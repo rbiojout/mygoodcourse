@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
 
+ruby '2.2.1'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
 # Use postgresql as the database for Active Record
@@ -65,12 +67,16 @@ gem "country_select"
 
 # upload images
 gem 'carrierwave'
+# handle image manipulation
 gem 'mini_magick'
 #gem 'rmagick'
 # grim help to make preview from pdf
 # gem 'grim'
 
 gem 'nested_form_fields'
+
+# for Heroku
+gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

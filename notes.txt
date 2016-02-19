@@ -63,6 +63,7 @@ rails generate devise:views Customers
 
 #### Add some layout
 bootstrap
+look at http://www.freenetmall.com/common/jquery/FormHelpers/docs/fontsize.html
 
 scaffold Employees
 rails g scaffold Employee name:string first_name:string entry_date:date mobile:string picture:string role:string active:boolean
@@ -104,7 +105,6 @@ brew reinstall imagemagick --with-ghostscript
 
 remove name for atatchments
 rails generate migration RemoveNameFromAttachments name:string
-
 
 
 ##### Set-up Activ Admin
