@@ -1,0 +1,44 @@
+<%= simple_form_for(@customer) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :email, required: true, autofocus: true %>
+      <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+      <%= f.input :password_confirmation, required: true %>
+      <%= f.input :name %>
+      <%= f.input :first_name %>
+      <%= f.input :mobile, as: :tel %>
+
+      <%= f.input :picture, :as => :image_preview %>
+
+      <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address'} %>
+      <div class="geo-details">
+          <%= f.input :street_address, :input_html => {:geocoding => 'name'} %>
+          <%= f.input :administrative_area_level_1, :input_html => {:geocoding => 'administrative_area_level_1'} %>
+          <%= f.input :administrative_area_level_2, :input_html => {:geocoding => 'administrative_area_level_2'} %>
+          <%= f.input :postal_code, :input_html => {:geocoding => 'postal_code'} %>
+          <%= f.input :locality, :input_html => {:geocoding => 'locality'} %>
+          <%= f.input :lat, :input_html => {:geocoding => 'lat'} %>
+          <%= f.input :lng, :input_html => {:geocoding => 'lng'} %>
+      </div>
+
+    </div>
+    <div class="form-actions">
+      <%= f.button :submit, "Sign up" %>
+    </div>
+<% end %>
+
+
+<script>
+    $(function(){
+        $("#customer_formatted_address").geocomplete({
+            details: ".geo-details",
+            //detailsAttribute: "data-geo",
+            detailsAttribute: "geocoding",
+
+        });
+        $("#find").click(function(){
+            $("#location").trigger("geocode");
+        });
+    });
+</script>

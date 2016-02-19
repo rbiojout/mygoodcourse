@@ -1,0 +1,55 @@
+<%= simple_form_for(@product) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
+    <%= f.input :sku %>
+    <%= f.input :permalink %>
+    <%= f.input :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
+    <%= f.input :short_description %>
+    <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
+    <%= f.input :price, input_html: { min: '0.00', step: '1.00' }, hint: 'Value your work appropriately. Prices can be set from $1 up.' %>
+
+    <div class="row">
+    <%= f.nested_fields_for :attachments do |att| %>
+          <div class="col-md-4">
+            <%= att.input :file, :as => :attachment_preview, :input_html => {preview_version: :preview} %>
+        <% if att.object.new_record?  %>
+
+            <% else %>
+
+
+            <% end %>
+          </div>
+          <div class="col-md-1">
+            <%= att.input :file_size, :disabled => true %>
+          </div>
+          <div class="col-md-1">
+            <%= att.input :file_type, :disabled => true %>
+          </div>
+          <div class="col-md-1">
+            <%= att.input :nbpages %>
+          </div>
+          <div class="col-md-2">
+            <%= att.input :version_number %>
+          </div>
+          <div class="col-md-1">
+            <%= att.input :active %>
+          </div>
+          <div class="col-md-1">
+            <%= att.remove_nested_fields_link %>
+          </div>
+
+
+
+    <% end %>
+    </div>
+    <%= f.add_nested_fields_link :attachments, 'Add another attachment' %>
+
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
