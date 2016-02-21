@@ -1,16 +1,22 @@
 class Customer < ActiveRecord::Base
+
+  EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
+  PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
+
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  mount_uploader :picture, PictureUploader
+  # add a file for image
+  # mount_uploader :picture, PictureUploader
 
+
+  # Validations
   # validate in addition to Devise
   validates :name, :first_name, presence: true
-  validates :mobile,   presence: true,
-            numericality: true,
-            length:  { :minimum => 10, :maximum => 15 }
+  validates :mobile,   format: { with: PHONE_REGEX }
 
 
   has_many :products

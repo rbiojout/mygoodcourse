@@ -18,12 +18,12 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @product.description %>
+  <%= @product.description.html_safe %>
 </p>
 
 <p>
   <strong>Short description:</strong>
-  <%= @product.short_description %>
+  <%= @product.short_description.html_safe %>
 </p>
 
 <p>

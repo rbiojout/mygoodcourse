@@ -43,9 +43,9 @@ class DocumentUploader < CarrierWave::Uploader::Base
   version :preview do
     process :convert => :png
     process :resize_to_limit => [350,350]
-    process :set_content_type
+    process :set_content_type => 'image/png'
 
-    def full_filename (for_file = model.logo.file)
+    def full_filename (for_file = model.preview.file)
       super.chomp(File.extname(super)) + '.png'
     end
   end

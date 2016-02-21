@@ -10,53 +10,51 @@
 
   <%= f.error_notification %>
 
-  <div class="form-inputs">
+  <td class="form-inputs">
     <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
     <%= f.input :sku %>
     <%= f.input :permalink %>
     <%= f.input :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
-    <%= f.input :short_description %>
+    <%= f.input :short_description, as: :wysihtml5 %>
     <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
     <%= f.input :price, :collection => ['0.00', '0.99', '4.99', '9.99', '14.99', '19.99'], hint: 'Value your work appropriately.' %>
 
     <div class="row">
     <%= f.nested_fields_for :attachments do |att| %>
           <div class="col-md-3">
-            <%= att.input :file, :as => :attachment_preview, :input_html => {preview_version: :preview} %>
+            <b>Attachment</b>
+            </div>
+          <div class="col-md-3">
         <% if att.object.new_record?  %>
-
+                <%= att.input :file %>
+                <%= att.input :file_cache, as: :hidden  %>
             <% else %>
-
+                <%= image_tag att.object.file.url(:preview)  %>
 
             <% end %>
+            <%= att.input :file_size, as: :hidden %>
+            <%= att.input :file_type, as: :hidden %>
+            <%= att.input :nbpages, as: :hidden %>
+            <%= att.input :version_number, as: :hidden %>
           </div>
           <div class="col-md-2">
-            <%= att.input :file_size, :disabled => true %>
+              <%= att.input :active %>
           </div>
           <div class="col-md-2">
-            <%= att.input :file_type, :disabled => true %>
-          </div>
-          <div class="col-md-1">
-            <%= att.input :nbpages, :disabled => true %>
-          </div>
-          <div class="col-md-2">
-            <%= att.input :version_number %>
-          </div>
-          <div class="col-md-1">
-            <%= att.input :active %>
-          </div>
-          <div class="col-md-1">
-            <%= att.remove_nested_fields_link %>
-          </div>
-
-
-
+              <%= att.remove_nested_fields_link %>
+           </div>
     <% end %>
-    </div>
+      <div class="row">
+        <div class="col-md-3">
+          <b></b>
+        </div>
+        <div class="col-md-3">
     <%= f.add_nested_fields_link :attachments, 'Add another attachment', class: 'btn btn-default' %>
+          </div>
+      </div>
+    </div>
 
 
-  </div>
 
   <div class="form-actions">
     <%= f.button :submit %>

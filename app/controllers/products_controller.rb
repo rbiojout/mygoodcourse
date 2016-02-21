@@ -4,6 +4,8 @@ class ProductsController < ApplicationController
 
   before_action :correct_user, except: :show
 
+  #before_action :check_attachment, only: [:update]
+
 
   helper_method :sort_column, :sort_direction
 
@@ -85,7 +87,7 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :sku, :permalink, :description, :short_description, :active, :price, attachments_attributes: [:file, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id])
+      params.require(:product).permit(:name, :sku, :permalink, :description, :short_description, :active, :price, attachments_attributes: [:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id])
     end
 
     def correct_user
@@ -101,4 +103,12 @@ class ProductsController < ApplicationController
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
+    def check_attachment
+      logger.debug "@product.attachments.length #{@product.attachments.length}"
+      unless ( @product.attachments.length > 0)
+        flash[:error] = "You need to provide an attachment"
+        redirect_to product_path
+    end
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+    end
 end

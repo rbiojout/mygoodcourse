@@ -1,5 +1,5 @@
   class AttachmentPreviewInput < SimpleForm::Inputs::FileInput
-    def input_simple(wrapper_options=nil)
+    def input(wrapper_options=nil)
       # :
       out = ''
       if object.send("#{attribute_name}?")
@@ -8,12 +8,14 @@
       (out << super).html_safe
     end
 
-    def input(wrapper_options = nil)
+    def input_preview(wrapper_options = nil)
       # :preview_version is a custom attribute from :input_html hash, so you can pick custom sizes
       version = input_html_options.delete(:preview_version)
       out = ActiveSupport::SafeBuffer.new # the output buffer we're going to build
       # check if there's an uploaded file (eg: edit mode or form not saved)
       if object.send("#{attribute_name}")
+        # check file extension
+
         # append preview image to output
         out << "<div>".html_safe
         out << template.image_tag(object.send(attribute_name).tap {|o| break o.send(version) if version}.send('url'), class: 'img-thumbnail')
