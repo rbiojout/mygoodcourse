@@ -9,6 +9,6 @@ class Product < ActiveRecord::Base
 
   validates :customer_id, :name, :description, :short_description, presence: true
 
-  default_scope -> { order(created_at: :desc) }
+  #default_scope -> { order(created_at: :desc) }
 
 end

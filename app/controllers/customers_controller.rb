@@ -1,5 +1,8 @@
 class CustomersController < ApplicationController
   before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_customer!, only: [:update, :edit]
+
+  before_action :correct_user, only: [:update, :edit]
 
   # GET /customers
   # GET /customers.json
@@ -69,6 +72,11 @@ class CustomersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def customer_params
-      params.require(:customer).permit(:name, :first_name, :email, :mobile, :picture, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
+      params.require(:customer).permit(:name, :first_name, :email, :mobile, :picture, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
+    end
+
+    def correct_user
+      @customer = Customer.find(params[:id])
+      redirect_to root_path, alert: "You don't have the right to access to this page" unless @customer == current_customer
     end
 end

@@ -37,6 +37,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # add devise
 gem 'devise'
 
+# add pagination helper
+gem 'will_paginate'
+
 # add some CSS
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
 gem 'autoprefixer-rails'

@@ -2,16 +2,16 @@
 
 <h1>My Products</h1>
 
-<table>
+<table class='table'>
   <thead>
   <tr>
-    <th>Name</th>
+    <th><%= sortable_bootstrap "name" %></th>
     <th>Sku</th>
     <th>Permalink</th>
     <th>Description</th>
     <th>Short description</th>
     <th>Active</th>
-    <th>Price</th>
+    <th><%= sortable_bootstrap "price" %></th>
     <th colspan="3"></th>
   </tr>
   </thead>
@@ -33,6 +33,10 @@
   <% end %>
   </tbody>
 </table>
+
+<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+
+
 
 <br>
 

@@ -1,7 +1,15 @@
-// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
+// https://github.com/twbs/bootstrap-sass/blob/master/assets/stylesheets/bootstrap/_variables.scss
+//** Global textual link color.
 
+// $brand-primary: green;
+
+
+// "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+
+
 
 /* universal */
 body {
@@ -19,6 +27,55 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+
+/* tentative to add glyph to sort */
+.sorting, .sorting_asc,
+.sorting_desc, .sorting_asc_disabled,
+.sorting_desc_disabled {
+  cursor: pointer;
+  position: relative;
+}
+
+.sorting:after, .sorting_asc:after,
+.sorting_desc:after, .sorting_asc_disabled:after,
+.sorting_desc_disabled:after {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  display: block;
+  font-family: 'Glyphicons Halflings';
+  opacity: 0.5
+}
+
+.sorting:after {
+  opacity: 0.2;
+  content: "\e150"
+}
+
+.sorting_asc:after {
+  content: "\e155"
+}
+
+.sorting_desc:after {
+  content: "\e156"
+}
+
+.sorting_asc_disabled:after, .sorting_desc_disabled:after {
+  color: #eee
+}
+
+.sorting:after, .sorting_asc:after,
+.sorting_desc:after {
+  display: none
+}
+
+.sorting:after, .sorting_asc:after,
+.sorting_desc:after {
+  top: 6px;
+  right: 6px
+}
+
 
 
 /* Override Rail's default error calls with Bootstrap 3 */

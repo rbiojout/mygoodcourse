@@ -1,4 +1,13 @@
-<%= simple_form_for(@product) do |f| %>
+<%= simple_form_for @product, html: { class: 'form-horizontal' },
+                    wrapper: :horizontal_form,
+                    wrapper_mappings: {
+                            check_boxes: :horizontal_radio_and_checkboxes,
+                            radio_buttons: :horizontal_radio_and_checkboxes,
+                            file: :horizontal_file_input,
+                            boolean: :horizontal_boolean
+                    } do |f| %>
+
+
   <%= f.error_notification %>
 
   <div class="form-inputs">
@@ -8,11 +17,11 @@
     <%= f.input :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
     <%= f.input :short_description %>
     <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
-    <%= f.input :price, input_html: { min: '0.00', step: '1.00' }, hint: 'Value your work appropriately. Prices can be set from $1 up.' %>
+    <%= f.input :price, :collection => ['0.00', '0.99', '4.99', '9.99', '14.99', '19.99'], hint: 'Value your work appropriately.' %>
 
     <div class="row">
     <%= f.nested_fields_for :attachments do |att| %>
-          <div class="col-md-4">
+          <div class="col-md-3">
             <%= att.input :file, :as => :attachment_preview, :input_html => {preview_version: :preview} %>
         <% if att.object.new_record?  %>
 
@@ -21,14 +30,14 @@
 
             <% end %>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <%= att.input :file_size, :disabled => true %>
           </div>
-          <div class="col-md-1">
+          <div class="col-md-2">
             <%= att.input :file_type, :disabled => true %>
           </div>
           <div class="col-md-1">
-            <%= att.input :nbpages %>
+            <%= att.input :nbpages, :disabled => true %>
           </div>
           <div class="col-md-2">
             <%= att.input :version_number %>
@@ -44,7 +53,7 @@
 
     <% end %>
     </div>
-    <%= f.add_nested_fields_link :attachments, 'Add another attachment' %>
+    <%= f.add_nested_fields_link :attachments, 'Add another attachment', class: 'btn btn-default' %>
 
 
   </div>

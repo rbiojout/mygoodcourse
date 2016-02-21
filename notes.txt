@@ -57,7 +57,6 @@ config.scoped_views = true
 
 
 rails generate devise Customers
-
 rails generate devise:views Customers
 
 
@@ -77,6 +76,9 @@ rails generate simple_form:install
 don't forget country_select
 look at http://www.ct2c.fr/blog/starter-app-ruby-on-rails-partie-04
 add an helper for the preview of images
+
+special layout for forms http://simple-form-bootstrap.plataformatec.com.br
+
 
 
 ## add address informations

@@ -2,19 +2,22 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
-  before_action :check_product_ownership, except: :show
+  before_action :correct_user, except: :show
+
+
+  helper_method :sort_column, :sort_direction
 
   # GET /products
   # GET /products.json
   def index
-    @products = Product.all
+    @products = Product.order(sort_column + " " + sort_direction)
   end
 
 
   # GET /products
   # GET /products.json
   def myproducts
-    @products = current_customer.products
+    @products = current_customer.products.order(sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => 2)
   end
 
   # GET /products/1
@@ -85,8 +88,17 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :sku, :permalink, :description, :short_description, :active, :price, attachments_attributes: [:file, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id])
     end
 
-    def check_product_ownership
+    def correct_user
       redirect_to products_path, alert: "You don't have the right to access to this page" unless @product.nil? || @product.customer_id == current_customer.id
+    end
+
+    # Used for sorting the list
+    def sort_column
+      Product.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end
 
 end
