@@ -23,8 +23,8 @@
         <td><%= product.name %></td>
         <td><%= product.sku %></td>
         <td><%= product.permalink %></td>
-        <td><%= product.description %></td>
-        <td><%= product.short_description %></td>
+        <td><%= product.description.html_safe %></td>
+        <td><%= product.short_description.html_safe %></td>
         <td><%= product.active %></td>
         <td><%= product.price %></td>
         <td><%= link_to 'Show', product %></td>

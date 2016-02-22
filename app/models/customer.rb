@@ -10,12 +10,12 @@ class Customer < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # add a file for image
-  # mount_uploader :picture, PictureUploader
+  mount_uploader :picture, PictureUploader
 
 
   # Validations
   # validate in addition to Devise
-  validates :name, :first_name, presence: true
+  validates :name, :first_name, :mobile, presence: true
   validates :mobile,   format: { with: PHONE_REGEX }
 
 
