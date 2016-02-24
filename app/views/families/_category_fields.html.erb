@@ -1,6 +1,5 @@
 
-    <div class="form-inline" id="category_<%= f.object.id %>">
-          <%= f.object.id %>
+    <div class="nested-fields form-inline" id="category_<%= f.object.id %>">
       <span class="handle">[drag]</span>
           <div class="form-group">
             <%= f.input :name %>
@@ -10,4 +9,6 @@
           </div>
           <%= link_to_remove_association "remove category", f, class: 'btn btn-danger btn-sm' %>
         </div>
+
+
 

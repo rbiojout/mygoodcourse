@@ -7,5 +7,5 @@ jQuery ->
     axis: 'y'
     handle: '.handle'
     update: ->
-      alert('up')
+      # alert('up')
       $.post($(this).data('update-url'), $(this).sortable('serialize'))

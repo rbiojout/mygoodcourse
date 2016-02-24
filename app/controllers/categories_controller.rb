@@ -62,8 +62,10 @@ class CategoriesController < ApplicationController
   end
 
   def sort
-    params[:category].each .each_with_index do |id, index|
-      Category.update(id, position: index+1)
+    unless params[:category].nil?
+      params[:category].each .each_with_index do |id, index|
+        Category.update(id, position: index+1)
+      end
     end
     render nothing:true
   end
