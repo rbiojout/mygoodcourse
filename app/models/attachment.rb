@@ -9,6 +9,8 @@ class Attachment < ActiveRecord::Base
   before_save :update_file_attributes
   #before_update :update_file_attributes
 
+  default_scope -> { order(created_at: :desc) }
+
   private
 
   def update_file_attributes

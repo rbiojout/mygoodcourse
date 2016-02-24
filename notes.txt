@@ -93,6 +93,10 @@ rails g scaffold Attachment file:string file_name:string file_size:integer file_
 ## link products_to_customer
 rails g migration add_customer_to_products customer:references
 
+add sortable list
+http://josephndungu.com/tutorials/ajax-sortable-lists-rails-4
+
+
 work on editor
 http://www.jqueryscript.net/text/Responsive-WYSIWYG-Text-Editor-with-jQuery-Bootstrap-LineControl-Editor.html
 
@@ -108,6 +112,10 @@ brew reinstall imagemagick --with-ghostscript
 remove name for atatchments
 rails generate migration RemoveNameFromAttachments name:string
 
+
+add some categories for the products
+rails g scaffold Family name:string description:string
+rails g scaffold Categories name:string description:string family:references
 
 ##### Set-up Activ Admin
 gem activ_admin

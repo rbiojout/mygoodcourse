@@ -6,10 +6,6 @@
   <thead>
   <tr>
     <th><%= sortable_bootstrap "name" %></th>
-    <th>Sku</th>
-    <th>Permalink</th>
-    <th>Description</th>
-    <th>Short description</th>
     <th>Active</th>
     <th><%= sortable_bootstrap "price" %></th>
     <th colspan="3"></th>
@@ -20,10 +16,6 @@
   <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
-        <td><%= product.sku %></td>
-        <td><%= product.permalink %></td>
-        <td><%= product.description %></td>
-        <td><%= product.short_description %></td>
         <td><%= product.active %></td>
         <td><%= product.price %></td>
         <td><%= link_to 'Show', product %></td>

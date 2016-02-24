@@ -11,13 +11,16 @@
 // about supported directives.
 //
 //= require jquery
+//= require jquery-ui/sortable
+//= require jquery_ujs
 //= require bootstrap-sprockets
 //= require moment
-//= require bootstrap-wysihtml5
-//= require jquery_ujs
+//= require trix
+//= require cocoon
 //= require jquery.geocomplete
 //= require underscore
 //= require gmaps/google
-//= require nested_form_fields
 //= require turbolinks
 //= require_tree .
+
+

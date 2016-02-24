@@ -5,3 +5,6 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+
+families = Family.create ([{ name: 'Maths' }, { name: 'English' }, { name: 'Science' }, { name: 'History' }, { name: 'Geography' }, { name: 'Language' }, { name: 'Computing' }, { name: 'Design and Technology' }, { name: 'Art and Design' }, { name: 'Physical Education' }, { name: 'Citizenship' }, { name: 'Music' }])

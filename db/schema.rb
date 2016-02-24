@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160218180046) do
+ActiveRecord::Schema.define(version: 20160224154116) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,9 +26,22 @@ ActiveRecord::Schema.define(version: 20160218180046) do
     t.integer  "product_id"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.integer  "priority"
   end
 
   add_index "attachments", ["product_id"], name: "index_attachments_on_product_id", using: :btree
+
+  create_table "categories", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "description"
+    t.integer  "family_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "position"
+  end
+
+  add_index "categories", ["family_id"], name: "index_categories_on_family_id", using: :btree
+  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
   create_table "customers", force: :cascade do |t|
     t.string   "name"
@@ -85,6 +98,15 @@ ActiveRecord::Schema.define(version: 20160218180046) do
   add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
   add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
+  create_table "families", force: :cascade do |t|
+    t.string   "name",        null: false
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "families", ["name"], name: "index_families_on_name", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "sku"
@@ -102,5 +124,6 @@ ActiveRecord::Schema.define(version: 20160218180046) do
   add_index "products", ["customer_id"], name: "index_products_on_customer_id", using: :btree
 
   add_foreign_key "attachments", "products"
+  add_foreign_key "categories", "families"
   add_foreign_key "products", "customers"
 end

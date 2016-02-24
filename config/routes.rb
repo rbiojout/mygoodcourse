@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
 
+  resources :categories do
+    collection { post :sort }
+  end
+
+  resources :families
   resources :attachments
   resources :products do
     member do

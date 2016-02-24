@@ -18,6 +18,10 @@ gem 'coffee-rails', '~> 4.1.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+
+# add some additional jquery
+gem 'jquery-ui-rails'
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
@@ -46,7 +50,9 @@ gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 
 # add a WISIWYG HTML editor for bootstrap
-gem 'bootstrap-wysihtml5-rails'
+# gem 'bootstrap-wysihtml5-rails'
+
+gem 'trix'
 
 # add datetime picker with bootstrap
 #gem 'bootstrap-datepicker-rails'
@@ -76,7 +82,9 @@ gem 'mini_magick'
 # grim help to make preview from pdf
 # gem 'grim'
 
-gem 'nested_form_fields'
+# gem 'nested_form_fields'
+
+gem 'cocoon'
 
 # for Heroku
 gem 'rails_12factor', group: :production

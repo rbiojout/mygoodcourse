@@ -7,6 +7,7 @@
   <thead>
     <tr>
       <th><%= sortable_bootstrap "name" %></th>
+      <th><%= sortable_bootstrap "created_at", 'Creation date' %></th>
       <th><%= sortable_bootstrap "sku", 'Unique SKU' %></th>
       <th>Permalink</th>
       <th>Description</th>
@@ -21,6 +22,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.name %></td>
+        <td><%= product.created_at.to_date %></td>
         <td><%= product.sku %></td>
         <td><%= product.permalink %></td>
         <td><%= product.description.html_safe %></td>

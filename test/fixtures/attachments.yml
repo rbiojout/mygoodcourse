@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  file: MyString
+  file_name: MyString
+  file_size: 1
+  file_type: 
+  nbpages: 1
+  version_number: 9.99
+  active: false
+  preview: MyString
+  product_id: 
+
+two:
+  file: MyString
+  file_name: MyString
+  file_size: 1
+  file_type: 
+  nbpages: 1
+  version_number: 9.99
+  active: false
+  preview: MyString
+  product_id: 

@@ -4,8 +4,6 @@ class ProductsController < ApplicationController
 
   before_action :correct_user, except: :show
 
-  #before_action :check_attachment, only: [:update]
-
 
   helper_method :sort_column, :sort_direction
 
@@ -25,6 +23,7 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    @attachments = @product.attachments
   end
 
   # GET /products/new
@@ -104,10 +103,18 @@ class ProductsController < ApplicationController
     end
 
     def check_attachment
-      logger.debug "@product.attachments.length #{@product.attachments.length}"
-      unless ( @product.attachments.length > 0)
+      #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
+      if ( params[:product][:attachments_attributes].nil? )
+        #@product.attachments.build
         flash[:error] = "You need to provide an attachment"
-        redirect_to product_path
+        #redirect_to product_path
+        logger.debug "no attachment"
+      else if (params[:product][:attachments_attributes].size == 1 && params[:product][:attachments_attributes].first[1][:_destroy] == 'true')
+             params[:product][:attachments_attributes].first[1][:_destroy] = 'false'
+         flash[:error] = "You need to provide an attachment"
+         #redirect_to product_path
+       end
+
     end
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
     end

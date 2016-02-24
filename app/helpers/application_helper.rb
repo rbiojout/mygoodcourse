@@ -1,5 +1,7 @@
 module ApplicationHelper
 
+
+
   # Returns the full title on a per-page basis.
   def full_title(page_title = '')
     base_title = "ForMyCourse"
@@ -36,5 +38,6 @@ module ApplicationHelper
     options[:outer_window] ||= 1
     will_paginate(collection, options)
   end
+
 
 end

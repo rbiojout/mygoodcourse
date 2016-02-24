@@ -33,8 +33,18 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= @product.price||= "Free" %>
 </p>
+
+
+<p>
+  <%= image_tag @product.preview, class: 'img-thumbnail' %>
+</p>
+
+
+
+
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>

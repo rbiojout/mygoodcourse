@@ -11,7 +11,8 @@
  * file per style scope.
  *
  *= require_tree .
- *= require bootstrap-wysihtml5
+ *= require jquery-ui/sortable
+ *= require trix
  *= require_self
  */
 

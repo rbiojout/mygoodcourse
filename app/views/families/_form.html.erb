@@ -1,0 +1,31 @@
+<%= simple_form_for(@family) do |f| %>
+
+    https://www.youtube.com/watch?v=0aBsUkJMbmE
+
+  <%= f.error_notification %>
+
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <h3>Category</h3>
+
+
+    <div id="categories" data-update-url="<%= sort_categories_url %>">
+
+        <%= f.fields_for :categories do |cat| %>
+            <%= render 'category_fields', f: cat %>
+        <% end %>
+
+        <div class="links">
+          <%= link_to_add_association 'Add new category', f, :categories, class: 'btn btn-primary' %>
+        </div>
+
+
+
+      </div>
+
+
+  <div class="row">
+    <%= f.button :submit %>
+  </div>
+
+<% end %>
