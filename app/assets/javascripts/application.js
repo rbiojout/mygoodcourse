@@ -14,6 +14,7 @@
 //= require jquery-ui/sortable
 //= require jquery-ui/widget
 //= require jquery-ui/mouse
+//= require jquery.ui.touch-punch
 //= require jquery_ujs
 //= require jquery.turbolinks
 //= require bootstrap-sprockets
