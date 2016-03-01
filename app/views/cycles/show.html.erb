@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @cycle.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @cycle.description %>
+</p>
+
+<ul id="levels" data-update-url="<%= sort_levels_url %>">
+<% @cycle.levels.each  do |lev| %>
+
+    <li class="form-inline" id="level_<%= lev.id %>">
+      <span class="glyphicon glyphicon-sort handle" aria-hidden="true"></span>
+      <div class="form-group">
+        <%= lev.name %>
+        <%= lev.description %>
+      </div>
+    </li>
+
+    <% end %>
+</ul>
+
+
+
+
+<%= link_to 'Edit', edit_cycle_path(@cycle) %> |
+<%= link_to 'Back', cycles_path %>

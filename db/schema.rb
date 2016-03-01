@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224154116) do
+ActiveRecord::Schema.define(version: 20160301090518) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -43,6 +43,18 @@ ActiveRecord::Schema.define(version: 20160224154116) do
   add_index "categories", ["family_id"], name: "index_categories_on_family_id", using: :btree
   add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
+  create_table "countries", force: :cascade do |t|
+    t.string   "name"
+    t.string   "code2"
+    t.string   "code3"
+    t.string   "continent"
+    t.string   "tld"
+    t.string   "currency"
+    t.boolean  "eu_member"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "customers", force: :cascade do |t|
     t.string   "name"
     t.string   "first_name"
@@ -72,6 +84,14 @@ ActiveRecord::Schema.define(version: 20160224154116) do
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+
+  create_table "cycles", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -107,6 +127,51 @@ ActiveRecord::Schema.define(version: 20160224154116) do
 
   add_index "families", ["name"], name: "index_families_on_name", using: :btree
 
+  create_table "levels", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "position"
+    t.integer  "cycle_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "levels", ["cycle_id"], name: "index_levels_on_cycle_id", using: :btree
+
+  create_table "order_items", force: :cascade do |t|
+    t.integer  "product_id"
+    t.decimal  "price",      precision: 8, scale: 2
+    t.decimal  "tax_rate",   precision: 8, scale: 2
+    t.decimal  "tax_amount", precision: 8, scale: 2
+    t.integer  "order_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
+  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
+
+  create_table "orders", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.datetime "created_at",                                               null: false
+    t.datetime "updated_at",                                               null: false
+    t.string   "token"
+    t.string   "status"
+    t.datetime "received_at"
+    t.datetime "accepted_at"
+    t.integer  "accepted_by"
+    t.string   "consignment_number"
+    t.datetime "rejected_at"
+    t.integer  "rejected_by"
+    t.string   "ip_address"
+    t.text     "notes"
+    t.decimal  "amount_paid",        precision: 8, scale: 2, default: 0.0
+    t.boolean  "exported"
+    t.string   "invoice_number"
+  end
+
+  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "sku"
@@ -125,5 +190,9 @@ ActiveRecord::Schema.define(version: 20160224154116) do
 
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
+  add_foreign_key "levels", "cycles"
+  add_foreign_key "order_items", "orders"
+  add_foreign_key "order_items", "products"
+  add_foreign_key "orders", "customers"
   add_foreign_key "products", "customers"
 end

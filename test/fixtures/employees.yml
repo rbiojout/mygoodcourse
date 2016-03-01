@@ -1,19 +1,21 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  first_name: MyString
+  name: Employee1
+  first_name: FirstName1
   entry_date: 2016-02-16
-  mobile: MyString
+  mobile: +33663220908
   picture: MyString
-  role: MyString
-  active: false
+  role: Admin
+  active: true
+  email: employee1@test.com
 
 two:
-  name: MyString
-  first_name: MyString
+  name: Employee2
+  first_name: FirstName2
   entry_date: 2016-02-16
-  mobile: MyString
+  mobile: +33663220807
   picture: MyString
-  role: MyString
+  role: Admin
   active: false
+  email: employee2@test.com

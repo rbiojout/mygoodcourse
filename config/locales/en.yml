@@ -21,3 +21,10 @@
 
 en:
   hello: "Hello world"
+
+  order_mailer:
+    received:
+      subject: 'Order Confirmation'
+      accepted: 'Order Accepted'
+      rejected: 'Order Rejected'
+

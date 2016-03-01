@@ -19,6 +19,11 @@ class Customer < ActiveRecord::Base
   validates :mobile,   format: { with: PHONE_REGEX }
 
 
-  has_many :products
+  has_many :products, dependent: :destroy
+
+  # We don't want to delete if some orders have been done
+  has_many :orders, dependent: :restrict_with_exception
+
+
 
 end

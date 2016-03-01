@@ -1,15 +1,36 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  first_name: MyString
-  email: MyString
-  mobile: MyString
+  name: Customer1
+  first_name: FirstName1
+  email: customer1@test.com
+  mobile: +33663220909
   picture: MyString
 
 two:
-  name: MyString
-  first_name: MyString
-  email: MyString
-  mobile: MyString
+  name: Customer2
+  first_name: FirstName2
+  email: customer2@test.com
+  mobile: +33663220909
   picture: MyString
+
+customer_without_orders:
+  name: Customer3
+  first_name: FirstName3
+  email: customer3@test.com
+  mobile: +33663220909
+  picture:
+
+JoeBloggs:
+  first_name: Joe
+  name: Bloggs
+  email: joe@example.com
+  mobile: '01234 123123'
+  formatted_address: 'Unit 9 Winchester Place, North Street, BH15 1NX'
+  street_address:
+  administrative_area_level_1:
+  administrative_area_level_2:
+  postal_code:
+  locality:
+  lat:
+  lng:

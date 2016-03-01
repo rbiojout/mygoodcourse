@@ -9,3 +9,9 @@ jQuery ->
     update: ->
       # alert('up')
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+  $('#sortable_3').sortable
+    axis: 'y'
+    handle: '.handle'
+    update: ->
+      alert('up')

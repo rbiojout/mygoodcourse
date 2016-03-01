@@ -1,0 +1,17 @@
+<%= simple_form_for(@country) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :code2 %>
+    <%= f.input :code3 %>
+    <%= f.input :continent %>
+    <%= f.input :tld %>
+    <%= f.input :currency %>
+    <%= f.input :eu_member %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

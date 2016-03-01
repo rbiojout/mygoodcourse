@@ -1,0 +1,15 @@
+<%= simple_form_for(@order_item) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.association :product %>
+    <%= f.input :price %>
+    <%= f.input :tax_rate %>
+    <%= f.input :tax_amount %>
+    <%= f.association :order %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

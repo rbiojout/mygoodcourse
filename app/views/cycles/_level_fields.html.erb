@@ -1,0 +1,9 @@
+
+<div class="nested-fields form-inline" id="level_<%= f.object.id %>">
+  <span class="glyphicon glyphicon-sort handle" aria-hidden="true"></span>
+  <div class="form-group">
+    <%= f.input :name %>
+    <%= f.input :description %>
+  </div>
+  <%= link_to_remove_association "remove level", f, class: 'btn btn-danger btn-sm' %>
+</div>

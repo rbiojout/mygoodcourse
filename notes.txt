@@ -117,22 +117,17 @@ add some categories for the products
 rails g scaffold Family name:string description:string
 rails g scaffold Categories name:string description:string family:references
 
-##### Set-up Activ Admin
-gem activ_admin
-rails g active_admin:install
+add some levels for the products
+rails g scaffold Cycle name:string description:string position:integer
+rails g scaffold Level name:string description:string position:integer cycle:references
 
-interesting add-ons https://viget.com/extend/8-insanely-useful-activeadmin-customizations
 
-move css to vendor/assets to keep the CSS work
+add some ideas regarding orders
+rails g scaffold Order order_date:datetime customer:references
+rails g scaffold OrderItem product:references price:decimal tax_rate:decimal tax_amount:decimal order:references
+rails g scaffold Country name:string code2:string code3:string continent:string tld:string currency:string eu_member:boolean
 
-IMPORTANT to scaffold use option rails g scaffold test name:string -c=scaffold_controller
+rails g migration add_infos_to_orders first_name:string name:string email:string mobile:string status:string received_at:datetime accepted_at:date_time accepted_by:integer consignment_number:string rejected_at:datetime rejected_by:integer ip_address:string notes:text amount_paid:decimal exported:boolean invoice_number:string
 
-rails g scaffold address full_address:string address1:string address2:string city:string zip_code:references latitude:float longitude:float user:references -c=scaffold_controller
 
-rails g scaffold slot start_time:datetime duration:integer prefered:boolean -c=scaffold_controller
-rails g scaffold work_day name:string  -c=scaffold_controller
-rails g scaffold work_grid work_day:references slot:references  -c=scaffold_controller
-rails g migration link_customers_to_work_grids
-rails g scaffold services name:string description:string -c=scaffold_controller
-rails g scaffold missions week_hours:integer description:string start_day:date end_day:date service:references address:reference -c=scaffold_controller
 

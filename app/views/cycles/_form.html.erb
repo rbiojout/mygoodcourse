@@ -1,0 +1,31 @@
+<%= simple_form_for(@cycle) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%= f.input :position, as: :hidden %>
+
+    <h3>Levels</h3>
+
+
+    <div id="levels" data-update-url="<%= sort_levels_url %>">
+
+      <%= f.fields_for :levels do |cat| %>
+          <%= render 'level_fields', f: cat %>
+      <% end %>
+
+      <div class="links">
+        <%= link_to_add_association 'Add new level', f, :levels, class: 'btn btn-primary' %>
+      </div>
+
+
+
+    </div>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

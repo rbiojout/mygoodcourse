@@ -1,19 +1,63 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: 
+  name: Product1
   sku: 
   permalink: 
-  description: 
-  short_description: 
-  active: 
+  description: Product1
+  short_description: product1
+  active: true
+  featured: true
   price: 9.99
+  customer: one
 
 two:
-  name: 
+  name: Product2
   sku: 
   permalink: 
-  description: 
-  short_description: 
-  active: 
+  description: Product2
+  short_description: Product2
+  active: true
+  featured: true
   price: 9.99
+  customer: two
+
+product_without_orders:
+  name: Product0
+  sku:
+  permalink:
+  description: Product0
+  short_description: Product0
+  active: true
+  featured: true
+  price: 9.99
+  customer: one
+
+yealink_t22p:
+  name:                'Yealink T22P'
+  sku:                 'YT22P'
+  description:         'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  short_description:   'An awesome phone which you will absolutely love to use.'
+  price:               100
+
+snom_870:
+  name:                'Snom 870'
+  sku:                 'SN870'
+  description:         'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  short_description:   'An awesome phone which you will absolutely love to use.'
+  price:               250
+
+yealink_headset:
+  name:                'Yealink Headset'
+  sku:                 'YHS32'
+  description:         'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  short_description:   'An awesome phone which you will absolutely love to use.'
+  price:               40.00
+
+software_product:
+  name:                'Software Product'
+  sku:                 'SP'
+  short_description:   'An awesome piece of software which can be purchased.'
+  description:         'Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+  price:               500.00
+

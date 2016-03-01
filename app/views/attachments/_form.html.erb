@@ -3,14 +3,12 @@
 
   <div class="form-inputs">
     <%= f.input :file %>
-    <%= f.input :file_name %>
     <%= f.input :file_size %>
     <%= f.input :file_type %>
     <%= f.input :nbpages %>
     <%= f.input :version_number %>
     <%= f.input :active %>
-    <%= f.input :preview %>
-    <%= f.association :product %>
+    <%= f.association :product, {include_blank: false} %>
   </div>
 
   <div class="form-actions">

@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @customer = customers(:one)
   end
@@ -18,7 +20,7 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, customer: { email: @customer.email, first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name, picture: @customer.picture }
+      post :create, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name, picture: @customer.picture }
     end
 
     assert_redirected_to customer_path(assigns(:customer))
@@ -29,7 +31,8 @@ class CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  test "should get edit" do
+  test "should get edit customer" do
+    sign_in :customer, @customer
     get :edit, id: @customer
     assert_response :success
   end
@@ -39,11 +42,17 @@ class CustomersControllerTest < ActionController::TestCase
     assert_redirected_to customer_path(assigns(:customer))
   end
 
-  test "should destroy customer" do
+  test "should destroy customer without order" do
     assert_difference('Customer.count', -1) do
-      delete :destroy, id: @customer
+      delete :destroy, id: customers(:customer_without_orders)
     end
 
     assert_redirected_to customers_path
+  end
+
+  test "should not destroy customer with order" do
+    assert_raises (ActiveRecord::DeleteRestrictionError) do
+      delete :destroy, id: @customer
+    end
   end
 end

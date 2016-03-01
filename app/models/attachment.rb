@@ -1,13 +1,14 @@
 class Attachment < ActiveRecord::Base
-  #attr_accessible :file, :file_name, :file_size, :file_type, :nbpages, :version_number, :active
+  #attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active
   belongs_to :product
+  validates :product, :presence => true
+
+
   mount_uploader :file, DocumentUploader
-
-
   validates :file, presence: true
 
   before_save :update_file_attributes
-  #before_update :update_file_attributes
+  before_update :update_file_attributes
 
   default_scope -> { order(created_at: :desc) }
 

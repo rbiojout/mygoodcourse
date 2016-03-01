@@ -1,0 +1,14 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  token: one
+  customer: one
+
+two:
+  token: two
+  customer: two
+
+order:
+  customer: JoeBloggs
+  ip_address: '127.0.0.1'
+

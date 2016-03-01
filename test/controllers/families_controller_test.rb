@@ -1,6 +1,8 @@
 require 'test_helper'
 
 class FamiliesControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+
   setup do
     @family = families(:one)
   end

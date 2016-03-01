@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :countries
+  resources :order_items
+  resources :orders
+  resources :levels do
+    collection { post :sort }
+  end
+  resources :cycles
   resources :categories do
     collection { post :sort }
   end

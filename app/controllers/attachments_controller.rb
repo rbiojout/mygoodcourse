@@ -25,7 +25,8 @@ class AttachmentsController < ApplicationController
   # POST /attachments.json
   def create
     @attachment = Attachment.new(attachment_params)
-    @product = Product.find(params[:product_id])
+    logger.debug("params #{params[:product_id]}  #{params[:attachment][:product_id]}")
+    @product = Product.find(params[:attachment][:product_id])
 
     respond_to do |format|
       if @attachment.save

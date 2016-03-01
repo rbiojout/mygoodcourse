@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
+  name: Category1
   description: MyString
-  family_id: 
+  family: one
 
 two:
-  name: MyString
+  name: Category2
   description: MyString
-  family_id: 
+  family: two
