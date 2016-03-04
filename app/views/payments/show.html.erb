@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @payment.order %>
+</p>
+
+<p>
+  <strong>Amount:</strong>
+  <%= @payment.amount %>
+</p>
+
+<p>
+  <strong>Reference:</strong>
+  <%= @payment.reference %>
+</p>
+
+<p>
+  <strong>Confirmed:</strong>
+  <%= @payment.confirmed %>
+</p>
+
+<p>
+  <strong>Refundable:</strong>
+  <%= @payment.refundable %>
+</p>
+
+<p>
+  <strong>Amount refunded:</strong>
+  <%= @payment.amount_refunded %>
+</p>
+
+<p>
+  <strong>Parent payment:</strong>
+  <%= @payment.parent_payment_id %>
+</p>
+
+<p>
+  <strong>Exported:</strong>
+  <%= @payment.exported %>
+</p>
+
+<%= link_to 'Edit', edit_payment_path(@payment) %> |
+<%= link_to 'Back', payments_path %>

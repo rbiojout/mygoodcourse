@@ -78,6 +78,42 @@ class ProductsController < ApplicationController
     end
   end
 
+  def add_to_basket
+    #begin
+      product_to_order = Product.find(params[:product_id])
+      if (product_to_order.nil? || !product_to_order.active?)
+        flash[:alert] = "Product not active."
+      else
+        current_order.order_items.add_item(product_to_order)
+        flash[:notice] = "Product was successfully added."
+      end
+
+
+    respond_to do |wants|
+      wants.html { redirect_to request.referer }
+      wants.json { render :json => {:added => true} }
+    end
+  end
+
+  def remove_from_basket
+    item = current_order.order_items.find(params[:order_item_id])
+    if current_order.order_items.count == 1
+      respond_to do |format|
+        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
+        format.json { head :no_content }
+      end
+    else
+      item.destroy
+      respond_to do |wants|
+        wants.html { redirect_to request.referer, :notice => "Item has been removed from your basket successfully"}
+        wants.json do
+          current_order.reload
+          render :json => {:status => 'complete', :items => render_to_string(:partial => 'orders/basket.html', :locals => {:order => current_order})}
+        end
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

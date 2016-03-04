@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  before_action :set_order, only: [:show, :edit, :update, :destroy]
+  before_action :set_order, only: [:show, :edit, :update, :destroy, :basket]
 
   # GET /orders
   # GET /orders.json
@@ -10,6 +10,12 @@ class OrdersController < ApplicationController
   # GET /orders/1
   # GET /orders/1.json
   def show
+    @payments = @order.payments.to_a
+  end
+
+  # GET /basket/1
+  def basket
+    @payments = @order.payments.to_a
   end
 
   # GET /orders/new

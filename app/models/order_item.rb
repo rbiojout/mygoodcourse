@@ -16,16 +16,21 @@ class OrderItem < ActiveRecord::Base
   #
   # @param ordered_item [Object] an object which implements the Shoppe::OrderableItem protocol
   # @param quantity [Fixnum] the number of items to order
-  # @return [Shoppe::OrderItem]
+  # @return [OrderItem]
   def self.add_item(product)
-    fail Errors::UnorderableItem, product: product unless product.active?
-    transaction do
-      if existing = where(product_id: product.id).first
-        existing
-      else
-        new_item = create(product: product)
-        new_item
+    #fail Errors::UnorderableItem, product: product unless product.active?
+    if product.active
+      transaction do
+        if existing = where(product_id: product.id).first
+          existing
+        else
+          new_item = create(product: product, price: product.price || 0.00 , tax_rate: TAX_RATE, tax_amount: ((product.price || 0.00 )*(TAX_RATE/100))  )
+          new_item
+        end
       end
+    else
+      # @TODO treat it
+      #raise "inactive product"
     end
   end
 
@@ -34,7 +39,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def unit_price
-    read_attribute(:price) || product.try(:price) || BigDecimal(0)
+    read_attribute(:unit_price) || product.price || BigDecimal(0)
   end
 
   # The cost price for the item
@@ -48,7 +53,6 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def tax_rate
-    logger.debug ("ENV['TAX_RATE'] #{ENV['TAX_RATE']}  #{'TAX_RATE'}")
     read_attribute(:tax_rate) || TAX_RATE || product.try(:tax_rate).try(:rate_for, order) || BigDecimal(0)
   end
 

@@ -5,6 +5,8 @@ class CustomersControllerTest < ActionController::TestCase
 
   setup do
     @customer = customers(:one)
+    @request.env["devise.mapping"] = Devise.mappings[:customer]
+    get :new
   end
 
   test "should get index" do
@@ -20,7 +22,7 @@ class CustomersControllerTest < ActionController::TestCase
 
   test "should create customer" do
     assert_difference('Customer.count') do
-      post :create, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name, picture: @customer.picture }
+      post :create, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }
     end
 
     assert_redirected_to customer_path(assigns(:customer))

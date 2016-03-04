@@ -1,3 +1,4 @@
+
 chucky
 
 2147-D32242T
@@ -130,4 +131,5 @@ rails g scaffold Country name:string code2:string code3:string continent:string 
 rails g migration add_infos_to_orders first_name:string name:string email:string mobile:string status:string received_at:datetime accepted_at:date_time accepted_by:integer consignment_number:string rejected_at:datetime rejected_by:integer ip_address:string notes:text amount_paid:decimal exported:boolean invoice_number:string
 
 
-
+rails g model Cart 'subtotal:decimal{12,3}' 'tax:decimal{12,3}' 'shipping:decimal{12,3}' 'total:decimal{12,3}' order_status:references
+rails g model OrderItem product:references order:references 'unit_price:decimal{12,3}' quantity:integer 'total_price:decimal{12,3}'

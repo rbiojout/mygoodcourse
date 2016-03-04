@@ -6,8 +6,7 @@
     # belongs_to :billing_country, class_name: 'Country', foreign_key: 'billing_country_id'
 
     # Payments which have been stored for the order
-    # @TODO
-    # has_many :payments, dependent: :destroy, class_name: 'Shoppe::Payment'
+    has_many :payments, dependent: :destroy
 
     # Validations
 

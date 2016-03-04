@@ -7,38 +7,16 @@ class OrderItemsControllerTest < ActionController::TestCase
     @order_item = order_items(:one)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:order_items)
-  end
-
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
   test "should create order_item" do
     assert_difference('OrderItem.count') do
       post :create, order_item: { order_id: @order_item.order_id, price: @order_item.price, product_id: @order_item.product_id, tax_amount: @order_item.tax_amount, tax_rate: @order_item.tax_rate }
     end
-
-    assert_redirected_to order_item_path(assigns(:order_item))
   end
 
-  test "should show order_item" do
-    get :show, id: @order_item
-    assert_response :success
-  end
-
-  test "should get edit" do
-    get :edit, id: @order_item
-    assert_response :success
-  end
 
   test "should update order_item" do
     patch :update, id: @order_item, order_item: { order_id: @order_item.order_id, price: @order_item.price, product_id: @order_item.product_id, tax_amount: @order_item.tax_amount, tax_rate: @order_item.tax_rate }
-    assert_redirected_to order_item_path(assigns(:order_item))
+    assert /\A\s*\z/.match(@response.body)
   end
 
   test "should destroy order_item" do
@@ -46,6 +24,6 @@ class OrderItemsControllerTest < ActionController::TestCase
       delete :destroy, id: @order_item
     end
 
-    assert_redirected_to order_items_path
+    assert /\A\s*\z/.match(@response.body)
   end
 end

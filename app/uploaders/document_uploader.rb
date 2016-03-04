@@ -57,7 +57,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   def preview_pdf
     manipulate! do |img|
-      img.format("png", 1)
+      img.format("png", 0)
       img.resize("350x350")
       img = yield(img) if block_given?
         img
@@ -70,7 +70,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   def cover_pdf (dim)
     manipulate! do |img|
-      img.format("png", 1)
+      img.format("png", 0)
       img.resize("#{dim}x#{dim}")
       img = yield(img) if block_given?
       img
