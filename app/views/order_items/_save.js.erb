@@ -1,0 +1,11 @@
+$("ul.errors").html("")
+<% if @order_item.errors.any? %>
+  <% @order_item.errors.full_messages.each do |message| %>
+    $("ul.errors").append($("<li />").html("<%= message.html_safe %>"))
+  <% end %>
+<% else %>
+
+<% logger.debug("=====> @order_items #{@order_items}") %>
+  $(".orderitem-index").html("<%= escape_javascript(render 'index') %>")
+  $("#orderitem-modal").modal("hide")
+<% end %>

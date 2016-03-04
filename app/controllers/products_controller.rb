@@ -95,25 +95,6 @@ class ProductsController < ApplicationController
     end
   end
 
-  def remove_from_basket
-    item = current_order.order_items.find(params[:order_item_id])
-    if current_order.order_items.count == 1
-      respond_to do |format|
-        format.html { redirect_to products_url, notice: 'Product was successfully destroyed.' }
-        format.json { head :no_content }
-      end
-    else
-      item.destroy
-      respond_to do |wants|
-        wants.html { redirect_to request.referer, :notice => "Item has been removed from your basket successfully"}
-        wants.json do
-          current_order.reload
-          render :json => {:status => 'complete', :items => render_to_string(:partial => 'orders/basket.html', :locals => {:order => current_order})}
-        end
-      end
-    end
-  end
-
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

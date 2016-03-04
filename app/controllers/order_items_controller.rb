@@ -1,6 +1,15 @@
 class OrderItemsController < ApplicationController
   before_action :set_order_item, only: [:update, :destroy]
 
+  # GET /countries
+  # GET /countries.json
+  def index
+    @order = current_order
+    @order_items = current_order.order_items
+  end
+
+
+
   # POST /order_items
   # POST /order_items.json
   def create
@@ -39,13 +48,15 @@ class OrderItemsController < ApplicationController
     #end
   end
 
+  def delete
+    @order_item = OrderItem.find(params[:order_item_id])
+  end
+
   # DELETE /order_items/1
   # DELETE /order_items/1.json
   def destroy
     @order_item.destroy
-    render nothing:true
-
-    #@order_item.destroy
+    @order_items = current_order.order_items
     #respond_to do |format|
     #  format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
     #  format.json { head :no_content }

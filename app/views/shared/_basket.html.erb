@@ -1,6 +1,6 @@
 <div class="'basket">
   <% if has_order? && current_order.has_items? %>
-    <%= link_to "#{current_order.order_items.size} Items in Cart ( #{number_to_currency current_order.total_before_tax} )", basket_path(current_order), class: "btn btn-link" %>
+    <%= link_to "#{current_order.order_items.size} Items in Cart ( #{number_to_currency current_order.total_before_tax} )", order_items_path, class: "btn btn-link" %>
       link_to "Checkout", checkout_path, :class => 'checkout'
   <% end %>
 </div>

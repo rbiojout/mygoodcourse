@@ -2,7 +2,9 @@ Rails.application.routes.draw do
 
   resources :payments
   resources :countries
-  resources :order_items
+  resources :order_items do
+    get "delete"
+  end
   resources :orders
   resources :levels do
     collection { post :sort }
@@ -47,7 +49,7 @@ Rails.application.routes.draw do
   #
   # Basket
   #
-  get 'basket/:id' => 'orders#basket', :as => 'basket'
+  #get 'basket/:id' => 'orders#basket', :as => 'basket'
   #delete 'basket' => 'orders#destroy', :as => 'empty_basket'
   #post 'basket/:order_item_id' => 'orders#change_item_quantity', :as => 'adjust_basket_item_quantity'
   #delete 'basket/:order_item_id' => 'orders#change_item_quantity'
