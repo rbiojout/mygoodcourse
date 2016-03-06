@@ -30,12 +30,64 @@
       <p class="alert alert-danger"><%= alert %></p>
   <% end %>
 
-  <p><%=render 'shared/basket'%></p>
-
-
   <%= yield %>
+  <!-- FOOTER -->
+  <hr>
+  <footer>
+      <div class="row">
+        <div class="col-md-3 col-sm-3">
+          <address>
+            <strong>ForMyCourse</strong><br>
+            1355 Market Street, Suite 900<br>
+            San Francisco, CA 94103<br>
+            <abbr title="Phone">P:</abbr> (123) 456-7890
+          </address>
+        </div>
+        <div class="col-md-5 col-md-push-1 col-sm-5 col-sm-push-1">
+          <div class="row">
+            <div class="col-md-4 col-sm-4">
+              <ul class="list-inline">
+                <li><a href="#">About</a></li>
+                <li><a href="#">Our Story</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Terms</a></li>
+                <li><a href="#">Contact</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <ul class="list-inline">
+                <li><a href="#">Careeers</a></li>
+                <li><a href="#">Team</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">Blog</a></li>
+              </ul>
+            </div>
+            <div class="col-md-4 col-sm-4">
+              <ul class="list-inline">
+                <li><a href="#">Get Support</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Forum</a></li>
+                <li><a href="#">Advertise</a></li>
+                <li><a href="#">Affiliate</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 col-sm-3 col-md-push-1 col-sm-push-1">
+          <div class="text-right">
+            <a href="#"><i class="fa fa-twitter fa-lg"></i></a>
+            <a href="#"><i class="fa fa-facebook fa-lg"></i></a>
+            <a href="#"><i class="fa fa-dribbble fa-lg"></i></a>
+            <a href="#"><i class="fa fa-behance fa-lg"></i></a>
+          </div>
+        </div>
+      </div>
+
+  </footer>
   <%= debug(params) if Rails.env.development? %>
+
 </div>
+
 
 </body>
 </html>

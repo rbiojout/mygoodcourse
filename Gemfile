@@ -54,6 +54,8 @@ gem 'will_paginate'
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
+# add extra icon fonts
+gem 'font-awesome-sass', '~> 4.2.0'
 
 # add a WISIWYG HTML editor for bootstrap
 # gem 'bootstrap-wysihtml5-rails'

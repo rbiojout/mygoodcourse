@@ -20,6 +20,8 @@ class Product < ActiveRecord::Base
   # Orders which have ordered this product
   has_many :orders, through: :order_items
 
+  has_and_belongs_to_many :categories, table_name: 'products_categories'
+
   # Before validation, set the permalink if we don't already have one
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 

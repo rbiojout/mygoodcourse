@@ -134,5 +134,6 @@ class ProductsController < ApplicationController
 
     end
       %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      stat
     end
 end

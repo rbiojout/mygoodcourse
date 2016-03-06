@@ -84,6 +84,8 @@ GEM
       warden (~> 1.2.3)
     erubis (2.7.0)
     execjs (2.6.0)
+    font-awesome-sass (4.2.2)
+      sass (~> 3.2)
     fullcalendar-rails (2.6.0.0)
       jquery-rails (>= 4.0.5, < 5.0.0)
       jquery-ui-rails (>= 5.0.2)
@@ -230,6 +232,7 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   country_select
   devise
+  font-awesome-sass (~> 4.2.0)
   fullcalendar-rails
   geocoder
   gmaps4rails
