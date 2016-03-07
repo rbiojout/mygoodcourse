@@ -16,10 +16,10 @@
         <% end %>
 
 
-      <p><%= link_to_add_association 'Add new category', f, :categories, class: 'btn btn-primary btn-sm' %></p>
+      <p><%= link_to_add_association  f, :categories, class: 'btn btn-primary btn-sm' do %><i class="fa fa-plus" aria-hidden="true"></i> Add new category<% end %></p>
       </div>
 
 
-    <%= f.button :submit, class:'btn btn-primary' %>
+    <%= f.button :button, class:'btn btn-primary' do %><i class="fa fa-check" aria-hidden="true"></i> Update Form<%end%>
 
 <% end %>

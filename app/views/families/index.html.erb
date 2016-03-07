@@ -16,9 +16,9 @@
       <tr>
         <td><%= family.name %></td>
         <td><%= family.description %></td>
-        <td><%= link_to 'Show', family, class: 'btn btn-default btn-sm' %></td>
-        <td><%= link_to 'Edit', edit_family_path(family), class: 'btn btn-info btn-sm' %></td>
-        <td><%= link_to 'Destroy', family, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to family, class: 'btn btn-default btn-sm' do %><i class="fa fa-check-circle"></i> Show<% end %></td>
+        <td><%= link_to edit_family_path(family), class: 'btn btn-info btn-sm' do %><i class="fa fa-edit"></i> Edit<% end %></td>
+        <td><%= link_to family, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-remove"></i> Destroy<% end %></td>
       </tr>
     <% end %>
   </tbody>
@@ -26,4 +26,4 @@
 
 <br>
 
-<%= link_to 'New Family', new_family_path, class: 'btn btn-primary' %>
+<%= link_to new_family_path, class: 'btn btn-primary' do %><i class="fa fa-plus"></i> New Family<% end %>
