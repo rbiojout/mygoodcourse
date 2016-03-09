@@ -13,6 +13,24 @@ class ProductsController < ApplicationController
     @products = Product.order(sort_column + " " + sort_direction)
   end
 
+  # GET /catalog
+  def catalog
+    @products = Product.active # creates an anonymous scope
+    @products = @products.status(params[:status]) if params[:status].present?
+    family_id = params[:family_id] || session[:family_for_products_id]
+    # unload if :family_id equal 0
+    unless family_id.nil?
+      if family_id.to_s == "0"
+        session[:family_for_products_id] = nil
+        family_id =nil
+      end
+    end
+    @products = Family.find(family_id).products.active unless family_id.nil?
+    # store the family in session
+    session[:family_for_products_id] = family_id
+    @products = Category.find(params[:category_id]).products.active if params[:category_id].present?
+  end
+
 
   # GET /products
   # GET /products.json

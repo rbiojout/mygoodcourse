@@ -13,7 +13,9 @@
           <p><strong>File type : </strong><%= attachment.file_type %></p>
           <p><strong># pages : </strong><%= attachment.nbpages %></p>
           <p><strong>Version number : </strong><%= attachment.version_number %></p>
-          <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
+          <% if remove_ok %>
+            <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
+          <% end %>
         </div>
     <% end %>
   </div>

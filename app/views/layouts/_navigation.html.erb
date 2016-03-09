@@ -17,7 +17,9 @@
       <ul class="nav navbar-nav navbar-right">
         <% if has_order? && current_order.has_items? %>
             <li>
-              <%= link_to " #{current_order.order_items.size} Items in Cart ( #{number_to_currency current_order.total_before_tax} )", order_items_path, class: "fa fa-shopping-cart" %>
+              <%= link_to  order_items_path do %>
+                  <i class="fa fa-shopping-cart" aria-hidden="true"></i> <%="#{current_order.order_items.size} Items in Cart ( #{number_to_currency current_order.total_before_tax} )" %>
+              <% end %>
             </li>
         <% end %>
       </ul>

@@ -5,6 +5,10 @@
     http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform
     <%= f.error_notification %>
 
+    <% @product.errors.full_messages.each do |msg| %>
+        <p><%= msg %></p>
+    <% end %>
+
 
 
       <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
@@ -13,7 +17,6 @@
       <%= f.trix_editor :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
       <%= f.input :short_description %>
       <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
-      <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
       <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
 
     <div class="row panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -42,11 +45,12 @@
 
     </div>
 
-
+    <!--- Attachments --->
+    <% remove_ok = false %>
     <div class="row", id="attachments">
-
-        <%= f.fields_for :attachments do |att| %>
-            <%= render 'attachment_fields', f: att %>
+        <%= f.fields_for :attachments do |att, index| %>
+            <%= render 'attachment_fields', f: att, remove_ok: remove_ok %>
+          <% remove_ok = true %>
         <% end %>
 
     </div>

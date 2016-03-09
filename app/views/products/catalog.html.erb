@@ -1,0 +1,50 @@
+
+<h1>Catalog</h1>
+
+<%= link_to 'All families', catalog_products_path(:family_id => 0), class:'btn btn-default' %>
+
+<% Family.with_products.each do |fam| %>
+    <% if fam.id.to_s == session[:family_for_products_id]
+         btn_class = "btn btn-primary"
+    else
+      btn_class = "btn btn-default"
+    end %>
+
+    <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: btn_class %>
+    <% end %>
+
+<div class="row carouselImg">
+  <% @products.each do |product| %>
+      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+        <div class="hovereffect">
+          <% if product.preview.nil? %>
+              <%= image_tag "product.preview", class: 'img-thumbnail' %>
+              <% else %>
+          <%= image_tag product.preview, class: 'img-thumbnail' %>
+              <% end %>
+          <div class="overlay">
+            <h2><%= product.name %></h2>
+
+            <%= link_to 'detail', product_path(product.id), class:"info" %>
+          </div>
+        </div>
+        <div href="/rooms/10855464?s=U_pEUuKW" target="listing_10855464" class="panel-overlay-bottom-left panel-overlay-label panel-overlay-listing-label">
+          <div class="tooltip tooltip-fixed tooltip-bottom-left total-price-breakdown text-dark-gray" role="tooltip">
+            <div class="loading"></div>
+          </div>
+          <div>
+            <div class="price-amount-container">
+              <sup class="h6 text-contrast"><span class="glyphicon glyphicon-eur" aria-hidden="true"></span> </sup>
+              <span class="h3 text-contrast price-amount"><%= product.price||"Free" %></span>
+              <sup class="h6 text-contrast"></sup>
+            </div>
+          </div>
+        </div>
+        <div>
+            <p><%= product.short_description.html_safe %></p>
+        </div>
+      </div>
+  <% end %>
+
+</div>
+

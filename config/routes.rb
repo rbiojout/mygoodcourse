@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
     collection do
       get 'myproducts'
+      get 'catalog'
     end
   end
   devise_for :employees
@@ -38,6 +39,7 @@ Rails.application.routes.draw do
   #get 'products/filter' => 'products#filter', :as => 'product_filter'
   #get 'products/:category_id' => 'products#index', :as => 'products'
   #get 'products/:category_id/:product_id' => 'products#show', :as => 'product'
+
   post 'products/:product_id/buy' => 'products#add_to_basket', :as => 'buy_product'
   delete 'products/:order_item_id/remove_from_basket' => 'products#remove_from_basket', :as => 'remove_basket_item'
 

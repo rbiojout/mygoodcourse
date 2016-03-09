@@ -1,8 +1,6 @@
 class Attachment < ActiveRecord::Base
   #attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active
   belongs_to :product
-  validates :product, :presence => true
-
 
   mount_uploader :file, DocumentUploader
   validates :file, presence: true
@@ -24,8 +22,8 @@ class Attachment < ActiveRecord::Base
       #image.identify do |b|
       # b.format '%n'
       #end
-
     end
   end
+
 
 end
