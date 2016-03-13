@@ -13,7 +13,7 @@
 
       <%= f.input :picture, :as => :image_preview %>
 
-      <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address'} %>
+      <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address', class: 'geocoding_fulladdress'} %>
       <div class="geo-details">
           <%= f.input :street_address, as: :hidden, :input_html => {:geocoding => 'name'} %>
           <%= f.input :administrative_area_level_1, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_1'} %>
@@ -30,17 +30,3 @@
     </div>
 <% end %>
 
-
-<script>
-    $(function(){
-        $("#customer_formatted_address").geocomplete({
-            details: ".geo-details",
-            //detailsAttribute: "data-geo",
-            detailsAttribute: "geocoding",
-
-        });
-        $("#find").click(function(){
-            $("#location").trigger("geocode");
-        });
-    });
-</script>

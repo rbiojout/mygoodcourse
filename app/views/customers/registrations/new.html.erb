@@ -13,6 +13,17 @@
 
       <%= f.input :picture, :as => :image_preview %>
 
+      <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address', class: 'geocoding_fulladdress'}, class: 'geocoding_fulladdress' %>
+      <div class="geo-details">
+        <%= f.input :street_address, as: :hidden, :input_html => {:geocoding => 'name'} %>
+        <%= f.input :administrative_area_level_1, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_1'} %>
+        <%= f.input :administrative_area_level_2, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_2'} %>
+        <%= f.input :postal_code, as: :hidden, :input_html => {:geocoding => 'postal_code'} %>
+        <%= f.input :locality, as: :hidden, :input_html => {:geocoding => 'locality'} %>
+        <%= f.input :lat, as: :hidden, :input_html => {:geocoding => 'lat'} %>
+        <%= f.input :lng, as: :hidden, :input_html => {:geocoding => 'lng'} %>
+      </div>
+
       </div>
     <div class="form-actions">
       <%= f.button :submit, "Sign up" %>
@@ -22,19 +33,5 @@
 
 <%= render "customers/shared/links" %>
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.18&sensor=false&amp;libraries=places"></script>
 
-<script>
-    $(function(){
-        $("#customer_address_attributes_full_address").geocomplete({
-            details: ".geo-details",
-            //detailsAttribute: "data-geo",
-            detailsAttribute: "geocoding",
-
-        });
-        $("#find").click(function(){
-            $("#location").trigger("geocode");
-        });
-    });
-</script>
 

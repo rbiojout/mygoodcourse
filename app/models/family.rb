@@ -10,4 +10,5 @@ class Family < ActiveRecord::Base
   # families with products
   scope :with_products, -> { Family.joins(:products).distinct }
 
+
 end

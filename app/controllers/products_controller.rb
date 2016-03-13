@@ -15,20 +15,61 @@ class ProductsController < ApplicationController
 
   # GET /catalog
   def catalog
+    # filter only on active products
     @products = Product.active # creates an anonymous scope
+
     @products = @products.status(params[:status]) if params[:status].present?
+
+    # Get the parameters
     family_id = params[:family_id] || session[:family_for_products_id]
+    category_id = params[:category_id] || session[:category_for_products_id]
+
+    logger.debug("=====>family_id #{family_id}")
+    logger.debug("=====> #{category_id}")
+
+    # do we have to delete some parameters?
     # unload if :family_id equal 0
-    unless family_id.nil?
+    unless params[:family_id].nil?
       if family_id.to_s == "0"
         session[:family_for_products_id] = nil
         family_id =nil
       end
+        session[:category_for_products_id] = nil
+        category_id = nil
+        logger.debug("=====> .. #{category_id}")
     end
-    @products = Family.find(family_id).products.active unless family_id.nil?
-    # store the family in session
-    session[:family_for_products_id] = family_id
-    @products = Category.find(params[:category_id]).products.active if params[:category_id].present?
+    # unload if :category_id equal 0
+    unless category_id.nil?
+      if category_id.to_s == "0"
+        session[:category_for_products_id] = nil
+        category_id =nil
+        # if we have the category we need to have set the corresponding family
+      else
+        session[:category_for_products_id] = category_id
+        family_id = Category.find(category_id).family_id
+        session[:family_for_products_id] = family_id
+      end
+    end
+
+    logger.debug("=====> #{category_id}")
+
+    # show the most detailed level of information
+    unless family_id.nil?
+      unless category_id.nil?
+        @products = Category.find(category_id).products.active
+        # store the category in session
+        session[:category_for_products_id] = category_id
+        # store the family in session
+        session[:family_for_products_id] = family_id
+      else
+        @products = Family.find(family_id).products.active
+        # store the family in session
+        session[:family_for_products_id] = family_id
+      end
+    end
+
+
+
   end
 
 
