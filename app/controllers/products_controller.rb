@@ -112,7 +112,7 @@ class ProductsController < ApplicationController
     end
 
     logger.debug("===> #{sort_column} / #{sort_direction}")
-    @products = @products.active.order("LOWER(" + sort_column + ") " + sort_direction)
+    @products = @products.active.order( sort_column + " " + sort_direction)
 
   end
 
