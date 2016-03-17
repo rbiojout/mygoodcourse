@@ -7,10 +7,10 @@
 
 <p>
   <strong>Description:</strong>
-  <%= @cycle.description %>
+  <%= @cycle.description.html_safe %>
 </p>
 
-<ul id="levels" data-update-url="<%= sort_levels_url %>">
+<ul id="levels_sortable" class="sortable" data-update-url="<%= sort_levels_url %>">
 <% @cycle.levels.each  do |lev| %>
 
     <li class="form-inline" id="level_<%= lev.id %>">

@@ -4,7 +4,11 @@
         <li class="btn btn-success btn-sm glyphicon glyphicon-sort handle">move</li>
     <% end %>
     <%= link_to_remove_association "remove level", f, class: 'btn btn-danger btn-sm' %>
-
+  <% unless f.object.id.nil?%>
+    (OK)
+  <% else %>
+    (KO)
+  <% end %>
     <%= f.input :name, label:false, placeholder: 'name' %>
     <%= f.input :description, label:false, placeholder: 'description' %>
 

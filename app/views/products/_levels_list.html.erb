@@ -1,0 +1,25 @@
+<div class="row panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+  <% Cycle.all.each do |cycle| %>
+      <% if cycle.levels.to_a.length > 0  %>
+          <div class="col-sm-4 col-md-3">
+            <div class="panel panel-default">
+              <div class="panel-heading" role="tab" id="heading<%=cycle.id%>">
+                <h4 class="panel-title">
+                  <a role="button" data-toggle="collapse"  data-parent="#accordion" href="#collapse<%=cycle.id%>" aria-expanded="false" aria-controls="collapse<%=cycle.id%>">
+                    <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i> <%=cycle.name%>
+                  </a>
+                </h4>
+              </div>
+              <div id="collapse<%=cycle.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=cycle.id%>">
+                <div class="panel-body">
+                  <%= f.association :levels, label: cycle.name, collection: cycle.levels, as: :check_boxes %>
+                </div>
+              </div>
+            </div>
+          </div>
+      <% end %>
+  <% end %>
+  <% f.association :levels, collection: Cycle.all, as: :grouped_select, group_method: :levels %>
+
+</div>

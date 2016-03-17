@@ -19,33 +19,14 @@
       <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
       <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
 
-    <div class="row panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+    <!--- Categories List --->
+    <%= render 'categories_list', f: f %>
 
-      <% Family.all.each do |family| %>
-          <% if family.categories.to_a.length > 0  %>
-              <div class="col-sm-4 col-md-3">
-              <div class="panel panel-default">
-                <div class="panel-heading" role="tab" id="heading<%=family.id%>">
-                  <h4 class="panel-title">
-                    <a role="button" data-toggle="collapse"  data-parent="#accordion" href="#collapse<%=family.id%>" aria-expanded="false" aria-controls="collapse<%=family.id%>">
-                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i> <%=family.name%>
-                    </a>
-                  </h4>
-                </div>
-                <div id="collapse<%=family.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%=family.id%>">
-                  <div class="panel-body">
-                    <%= f.association :categories, label: family.name, collection: family.categories, as: :check_boxes %>
-                  </div>
-                </div>
-              </div>
-              </div>
-          <% end %>
-      <% end %>
-      <% f.association :categories, collection: Family.all, as: :grouped_select, group_method: :categories %>
-
-    </div>
+    <!--- Levels List -->
+    <%= render 'levels_list', f: f %>
 
     <!--- Attachments --->
+    <!--- only the first element can not be removed -->
     <% remove_ok = false %>
     <div class="row", id="attachments">
         <%= f.fields_for :attachments do |att, index| %>

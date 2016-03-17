@@ -61,6 +61,17 @@ class CyclesController < ApplicationController
     end
   end
 
+
+  # POST /cycles/sort
+  def sort
+    unless params[:cycle].nil?
+      params[:cycle].each .each_with_index do |id, index|
+        Cycle.update(id, position: index+1)
+      end
+    end
+    render nothing:true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cycle

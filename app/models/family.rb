@@ -7,6 +7,8 @@ class Family < ActiveRecord::Base
 
   validates :name, presence: true
 
+  default_scope -> { order(position: :asc) }
+
   # families with products
   scope :with_products, -> { Family.joins(:products).distinct }
 

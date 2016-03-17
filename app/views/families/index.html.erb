@@ -2,28 +2,23 @@
 
 <h1>Listing Families</h1>
 
-<table calss="table">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
+<div id="families_sortable" class="sortable" data-update-url="<%= sort_families_path %>">
     <% @families.each do |family| %>
-      <tr>
-        <td><%= family.name %></td>
-        <td><%= family.description %></td>
-        <td><%= link_to family, class: 'btn btn-default btn-sm' do %><i class="fa fa-check-circle"></i> Show<% end %></td>
-        <td><%= link_to edit_family_path(family), class: 'btn btn-info btn-sm' do %><i class="fa fa-edit"></i> Edit<% end %></td>
-        <td><%= link_to family, class: 'btn btn-danger btn-sm', method: :delete, data: { confirm: 'Are you sure?' } do %><i class="fa fa-remove"></i> Destroy<% end %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <div class="panel panel-default" id="family_<%=family.id%>">
+        <%= link_to '#' do %>
+            <li class="btn btn-success glyphicon glyphicon-sort handle">move</li>
+        <% end %>
+        <%= family.name %>
+        <div class="btn-group pull-right">
+          <%= link_to 'Show', family, class: "btn btn-default active" %>
+          <%= link_to 'Edit', edit_family_path(family), class: "btn btn-default" %>
+          <%= link_to 'Destroy', family, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
+        </div>
+      </div>
+  <% end %>
+
+</div>
 
 <br>
 
-<%= link_to new_family_path, class: 'btn btn-primary' do %><i class="fa fa-plus"></i> New Family<% end %>
+<%= link_to 'New Family', new_family_path, class: 'btn btn-primary' %>

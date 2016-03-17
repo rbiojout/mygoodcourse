@@ -1,2 +1,0 @@
-$ ->
-  $('.sortable').sortable()

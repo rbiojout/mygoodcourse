@@ -9,12 +9,16 @@ Rails.application.routes.draw do
   resources :levels do
     collection { post :sort }
   end
-  resources :cycles
+  resources :cycles do
+    collection { post :sort }
+  end
   resources :categories do
     collection { post :sort }
   end
 
-  resources :families
+  resources :families do
+    collection { post :sort }
+  end
   resources :attachments
   resources :products do
     member do

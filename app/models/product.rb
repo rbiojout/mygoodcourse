@@ -7,7 +7,7 @@ class Product < ActiveRecord::Base
 
   belongs_to :customer
   # validators
-  validates :customer_id, :name, :description, :short_description, presence: true
+  validates :customer_id, :name, :description, presence: true
 
   #default_scope -> { order(created_at: :desc) }
 
@@ -20,8 +20,13 @@ class Product < ActiveRecord::Base
   # Orders which have ordered this product
   has_many :orders, through: :order_items
 
+  # product is link to many categories
   has_and_belongs_to_many :categories, table_name: 'products_categories'
   has_many :families, through: :categories
+
+  # product is linked to many levels
+  has_and_belongs_to_many :levels, table_name: 'levels_products'
+  has_many :cycles, through: :levels
 
 
   # Before validation, set the permalink if we don't already have one
@@ -33,8 +38,72 @@ class Product < ActiveRecord::Base
   # All featured products
   scope :featured, -> { where(featured: true) }
 
+  # Can be an array of values
+  scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id}).distinct}
+  scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id}).distinct}
+
+  # Can be an array of values
+  scope :for_cycle, -> (cycle_id) {joins(:cycles).where(cycles: {id: cycle_id}).distinct}
+  scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id}).distinct}
+
+  def self.find_by_category(category_id)
+    has_category = false
+    unless category_id.nil?
+      if category_id.to_f > 0
+        has_category = true
+      end
+    end
+    logger.debug("===> #{category_id} #{category_id.to_f > 0} #{has_category} ")
+    if has_category == true
+      logger.debug("===> first ")
+      joins(:categories).where(categories: {id: category_id})
+    else
+      logger.debug("===> second ")
+      all
+    end
+  end
+
+  def self.find_by_level(level_id)
+    has_level = false
+    unless level_id.nil?
+      if level_id.to_f > 0
+        has_level = true
+      end
+    end
+    logger.debug("===>  #{level_id.to_f > 0}")
+    logger.debug("===> #{level_id} #{level_id.to_f > 0} #{has_level} ")
+    if(has_level)
+      joins(:levels).where(levels: {id: level_id})
+    else
+      all
+    end
+  end
 
 
+  def self.find_by_category_and_level(category_id, level_id)
+    has_category = false
+    has_level = false
+    unless category_id.nil?
+      if category_id.to_f > 0
+        has_category = true
+      end
+    end
+    unless level_id.nil?
+      if level_id.to_f > 0
+        has_level = true
+      end
+    end
+    logger.debug("===> #{category_id.to_f > 0}  #{level_id.to_f > 0}")
+    if (has_category && has_level)
+      joins(:categories).where(categories: {id: category_id}).joins(:levels).where(levels: {id: level_id})
+    elsif(has_category)
+      joins(:categories).where(categories: {id: category_id})
+    elsif(has_level)
+      joins(:levels).where(levels: {id: level_id})
+    else
+      all
+    end
+  end
 
   def preview
     # we return nil if nothing match

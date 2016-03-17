@@ -24,9 +24,11 @@ class ProductsController < ApplicationController
     family_id = params[:family_id] || session[:family_for_products_id]
     category_id = params[:category_id] || session[:category_for_products_id]
 
-    logger.debug("=====>family_id #{family_id}")
-    logger.debug("=====> #{category_id}")
+    cycle_id = params[:cycle_id] || session[:cycle_for_products_id]
+    level_id = params[:level_id] || session[:level_for_products_id]
 
+
+    # prepare parameters for Family and Category
     # do we have to delete some parameters?
     # unload if :family_id equal 0
     unless params[:family_id].nil?
@@ -34,9 +36,9 @@ class ProductsController < ApplicationController
         session[:family_for_products_id] = nil
         family_id =nil
       end
-        session[:category_for_products_id] = nil
-        category_id = nil
-        logger.debug("=====> .. #{category_id}")
+      session[:category_for_products_id] = nil
+      category_id = nil
+      #logger.debug("=====> .. #{category_id}")
     end
     # unload if :category_id equal 0
     unless category_id.nil?
@@ -51,27 +53,68 @@ class ProductsController < ApplicationController
       end
     end
 
-    logger.debug("=====> #{category_id}")
 
+    # prepare parameters for Cycle and Level
+    # do we have to delete some parameters?
+    # unload if :cycle_id equal 0
+    unless params[:cycle_id].nil?
+      if cycle_id.to_s == "0"
+        session[:cycle_for_products_id] = nil
+        cycle_id =nil
+      end
+      session[:level_for_products_id] = nil
+      level_id = nil
+    end
+    # unload if :level_id equal 0
+    unless level_id.nil?
+      if level_id.to_s == "0"
+        session[:level_for_products_id] = nil
+        level_id =nil
+        # if we have the level we need to have set the corresponding family
+      else
+        session[:level_for_products_id] = level_id
+        cycle_id = Level.find(level_id).cycle_id
+        session[:cycle_for_products_id] = cycle_id
+      end
+    end
+
+
+    # filter for Family and Category
     # show the most detailed level of information
     unless family_id.nil?
       unless category_id.nil?
-        @products = Category.find(category_id).products.active
+        @products.for_category(category_id)
         # store the category in session
         session[:category_for_products_id] = category_id
         # store the family in session
         session[:family_for_products_id] = family_id
       else
-        @products = Family.find(family_id).products.active
+        @products = @products.for_family(family_id)
         # store the family in session
         session[:family_for_products_id] = family_id
       end
     end
 
+    # filter for Cycle and Level
+    # show the most detailed level of information
+    unless cycle_id.nil?
+      unless level_id.nil?
+        @products.for_level(level_id)
+        # store the level in session
+        session[:level_for_products_id] = level_id
+        # store the cycle in session
+        session[:cycle_for_products_id] = cycle_id
+      else
+        @products = @products.for_cycle(cycle_id)
+        # store the cycle in session
+        session[:cycle_for_products_id] = cycle_id
+      end
+    end
 
+    logger.debug("===> #{sort_column} / #{sort_direction}")
+    @products = @products.active.order("LOWER(" + sort_column + ") " + sort_direction)
 
   end
-
 
   # GET /products
   # GET /products.json
@@ -162,7 +205,9 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :sku, :permalink, :description, :short_description, :active, :price, attachments_attributes: [:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id], :category_ids => [])
+      params.require(:product).permit(:name, :sku, :permalink, :description, :short_description, :active, :price,
+                                      attachments_attributes: [:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id],
+                                      :category_ids => [], :level_ids => [])
     end
 
     def correct_user
