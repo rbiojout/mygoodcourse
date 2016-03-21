@@ -33,6 +33,9 @@ Rails.application.routes.draw do
   devise_for :employees
   resources :employees
   devise_for :customers
+  devise_scope :customers do
+    post "/sign_up", :to => "devise/registrations#create"
+  end
   resources :customers
 
 

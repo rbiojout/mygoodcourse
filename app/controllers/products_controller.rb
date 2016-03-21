@@ -18,7 +18,7 @@ class ProductsController < ApplicationController
     # filter only on active products
     @products = Product.active # creates an anonymous scope
 
-    @products = @products.status(params[:status]) if params[:status].present?
+    #@products = @products.status(params[:status]) if params[:status].present?
 
     # Get the parameters
     family_id = params[:family_id] || session[:family_for_products_id]
@@ -26,6 +26,8 @@ class ProductsController < ApplicationController
 
     cycle_id = params[:cycle_id] || session[:cycle_for_products_id]
     level_id = params[:level_id] || session[:level_for_products_id]
+
+    logger.debug("===> parameters received #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
 
     # prepare parameters for Family and Category
@@ -78,20 +80,23 @@ class ProductsController < ApplicationController
       end
     end
 
+    #logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
     # filter for Family and Category
     # show the most detailed level of information
     unless family_id.nil?
       unless category_id.nil?
-        @products.for_category(category_id)
+        @products = @products.for_category(category_id)
         # store the category in session
         session[:category_for_products_id] = category_id
         # store the family in session
         session[:family_for_products_id] = family_id
+        #logger.debug("===> products by category #{category_id}")
       else
         @products = @products.for_family(family_id)
         # store the family in session
         session[:family_for_products_id] = family_id
+        #logger.debug("===> products by family")
       end
     end
 
@@ -99,20 +104,22 @@ class ProductsController < ApplicationController
     # show the most detailed level of information
     unless cycle_id.nil?
       unless level_id.nil?
-        @products.for_level(level_id)
+        @products = @products.for_level(level_id)
         # store the level in session
         session[:level_for_products_id] = level_id
         # store the cycle in session
         session[:cycle_for_products_id] = cycle_id
+        #logger.debug("===> products by level")
       else
         @products = @products.for_cycle(cycle_id)
         # store the cycle in session
         session[:cycle_for_products_id] = cycle_id
+        #logger.debug("===> products by cycle")
       end
     end
 
-    logger.debug("===> #{sort_column} / #{sort_direction}")
-    @products = @products.active.order( sort_column + " " + sort_direction)
+    #logger.debug("===> #{sort_column} / #{sort_direction}")
+    @products = @products.order( sort_column + " " + sort_direction)
 
   end
 
@@ -225,7 +232,7 @@ class ProductsController < ApplicationController
 
     def check_attachment
       #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
-      if ( params[:product][:attachments_attributes].nil? )
+      if params[:product][:attachments_attributes].nil?
         #@product.attachments.build
         flash[:error] = "You need to provide an attachment"
         #redirect_to product_path

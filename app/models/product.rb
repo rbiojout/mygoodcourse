@@ -1,13 +1,20 @@
 class Product < ActiveRecord::Base
+
+  # we want a name with a Capital
+  before_save :capitalize_name
+
+  # we need at least one attachment
   has_many :attachments, dependent: :destroy
   accepts_nested_attributes_for :attachments, :reject_if => proc {|attributes| attributes['file'].blank?  && attributes['file_cache'].blank?},  allow_destroy: true
-  #
   validates_presence_of :attachments, :message => "You need to provide at least one version of attachment. Please add a new version."
   before_update :ensure_attachment_present
 
+  # linked to customer as necessary
   belongs_to :customer
   # validators
   validates :customer_id, :name, :description, presence: true
+
+
 
   #default_scope -> { order(created_at: :desc) }
 
@@ -15,13 +22,13 @@ class Product < ActiveRecord::Base
   # Ordered items which are associated with this product
   # We don't want to delete if some orders have been collected
   has_many :order_items, dependent: :restrict_with_exception
-  before_destroy :ensure_not_referenced_by_any_order_item
+  before_destroy :ensure_not_referenced
 
   # Orders which have ordered this product
   has_many :orders, through: :order_items
 
   # product is link to many categories
-  has_and_belongs_to_many :categories, table_name: 'products_categories'
+  has_and_belongs_to_many :categories, table_name: 'categories_products'
   has_many :families, through: :categories
 
   # product is linked to many levels
@@ -72,7 +79,7 @@ class Product < ActiveRecord::Base
     end
     logger.debug("===>  #{level_id.to_f > 0}")
     logger.debug("===> #{level_id} #{level_id.to_f > 0} #{has_level} ")
-    if(has_level)
+    if has_level
       joins(:levels).where(levels: {id: level_id})
     else
       all
@@ -96,9 +103,9 @@ class Product < ActiveRecord::Base
     logger.debug("===> #{category_id.to_f > 0}  #{level_id.to_f > 0}")
     if (has_category && has_level)
       joins(:categories).where(categories: {id: category_id}).joins(:levels).where(levels: {id: level_id})
-    elsif(has_category)
+    elsif has_category
       joins(:categories).where(categories: {id: category_id})
-    elsif(has_level)
+    elsif has_level
       joins(:levels).where(levels: {id: level_id})
     else
       all
@@ -106,18 +113,17 @@ class Product < ActiveRecord::Base
   end
 
   def preview
-    # we return nil if nothing match
-    nil
-    unless attachments.first.nil?
-      unless attachments.first.file.nil?
            attachments.first.file.url(:preview)
-         end
-    end
   end
 
   private
+  # we want a name that start with capital
+  def capitalize_name
+    self.name = self.name.camelize
+  end
+
   # ensure that there are no line items referencing this product
-  def ensure_not_referenced_by_any_order_item
+  def ensure_not_referenced
     if order_items.empty?
          return true
     else

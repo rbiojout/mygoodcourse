@@ -2,148 +2,225 @@
 <h1>Catalog</h1>
 
 <hr>
-  <h5>SEARCH</h5>
+<h5>SEARCH</h5>
 <hr>
 
-<div class="row">
-  <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
 
-    <!--- orders --->
-    <%= link_to 'order by date', catalog_products_path(:sort =>'created_at', :direction => 'asc' ) %>
-    <%= link_to 'order by date desc', catalog_products_path(:sort =>'created_at', :direction => 'desc' ) %>
-    <%= link_to 'order by name', catalog_products_path(:sort =>'name', :direction => 'asc' ) %>
-    <%= link_to 'order by name desc', catalog_products_path(:sort =>'name', :direction => 'desc' ) %>
-    <%= link_to 'order by price', catalog_products_path(:sort =>'price', :direction => 'asc' ) %>
-    <%= link_to 'order by price desc', catalog_products_path(:sort =>'price', :direction => 'desc' ) %>
-    <!-- Family and Category -->
-    <div class="panel-group" id="accordion_family" role="tablist" aria-multiselectable="true">
-      <div class="panel panel-default">
-        <%= link_to 'All families', catalog_products_path(:family_id => 0), class:"btn btn-default #{'btn-primary' if session[:family_for_products_id].nil?}" %>
-      </div>
+<!-- Page Content -->
 
-      <% Family.with_products.each do |fam| %>
-          <% if fam.id.to_s == session[:family_for_products_id].to_s
-               family_active = true
-             end %>
-          <div class="panel panel-default">
-            <div  role="tab" id="heading<%=fam.id%>">
+  <div class="row">
 
-              <% if family_active %>
-                  <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-primary" %>
-                  <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=fam.id%>" aria-expanded="true" aria-controls="collapse<%=fam.id%>">
-                    <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                  </a>
-              <% else %>
-                  <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-default" %>
-                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#collapse<%=fam.id%>" aria-expanded="false" aria-controls="collapse<%=fam.id%>">
-                    <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                  </a>
-              <% end %>
+    <div class="col-md-3">
+      <!--- orders --->
+      <p>order by date
+        <%= link_to catalog_products_path(:sort =>'created_at', :direction => 'asc' ) do %>
+            <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
+        <%= link_to catalog_products_path(:sort =>'created_at', :direction => 'desc' ) do %>
+            <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
+      </p>
+      <p>order by name
+        <%= link_to catalog_products_path(:sort =>'name', :direction => 'asc' ) do %>
+            <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
+        <%= link_to catalog_products_path(:sort =>'name', :direction => 'desc' ) do %>
+            <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
+      </p>
+      <p>order by price
+        <%= link_to catalog_products_path(:sort =>'price', :direction => 'asc' ) do %>
+            <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
+        <%= link_to catalog_products_path(:sort =>'price', :direction => 'desc' ) do %>
+            <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
+      </p>
+      <p>Free products</p>
 
-            </div>
-            <div id="collapse<%=fam.id%>" class="panel-collapse collapse <%="in" if family_active%>" role="tabpanel" aria-labelledby="heading<%=fam.id%>">
-              <div class="panel-body">
-                <% Category.with_products_for_family(fam.id).each do |cat| %>
-                    <% if cat.id.to_s == session[:category_for_products_id].to_s
-                         category_active = true
-                       end %>
-                    <% if category_active %>
-                        <p><%= link_to catalog_products_path(:category_id => cat.id) do %><i class="fa fa-square" aria-hidden="true"></i> <%=cat.name %><% end %></p>
-                    <% else %>
-                        <p><%= link_to catalog_products_path(:category_id => cat.id) do %><i class="fa fa-square-o" aria-hidden="true"></i> <%=cat.name %><% end %></p>
-                    <% end %>
+
+
+
+      <!-- Family and Category -->
+      <div class="list-group" id="accordion_family" role="tablist" aria-multiselectable="true">
+        <div class="list-group-item">
+          <%= link_to 'All families', catalog_products_path(:family_id => 0), class:"btn #{ (session[:family_for_products_id].nil?)? 'btn-primary' : 'btn-default'}" %>
+        </div>
+
+        <% Family.with_products.each do |fam| %>
+            <% if fam.id.to_s == session[:family_for_products_id].to_s
+                 family_active = true
+               end %>
+            <div class="list-group-item">
+              <div  role="tab" id="heading_family<%=fam.id%>">
+
+                <% if family_active %>
+                    <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-primary" %>
+                    <a role="button" data-toggle="collapse" data-parent="#accordion_family" href="#collapse_family<%=fam.id%>" aria-expanded="true" aria-controls="collapse_family<%=fam.id%>">
+                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
+                    </a>
+                <% else %>
+                    <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-default" %>
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_family" href="#collapse_family<%=fam.id%>" aria-expanded="false" aria-controls="collapse_family<%=fam.id%>">
+                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
+                    </a>
                 <% end %>
 
               </div>
-            </div>
-          </div>
-      <% end %>
-    </div>
-    <!--  end of Family and Category -->
+              <div id="collapse_family<%=fam.id%>" class="panel-collapse collapse <%="in" if family_active%>" role="tabpanel" aria-labelledby="heading_family<%=fam.id%>">
+                <div class="panel-body">
+                  <% Category.with_products_for_family(fam.id).each do |cat| %>
+                      <% if cat.id.to_s == session[:category_for_products_id].to_s
+                           category_active = true
+                         end %>
+                      <% if category_active %>
+                          <p><%= link_to catalog_products_path(:category_id => cat.id) do %><i class="fa fa-square" aria-hidden="true"></i> <%=cat.name %><% end %></p>
+                      <% else %>
+                          <p><%= link_to catalog_products_path(:category_id => cat.id) do %><i class="fa fa-square-o" aria-hidden="true"></i> <%=cat.name %><% end %></p>
+                      <% end %>
+                  <% end %>
 
-    <!-- Cycle and Level -->
-    <div class="panel-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
-      <div class="panel panel-default">
-        <%= link_to 'All Cycles', catalog_products_path(:cycle_id => 0), class:"btn btn-default #{'btn-primary' if session[:cycle_for_products_id].nil?}" %>
+                </div>
+              </div>
+            </div>
+        <% end %>
       </div>
+      <!--  end of Family and Category -->
 
-      <% Cycle.with_products.each do |cycle| %>
-          <% if cycle.id.to_s == session[:cycle_for_products_id].to_s
-               cycle_active = true
-             end %>
-          <div class="panel panel-default">
-            <div  role="tab" id="heading_cycle<%=cycle.id%>">
+      <!-- Cycle and Level -->
+      <div class="list-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
+        <div class="list-group-item">
+          <%= link_to 'All Cycles', catalog_products_path(:cycle_id => 0), class:"btn  #{(session[:cycle_for_products_id].nil?)? 'btn-primary' : 'btn-default'}" %>
+        </div>
 
-              <% if cycle_active %>
-                  <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-primary" %>
-                  <a role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="true" aria-controls="collapse_cycle<%=cycle.id%>">
-                    <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                  </a>
-              <% else %>
-                  <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-default" %>
-                  <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="false" aria-controls="collapse_cycle<%=cycle.id%>">
-                    <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                  </a>
-              <% end %>
+        <% Cycle.with_products.each do |cycle| %>
+            <% if cycle.id.to_s == session[:cycle_for_products_id].to_s
+                 cycle_active = true
+               end %>
+            <div class="list-group-item">
+              <div  role="tab" id="heading_cycle<%=cycle.id%>">
 
-            </div>
-            <div id="collapse_cycle<%=cycle.id%>" class="panel-collapse collapse <%="in" if cycle_active%>" role="tabpanel" aria-labelledby="heading<%=cycle.id%>">
-              <div class="panel-body">
-                <% Level.with_products_for_cycle(cycle.id).each do |level| %>
-                    <% if level.id.to_s == session[:level_for_products_id].to_s
-                         level_active = true
-                       end %>
-                    <% if level_active %>
-                        <p><%= link_to catalog_products_path(:level_id => level.id) do%><i class="fa fa-square" aria-hidden="true"></i> <%=level.name %><% end %></p>
-                    <% else %>
-                        <p><%= link_to catalog_products_path(:level_id => level.id) do%><i class="fa fa-square-o" aria-hidden="true"></i> <%=level.name %><% end %></p>
-                    <% end %>
+                <% if cycle_active %>
+                    <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-primary" %>
+                    <a role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="true" aria-controls="collapse_cycle<%=cycle.id%>">
+                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
+                    </a>
+                <% else %>
+                    <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-default" %>
+                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="false" aria-controls="collapse_cycle<%=cycle.id%>">
+                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
+                    </a>
                 <% end %>
 
               </div>
+              <div id="collapse_cycle<%=cycle.id%>" class="panel-collapse collapse <%="in" if cycle_active%>" role="tabpanel" aria-labelledby="heading<%=cycle.id%>">
+                <div class="panel-body">
+                  <% Level.with_products_for_cycle(cycle.id).each do |level| %>
+                      <% if level.id.to_s == session[:level_for_products_id].to_s
+                           level_active = true
+                         end %>
+                      <% if level_active %>
+                          <p><%= link_to catalog_products_path(:level_id => level.id) do%><i class="fa fa-square" aria-hidden="true"></i> <%=level.name %><% end %></p>
+                      <% else %>
+                          <p><%= link_to catalog_products_path(:level_id => level.id) do%><i class="fa fa-square-o" aria-hidden="true"></i> <%=level.name %><% end %></p>
+                      <% end %>
+                  <% end %>
+
+                </div>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <!--  end of Family and Category -->
+    </div>
+
+    <div class="col-md-9">
+
+      <div class="row">
+            <div id="carousel-products" class="carousel slide" data-ride="carousel">
+        <!-- Indicators -->
+        <ol class="carousel-indicators">
+          <li data-target="#carousel-products" data-slide-to="0" class="active"></li>
+          <li data-target="#carousel-products" data-slide-to="1"></li>
+          <li data-target="#carousel-products" data-slide-to="2"></li>
+        </ol>
+
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+          <div class="item active">
+            <img src="http://placehold.it/1000x300" class="img-responsive" alt="...">
+            <div class="carousel-caption">
+              ...
             </div>
           </div>
-      <% end %>
-    </div>
-    <!--  end of Family and Category -->
+          <div class="item">
+            <img src="http://placehold.it/1000x300" alt="...">
+            <div class="carousel-caption">
+              ...
+            </div>
+          </div>
+          <div class="item">
+            <img src="http://placehold.it/1000x300" alt="...">
+            <div class="carousel-caption">
+              ...
+            </div>
+          </div>
+        </div>
 
+        <!-- Controls -->
+        <a class="left carousel-control" href="#carousel-products" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="right carousel-control" href="#carousel-products" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+      </div>
+        <hr>
+      </div>
+
+
+      <div class="row">
+
+
+        <% @products.each do |product| %>
+            <div class="col-sm-4 col-lg-4 col-md-4 panel-product">
+
+              <div class="hovereffect center-block panel-image-product">
+                <%= link_to product_path(product.id) do %>
+                    <% if product.preview.nil? %>
+                        <%= image_tag "product.preview", class: 'img-thumbnail center-block' %>
+                    <% else %>
+                        <%= image_tag product.preview, class: 'img-thumbnail center-block' %>
+                    <% end %>
+                <% end %>
+              </div>
+
+              <div class="caption">
+                <h4 class="pull-right"><%= number_to_currency(product.price, precision: 2)||"Free" %></h4>
+                <h4><%= link_to product.name, product_path(product.id) %>
+                </h4>
+                <p><%= product.short_description.html_safe %></p>
+              </div>
+
+              <div class="ratings">
+                <p class="pull-right">6 reviews</p>
+                <p>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                  <span class="glyphicon glyphicon-star-empty"></span>
+                </p>
+              </div>
+
+            </div>
+        <% end %>
+
+      </div>
+
+    </div>
 
   </div>
 
-  <div class="col-lg-9 col-md-8 col-sm-6 col-xs-12">
-    <div class="row carouselImg">
-  <% @products.each do |product| %>
-      <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-        <div class="hovereffect">
-          <% if product.preview.nil? %>
-              <%= image_tag "product.preview", class: 'img-thumbnail' %>
-              <% else %>
-          <%= image_tag product.preview, class: 'img-thumbnail' %>
-              <% end %>
-          <div class="overlay">
-            <h2><%= product.name %></h2>
+<!-- /.container -->
 
-            <%= link_to 'detail informations', product_path(product.id), class:"info" %>
-          </div>
-        </div>
-        <div href="/rooms/10855464?s=U_pEUuKW" target="listing_10855464" class="panel-overlay-bottom-left panel-overlay-label panel-overlay-listing-label">
-          <div class="tooltip tooltip-fixed tooltip-bottom-left total-price-breakdown text-dark-gray" role="tooltip">
-            <div class="loading"></div>
-          </div>
-          <div>
-            <div class="price-amount-container">
-              <sup class="h6 text-contrast"><span class="glyphicon glyphicon-eur" aria-hidden="true"></span> </sup>
-              <span class="h3 text-contrast price-amount"><%= product.price||"Free" %></span>
-              <sup class="h6 text-contrast"></sup>
-            </div>
-          </div>
-        </div>
-        <div>
-            <p><%= product.short_description.html_safe %></p>
-        </div>
-      </div>
-  <% end %>
-</div>
-    </div>
-</div>
+
+
+
 

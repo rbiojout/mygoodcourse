@@ -6,7 +6,7 @@ class CustomersControllerTest < ActionController::TestCase
   setup do
     @customer = customers(:one)
     @request.env["devise.mapping"] = Devise.mappings[:customer]
-    get :new
+    #get :new
   end
 
   test "should get index" do
@@ -40,6 +40,7 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should update customer" do
+    sign_in :customer, @customer
     patch :update, id: @customer, customer: { email: @customer.email, first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name, picture: @customer.picture }
     assert_redirected_to customer_path(assigns(:customer))
   end

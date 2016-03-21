@@ -187,9 +187,14 @@ a.panel-image {
 
 .carouselImg img {
     width: auto;
-    height: 225px;
-    max-height: 225px;
+    max-height: 320px;
     /* center the image */
     margin-left: auto;
     margin-right: auto;
+}
+
+
+
+.panel-image-product {
+    min-height: 360px;
 }
