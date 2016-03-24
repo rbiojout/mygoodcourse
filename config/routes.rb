@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  post '/rate' => 'rater#create', :as => 'rate'
+  resources :comments
   resources :payments
   resources :countries
   resources :order_items do

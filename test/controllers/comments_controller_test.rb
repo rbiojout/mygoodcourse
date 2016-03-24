@@ -1,0 +1,69 @@
+require 'test_helper'
+
+class CommentsControllerTest < ActionController::TestCase
+  include Devise::TestHelpers
+  setup do
+    @comment = comments(:one)
+    # add a signed user to perform the tests
+    sign_in :customer, (customers(:one))
+  end
+
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:comments)
+  end
+
+  test "should get new" do
+    get :new
+    assert_response :success
+  end
+
+  test "should create comment" do
+    assert_difference('Comment.count') do
+      post :create, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
+    end
+
+    assert_redirected_to comment_path(assigns(:comment))
+  end
+
+  test "need login to create comment" do
+    sign_out :customer
+    assert_no_difference('Comment.count') do
+      post :create, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
+    end
+
+    assert_redirected_to new_customer_session_path
+  end
+
+  test "should show comment" do
+    get :show, id: @comment
+    assert_response :success
+  end
+
+  test "should get edit" do
+    get :edit, id: @comment
+    assert_response :success
+  end
+
+  test "should update comment" do
+    patch :update, id: @comment, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
+    assert_redirected_to comment_path(assigns(:comment))
+  end
+
+  test "need ownership to update comment" do
+    sign_out :customer
+    sign_in :customer, (customers(:two))
+    patch :update, id: @comment, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
+
+    assert_redirected_to root_path
+  end
+
+  test "should destroy comment" do
+    assert_difference('Comment.count', -1) do
+      delete :destroy, id: @comment
+    end
+
+    assert_redirected_to comments_path
+  end
+end

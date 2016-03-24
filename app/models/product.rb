@@ -36,6 +36,11 @@ class Product < ActiveRecord::Base
   has_many :cycles, through: :levels
 
 
+  # many comments linked, we consolidate the number and the average score
+  has_many :comments, dependent: :destroy
+
+
+
   # Before validation, set the permalink if we don't already have one
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 
@@ -113,7 +118,12 @@ class Product < ActiveRecord::Base
   end
 
   def preview
-           attachments.first.file.url(:preview)
+    begin
+     attachments.first.file.url(:preview)
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      "empty_preview.png"
+    end
   end
 
   private

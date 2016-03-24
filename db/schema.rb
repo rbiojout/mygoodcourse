@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160316125158) do
+ActiveRecord::Schema.define(version: 20160323125724) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,19 @@ ActiveRecord::Schema.define(version: 20160316125158) do
 
   add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id", using: :btree
   add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "score"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+  end
+
+  add_index "comments", ["customer_id"], name: "index_comments_on_customer_id", using: :btree
+  add_index "comments", ["product_id"], name: "index_comments_on_product_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
@@ -216,12 +229,16 @@ ActiveRecord::Schema.define(version: 20160316125158) do
     t.datetime "created_at",                                                null: false
     t.datetime "updated_at",                                                null: false
     t.integer  "customer_id"
+    t.integer  "nb_comments"
+    t.decimal  "score_comments"
   end
 
   add_index "products", ["customer_id"], name: "index_products_on_customer_id", using: :btree
 
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
+  add_foreign_key "comments", "customers"
+  add_foreign_key "comments", "products"
   add_foreign_key "levels", "cycles"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"

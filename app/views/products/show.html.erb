@@ -1,48 +1,247 @@
+<div class="row">
+  <div class="col-xs-4">
+    <p>
+      <%= image_tag @product.preview, class: 'img-thumbnail' %>
+    </p>
+  </div>
+  <div class="col-xs-8">
+    <div class="panel panel-<%= (@product.active?)?'primary':'info' %>">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= @product.name %></h3>
+        <div class="product-labels">
+          <span class="label label-info">new</span>
+          <span class="label label-danger">sale</span>
+        </div>
+        <div class="product-rating">
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star"></i>
+          <i class="fa fa-star-o"></i>
+          <i class="fa fa-star-o"></i>
+        </div>
+      </div>
+      <div class="panel-body">
+        <%= @product.price||= "Free" %>
+        <hr>
+        <ul>
+          <li><span>type:</span> </li>
+          <li><span>nb pages:</span> </li>
+        </ul>
+        <p><%= @product.description.html_safe %></p>
+      </div>
+      <div class="panel-footer">
+        <p>
+          <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary' do %><i class="fa fa-shopping-cart"></i> Add to cart<% end %>
+        </p>
+        Categories:
+        <% @product.categories.each do |category| %>
+            <%= link_to catalog_products_path(category_id: category.id) do%><span class="label label-default"><%= category.name %></span><% end %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @product.name %>
-</p>
+        <% end %>
+        <hr>
 
-<p>
-  <strong>Sku:</strong>
-  <%= @product.sku %>
-</p>
+       Levels:
+        <% @product.levels.each do |level| %>
+            <%= link_to catalog_products_path(level_id: level.id) do%><span class="label label-default"><%= level.name %></span><% end %>
 
-<p>
-  <strong>Permalink:</strong>
-  <%= @product.permalink %>
-</p>
+        <% end %>
+      </div>
+    </div>
+    <ul class="list-inline product-links">
+      <li><a href="#"><i class="fa fa-heart"></i> Add to wishlist</a></li>
+      <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
+      <li><a href="#"><i class="fa fa-envelope"></i> Email to friend</a></li>
+    </ul>
 
-<p>
-  <strong>Description:</strong>
-  <%= @product.description.html_safe %>
-</p>
+  </div>
+</div>
 
-<p>
-  <strong>Short description:</strong>
-  <%= @product.short_description.html_safe %>
-</p>
+<div class="tabs product-tabs">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class=""><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="false">Description</a></li>
+    <li role="presentation" class="active"><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="true">Reviews (25)</a></li>
+    <li role="presentation" class=""><a href="#video" role="tab" data-toggle="tab" aria-controls="video" aria-expanded="false">Responsive Video</a></li>
+  </ul>
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane" id="description">
+      <h4>Etiam posuere id nulla</h4>
+      <%= @product.description.html_safe %>
+      <p>Ut arcu ipsum, cursus vitae ligula id, semper sodales mauris. Etiam posuere id nulla lacinia convallis. Sed tortor nisi, semper a auctor id, aliquet et sem. Aliquam suscipit lectus ut arcu pretium, et malesuada tortor finibus. Pellentesque sed arcu nec lectus vulputate pharetra. Vestibulum lobortis dolor massa, et tristique ex tincidunt at. Donec imperdiet elit elit, sit amet posuere dui auctor id. Nullam vel augue varius, ornare purus a, mattis diam.</p>
+      <ul>
+        <li>Etiam posuere id nulla lacinia convallis</li>
+        <li>Sed tortor nisi, semper a auctor id, aliquet</li>
+        <li>Curabitur eros dui</li>
+      </ul>
+      <h5>Pellentesque vel felis pharetra</h5>
+      <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Curabitur eros dui, viverra nec nisl quis, aliquet auctor nisi. Pellentesque vel felis pharetra, accumsan purus eu, mattis est. Aliquam tincidunt efficitur nibh nec volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Nulla ut nisl eu nisi vestibulum consectetur. Quisque egestas dolor neque, at bibendum lorem convallis sed. Maecenas finibus metus ante, non tristique sapien sagittis id. Nam et iaculis massa. Nulla facilisi. Integer at nunc neque. Phasellus posuere et nunc ac blandit. Mauris sollicitudin, sapien vitae luctus pellentesque, risus nunc mattis purus, sed laoreet ante leo congue sem. Etiam eget nisi ipsum. Phasellus consectetur vel turpis vitae eleifend.</p>
+      <h5>Phasellus et libero</h5>
+      <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Phasellus et libero nec ligula imperdiet viverra quis et turpis. Aenean quis mattis nunc. Mauris consectetur sed eros sed convallis. Morbi non elit in est tempus scelerisque congue a purus. In eget ullamcorper magna. Nam libero turpis, ullamcorper sit amet molestie nec, cursus ac urna. Suspendisse blandit finibus est, quis pulvinar arcu pretium vel. Aenean et leo nisi. Donec at iaculis ligula. Proin condimentum lobortis ex, in congue nisi molestie eget.</p>
+    </div>
+    <div role="tabpanel" class="tab-pane active in" id="reviews">
 
-<p>
-  <strong>Active:</strong>
-  <%= @product.active %>
-</p>
+      <div class="comments">
 
-<p>
-  <strong>Price:</strong>
-  <%= @product.price||= "Free" %>
-</p>
+        <!-- REVIEW - START -->
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object" alt="" src="http://placehold.it/70x70">
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">John Doe</h3>
+            <div class="meta">
+              <span class="date">20 July 2015</span>
+              <a data-toggle="modal" data-target="#addReview">Reply</a>
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+        <!-- REVIEW - END -->
+
+        <!-- REVIEW - START -->
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object" alt="" src="http://placehold.it/70x70">
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">John Doe</h3>
+            <div class="meta">
+              <span class="date">20 July 2015</span>
+              <a data-toggle="modal" data-target="#addReview">Reply</a>
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+
+            <!-- REVIEW - START -->
+            <div class="media">
+              <div class="media-left">
+                <img class="media-object" alt="" src="http://placehold.it/70x70">
+              </div>
+              <div class="media-body">
+                <h3 class="media-heading">John Doe</h3>
+                <div class="meta">
+                  <span class="date">20 July 2015</span>
+                </div>
+                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+              </div>
+            </div>
+            <!-- REVIEW - END -->
+
+            <!-- REVIEW - START -->
+            <div class="media">
+              <div class="media-left">
+                <img class="media-object" alt="" src="http://placehold.it/70x70">
+              </div>
+              <div class="media-body">
+                <h3 class="media-heading">John Doe</h3>
+                <div class="meta">
+                  <span class="date">20 July 2015</span>
+                </div>
+                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+              </div>
+            </div>
+            <!-- REVIEW - END -->
+
+          </div>
+        </div>
+        <!-- REVIEW - END -->
+
+        <!-- REVIEW - START -->
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object" alt="" src="http://placehold.it/70x70">
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">John Doe</h3>
+            <div class="meta">
+              <span class="date">20 July 2015</span>
+              <a data-toggle="modal" data-target="#addReview">Reply</a>
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+        <!-- REVIEW - END -->
+
+      </div>
+
+      <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="video">
+      <div class="embed-responsive embed-responsive-16by9">
+        <iframe allowfullscreen="" src="http://www.youtube.com/embed/M4z90wlwYs8?feature=player_detailpage"></iframe>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-<p>
-  <%= image_tag @product.preview, class: 'img-thumbnail' %>
-</p>
 
 
 
+<p><h3>Comments</h3></p>
 
-<%= link_to "Add to cart", buy_product_path(@product), :method => :post, class:'btn btn-primary' %>
+
+
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ==========================
+    	ADD REVIEW - START
+    =========================== -->
+<div class="modal fade" id="addReview" tabindex="-1" role="dialog" aria-labelledby="addReviewLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><i class="fa fa-times"></i></button>
+        <h4 class="modal-title">Add a review</h4>
+      </div>
+      <div class="modal-body">
+        <form class="comment-form">
+          <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked<span class="required">*</span></p>
+          <div class="row">
+            <div class="form-group comment-form-author col-sm-6">
+              <label for="author">Name<span class="required">*</span></label>
+              <input class="form-control" id="author" name="author" type="text" required="" value="" placeholder="Enter your name">
+            </div>
+            <div class="form-group comment-form-email col-sm-6">
+              <label for="email">Email<span class="required">*</span></label>
+              <input class="form-control" id="email" name="email" type="email" required="" value="" placeholder="Enter your email">
+            </div>
+          </div>
+          <div class="form-group comment-form-comment">
+            <label for="comment">Comment<span class="required">*</span></label>
+            <textarea class="form-control" id="comment" name="comment" required="" placeholder="Enter your message"></textarea>
+          </div>
+          <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- ==========================
+    ADD REVIEW - END
+=========================== -->

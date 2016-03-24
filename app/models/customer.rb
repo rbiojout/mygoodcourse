@@ -21,8 +21,11 @@ class Customer < ActiveRecord::Base
 
   has_many :products, dependent: :destroy
 
+  has_many :comments, dependent: :destroy
+
   # We don't want to delete if some orders have been done
   has_many :orders, dependent: :restrict_with_exception
+
 
 
 

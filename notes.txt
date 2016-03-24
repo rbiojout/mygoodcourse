@@ -135,3 +135,7 @@ rails g model Cart 'subtotal:decimal{12,3}' 'tax:decimal{12,3}' 'shipping:decima
 rails g model OrderItem product:references order:references 'unit_price:decimal{12,3}' quantity:integer 'total_price:decimal{12,3}'
 
 rails g migration add_position_to_families_and_cycles position:integer
+
+
+RATING
+https://github.com/javiertoledo/bootstrap-rating-input

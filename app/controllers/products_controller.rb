@@ -50,7 +50,8 @@ class ProductsController < ApplicationController
         # if we have the category we need to have set the corresponding family
       else
         session[:category_for_products_id] = category_id
-        family_id = Category.find(category_id).family_id
+        #family_id = Category.find(category_id).family_id
+        family_id = Category.where(id: category_id).pluck(:family_id).to_s
         session[:family_for_products_id] = family_id
       end
     end
@@ -75,12 +76,13 @@ class ProductsController < ApplicationController
         # if we have the level we need to have set the corresponding family
       else
         session[:level_for_products_id] = level_id
-        cycle_id = Level.find(level_id).cycle_id
+        #cycle_id = Level.find(level_id).cycle_id
+        cycle_id = Level.where(id: level_id).pluck(:cycle_id).to_s
         session[:cycle_for_products_id] = cycle_id
       end
     end
 
-    #logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
+    logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
     # filter for Family and Category
     # show the most detailed level of information
@@ -117,6 +119,8 @@ class ProductsController < ApplicationController
         #logger.debug("===> products by cycle")
       end
     end
+
+    logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
     #logger.debug("===> #{sort_column} / #{sort_direction}")
     @products = @products.order( sort_column + " " + sort_direction)

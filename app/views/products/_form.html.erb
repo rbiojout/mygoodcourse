@@ -19,6 +19,12 @@
       <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
       <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
 
+
+    <input type="number" name="score" id="score_product" class="rating" />
+    <hr>
+    <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
+
+
     <!--- Categories List --->
     <%= render 'categories_list', f: f %>
 

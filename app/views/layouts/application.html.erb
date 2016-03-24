@@ -37,6 +37,21 @@
   <%= debug(params) if Rails.env.development? %>
 
 </div>
+
+
+<div class="modal fade" id="shoppingCart">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <p class="pull-right text-primary"><b>4 items</b></p>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title text-primary"><span class="glyphicon glyphicon-shopping-cart"></span> Your Cart</h4>
+      </div>
+
+    </div>
+  </div>
+</div>
+
 <footer class="bs-docs-footer" role="contentinfo">
   <%= render 'layouts/footer' %>
 </footer>

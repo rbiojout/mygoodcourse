@@ -44,10 +44,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# add devise
+# add devise for the users
 gem 'devise'
 
-# add pagination helper
+# add pagination helper for listing the data
 gem 'will_paginate'
 
 # add some CSS
@@ -59,7 +59,6 @@ gem 'font-awesome-sass', '~> 4.2.0'
 
 # add a WISIWYG HTML editor for bootstrap
 # gem 'bootstrap-wysihtml5-rails'
-
 gem 'trix'
 
 # add datetime picker with bootstrap
@@ -92,6 +91,7 @@ gem 'mini_magick'
 
 # gem 'nested_form_fields'
 
+# better work for nested forms
 gem 'cocoon'
 
 # for Heroku

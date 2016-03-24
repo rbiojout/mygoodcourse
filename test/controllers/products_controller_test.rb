@@ -15,6 +15,43 @@ class ProductsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:products)
   end
 
+
+  test "should get catalog" do
+    get :catalog
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should filter catalog by families" do
+    get :catalog, :family_id => [families(:one).id.to_s, families(:two).id.to_s]
+    assert_equal session[:family_for_products_id], [families(:one).id.to_s, families(:two).id.to_s]
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should filter catalog by family" do
+    get :catalog, :family_id => (families(:one))
+    assert_equal session[:family_for_products_id], families(:one).id.to_s
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should filter catalog by categories" do
+    get :catalog, :category_id => [categories(:one).id.to_s, categories(:two).id.to_s]
+    assert_equal session[:category_for_products_id], [categories(:one).id.to_s, categories(:two).id.to_s]
+    assert_equal session[:family_for_products_id], [categories(:one).family_id, categories(:two).family_id].to_s
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should filter catalog by category" do
+    get :catalog, :category_id => (categories(:one))
+    assert_equal session[:category_for_products_id], categories(:one).id.to_s
+    assert_equal session[:family_for_products_id], [categories(:one).family_id].to_s
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
   test "should get new" do
     get :new
     assert_response :success
