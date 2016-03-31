@@ -9,15 +9,29 @@
         <p><%= msg %></p>
     <% end %>
 
+    <div class="row">
+      <div class="col-md-3">
+        <h4>Categories</h4>
+        <!--- Categories List --->
+        <%= render 'categories_list', f: f %>
 
+        <h4>Levels</h4>
+        <!--- Levels List -->
+        <%= render 'levels_list', f: f %>
 
-      <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
-      <%= f.input :sku %>
-      <%= f.input :permalink %>
-      <%= f.trix_editor :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
-      <%= f.input :short_description %>
-      <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
-      <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
+      </div>
+      <div class="col-md-9">
+        <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
+        <%= f.input :sku %>
+        <%= f.input :permalink %>
+        <%= f.trix_editor :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
+        <%= f.input :short_description %>
+        <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
+        <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
+      </div>
+
+    </div>
+
 
 
     <input type="number" name="score" id="score_product" class="rating" />
@@ -25,11 +39,6 @@
     <input type="number" name="your_awesome_parameter" id="some_id" class="rating" data-clearable="remove" data-icon-lib="fa" data-active-icon="fa-heart" data-inactive-icon="fa-heart-o" data-clearable-icon="fa-trash-o"/>
 
 
-    <!--- Categories List --->
-    <%= render 'categories_list', f: f %>
-
-    <!--- Levels List -->
-    <%= render 'levels_list', f: f %>
 
     <!--- Attachments --->
     <!--- only the first element can not be removed -->

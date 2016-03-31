@@ -10,22 +10,20 @@
   <%= @cycle.description.html_safe %>
 </p>
 
-<ul id="levels_sortable" class="sortable" data-update-url="<%= sort_levels_url %>">
+<h3>Associated Levels</h3>
+<ul id="levels_sortable" class="list-group sortable" data-update-url="<%= sort_levels_url %>">
 <% @cycle.levels.each  do |lev| %>
 
-    <li class="form-inline" id="level_<%= lev.id %>">
-      <span class="glyphicon glyphicon-sort handle" aria-hidden="true"></span>
-      <div class="form-group">
-        <%= lev.name %>
+    <li class="list-group-item" id="level_<%= lev.id %>">
+      <a href="#" class="btn btn-success btn-sm handle"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span> move</a>
+        <%= lev.name %>,
         <%= lev.description %>
-      </div>
     </li>
 
     <% end %>
 </ul>
+<div class="btn-group">
+  <%= link_to 'Edit', edit_cycle_path(@cycle), class: "btn btn-default" %>
+  <%= link_to 'Back', cycles_path, class: "btn btn-default active" %>
+</div>
 
-
-
-
-<%= link_to 'Edit', edit_cycle_path(@cycle) %> |
-<%= link_to 'Back', cycles_path %>

@@ -1,0 +1,41 @@
+
+
+
+<%= form_for(@comment, remote: true, :html => { :role => "form", 'data-model' => 'comment' }) do |f| %>
+
+    <div id="error_explanation" class="bg-danger text-danger">
+      <% if @comment.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this comment from being saved:</h2>
+
+            <ul>
+              <% @comment.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+    </div>
+          <%= f.hidden_field :product_id, :class => "form-control first_input"  %>
+        <div class="form-group">
+          <%= f.label :score, :class => "control-label" %>
+          <%= f.select :score, [['horrible', 1], ['poor', 2], ['mediocre', 3], ['good', 4], ['great', 5]], :class => "form-control first_input"  %>
+          <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+          <%= f.label :title, :class => "control-label" %>
+          <%= f.text_field :title, :class => "form-control" %>
+          <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+          <%= f.label :description, :class => "control-label" %>
+          <%= f.text_field :description, :class => "form-control" %>
+          <span class="help-block"></span>
+        </div>
+        <div class="form-group">
+          <%= f.submit  @comment.new_record? ? "Create Comment" : "Update Comment", :class => "btn btn-primary" %>
+        </div>
+
+
+<% end %>

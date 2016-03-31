@@ -130,7 +130,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def myproducts
-    @products = current_customer.products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => 30)
+    @products = current_customer.products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
   end
 
   # GET /products/1

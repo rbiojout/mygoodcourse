@@ -5,7 +5,7 @@
     </p>
   </div>
   <div class="col-xs-8">
-    <div class="panel panel-<%= (@product.active?)?'primary':'info' %>">
+    <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title"><%= @product.name %></h3>
         <div class="product-labels">
@@ -58,12 +58,12 @@
 
 <div class="tabs product-tabs">
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class=""><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="false">Description</a></li>
-    <li role="presentation" class="active"><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="true">Reviews (25)</a></li>
+    <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a></li>
+    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews (25)</a></li>
     <li role="presentation" class=""><a href="#video" role="tab" data-toggle="tab" aria-controls="video" aria-expanded="false">Responsive Video</a></li>
   </ul>
   <div class="tab-content">
-    <div role="tabpanel" class="tab-pane" id="description">
+    <div role="tabpanel" class="tab-pane active in" id="description">
       <h4>Etiam posuere id nulla</h4>
       <%= @product.description.html_safe %>
       <p>Ut arcu ipsum, cursus vitae ligula id, semper sodales mauris. Etiam posuere id nulla lacinia convallis. Sed tortor nisi, semper a auctor id, aliquet et sem. Aliquam suscipit lectus ut arcu pretium, et malesuada tortor finibus. Pellentesque sed arcu nec lectus vulputate pharetra. Vestibulum lobortis dolor massa, et tristique ex tincidunt at. Donec imperdiet elit elit, sit amet posuere dui auctor id. Nullam vel augue varius, ornare purus a, mattis diam.</p>
@@ -77,7 +77,19 @@
       <h5>Phasellus et libero</h5>
       <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Aliquam erat volutpat. Phasellus et libero nec ligula imperdiet viverra quis et turpis. Aenean quis mattis nunc. Mauris consectetur sed eros sed convallis. Morbi non elit in est tempus scelerisque congue a purus. In eget ullamcorper magna. Nam libero turpis, ullamcorper sit amet molestie nec, cursus ac urna. Suspendisse blandit finibus est, quis pulvinar arcu pretium vel. Aenean et leo nisi. Donec at iaculis ligula. Proin condimentum lobortis ex, in congue nisi molestie eget.</p>
     </div>
-    <div role="tabpanel" class="tab-pane active in" id="reviews">
+    <div role="tabpanel" class="tab-pane" id="reviews">
+
+    <hr>
+      <%= link_to 'add comment', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+    <hr>
+
+      <div id="comment_table" class="comments">
+        <% @product.comments.each do |comment| %>
+            <%# Render table row partial for each person object %>
+            <%= render partial: 'comments/table_row', locals: {comment: comment} %>
+        <% end %>
+      </div>
+
 
       <div class="comments">
 
@@ -90,7 +102,13 @@
             <h3 class="media-heading">John Doe</h3>
             <div class="meta">
               <span class="date">20 July 2015</span>
-              <a data-toggle="modal" data-target="#addReview">Reply</a>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
             </div>
             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
           </div>
@@ -106,40 +124,15 @@
             <h3 class="media-heading">John Doe</h3>
             <div class="meta">
               <span class="date">20 July 2015</span>
-              <a data-toggle="modal" data-target="#addReview">Reply</a>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
             </div>
             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-
-            <!-- REVIEW - START -->
-            <div class="media">
-              <div class="media-left">
-                <img class="media-object" alt="" src="http://placehold.it/70x70">
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">John Doe</h3>
-                <div class="meta">
-                  <span class="date">20 July 2015</span>
-                </div>
-                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-              </div>
-            </div>
-            <!-- REVIEW - END -->
-
-            <!-- REVIEW - START -->
-            <div class="media">
-              <div class="media-left">
-                <img class="media-object" alt="" src="http://placehold.it/70x70">
-              </div>
-              <div class="media-body">
-                <h3 class="media-heading">John Doe</h3>
-                <div class="meta">
-                  <span class="date">20 July 2015</span>
-                </div>
-                <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-              </div>
-            </div>
-            <!-- REVIEW - END -->
-
           </div>
         </div>
         <!-- REVIEW - END -->
@@ -153,7 +146,57 @@
             <h3 class="media-heading">John Doe</h3>
             <div class="meta">
               <span class="date">20 July 2015</span>
-              <a data-toggle="modal" data-target="#addReview">Reply</a>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+        <!-- REVIEW - END -->
+
+        <!-- REVIEW - START -->
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object" alt="" src="http://placehold.it/70x70">
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">John Doe</h3>
+            <div class="meta">
+              <span class="date">20 July 2015</span>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
+            </div>
+            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
+          </div>
+        </div>
+        <!-- REVIEW - END -->
+
+        <!-- REVIEW - START -->
+        <div class="media">
+          <div class="media-left">
+            <img class="media-object" alt="" src="http://placehold.it/70x70">
+          </div>
+          <div class="media-body">
+            <h3 class="media-heading">John Doe</h3>
+            <div class="meta">
+              <span class="date">20 July 2015</span>
+              <div class="product-rating">
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star"></i>
+                <i class="fa fa-star-o"></i>
+                <i class="fa fa-star-o"></i>
+              </div>
             </div>
             <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
           </div>
@@ -163,6 +206,8 @@
       </div>
 
       <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
+      <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
+
 
     </div>
     <div role="tabpanel" class="tab-pane" id="video">
@@ -177,7 +222,7 @@
 
 
 
-<p><h3>Comments</h3></p>
+
 
 
 
@@ -220,21 +265,23 @@
         <h4 class="modal-title">Add a review</h4>
       </div>
       <div class="modal-body">
+
         <form class="comment-form">
-          <p class="comment-notes"><span id="email-notes">Your email address will not be published.</span> Required fields are marked<span class="required">*</span></p>
+          <input type="hidden" name="product_id" value=<%= @product.id%> >
+          <p class="comment-notes"><span id="email-notes">You need to be logged in to comment</span> Required fields are marked<span class="required">*</span></p>
           <div class="row">
-            <div class="form-group comment-form-author col-sm-6">
-              <label for="author">Name<span class="required">*</span></label>
-              <input class="form-control" id="author" name="author" type="text" required="" value="" placeholder="Enter your name">
+            <div class="form-group col-sm-3">
+              <label for="author">Score<span class="required">*</span></label>
+              <input class="form-control" id="score" name="score" type="text" required="" value="" placeholder="Enter your Score">
             </div>
-            <div class="form-group comment-form-email col-sm-6">
-              <label for="email">Email<span class="required">*</span></label>
-              <input class="form-control" id="email" name="email" type="email" required="" value="" placeholder="Enter your email">
+            <div class="form-group col-sm-9">
+              <label for="title">Title<span class="required">*</span></label>
+              <input class="form-control" id="title" name="title" type="title" required="" value="" placeholder="Enter your title">
             </div>
           </div>
-          <div class="form-group comment-form-comment">
-            <label for="comment">Comment<span class="required">*</span></label>
-            <textarea class="form-control" id="comment" name="comment" required="" placeholder="Enter your message"></textarea>
+          <div class="form-group">
+            <label for="description">Description<span class="required">*</span></label>
+            <textarea class="form-control" id="description" name="description" required="" placeholder="Enter your description"></textarea>
           </div>
           <button class="btn btn-primary" type="submit"><i class="fa fa-check"></i>Submit</button>
         </form>

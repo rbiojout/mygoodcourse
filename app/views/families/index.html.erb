@@ -2,11 +2,11 @@
 
 <h1>Listing Families</h1>
 
-<div id="families_sortable" class="sortable" data-update-url="<%= sort_families_path %>">
+<ul id="families_sortable" class="list-group sortable" data-update-url="<%= sort_families_path %>">
     <% @families.each do |family| %>
-      <div class="panel panel-default" id="family_<%=family.id%>">
-        <%= link_to '#' do %>
-            <li class="btn btn-success glyphicon glyphicon-sort handle">move</li>
+      <li class="list-group-item" id="family_<%=family.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="glyphicon glyphicon-sort handle"> move</span>
         <% end %>
         <%= family.name %>
         <div class="btn-group pull-right">
@@ -14,11 +14,10 @@
           <%= link_to 'Edit', edit_family_path(family), class: "btn btn-default" %>
           <%= link_to 'Destroy', family, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
         </div>
-      </div>
+      </li>
   <% end %>
 
-</div>
+</ul>
 
-<br>
 
 <%= link_to 'New Family', new_family_path, class: 'btn btn-primary' %>

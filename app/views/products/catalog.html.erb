@@ -83,7 +83,7 @@
 
 
       <!-- Family and Category -->
-      <div class="list-group" id="accordion_family" role="tablist" aria-multiselectable="true">
+      <div class="list-group" id="accordion_family" role="tablist" aria-multiselectable="true" >
         <div class="list-group-item">
           <%= link_to 'All families', catalog_products_path(:family_id => 0), class:"btn #{ (session[:family_for_products_id].nil?)? 'btn-primary' : 'btn-default'}" %>
         </div>

@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :product
   belongs_to :customer
 
-  validates :title, :description, :product, presence: true
+  validates :title, :description, :score, :product, presence: true
 
   before_save :update_for_product
   before_update :update_for_product

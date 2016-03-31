@@ -1,0 +1,26 @@
+<!-- REVIEW - START -->
+<div class="media">
+  <div class="media-left">
+    <%= comment.customer.picture %>
+    <%= comment.customer.name %>
+    <%= comment.customer.first_name %>
+    <img class="media-object" alt="" src="<%= comment.customer.picture %>">
+  </div>
+  <div class="media-body">
+    <h3 class="media-heading">John Doe</h3>
+    <div class="meta">
+      <span class="date">20 July 2015</span>
+      <%= comment.score %>
+      <div class="product-rating">
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star"></i>
+        <i class="fa fa-star-o"></i>
+        <i class="fa fa-star-o"></i>
+      </div>
+    </div>
+    <h5><%= comment.title %></h5>
+    <p><%= comment.description %></p>
+  </div>
+</div>
+<!-- REVIEW - END -->

@@ -10,5 +10,20 @@
   <%= @family.description.html_safe %>
 </p>
 
-<%= link_to 'Edit', edit_family_path(@family), class: 'btn btn-info' %> |
-<%= link_to 'Back', families_path %>
+
+<h3>Associated Categories</h3>
+<ul id="categories_sortable" class="list-group sortable" data-update-url="<%= sort_categories_url %>">
+  <% @family.categories.each  do |cat| %>
+
+      <li class="list-group-item" id="category_<%= cat.id %>">
+        <a href="#" class="btn btn-success btn-sm handle"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span> move</a>
+        <%= cat.name %>,
+        <%= cat.description %>
+      </li>
+
+  <% end %>
+</ul>
+<div class="btn-group">
+  <%= link_to 'Edit', edit_family_path(@family), class: "btn btn-default" %>
+  <%= link_to 'Back', families_path, class: "btn btn-default active" %>
+</div>

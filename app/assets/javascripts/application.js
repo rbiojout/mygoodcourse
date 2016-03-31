@@ -26,6 +26,7 @@
 //= require gmaps/google
 //= require jquery.geocomplete
 //= require turbolinks
+//= require bootstrap-treenav
 //= require_tree .
 
 
