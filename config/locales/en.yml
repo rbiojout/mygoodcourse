@@ -28,3 +28,9 @@ en:
       accepted: 'Order Accepted'
       rejected: 'Order Rejected'
 
+  time:
+    formats:
+      short: "%D"
+    new: 'New'
+    recent: 'Recent'
+

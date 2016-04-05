@@ -1,0 +1,24 @@
+<%= content_tag("div", class: 'product-rating') do
+# this helper provide the stars
+# need for font awesome to be installed
+# default values
+# - score (value of the score) = 0
+# - nb_stars (total of the scale) = 5
+# - simple ( remove the numeric value)= fale
+
+  score ||= 0
+  nb_stars ||= 5
+  simple ||= false
+  1.upto(nb_stars) do |i|
+    if i<=score
+      concat content_tag("span", ' ', class: "fa fa-star")+ ' '
+    else
+      concat content_tag("span", ' ', class: "fa fa-star-o")+ ' '
+    end
+    # make some space for the stars
+    concat ' '
+  end
+  # add the score in a visual way
+  concat content_tag("span", score.round(2), class: 'badge') unless simple
+
+end %>

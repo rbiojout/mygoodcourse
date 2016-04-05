@@ -33,5 +33,27 @@ product_without_orders:
   price: 9.99
   customer: one
 
+priced_one:
+  name: Product1
+  sku:
+  permalink:
+  description: Product1
+  short_description: product1
+  active: true
+  featured: true
+  price: 100.00
+  customer: one
+
+priced_two:
+  name: Product2
+  sku:
+  permalink:
+  description: Product2
+  short_description: Product2
+  active: true
+  featured: true
+  price: 250.00
+  customer: two
+
 
 

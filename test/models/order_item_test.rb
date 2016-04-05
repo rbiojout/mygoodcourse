@@ -6,12 +6,12 @@ class OrderItemTest < ActiveSupport::TestCase
   # end
   setup do
     @order = orders(:order)
-    @product = products(:yealink_t22p)
+    @product = products(:priced_one)
     @item = @order.order_items.create!(product: @product)
   end
 
   test 'new item can be added to order' do
-    product2 = products(:snom_870)
+    product2 = products(:priced_two)
     assert new_item = @order.order_items.add_item(product2)
     assert_equal true, new_item.is_a?(OrderItem)
     assert_equal product2, new_item.product

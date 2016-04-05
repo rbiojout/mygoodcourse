@@ -267,9 +267,7 @@
                 <p class="pull-right"><%= product.nb_comments.to_s + ' reviews' unless product.nb_comments.nil? %></p>
                 <p>
                   <% unless product.score_comments.nil? %>
-                      <% 1.upto(5) do |i| %>
-                          <span class="glyphicon glyphicon-star<%='-empty' if i>product.score_comments %>"> </span>
-                      <% end %>
+                      <%= render "comments/show_stars", :score => product.score_comments, :simple => true %>
                   <% end %>
                 </p>
               </div>

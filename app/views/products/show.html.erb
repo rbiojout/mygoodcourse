@@ -12,14 +12,9 @@
           <span class="label label-info">new</span>
           <span class="label label-danger">sale</span>
         </div>
-        <div class="product-rating">
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star"></i>
-          <i class="fa fa-star-o"></i>
-          <i class="fa fa-star-o"></i>
-        </div>
-      </div>
+        <div id="product_score">
+          <%= render "comments/show_stars", :score => @product.score_comments %>
+        </div>      </div>
       <div class="panel-body">
         <%= @product.price||= "Free" %>
         <hr>
@@ -59,7 +54,7 @@
 <div class="tabs product-tabs">
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a></li>
-    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews (25)</a></li>
+    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews <span id="nb_comments" class="badge"><%= @product.nb_comments||0  %></span></a></li>
     <li role="presentation" class=""><a href="#video" role="tab" data-toggle="tab" aria-controls="video" aria-expanded="false">Responsive Video</a></li>
   </ul>
   <div class="tab-content">
@@ -90,120 +85,6 @@
         <% end %>
       </div>
 
-
-      <div class="comments">
-
-        <!-- REVIEW - START -->
-        <div class="media">
-          <div class="media-left">
-            <img class="media-object" alt="" src="http://placehold.it/70x70">
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">John Doe</h3>
-            <div class="meta">
-              <span class="date">20 July 2015</span>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-            </div>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-          </div>
-        </div>
-        <!-- REVIEW - END -->
-
-        <!-- REVIEW - START -->
-        <div class="media">
-          <div class="media-left">
-            <img class="media-object" alt="" src="http://placehold.it/70x70">
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">John Doe</h3>
-            <div class="meta">
-              <span class="date">20 July 2015</span>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-            </div>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-          </div>
-        </div>
-        <!-- REVIEW - END -->
-
-        <!-- REVIEW - START -->
-        <div class="media">
-          <div class="media-left">
-            <img class="media-object" alt="" src="http://placehold.it/70x70">
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">John Doe</h3>
-            <div class="meta">
-              <span class="date">20 July 2015</span>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-            </div>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-          </div>
-        </div>
-        <!-- REVIEW - END -->
-
-        <!-- REVIEW - START -->
-        <div class="media">
-          <div class="media-left">
-            <img class="media-object" alt="" src="http://placehold.it/70x70">
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">John Doe</h3>
-            <div class="meta">
-              <span class="date">20 July 2015</span>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-            </div>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-          </div>
-        </div>
-        <!-- REVIEW - END -->
-
-        <!-- REVIEW - START -->
-        <div class="media">
-          <div class="media-left">
-            <img class="media-object" alt="" src="http://placehold.it/70x70">
-          </div>
-          <div class="media-body">
-            <h3 class="media-heading">John Doe</h3>
-            <div class="meta">
-              <span class="date">20 July 2015</span>
-              <div class="product-rating">
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star"></i>
-                <i class="fa fa-star-o"></i>
-                <i class="fa fa-star-o"></i>
-              </div>
-            </div>
-            <p>Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.</p>
-          </div>
-        </div>
-        <!-- REVIEW - END -->
-
-      </div>
 
       <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
       <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>

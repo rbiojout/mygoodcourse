@@ -4,8 +4,10 @@ class Comment < ActiveRecord::Base
 
   validates :title, :description, :score, :product, presence: true
 
-  before_save :update_for_product
-  before_update :update_for_product
+  after_save :update_for_product
+  after_update :update_for_product
+
+  default_scope -> { order(created_at: :desc) }
 
   private
 

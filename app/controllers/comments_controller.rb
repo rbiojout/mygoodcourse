@@ -32,13 +32,14 @@ class CommentsController < ApplicationController
   def create
     @comment = Comment.new(comment_params)
     @comment.customer = current_customer
+    @nb_comments = @comment.product.nb_comments
 
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
         format.json { render :show, status: :created, location: @comment }
         # added
-        format.js   { render action: 'show', status: :created, location: @comment }
+        format.js   { @current_comment = @comment }
       else
         format.html { render :new }
         format.json { render json: @comment.errors, status: :unprocessable_entity }

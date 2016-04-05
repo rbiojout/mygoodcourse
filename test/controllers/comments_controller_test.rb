@@ -27,6 +27,19 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to comment_path(assigns(:comment))
   end
 
+  test "should create comment via ajax" do
+    assert_difference('Comment.count') do
+      xhr :post, :create, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
+    end
+
+    assert_response :success
+    assert_select_jquery :prepend, '#comment_table' do
+      assert_select '.media-body h5', @comment.title
+      assert_select '.media-body p', @comment.description
+    end
+
+  end
+
   test "need login to create comment" do
     sign_out :customer
     assert_no_difference('Comment.count') do

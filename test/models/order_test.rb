@@ -31,8 +31,8 @@ class OrderTest < ActiveSupport::TestCase
 
   test 'money calculations' do
     # create some products with some stock (so it doesn't get in our way)
-    product1 = products(:yealink_t22p)
-    product2 = products(:snom_870)
+    product1 = products(:priced_one)
+    product2 = products(:priced_two)
 
     # create an order
     order = orders(:order)

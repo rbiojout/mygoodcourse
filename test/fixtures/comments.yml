@@ -25,5 +25,5 @@ empty_customer:
   title: MyString
   description: MyString
   score:
-  product: one
+  product: two
   customer:
