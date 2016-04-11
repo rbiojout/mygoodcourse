@@ -1,5 +1,6 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :basket]
+  before_action :authenticate_customer!, only: [:checkout, :payment, :confirmation]
 
   # GET /orders
   # GET /orders.json
@@ -78,6 +79,51 @@ class OrdersController < ApplicationController
   def ship
     @order.ship!(params[:consignment_number], current_customer)
     redirect_to @order, flash: { notice: 'shoppe.orders.ship_notice' }
+  end
+
+  def checkout
+    @order = Order.find(current_order.id)
+    @order.customer = current_customer
+
+    redirect_to catalog_products_path, flash: { alert: 'Your Cart is empty' } if @order.order_items.empty?
+
+    if request.patch?
+      @order.ip_address = request.ip
+      if @order.proceed_to_confirm
+        redirect_to checkout_payment_path
+      end
+    else
+      # Add some example order data for the example. In a real application
+      # this shouldn't be present.
+    end
+  end
+
+  def payment
+    @order = Order.find(current_order.id)
+    if request.patch?
+      redirect_to checkout_confirmation_path
+    end
+  end
+
+  def confirmation
+    unless current_order.confirming?
+      redirect_to checkout_path
+      return
+    end
+
+    #if request.patch?
+      begin
+        current_order.confirm!
+        # This payment method should usually be called in a payment module or elsewhere but for the demo
+        # we are adding a payment to the order straight away.
+        current_order.payments.create(:amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
+        session[:order_id] = nil
+        redirect_to root_path, :notice => "Order has been accepted!"
+      rescue  => e
+        flash[:alert] = "Payment was declined by the bank. #{e.message}"
+        redirect_to checkout_path
+      end
+    #end
   end
 
 

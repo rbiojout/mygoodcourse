@@ -1,0 +1,22 @@
+<h1>Customers</h1>
+<p>avatars : 140 x 140</p>
+<p>avatar comment : 80 x 80</p>
+<div class="row">
+  <%= render(partial: 'customers/customer', object: Customer.first) %>
+</div>
+<hr>
+
+<h1>Products</h1>
+<p>images mini : 160 x 162</p>
+<p>images preview : 174 x 225</p>
+<p>image full : 272 x 350</p>
+<div class="row">
+<%= render(partial: 'products/product', object: Product.first) %>
+</div>
+<hr>
+
+<h1>Comments</h1>
+<div class="row">
+<%= render(partial: 'comments/comment', object: Comment.first) %>
+</div>
+<hr>

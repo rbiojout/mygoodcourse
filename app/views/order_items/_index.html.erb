@@ -1,8 +1,0 @@
-<% @order_items.each do |order_item| %>
-  <tr>
-    <td><%= order_item.product.name %></td>
-    <td><%= number_to_currency order_item.product.price %></td>
-    <td><%= link_to "Edit", edit_order_item_path(order_item), remote: true, class: "btn btn-default" %></td>
-    <td><%= link_to "Delete", order_item_delete_path(order_item), remote: true, class: "btn btn-danger" %></td>
-  </tr>
-<% end %>

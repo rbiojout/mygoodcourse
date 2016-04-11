@@ -75,13 +75,17 @@
     <div role="tabpanel" class="tab-pane" id="reviews">
 
     <hr>
-      <%= link_to 'add comment', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+      <% if customer_signed_in? %>
+        <%= link_to 'add comment', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+      <% else %>
+          <%= link_to 'add comment', new_customer_session_path(:redirect_to => product_path(id: @product.id)), class: 'btn btn-primary' %>
+      <% end %>
     <hr>
 
       <div id="comment_table" class="comments">
         <% @product.comments.each do |comment| %>
             <%# Render table row partial for each person object %>
-            <%= render partial: 'comments/table_row', locals: {comment: comment} %>
+            <%= render partial: 'comments/comment', locals: {comment: comment} %>
         <% end %>
       </div>
 

@@ -202,9 +202,9 @@ class ProductsController < ApplicationController
       end
 
 
-    respond_to do |wants|
-      wants.html { redirect_to request.referer }
-      wants.json { render :json => {:added => true} }
+    respond_to do |format|
+      format.html { redirect_to catalog_products_path }
+      format.json { render :json => {:added => true} }
     end
   end
 

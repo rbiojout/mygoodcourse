@@ -243,37 +243,8 @@
 
       <div class="row">
 
+        <%= render(partial:'products/product', collection: @products) %>
 
-        <% @products.each do |product| %>
-            <div class="col-sm-4 col-lg-4 col-md-4 panel-product">
-
-              <div class="hovereffect center-block panel-image-product">
-                <%= link_to product_path(product.id) do %>
-                    <% if product.preview.nil? %>
-                        <%= image_tag "product.preview", class: 'img-thumbnail center-block' %>
-                    <% else %>
-                        <%= image_tag product.preview, class: 'img-thumbnail center-block' %>
-                    <% end %>
-                <% end %>
-              </div>
-
-              <div class="caption">
-                <h4 class="pull-right"><%= number_to_currency(product.price, precision: 2)||"Free" %></h4>
-                <h4><%= link_to product.name, product_path(product.id) %>
-                </h4>
-              </div>
-
-              <div class="ratings">
-                <p class="pull-right"><%= product.nb_comments.to_s + ' reviews' unless product.nb_comments.nil? %></p>
-                <p>
-                  <% unless product.score_comments.nil? %>
-                      <%= render "comments/show_stars", :score => product.score_comments, :simple => true %>
-                  <% end %>
-                </p>
-              </div>
-
-            </div>
-        <% end %>
 
       </div>
 

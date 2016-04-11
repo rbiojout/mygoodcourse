@@ -2,6 +2,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
+
   before_action :correct_user, except: :show
 
   # GET /comments

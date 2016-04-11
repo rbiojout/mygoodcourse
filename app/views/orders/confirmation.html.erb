@@ -1,0 +1,21 @@
+<% @page_title = 'Checkout' %>
+
+<div class="checkout">
+  <h2>Let's do this thing!</h2>
+  <p>Brilliant! We have everything we need to place the order. Check the items below carefully,
+    and if you're happy click 'Place Order' to submit the order.</p>
+  <table class="table table-bordered table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Price</th>
+      <td>&nbsp;</td>
+      <td>&nbsp;</td>
+    </tr>
+    </thead>
+    <tbody class="orderitem-index">
+    <%= render(partial: 'order_items/order_item', collection: current_order.order_items, locals: {with_header: true, readonly: true}) %>
+    </tbody>
+  </table>
+</div>
+

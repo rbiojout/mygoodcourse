@@ -1,0 +1,10 @@
+<div>
+  <img class="media-object img-circle" alt="" src="<%= customer.picture %>" style="width:80px;">
+  <h3 class="media-heading"><%= customer.first_name %> <%= customer.name %></h3>
+  <% #@TODO follow me %>
+  <h5>Follow me</h5>
+  <%= customer.locality %>,
+  <%= content_tag('small', nice_date(customer.created_at), :class => 'small') %>
+  <% #@TODO stars %>
+  stars
+</div>

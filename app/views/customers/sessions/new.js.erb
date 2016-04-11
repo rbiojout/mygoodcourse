@@ -1,0 +1,15 @@
+// TODO : need to handle the NOT AUTHORIZE
+
+$(location).attr('href', "<%= new_customer_session_path %>");
+
+
+$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Sign In ");
+
+
+$('.modal-body').html('<%= j render("customers/sessions/form_login") %>');
+
+$('#dialog').modal("show");
+
+$('#dialog').on('shown.bs.modal', function () {
+    $('.first_input').focus()
+})

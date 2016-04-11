@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+
   # Returns the active order for this session
   #def current_order
   #  if !session[:order_id].nil?
@@ -13,6 +14,21 @@ class ApplicationController < ActionController::Base
   #    Order.new
   #  end
   #end
+
+  # add the possibility to have a custom redirect after sign in with devise
+  # add in the session controller
+  # if params[:redirect_to].present?
+  #   store_location_for(resource, params[:redirect_to])
+  # end
+  def after_sign_in_path_for(resource)
+    sign_in_url = new_customer_session_url
+    if request.referer == sign_in_url
+      super
+    else
+      stored_location_for(resource) || request.referer || root_path
+    end
+  end
+
 
   private
 

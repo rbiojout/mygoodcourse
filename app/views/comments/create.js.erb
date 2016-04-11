@@ -1,4 +1,4 @@
-$('#comment_table').prepend("<%= j render partial: 'table_row', locals: {comment: @comment } %>");
+$('#comment_table').prepend("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
 
 // we update the associated informations
 $('#nb_comments').html("<%= @comment.product.nb_comments %>");

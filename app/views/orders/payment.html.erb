@@ -1,0 +1,13 @@
+<% @page_title = 'Checkout' %>
+
+<div class="checkout" >
+  <p3 class="secure">Secure connection</p3>
+  <h3>Pay using your credit/debit card</h3>
+  <%= simple_form_for(@order, :url => checkout_payment_path) do |f| %>
+      <%= f.error_notification %>
+      <h3>This is a demo form. Any values entered here will be accepted.</h3>
+
+
+      <%= f.button :submit %>
+  <% end %>
+</div>

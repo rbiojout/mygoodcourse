@@ -1,0 +1,22 @@
+<% @page_title = 'Checkout' %>
+
+<div class="checkout" %>
+  <p>Secure connection</p>
+  <h2>Place your order</h2>
+  <p>Fantastic! You're ready to place your order, just follow the instructions below and
+    we'll get your products shipped to you as quickly as we can.</p>
+  <h3>Review the products in your shopping bag</h3>
+  <%= render('orders/order_table', :order => current_order) %>
+
+
+  <h3>Complete your details below to complete your order</h3>
+
+  <h4>Billing adress</h4>
+
+  <h4>Card infos</h4>
+
+      <%= simple_form_for @order, :url => checkout_path, :html => {:class => 'checkout disableable'} do |f| %>
+      <%= f.error_notification %>
+        <%= f.button :submit  %>
+      <% end %>
+</div>

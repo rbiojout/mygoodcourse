@@ -1,5 +1,7 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
+  before_filter { @order = Order.find(params[:order_id]) }
+
 
   # GET /payments
   # GET /payments.json
@@ -21,10 +23,11 @@ class PaymentsController < ApplicationController
   def edit
   end
 
+
   # POST /payments
   # POST /payments.json
   def create
-    @payment = Payment.new(payment_params)
+    @payment = @order.payments.build(payment_params)
 
     respond_to do |format|
       if @payment.save
@@ -60,6 +63,18 @@ class PaymentsController < ApplicationController
       format.json { head :no_content }
     end
   end
+
+  def refund
+    if request.post?
+      @payment.refund!(params[:amount])
+      redirect_to @order, flash: { notice: 'refunded' }
+    else
+      render layout: false
+    end
+  rescue Errors::RefundFailed => e
+    redirect_to @order, flash: { alert: e.message }
+  end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

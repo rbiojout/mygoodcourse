@@ -1,0 +1,30 @@
+<% with_header ||= false %>
+<% #https://addstar34.github.io/2016/01/13/the-secret-to-easy-nested-content-tags.html %>
+
+
+
+<div class="row">
+  <div class="col-xs-2 picture_part">
+    <%= image_tag order_item.product.preview, class: 'img-thumbnail center-block' %>
+  </div>
+  <div class="col-xs-6 description_part">
+    <h4><%= order_item.product.name %></h4>
+    <p>By Author</p>
+    <%= order_item.product.description.html_safe %>
+  </div>
+  <div class="col-xs-3 price_part">
+    <div class="ratings">
+      <p class="pull-right"><%= order_item.product.nb_comments.to_s + ' reviews' unless order_item.product.nb_comments.nil? %></p>
+      <p>
+        <% unless order_item.product.score_comments.nil? %>
+            <%= render "comments/show_stars", :score => order_item.product.score_comments, :simple => true %>
+        <% end %>
+      </p>
+    </div>
+    <%= number_to_currency order_item.product.price %>
+    <hr>
+    <%= link_to "Remove from Cart", order_item_delete_path(order_item), remote: true, class: "btn btn-danger" %>
+    <hr>
+    <p>Nb Pages</p>
+  </div>
+</div>

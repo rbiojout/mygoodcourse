@@ -34,10 +34,14 @@ Rails.application.routes.draw do
   end
   devise_for :employees
   resources :employees
-  devise_for :customers
-  devise_scope :customers do
-    post "/sign_up", :to => "devise/registrations#create"
-  end
+  devise_for :customers, controllers: {
+             sessions: 'customers/sessions',
+             registrations: 'customers/registrations'
+                   }
+  #devise_scope :customers do
+  #  post "/sign_up", :to => "customers/registrations#create"
+  #  post "/sign_in", :to => "customers/sessions#create"
+  #end
   resources :customers
 
 
@@ -81,6 +85,7 @@ Rails.application.routes.draw do
   get 'static_pages/help', as: 'help'
   get 'static_pages/contact', as: 'contact'
   get 'static_pages/about', as: 'about'
+  get 'static_pages/cheating', as: 'cheating'
 
 
   # root page
