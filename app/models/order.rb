@@ -13,6 +13,7 @@ class Order < ActiveRecord::Base
   #require_dependency 'shoppe/order/delivery'
 
 
+  # the customer linked to the order
   belongs_to :customer
 
   # All items which make up this order
@@ -30,6 +31,10 @@ class Order < ActiveRecord::Base
 
   # Some methods for setting the billing & delivery addresses
   attr_accessor :save_addresses, :billing_address_id, :delivery_address_id
+
+  # This search the orders with a state 'accepted' for a particular customer_id
+  # the collection is ordered by creation date descending
+  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: ['received', 'accepted']).order(:created_at => :desc)}
 
   # The order number
   #

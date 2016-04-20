@@ -3,10 +3,22 @@
 one:
   token: one
   customer: one
+  status: 'accepted'
+  ip_address: '127.0.0.1'
+  amount_paid: '9.99'
 
 two:
   token: two
   customer: two
+
+
+rejected:
+  token: one
+  customer: customer_with_rejected_orders
+  status: 'rejected'
+  ip_address: '127.0.0.1'
+  amount_paid: '9.99'
+
 
 order:
   customer: JoeBloggs

@@ -58,6 +58,10 @@ class Product < ActiveRecord::Base
   scope :for_cycle, -> (cycle_id) {joins(:cycles).where(cycles: {id: cycle_id}).distinct}
   scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id}).distinct}
 
+  # Return all product linked to a category
+  # not filtering on active state
+  # @param category_id [int] the id for the category
+  # @return [Collection]
   def self.find_by_category(category_id)
     has_category = false
     unless category_id.nil?
@@ -65,16 +69,20 @@ class Product < ActiveRecord::Base
         has_category = true
       end
     end
-    logger.debug("===> #{category_id} #{category_id.to_f > 0} #{has_category} ")
+    #logger.debug("===> #{category_id} #{category_id.to_f > 0} #{has_category} ")
     if has_category == true
-      logger.debug("===> first ")
+      #logger.debug("===> first ")
       joins(:categories).where(categories: {id: category_id})
     else
-      logger.debug("===> second ")
+      #logger.debug("===> second ")
       all
     end
   end
 
+  # Return all product linked to a level
+  # not filtering on active state
+  # @param level_id [int] the id for the level
+  # @return [Collection]
   def self.find_by_level(level_id)
     has_level = false
     unless level_id.nil?
@@ -82,8 +90,8 @@ class Product < ActiveRecord::Base
         has_level = true
       end
     end
-    logger.debug("===>  #{level_id.to_f > 0}")
-    logger.debug("===> #{level_id} #{level_id.to_f > 0} #{has_level} ")
+    #logger.debug("===>  #{level_id.to_f > 0}")
+    #logger.debug("===> #{level_id} #{level_id.to_f > 0} #{has_level} ")
     if has_level
       joins(:levels).where(levels: {id: level_id})
     else
@@ -92,6 +100,11 @@ class Product < ActiveRecord::Base
   end
 
 
+  # Return all product linked to a category and level
+  # not filtering on active state
+  # @param category_id [int] the id for the category
+  # @param level_id [int] the id for the level
+  # @return [Collection]
   def self.find_by_category_and_level(category_id, level_id)
     has_category = false
     has_level = false
@@ -105,7 +118,7 @@ class Product < ActiveRecord::Base
         has_level = true
       end
     end
-    logger.debug("===> #{category_id.to_f > 0}  #{level_id.to_f > 0}")
+    #logger.debug("===> #{category_id.to_f > 0}  #{level_id.to_f > 0}")
     if (has_category && has_level)
       joins(:categories).where(categories: {id: category_id}).joins(:levels).where(levels: {id: level_id})
     elsif has_category
@@ -117,6 +130,19 @@ class Product < ActiveRecord::Base
     end
   end
 
+  # Get all the products attached to a customers based on the orders
+  # no filtering on active state
+  # @param customer_id [int] the id for the customer
+  # @param status [String] the status state, default 'accepted'
+  # @return [Collection]
+  def self.find_ordered_by_customer(customer_id, status = 'accepted')
+    status = Order::STATUSES.include?(status) ? status : 'accepted'
+    joins(:orders).where(orders: {status: status}).distinct.order(created_at: 'desc')
+  end
+
+  # return the URL of the file corresponding to the preview prepared
+  # in case of problem, returns the defaut preview
+  # @return [String]
   def preview
     begin
      attachments.first.file.url(:preview)

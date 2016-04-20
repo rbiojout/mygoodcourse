@@ -1,1 +1,5 @@
-<%= render 'save' %>
+$('#order_item_<%= @order_item.id %>').fadeOut();
+
+// update the summary of the cart
+$("#cart_summary").html("<%= escape_javascript(render 'layouts/cart_summary') %>")
+$("#orderitem-modal").modal("hide")

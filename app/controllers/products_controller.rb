@@ -127,8 +127,7 @@ class ProductsController < ApplicationController
 
   end
 
-  # GET /products
-  # GET /products.json
+  # GET /myproducts
   def myproducts
     @products = current_customer.products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
   end
@@ -192,7 +191,7 @@ class ProductsController < ApplicationController
   end
 
   def add_to_basket
-    #begin
+    # @TODO check if already paid in another transaction
       product_to_order = Product.find(params[:product_id])
       if (product_to_order.nil? || !product_to_order.active?)
         flash[:alert] = "Product not active."

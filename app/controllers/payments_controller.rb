@@ -1,6 +1,5 @@
 class PaymentsController < ApplicationController
   before_action :set_payment, only: [:show, :edit, :update, :destroy]
-  before_filter { @order = Order.find(params[:order_id]) }
 
 
   # GET /payments
@@ -27,6 +26,8 @@ class PaymentsController < ApplicationController
   # POST /payments
   # POST /payments.json
   def create
+    @order = Order.find(params[:payment][:order_id])
+    logger.debug("===> @order #{params[:order_id]} #{@order}")
     @payment = @order.payments.build(payment_params)
 
     respond_to do |format|

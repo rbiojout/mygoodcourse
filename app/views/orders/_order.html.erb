@@ -1,0 +1,26 @@
+<div class="row" id="order_<%= order.id%>" >
+  <div class="col-xs-2">
+    <%=order.id %>
+  </div>
+  <div class="col-xs-2">
+    <%=order.status %>
+  </div>
+  <div class="col-xs-2">
+    <%=order.created_at.strftime("%D") %>
+  </div>
+  <div class="col-xs-2">
+    <%= number_to_currency(order.amount_paid, precision: 2) %>
+  </div>
+  <div class="col-xs-2">
+    <%= order.invoice_number %>
+  </div>
+  <div class="col-xs-2">
+    <ul>
+    <% order.order_items.each do |item|%>
+        <li>
+          <%= item.product.name %>
+        </li>
+    <%end %>
+    </ul>
+  </div>
+</div>

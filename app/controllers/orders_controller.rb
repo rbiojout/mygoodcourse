@@ -1,11 +1,17 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show, :edit, :update, :destroy, :basket]
-  before_action :authenticate_customer!, only: [:checkout, :payment, :confirmation]
+  before_action :authenticate_customer!, only: [:checkout, :payment, :confirmation, :myorders]
 
   # GET /orders
   # GET /orders.json
   def index
     @orders = Order.all.paginate(page: params[:page], :per_page => 30)
+  end
+
+  # GET /myorders
+  def myorders
+    @orders = Order.accepted_for_customer(current_customer.id).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @products = Product.find_ordered_by_customer(current_customer.id).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
   end
 
   # GET /orders/1
@@ -48,6 +54,7 @@ class OrdersController < ApplicationController
     end
   end
 
+
   # PATCH/PUT /orders/1
   # PATCH/PUT /orders/1.json
   def update
@@ -82,20 +89,16 @@ class OrdersController < ApplicationController
   end
 
   def checkout
-    @order = Order.find(current_order.id)
-    @order.customer = current_customer
+    current_order.customer = current_customer
 
-    redirect_to catalog_products_path, flash: { alert: 'Your Cart is empty' } if @order.order_items.empty?
+    redirect_to catalog_products_path, flash: { alert: 'Your Cart is empty' } if current_order.order_items.empty?
 
-    if request.patch?
-      @order.ip_address = request.ip
-      if @order.proceed_to_confirm
-        redirect_to checkout_payment_path
-      end
-    else
-      # Add some example order data for the example. In a real application
-      # this shouldn't be present.
-    end
+    # update the status
+    current_order.ip_address = request.ip
+    current_order.status = "confirming"
+    # store in DB
+    current_order.save
+    @order = current_order
   end
 
   def payment
@@ -111,6 +114,9 @@ class OrdersController < ApplicationController
       return
     end
 
+    # validate card infos
+    #@TODO use validation of card
+
     #if request.patch?
       begin
         current_order.confirm!
@@ -118,9 +124,15 @@ class OrdersController < ApplicationController
         # we are adding a payment to the order straight away.
         current_order.payments.create(:amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
         session[:order_id] = nil
+        # save the amount paid
+        current_order.amount_paid = current_order.total
+        # save the state from the payment module as accepted
+        current_order.accept!(current_customer)
         redirect_to root_path, :notice => "Order has been accepted!"
       rescue  => e
         flash[:alert] = "Payment was declined by the bank. #{e.message}"
+        # save the state from the payment module as rejected
+        current_order.reject!(current_customer)
         redirect_to checkout_path
       end
     #end
@@ -145,6 +157,6 @@ class OrdersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
-      params.require(:order).permit(:customer_id, :notes,  order_item_attributes: [:id, :product_id, :price, :tax_rate, :tax_amount, :_destroy])
+      params.require(:order).permit(:customer_id, :notes, order_item_attributes: [:id, :product_id, :price, :tax_rate, :tax_amount, :_destroy])
     end
 end

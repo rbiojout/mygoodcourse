@@ -1,0 +1,11 @@
+<%= render(partial: 'orders/order', collection: @orders) %>
+
+
+<%= will_paginate(@orders, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+
+
+<hr>
+<%= render(partial: 'products/product', collection: @products) %>
+
+
+<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>

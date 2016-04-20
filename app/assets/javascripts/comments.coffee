@@ -3,6 +3,17 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).ready ->
+  $('.comment .media-object')
+    .mouseenter ->
+      $(this).popover({
+        content: "Located in ... Member since ... ? for customer "+$(this).data('customer'),
+        placement: "top"})
+      $(this).popover('show')
+      # alert($(this).data('customer'))
+    .mouseleave ->
+      $(this).popover('hide')
+
+
   $(document).bind 'ajaxError', 'form#new_comment', (event, jqxhr, settings, exception) ->
 # note: jqxhr.responseJSON undefined, parsing responseText instead
     $(event.data).render_form_errors $.parseJSON(jqxhr.responseText)

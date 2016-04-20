@@ -5,8 +5,56 @@
   <h2>Place your order</h2>
   <p>Fantastic! You're ready to place your order, just follow the instructions below and
     we'll get your products shipped to you as quickly as we can.</p>
-  <h3>Review the products in your shopping bag</h3>
-  <%= render('orders/order_table', :order => current_order) %>
+  <h3>Enter your payment informations</h3>
+  <b>Card informations</b>
+  <p>Card Number</p>
+  <p>Expiration date</p>
+  <p>Security code</p>
+  <%= form_tag(checkout_confirmation_path, method: 'get') do  %>
+      <h3>This is a demo form. Any values entered here will be accepted.</h3>
+
+      <%= label_tag :card_number, "Full Card Number" %>
+      <%= text_field_tag :card_number %>
+
+      <%= label_tag 'exp_month', "Expiry Date (mm/yyyy)" %>
+      <%= select_tag :exp_month, options_for_select((1..12).to_a) %>
+      <%= select_tag :exp_year, options_for_select((Date.today.year..Date.today.year + 10).to_a), :class => 'year' %>
+
+      <%= label_tag 'cvc', "Security Code" %>
+      <%= text_field_tag 'cvc', '', :maxlength => 4 %>
+      <span>This is the 3 digit number on the back of your card.</span>
+
+
+
+      <%= submit_tag("Submit") %>
+  <% end %>
+
+
+  .checkout
+  %p.secure Secure connection
+  %h3 Pay using your credit/debit card
+  = form_for @order, :url => checkout_payment_path, :html => {:class => 'checkout'} do |f|
+  = field_set_tag nil, :class => 'payment' do
+  %h3 This is a demo form. Any values entered here will be accepted.
+  %dl
+  %dt= label_tag 'card_number', "Full Card Number"
+  %dd.number= text_field_tag 'card_number', '', :name => nil
+  %dl
+  %dt= label_tag 'exp_month', "Expiry Date (mm/yyyy)"
+  %dd.expiry
+  = select_tag nil, options_for_select((1..12).to_a)
+  = select_tag nil, options_for_select((Date.today.year..Date.today.year + 10).to_a), :class => 'year'
+  %dl
+  %dt= label_tag 'cvc', "Security Code"
+  %dd.cvc
+  = text_field_tag 'cvc', '', :name => nil, :maxlength => 4
+  %span This is the 3 digit number on the back of your card.
+  %p.submit= f.submit "Review your order", :class => 'review'
+
+
+  <div class="orderitem-index">
+    <%= render(partial: "order_items/order_item", collection: current_order.order_items) %>
+  </div>
 
 
   <h3>Complete your details below to complete your order</h3>
@@ -14,9 +62,13 @@
   <h4>Billing adress</h4>
 
   <h4>Card infos</h4>
+  <h3>Pay using your credit/debit card</h3>
+
 
       <%= simple_form_for @order, :url => checkout_path, :html => {:class => 'checkout disableable'} do |f| %>
       <%= f.error_notification %>
         <%= f.button :submit  %>
       <% end %>
 </div>
+
+<div id="orderitem-modal" class="modal fade"></div>

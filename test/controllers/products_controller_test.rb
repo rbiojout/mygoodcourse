@@ -93,4 +93,5 @@ class ProductsControllerTest < ActionController::TestCase
       delete :destroy, id: @product
     end
   end
+
 end

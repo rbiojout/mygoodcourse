@@ -13,3 +13,10 @@ two:
   tax_rate: 9.99
   tax_amount: 9.99
   order: one
+
+rejected:
+  product: product_with_order_rejected
+  price: 9.99
+  tax_rate: 9.99
+  tax_amount: 9.99
+  order: rejected

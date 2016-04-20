@@ -139,3 +139,9 @@ rails g migration add_position_to_families_and_cycles position:integer
 
 RATING
 https://github.com/javiertoledo/bootstrap-rating-input
+
+STRIPE
+https://richonrails.com/articles/building-a-shopping-cart-in-ruby-on-rails
+https://richonrails.com/articles/credit-card-processing-with-active-merchant
+https://www.youtube.com/watch?v=jTTSt2R_QDc
+

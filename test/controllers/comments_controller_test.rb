@@ -34,7 +34,7 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_select_jquery :prepend, '#comment_table' do
-      assert_select '.media-body h5', @comment.title
+      #assert_select '.media-object img', @comment.customer.picture
       assert_select '.media-body p', @comment.description
     end
 

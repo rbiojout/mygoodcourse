@@ -3,7 +3,7 @@
 
 
 
-<div class="row">
+<div class="row" id="order_item_<%=order_item.id%>">
   <div class="col-xs-2 picture_part">
     <%= image_tag order_item.product.preview, class: 'img-thumbnail center-block' %>
   </div>
@@ -23,7 +23,7 @@
     </div>
     <%= number_to_currency order_item.product.price %>
     <hr>
-    <%= link_to "Remove from Cart", order_item_delete_path(order_item), remote: true, class: "btn btn-danger" %>
+    <%= link_to "Remove from Cart", order_item, remote: true, method: :delete, data: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: "btn btn-danger" %>
     <hr>
     <p>Nb Pages</p>
   </div>

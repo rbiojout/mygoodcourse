@@ -1,4 +1,4 @@
-<div class="container"></div>
+
   <div class="well">
     <%= link_to "Continue Shopping", catalog_products_path, class: "btn btn-primary" %>
     <%= link_to "Checkout", checkout_path, class: "btn btn-primary" %>
@@ -6,8 +6,9 @@
   <div class="new-orderitem"></div>
 
   <div class="orderitem-index">
-  <%= render(partial: "order_item", collection: @order_items) %>
+  <%= render(partial: "order_items/order_item", collection: @order_items) %>
   </div>
+
 
 
 <div id="orderitem-modal" class="modal fade"></div>

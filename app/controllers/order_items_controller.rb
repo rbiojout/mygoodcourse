@@ -1,13 +1,20 @@
 class OrderItemsController < ApplicationController
-  before_action :set_order_item, only: [:update, :destroy]
+  before_action :set_order_item, only: [:update, :delete, :destroy]
 
-  # GET /countries
-  # GET /countries.json
+  #http://www.benkirane.ch/ajax-bootstrap-modals-rails/
+
+  # GET /order_items
+  # GET /order_items.json
   def index
     @order = current_order
     @order_items = current_order.order_items
   end
 
+  def show
+  end
+
+  def new
+  end
 
 
   # POST /order_items
@@ -48,19 +55,26 @@ class OrderItemsController < ApplicationController
     #end
   end
 
-  def delete
-    @order_item = OrderItem.find(params[:order_item_id])
-  end
 
   # DELETE /order_items/1
   # DELETE /order_items/1.json
   def destroy
     @order_item.destroy
     @order_items = current_order.order_items
-    #respond_to do |format|
-    #  format.html { redirect_to order_items_url, notice: 'Order item was successfully destroyed.' }
-    #  format.json { head :no_content }
-    #end
+    if @order_items.empty?
+      respond_to do |format|
+          format.html { redirect_to catalog_products_path, flash: { alert: 'Your Cart is empty' } }
+          format.js { render js: "window.location='#{catalog_products_path}'", flash: { alert: 'Your Cart is empty' } }
+        logger.debug("===> #{catalog_products_path}")
+        end
+    else
+      respond_to do |format|
+          format.html { redirect_to order_items_path, notice: 'Order item was successfully destroyed.' }
+          format.json { head :no_content }
+          format.js
+      end
+    end
+
   end
 
   private

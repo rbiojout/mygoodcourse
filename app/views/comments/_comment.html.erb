@@ -1,17 +1,15 @@
 <!-- REVIEW - START -->
 
-<div class="media" id=<%= 'current_comment' if comment == @current_comment %> >
+<div class="media comment" id=<%= 'current_comment' if comment == @current_comment %> >
   <div class="media-left">
-
-
-    <img class="media-object img-circle" alt="" src="<%= comment.customer.picture %>" style="width:80px;">
+    <img class="media-object img-circle" alt="Customer" data-customer="<%=comment.customer.id %>" src="<%= comment.customer.picture.url %>" src2="<%= comment.customer.picture %>" style="width:80px;">
   </div>
   <div class="media-body">
     <div class="row">
       <div class="col-xs-9">
         <h3 class="media-heading"><%= comment.customer.first_name %> <%= comment.customer.name %></h3>
         <div class="meta">
-          <span class="date text-muted"><%= nice_date (comment.created_at) %></span>
+          <span class="date text-muted"><%= nice_date(comment.updated_at) %></span>
         </div>
         <b><%= comment.title %></b>
         <p><%= comment.description %></p>
@@ -19,7 +17,7 @@
       <div class="col-xs-3">
         <%= render "comments/show_stars", :score => comment.score %>
         <% # @TODO add report %>
-        <p>REPORT</p>
+        <p>REPORT problem</p>
       </div>
     </div>
   </div>

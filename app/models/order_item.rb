@@ -2,6 +2,25 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
 
+
+  # Recover all accepted order_items received for a particular customers buying
+  # @param customer_id [int] the id for the seller
+  # @param status [String] the status state, default 'accepted'
+  # @return [Collection]
+  def self.find_ordered_by_customer(customer_id, status = 'accepted')
+    status = Order::STATUSES.include?(status) ? status : 'accepted'
+    joins(:order).where(orders: {status: status, customer_id: customer_id}).order(:product_id)
+  end
+
+  # Recover all accepted order_items received for a particular customers selling
+  # @param customer_id [int] the id for the seller
+  # @param status [String] the status state, default 'accepted'
+  # @return [Collection]
+  def self.find_sold_by_customer(customer_id, status = 'accepted')
+    status = Order::STATUSES.include?(status) ? status : 'accepted'
+    joins(:order).where(orders: {status: status}).joins(:product).where(products: {customer_id: customer_id}).order(:product_id)
+  end
+
   # Before saving an order item which belongs to a received order, cache the pricing again if appropriate.
   before_save do
     if order.received? && (price_changed? )
@@ -15,7 +34,6 @@ class OrderItem < ActiveRecord::Base
   # exist already.
   #
   # @param ordered_item [Object] an object which implements the Shoppe::OrderableItem protocol
-  # @param quantity [Fixnum] the number of items to order
   # @return [OrderItem]
   def self.add_item(product)
     #fail Errors::UnorderableItem, product: product unless product.active?
@@ -42,7 +60,15 @@ class OrderItem < ActiveRecord::Base
     read_attribute(:unit_price) || product.price || BigDecimal(0)
   end
 
+  # The unit price for the item without tax
+  #
+  # @return [BigDecimal]
+  def unit_price_without_tax
+    read_attribute(:unit_price) || product.price / (1+ TAX_RATE/BigDecimal(100)) || BigDecimal(0)
+  end
+
   # The cost price for the item
+  # based on the price without tax and the commission rate
   #
   # @return [BigDecimal]
   def unit_cost_price
@@ -57,10 +83,13 @@ class OrderItem < ActiveRecord::Base
   end
 
   # The total tax for the item
+  # sub_total = amount with taxes
+  # sub_total_without_tax = sub_total /( 1 + tax_rate/100)
+  # tax_amout = sub_total - sub_total_without_tax = sub_total * (tax_rate( 100 + tax_rate) )
   #
   # @return [BigDecimal]
   def tax_amount
-    read_attribute(:tax_amount) || (sub_total / BigDecimal(100)) * tax_rate
+    read_attribute(:tax_amount) || (sub_total * tax_rate / (BigDecimal(100) +tax_rate))
   end
 
   # The total cost for the product
@@ -83,7 +112,14 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def total
-    tax_amount + sub_total
+    sub_total
+  end
+
+  # The total price including tax for the order line
+  #
+  # @return [BigDecimal]
+  def total_without_tax
+     sub_total - tax_amount
   end
 
   # Cache the pricing for this order item

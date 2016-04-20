@@ -11,13 +11,9 @@ class Order < ActiveRecord::Base
   #
   # @param params [Hash] a hash of order attributes
   # @return [Boolean]
-  def proceed_to_confirm(params = {})
+  def change_to_confirming
     self.status = 'confirming'
-    if update(params)
-      true
-    else
-      false
-    end
+    true
   end
 
   # This method should be executed by the application when the order should be completed

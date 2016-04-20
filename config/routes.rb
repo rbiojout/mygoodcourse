@@ -4,22 +4,32 @@ Rails.application.routes.draw do
   resources :comments
   resources :payments
   resources :countries
-  resources :order_items do
-    get "delete"
+  resources :order_items
+  resources :orders do
+    collection do
+      get 'myorders'
+    end
   end
-  resources :orders
   resources :levels do
-    collection { post :sort }
+    collection do
+      post :sort
+    end
   end
   resources :cycles do
-    collection { post :sort }
+    collection do
+      post :sort
+    end
   end
   resources :categories do
-    collection { post :sort }
+    collection do
+      post :sort
+    end
   end
 
   resources :families do
-    collection { post :sort }
+    collection do
+      post :sort
+    end
   end
   resources :attachments
   resources :products do
