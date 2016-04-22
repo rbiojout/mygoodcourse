@@ -26,6 +26,32 @@ class Customer < ActiveRecord::Base
   # We don't want to delete if some orders have been done
   has_many :orders, dependent: :restrict_with_exception
 
+  # we have a social follower/following process
+  has_many :peers, foreign_key: "follower_id"
+
+  # we have a social follower/following process
+  has_many :followeds, class_name:  "Customer",
+           foreign_key: "follower_id",
+           through:   :peers
+
+  # we have a social follower/following process
+  has_many :followers, class_name:  "Customer",
+           foreign_key: "followed_id",
+           through:   :peers
+
+  # Follows a user.
+  def follow(other_customer)
+    peers.create(followed: other_customer)
+  end
+  # Unfollows a user.
+  def unfollow(other_customer)
+    peers.find_by(followed: other_customer).destroy
+  end
+  # Returns true if the current user is following the other user.
+  def following?(other_customer)
+    followeds.include?(other_customer)
+  end
+
 
 
 

@@ -52,5 +52,10 @@ module ApplicationHelper
     content_tag("span", nice_date.html_safe, class: 'date')
   end
 
+  # helper to have a common way to present price
+  def nice_price(price)
+    nice_date = number_to_currency(price, precision: 2)||"Free"
+  end
+
 
 end

@@ -31,7 +31,7 @@ product_without_orders:
   active: true
   featured: true
   price: 9.99
-  customer: seller_one
+  customer: one
 
 product_with_order_rejected:
   name: Product_rejected

@@ -53,7 +53,18 @@ class AttachmentsControllerTest < ActionController::TestCase
     assert_difference('Attachment.count', -1) do
       delete :destroy, id: @attachment
     end
-
     assert_redirected_to attachments_path
+  end
+
+  test "should not exceed size" do
+
+  end
+
+  test "should respect filetype" do
+
+  end
+
+  test "should build different formats" do
+
   end
 end

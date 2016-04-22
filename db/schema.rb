@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160323125724) do
+ActiveRecord::Schema.define(version: 20160421065540) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -216,6 +216,17 @@ ActiveRecord::Schema.define(version: 20160323125724) do
   end
 
   add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
+
+  create_table "peers", force: :cascade do |t|
+    t.integer  "follower_id"
+    t.integer  "followed_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "peers", ["followed_id", "follower_id"], name: "index_peers_on_followed_id_and_follower_id", unique: true, using: :btree
+  add_index "peers", ["followed_id"], name: "index_peers_on_followed_id", using: :btree
+  add_index "peers", ["follower_id"], name: "index_peers_on_follower_id", using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name"

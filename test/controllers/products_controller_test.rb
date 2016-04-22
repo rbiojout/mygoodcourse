@@ -76,7 +76,9 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should update product" do
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku }
+    @attachment = attachments(:one)
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku,
+                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }
     assert_redirected_to product_path(assigns(:product))
   end
 

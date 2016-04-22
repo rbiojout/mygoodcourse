@@ -41,14 +41,14 @@
 
 
     <!--- Attachments --->
-    <!--- only the first element can not be removed -->
-    <% remove_ok = false %>
-    <div class="row", id="attachments">
-        <%= f.fields_for :attachments do |att, index| %>
-            <%= render 'attachment_fields', f: att, remove_ok: remove_ok %>
-          <% remove_ok = true %>
+    <!--- only the first element can not be removed from the existing list -->
+    <% is_first= true %>
+    <div class="row", id="product_attachments">
+        <%= f.fields_for :attachments do |att| %>
+            <%= att.object.id.to_s + " " + is_first.to_s + " " %>
+            <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
+          <% is_first = false %>
         <% end %>
-
     </div>
 
     <div class="row">

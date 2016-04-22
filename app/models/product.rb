@@ -22,7 +22,8 @@ class Product < ActiveRecord::Base
   # Ordered items which are associated with this product
   # We don't want to delete if some orders have been collected
   has_many :order_items, dependent: :restrict_with_exception
-  before_destroy :ensure_not_referenced
+  #before_destroy :ensure_not_referenced
+  before_destroy validates :order_items, absence: true
 
   # Orders which have ordered this product
   has_many :orders, through: :order_items

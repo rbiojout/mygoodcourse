@@ -5,7 +5,10 @@
   </div>
   <div class="new-orderitem"></div>
 
-  <div class="orderitem-index">
+  <div id="orderitem-dropped">
+  </div>
+
+  <div id="order_items_index">
   <%= render(partial: "order_items/order_item", collection: @order_items) %>
   </div>
 

@@ -4,7 +4,12 @@ Rails.application.routes.draw do
   resources :comments
   resources :payments
   resources :countries
-  resources :order_items
+  resources :order_items do
+    member do
+    end
+  end
+  post 'undo' => 'order_items#undo', :as => 'undo_order_item'
+
   resources :orders do
     collection do
       get 'myorders'
@@ -52,8 +57,17 @@ Rails.application.routes.draw do
   #  post "/sign_up", :to => "customers/registrations#create"
   #  post "/sign_in", :to => "customers/sessions#create"
   #end
-  resources :customers
+  resources :customers do
+    member do
+      get :followeds, :followers
+    end
+  end
 
+  # Follow and unfollow other peer customers
+  #
+  #
+  post 'peers/follow' => 'peers#follow', :as => 'follow_peer'
+  delete 'peers/unfollow' => 'peers#unfollow', :as => 'unfollow_peer'
 
   #
   # Product browising

@@ -6,7 +6,7 @@ one: # generated id:980190962
   file_type: 'application/pdf'
   nbpages: 1
   version_number: 9.99
-  active: false
+  active: true
   product: one
 
 two: # generated id:298486374

@@ -1,0 +1,1 @@
+$("#follow_form_<%= @followed.id%>").html("<%= escape_javascript(link_to("Unfollow", unfollow_peer_path(followed_id: @followed.id), method: :post, remote: true )) %>")

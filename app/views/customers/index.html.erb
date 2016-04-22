@@ -36,4 +36,7 @@
 
 <br>
 
+<ul>
+<%= render(partial: 'customers/customer', collection: @customers) %>
+</ul>
 <%= link_to 'New Customer', new_customer_path %>

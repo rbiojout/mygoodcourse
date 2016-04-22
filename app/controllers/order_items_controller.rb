@@ -38,6 +38,18 @@ class OrderItemsController < ApplicationController
     #end
   end
 
+  # POST /order_items/undo?product_id=
+  def undo
+    product_to_order = Product.find(params[:product_id])
+    @order_item = current_order.order_items.add_item(product_to_order)
+    respond_to do |format|
+      format.html {redirect_to catalog_products_path}
+      format.js { }
+    end
+  end
+
+
+
   # PATCH/PUT /order_items/1
   # PATCH/PUT /order_items/1.json
   def update
@@ -71,7 +83,7 @@ class OrderItemsController < ApplicationController
       respond_to do |format|
           format.html { redirect_to order_items_path, notice: 'Order item was successfully destroyed.' }
           format.json { head :no_content }
-          format.js
+          format.js {}
       end
     end
 

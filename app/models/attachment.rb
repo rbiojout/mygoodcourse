@@ -5,8 +5,10 @@ class Attachment < ActiveRecord::Base
   mount_uploader :file, DocumentUploader
   validates :file, presence: true
 
+  # method for update and create
   before_save :update_file_attributes
-  before_update :update_file_attributes
+  # method after the creation of a new attachment
+  before_create :increment_version
 
   default_scope -> { order(created_at: :desc) }
 
@@ -22,6 +24,14 @@ class Attachment < ActiveRecord::Base
       #image.identify do |b|
       # b.format '%n'
       #end
+    end
+  end
+
+  def increment_version
+    begin
+     self.version_number = (product.attachments.first.version_number||0) + 1.0
+    rescue
+      self.version_number = 1.0
     end
   end
 

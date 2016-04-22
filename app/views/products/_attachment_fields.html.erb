@@ -1,23 +1,24 @@
 <div class="nested-fields col-sm-4 col-md-3">
-  <div class="thumbnail">
+  <div class="thumbnail" id="attachment_<%=f.object.id%>">
     <% if f.object.new_record?  %>
         <%= f.input :file %>
         <%= f.input :file_cache, as: :hidden  %>
-        <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
   <% else %>
         <% attachment = f.object %>
-        <%= image_tag f.object.file.url(:preview), class: 'img-responsive' %>
+        <%= image_tag f.object.file.url(:preview), class: 'img-responsive panel-image-product' %>
         <div class="caption">
           <h3>Detail</h3>
-          <p><strong>Created at : </strong><%= attachment.created_at %></p>
+          <p><strong>Created at : </strong><%= nice_date(attachment.created_at) %></p>
           <p><strong>File Size : </strong><%= attachment.file_size %></p>
           <p><strong>File type : </strong><%= attachment.file_type %></p>
           <p><strong># pages : </strong><%= attachment.nbpages %></p>
           <p><strong>Version number : </strong><%= attachment.version_number %></p>
-          <% if remove_ok %>
-            <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
-          <% end %>
         </div>
+    <% end %>
+    <!--- only when remove_ok flag is received we activate the link to remove --->
+    <% is_first ||=false %>
+    <% unless is_first %>
+        <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
     <% end %>
   </div>
 </div>

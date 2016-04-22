@@ -52,7 +52,11 @@
   %p.submit= f.submit "Review your order", :class => 'review'
 
 
-  <div class="orderitem-index">
+
+  <div id="orderitem-dropped">
+  </div>
+
+  <div id="order_items_index">
     <%= render(partial: "order_items/order_item", collection: current_order.order_items) %>
   </div>
 

@@ -1,10 +1,19 @@
-<div>
-  <img class="media-object img-circle" alt="" src="<%= customer.picture %>" style="width:80px;">
+<div class="customer_presentation" id="customer_presentation_<%= customer.id%>">
+  <img class="media-object img-circle customer-picture" data-customer="<%=customer.id %>" alt="" src="<%= customer.picture %>" style="width:80px;">
   <h3 class="media-heading"><%= customer.first_name %> <%= customer.name %></h3>
   <% #@TODO follow me %>
-  <h5>Follow me</h5>
-  <%= customer.locality %>,
-  <%= content_tag('small', nice_date(customer.created_at), :class => 'small') %>
+  <% if customer_signed_in? %>
+      <div class="follow_form" id="follow_form_<%= customer.id%>">
+        <% if current_customer.following?(customer) %>
+            <h5><%= link_to("Unfollow", unfollow_peer_path(followed_id: customer.id), method: :delete, remote: true ) %></h5>
+        <% else %>
+            <h5><%= link_to("Follow", follow_peer_path(followed_id: customer.id), remote: true ) %></h5>
+        <% end %>
+      </div>
+  <% end %>
+
+  <%= customer.locality+' ' %>
+  since <%= content_tag('small', nice_date(customer.created_at), :class => 'small') %>
   <% #@TODO stars %>
   stars
 </div>

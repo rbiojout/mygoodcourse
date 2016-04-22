@@ -1,5 +1,8 @@
 $('#order_item_<%= @order_item.id %>').fadeOut();
 
+$('#orderitem-dropped').prepend("<%= escape_javascript(render('order_items/undo_order_item', order_item: @order_item)) %>")
+
+
 // update the summary of the cart
 $("#cart_summary").html("<%= escape_javascript(render 'layouts/cart_summary') %>")
 $("#orderitem-modal").modal("hide")

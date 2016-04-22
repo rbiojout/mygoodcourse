@@ -2,7 +2,7 @@
 
 
 <% if customer_signed_in? %>
-    <li><%= link_to 'Edit my account', edit_customer_registration_path %></li>
+    <li><%= link_to 'Edit my account', edit_customer_registration_path(:id => current_customer.id) %></li>
     <li><%= link_to 'Edit my profile', edit_customer_path(current_customer) %></li>
     <li><%= link_to 'Sign out', destroy_customer_session_path, :method=>'delete' %></li>
     <li><%= link_to 'My products', myproducts_products_path %></li>

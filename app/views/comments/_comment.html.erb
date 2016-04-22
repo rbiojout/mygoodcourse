@@ -2,7 +2,7 @@
 
 <div class="media comment" id=<%= 'current_comment' if comment == @current_comment %> >
   <div class="media-left">
-    <img class="media-object img-circle" alt="Customer" data-customer="<%=comment.customer.id %>" src="<%= comment.customer.picture.url %>" src2="<%= comment.customer.picture %>" style="width:80px;">
+    <img class="media-object img-circle customer-picture" alt="Customer" data-customer="<%=comment.customer.id %>" src="<%= comment.customer.picture.url %>" src2="<%= comment.customer.picture %>" style="width:80px;">
   </div>
   <div class="media-body">
     <div class="row">
