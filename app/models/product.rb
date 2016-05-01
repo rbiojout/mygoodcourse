@@ -22,8 +22,9 @@ class Product < ActiveRecord::Base
   # Ordered items which are associated with this product
   # We don't want to delete if some orders have been collected
   has_many :order_items, dependent: :restrict_with_exception
+
   #before_destroy :ensure_not_referenced
-  before_destroy validates :order_items, absence: true
+  #before_destroy validates :order_items, absence: true
 
   # Orders which have ordered this product
   has_many :orders, through: :order_items
@@ -31,10 +32,13 @@ class Product < ActiveRecord::Base
   # product is link to many categories
   has_and_belongs_to_many :categories, table_name: 'categories_products'
   has_many :families, through: :categories
+  validates_presence_of :categories, :message => "You need to provide at least one category."
+
 
   # product is linked to many levels
   has_and_belongs_to_many :levels, table_name: 'levels_products'
   has_many :cycles, through: :levels
+  validates_presence_of :levels, :message => "You need to provide at least one level."
 
 
   # many comments linked, we consolidate the number and the average score

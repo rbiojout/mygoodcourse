@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   #  post "/sign_in", :to => "customers/sessions#create"
   #end
   resources :customers do
+    post 'attach_picture'
     member do
       get :followeds, :followers
     end

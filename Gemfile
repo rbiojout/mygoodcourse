@@ -91,6 +91,10 @@ gem 'mini_magick'
 # grim help to make preview from pdf
 # gem 'grim'
 
+# handle file upload with javascript, in particular for progress bar
+gem 'jquery-fileupload-rails'
+
+
 # gem 'nested_form_fields'
 
 # better work for nested forms

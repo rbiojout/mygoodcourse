@@ -10,6 +10,8 @@ one:
   featured: true
   price: 9.99
   customer: one
+  levels: one
+  categories: one
 
 two:
   name: Product2

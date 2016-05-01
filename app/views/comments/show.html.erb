@@ -1,24 +1,7 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @comment.title %>
-</p>
+<%= render('comments/comment', comment: @comment) %>
 
-<p>
-  <strong>Description:</strong>
-  <%= @comment.description %>
-</p>
-
-<p>
-  <strong>Score:</strong>
-  <%= @comment.score %>
-</p>
-
-<p>
-  <strong>Product:</strong>
-  <%= @comment.product %>
-</p>
 
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>

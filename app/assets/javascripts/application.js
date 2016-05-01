@@ -17,6 +17,8 @@
 //= require jquery.ui.touch-punch
 //= require jquery_ujs
 //= require jquery.turbolinks
+//= require jquery-fileupload/basic
+//= require jquery-fileupload/vendor/tmpl
 //= require bootstrap-sprockets
 //= require moment
 //= require trix
@@ -24,7 +26,6 @@
 //= require jquery.geocomplete
 //= require underscore
 //= require gmaps/google
-//= require jquery.geocomplete
 //= require turbolinks
 //= require bootstrap-treenav
 //= require_tree .

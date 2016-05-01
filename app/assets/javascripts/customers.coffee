@@ -5,10 +5,19 @@
 $(document).ready ->
   $('.customer-picture')
   .mouseenter ->
+    id = $(this).data('customer')
+    created = $(this).data('created')
+    locality = $(this).data('locality')
+    $.ajax
+      url: "/customers/#{id}",
+      type: "GET",
+      dataType: "json"
+      success: (data) ->
+        console.log(data)
     $(this).popover({
-      content: "Located in ... Member since ... ? for customer "+$(this).data('customer'),
+      content: "Located in #{locality}. Member since #{created}",
       placement: "top"})
     $(this).popover('show')
-# alert($(this).data('customer'))
+
   .mouseleave ->
     $(this).popover('hide')

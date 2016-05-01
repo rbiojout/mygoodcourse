@@ -1,5 +1,5 @@
 <div class="customer_presentation" id="customer_presentation_<%= customer.id%>">
-  <img class="media-object img-circle customer-picture" data-customer="<%=customer.id %>" alt="" src="<%= customer.picture %>" style="width:80px;">
+  <img class="media-object img-circle customer-picture" data-customer="<%=customer.id %>" data-locality="<%=customer.locality||'Secret'%>" data-created="<%=customer.created_at.strftime("%D")%>" alt="" src="<%= customer.picture %>" style="width:80px;">
   <h3 class="media-heading"><%= customer.first_name %> <%= customer.name %></h3>
   <% #@TODO follow me %>
   <% if customer_signed_in? %>
@@ -12,7 +12,7 @@
       </div>
   <% end %>
 
-  <%= customer.locality+' ' %>
+  <%= customer.locality||' '+' ' %>
   since <%= content_tag('small', nice_date(customer.created_at), :class => 'small') %>
   <% #@TODO stars %>
   stars

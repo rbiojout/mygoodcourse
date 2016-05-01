@@ -52,11 +52,21 @@ class CommentsControllerTest < ActionController::TestCase
   test "should show comment" do
     get :show, id: @comment
     assert_response :success
+    assert_select '.customer-picture', 'data-customer' => @comment.customer.id
+    assert_select '.customer-picture', 'data-locality' => @comment.customer.locality
+    assert_select '.customer-picture', 'data-created' => @comment.customer.created_at.strftime("%D")
   end
 
   test "should get edit" do
     get :edit, id: @comment
     assert_response :success
+  end
+
+
+  test "need login to edit comment" do
+    sign_out :customer
+    get :edit, id: @comment
+    assert_redirected_to new_customer_session_path
   end
 
   test "should update comment" do
@@ -79,4 +89,6 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_redirected_to comments_path
   end
+
+
 end
