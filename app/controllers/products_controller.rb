@@ -123,7 +123,7 @@ class ProductsController < ApplicationController
     logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
     #logger.debug("===> #{sort_column} / #{sort_direction}")
-    @products = @products.order( sort_column + " " + sort_direction)
+    @products = @products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
 
   end
 

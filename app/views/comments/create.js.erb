@@ -1,4 +1,8 @@
-$('#comment_table').prepend("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
+
+// we had the new comment at the top, just after the form and hide the fomr
+$('#comment-form').after("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
+$('#comment-form').hide();
+
 
 // we update the associated informations
 $('#nb_comments').html("<%= @comment.product.nb_comments %>");
@@ -6,7 +10,7 @@ $('#product_score').html("<%= j render partial: 'comments/show_stars', locals: {
 
 
 // close the modal
-$('#dialog').modal_success();
+// $('#dialog').modal_success();
 
 // first we need to hide before to show
 $('#current_comment').focus();

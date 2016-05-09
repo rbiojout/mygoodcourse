@@ -20,17 +20,17 @@
     <%= f.hidden_field :product_id, :class => "form-control first_input"  %>
         <div class="form-group">
           <%= f.label :score, :class => "control-label" %>
-          <%= f.select :score, [['horrible', 1], ['poor', 2], ['mediocre', 3], ['good', 4], ['great', 5]], :class => "form-control first_input"  %>
+          <%= f.number_field :score, class: 'rating kv-ltr-theme-fa-star rating-loading', 'data-max' => '5', 'data-step' => '1', 'data-show-clear' => 'false', 'data-size' => "xs"   %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <%= f.label :title, :class => "control-label" %>
-          <%= f.text_field :title, :class => "form-control" %>
+          <%= f.label :title, :class => "control-label"  %>
+          <%= f.text_field :title, placeholder: 'Title or summary of your comment (required)', :class => "form-control" %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">
           <%= f.label :description, :class => "control-label" %>
-          <%= f.text_area :description, :rows => 5, :class => "form-control" %>
+          <%= f.text_area :description, placeholder: 'Enter here your comment (required)', :rows => 5, :class => "form-control" %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">

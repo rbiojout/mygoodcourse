@@ -21,6 +21,8 @@
     <p>
       <% unless product.score_comments.nil? %>
           <%= render "comments/show_stars", :score => product.score_comments, :simple => true %>
+      <% else %>
+            <span>&nbsp;</span>
       <% end %>
     </p>
   </div>

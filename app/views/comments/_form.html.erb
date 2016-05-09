@@ -13,9 +13,9 @@
           <span class='badge'><%=@comment.score%></span>
         </div>
         <% else %>
-    <%= f.input :score, type: 'number', input_html: { class: 'rating', 'data-max' => '5' } %>
+    <%= f.input :score, type: 'number', input_html: { class: 'rating', 'data-max' => '5', 'data-step' => '1', 'data-show-clear' => 'false', 'data-size' => "xs"  } %>
         <% end %>
-    <%= f.input :title %>
+    <%= f.input :title, placeholder: 'Title or Summary (needed)' %>
     <%= f.input :description, as: :text %>
     <%= f.association :product, :include_blank => false %>
   </div>

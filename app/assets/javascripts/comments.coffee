@@ -26,7 +26,11 @@ $(document).ready ->
     model = @data('model')
     # show error messages in input form-group help-block
     $.each errors, (field, messages) ->
-      $input = $('input[name="' + model + '[' + field + ']"]')
+      $input = $form.find('input, select, textarea').filter(->
+        name = $(this).attr('name')
+        if name
+          name.match(new RegExp(model + '\\[' + field + '\\(?'))
+      )
       $input.closest('.form-group').addClass('has-error').find('.help-block').html messages.join(' & ')
       return
     return
@@ -37,6 +41,13 @@ $(document).ready ->
       $(this).removeClass 'has-error'
       return
     return
+
+  $.fn.clear_form_fields = () ->
+    this.find(':input','#myform')
+      .not(':button, :submit, :reset, :hidden')
+      .val('')
+      .removeAttr('checked')
+      .removeAttr('selected')
 
   return
 ) jQuery

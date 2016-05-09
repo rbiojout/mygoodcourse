@@ -1,10 +1,15 @@
+$('#comment-form').html("<%= j (render 'form_ajax') %>");
+$('#comment-form').slideDown(350);
+$('#comment_score').focus();
+$('#comment_score').rating({min: 0, max: 5, step: 1, stars: 5});
+
 // TODO : need to handle the NOT AUTHORIZE
-$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Comment");
+//$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Comment");
 
-$('.modal-body').html('<%= j render("form_ajax") %>');
+//$('.modal-body').html('<%= j render("form_ajax") %>');
 
-$('#dialog').modal("show");
+//$('#dialog').modal("show");
 
-$('#dialog').on('shown.bs.modal', function () {
-    $('.first_input').focus()
-})
+//$('#dialog').on('shown.bs.modal', function () {
+//    $('.first_input').focus()
+//})

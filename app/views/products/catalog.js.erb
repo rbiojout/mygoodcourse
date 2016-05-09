@@ -1,0 +1,2 @@
+$('#catalog-products').append('<%= j render @products %>');
+$('.pagination').replaceWith('<%= escape_javascript will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');

@@ -83,6 +83,7 @@
     <hr>
 
       <div id="comment_table" class="comments">
+        <div id="comment-form" style="display:none;"></div>
         <% @product.comments.each do |comment| %>
             <%# Render table row partial for each person object %>
             <%= render partial: 'comments/comment', locals: {comment: comment} %>
