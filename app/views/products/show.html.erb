@@ -84,12 +84,16 @@
 
       <div id="comment_table" class="comments">
         <div id="comment-form" style="display:none;"></div>
-        <% @product.comments.each do |comment| %>
+        <% @comments.each do |comment| %>
             <%# Render table row partial for each person object %>
             <%= render partial: 'comments/comment', locals: {comment: comment} %>
         <% end %>
+
       </div>
 
+      <div id="infinite-scrolling-comments" class="row">
+        <%= will_paginate(@comments, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+      </div>
 
       <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
       <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>

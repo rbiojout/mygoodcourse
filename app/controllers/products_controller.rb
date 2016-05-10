@@ -136,6 +136,7 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @attachments = @product.attachments
+    @comments = @product.comments.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
   end
 
   # GET /products/new

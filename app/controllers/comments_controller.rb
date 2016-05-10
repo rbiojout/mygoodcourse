@@ -8,7 +8,12 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    if (params[:product_id].nil?)
+      @comments = Comment.all
+    else
+      @comments.product = Product.find(params[:product_id])
+    end
+    @comments = @comments.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
   end
 
   # GET /comments/1
