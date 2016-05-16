@@ -1,14 +1,21 @@
 <div class="row panel-group" id="accordion_family" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-primary">
+    <div class="panel-heading" role="tab" id="heading_family_0">
+      <h2 class="panel-title">
+        Categories
+      </h2>
+    </div>
+  </div>
 
   <% Family.all.each do |family| %>
       <% if family.categories.to_a.length > 0  %>
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading_family_<%=family.id%>">
-                <h5 class="panel-title">
+                <h2 class="panel-title">
                   <a role="button" data-toggle="collapse"  data-parent="#accordion_family" href="#collapse_family_<%=family.id%>" aria-expanded="false" aria-controls="collapse_family_<%=family.id%>">
                     <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i> <%=family.name%>
                   </a>
-                </h5>
+                </h2>
               </div>
               <div id="collapse_family_<%=family.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_family_<%=family.id%>">
                 <div class="panel-body">

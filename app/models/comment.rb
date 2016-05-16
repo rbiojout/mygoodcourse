@@ -15,6 +15,10 @@ class Comment < ActiveRecord::Base
   # @return Comment
   scope :find_by_product_customer, -> (product_id, customer_id) {where(:product_id => product_id, :customer_id => customer_id).order(updated_at: :desc).first}
 
+  # This search all the comments already relatted to the products for a particular customer_id
+  # @param customer_id [int] the id for the customer
+  # @return Comment
+  scope :find_for_all_product_of_customer, -> (customer_id) {joins(:product).where(products: {:customer_id => customer_id}).distinct  }
 
   private
 
@@ -26,6 +30,7 @@ class Comment < ActiveRecord::Base
     product.score_comments = score_comments
     product.save
   end
+
 
 
 end

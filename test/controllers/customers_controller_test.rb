@@ -53,9 +53,13 @@ class CustomersControllerTest < ActionController::TestCase
     assert_redirected_to customers_path
   end
 
+
   test "should not destroy customer with order" do
-    assert_raises (ActiveRecord::DeleteRestrictionError) do
-      delete :destroy, id: @customer
+    assert_difference('Customer.count', 0) do
+      delete :destroy, id: customers(:one)
     end
+
+    assert_redirected_to root_path
   end
+
 end

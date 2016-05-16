@@ -3,13 +3,15 @@
   <h3 class="media-heading"><%= customer.first_name %> <%= customer.name %></h3>
   <% #@TODO follow me %>
   <% if customer_signed_in? %>
+      <h5>
       <div class="follow_form" id="follow_form_<%= customer.id%>">
         <% if current_customer.following?(customer) %>
-            <h5><%= link_to("Unfollow", unfollow_peer_path(followed_id: customer.id), method: :delete, remote: true ) %></h5>
+            <%= link_to "Unfollow", unfollow_peer_path(followed_id: customer.id), method: :delete, remote: true %>
         <% else %>
-            <h5><%= link_to("Follow", follow_peer_path(followed_id: customer.id), remote: true ) %></h5>
+            <%= link_to "Follow", follow_peer_path(followed_id: customer.id), method: :post, remote: true  %>
         <% end %>
       </div>
+      </h5>
   <% end %>
 
   <%= customer.locality||' '+' ' %>

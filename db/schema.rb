@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160421065540) do
+ActiveRecord::Schema.define(version: 20160516203452) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,9 @@ ActiveRecord::Schema.define(version: 20160421065540) do
     t.string   "locality"
     t.decimal  "lat"
     t.decimal  "lng"
+    t.date     "birthdate"
+    t.decimal  "score_comments"
+    t.integer  "nb_comments"
   end
 
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
@@ -246,6 +249,18 @@ ActiveRecord::Schema.define(version: 20160421065540) do
 
   add_index "products", ["customer_id"], name: "index_products_on_customer_id", using: :btree
 
+  create_table "stripe_accounts", force: :cascade do |t|
+    t.integer "customer_id"
+    t.string  "publishable_key",       limit: 255
+    t.string  "secret_key",            limit: 255
+    t.string  "stripe_user_id",        limit: 255
+    t.string  "currency",              limit: 255
+    t.string  "stripe_account_type",   limit: 255
+    t.text    "stripe_account_status",             default: "{}"
+  end
+
+  add_index "stripe_accounts", ["customer_id"], name: "index_stripe_accounts_on_customer_id", using: :btree
+
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
   add_foreign_key "comments", "customers"
@@ -256,4 +271,5 @@ ActiveRecord::Schema.define(version: 20160421065540) do
   add_foreign_key "orders", "customers"
   add_foreign_key "payments", "orders"
   add_foreign_key "products", "customers"
+  add_foreign_key "stripe_accounts", "customers"
 end

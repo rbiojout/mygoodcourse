@@ -116,6 +116,20 @@ Rails.application.routes.draw do
   # root page
   root to: 'products#catalog'
 
+
+  # StripeAccount Connect endpoints
+  #  - oauth flow
+  get '/connect/oauth' => 'stripe_accounts#oauth', as: 'stripe_oauth'
+  get '/connect/confirm' => 'stripe_accounts#confirm', as: 'stripe_confirm'
+  get '/connect/deauthorize' => 'stripe_accounts#deauthorize', as: 'stripe_deauthorize'
+  #  - create accounts
+  post '/connect/managed' => 'stripe_accounts#managed', as: 'stripe_managed'
+  post '/connect/standalone' => 'stripe_accounts#standalone', as: 'stripe_standalone'
+
+  # StripeAccount webhooks
+  post '/hooks/stripe' => 'stripe_hooks#stripe'
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

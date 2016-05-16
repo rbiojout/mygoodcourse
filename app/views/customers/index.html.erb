@@ -10,6 +10,7 @@
       <th>Email</th>
       <th>Mobile</th>
       <th>Picture</th>
+      <th>Stripe</th>
       <th colspan="1"></th>
     </tr>
   </thead>
@@ -22,6 +23,7 @@
         <td><%= customer.email %></td>
         <td><%= customer.mobile %></td>
         <td><%= customer.picture %></td>
+        <td><%= customer.stripe_account %></td>
         <td>
           <div class="btn-group pull-right">
             <%= link_to 'Show', customer, class: "btn btn-default active" %>

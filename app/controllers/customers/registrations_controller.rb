@@ -38,6 +38,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   end
 
+  # redirect to a specific page
+  def after_sign_up_path_for(customers)
+    root_path
+    #'/an/example/path' # Or :prefix_to_your_route
+  end
 
   private
   # Use callbacks to share common setup or constraints between actions.
@@ -47,7 +52,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def customer_params
-    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :mobile, :picture, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
+    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :mobile, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
   end
 
 

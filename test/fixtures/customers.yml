@@ -42,6 +42,27 @@ customer_with_rejected_orders:
   mobile: +33663220909
   picture:
 
+stripe-managed:
+  name: StripeManaged
+  first_name: FirstName
+  email: StripeManaged@test.com
+  mobile: +33663220909
+  picture:
+
+stripe_standalone:
+  name: StripeStandalone
+  first_name: FirstName
+  email: StripeStandalone@test.com
+  mobile: +33663220909
+  picture:
+
+stripe_oauth:
+  name: StripeOauth
+  first_name: FirstName
+  email: StripeOauth@test.com
+  mobile: +33663220909
+  picture:
+
 
 JoeBloggs:
   first_name: Joe

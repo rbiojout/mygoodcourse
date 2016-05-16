@@ -2,6 +2,8 @@ class Product < ActiveRecord::Base
 
   # we want a name with a Capital
   before_save :capitalize_name
+  after_save :update_for_customer
+
 
   # we need at least one attachment
   has_many :attachments, dependent: :destroy
@@ -181,6 +183,16 @@ class Product < ActiveRecord::Base
       errors.add(:base, 'Attachment needed')
       return true
     end
+  end
+
+  # aggregate the score of comments for user
+  def update_for_customer
+    comments = Comment.find_for_all_product_of_customer(customer.id)
+    nb_comments = comments.size
+    score_comments = comments.average(:score)
+    customer.nb_comments = nb_comments
+    customer.score_comments = score_comments
+    customer.save
   end
 
 end

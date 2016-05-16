@@ -1,0 +1,30 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+managed:
+  customer: stripe_managed
+  publishable_key:
+  secret_key:
+  stripe_user_id:
+  currency:
+  stripe_account_type:
+  #stripe_account_status:
+
+standalone:
+  customer_id: customers(:stripe_standalone).id
+  publishable_key:
+  secret_key:
+  stripe_user_id:
+  currency:
+  stripe_account_type:
+  #stripe_account_status:
+
+oauth:
+  customer_id: customers(:stripe_oauth).id
+  publishable_key:
+  secret_key:
+  stripe_user_id:
+  currency:
+  stripe_account_type:
+  #stripe_account_status:
+
+

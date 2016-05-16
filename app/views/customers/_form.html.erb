@@ -4,11 +4,14 @@
     <%= f.error_notification %>
 
     <div class="form-group">
+      <% if @customer.new_record? %>
       <%= f.input :email, required: true, autofocus: true %>
       <%= f.input :password, required: true, hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
       <%= f.input :password_confirmation, required: true %>
+      <% end %>
       <%= f.input :name %>
       <%= f.input :first_name %>
+      <%= f.input :birthdate %>
       <%= f.input :mobile, as: :tel %>
 
       <%= f.input :picture, :as => :image_preview %>

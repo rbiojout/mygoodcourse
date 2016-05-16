@@ -39,6 +39,9 @@ class Customer < ActiveRecord::Base
            foreign_key: "followed_id",
            through:   :peers
 
+  # payment solution StripeAccount
+  has_one :stripe_account, dependent: :destroy
+
   # Follows a user.
   def follow(other_customer)
     peers.create(followed: other_customer)

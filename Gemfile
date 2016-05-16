@@ -100,12 +100,18 @@ gem 'jquery-fileupload-rails'
 # better work for nested forms
 gem 'cocoon'
 
+# use of Stripe as payment solution
+gem 'stripe'
+gem 'oauth2'
+
+
 # for Heroku
 gem 'rails_12factor', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  gem 'sqlite3'
 end
 
 group :development do
