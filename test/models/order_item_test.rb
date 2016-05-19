@@ -18,15 +18,17 @@ class OrderItemTest < ActiveSupport::TestCase
   end
 
 
+  # with VAT = TAX_RATE
+  # with commission_rate = COMMISSION_RATE
   test 'financials' do
-    assert_equal BigDecimal(120), @item.unit_price
-    assert_equal BigDecimal(100), @item.unit_price_without_tax
-    assert_equal ((1-COMMISSION_RATE/100)*120), @item.unit_cost_price
+    assert_equal BigDecimal(100), @item.unit_price
+    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), @item.unit_price_without_tax
+    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), @item.unit_cost_price
     assert_equal TAX_RATE, @item.tax_rate
-    assert_equal (TAX_RATE/100 * 100), @item.tax_amount
-    assert_equal ((1-COMMISSION_RATE/100)*120), @item.total_cost
-    assert_equal BigDecimal(120), @item.sub_total
-    assert_equal ((1 + TAX_RATE/100) * 100 ), @item.total
+    assert_equal 100*(TAX_RATE/100 * COMMISSION_RATE/100), @item.tax_amount
+    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), @item.total_cost
+    assert_equal BigDecimal(100), @item.sub_total
+    assert_equal (100), @item.total
   end
 
 

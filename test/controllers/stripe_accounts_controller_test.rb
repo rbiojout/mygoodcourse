@@ -12,8 +12,7 @@ class StripeAccountsControllerTest < ActionController::TestCase
   test "should test standalone" do
     sign_in :customer, @customer
     get :standalone
-    assert_response :success
-    assert_not_nil assigns(:customers)
+    assert_redirected_to customer_path(@customer)
   end
 
 

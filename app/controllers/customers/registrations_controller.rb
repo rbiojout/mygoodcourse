@@ -1,8 +1,8 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
-# before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
+  before_filter :configure_sign_up_params, only: [:create]
+  before_filter :configure_account_update_params, only: [:update]
 
-  before_action :set_customer, only: [:show, :edit, :update, :destroy]
+  before_action :set_customer, only: [:show, :edit, :update]
 
   def create
     #build_resource
@@ -44,17 +44,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     #'/an/example/path' # Or :prefix_to_your_route
   end
 
-  private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
-
-  # Never trust parameters from the scary internet, only allow the white list through.
-  def customer_params
-    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :mobile, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
-  end
-
 
 
 
@@ -79,9 +68,17 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    begin
+      resource.destroy
+    rescue
+      #@TODO check if customer if prevented from being deleted
+    end
+    Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
+    set_flash_message! :notice, :destroyed
+    yield resource if block_given?
+    respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
@@ -113,4 +110,17 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_customer
+    @customer = Customer.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def customer_params
+    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :mobile, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
+  end
+
+
 end

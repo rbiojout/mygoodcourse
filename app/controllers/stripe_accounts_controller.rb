@@ -31,7 +31,7 @@ class StripeAccountsController < ApplicationController
     else
       flash[:error] = "Unable to create StripeAccount account!"
     end
-    redirect_to customer_path( current_customer )
+    redirect_to customer_path(current_customer)
   end
 
   # Connect yourself to a StripeAccount account.

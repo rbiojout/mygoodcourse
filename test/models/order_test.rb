@@ -45,13 +45,14 @@ class OrderTest < ActiveSupport::TestCase
     item1 = order.order_items.create!(product: product1)
 
     # check all prices for the first item
-    assert_equal BigDecimal(120), item1.unit_price
-    assert_equal BigDecimal(100), item1.unit_price_without_tax
-    assert_equal ((1-COMMISSION_RATE/100)*120), item1.unit_cost_price
-    assert_equal (TAX_RATE/100 * 100), item1.tax_amount
+    assert_equal BigDecimal(100), item1.unit_price
+    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), item1.unit_price_without_tax
+    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item1.unit_cost_price
     assert_equal TAX_RATE, item1.tax_rate
-    assert_equal BigDecimal(120), item1.sub_total
-    assert_equal ((1 + TAX_RATE/100) * 100 ), item1.total
+    assert_equal BigDecimal(100*(TAX_RATE/100*COMMISSION_RATE/100)), item1.tax_amount
+    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item1.total_cost
+    assert_equal BigDecimal(100), item1.sub_total
+    assert_equal BigDecimal(100), item1.total
 
     # check that no item prices have been persisted
     assert_equal nil, item1.read_attribute(:unit_price)
@@ -60,10 +61,10 @@ class OrderTest < ActiveSupport::TestCase
     assert_equal nil, item1.read_attribute(:tax_rate)
 
     # check the order's totals are looking OK
-    assert_equal BigDecimal(120), order.items_sub_total
-    assert_equal BigDecimal(100), item1.unit_price_without_tax
-    assert_equal (TAX_RATE/100 * 100), order.tax
-    assert_equal ((1 + TAX_RATE/100) * 100 ), order.total
+    assert_equal BigDecimal(100), order.items_sub_total
+    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), item1.unit_price_without_tax
+    assert_equal BigDecimal(100*COMMISSION_RATE/100*TAX_RATE/100), order.tax
+    assert_equal BigDecimal(100), order.total
 
     # check the item totals are OK
     assert_equal 1, order.total_items
@@ -74,22 +75,23 @@ class OrderTest < ActiveSupport::TestCase
     item2 = order.order_items.create!(product: product2)
 
     # check all prices for the second item
-    assert_equal BigDecimal(240), item2.unit_price
-    assert_equal BigDecimal(200), item2.unit_price_without_tax
-    assert_equal ((1-COMMISSION_RATE/100)*240), item2.unit_cost_price
-    assert_equal (TAX_RATE/100 * 200), item2.tax_amount
+
+    assert_equal BigDecimal(200), item2.unit_price
+    assert_equal BigDecimal(200*(1-COMMISSION_RATE/100*TAX_RATE/100)), item2.unit_price_without_tax
+    assert_equal BigDecimal(200*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item2.unit_cost_price
+    assert_equal BigDecimal(200*(TAX_RATE/100*COMMISSION_RATE/100)), item2.tax_amount
     assert_equal TAX_RATE, item2.tax_rate
-    assert_equal BigDecimal(240), item2.sub_total
-    assert_equal ((1 + TAX_RATE/100) * 200 ), item2.total
+    assert_equal BigDecimal(200), item2.sub_total
+    assert_equal BigDecimal(200), item2.total
 
 
     # check item total again
     assert_equal 2, order.total_items
 
     # check order totals again
-    assert_equal BigDecimal(360), order.items_sub_total
-    assert_equal (TAX_RATE/100 * 300), order.tax
-    assert_equal ((1 + TAX_RATE/100) * 300 ), order.total
+    assert_equal BigDecimal(300), order.items_sub_total
+    assert_equal BigDecimal(300*(TAX_RATE/100 * COMMISSION_RATE/100)), order.tax
+    assert_equal BigDecimal(300), order.total
   end
 
 

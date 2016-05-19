@@ -54,28 +54,35 @@ class OrderItem < ActiveRecord::Base
 
 
   # The unit price for the item
-  #
+  # the price is for individual sellers, they don't pay the VAT
+  # the VAT is only paid by the marketplace on the commission
   # @return [BigDecimal]
   def unit_price
     read_attribute(:unit_price) || product.price || BigDecimal(0)
   end
 
   # The unit price for the item without tax
+  # VAT tax is only on the commission
+  # unit_price_without_tax = unit_price*( 1 - COMMISSION_RATE/100*TAX_RATE/100)
   #
   # @return [BigDecimal]
   def unit_price_without_tax
-    read_attribute(:unit_price) || product.price / (1+ TAX_RATE/BigDecimal(100)) || BigDecimal(0)
+    read_attribute(:unit_price_without_tax) || product.price*(1-COMMISSION_RATE/100*TAX_RATE/100) || BigDecimal(0)
   end
 
-  # The cost price for the item
+
+  # The cost price for the item meaning the part for the seller
   # based on the price without tax and the commission rate
+  # the VAT is only on the commission
+  # unit_cost_price = unit_price(1 - COMMISSION_RATE/100*(1 + TAX_RATE/100) )
   #
   # @return [BigDecimal]
   def unit_cost_price
-    read_attribute(:cost_price) || ((1-COMMISSION_RATE/100) * unit_price) || BigDecimal(0)
+    read_attribute(:cost_price) || unit_price*(1-COMMISSION_RATE/100*(1+TAX_RATE/100)) || BigDecimal(0)
   end
 
   # The tax rate for the item
+  # the VAT is only on the commission
   #
   # @return [BigDecimal]
   def tax_rate
@@ -84,15 +91,16 @@ class OrderItem < ActiveRecord::Base
 
   # The total tax for the item
   # sub_total = amount with taxes
-  # sub_total_without_tax = sub_total /( 1 + tax_rate/100)
-  # tax_amout = sub_total - sub_total_without_tax = sub_total * (tax_rate( 100 + tax_rate) )
+  # sub_total_without_tax = sub_total ( 1 - COMMISSION_RATE/100 * tax_rate/100)
+  # tax_amout = sub_total - sub_total_without_tax = sub_total * (COMMISSION_RATE/100 * tax_rate/100) )
   #
   # @return [BigDecimal]
   def tax_amount
-    read_attribute(:tax_amount) || (sub_total * tax_rate / (BigDecimal(100) +tax_rate))
+    read_attribute(:tax_amount) || (sub_total * (COMMISSION_RATE/100) * (tax_rate/100))
   end
 
   # The total cost for the product
+  # excluding VAT
   #
   # @return [BigDecimal]
   def total_cost
@@ -101,6 +109,7 @@ class OrderItem < ActiveRecord::Base
   end
 
   # The sub total for the product
+  # including commission and VAT
   #
   # @return [BigDecimal]
   def sub_total
@@ -108,7 +117,7 @@ class OrderItem < ActiveRecord::Base
     unit_price
   end
 
-  # The total price including tax for the order line
+  # The total price including tax for the order line and the commission
   #
   # @return [BigDecimal]
   def total

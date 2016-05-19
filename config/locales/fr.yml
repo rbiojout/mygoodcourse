@@ -1,0 +1,120 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+fr:
+  hello: "Bonjour à tous"
+  page:
+    title:
+      catalog: 'Catalogue'
+      my_products: 'Mes Produits'
+      my_orders: 'Mes Commandes'
+
+  activerecord:
+    models:
+      customer: 'client'
+      product: 'produit'
+      attachment: 'document'
+      comment: 'commentaire'
+      category: 'catégorie'
+      country: 'pays'
+      cycle: 'cycle'
+      family: 'famille'
+      level: 'niveau'
+      order: 'commande'
+    attributes:
+      customer:
+        name: 'Nom'
+        first_name: 'Prénom'
+        mobile: 'Téléphone portable'
+        picture: 'Image'
+        email: 'Email'
+        password: 'Mot de passe'
+        password_confirmation: 'Confirmation du mot de passe'
+        current_password: 'Mot de passe actuel'
+        formatted_address: 'Adresse complète'
+        street_address: 'Adresse'
+        administrative_area_level_1: 'Ville'
+        administrative_area_level_2: 'Agglomération'
+        postal_code: 'Code Postal'
+        locality: 'Ville'
+        birthdate: 'Date de naissance'
+      product:
+        name: 'Nom'
+        description: 'Description'
+        short_description: 'Courte description'
+        active: 'Actif'
+        price: 'Prix'
+        nb_comments: 'Nombre de commentaires'
+        score_comments: 'Score moyen des commentaires'
+      attachment:
+        title: 'Titre'
+        description: 'Description'
+      comment:
+        title: 'Titre'
+        description: 'Description'
+        score: 'Score'
+      category:
+        name: 'Nom'
+        description: 'Description'
+        position: 'Position'
+      country:
+        name: 'Nom'
+        continent: 'Continent'
+        currency: 'Monnaie'
+      cycle:
+        name: 'Nom'
+        description: 'Description'
+        position: 'Position'
+      family:
+        name: 'Nom'
+        description: 'Description'
+        position: 'Position'
+      level:
+        name: 'Nom'
+        description: 'Description'
+        position: 'Position'
+      order:
+        status: 'Etat'
+        received_at: 'Reçu le'
+        accepted_at: 'Acceptée le'
+        consignement_number: 'Numéro de consigne'
+        rejected_at: 'Refusée le'
+        rejected_by: 'Refusée par'
+        ip_address: 'Adresse IP'
+        amount_paid: 'Montant payé'
+        esported: 'Exportée'
+        incoice_number: 'Numéro de facture'
+
+
+  order_mailer:
+    received:
+      subject: 'Order Confirmation'
+      accepted: 'Order Accepted'
+      rejected: 'Order Rejected'
+
+  time:
+    formats:
+      short: "%D"
+    new: 'Nouveau'
+    recent: 'Récent'
+
+
+

@@ -54,7 +54,7 @@ priced_one:
   short_description: product1
   active: true
   featured: true
-  price: 120.00
+  price: 100.00
   customer: one
 
 priced_two:
@@ -65,7 +65,7 @@ priced_two:
   short_description: Product2
   active: true
   featured: true
-  price: 240.00
+  price: 200.00
   customer: two
 
 

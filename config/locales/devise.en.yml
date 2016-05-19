@@ -2,6 +2,20 @@
 
 en:
   devise:
+    page:
+      sign_up: "Sign up"
+      log_in: "Log in"
+      forgot_password: "Forgot your password?"
+      resend_instruction: "Didn't receive confirmation instructions?"
+      unlock_instruction: "Didn't receive unlock instructions?"
+      sign_in_with: "Sign in with"
+      edit_my_account: "Edit my account"
+      update_my_account: "Update my account"
+      sign_out: "Sign out"
+      cancel_account: "Cancel my account"
+    infos:
+      blank: "leave blank if you don't want to change it"
+      password_needed: "We need your current password to confirm your changes"
     confirmations:
       confirmed: "Your email address has been successfully confirmed."
       send_instructions: "You will receive an email with instructions for how to confirm your email address in a few minutes."
