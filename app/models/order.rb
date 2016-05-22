@@ -5,11 +5,14 @@ class Order < ActiveRecord::Base
 
   self.table_name = 'orders'
 
+  # virtual attribute
+  attr_accessor :stripe_customer_token
 
   # Require dependencies
   require_dependency 'order/states'
   require_dependency 'order/actions'
   require_dependency 'order/billing'
+  require_dependency 'order/stripe_order'
   #require_dependency 'shoppe/order/delivery'
 
 

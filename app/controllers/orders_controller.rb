@@ -103,9 +103,16 @@ class OrdersController < ApplicationController
 
   def payment
     @order = Order.find(current_order.id)
-    if request.patch?
-      redirect_to checkout_confirmation_path
+    if request.post?
+      if @order.accept_stripe_token(params[:stripe_token])
+        redirect_to checkout_confirmation_path
+      else
+        flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+      end
     end
+    #if request.patch?
+    #  redirect_to checkout_confirmation_path
+    #end
   end
 
   def confirmation
@@ -117,12 +124,16 @@ class OrdersController < ApplicationController
     # validate card infos
     #@TODO use validation of card
 
+
     #if request.patch?
       begin
+        current_order.accept_stripe_token(params[:stripeToken])
         current_order.confirm!
         # This payment method should usually be called in a payment module or elsewhere but for the demo
         # we are adding a payment to the order straight away.
-        current_order.payments.create(:amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
+        # charge = ::Stripe::Charge.create({ customer: current_order.stripe_customer_token, amount: (current_order.total * BigDecimal(100)).round, currency: 'EUR', capture: false }, Rails.application.secrets.stripe_secret_key)
+
+        #current_order.payments.create(:amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
         session[:order_id] = nil
         # save the amount paid
         current_order.amount_paid = current_order.total

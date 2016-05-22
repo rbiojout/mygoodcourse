@@ -16,6 +16,24 @@ class Order < ActiveRecord::Base
     true
   end
 
+  # we try to charge to Stripe before to confirm
+  before_confirmation do
+    if self.stripe_customer_token && total > 0.0
+      begin
+        charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (total * BigDecimal(100)).round, currency: 'EUR', capture: true }, Rails.application.secrets.stripe_secret_key)
+        # @TODO add method stripe in the list of methods for payment
+        # @TODO add a split of payments to the owner and to the platform
+        # if the user is managed, send money else keep and schedule when possible
+        payments.create(:amount => total, :reference => charge.id, :refundable => true, confirmed: true)
+
+        #payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
+      rescue ::Stripe::CardError
+        raise Errors::PaymentDeclined, 'Payment was declined by the payment processor.'
+      end
+    end
+  end
+
+
   # This method should be executed by the application when the order should be completed
   # by the customer. It will raise exceptions if anything goes wrong or return true if
   # the order has been confirmed successfully
@@ -42,7 +60,7 @@ class Order < ActiveRecord::Base
 
   # Mark order as accepted
   #
-  # @param user [Shoppe::User] the user who carried out this action
+  # @param user [User] the user who carried out this action
   def accept!(user = nil)
     run_callbacks :acceptance do
       self.accepted_at = Time.now
