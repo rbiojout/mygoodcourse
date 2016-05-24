@@ -19,12 +19,32 @@ class Order < ActiveRecord::Base
   # we try to charge to Stripe before to confirm
   before_confirmation do
     if self.stripe_customer_token && total > 0.0
+      not_charged_to_sellers = 0.0
+      ref_charges = ""
       begin
-        charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (total * BigDecimal(100)).round, currency: 'EUR', capture: true }, Rails.application.secrets.stripe_secret_key)
+        self.order_items.each do |order_item|
+          product_price = order_item.unit_price
+          application_fee = order_item.application_fee
+          share_seller = order_item.unit_cost_price
+          stripe_account_seller = order_item.product.customer.stripe_account
+          if (stripe_account_seller.nil?)
+            not_charged_to_sellers += product_price
+          else
+            charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (product_price * BigDecimal(100)).round, currency: 'EUR', capture: true, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee * BigDecimal(100)).round }, Rails.application.secrets.stripe_secret_key)
+            ref_charges += charge.id + "-"
+          end
+        end
+
+        if not_charged_to_sellers > 0.0
+          charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (not_charged_to_sellers * BigDecimal(100)).round, currency: 'EUR', capture: true }, Rails.application.secrets.stripe_secret_key)
+          ref_charges += charge.id
+        end
         # @TODO add method stripe in the list of methods for payment
         # @TODO add a split of payments to the owner and to the platform
         # if the user is managed, send money else keep and schedule when possible
-        payments.create(:amount => total, :reference => charge.id, :refundable => true, confirmed: true)
+        payments.create(:amount => total, :reference => ref_charges, :refundable => true, confirmed: true)
+
+
 
         #payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
       rescue ::Stripe::CardError

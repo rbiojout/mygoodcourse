@@ -1,6 +1,21 @@
 $(function() {
-    var $form = $('#payment-form');
+    $('[data-numeric]').payment('restrictNumeric');
+    $('.cc-number').payment('formatCardNumber');
+    $('.cc-exp').payment('formatCardExpiry');
+    $('.cc-cvc').payment('formatCardCVC');
+
+    $.fn.toggleInputError = function(erred) {
+        this.parent('.form-group').toggleClass('has-error', erred);
+        return this;
+    };
+
+
+    var $form = $('#stripe-form');
     $form.submit(function(event) {
+        event.preventDefault();
+
+        var cardType = $.payment.cardType($('.cc-number').val());
+        $('.cc-number').toggleInputError(!$.payment.validateCardNumber($('.cc-number').val()));
         // Disable the submit button to prevent repeated clicks:
         $form.find('.submit').prop('disabled', true);
 
@@ -14,7 +29,7 @@ $(function() {
 
 function stripeResponseHandler(status, response) {
     // Grab the form:
-    var $form = $('#payment-form');
+    var $form = $('#stripe-form');
 
     if (response.error) { // Problem!
 
@@ -34,3 +49,4 @@ function stripeResponseHandler(status, response) {
         $form.get(0).submit();
     }
 };
+

@@ -1,0 +1,50 @@
+.has-error input {
+  border-width: 2px;
+}
+.validation.text-danger:after {
+  content: 'Validation failed';
+}
+.validation.text-success:after {
+  content: 'Validation passed';
+}
+
+
+.icon-secure,
+.cc-num__wrap {
+  position: relative;
+}
+
+.card {
+  position: absolute;
+  display: block;
+  align: right;
+  right: 0.375em;
+  top: 50%;
+  margin-top: -10px;
+  width: 28px;
+  height: 19px;
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/card.svg') center center;
+  background-size: 100%;
+}
+
+.cc-num.visa + .card {
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/visa.png') no-repeat center center;
+}
+
+.cc-num.amex + .card {
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/amex.png') no-repeat center center;
+}
+
+.cc-num.mastercard + .card {
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/mastercard.png') no-repeat center center;
+}
+
+.cc-num.diners + .card {
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/diners.png') no-repeat center center;
+}
+
+.cc-num.discover + .card {
+  background: url('https://d2fz1tzabfzgo4.cloudfront.net/demos/cards/discover.png') no-repeat center center;
+}
+
+

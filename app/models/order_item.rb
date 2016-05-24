@@ -81,6 +81,15 @@ class OrderItem < ActiveRecord::Base
     read_attribute(:cost_price) || unit_price*(1-COMMISSION_RATE/100*(1+TAX_RATE/100)) || BigDecimal(0)
   end
 
+  # The application fee for the platfom
+  # based on the unit cost price deducted from the unit price
+  # application_fee = unit_price - unit_cost_price
+  #
+  # @return [BigDecimal]
+  def application_fee
+    unit_price - unit_cost_price || BigDecimal(0)
+  end
+
   # The tax rate for the item
   # the VAT is only on the commission
   #
