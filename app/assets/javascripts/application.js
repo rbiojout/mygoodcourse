@@ -21,7 +21,6 @@
 //= require jquery-fileupload/vendor/tmpl
 //= require bootstrap-sprockets
 //= require moment
-//= require trix
 //= require cocoon
 //= require jquery.geocomplete
 //= require underscore
