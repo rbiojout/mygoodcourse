@@ -1,3 +1,8 @@
+$ ->
+  $('[data-provider="summernote"]').each ->
+    $(this).summernote()
+
+
 @paintIt = (element, backgroundColor, textColor) ->
   element.style.backgroundColor = backgroundColor
   if textColor?

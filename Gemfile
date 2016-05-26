@@ -61,8 +61,10 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 4.2.0'
 
 # add a WISIWYG HTML editor for bootstrap
-# gem 'bootstrap-wysihtml5-rails'
-gem 'trix'
+gem 'bootstrap-wysihtml5-rails'
+# gem 'trix'
+# gem 'summernote-rails'
+
 
 # add datetime picker with bootstrap
 #gem 'bootstrap-datepicker-rails'

@@ -22,11 +22,15 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require cocoon
+//= require summernote
+// require bootstrap-treenav
+//= require bootstrap-wysihtml5
+//= require bootstrap-wysihtml5/locales
+// require trix
 //= require jquery.geocomplete
 //= require underscore
 //= require gmaps/google
 //= require turbolinks
-//= require bootstrap-treenav
 //= require_tree .
 
 

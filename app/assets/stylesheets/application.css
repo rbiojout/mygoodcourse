@@ -12,7 +12,9 @@
  *
  *= require_tree .
  *= require jquery-ui/sortable
- *= require trix
+ * require trix
+ *= require bootstrap-wysihtml5
+ *= require summernote
  *= require_self
  */
 
