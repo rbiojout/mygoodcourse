@@ -21,11 +21,11 @@ class ProductsController < ApplicationController
     #@products = @products.status(params[:status]) if params[:status].present?
 
     # Get the parameters
-    family_id = params[:family_id] || session[:family_for_products_id]
-    category_id = params[:category_id] || session[:category_for_products_id]
+    family_id = params[:family_id] || session[:family_for_products_id] || "0"
+    category_id = params[:category_id] || session[:category_for_products_id] || "0"
 
-    cycle_id = params[:cycle_id] || session[:cycle_for_products_id]
-    level_id = params[:level_id] || session[:level_for_products_id]
+    cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || "0"
+    level_id = params[:level_id] || session[:level_for_products_id] || "0"
 
     logger.debug("===> parameters received #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
@@ -120,6 +120,12 @@ class ProductsController < ApplicationController
       end
     end
 
+    # add the corresponding families, categories, cycles and levels
+    @families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
+    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
+    @cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
+    @levels = Level.associated_to_families_categories(family_id, category_id, true)
+    
     logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
     #logger.debug("===> #{sort_column} / #{sort_direction}")

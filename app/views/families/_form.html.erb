@@ -6,7 +6,7 @@
   <%= f.error_notification %>
 
     <%= f.input :name %>
-    <%= f.trix_editor :description %>
+    <%= f.input :description, as: 'text' %>
     <h3>Category</h3>
 
     <div id="categories_sortable" class="sortable" data-update-url="<%= sort_categories_url %>">

@@ -57,13 +57,32 @@ class Product < ActiveRecord::Base
   # All featured products
   scope :featured, -> { where(featured: true) }
 
+  # only active
+  scope :active, ->{ where(active: true)}
+
   # Can be an array of values
   scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id}).distinct}
   scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id}).distinct}
 
+  def self.count_active_for_family(family_id)
+    Product.joins(:families).where(families: {id: family_id}).where(active: true).count
+  end
+
+  def self.count_active_for_category(category_id)
+    Product.joins(:categories).where(categories: {id: category_id}).where(active: true).count
+  end
+
   # Can be an array of values
   scope :for_cycle, -> (cycle_id) {joins(:cycles).where(cycles: {id: cycle_id}).distinct}
   scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id}).distinct}
+
+  def self.count_active_for_cycle(cycle_id)
+    Product.joins(:cycles).where(cycles: {id: cycle_id}).where(active: true).count
+  end
+
+  def self.count_active_for_level(category_id)
+    Product.joins(:levels).where(levels: {id: level_id}).count
+  end
 
   # Return all product linked to a category
   # not filtering on active state

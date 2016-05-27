@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.trix_editor :description %>
+    <%= f.input :description, as: 'text' %>
     <%= f.input :position, as: :hidden %>
 
     <h3>Levels</h3>
