@@ -29,9 +29,9 @@ class Family < ActiveRecord::Base
       unless level_id == "0"
         # we filter at the Levels level
         if active
-          Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true})
+          Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true}).distinct
         else
-          Family.joins(products: :levels).where(levels: {id: level_id})
+          Family.joins(products: :levels).where(levels: {id: level_id}).distinct
         end
       # special case no filter
       else
@@ -44,9 +44,9 @@ class Family < ActiveRecord::Base
     else
       # we filter at the Cycles level
       if active
-        Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true})
+        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
       else
-        Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id})
+        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).distinct
       end
     end
   end

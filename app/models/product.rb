@@ -65,11 +65,42 @@ class Product < ActiveRecord::Base
   scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id}).distinct}
 
   def self.count_active_for_family(family_id)
-    Product.joins(:families).where(families: {id: family_id}).where(active: true).count
+    Product.joins(:families).where(families: {id: family_id}).where(active: true).distinct.count
+  end
+
+  def self.count_active_filtered_for_family(family_id, cycle_id, level_id)
+    # use low level if present
+    unless level_id.nil?
+      Product.joins(:families).joins(levels: :cycle).where(families: {id: family_id}).where(levels: {id: level_id}).where(active: true).distinct.count unless level_id.to_s =="0"
+      # use parent else
+    else
+      unless cycle_id.nil?
+        Product.joins(:families).joins(levels: :cycle).where(families: {id: family_id}).where(cycles: {id: cycle_id}).where(active: true).distinct.count unless cycle_id.to_s =="0"
+        # query all
+      else
+        Product.joins(:families).joins(levels: :cycle).where(families: {id: family_id}).distinct.count
+      end
+    end
   end
 
   def self.count_active_for_category(category_id)
-    Product.joins(:categories).where(categories: {id: category_id}).where(active: true).count
+    Product.joins(:categories).where(categories: {id: category_id}).where(active: true).distinct.count
+  end
+
+  def self.count_active_filtered_for_category(category_id, cycle_id, level_id)
+    # use low level if present
+    unless level_id.nil?
+      Product.joins(:families).joins(levels: :cycle).where(categories: {id: category_id}).where(levels: {id: level_id}).where(active: true).distinct.count unless level_id.to_s =="0"
+      # use parent else
+    else
+      unless cycle_id.nil?
+        Product.joins(:families).joins(levels: :cycle).where(categories: {id: category_id}).where(cycles: {id: cycle_id}).where(active: true).distinct.count unless cycle_id.to_s =="0"
+        # query all
+      else
+        Product.joins(:families).joins(levels: :cycle).where(categories: {id: category_id}).distinct.count
+      end
+    end
+
   end
 
   # Can be an array of values
@@ -77,11 +108,41 @@ class Product < ActiveRecord::Base
   scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id}).distinct}
 
   def self.count_active_for_cycle(cycle_id)
-    Product.joins(:cycles).where(cycles: {id: cycle_id}).where(active: true).count
+    Product.joins(:cycles).where(cycles: {id: cycle_id}).where(active: true).distinct.count
   end
 
-  def self.count_active_for_level(category_id)
-    Product.joins(:levels).where(levels: {id: level_id}).count
+  def self.count_active_filtered_for_cycle(cycle_id, family_id, category_id)
+    # use low level if present
+    unless category_id.nil?
+      Product.joins(:cycles).joins(categories: :family).where(cycles: {id: cycle_id}).where(categories: {id: category_id}).where(active: true).distinct.count unless category_id.to_s =="0"
+    # use parent else
+    else
+      unless family_id.nil?
+        Product.joins(:cycles).joins(categories: :family).where(cycles: {id: cycle_id}).where(families: {id: family_id}).where(active: true).distinct.count unless family_id.to_s =="0"
+      # query all
+      else
+        Product.joins(:cycles).joins(categories: :family).where(cycles: {id: cycle_id}).where(active: true).distinct.count
+      end
+    end
+  end
+
+  def self.count_active_for_level(level_id)
+    Product.joins(:levels).where(levels: {id: level_id}).distinct.count
+  end
+
+  def self.count_active_filtered_for_level(level_id, family_id, category_id)
+    # use low level if present
+    unless category_id.nil?
+      Product.joins(:levels).joins(categories: :family).where(levels: {id: level_id}).where(categories: {id: category_id}).where(active: true).distinct.count unless category_id.to_s =="0"
+      # use parent else
+    else
+      unless family_id.nil?
+        Product.joins(:levels).joins(categories: :family).where(levels: {id: level_id}).where(families: {id: family_id}).where(active: true).distinct.count unless family_id.to_s =="0"
+        # query all
+      else
+        Product.joins(:levels).joins(categories: :family).where(levels: {id: level_id}).where(active: true).distinct.count
+      end
+    end
   end
 
   # Return all product linked to a category

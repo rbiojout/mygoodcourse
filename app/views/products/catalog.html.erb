@@ -8,6 +8,7 @@
 
 <!-- Page Content -->
 
+
 <!-- carousel -->
 <div class="row">
   <div id="carousel-products" class="carousel slide" data-ride="carousel">
@@ -87,111 +88,6 @@
       </div>
 
 
-
-
-      <!-- Family and Category -->
-      <div class="list-group" id="accordion_family" role="tablist" aria-multiselectable="true" >
-        <div class="list-group-item">
-          <%= link_to 'All families', catalog_products_path(:family_id => 0), class:"btn #{ (session[:family_for_products_id].nil?)? 'btn-primary' : 'btn-default'}" %>
-        </div>
-
-        <% Family.with_products.each do |fam| %>
-            <% if (session[:family_for_products_id]||%w[]).include? fam.id.to_s
-                 family_active = true
-               end %>
-            <div class="list-group-item">
-              <div  role="tab" id="heading_family<%=fam.id%>">
-
-                <% if family_active %>
-                    <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-primary" %>
-                    <a role="button" data-toggle="collapse" data-parent="#accordion_family" href="#collapse_family<%=fam.id%>" aria-expanded="true" aria-controls="collapse_family<%=fam.id%>">
-                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                    </a>
-                <% else %>
-                    <%= link_to "#{fam.name}", catalog_products_path(:family_id => fam.id), class: "btn btn-default" %>
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_family" href="#collapse_family<%=fam.id%>" aria-expanded="false" aria-controls="collapse_family<%=fam.id%>">
-                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                    </a>
-                <% end %>
-
-              </div>
-              <div id="collapse_family<%=fam.id%>" class="panel-collapse collapse <%="in" if family_active%>" role="tabpanel" aria-labelledby="heading_family<%=fam.id%>">
-                <div class="panel-body">
-                  <ul class="list-unstyled">
-                  <% Category.with_products_for_family(fam.id).each do |cat| %>
-                      <% if  (session[:category_for_products_id]||%w[]).include? cat.id.to_s
-                           category_active = true
-                         end %>
-                          <li><%= link_to catalog_products_path(:category_id => cat.id) do %><i class="fa fa-square<%='-o' unless category_active %>" aria-hidden="true"></i> <%=cat.name %><% end %></li>
-                  <% end %>
-                  </ul>
-                </div>
-              </div>
-            </div>
-        <% end %>
-      </div>
-      <!--  end of Family and Category -->
-
-      <!-- Cycle and Level -->
-      <div class="list-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
-        <div class="list-group-item">
-          <%= link_to 'All Cycles', catalog_products_path(:cycle_id => 0), class:"btn  #{(session[:cycle_for_products_id].nil?)? 'btn-primary' : 'btn-default'}" %>
-        </div>
-
-        <% Cycle.with_products.each do |cycle| %>
-            <% if (session[:cycle_for_products_id]||%w[]).include? cycle.id.to_s
-                 cycle_active = true
-               end %>
-            <div class="list-group-item">
-              <div  role="tab" id="heading_cycle<%=cycle.id%>">
-
-                <% if cycle_active %>
-                    <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-primary" %>
-                    <a role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="true" aria-controls="collapse_cycle<%=cycle.id%>">
-                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                    </a>
-                <% else %>
-                    <%= link_to "#{cycle.name}", catalog_products_path(:cycle_id => cycle.id), class: "btn btn-default" %>
-                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion_cycle" href="#collapse_cycle<%=cycle.id%>" aria-expanded="false" aria-controls="collapse_cycle<%=cycle.id%>">
-                      <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i>
-                    </a>
-                <% end %>
-
-              </div>
-              <div id="collapse_cycle<%=cycle.id%>" class="panel-collapse collapse <%="in" if cycle_active%>" role="tabpanel" aria-labelledby="heading<%=cycle.id%>">
-                <div class="panel-body">
-                  <ul class="list-unstyled">
-                    <% Level.with_products_for_cycle(cycle.id).each do |level| %>
-                        <% if  (session[:level_for_products_id]||%w[]).include? level.id.to_s
-                             level_active = true
-                           end %>
-                        <li><%= link_to catalog_products_path(:level_id => level.id) do%><i class="fa fa-square<%='-o' unless level_active %>" aria-hidden="true"></i> <%=level.name %><% end %></li>
-                    <% end %>
-                  </ul>
-                </div>
-              </div>
-            </div>
-        <% end %>
-      </div>
-      <!--  end of Cycle and Level -->
-
-
-      <ul class="nav nav-pills nav-stacked">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
-        <li><i class="fa fa-square-o" aria-hidden="true"> </i> open</li>
-        <li><i class="fa fa-square" aria-hidden="true"> </i> close</li>
-
-        <li role="presentation"><a href="#">Profile</a></li>
-        <li role="presentation"><a href="#">Messages</a></li>
-      </ul>
-
-
-      <div class="btn-group " role="group" aria-label="...">
-        <button type="button" class="btn btn-default">Left</button>
-        <button type="button" class="btn btn-default">Right very long dimension</button>
-      </div>
-
-
       <!--- Family and Category --->
       <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
@@ -200,18 +96,21 @@
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked category-menu">
             <li <%= "#{ 'class=active' if session[:family_for_products_id].nil? }"%> ><%= link_to 'All families', catalog_products_path(:family_id => 0) %></li>
-            <% Family.with_products.each do |fam| %>
+            <% @families.each do |fam| %>
                 <% family_active = (fam.id.to_s == session[:family_for_products_id].to_s)? true:false %>
-                <li <%= "#{ 'class=active' if family_active }"%> > <%= link_to catalog_products_path(:family_id => fam.id) do %><%= fam.name %> <span class="badge pull-right"><%= Product.count_active_for_family(fam.id)%></span><% end %>
+                <li <%= "#{ 'class=active' if family_active }"%> > <%= link_to catalog_products_path(:family_id => fam.id) do %><%= fam.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_family(fam.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
                   <ul>
-                    <% Category.with_products_for_family(fam.id).each do |cat| %>
-                        <li>
-                          <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><% end %>
-                          <% if (cat.id.to_s == session[:category_for_products_id].to_s) %>
-                              <span class="badge pull-right"><%= Product.count_active_for_category(cat.id)%></span>
-                          <% end %>
-                        </li>
-                    <% end %>
+                    <% fam.categories.each do |cat| %>
+                        <% if @categories.include?(cat)%>
+                            <li>
+                              <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><% end %>
+                              <% if (cat.id.to_s == session[:category_for_products_id].to_s) %>
+                              SELECTED
+                              <% end %>
+                              <b>(<%= Product.count_active_filtered_for_category(cat.id, @cycles.map(&:id), @levels.map(&:id))%>)</b>
+                            </li>
+                        <% end %>
+                    <%   end %>
                   </ul>
                 </li>
             <% end %>
@@ -228,17 +127,19 @@
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked category-menu">
             <li <%= "#{ 'class=active' if session[:cycle_for_products_id].nil? }"%> ><%= link_to 'All cycles', catalog_products_path(:cycle_id => 0) %></li>
-            <% Cycle.with_products.each do |cyc| %>
+            <% @cycles.each do |cyc| %>
                 <% cycle_active = (cyc.id.to_s == session[:cycle_for_products_id].to_s)? true:false %>
-                <li <%= "#{ 'class=active' if cycle_active }"%> > <%= link_to catalog_products_path(:cycle_id => cyc.id) do %><%= cyc.name %> <span class="badge pull-right"><%= Product.count_active_for_cycle(cyc.id)%></span><% end %>
+                <li <%= "#{ 'class=active' if cycle_active }"%> > <%= link_to catalog_products_path(:cycle_id => cyc.id) do %><%= cyc.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_cycle(cyc.id, @families.map(&:id), @categories.map(&:id))%></span><% end %>
                   <ul>
-                    <% Level.with_products_for_cycle(cyc.id).each do |lev| %>
-                        <li>
-                          <%= link_to catalog_products_path(:level_id => lev.id) do %><%=lev.name %><% end %>
-                          <% if (lev.id.to_s == session[:level_for_products_id].to_s) %>
-                              <span class="badge pull-right"><%= Product.count_active_for_level(lev.id)%></span>
-                          <% end %>
-                        </li>
+                    <% cyc.levels.each do |lev| %>
+                        <% if @levels.include?(lev) %>
+                            <li>
+                              <%= link_to catalog_products_path(:level_id => lev.id) do %><%=lev.name %><% end %>
+                              <% if (lev.id.to_s == session[:level_for_products_id].to_s) %> SELECTED
+                              <% end %>
+                              <b>(<%= Product.count_active_filtered_for_level(lev.id, @families.map(&:id), @categories.map(&:id))%>)</b>
+                            </li>
+                        <% end %>
                     <% end %>
                   </ul>
                 </li>

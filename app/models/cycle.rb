@@ -31,9 +31,9 @@ class Cycle < ActiveRecord::Base
       unless category_id == "0"
         # we filter at the Categories level
         if active
-          Cycle.joins(products: :categories).where(categories: {id: category_id}).where(products: {active: true})
+          Cycle.joins(products: :categories).where(categories: {id: category_id}).where(products: {active: true}).distinct
         else
-          Cycle.joins(products: :categories).where(categories: {id: category_id})
+          Cycle.joins(products: :categories).where(categories: {id: category_id}).distinct
         end
       # special case no filter
       else
@@ -46,9 +46,9 @@ class Cycle < ActiveRecord::Base
     else
       # we filter at the Families level
       if active
-        Cycle.joins(products: [{ categories: :family }]).where(families: {id: family_id}).where(products: {active: true})
+        Cycle.joins(products: [{ categories: :family }]).where(families: {id: family_id}).where(products: {active: true}).distinct
       else
-        Cycle.joins(products: [{ categories: :family }]).where(families: {id: family_id})
+        Cycle.joins(products: [{ categories: :family }]).where(families: {id: family_id}).distinct
       end
     end
   end

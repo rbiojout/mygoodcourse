@@ -9,3 +9,9 @@ two:
   name: Cycle2
   description: MyString
   position: 2
+
+C1:
+  name: C1
+
+C2:
+  name: C2

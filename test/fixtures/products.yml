@@ -68,5 +68,54 @@ priced_two:
   price: 200.00
   customer: two
 
+ProdF1C1_C1L1:
+  name: ProdF1C1_C1L1
+  sku:
+  permalink:
+  description: ProdC1L1
+  short_description: ProdC1L1
+  active: true
+  featured: true
+  price: 200.00
+  customer: one
+  categories: F1C1
+  levels: C1L1
 
+ProdF1C2_C1L2:
+  name: ProdF1C2_C1L2
+  sku:
+  permalink:
+  description: ProdC2L2
+  short_description: ProdC2L2
+  active: true
+  featured: true
+  price: 200.00
+  customer: one
+  categories: F1C2
+  levels: C1L2
 
+ProdF2C1_C2L1:
+  name: ProdF2C1_C2L1
+  sku:
+  permalink:
+  description: ProdC3L3
+  short_description: ProdC3L3
+  active: true
+  featured: true
+  price: 200.00
+  customer: one
+  categories: F2C1
+  levels: C2L1
+
+ProdF2C2_C2L2:
+  name: ProdF2C2_C2L2
+  sku:
+  permalink:
+  description: ProdC4L4
+  short_description: ProdC4L4
+  active: true
+  featured: true
+  price: 200.00
+  customer: one
+  categories: F2C2
+  levels: C2L2

@@ -9,3 +9,19 @@ two:
   name: Category2
   description: MyString
   family: two
+
+F1C1:
+  name: F1C1
+  family: F1
+
+F1C2:
+  name: F1C2
+  family: F1
+
+F2C1:
+  name: F2C1
+  family: F2
+
+F2C1:
+  name: F2C2
+  family: F2

@@ -30,9 +30,9 @@ class Level < ActiveRecord::Base
       unless category_id == "0"
         # we filter at the Categories level
         if active
-          Level.joins(products: :categories).where(categories: {id: category_id}).where(products: {active: true})
+          Level.joins(products: :categories).where(categories: {id: category_id}).where(products: {active: true}).distinct
         else
-          Level.joins(products: :categories).where(categories: {id: category_id})
+          Level.joins(products: :categories).where(categories: {id: category_id}).distinct
         end
       # special case no filter
       else
@@ -45,9 +45,9 @@ class Level < ActiveRecord::Base
     else
       # we filter at the Families level
       if active
-        Level.joins(products: [{ categories: :family }]).where(families: {id: family_id}).where(products: {active: true})
+        Level.joins(products: [{ categories: :family }]).where(families: {id: family_id}).where(products: {active: true}).distinct
       else
-        Level.joins(products: [{ categories: :family }]).where(families: {id: family_id})
+        Level.joins(products: [{ categories: :family }]).where(families: {id: family_id}).distinct
       end
     end
   end

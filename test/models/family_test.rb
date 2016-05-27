@@ -15,8 +15,13 @@ class FamilyTest < ActiveSupport::TestCase
   end
 
   test "should filter by level" do
-    families = Family.associated_to_cycles_levels(nil, levels(:one), false)
+    families = Family.associated_to_cycles_levels(nil, levels(:C1L1), false)
     assert_not_equal families.count, 0
+    assert products(:ProdF1C1_C1L1).levels.include?(levels(:C1L1))
+    assert products(:ProdF1C1_C1L1).families.include?(families(:F1))
+    assert families.include?(families(:F1))
+    assert Product.find_by_level(levels(:C1L1).id).include?(products(:ProdF1C1_C1L1))
+
   end
 
   test "should filter by levels" do
@@ -38,6 +43,10 @@ class FamilyTest < ActiveSupport::TestCase
   test "should filter by cycles" do
     families = Family.associated_to_cycles_levels(Cycle.all, nil, false)
     assert_not_equal families.count, 0
+    assert products(:ProdF1C1_C1L1).cycles.include?(cycles(:C1))
+    assert products(:ProdF1C1_C1L1).families.include?(families(:F1))
+    assert families.include?(families(:F1))
+    assert Product.find_by_category(categories(:F1C1).id).include?(products(:ProdF1C1_C1L1))
   end
 
   test "should filter active by cycles" do

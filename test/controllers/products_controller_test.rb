@@ -39,7 +39,7 @@ class ProductsControllerTest < ActionController::TestCase
   test "should filter catalog by categories" do
     get :catalog, :category_id => [categories(:one).id.to_s, categories(:two).id.to_s]
     assert_equal session[:category_for_products_id], [categories(:one).id.to_s, categories(:two).id.to_s]
-    assert_equal session[:family_for_products_id], [categories(:one).family_id, categories(:two).family_id].to_s
+    assert_equal session[:family_for_products_id].to_s, [categories(:one).family_id, categories(:two).family_id].to_s
     assert_response :success
     assert_not_nil assigns(:products)
   end
@@ -47,7 +47,7 @@ class ProductsControllerTest < ActionController::TestCase
   test "should filter catalog by category" do
     get :catalog, :category_id => (categories(:one))
     assert_equal session[:category_for_products_id], categories(:one).id.to_s
-    assert_equal session[:family_for_products_id], [categories(:one).family_id].to_s
+    assert_equal session[:family_for_products_id], [categories(:one).family_id]
     assert_response :success
     assert_not_nil assigns(:products)
   end

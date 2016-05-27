@@ -15,8 +15,12 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "should filter by level" do
-    categories = Category.associated_to_cycles_levels(nil, levels(:one), false)
+    categories = Category.associated_to_cycles_levels(nil, levels(:C1L1), false)
     assert_not_equal categories.count, 0
+    assert products(:ProdF1C1_C1L1).levels.include?(levels(:C1L1))
+    assert products(:ProdF1C1_C1L1).categories.include?(categories(:F1C1))
+    assert categories.include?(categories(:F1C1))
+    assert Product.find_by_level(levels(:C1L1).id).include?(products(:ProdF1C1_C1L1))
   end
 
   test "should filter by levels" do
@@ -30,8 +34,12 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "should filter by cycle" do
-    categories = Category.associated_to_cycles_levels(cycles(:one), nil, false)
+    categories = Category.associated_to_cycles_levels(cycles(:C1), nil, false)
     assert_not_equal categories.count, 0
+    assert products(:ProdF1C1_C1L1).cycles.include?(cycles(:C1))
+    assert products(:ProdF1C1_C1L1).categories.include?(categories(:F1C1))
+    assert categories.include?(categories(:F1C1))
+    assert Product.find_by_category(categories(:F1C1).id).include?(products(:ProdF1C1_C1L1))
   end
 
 

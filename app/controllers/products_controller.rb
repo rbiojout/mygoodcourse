@@ -17,15 +17,16 @@ class ProductsController < ApplicationController
   def catalog
     # filter only on active products
     @products = Product.active # creates an anonymous scope
+    logger.debug("===> active products #{@products.count}")
 
     #@products = @products.status(params[:status]) if params[:status].present?
 
     # Get the parameters
-    family_id = params[:family_id] || session[:family_for_products_id] || "0"
-    category_id = params[:category_id] || session[:category_for_products_id] || "0"
+    family_id = params[:family_id] || session[:family_for_products_id]
+    category_id = params[:category_id] || session[:category_for_products_id]
 
-    cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || "0"
-    level_id = params[:level_id] || session[:level_for_products_id] || "0"
+    cycle_id = params[:cycle_id] || session[:cycle_for_products_id]
+    level_id = params[:level_id] || session[:level_for_products_id]
 
     logger.debug("===> parameters received #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
@@ -36,7 +37,7 @@ class ProductsController < ApplicationController
     unless params[:family_id].nil?
       if family_id.to_s == "0"
         session[:family_for_products_id] = nil
-        family_id =nil
+        family_id = nil
       end
       session[:category_for_products_id] = nil
       category_id = nil
@@ -51,7 +52,7 @@ class ProductsController < ApplicationController
       else
         session[:category_for_products_id] = category_id
         #family_id = Category.find(category_id).family_id
-        family_id = Category.where(id: category_id).pluck(:family_id).to_s
+        family_id = Category.where(id: category_id).pluck(:family_id)
         session[:family_for_products_id] = family_id
       end
     end
@@ -77,59 +78,80 @@ class ProductsController < ApplicationController
       else
         session[:level_for_products_id] = level_id
         #cycle_id = Level.find(level_id).cycle_id
-        cycle_id = Level.where(id: level_id).pluck(:cycle_id).to_s
+        cycle_id = Level.where(id: level_id).pluck(:cycle_id)
         session[:cycle_for_products_id] = cycle_id
       end
     end
 
     logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
+    # add the corresponding families, categories, cycles and levels
+    @families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
+    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
     # filter for Family and Category
     # show the most detailed level of information
     unless family_id.nil?
-      unless category_id.nil?
+      unless category_id.nil? && category_id.to_s != "0"
         @products = @products.for_category(category_id)
+        @categories = [Category.find_by(id: category_id)]
+        @families = [@categories.first.family]
         # store the category in session
         session[:category_for_products_id] = category_id
         # store the family in session
         session[:family_for_products_id] = family_id
         #logger.debug("===> products by category #{category_id}")
-      else
-        @products = @products.for_family(family_id)
-        # store the family in session
-        session[:family_for_products_id] = family_id
-        #logger.debug("===> products by family")
+      else if family_id.to_s != "0"
+          @products = @products.for_family(family_id)
+          # store the family in session
+          session[:family_for_products_id] = family_id
+          #logger.debug("===> products by family")
+          selected_family = Family.find_by(id: family_id)
+          @families = [selected_family]
+           @categories = selected_family.categories
+         end
       end
     end
+
+    # add the corresponding families, categories, cycles and levels
+    @cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
+    @levels = Level.associated_to_families_categories(family_id, category_id, true)
 
     # filter for Cycle and Level
     # show the most detailed level of information
     unless cycle_id.nil?
-      unless level_id.nil?
+      unless level_id.nil? && level_id.to_s != "0"
         @products = @products.for_level(level_id)
         # store the level in session
         session[:level_for_products_id] = level_id
         # store the cycle in session
         session[:cycle_for_products_id] = cycle_id
         #logger.debug("===> products by level")
-      else
-        @products = @products.for_cycle(cycle_id)
-        # store the cycle in session
-        session[:cycle_for_products_id] = cycle_id
-        #logger.debug("===> products by cycle")
+        @levels = [Level.find_by(id: level_id)]
+        @cycles = [@levels.first.cycle]
+      else if cycle_id.to_s != "0"
+          @products = @products.for_cycle(cycle_id)
+          # store the cycle in session
+          session[:cycle_for_products_id] = cycle_id
+          #logger.debug("===> products by cycle")
+          selected_cycle = Cycle.find_by(id: cycle_id)
+          @cycles = [selected_cycle]
+          @levels = selected_cycle.levels
+          end
       end
     end
 
     # add the corresponding families, categories, cycles and levels
-    @families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
-    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
-    @cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
-    @levels = Level.associated_to_families_categories(family_id, category_id, true)
-    
+    #@families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
+    #@categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
+    #@cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
+    #@levels = Level.associated_to_families_categories(family_id, category_id, true)
+
     logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
     #logger.debug("===> #{sort_column} / #{sort_direction}")
     @products = @products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+
+    logger.debug("===> active products #{@products.count}")
 
   end
 

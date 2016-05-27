@@ -30,9 +30,9 @@ class Category < ActiveRecord::Base
       unless level_id == "0"
         # we filter at the Levels level
         if active
-          Category.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true})
+          Category.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true}).distinct
         else
-          Category.joins(products: :levels).where(levels: {id: level_id})
+          Category.joins(products: :levels).where(levels: {id: level_id}).distinct
         end
         # special case no filter
       else
@@ -45,9 +45,9 @@ class Category < ActiveRecord::Base
   else
       # we filter at the Cycles level
       if active
-        Category.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true})
+        Category.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
       else
-        Category.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id})
+        Category.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).distinct
       end
     end
   end
