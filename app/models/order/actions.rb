@@ -21,6 +21,8 @@ class Order < ActiveRecord::Base
     if self.stripe_customer_token && total > 0.0
       not_charged_to_sellers = 0.0
       ref_charges = ""
+      # group by seller
+      group_by_seller = self.order_items.group_by{ |d| Product.find(d[:product_id])[:customer_id]}
       begin
         self.order_items.each do |order_item|
           product_price = order_item.unit_price
@@ -42,7 +44,7 @@ class Order < ActiveRecord::Base
         # @TODO add method stripe in the list of methods for payment
         # @TODO add a split of payments to the owner and to the platform
         # if the user is managed, send money else keep and schedule when possible
-        payments.create(:amount => total, :reference => ref_charges, :refundable => true, confirmed: true)
+        payments.create(:amount => total, :method => 'stripe', :reference => ref_charges, :refundable => true, confirmed: true)
 
 
 
