@@ -13,7 +13,7 @@ class StripeManaged < Struct.new( :customer )
     return nil unless country.in?( COUNTRIES.map { |c| c[:code] } )
 
     begin
-      @account = StripeAccount::Account.create(
+      @account = Stripe::Account.create(
         managed: true,
         country: country,
         email: customer.email,
@@ -120,7 +120,7 @@ class StripeManaged < Struct.new( :customer )
   end
 
   def account
-    @account ||= StripeAccount::Account.retrieve( user.stripe_user_id )
+    @account ||= Stripe::Account.retrieve( user.stripe_user_id )
   end
 
 end

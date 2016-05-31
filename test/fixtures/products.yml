@@ -24,6 +24,72 @@ two:
   price: 9.99
   customer: two
 
+free_from_seller_one:
+  name: Free from Seller One
+  sku:
+  permalink:
+  description: Free from Seller One
+  short_description: Free from Seller One
+  active: true
+  featured: true
+  price: 0.00
+  customer: seller_one
+
+one_from_seller_one:
+  name: One from Seller One
+  sku:
+  permalink:
+  description: One from Seller One
+  short_description: One from Seller One
+  active: true
+  featured: true
+  price: 4.99
+  customer: seller_one
+
+two_from_seller_one:
+  name: Two from Seller One
+  sku:
+  permalink:
+  description: Two from Seller One
+  short_description: Two from Seller One
+  active: true
+  featured: true
+  price: 9.99
+  customer: seller_one
+
+free_from_seller_two:
+  name: Free from Seller Two
+  sku:
+  permalink:
+  description: Free from Seller Two
+  short_description: Free from Seller Two
+  active: true
+  featured: true
+  price: 0.00
+  customer: seller_two
+
+one_from_seller_two:
+  name: One from Seller Two
+  sku:
+  permalink:
+  description: One from Seller Two
+  short_description: One from Seller Two
+  active: true
+  featured: true
+  price: 4.99
+  customer: seller_two
+
+two_from_seller_two:
+  name: Two from Seller Two
+  sku:
+  permalink:
+  description: Two from Seller Two
+  short_description: Two from Seller Two
+  active: true
+  featured: true
+  price: 9.99
+  customer: seller_two
+
 product_without_orders:
   name: Product_without_orders
   sku:

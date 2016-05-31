@@ -20,13 +20,13 @@ class StripeHooksController < ApplicationController
     # Retrieve the event from StripeAccount so that we can be
     # sure it wasn't spoofed/faked by someone being mean.
     begin
-      event = StripeAccount::Event.retrieve( *args )
-    rescue StripeAccount::InvalidRequestError
+      event = Stripe::Event.retrieve( *args )
+    rescue Stripe::InvalidRequestError
       # The event doesn't exist for some reason... this might
       # happen if you've got other apps maybe?
       render nothing: true, status: 200
       return
-    rescue StripeAccount::AuthenticationError
+    rescue Stripe::AuthenticationError
       # If we get an authentication error, and the event belongs to
       # a user, that means the account deauthorized
       # our application. We can't look up and verify the event

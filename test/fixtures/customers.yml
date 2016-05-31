@@ -28,6 +28,22 @@ seller_two:
   mobile: +33663220909
   picture:
 
+buyer_one:
+  name: Buyer1
+  first_name: FirstName
+  email: buyer1@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
+  mobile: +33663220909
+  picture:
+
+buyer_two:
+  name: Buyer2
+  first_name: FirstName
+  email: buyer2@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
+  mobile: +33663220909
+  picture:
+
 customer_without_orders:
   name: CustomerWithoutdOrders
   first_name: FirstName3

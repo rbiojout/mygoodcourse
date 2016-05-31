@@ -88,6 +88,8 @@ class OrdersController < ApplicationController
     redirect_to @order, flash: { notice: 'shoppe.orders.ship_notice' }
   end
 
+  # GET /checkout
+  # PATCH /checkout
   def checkout
     current_order.customer = current_customer
 
@@ -101,6 +103,8 @@ class OrdersController < ApplicationController
     @order = current_order
   end
 
+  # GET /checkout/pay
+  # PATCH /checkout/pay
   def payment
     @order = Order.find(current_order.id)
     if request.post?
@@ -115,6 +119,8 @@ class OrdersController < ApplicationController
     #end
   end
 
+  # GET /checkout/confirm
+  # PATCH /checkout/confirm
   def confirmation
     unless current_order.confirming?
       redirect_to checkout_path
@@ -142,6 +148,7 @@ class OrdersController < ApplicationController
         redirect_to root_path, :notice => "Order has been accepted!"
       rescue  => e
         flash[:alert] = "Payment was declined by the bank. #{e.message}"
+        logger.debug("Payment was declined by the bank. #{e.message}")
         # save the state from the payment module as rejected
         current_order.reject!(current_customer)
         redirect_to checkout_path

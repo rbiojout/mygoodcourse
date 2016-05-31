@@ -108,4 +108,11 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
+  test "should buy" do
+    assert_difference('OrderItem.count',1) do
+      post :add_to_basket, product_id: products(:one)
+    end
+    assert_redirected_to catalog_products_path
+  end
+
 end

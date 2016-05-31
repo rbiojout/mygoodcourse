@@ -12,12 +12,13 @@ class StripeStandalone < Struct.new( :customer )
     return nil unless country.in?( COUNTRIES.map { |c| c[:code] } )
 
     begin
-      @account = StripeAccount::Account.create(
+      @account = Stripe::Account.create(
         email: customer.email,
         managed: false,
         country: country
       )
-    rescue
+    rescue Exception => exc
+      puts ("Message for the log file #{exc.message}")
       nil # TODO: improve
     end
 
@@ -47,7 +48,7 @@ class StripeStandalone < Struct.new( :customer )
   end
 
   def account
-    @account ||= StripeAccount::Account.retrieve( customer.stripe_account )
+    @account ||= Stripe::Account.retrieve( customer.stripe_account )
   end
 
 end

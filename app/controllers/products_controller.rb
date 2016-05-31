@@ -220,6 +220,8 @@ class ProductsController < ApplicationController
     end
   end
 
+  # POST /buy_product
+  # POST /buy_product json
   def add_to_basket
     # @TODO check if already paid in another transaction
       product_to_order = Product.find(params[:product_id])

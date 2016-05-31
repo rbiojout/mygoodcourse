@@ -145,3 +145,5 @@ https://richonrails.com/articles/building-a-shopping-cart-in-ruby-on-rails
 https://richonrails.com/articles/credit-card-processing-with-active-merchant
 https://www.youtube.com/watch?v=jTTSt2R_QDc
 
+Be careful to add the locales in the URI list (comma separated list in stripe)
+

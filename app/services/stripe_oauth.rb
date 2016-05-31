@@ -21,9 +21,7 @@ class StripeOauth < Struct.new( :customer )
         physical_product: 'false',
         product_category: 'education',
         product_description: '',
-        average_payment: '10',
-
-
+        average_payment: '10'
       }
     }.merge( params ) )
 
@@ -46,10 +44,11 @@ class StripeOauth < Struct.new( :customer )
 
         # The application is configured incorrectly and
         # does not have the right Redirect URI
+        # @TODO update URL
         when 'invalid_redirect_uri'
           return nil, <<-EOF
             Redirect URI is not setup correctly.
-            Please see the <a href='#{Rails.configuration.github_url}/blob/master/README.markdown' target='_blank'>README</a>.
+            Please see the <a href='https://github.com/rfunduk/rails-stripe-connect-example/blob/master/README.markdown' target='_blank'>README</a>.
           EOF
 
         # Something else horrible happened? Network is down,
@@ -126,7 +125,7 @@ class StripeOauth < Struct.new( :customer )
   # All transactions will use this currency.
   def default_currency
     begin
-      StripeAccount::Account.retrieve( customer.stripe_account.stripe_user_id, user.secret_key ).default_currency
+      Stripe::Account.retrieve( customer.stripe_account.stripe_user_id, user.secret_key ).default_currency
     rescue
       'EUR'
     end

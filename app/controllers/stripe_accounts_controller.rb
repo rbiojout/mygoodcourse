@@ -40,7 +40,9 @@ class StripeAccountsController < ApplicationController
   def oauth
     connector = StripeOauth.new( current_customer )
 
-    logger.debug("===> #{stripe_confirm_url}")
+    logger.debug(connector);
+
+    #logger.debug("===> #{stripe_confirm_url}")
 
     url, error = connector.oauth_url( redirect_uri: stripe_confirm_url )
 

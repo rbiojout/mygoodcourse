@@ -4,7 +4,7 @@
 
 <%= link_to 'Stripe oauth', stripe_oauth_path %> |
 
-<%= link_to 'Stripe', stripe_standalone_path, :method => :post %> |
+<%= link_to 'Stripe', stripe_standalone_path(:country => 'FR'), :method => :post %> |
 
 <%= link_to 'Show', @customer %> |
 <%= link_to 'Back', customers_path %>

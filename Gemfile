@@ -107,11 +107,16 @@ gem 'cocoon'
 gem 'stripe'
 gem 'oauth2'
 
-gem 'puma'
 
 # for Heroku
 group :production do
   gem 'rails_12factor'
+  gem 'puma'
+end
+
+group :test do
+  gem 'capybara'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
@@ -119,6 +124,7 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
 end
+
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
