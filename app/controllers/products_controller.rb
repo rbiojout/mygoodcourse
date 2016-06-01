@@ -269,12 +269,12 @@ class ProductsController < ApplicationController
       #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
       if params[:product][:attachments_attributes].nil?
         #@product.attachments.build
-        flash[:error] = "You need to provide an attachment"
+        flash[:alert] = "You need to provide an attachment"
         #redirect_to product_path
         logger.debug "no attachment"
       else if (params[:product][:attachments_attributes].size == 1 && params[:product][:attachments_attributes].first[1][:_destroy] == 'true')
              params[:product][:attachments_attributes].first[1][:_destroy] = 'false'
-         flash[:error] = "You need to provide an attachment"
+         flash[:alert] = "You need to provide an attachment"
          #redirect_to product_path
        end
 

@@ -14,7 +14,7 @@ class StripeAccountsController < ApplicationController
     if account
       flash[:notice] = "Managed StripeAccount account created! <a target='_blank' rel='platform-account' href='https://dashboard.stripe.com/test/applications/users/#{account.id}'>View in dashboard &raquo;</a>"
     else
-      flash[:error] = "Unable to create StripeAccount account!"
+      flash[:alert] = "Unable to create StripeAccount account!"
     end
     redirect_to customer_path( current_customer )
   end
@@ -29,7 +29,7 @@ class StripeAccountsController < ApplicationController
     if account
       flash[:notice] = "Standalone StripeAccount account created! <a target='_blank' rel='platform-account' href='https://dashboard.stripe.com/test/applications/users/#{account.id}'>View in dashboard &raquo;</a>"
     else
-      flash[:error] = "Unable to create StripeAccount account!"
+      flash[:alert] = "Unable to create StripeAccount account!"
     end
     redirect_to customer_path(current_customer)
   end
@@ -47,7 +47,7 @@ class StripeAccountsController < ApplicationController
     url, error = connector.oauth_url( redirect_uri: stripe_confirm_url )
 
     if url.nil?
-      flash[:error] = error
+      flash[:alert] = error
       redirect_to customer_path( current_customer )
     else
       redirect_to url
@@ -68,7 +68,7 @@ class StripeAccountsController < ApplicationController
       # If we have an 'error' parameter, it's because the
       # user denied the connection request. Other errors
       # are handled at #oauth_url generation time.
-      flash[:error] = "Authorization request denied."
+      flash[:alert] = "Authorization request denied."
     end
 
     redirect_to customer_path( current_customer )
