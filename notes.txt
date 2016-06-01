@@ -147,3 +147,6 @@ https://www.youtube.com/watch?v=jTTSt2R_QDc
 
 Be careful to add the locales in the URI list (comma separated list in stripe)
 
+set variables on HEROKU https://devcenter.heroku.com/articles/config-vars
+
+
