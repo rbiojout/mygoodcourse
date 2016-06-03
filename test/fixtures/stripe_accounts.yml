@@ -10,7 +10,7 @@ managed:
   #stripe_account_status:
 
 standalone:
-  customer_id: customers(:stripe_standalone).id
+  customer: stripe_standalone
   publishable_key:
   secret_key:
   stripe_user_id:
@@ -19,7 +19,7 @@ standalone:
   #stripe_account_status:
 
 oauth:
-  customer_id: customers(:stripe_oauth).id
+  customer: stripe_oauth
   publishable_key:
   secret_key:
   stripe_user_id:
@@ -27,4 +27,34 @@ oauth:
   stripe_account_type:
   #stripe_account_status:
 
+buyer_one:
+  customer: buyer_one
+  publishable_key: pk_test_jT0NleQttIPvNijtjBrAw2d0
+  secret_key: sk_test_OdK1w73i68c6Om7SaFFxlD84
+  stripe_user_id: acct_18HqYaCGqkxiuwPU
+  currency: EUR
+  stripe_account_type: oauth
 
+buyer_two:
+  customer: buyer_two
+  publishable_key: pk_test_7jSbOpt9Zjy3Zfyau2jOPkaS
+  secret_key: sk_test_Y8dj3lTC1Z2S0lrhY4zkcV4s
+  stripe_user_id: acct_18HqffENZT83VZnp
+  currency: EUR
+  stripe_account_type: oauth
+
+seller_one:
+  customer: seller_one
+  publishable_key: pk_test_lSxuV8ejXtCgI0emOLkJ8DPE
+  secret_key: sk_test_xDUSokBgfQT3y5XmxbE50DiS
+  stripe_user_id: acct_18HqlHCSYSTWoUFr
+  currency: EUR
+  stripe_account_type: oauth
+
+seller_two:
+  customer: seller_two
+  publishable_key: pk_test_u6V8tmeH14HXTJmPfzXCAhuc
+  secret_key: sk_test_eUsxWIy5aJ73O05WavKEIsvN
+  stripe_user_id: acct_18HqqCDjPM1YLmZj
+  currency: EUR
+  stripe_account_type: oauth
