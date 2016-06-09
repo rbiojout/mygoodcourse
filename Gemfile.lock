@@ -224,6 +224,7 @@ GEM
     globalid (0.3.6)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
+    grim (1.2.0)
     groupdate (3.0.0)
       activesupport (>= 3)
     haml (4.0.7)
@@ -412,6 +413,7 @@ DEPENDENCIES
   fullcalendar-rails
   geocoder
   gmaps4rails
+  grim
   groupdate
   haml
   jbuilder (~> 2.0)

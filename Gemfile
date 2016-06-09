@@ -92,7 +92,8 @@ gem 'carrierwave'
 # gem 'mini_magick'
 gem 'rmagick'
 # grim help to make preview from pdf
-# gem 'grim'
+gem 'grim'
+# store in the cloud, in particular AWS
 gem 'fog'
 
 # handle file upload with javascript, in particular for progress bar

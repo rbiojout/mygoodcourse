@@ -41,15 +41,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   #   process :resize_to_fit => [50, 50]
   # end
 
-  version :preview do
-    process :convert => :png
-    process :resize_to_limit => [350,350]
-    process :set_content_type => 'image/png'
 
-    def full_filename (for_file = model.preview.file)
-      super.chomp(File.extname(super)) + '.png'
-    end
-  end
 
   def convert_to_reduced(height, width)
     image = ::Magick::Image.read(current_path + "[0]")[0]

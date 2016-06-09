@@ -1,4 +1,5 @@
 class Attachment < ActiveRecord::Base
+
   #attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active
   belongs_to :product
 
@@ -21,8 +22,10 @@ class Attachment < ActiveRecord::Base
       # count the number of pages for the pdf with ImageMagic identity
 
       #image = MiniMagick::Image.open(file.file.file)
-      image = ::Magick::Image.read(file.file.file)
-      self.nbpages = image.count
+      # this method is to slow we use Grim instead
+      #pdf = ::Magick::Image.read(file.file.file)
+      pdf   = Grim.reap(file.file.file)
+      self.nbpages = pdf.count
       #image.identify do |b|
       # b.format '%n'
       #end
