@@ -1,4 +1,9 @@
 class Product < ActiveRecord::Base
+  include PgSearch
+
+  multisearchable :against => [:name, :description, :short_description]
+
+  pg_search_scope :search_by_text, :against => [:name, :description, :short_description], :ignoring => :accents
 
   # we want a name with a Capital
   before_save :capitalize_name

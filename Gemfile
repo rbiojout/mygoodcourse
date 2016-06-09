@@ -8,6 +8,9 @@ gem 'rails', '4.2.3'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
+# add some search with PostGres
+gem 'pg_search'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets

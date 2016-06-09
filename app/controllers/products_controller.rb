@@ -16,7 +16,20 @@ class ProductsController < ApplicationController
   # GET /catalog
   def catalog
     # filter only on active products
-    @products = Product.active # creates an anonymous scope
+    query = params[:query]
+
+    if query.blank?
+      @products = Product.active # creates an anonymous scope
+    else
+      @products = Product.search_by_text(query)
+      if @products.count == 0
+        @products = Product.active
+      end
+      flash[:notice] = "searching for #{query}"
+    end
+
+
+
     logger.debug("===> active products #{@products.count}")
 
     #@products = @products.status(params[:status]) if params[:status].present?
