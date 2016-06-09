@@ -19,8 +19,10 @@ class Attachment < ActiveRecord::Base
       self.file_type = file.file.content_type
       self.file_size = file.file.size
       # count the number of pages for the pdf with ImageMagic identity
-      image = MiniMagick::Image.open(file.file.file)
-      self.nbpages = image.identify.lines.count
+
+      #image = MiniMagick::Image.open(file.file.file)
+      image = ::Magick::Image.read(file.file.file)
+      self.nbpages = image.count
       #image.identify do |b|
       # b.format '%n'
       #end

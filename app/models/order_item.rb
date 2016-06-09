@@ -42,7 +42,7 @@ class OrderItem < ActiveRecord::Base
         if existing = where(product_id: product.id).first
           existing
         else
-          new_item = create(product: product, price: product.price || 0.00 , tax_rate: TAX_RATE, tax_amount: ((product.price || 0.00 )*(TAX_RATE/100))  )
+          new_item = create(product: product, price: product.price || 0.00 , tax_rate: TAX_RATE, tax_amount: ((product.price|| 0.00) * (COMMISSION_RATE/100) * (TAX_RATE/100))   )
           new_item
         end
       end

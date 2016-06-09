@@ -60,7 +60,7 @@ Rails.application.routes.draw do
   resources :customers do
     post 'attach_picture'
     member do
-      get :followeds, :followers
+      get :followeds, :followers, :dashboard
     end
   end
 

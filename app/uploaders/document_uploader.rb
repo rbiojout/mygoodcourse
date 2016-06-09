@@ -3,13 +3,14 @@
 class DocumentUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
-  #include CarrierWave::RMagick
+  include CarrierWave::RMagick
   include CarrierWave::MimeTypes
-  include CarrierWave::MiniMagick
+  #include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  # storage :file
   # storage :fog
+  storage (Rails.env.production? ? :fog : :file)
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -48,6 +49,27 @@ class DocumentUploader < CarrierWave::Uploader::Base
     def full_filename (for_file = model.preview.file)
       super.chomp(File.extname(super)) + '.png'
     end
+  end
+
+  def convert_to_reduced(height, width)
+    image = ::Magick::Image.read(current_path + "[0]")[0]
+    image.resize_to_fit(height,width).write(current_path)
+  end
+
+  version :preview do
+    process :convert_to_reduced => [350, 350]
+    process :convert => :png
+    process :set_content_type
+
+    def full_filename (for_file = model.source.file)
+      super.chomp(File.extname(super)) + '.png'
+    end
+  end
+
+
+
+  def set_content_type(*args)
+    self.file.instance_variable_set(:@content_type, "image/png")
   end
 
 

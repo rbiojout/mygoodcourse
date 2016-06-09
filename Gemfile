@@ -89,10 +89,11 @@ gem "country_select"
 # upload images
 gem 'carrierwave'
 # handle image manipulation
-gem 'mini_magick'
-#gem 'rmagick'
+# gem 'mini_magick'
+gem 'rmagick'
 # grim help to make preview from pdf
 # gem 'grim'
+gem 'fog'
 
 # handle file upload with javascript, in particular for progress bar
 gem 'jquery-fileupload-rails'
@@ -106,6 +107,10 @@ gem 'cocoon'
 # use of Stripe as payment solution
 gem 'stripe'
 gem 'oauth2'
+
+# add some graphing tools
+gem "chartkick"
+gem 'groupdate'
 
 
 # for Heroku

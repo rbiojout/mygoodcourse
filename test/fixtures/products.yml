@@ -8,7 +8,7 @@ one:
   short_description: product1
   active: true
   featured: true
-  price: 9.99
+  price: 10.00
   customer: one
   levels: one
   categories: one
@@ -21,7 +21,7 @@ two:
   short_description: Product2
   active: true
   featured: true
-  price: 9.99
+  price: 10.00
   customer: two
 
 free_from_seller_one:
@@ -43,7 +43,7 @@ one_from_seller_one:
   short_description: One from Seller One
   active: true
   featured: true
-  price: 4.99
+  price: 5.00
   customer: seller_one
 
 two_from_seller_one:
@@ -54,7 +54,7 @@ two_from_seller_one:
   short_description: Two from Seller One
   active: true
   featured: true
-  price: 9.99
+  price: 10.00
   customer: seller_one
 
 free_from_seller_two:
@@ -76,7 +76,7 @@ one_from_seller_two:
   short_description: One from Seller Two
   active: true
   featured: true
-  price: 4.99
+  price: 5.00
   customer: seller_two
 
 two_from_seller_two:
@@ -87,7 +87,7 @@ two_from_seller_two:
   short_description: Two from Seller Two
   active: true
   featured: true
-  price: 9.99
+  price: 10.00
   customer: seller_two
 
 product_without_orders:

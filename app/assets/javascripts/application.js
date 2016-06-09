@@ -29,6 +29,8 @@
 // require trix
 //= require jquery.geocomplete
 //= require underscore
+//= require Chart.bundle
+//= require chartkick
 //= require gmaps/google
 //= require turbolinks
 //= require_tree .

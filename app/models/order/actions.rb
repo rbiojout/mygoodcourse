@@ -22,6 +22,7 @@ class Order < ActiveRecord::Base
   # if the seller has not Stripe account we don't process and mark the status "received"
   # if the validation is OK, we mark the Order_items with the confirmation number from stripe and the status "accepted"
   # else we mark with the status "rejected"
+  # @TODO handle the FREE products too
   before_confirmation do
     if self.stripe_customer_token && total > 0.0
       not_charged_to_sellers = 0.0
@@ -131,7 +132,8 @@ class Order < ActiveRecord::Base
     if (stripe_account_seller.nil?)
       notes += "StripeAccount null for some items."
       #we charge all to the platform
-      charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', capture: true }, Rails.application.secrets.stripe_secret_key)
+      # @TODO handle exception to continue treat other charges
+      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, capture: true }, Rails.application.secrets.stripe_secret_key)
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
         roi.method = "Stripe"
@@ -156,7 +158,7 @@ class Order < ActiveRecord::Base
     else
       # we charge to the seller
       # @TODO if the OAuth is no more valid we must handle this and use the platform
-      charge = ::Stripe::Charge.create({ customer: self.stripe_customer_token, amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', capture: true, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round }, Rails.application.secrets.stripe_secret_key)
+      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round, capture: true }, Rails.application.secrets.stripe_secret_key)
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
         roi.method = "Stripe"
