@@ -17,7 +17,7 @@ class Family < ActiveRecord::Base
 
 
   # we look for the objects associated in case of a query
-  def self.associated_to_products(query)
+  def self.associated_to_query(query)
     if query.blank?
       Family.all
     else
@@ -29,7 +29,7 @@ class Family < ActiveRecord::Base
   # @cycle_id : list of cycles, default to "0"
   # @level_id : list of levels, default to "0"
   # @active : flag for only active, default to false
-  def self.associated_to_cycles_levels(cycle_id, level_id, query, active)
+  def self.associated_to_cycles_levels(cycle_id, level_id, active)
     cycle_id ||= "0"
     level_id ||= "0"
     active ||=false
@@ -38,66 +38,24 @@ class Family < ActiveRecord::Base
       unless level_id == "0"
         # we filter at the Levels level
         if active
-          # check if query
-          # we have no cycle, a LEVEL, no query and ACTIVE
-          if query.blank?
-            Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true}).distinct
-            # we have no cycle, a LEVEL, a QUERY and ACTIVE
-          else
-            Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {id: Product.search_by_text(query)}).where(products: {active: true}).distinct
-          end
-          #
+          Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true}).distinct
         else
-          # we have no cycle, a LEVEL, no query and not active
-          if query.blank?
-            Family.joins(products: :levels).where(levels: {id: level_id}).distinct
-            # we have no cycle, a LEVEL, a QUERY and not active
-          else
-            Category.joins(products: :levels).where(levels: {id: level_id}).where(products: {id: Product.search_by_text(query)}).distinct
-          end
+          Family.joins(products: :levels).where(levels: {id: level_id}).distinct
         end
-        # special case no filter for level
+        # special case no filter
       else
         if active
-          # check if query
-          # we have no cycle, no level, no query and ACTIVE
-          if query.blank?
-            Family.with_active_products
-            # we have no cycle, no level, a QUERY and ACTIVE
-          else
-            Family.joins(:products).where(products: {id: Product.search_by_text(query)}).where(products: {active: true}).distinct
-          end
+          Family.with_active_products
         else
-          # check if query
-          # we have no cycle, no level, no query and no active
-          if query.blank?
-            Family.all
-            # we have no cycle, no level, a QUERY and no active
-          else
-            Family.joins(:products).where(products: {id: Product.search_by_text(query)}).distinct
-          end
+          Family.all
         end
       end
     else
       # we filter at the Cycles level
       if active
-        # check if query
-        # we have CYCLE, no level, no query and ACTIVE
-        if query.blank?
-          Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
-          # we have CYCLE, no level, a QUERY and ACTIVE
-        else
-          Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {id: Product.search_by_text(query)}).where(products: {active: true}).distinct
-        end
+        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
       else
-        # check if query
-        # we have CYCLE, no level, no query and no active
-        if query.blank?
-          Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).distinct
-          # we have CYCLE, no level, a QUERY and no active
-        else
-          Family.joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {id: Product.search_by_text(query)}).distinct
-        end
+        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).distinct
       end
     end
   end

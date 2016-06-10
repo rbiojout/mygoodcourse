@@ -2,16 +2,18 @@
 <h1>Catalog</h1>
 
 <hr>
+<!-- Page Content -->
+
+<!-- search -->
 <h5>SEARCH</h5>
 <%= form_tag(catalog_products_path, method: :get) do |f| %>
     <%= text_field_tag 'query' %>
     <%= button_tag 'submit', class: 'btn btn-primary' %>
-
+    <%= session[:query_store] %>
 <% end %>
 <hr>
+<!-- end search -->
 
-
-<!-- Page Content -->
 
 
 <!-- carousel -->

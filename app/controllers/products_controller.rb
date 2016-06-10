@@ -22,7 +22,7 @@ class ProductsController < ApplicationController
 
     unless query.nil?
       # we add or remove if the parameter is sent
-      if query.blank?
+      if query.empty?
         query_store = nil
       else
         query_store = query
@@ -36,13 +36,17 @@ class ProductsController < ApplicationController
       @products = Product.search_by_text(query_store)
       if @products.count == 0
         @products = Product.active
+        flash.now[:alert] = "no result found"
+        query_store = nil
       else
-        flash[:notice] = "searching for #{query_store}"
+        flash.now[:notice] = "searching for #{query_store}"
       end
     end
 
+
     session[:query_store] = query_store
 
+    logger.debug("===> query_store #{query_store} - #{session[:query_store]}")
 
     logger.debug("===> active products #{@products.count}")
 
@@ -113,8 +117,11 @@ class ProductsController < ApplicationController
     logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
     # add the corresponding families, categories, cycles and levels
-    @families = Family.associated_to_cycles_levels(cycle_id, level_id, query_store, true)
-    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, query_store, true)
+    query_families = Family.associated_to_query(query_store)
+    query_categories = Category.associated_to_query(query_store)
+    logger.debug("....#{@products.count} -  #{query_families.count}")
+    @families = (query_families & Family.associated_to_cycles_levels(cycle_id, level_id, true))
+    @categories = (query_categories & Category.associated_to_cycles_levels(cycle_id, level_id, true))
     # filter for Family and Category
     # show the most detailed level of information
     unless family_id.nil?
@@ -140,8 +147,10 @@ class ProductsController < ApplicationController
     end
 
     # add the corresponding families, categories, cycles and levels
-    @cycles = Cycle.associated_to_families_categories(family_id, category_id, query_store, true)
-    @levels = Level.associated_to_families_categories(family_id, category_id, query_store, true)
+    query_cycles = Cycle.associated_to_query(query_store)
+    query_levels = Level.associated_to_query(query_store)
+    @cycles = (query_cycles & Cycle.associated_to_families_categories(family_id, category_id, true))
+    @levels = (query_levels & Level.associated_to_families_categories(family_id, category_id, true))
 
     # filter for Cycle and Level
     # show the most detailed level of information
@@ -175,7 +184,7 @@ class ProductsController < ApplicationController
 
     logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
-    #logger.debug("===> #{sort_column} / #{sort_direction}")
+    logger.debug("===> #{sort_column} / #{sort_direction}")
     @products = @products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
 
     logger.debug("===> active products #{@products.count}")
