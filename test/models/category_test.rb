@@ -5,17 +5,17 @@ class CategoryTest < ActiveSupport::TestCase
   #   assert true
   # end
   test "should filter by nil" do
-    categories = Category.associated_to_cycles_levels(nil, nil, false)
+    categories = Category.associated_to_cycles_levels(nil, nil, nil, false)
     assert_equal categories.count, Category.all.count
   end
 
   test "should filter active by nil" do
-    categories = Category.associated_to_cycles_levels(nil, nil, true)
+    categories = Category.associated_to_cycles_levels(nil, nil, nil, true)
     assert_equal categories.count, Category.with_active_products.count
   end
 
   test "should filter by level" do
-    categories = Category.associated_to_cycles_levels(nil, levels(:C1L1), false)
+    categories = Category.associated_to_cycles_levels(nil, levels(:C1L1), nil, false)
     assert_not_equal categories.count, 0
     assert products(:ProdF1C1_C1L1).levels.include?(levels(:C1L1))
     assert products(:ProdF1C1_C1L1).categories.include?(categories(:F1C1))
@@ -24,17 +24,17 @@ class CategoryTest < ActiveSupport::TestCase
   end
 
   test "should filter by levels" do
-    categories = Category.associated_to_cycles_levels(nil, Level.all, false)
+    categories = Category.associated_to_cycles_levels(nil, Level.all, nil, false)
     assert_not_equal categories.count, 0
   end
 
   test "should filter active by levels" do
-    categories = Category.associated_to_cycles_levels(nil, Level.all, true)
+    categories = Category.associated_to_cycles_levels(nil, Level.all, nil, true)
     assert_not_equal categories.count, 0
   end
 
   test "should filter by cycle" do
-    categories = Category.associated_to_cycles_levels(cycles(:C1), nil, false)
+    categories = Category.associated_to_cycles_levels(cycles(:C1), nil, nil, false)
     assert_not_equal categories.count, 0
     assert products(:ProdF1C1_C1L1).cycles.include?(cycles(:C1))
     assert products(:ProdF1C1_C1L1).categories.include?(categories(:F1C1))
@@ -44,22 +44,22 @@ class CategoryTest < ActiveSupport::TestCase
 
 
   test "should filter by cycles" do
-    categories = Category.associated_to_cycles_levels(Cycle.all, nil, false)
+    categories = Category.associated_to_cycles_levels(Cycle.all, nil, nil, false)
     assert_not_equal categories.count, 0
   end
 
   test "should filter active by cycles" do
-    categories = Category.associated_to_cycles_levels(Cycle.all, nil, true)
+    categories = Category.associated_to_cycles_levels(Cycle.all, nil, nil, true)
     assert_not_equal categories.count, 0
   end
 
   test "should filter by cycle and level" do
-    categories = Category.associated_to_cycles_levels(cycles(:one), levels(:one), false)
+    categories = Category.associated_to_cycles_levels(cycles(:one), levels(:one), nil, false)
     assert_not_equal categories.count, 0
   end
 
   test "should filter active by cycle and level" do
-    categories = Category.associated_to_cycles_levels(cycles(:one), levels(:one), true)
+    categories = Category.associated_to_cycles_levels(cycles(:one), levels(:one), nil, true)
     assert_not_equal categories.count, 0
   end
 end

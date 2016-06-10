@@ -18,16 +18,30 @@ class ProductsController < ApplicationController
     # filter only on active products
     query = params[:query]
 
-    if query.blank?
-      @products = Product.active # creates an anonymous scope
-    else
-      @products = Product.search_by_text(query)
-      if @products.count == 0
-        @products = Product.active
+    query_store =  session[:query_store]
+
+    unless query.nil?
+      # we add or remove if the parameter is sent
+      if query.blank?
+        query_store = nil
+      else
+        query_store = query
       end
-      flash[:notice] = "searching for #{query}"
     end
 
+
+    if query_store.nil?
+      @products = Product.active # creates an anonymous scope
+    else
+      @products = Product.search_by_text(query_store)
+      if @products.count == 0
+        @products = Product.active
+      else
+        flash[:notice] = "searching for #{query_store}"
+      end
+    end
+
+    session[:query_store] = query_store
 
 
     logger.debug("===> active products #{@products.count}")
@@ -99,8 +113,8 @@ class ProductsController < ApplicationController
     logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
     # add the corresponding families, categories, cycles and levels
-    @families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
-    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
+    @families = Family.associated_to_cycles_levels(cycle_id, level_id, query_store, true)
+    @categories = Category.associated_to_cycles_levels(cycle_id, level_id, query_store, true)
     # filter for Family and Category
     # show the most detailed level of information
     unless family_id.nil?
@@ -126,8 +140,8 @@ class ProductsController < ApplicationController
     end
 
     # add the corresponding families, categories, cycles and levels
-    @cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
-    @levels = Level.associated_to_families_categories(family_id, category_id, true)
+    @cycles = Cycle.associated_to_families_categories(family_id, category_id, query_store, true)
+    @levels = Level.associated_to_families_categories(family_id, category_id, query_store, true)
 
     # filter for Cycle and Level
     # show the most detailed level of information
