@@ -31,9 +31,9 @@ class ProductsController < ApplicationController
 
 
     if query_store.nil?
-      @products = Product.active # creates an anonymous scope
+      @products = Product.includes(:attachments).active # creates an anonymous scope
     else
-      @products = Product.search_by_text(query_store)
+      @products = Product.includes(:attachments).search_by_text(query_store)
       if @products.count == 0
         @products = Product.active
         flash.now[:alert] = "no result found"
@@ -185,7 +185,7 @@ class ProductsController < ApplicationController
     logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
     logger.debug("===> #{sort_column} / #{sort_direction}")
-    @products = @products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @products = @products.unscope(:order).order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => Product.per_page)
 
     logger.debug("===> active products #{@products.count}")
 
@@ -193,14 +193,14 @@ class ProductsController < ApplicationController
 
   # GET /myproducts
   def myproducts
-    @products = current_customer.products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @products = current_customer.products.order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => Product.per_page)
   end
 
   # GET /products/1
   # GET /products/1.json
   def show
     @attachments = @product.attachments
-    @comments = @product.comments.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @comments = @product.comments.paginate(page: params[:page], :per_page => Product.per_page)
   end
 
   # GET /products/new

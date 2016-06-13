@@ -36,7 +36,11 @@ Rails.application.routes.draw do
       post :sort
     end
   end
-  resources :attachments
+  resources :attachments do
+    collection do
+      post :sort
+    end
+  end
   resources :products do
     member do
       #get 'detail'

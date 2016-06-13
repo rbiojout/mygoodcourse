@@ -7,3 +7,9 @@ $ ->
     handle: '.handle'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+  $( ".sortgrid" ).sortable
+    handle: ".thumbnail"
+    update: ->
+      $.post($(this).data('update-url'), $(this).sortable('serialize'))
+

@@ -1,24 +1,29 @@
-<div class="nested-fields col-sm-4 col-md-3">
-  <div class="thumbnail" id="attachment_<%=f.object.id%>">
+
+<div class="nested-fields col-sm-4 col-md-4" id="attachment_<%=f.object.id%>">
+  <div class="thumbnail" >
     <% if f.object.new_record?  %>
+        <img class="img-responsive" src="http://placehold.it/255x360" alt="">
+        <img class="img-responsive" src="http://placehold.it/255x122/111111/FFFFFF" alt="">
         <%= f.input :file %>
         <%= f.input :file_cache, as: :hidden  %>
   <% else %>
         <% attachment = f.object %>
         <%= image_tag f.object.file.url(:preview), class: 'img-responsive panel-image-product' %>
         <div class="caption">
-          <h3>Detail</h3>
-          <p><strong>Created at : </strong><%= nice_date(attachment.created_at) %></p>
-          <p><strong>File Size : </strong><%= attachment.file_size %></p>
-          <p><strong>File type : </strong><%= attachment.file_type %></p>
-          <p><strong># pages : </strong><%= attachment.nbpages %></p>
-          <p><strong>Version number : </strong><%= attachment.version_number %></p>
+          <h4>Detail</h4>
+          <h6><strong>Created at : </strong><%= nice_date(attachment.created_at) %></h6>
+          <h6><strong>File Size : </strong><%= attachment.file_size %></h6>
+          <h6><strong>File type : </strong><%= attachment.file_type %></h6>
+          <h6><strong># pages : </strong><%= attachment.nbpages %></h6>
+          <h6><strong>Version number : </strong><%= attachment.version_number %></h6> (<%= attachment.priority %>)
         </div>
     <% end %>
     <!--- only when remove_ok flag is received we activate the link to remove --->
     <% is_first ||=false %>
     <% unless is_first %>
-        <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm' %>
+        <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm center-block' %>
+    <% else %>
+        <%= button_tag "active version", class: 'btn btn-success btn-sm center-block' %>
     <% end %>
   </div>
 </div>

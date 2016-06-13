@@ -7,23 +7,25 @@
     </div>
   </div>
 
+  <% is_first= true %>
   <% Family.all.each do |family| %>
       <% if family.categories.to_a.length > 0  %>
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading_family_<%=family.id%>">
                 <h2 class="panel-title">
-                  <a role="button" data-toggle="collapse"  data-parent="#accordion_family" href="#collapse_family_<%=family.id%>" aria-expanded="false" aria-controls="collapse_family_<%=family.id%>">
+                  <a role="button" data-toggle="collapse"  data-parent="#accordion_family" href="#collapse_family_<%=family.id%>" aria-expanded="<%=(is_first==true)? 'true':'false'%>" aria-controls="collapse_family_<%=family.id%>">
                     <i class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></i> <%=family.name%>
                   </a>
                 </h2>
               </div>
-              <div id="collapse_family_<%=family.id%>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading_family_<%=family.id%>">
+              <div id="collapse_family_<%=family.id%>" class="panel-collapse collapse <%='in' if(is_first==true) %>" role="tabpanel" aria-labelledby="heading_family_<%=family.id%>">
                 <div class="panel-body">
                   <%= f.association :categories, label: false, collection: family.categories, as: :check_boxes %>
                 </div>
               </div>
             </div>
       <% end %>
+      <% is_first = false %>
   <% end %>
   <% f.association :categories, collection: Family.all, as: :grouped_select, group_method: :categories %>
 

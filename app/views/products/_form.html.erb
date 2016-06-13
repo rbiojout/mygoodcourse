@@ -26,6 +26,24 @@
 
       </div>
       <div class="col-md-9">
+
+        <!--- Attachments --->
+        <!--- only the first element can not be removed from the existing list -->
+        <% is_first= true %>
+        <div class="row sortgrid", id="product_attachments" data-update-url="<%= sort_attachments_path %>">
+          <%= f.fields_for :attachments do |att| %>
+              <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
+              <% is_first = false %>
+          <% end %>
+          <div class="col-sm-4 col-md-4">
+            <h4>Don't forget to save</h4>
+            <h5>You need to have a file attached. You can change by adding a new version</h5>
+            <h5>Only the LATEST version is available for the users to display</h5>
+            <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
+          </div>
+        </div>
+        <!-- end attachments -->
+
         <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
         <%= f.input :sku %>
         <%= f.input :permalink %>
@@ -38,22 +56,7 @@
     </div>
 
 
-    <!--- Attachments --->
-    <!--- only the first element can not be removed from the existing list -->
-    <% is_first= true %>
-    <div class="row", id="product_attachments">
-        <%= f.fields_for :attachments do |att| %>
-            <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
-          <% is_first = false %>
-        <% end %>
-    </div>
 
-    <div class="row">
-      <div class="col-sm-4 col-md-3">
-        <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary' %>
-      </div>
-    </div>
-    <hr>
     <div class="row">
         <div class="col-sm-4 col-md-3">
         <%= f.button :submit %>

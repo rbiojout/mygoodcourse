@@ -63,6 +63,16 @@ class AttachmentsController < ApplicationController
     end
   end
 
+  # POST /attachments/sort
+  def sort
+    unless params[:attachment].nil?
+      params[:attachment].each .each_with_index do |id, index|
+        Attachment.update(id, priority: index+1)
+      end
+    end
+    render nothing:true
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_attachment
@@ -71,6 +81,6 @@ class AttachmentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def attachment_params
-      params.require(:attachment).permit(:file, :file_size, :file_type, :nbpages, :version_number, :active, :product_id)
+      params.require(:attachment).permit(:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :product_id)
     end
 end

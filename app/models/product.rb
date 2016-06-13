@@ -1,8 +1,8 @@
 class Product < ActiveRecord::Base
   include PgSearch
 
+  # search options
   multisearchable :against => [:name, :description, :short_description]
-
   pg_search_scope :search_by_text, :against => [:name, :description, :short_description], :ignoring => :accents
 
   # we want a name with a Capital
@@ -56,6 +56,9 @@ class Product < ActiveRecord::Base
   # Before validation, set the permalink if we don't already have one
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 
+  # pagination
+  self.per_page = 10
+
   # All active products
   scope :active, -> { where(active: true) }
 
@@ -68,6 +71,7 @@ class Product < ActiveRecord::Base
   # Can be an array of values
   scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id})}
   scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id})}
+
 
   def self.count_active_for_family(family_id)
     Product.joins(:families).where(families: {id: family_id}).where(active: true).distinct.count
@@ -238,6 +242,18 @@ class Product < ActiveRecord::Base
   def preview
     begin
      attachments.first.file.url(:preview)
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      "empty_preview.png"
+    end
+  end
+
+  # return the nbpages of the file corresponding to the attachment
+  # in case of problem, returns 0
+  # @return [String]
+  def nbpages
+    begin
+      attachments.order(version_number: 'asc').first.nbpages
     rescue Exception => exc
       logger.error("Message for the log file #{exc.message}")
       "empty_preview.png"
