@@ -27,21 +27,21 @@
       <!--- orders --->
       <div class="list-group" id="sort_option" role="tablist" aria-multiselectable="true">
         <div class="list-group-item">
-        order by date
+          <%= t('dialog.method.order_by')%> <%= t('activerecord.attributes.product.creation_date') %>
         <%= link_to catalog_products_path(:sort =>'created_at', :direction => 'asc' ) do %>
             <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
         <%= link_to catalog_products_path(:sort =>'created_at', :direction => 'desc' ) do %>
             <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
         </div>
         <div class="list-group-item">
-            order by name
+          <%= t('dialog.method.order_by')%> <%= t('activerecord.attributes.product.name') %>
             <%= link_to catalog_products_path(:sort =>'name', :direction => 'asc' ) do %>
                 <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
             <%= link_to catalog_products_path(:sort =>'name', :direction => 'desc' ) do %>
                 <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
         </div>
         <div class="list-group-item">
-            order by price
+          <%= t('dialog.method.order_by')%> <%= t('activerecord.attributes.product.price') %>
             <%= link_to catalog_products_path(:sort =>'price', :direction => 'asc' ) do %>
                 <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
             <%= link_to catalog_products_path(:sort =>'price', :direction => 'desc' ) do %>

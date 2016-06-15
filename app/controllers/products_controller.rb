@@ -36,10 +36,10 @@ class ProductsController < ApplicationController
       @products = Product.includes(:attachments).search_by_text(query_store)
       if @products.count == 0
         @products = Product.active
-        flash.now[:alert] = "no result found"
+        flash.now[:alert] = "#{t('dialog.method.no_result_found')} (#{query_store})"
         query_store = nil
       else
-        flash.now[:notice] = "searching for #{query_store}"
+        flash.now[:notice] = "#{t('dialog.method.searching_for')}: #{query_store}"
       end
     end
 

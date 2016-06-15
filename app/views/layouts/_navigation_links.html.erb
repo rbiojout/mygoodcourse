@@ -3,11 +3,11 @@
 
 <% if customer_signed_in? %>
     <li><%= link_to t('devise.page.edit_my_account'), edit_customer_registration_path(:id => current_customer.id) %></li>
-    <li><%= link_to 'Edit my profile', edit_customer_path(current_customer) %></li>
+    <li><%= link_to t('page.title.my_profile'), edit_customer_path(current_customer) %></li>
     <li><%= link_to t('devise.page.sign_out'), destroy_customer_session_path, :method=>'delete' %></li>
     <li><%= link_to t('page.title.my_products'), myproducts_products_path %></li>
     <li><%= link_to t('page.title.my_orders'), myorders_orders_path %></li>
-    <li><%= link_to 'My Dashboard', dashboard_customer_path(current_customer) %></li>
+    <li><%= link_to t('page.title.my_dashboard'), dashboard_customer_path(current_customer) %></li>
 <% else %>
     <li><%= link_to t('devise.page.log_in'), new_customer_session_path %></li>
     <li><%= link_to t('devise.page.sign_up'), new_customer_registration_path %></li>

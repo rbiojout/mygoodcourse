@@ -31,28 +31,23 @@ class Customer < ActiveRecord::Base
   has_many :orders, dependent: :restrict_with_exception
 
   # we have a social follower/following process
-  has_many :peers, foreign_key: "follower_id"
+  has_many :active_peers, class_name:  "Peer", foreign_key: "follower_id"
+  has_many :passive_peers, class_name:  "Peer", foreign_key: "followed_id"
 
   # we have a social follower/following process
-  has_many :followeds, class_name:  "Customer",
-           foreign_key: "follower_id",
-           through:   :peers
-
-  # we have a social follower/following process
-  has_many :followers, class_name:  "Customer",
-           foreign_key: "followed_id",
-           through:   :peers
+  has_many :followeds, through: :active_peers,  source: :followed
+  has_many :followers, through: :passive_peers, source: :follower
 
   # payment solution StripeAccount
   has_one :stripe_account, dependent: :destroy
 
   # Follows a user.
   def follow(other_customer)
-    peers.create(followed: other_customer)
+    active_peers.create(followed: other_customer)
   end
   # Unfollows a user.
   def unfollow(other_customer)
-    peers.find_by(followed: other_customer).destroy
+    active_peers.find_by(followed: other_customer).destroy
   end
   # Returns true if the current user is following the other user.
   def following?(other_customer)

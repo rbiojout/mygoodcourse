@@ -1,4 +1,6 @@
-$('#order_item_<%= @order_item.id %>').fadeOut();
+$('#order_item_<%= @order_item.id %>').fadeOut("normal", function() {
+    $(this).remove();
+});
 
 $('#orderitem-dropped').prepend("<%= escape_javascript(render('order_items/undo_order_item', order_item: @order_item)) %>")
 

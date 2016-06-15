@@ -23,10 +23,18 @@ en:
   hello: "Hello world"
   page:
     title:
+      home: 'Home'
       catalog: 'Catalog'
       my_products: 'My Products'
       my_orders: 'My Orders'
+      my_profile: "Edit my profile"
+      my_dashboard: "Dashboard"
 
+  dialog:
+    method:
+      order_by: 'Order by'
+      searching_for: 'Searching for'
+      no_result_found: 'No result found'
 
 
   order_mailer:

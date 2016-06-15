@@ -6,3 +6,9 @@
 <h1>Orders</h1>
 <h1>Favorite products</h1>
 <h1>Followers</h1>
+<%= render(partial:'customers/customer', collection: current_customer.followers) %>
+<h1>Followeds</h1>
+<div id="followed-list">
+<%= render(partial:'customers/customer', collection: current_customer.followeds) %>
+</div>
+

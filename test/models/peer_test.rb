@@ -29,6 +29,14 @@ class PeerTest < ActiveSupport::TestCase
     assert c_one.following?(c_two)
     c_one.unfollow(c_two)
     assert_not c_one.following?(c_two)
+  end
+
+  test "customer one followed by customer two" do
+    c_one = customers(:one)
+    c_two = customers(:two)
+    assert c_one.following?(c_two)
+    assert c_two.followeds.include?(c_one)
+    assert c_one.followers.include?(c_two)
 
   end
 

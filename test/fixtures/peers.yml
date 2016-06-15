@@ -6,5 +6,5 @@ one:
 
 
 two:
-  follower: customers(:two)
-  followed: customers(:one)
+  follower: two
+  followed: one
