@@ -67,7 +67,7 @@ class AttachmentsController < ApplicationController
   def sort
     unless params[:attachment].nil?
       params[:attachment].each .each_with_index do |id, index|
-        Attachment.update(id, priority: index+1)
+        Attachment.update(id, position: index+1)
       end
     end
     render nothing:true

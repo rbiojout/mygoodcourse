@@ -2,6 +2,9 @@ class Attachment < ActiveRecord::Base
 
   #attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active
   belongs_to :product
+  # we want the new ones at the begining of the list
+  acts_as_list scope: :product, add_new_at: :top
+
 
   mount_uploader :file, DocumentUploader
   validates :file, presence: true
@@ -11,7 +14,7 @@ class Attachment < ActiveRecord::Base
   # method after the creation of a new attachment
   before_create :increment_version
 
-  default_scope -> { order(created_at: :desc) }
+  default_scope -> { order(position: :asc) }
 
   private
 

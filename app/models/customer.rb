@@ -21,6 +21,10 @@ class Customer < ActiveRecord::Base
 
   has_many :products, dependent: :destroy
 
+  def own_product(product)
+    self.products.include?(product)
+  end
+
   has_many :comments, dependent: :destroy
 
   # We don't want to delete if some orders have been done

@@ -31,16 +31,18 @@
         <!--- only the first element can not be removed from the existing list -->
         <% is_first= true %>
         <div class="row sortgrid", id="product_attachments" data-update-url="<%= sort_attachments_path %>">
-          <%= f.fields_for :attachments do |att| %>
-              <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
-              <% is_first = false %>
-          <% end %>
-          <div class="col-sm-4 col-md-4">
+          <div class="col-sm-4 col-md-4" style="height:590px">
             <h4>Don't forget to save</h4>
             <h5>You need to have a file attached. You can change by adding a new version</h5>
             <h5>Only the LATEST version is available for the users to display</h5>
             <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
           </div>
+          <!--- list all already existing attachments --->
+          <%= f.fields_for :attachments do |att| %>
+              <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
+              <% is_first = false %>
+          <% end %>
+          <!-- end list existing attachments --->
         </div>
         <!-- end attachments -->
 
@@ -51,17 +53,13 @@
         <%= f.input :short_description, as: 'text', :input_html => {:class => 'summernote'} %>
         <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
         <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>
+        <%= f.button :submit, class: 'btn btn-primary input-block-level form-control' %>
       </div>
 
     </div>
 
 
 
-    <div class="row">
-        <div class="col-sm-4 col-md-3">
-        <%= f.button :submit %>
-      </div>
-    </div>
 <% end %>
 
 

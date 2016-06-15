@@ -11,7 +11,7 @@ class Product < ActiveRecord::Base
 
 
   # we need at least one attachment
-  has_many :attachments, dependent: :destroy
+  has_many :attachments, -> { order(position: :asc) }, dependent: :destroy
   accepts_nested_attributes_for :attachments, :reject_if => proc {|attributes| attributes['file'].blank?  && attributes['file_cache'].blank?},  allow_destroy: true
   validates_presence_of :attachments, :message => "You need to provide at least one version of attachment. Please add a new version."
   before_update :ensure_attachment_present

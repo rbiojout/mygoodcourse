@@ -77,6 +77,13 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
+  test "should not create product without attachment" do
+    assert_difference('Product.count', 0) do
+      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: nil  }} }
+    end
+  end
+
+
   test "should show product" do
     get :show, id: @product
     assert_response :success
@@ -92,6 +99,15 @@ class ProductsControllerTest < ActionController::TestCase
     patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku,
                                             attachments_attributes: { "0" =>{ id: attachments(:one).id } } }
     assert_redirected_to product_path(assigns(:product))
+  end
+
+  test "should update product with ordered attachments" do
+    @attachment = attachments(:one)
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku,
+                                            attachments_attributes: {
+                                                "1465974930533" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')},
+                                                "0" =>{ id: attachments(:one).id } } }
+    assert_equal 2, assigns(:product).attachments.count
   end
 
   test "should destroy product not ordered" do

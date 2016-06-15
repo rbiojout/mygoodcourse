@@ -55,6 +55,13 @@ gem 'devise'
 
 # add pagination helper for listing the data
 gem 'will_paginate'
+# add some order in the models for lists
+gem 'acts_as_list'
+# gem 'nested_form_fields'
+
+# better work for nested forms the ajax is explains in the project page
+gem 'cocoon'
+
 
 # add some CSS
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
@@ -103,10 +110,6 @@ gem 'fog'
 gem 'jquery-fileupload-rails'
 
 
-# gem 'nested_form_fields'
-
-# better work for nested forms
-gem 'cocoon'
 
 # use of Stripe as payment solution
 gem 'stripe'
