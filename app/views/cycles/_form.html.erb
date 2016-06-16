@@ -3,7 +3,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
-    <%= f.input :description, as: 'text' %>
+    <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'} %>
     <%= f.input :position, as: :hidden %>
 
     <h3>Levels</h3>

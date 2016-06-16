@@ -120,6 +120,9 @@ gem 'oauth2'
 gem "chartkick"
 gem 'groupdate'
 
+# add admin
+gem 'rails_admin'
+gem "wysiwyg-rails", "~> 1.2.7"
 
 # for Heroku
 group :production do

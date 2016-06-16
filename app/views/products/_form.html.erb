@@ -69,7 +69,9 @@
         $('.wysihtml5').each(function(i, elem) {
             $(elem).wysihtml5();
         });
-        $('.summernote').summernote();
+        $('.summernote').summernote({
+            lang: '<%= I18n.locale %>'
+        });
 
 
     })
