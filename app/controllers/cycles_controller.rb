@@ -28,7 +28,7 @@ class CyclesController < ApplicationController
 
     respond_to do |format|
       if @cycle.save
-        format.html { redirect_to @cycle, notice: 'Cycle was successfully created.' }
+        format.html { redirect_to @cycle, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @cycle }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class CyclesController < ApplicationController
   def update
     respond_to do |format|
       if @cycle.update(cycle_params)
-        format.html { redirect_to @cycle, notice: 'Cycle was successfully updated.' }
+        format.html { redirect_to @cycle, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @cycle }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class CyclesController < ApplicationController
   def destroy
     @cycle.destroy
     respond_to do |format|
-      format.html { redirect_to cycles_url, notice: 'Cycle was successfully destroyed.' }
+      format.html { redirect_to cycles_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end

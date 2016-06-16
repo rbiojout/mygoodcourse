@@ -30,6 +30,11 @@ en:
       my_profile: "Edit my profile"
       my_dashboard: "Dashboard"
 
+  views:
+    flash_update_message: 'Updated with success'
+    flash_create_message: 'Created with success'
+    flash_delete_message: 'Deletes with success'
+
   dialog:
     method:
       order_by: 'Order by'
@@ -57,11 +62,5 @@ en:
     pformat: 'HH:mm'                # picking format of the time (this is the default, can be ommited)
   dayViewHeaderFormat: 'MMMM YYYY'  # picking format of the time (this is the default, can be ommited)
 
-  date:
-    datepicker:
-      default: "mm/dd/yyyy"
-      long: "MM dd, yyyy"
-    formats:
-      default: "dd/mm/yyyy"
-      long: ! '%B %d, %Y'
+
 

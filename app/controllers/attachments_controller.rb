@@ -30,7 +30,7 @@ class AttachmentsController < ApplicationController
 
     respond_to do |format|
       if @attachment.save
-        format.html { redirect_to @attachment, notice: 'Attachment was successfully created.' }
+        format.html { redirect_to @attachment, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @attachment }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class AttachmentsController < ApplicationController
   def update
     respond_to do |format|
       if @attachment.update(attachment_params)
-        format.html { redirect_to @attachment, notice: 'Attachment was successfully updated.' }
+        format.html { redirect_to @attachment, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @attachment }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class AttachmentsController < ApplicationController
   def destroy
     @attachment.destroy
     respond_to do |format|
-      format.html { redirect_to attachments_url, notice: 'Attachment was successfully destroyed.' }
+      format.html { redirect_to attachments_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end

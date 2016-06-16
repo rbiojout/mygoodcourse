@@ -45,7 +45,7 @@ class OrdersController < ApplicationController
 
     respond_to do |format|
       if @order.save
-        format.html { redirect_to @order, notice: 'Order was successfully created.' }
+        format.html { redirect_to @order, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @order }
       else
         format.html { render :new }
@@ -60,7 +60,7 @@ class OrdersController < ApplicationController
   def update
     respond_to do |format|
       if @order.update(order_params)
-        format.html { redirect_to @order, notice: 'Order was successfully updated.' }
+        format.html { redirect_to @order, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @order }
       else
         format.html { render :edit }
@@ -162,7 +162,7 @@ class OrdersController < ApplicationController
   def destroy
     @order.destroy
     respond_to do |format|
-      format.html { redirect_to orders_url, notice: 'Order was successfully destroyed.' }
+      format.html { redirect_to orders_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end

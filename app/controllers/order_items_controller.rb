@@ -81,7 +81,7 @@ class OrderItemsController < ApplicationController
         end
     else
       respond_to do |format|
-          format.html { redirect_to order_items_path, notice: 'Order item was successfully destroyed.' }
+          format.html { redirect_to order_items_path, notice: t('views.flash_delete_message') }
           format.json { head :no_content }
           format.js {}
       end

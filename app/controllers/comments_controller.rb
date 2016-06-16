@@ -42,7 +42,7 @@ class CommentsController < ApplicationController
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @comment, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @comment }
         # added
         format.js   { @current_comment = @comment }
@@ -60,7 +60,7 @@ class CommentsController < ApplicationController
   def update
     respond_to do |format|
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to @comment, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @comment }
         # added
         format.js   { @current_comment = @comment }
@@ -78,7 +78,7 @@ class CommentsController < ApplicationController
   def destroy
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
+      format.html { redirect_to comments_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end

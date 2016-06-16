@@ -115,6 +115,10 @@ fr:
         esported: 'Exportée'
         incoice_number: 'Numéro de facture'
 
+  views:
+    flash_update_message: 'Mise à jour avec succès'
+    flash_create_message: 'Création avec succès'
+    flash_delete_message: 'Suppression avec succès'
 
   order_mailer:
     received:
@@ -137,11 +141,4 @@ fr:
   dayViewHeaderFormat: 'MMMM YYYY'  # picking format of the time (this is the default, can be ommited)
 
 
-  date:
-    datepicker:
-      default: "dd/mm/yyyy"
-      long: "dd MM yyyy"
-    formats:
-      default: "dd/mm/yyyy"
-      long: ! '%d %B %Y'
 

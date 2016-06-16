@@ -29,7 +29,7 @@ class FamiliesController < ApplicationController
 
     respond_to do |format|
       if @family.save
-        format.html { redirect_to @family, notice: 'Family was successfully created.' }
+        format.html { redirect_to @family, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @family }
       else
         format.html { render :new }
@@ -44,7 +44,7 @@ class FamiliesController < ApplicationController
     logger.debug ("===== #{family_params}")
     respond_to do |format|
       if @family.update(family_params)
-        format.html { redirect_to @family, notice: 'Family was successfully updated.' }
+        format.html { redirect_to @family, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @family }
       else
         format.html { render :edit }
@@ -58,7 +58,7 @@ class FamiliesController < ApplicationController
   def destroy
     @family.destroy
     respond_to do |format|
-      format.html { redirect_to families_url, notice: 'Family was successfully destroyed.' }
+      format.html { redirect_to families_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end
