@@ -13,6 +13,7 @@
  *= require_tree .
  *= require jquery-ui/sortable
  * require trix
+ * use in custom.css not in plain css require bootstrap-datepicker
  *= require bootstrap-wysihtml5
  *= require summernote
  *= require_self

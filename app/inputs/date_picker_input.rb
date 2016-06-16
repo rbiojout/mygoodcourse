@@ -1,3 +1,4 @@
+# see https://github.com/zpaulovics/datetimepicker-rails for options
 class DatePickerInput < SimpleForm::Inputs::StringInput
   def input(wrapper_options)
     set_html_options

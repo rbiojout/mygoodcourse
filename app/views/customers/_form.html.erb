@@ -11,10 +11,10 @@
       <% end %>
       <%= f.input :name %>
       <%= f.input :first_name %>
-      <%= f.input :birthdate %>
       <%= f.input :mobile, as: :tel %>
 
       <%= f.input :picture, :as => :image_preview %>
+      <%= f.input :birthdate, as: :date_picker, input_html: {data: {date_options: {viewMode: 'years', showTodayButton: true}}} %>
 
       <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address', class: 'geocoding_fulladdress'} %>
       <div class="geo-details">
@@ -32,4 +32,5 @@
       <%= f.button :submit %>
     </div>
 <% end %>
+
 

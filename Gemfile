@@ -73,13 +73,14 @@ gem 'font-awesome-sass', '~> 4.2.0'
 # add a WISIWYG HTML editor for bootstrap
 gem 'bootstrap-wysihtml5-rails'
 # gem 'trix'
+# summernote directly added with js file
 # gem 'summernote-rails'
 
 
 # add datetime picker with bootstrap
 #gem 'bootstrap-datepicker-rails'
-#gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
-
+gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+# gem 'bootstrap-daterangepicker-rails'
 
 # add full calendar to display and control events
 gem 'momentjs-rails'

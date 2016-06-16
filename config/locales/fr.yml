@@ -128,5 +128,20 @@ fr:
     new: 'Nouveau'
     recent: 'Récent'
 
+  datepicker:
+    dformat: '%d/%m/%Y'             # display format of the date (this is the default, can be ommited)
+    pformat: 'DD/MM/YYYY'           # picking format of the date (this is the default, can be ommited)
+  timepicker:
+    dformat: '%R'                   # display format of the time (this is the default, can be ommited)
+    pformat: 'HH:mm'                # picking format of the time (this is the default, can be ommited)
+  dayViewHeaderFormat: 'MMMM YYYY'  # picking format of the time (this is the default, can be ommited)
 
+
+  date:
+    datepicker:
+      default: "dd/mm/yyyy"
+      long: "dd MM yyyy"
+    formats:
+      default: "dd/mm/yyyy"
+      long: ! '%d %B %Y'
 
