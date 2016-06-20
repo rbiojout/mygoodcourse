@@ -26,7 +26,7 @@ class StripeOauth < Struct.new( :customer )
     }.merge( params ) )
 
     # Make a request to this URL by hand before
-    # redirecting the user there. This way we
+    # redirecting the user_mailer there. This way we
     # can handle errors (other than access_denied, which
     # could come later).
     # See https://stripe.com/docs/connect/reference#get-authorize-errors
@@ -70,7 +70,7 @@ class StripeOauth < Struct.new( :customer )
 
   # Upon redirection back to this app, we'll have
   # a 'code' that we can use to get the access token
-  # and other details about our connected user.
+  # and other details about our connected user_mailer.
   # See app/controllers/users_controller.rb#confirm for counterpart.
   def verify!( code )
     data = client.get_token( code, {
@@ -92,7 +92,7 @@ class StripeOauth < Struct.new( :customer )
     stripe_account.save!
   end
 
-  # Deauthorize the user. Straight-forward enough.
+  # Deauthorize the user_mailer. Straight-forward enough.
   # See app/controllers/users_controller.rb#deauthorize for counterpart.
   def deauthorize!
     response = RestClient.post(
@@ -121,7 +121,7 @@ class StripeOauth < Struct.new( :customer )
 
   private
 
-  # Get the default currency of the connected user.
+  # Get the default currency of the connected user_mailer.
   # All transactions will use this currency.
   def default_currency
     begin
@@ -132,7 +132,7 @@ class StripeOauth < Struct.new( :customer )
   end
 
   # A simple OAuth2 client we can use to generate a URL
-  # to redirect the user to as well as get an access token.
+  # to redirect the user_mailer to as well as get an access token.
   # Used in #oauth_url and #verify!
   def client
     @client ||= OAuth2::Client.new(

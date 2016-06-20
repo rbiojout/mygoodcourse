@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160613094731) do
+ActiveRecord::Schema.define(version: 20160620171218) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,8 +107,16 @@ ActiveRecord::Schema.define(version: 20160613094731) do
     t.date     "birthdate"
     t.decimal  "score_comments"
     t.integer  "nb_comments"
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "unconfirmed_email"
+    t.string   "language"
+    t.integer  "country_id"
   end
 
+  add_index "customers", ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true, using: :btree
+  add_index "customers", ["country_id"], name: "index_customers_on_country_id", using: :btree
   add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
   add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
 
@@ -118,7 +126,10 @@ ActiveRecord::Schema.define(version: 20160613094731) do
     t.integer  "position"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "country_id"
   end
+
+  add_index "cycles", ["country_id"], name: "index_cycles_on_country_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -151,8 +162,10 @@ ActiveRecord::Schema.define(version: 20160613094731) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "position"
+    t.integer  "country_id"
   end
 
+  add_index "families", ["country_id"], name: "index_families_on_country_id", using: :btree
   add_index "families", ["name"], name: "index_families_on_name", using: :btree
 
   create_table "levels", force: :cascade do |t|
@@ -282,6 +295,9 @@ ActiveRecord::Schema.define(version: 20160613094731) do
   add_foreign_key "categories", "families"
   add_foreign_key "comments", "customers"
   add_foreign_key "comments", "products"
+  add_foreign_key "customers", "countries"
+  add_foreign_key "cycles", "countries"
+  add_foreign_key "families", "countries"
   add_foreign_key "levels", "cycles"
   add_foreign_key "order_items", "orders"
   add_foreign_key "order_items", "products"

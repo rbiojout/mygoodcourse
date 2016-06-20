@@ -4,7 +4,7 @@ class ProductHelperTest < ActionView::TestCase
 
   setup do
     @product = products(:one)
-    # add a signed user to perform the tests
+    # add a signed user_mailer to perform the tests
     @customer = customers(:one)
     end
 

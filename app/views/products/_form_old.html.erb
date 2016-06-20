@@ -17,7 +17,7 @@
       <%= f.input :description, hint: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.' %>
       <%= f.input :short_description, as: :wysihtml5 %>
       <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
-      <%= f.input :price, :collection => ['0.00', '0.99', '4.99', '9.99', '14.99', '19.99'], hint: 'Value your work appropriately.' %>
+      <%= f.input :price, :collection => %w(0.00 0.99 4.99 9.99 14.99 19.99), hint: 'Value your work appropriately.' %>
 
 
 

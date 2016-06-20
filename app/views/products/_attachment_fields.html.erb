@@ -16,12 +16,12 @@
         <% attachment = f.object %>
         <%= image_tag f.object.file.url(:preview), class: 'img-responsive panel-image-product' %>
         <div class="caption">
-          <h4>Detail</h4>
-          <h6><strong>Created at : </strong><%= nice_date(attachment.created_at) %></h6>
-          <h6><strong>File Size : </strong><%= attachment.file_size %></h6>
-          <h6><strong>File type : </strong><%= attachment.file_type %></h6>
-          <h6><strong># pages : </strong><%= attachment.nbpages %></h6>
-          <h6><strong>Version number : </strong><%= attachment.version_number %> (<%= attachment.position %>)</h6>
+          <h4><%= t('activerecord.attributes.attachment.detail')%></h4>
+          <h6><strong><%= t('activerecord.attributes.general.created_at')%> : </strong><%= nice_date(attachment.created_at) %></h6>
+          <h6><strong><%= t('activerecord.attributes.attachment.file_size')%> : </strong><%= attachment.file_size %></h6>
+          <h6><strong><%= t('activerecord.attributes.attachment.file_type')%> : </strong><%= attachment.file_type %></h6>
+          <h6><strong><%= t('activerecord.attributes.attachment.nbpages')%> : </strong><%= attachment.nbpages %></h6>
+          <h6><strong><%= t('activerecord.attributes.attachment.version_number')%> : </strong><%= attachment.version_number.round %></h6>
         </div>
         <!--- only when remove_ok flag is received we activate the link to remove --->
         <% is_first ||=false %>

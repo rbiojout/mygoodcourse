@@ -27,29 +27,66 @@ fr:
       catalog: 'Catalogue'
       my_products: 'Mes Produits'
       my_orders: 'Mes Commandes'
-      my_profile: "Editer mon profil"
+      my_account: "Mon compte"
+      my_profile: "Mon profil"
       my_dashboard: "Tableau de bord"
 
 
   dialog:
+    restricted: "Vous n'avez pas les droits pour accéder à cette page"
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
+    shop:
+      empty_cart: 'Votre panier est vide'
 
   activerecord:
     models:
-      customer: 'client'
-      product: 'produit'
       attachment: 'document'
+      category:
+        one: 'catégorie'
+        other: 'catégories'
       comment: 'commentaire'
-      category: 'catégorie'
       country: 'pays'
+      customer: 'client'
       cycle: 'cycle'
+      employee: 'employé'
       family: 'famille'
-      level: 'niveau'
+      level:
+        one: 'niveau'
+        other: 'niveaux'
       order: 'commande'
+      payment: 'paiement'
+      product: 'produit'
+      stripe_account: 'compte stripe'
     attributes:
+      general:
+        created_at: 'Créé le'
+        updated_at: 'Mis à jour le'
+      attachment:
+        title: 'Titre'
+        description: 'Description'
+        file_size: 'Taille'
+        file_type: 'Type'
+        nbpages: 'Nb pages'
+        version_number: 'N° version'
+        active: 'Actif'
+        position: 'Position'
+        detail: 'Détail'
+      category:
+        name: 'Nom'
+        description: 'Description'
+        position: 'Position'
+      comment:
+        title: 'Titre'
+        description: 'Description'
+        score: 'Score'
+      country:
+        name: 'nom'
+        continent: 'continent'
+        currency: 'devise'
+        eu_member: "pays de l'UE"
       customer:
         name: 'Nom'
         first_name: 'Prénom'
@@ -59,6 +96,8 @@ fr:
         password: 'Mot de passe'
         password_confirmation: 'Confirmation du mot de passe'
         current_password: 'Mot de passe actuel'
+        language: 'Langue'
+        country: 'Pays'
         formatted_address: 'Adresse complète'
         street_address: 'Adresse'
         administrative_area_level_1: 'Ville'
@@ -67,26 +106,6 @@ fr:
         locality: 'Ville'
         birthdate: 'Date de naissance'
         remember_me: 'Se souvenir de moi'
-      product:
-        name: 'Nom'
-        description: 'Description'
-        short_description: 'Courte description'
-        active: 'Actif'
-        price: 'Prix'
-        creation_date: 'Date de création'
-        nb_comments: 'Nombre de commentaires'
-        score_comments: 'Score moyen des commentaires'
-      attachment:
-        title: 'Titre'
-        description: 'Description'
-      comment:
-        title: 'Titre'
-        description: 'Description'
-        score: 'Score'
-      category:
-        name: 'Nom'
-        description: 'Description'
-        position: 'Position'
       country:
         name: 'Nom'
         continent: 'Continent'
@@ -103,17 +122,72 @@ fr:
         name: 'Nom'
         description: 'Description'
         position: 'Position'
+      order_item:
+        price: 'prix'
+        tax_rate: 'taux de taxes'
+        tax_amount: 'montant de taxes'
+        processing_reference: 'référence'
+        method: 'méthode de paiement'
+        status: 'état'
       order:
         status: 'Etat'
         received_at: 'Reçu le'
         accepted_at: 'Acceptée le'
+        accept_notice: 'La commande a été acceptée avec succès'
         consignement_number: 'Numéro de consigne'
         rejected_at: 'Refusée le'
         rejected_by: 'Refusée par'
+        reject_notice: 'La commande a été rejetée avec succès'
+        ship_notice: 'La commande a été envoyée avec succès'
         ip_address: 'Adresse IP'
         amount_paid: 'Montant payé'
         esported: 'Exportée'
         incoice_number: 'Numéro de facture'
+      payment:
+        amount: 'montant'
+        reference: 'référence'
+        confirmed: 'confirmé'
+        refundable: 'remboursable'
+        amount_refunded: 'montant remboursé'
+        exported: 'exporté'
+        method: 'méthode'
+        accept_notice: 'payement accepté'
+        reject_notice: 'payement refusé'
+      product:
+        name: 'Nom'
+        description: 'Description'
+        short_description: 'Courte description'
+        active: 'Actif'
+        price: 'Prix'
+        creation_date: 'Date de création'
+        nb_comments: 'Nombre de commentaires'
+        score_comments: 'Score moyen des commentaires'
+        need_attachment_notice: "Vous devez joindre au moins un document"
+
+  helpers:
+    action:
+      create: 'Ajouter'
+      edit: 'Editer'
+      delete: 'Supprimer'
+      customer:
+        create: 'Créer un compte'
+        edit: 'Editer mon profil'
+        delete: 'Supprimer mon compte'
+      product:
+        create: 'Créer un produit'
+        edit: 'Editer ce produit'
+        delete: 'Supprimer ce procuit'
+
+    submit:
+      # helpers.submit.<model>.<action>
+      customer:
+        create: 'Créer mon compte'
+        submit: 'Enregistrer mon compte'
+        update: 'Modifier mon compte'
+      product:
+        create: 'Créer un produit'
+        submit: 'Enregistrer ce produit'
+        update: 'Modifier ce produit'
 
   views:
     flash_update_message: 'Mise à jour avec succès'
@@ -125,6 +199,10 @@ fr:
       subject: 'Order Confirmation'
       accepted: 'Order Accepted'
       rejected: 'Order Rejected'
+
+  stripe:
+    dialog:
+      exchange_notice: 'Could not exchange Stripe token. Please try again.'
 
   time:
     formats:

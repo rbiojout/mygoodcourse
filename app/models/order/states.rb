@@ -27,14 +27,14 @@
     # All ordered ordered by their ID desending
     scope :ordered, -> { order(id: :desc) }
 
-    # Is this order still being built by the user?
+    # Is this order still being built by the user_mailer?
     #
     # @return [Boolean]
     def building?
       status == 'building'
     end
 
-    # Is this order in the user confirmation step?
+    # Is this order in the user_mailer confirmation step?
     #
     # @return [Boolean]
     def confirming?

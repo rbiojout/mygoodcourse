@@ -49,7 +49,7 @@
         <%= f.input :name, hint: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.' %>
         <%= f.input :sku %>
         <%= f.input :permalink %>
-        <%= f.input :description, as: 'text', :input_html => {:class => 'wysihtml5'}, placeholder: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.', hint: 'Be explicit in your description' %>
+        <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.', hint: 'Be explicit in your description' %>
         <%= f.input :short_description, as: 'text', :input_html => {:class => 'summernote'} %>
         <%= f.input :active, hint: 'you can activate or not your product. Non active products can not be downloaded' %>
         <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: 'Value your work appropriately.' %>

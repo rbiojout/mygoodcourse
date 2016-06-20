@@ -95,7 +95,7 @@ class CommentsController < ApplicationController
     end
 
   def correct_user
-    redirect_to root_path, alert: "You don't have the right to access to this page" unless @comment.nil? || @comment.product.customer_id == current_customer.id
+    redirect_to root_path, alert: t('dialog.restricted') unless @comment.nil? || @comment.product.customer_id == current_customer.id
   end
 
 end

@@ -14,7 +14,7 @@ en:
     # labels:
     #   defaults:
     #     password: 'Password'
-    #   user:
+    #   user_mailer:
     #     new:
     #       email: 'E-mail to sign in.'
     #     edit:

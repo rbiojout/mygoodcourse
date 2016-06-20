@@ -1,5 +1,5 @@
 class StripeManaged < Struct.new( :customer )
-  ALLOWED = [ 'US', 'CA' ] # public beta
+  ALLOWED = %w(US CA) # public beta
   COUNTRIES = [
     { name: 'United States', code: 'US' },
     { name: 'Canada', code: 'CA' },

@@ -5,11 +5,10 @@ class Order < ActiveRecord::Base
   # parts of the order lifecycle.
   define_model_callbacks :confirmation, :acceptance, :rejection
 
-  # This method should be called by the base application when the user has completed their
+  # This method should be called by the base application when the user_mailer has completed their
   # first round of entering details. This will mark the order as "confirming" which means
   # the customer now just must confirm.
   #
-  # @param params [Hash] a hash of order attributes
   # @return [Boolean]
   def change_to_confirming
     self.status = 'confirming'
@@ -73,7 +72,7 @@ class Order < ActiveRecord::Base
 
   # Mark order as accepted
   #
-  # @param user [User] the user who carried out this action
+  # @param user [User] the user_mailer who carried out this action
   def accept!(user = nil)
     run_callbacks :acceptance do
       self.accepted_at = Time.now
@@ -87,7 +86,7 @@ class Order < ActiveRecord::Base
 
   # Mark order as rejected
   #
-  # @param user [Shoppe::User] the user who carried out the action
+  # @param user [Shoppe::User] the user_mailer who carried out the action
   def reject!(user = nil)
     run_callbacks :rejection do
       self.rejected_at = Time.now
@@ -144,10 +143,10 @@ class Order < ActiveRecord::Base
       # we log at the order level
       if charge.paid
         self.amount_paid += amout_total
-        self.save()
+        self.save
 # @TODO add method stripe in the list of methods for payment
 # @TODO add a split of payments to the owner and to the platform
-# if the user is managed, send money else keep and schedule when possible
+# if the user_mailer is managed, send money else keep and schedule when possible
         payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
 
       else
@@ -168,10 +167,10 @@ class Order < ActiveRecord::Base
       # we log at the order level
       if charge.paid
         self.amount_paid += amout_total
-        self.save()
+        self.save
 # @TODO add method stripe in the list of methods for payment
 # @TODO add a split of payments to the owner and to the platform
-# if the user is managed, send money else keep and schedule when possible
+# if the user_mailer is managed, send money else keep and schedule when possible
         payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
       else
         notes += "Some items where not accepted by the Bank."

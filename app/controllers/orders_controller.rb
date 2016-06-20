@@ -71,21 +71,21 @@ class OrdersController < ApplicationController
 
   def accept
     @order.accept!(current_customer)
-    redirect_to @order, flash: { notice: 'shoppe.orders.accept_notice' }
+    redirect_to @order, flash: { notice: 'activerecord.order.accept_notice' }
   rescue Errors::PaymentDeclined => e
     redirect_to @order, flash: { alert: e.message }
   end
 
   def reject
     @order.reject!(current_customer)
-    redirect_to @order, flash: { notice: 'shoppe.orders.reject_notice' }
+    redirect_to @order, flash: { notice: 'activerecord.order.reject_notice' }
   rescue Errors::PaymentDeclined => e
     redirect_to @order, flash: { alert: e.message }
   end
 
   def ship
     @order.ship!(params[:consignment_number], current_customer)
-    redirect_to @order, flash: { notice: 'shoppe.orders.ship_notice' }
+    redirect_to @order, flash: { notice: 'activerecord.order.ship_notice' }
   end
 
   # GET /checkout
@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
   def checkout
     current_order.customer = current_customer
 
-    redirect_to catalog_products_path, flash: { alert: 'Your Cart is empty' } if current_order.order_items.empty?
+    redirect_to catalog_products_path, flash: { alert: t('dialog.shop.empty_cart') } if current_order.order_items.empty?
 
     # update the status
     current_order.ip_address = request.ip
@@ -111,7 +111,7 @@ class OrdersController < ApplicationController
       if @order.accept_stripe_token(params[:stripe_token])
         redirect_to checkout_confirmation_path
       else
-        flash.now[:notice] = "Could not exchange Stripe token. Please try again."
+        flash.now[:notice] = t('stripe.dialog.exchange_notice')
       end
     end
     #if request.patch?
@@ -145,9 +145,10 @@ class OrdersController < ApplicationController
         current_order.amount_paid = current_order.total
         # save the state from the payment module as accepted
         current_order.accept!(current_customer)
-        redirect_to root_path, :notice => "Order has been accepted!"
+        redirect_to root_path, :notice => t('activerecord.payment.accept_notice')
+
       rescue  => e
-        flash[:alert] = "Payment was declined by the bank. #{e.message}"
+        flash[:alert] = "#{t('activerecord.payment.reject_notice')} #{e.message}"
         logger.debug("Payment was declined by the bank. #{e.message}")
         # save the state from the payment module as rejected
         current_order.reject!(current_customer)

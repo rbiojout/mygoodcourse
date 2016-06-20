@@ -5,3 +5,4 @@ LANGUAGES = [
     ['English',                   'en'],
     ["Français".html_safe,        'fr']
 ]
+

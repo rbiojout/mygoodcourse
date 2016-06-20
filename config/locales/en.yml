@@ -27,8 +27,9 @@ en:
       catalog: 'Catalog'
       my_products: 'My Products'
       my_orders: 'My Orders'
-      my_profile: "Edit my profile"
-      my_dashboard: "Dashboard"
+      my_account: "My account"
+      my_profile: "My profile"
+      my_dashboard: "My Dashboard"
 
   views:
     flash_update_message: 'Updated with success'
@@ -36,17 +37,70 @@ en:
     flash_delete_message: 'Deletes with success'
 
   dialog:
+    restricted: "You don't have the right to access to this page"
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'
       no_result_found: 'No result found'
+    shop:
+      empty_cart: 'Your Cart is empty'
 
+  activerecord:
+    models:
+      category:
+        one: 'category'
+        other: 'categories'
+      level:
+        one: 'level'
+        other: 'levels'
+    attributes:
+      order:
+        accept_notice: 'Order has been accepted successfully'
+        reject_notice: 'Order has been rejected'
+        ship_notice: 'Order has been shipped successfully'
+      payment:
+        accept_notice: 'Payment has been accepted'
+        reject_notice: 'Payment has been rejected'
+      product:
+        create: 'Create a product'
+        submit: 'Save this product'
+        update: 'Modify this product'
+        need_attachment_notice: "You need to provide an attachment"
+
+  helpers:
+    action:
+      create: 'Create'
+      edit: 'Edit'
+      delete: 'Delete'
+      customer:
+        create: 'Create an account'
+        edit: 'Edit my profile'
+        delete: 'Delete my account'
+      product:
+        create: 'Create a product'
+        edit: 'Edit this product'
+        delete: 'Delete this product'
+
+    submit:
+      # helpers.submit.<model>.<action>
+      customer:
+        create: 'Create my account'
+        submit: 'Save my account'
+        update: 'Update my account'
+      product:
+        create: 'Create a product'
+        submit: 'Save this product'
+        update: 'Update this product'
 
   order_mailer:
     received:
       subject: 'Order Confirmation'
       accepted: 'Order Accepted'
       rejected: 'Order Rejected'
+
+  stripe:
+    dialog:
+      exchange_notice: 'Could not exchange Stripe token. Please try again.'
 
   time:
     formats:
@@ -61,6 +115,4 @@ en:
     dformat: '%R'                   # display format of the time (this is the default, can be ommited)
     pformat: 'HH:mm'                # picking format of the time (this is the default, can be ommited)
   dayViewHeaderFormat: 'MMMM YYYY'  # picking format of the time (this is the default, can be ommited)
-
-
 

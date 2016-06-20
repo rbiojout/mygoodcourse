@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     end
   end
   resources :attachments do
+    member do
+      get 'download'
+    end
     collection do
       post :sort
     end
@@ -56,7 +59,10 @@ Rails.application.routes.draw do
   resources :employees
   devise_for :customers, controllers: {
              sessions: 'customers/sessions',
-             registrations: 'customers/registrations'
+             registrations: 'customers/registrations',
+             confirmations: 'customers/confirmations',
+             passwords: 'customers/passwords',
+             unlocks: 'customers/unlocks'
                    }
   #devise_scope :customers do
   #  post "/sign_up", :to => "customers/registrations#create"

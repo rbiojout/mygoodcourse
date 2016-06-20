@@ -1,5 +1,6 @@
 class AttachmentsController < ApplicationController
-  before_action :set_attachment, only: [:show, :edit, :update, :destroy]
+  before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download]
+  before_action :authenticate_customer!, only: [:sort, :download]
 
   # GET /attachments
   # GET /attachments.json
@@ -60,6 +61,16 @@ class AttachmentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to attachments_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
+    end
+  end
+
+  # GET /attachments/1
+  def download
+    @pdf = @attachment.file.file.file
+    respond_to do |format|
+      format.pdf do
+        send_file(@pdf, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
+      end
     end
   end
 

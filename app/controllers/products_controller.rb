@@ -289,7 +289,7 @@ class ProductsController < ApplicationController
     end
 
     def correct_user
-      redirect_to products_path, alert: "You don't have the right to access to this page" unless @product.nil? || @product.customer_id == current_customer.id
+      redirect_to products_path, alert: t('dialog.restricted') unless @product.nil? || @product.customer_id == current_customer.id
     end
 
     # Used for sorting the list
@@ -305,12 +305,12 @@ class ProductsController < ApplicationController
       #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
       if params[:product][:attachments_attributes].nil?
         #@product.attachments.build
-        flash[:alert] = "You need to provide an attachment"
+        flash[:alert] = t('activerecord.product.need_attachment_notice')
         #redirect_to product_path
         logger.debug "no attachment"
       else if (params[:product][:attachments_attributes].size == 1 && params[:product][:attachments_attributes].first[1][:_destroy] == 'true')
              params[:product][:attachments_attributes].first[1][:_destroy] = 'false'
-         flash[:alert] = "You need to provide an attachment"
+         flash[:alert] = t('activerecord.product.need_attachment_notice')
          #redirect_to product_path
        end
 

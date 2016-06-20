@@ -1,13 +1,13 @@
 class Customers::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
-  # devise :omniauthable, omniauth_providers: [:twitter]
+  # user_mailer :omniauthable, omniauth_providers: [:twitter]
 
   # You should also create an action method in this controller like this:
   # def twitter
   # end
 
   # More info at:
-  # https://github.com/plataformatec/devise#omniauth
+  # https://github.com/plataformatec/user_mailer#omniauth
 
   # GET|POST /resource/auth/twitter
   # def passthru

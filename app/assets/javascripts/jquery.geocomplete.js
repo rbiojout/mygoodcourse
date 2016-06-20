@@ -34,7 +34,7 @@
   // * `maxZoom` - The maximum zoom level too zoom in after a geocoding response. Default: `16`
   // * `types` - An array containing one or more of the supported types for the places request. Default: `['geocode']` See the full list [here](http://code.google.com/apis/maps/documentation/javascript/places.html#place_search_requests).
   // * `blur` - Trigger geocode when input loses focus.
-  // * `geocodeAfterResult` - If blur is set to true, choose whether to geocode if user has explicitly selected a result before blur.
+  // * `geocodeAfterResult` - If blur is set to true, choose whether to geocode if user_mailer has explicitly selected a result before blur.
   // * `restoreValueAfterBlur` - Restores the input's value upon blurring. Default is `false` which ignores the setting.
 
   var defaults = {
@@ -169,7 +169,7 @@
     // to fall back when the autocompleter does not return a value.
     initGeocoder: function(){
 
-      // Indicates is user did select a result from the dropdown.
+      // Indicates is user_mailer did select a result from the dropdown.
       var selected = false;
 
       var options = {
@@ -201,12 +201,12 @@
         $.proxy(this.placeChanged, this)
       );
 
-      // Prevent parent form from being submitted if user hit enter.
+      // Prevent parent form from being submitted if user_mailer hit enter.
       this.$input.on('keypress.' + this._name, function(event){
         if (event.keyCode === 13){ return false; }
       });
 
-      // Assume that if user types anything after having selected a result,
+      // Assume that if user_mailer types anything after having selected a result,
       // the selected location is not valid any more.
       if (this.options.geocodeAfterResult === true){
         this.$input.bind('keypress.' + this._name, $.proxy(function(){
@@ -226,7 +226,7 @@
         this.lastInputVal = this.$input.val();
       }, this));
 
-      // Trigger find action when input element is blurred out and user has
+      // Trigger find action when input element is blurred out and user_mailer has
       // not explicitly selected a result.
       // (Useful for typing partial location and tabbing to the next field
       // or clicking somewhere else.)
@@ -528,7 +528,7 @@
       this.setDetail(this.details.lng, this.data.location.lng());
     },
 
-    // Update the plugin after the user has selected an autocomplete entry.
+    // Update the plugin after the user_mailer has selected an autocomplete entry.
     // If the place has no geometry it passes it to the geocoder.
     placeChanged: function(){
       var place = this.autocomplete.getPlace();

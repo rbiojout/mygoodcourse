@@ -5,7 +5,8 @@ ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
-gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+#gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # add some search with PostGres
@@ -50,7 +51,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
-# add devise for the users
+# add user_mailer for the users
 gem 'devise'
 
 # add pagination helper for listing the data
@@ -139,6 +140,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'sqlite3'
+  gem 'i18n-tasks', '~> 0.9.5'
 end
 
 

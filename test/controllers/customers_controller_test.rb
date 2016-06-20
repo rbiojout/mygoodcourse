@@ -5,7 +5,7 @@ class CustomersControllerTest < ActionController::TestCase
 
   setup do
     @customer = customers(:one)
-    @request.env["devise.mapping"] = Devise.mappings[:customer]
+    @request.env["user_mailer.mapping"] = Devise.mappings[:customer]
     #get :new
   end
 

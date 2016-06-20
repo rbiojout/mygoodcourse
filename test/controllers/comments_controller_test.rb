@@ -4,7 +4,7 @@ class CommentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup do
     @comment = comments(:one)
-    # add a signed user to perform the tests
+    # add a signed user_mailer to perform the tests
     sign_in :customer, (customers(:one))
   end
 

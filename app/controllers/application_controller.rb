@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # needed this form of set-up for devise
+  # needed this form of set-up for user_mailer
   # instead of
   # def default_url_options
   #  { locale: I18n.locale }
@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale]
   end
 
-  # needed this form of set-up for devise
+  # needed this form of set-up for user_mailer
   def self.default_url_options(options={})
     options.merge({ :locale => I18n.locale })
   end
@@ -45,7 +45,7 @@ class ApplicationController < ActionController::Base
   #  end
   #end
 
-  # add the possibility to have a custom redirect after sign in with devise
+  # add the possibility to have a custom redirect after sign in with user_mailer
   # add in the session controller
   # if params[:redirect_to].present?
   #   store_location_for(resource, params[:redirect_to])
@@ -64,7 +64,7 @@ class ApplicationController < ActionController::Base
 
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, :keys => [:email, :password, :password_confirmation, :name, :first_name, :mobile, :picture, :full_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng])
+    devise_parameter_sanitizer.permit(:sign_up, :keys => [:email, :password, :password_confirmation, :language, :country_id, :name, :first_name, :mobile, :birthdate, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng])
   end
 
   # Returns the active order for this session

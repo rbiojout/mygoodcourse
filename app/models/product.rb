@@ -239,6 +239,18 @@ class Product < ActiveRecord::Base
   # return the URL of the file corresponding to the preview prepared
   # in case of problem, returns the defaut preview
   # @return [String]
+  def attachment
+    begin
+      attachments.first
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      Attachment.new
+    end
+  end
+
+  # return the URL of the file corresponding to the preview prepared
+  # in case of problem, returns the defaut preview
+  # @return [String]
   def preview
     begin
      attachments.first.file.url(:preview)
@@ -269,24 +281,24 @@ class Product < ActiveRecord::Base
   # ensure that there are no line items referencing this product
   def ensure_not_referenced
     if order_items.empty?
-         return true
+      true
     else
-         errors.add(:base, 'Line Order present')
-         return false
+       errors.add(:base, 'Line Order present')
+       false
     end
   end
 
   # ensure that there is at list one attachment
   def ensure_attachment_present
     if attachments.empty?
-      return false
+      false
     else
       errors.add(:base, 'Attachment needed')
-      return true
+      true
     end
   end
 
-  # aggregate the score of comments for user
+  # aggregate the score of comments for user_mailer
   def update_for_customer
     comments = Comment.find_for_all_product_of_customer(customer.id)
     nb_comments = comments.size

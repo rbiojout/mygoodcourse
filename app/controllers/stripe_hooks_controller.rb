@@ -5,12 +5,12 @@ class StripeHooksController < ApplicationController
 
   def stripe
     # If the request has a 'user_id' key, then this is a webhook
-    # event sent regarding a connected user, and not to a webhook
+    # event sent regarding a connected user_mailer, and not to a webhook
     # handler setup on the application owner's account.
-    # So, use the user_id to look up a connected user on our end.
+    # So, use the user_id to look up a connected user_mailer on our end.
     user = params[:user_id] && User.find_by( stripe_user_id: params[:user_id] )
 
-    # If we didn't find a user, we'll have nil instead
+    # If we didn't find a user_mailer, we'll have nil instead
     # so build our arguments to the Event API taking that into account.
     # We'll end up with one of:
     #   args = [ 'EVENT_ID' ]
@@ -28,7 +28,7 @@ class StripeHooksController < ApplicationController
       return
     rescue Stripe::AuthenticationError
       # If we get an authentication error, and the event belongs to
-      # a user, that means the account deauthorized
+      # a user_mailer, that means the account deauthorized
       # our application. We can't look up and verify the event
       # because the event belongs to the connected account, and we're
       # no longer authorized to access their account!

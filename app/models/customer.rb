@@ -4,9 +4,9 @@ class Customer < ActiveRecord::Base
   PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 
 
-  # Include default devise modules. Others available are:
+  # Include default user_mailer modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :confirmable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # add a file for image
@@ -20,6 +20,7 @@ class Customer < ActiveRecord::Base
 
 
   has_many :products, dependent: :destroy
+  belongs_to :country
 
   def own_product(product)
     self.products.include?(product)
@@ -41,15 +42,15 @@ class Customer < ActiveRecord::Base
   # payment solution StripeAccount
   has_one :stripe_account, dependent: :destroy
 
-  # Follows a user.
+  # Follows a user_mailer.
   def follow(other_customer)
     active_peers.create(followed: other_customer)
   end
-  # Unfollows a user.
+  # Unfollows a user_mailer.
   def unfollow(other_customer)
     active_peers.find_by(followed: other_customer).destroy
   end
-  # Returns true if the current user is following the other user.
+  # Returns true if the current user_mailer is following the other user_mailer.
   def following?(other_customer)
     followeds.include?(other_customer)
   end

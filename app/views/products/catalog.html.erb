@@ -6,7 +6,7 @@
 
 <!-- search -->
 <h5>SEARCH
-<%= form_tag(catalog_products_path, method: :get) do |f| %>
+<%= form_tag(catalog_products_path, method: :get) do  %>
     <%= text_field_tag 'query' %>
     <%= button_tag 'submit', class: 'btn btn-primary btn-sm' %>
     <%= session[:query_store] %>
@@ -56,7 +56,7 @@
       <!--- Family and Category --->
       <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
-          <h3 class="panel-title">Categories</h3>
+          <h3 class="panel-title"><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h3>
         </div>
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked category-menu">
@@ -87,7 +87,7 @@
       <!--- Cycle and Level --->
       <div class="panel panel-default sidebar-menu">
         <div class="panel-heading">
-          <h3 class="panel-title">Cycles</h3>
+          <h3 class="panel-title"><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h3>
         </div>
         <div class="panel-body">
           <ul class="nav nav-pills nav-stacked category-menu">

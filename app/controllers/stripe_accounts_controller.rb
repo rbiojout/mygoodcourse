@@ -3,7 +3,7 @@ class StripeAccountsController < ApplicationController
   before_action :authenticate_customer!, only: [:managed, :standalone, :oauth, :confirm, :deauthorize]
 
   # Create a manage StripeAccount account for yourself.
-  # Only works on the currently logged in user.
+  # Only works on the currently logged in user_mailer.
   # See app/services/stripe_managed.rb for details.
   def managed
     connector = StripeManaged.new( current_customer )
@@ -20,7 +20,7 @@ class StripeAccountsController < ApplicationController
   end
 
   # Create a standalone StripeAccount account for yourself.
-  # Only works on the currently logged in user.
+  # Only works on the currently logged in user_mailer.
   # See app/services/stripe_unmanaged.rb for details.
   def standalone
     connector = StripeStandalone.new( current_customer )
@@ -35,12 +35,12 @@ class StripeAccountsController < ApplicationController
   end
 
   # Connect yourself to a StripeAccount account.
-  # Only works on the currently logged in user.
+  # Only works on the currently logged in user_mailer.
   # See app/services/stripe_oauth.rb for #oauth_url details.
   def oauth
     connector = StripeOauth.new( current_customer )
 
-    logger.debug(connector);
+    logger.debug(connector)
 
     #logger.debug("===> #{stripe_confirm_url}")
 
@@ -55,18 +55,18 @@ class StripeAccountsController < ApplicationController
   end
 
   # Confirm a connection to a StripeAccount account.
-  # Only works on the currently logged in user.
+  # Only works on the currently logged in user_mailer.
   # See app/services/stripe_connect.rb for #verify! details.
   def confirm
     connector = StripeOauth.new( current_customer )
     if params[:code]
       # If we got a 'code' parameter. Then the
-      # connection was completed by the user.
+      # connection was completed by the user_mailer.
       connector.verify!( params[:code] )
 
     elsif params[:error]
       # If we have an 'error' parameter, it's because the
-      # user denied the connection request. Other errors
+      # user_mailer denied the connection request. Other errors
       # are handled at #oauth_url generation time.
       flash[:alert] = "Authorization request denied."
     end
@@ -76,7 +76,7 @@ class StripeAccountsController < ApplicationController
 
   # Deauthorize the application from accessing
   # the connected StripeAccount account.
-  # Only works on the currently logged in user.
+  # Only works on the currently logged in user_mailer.
   def deauthorize
     connector = StripeOauth.new( current_customer )
     connector.deauthorize!

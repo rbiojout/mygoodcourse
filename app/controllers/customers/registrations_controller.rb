@@ -1,7 +1,5 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
-  before_action :set_customer, only: [:show, :edit, :update]
-
   def create
     #build_resource
 
@@ -13,9 +11,9 @@ class Customers::RegistrationsController < Devise::RegistrationsController
         super
       }
       format.json {
-        #@user = User.create(user_params)
-        #@user.save ? (render :json => {:state => {:code => 0}, :data => @user }) :
-            #(render :json => {:state => {:code => 1, :messages => @user.errors.full_messages} })
+        #@user_mailer = User.create(user_params)
+        #@user_mailer.save ? (render :json => {:state => {:code => 0}, :data => @user_mailer }) :
+            #(render :json => {:state => {:code => 1, :messages => @user_mailer.errors.full_messages} })
         if @customer.save
           if @customer.active_for_authentication?
             set_flash_message :notice, :signed_up if is_navigational_format?
@@ -80,7 +78,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign
-  # in to be expired now. This is useful if the user wants to
+  # in to be expired now. This is useful if the user_mailer wants to
   # cancel oauth signing in/up in the middle of the process,
   # removing all OAuth session data.
   # def cancel
@@ -110,14 +108,11 @@ class Customers::RegistrationsController < Devise::RegistrationsController
   # end
 
   private
-  # Use callbacks to share common setup or constraints between actions.
-  def set_customer
-    @customer = Customer.find(params[:id])
-  end
+
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def customer_params
-    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :mobile, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
+    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :language, :country_id, :mobile, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng)
   end
 
 
