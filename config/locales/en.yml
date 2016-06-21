@@ -66,6 +66,10 @@ en:
         submit: 'Save this product'
         update: 'Modify this product'
         need_attachment_notice: "You need to provide an attachment"
+    errors:
+      models:
+        product:
+
 
   helpers:
     action:

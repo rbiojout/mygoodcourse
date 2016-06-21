@@ -40,16 +40,23 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :resize_to_fit => [50, 50]
   # end
+  
 
-
-
-  def convert_to_reduced(height, width)
+  def add_backgroung(width, height)
     image = ::Magick::Image.read(current_path + "[0]")[0]
-    image.resize_to_fit(height,width).write(current_path)
+    image = image.resize_to_fit(width, height)
+    # we set to png to better transparency result
+    image = image.write("png:"+current_path)
+    target = ::Magick::Image.new(width, height) do
+      self.background_color = 'white'
+    end
+    # some issues of transparency appear...
+    #target.alpha(::Magick::TransparentAlphaChannel)
+    target.composite(image, ::Magick::CenterGravity, ::Magick::OverCompositeOp).write(current_path)
   end
 
   version :preview do
-    process :convert_to_reduced => [350, 350]
+    process :add_backgroung => [250, 350]
     process :convert => :png
     process :set_content_type
 
