@@ -40,7 +40,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
   # version :thumb do
   #   process :resize_to_fit => [50, 50]
   # end
-  
+
 
   def add_backgroung(width, height)
     image = ::Magick::Image.read(current_path + "[0]")[0]

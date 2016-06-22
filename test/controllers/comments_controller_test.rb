@@ -28,6 +28,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should create comment via ajax" do
+    sign_in :customer, (customers(:one))
     assert_difference('Comment.count') do
       xhr :post, :create, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
     end
@@ -70,6 +71,7 @@ class CommentsControllerTest < ActionController::TestCase
   end
 
   test "should update comment" do
+    sign_in :customer, (customers(:one))
     patch :update, id: @comment, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
     assert_redirected_to comment_path(assigns(:comment))
   end

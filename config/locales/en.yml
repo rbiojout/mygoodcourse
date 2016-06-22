@@ -54,6 +54,21 @@ en:
         one: 'level'
         other: 'levels'
     attributes:
+      creation_date: 'Creation date'
+      update_date: 'Update date'
+
+      attachment:
+        title: 'Title'
+        description: 'Description'
+        file_size: 'Size'
+        file_type: 'Type'
+        nbpages: 'Nb pages'
+        version_number: 'Version number'
+        active: 'Active'
+        position: 'Position'
+        detail: 'Detail'
+      customer:
+        language: 'Language'
       order:
         accept_notice: 'Order has been accepted successfully'
         reject_notice: 'Order has been rejected'
@@ -62,6 +77,14 @@ en:
         accept_notice: 'Payment has been accepted'
         reject_notice: 'Payment has been rejected'
       product:
+        name: 'Name'
+        description: 'Description'
+        short_description: 'Short description'
+        active: 'Active'
+        price: 'Price'
+        nb_comments: 'Nb comments'
+        score_comments: 'Comments Average Score'
+
         create: 'Create a product'
         submit: 'Save this product'
         update: 'Modify this product'

@@ -1,6 +1,6 @@
 RailsAdmin.config do |config|
 
-  config.main_app_name = ["ForMyCourse", "BackOffice"]
+  config.main_app_name = ["MyGoodCourse", "BackOffice"]
 
   require 'i18n'
   I18n.default_locale = :en

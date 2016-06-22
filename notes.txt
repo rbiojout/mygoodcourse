@@ -150,4 +150,13 @@ Be careful to add the locales in the URI list (comma separated list in stripe)
 set variables on HEROKU https://devcenter.heroku.com/articles/config-vars
 For Amazon S3, declare the variable in Rubymine (ENV VARIABLES DON'T WORK ELSE)
 
+installation SSH
+see https://devcenter.heroku.com/articles/ssl-endpoint
+see https://blog.heroku.com/archives/2016/5/18/announcing_heroku_free_ssl_beta_and_flexible_dyno_hours
+
+use of namecheap.com for buyin the SSH certificate
+openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
+
+heroku _certs:add mygoodcourse.crt mygoodcourse.key --app ancient-chamber-37263
+
 

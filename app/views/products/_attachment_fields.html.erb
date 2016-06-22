@@ -17,7 +17,7 @@
         <%= image_tag f.object.file.url(:preview), class: 'img-responsive panel-image-product' %>
         <div class="caption">
           <h4><%= t('activerecord.attributes.attachment.detail')%></h4>
-          <h6><strong><%= t('activerecord.attributes.general.created_at')%> : </strong><%= nice_date(attachment.created_at) %></h6>
+          <h6><strong><%= t('activerecord.attributes.creation_date')%> : </strong><%= nice_date(attachment.created_at) %></h6>
           <h6><strong><%= t('activerecord.attributes.attachment.file_size')%> : </strong><%= attachment.file_size %></h6>
           <h6><strong><%= t('activerecord.attributes.attachment.file_type')%> : </strong><%= attachment.file_type %></h6>
           <h6><strong><%= t('activerecord.attributes.attachment.nbpages')%> : </strong><%= attachment.nbpages %></h6>
