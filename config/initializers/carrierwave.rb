@@ -7,7 +7,7 @@ CarrierWave.configure do |config|
       #host:                  's3-eu-west-1.amazonaws.com',                         # optional, defaults to nil
       #endpoint:              'https://s3-eu-west-1.amazonaws.com'                  # optional, defaults to nil
   }
-  config.fog_directory  = (Rails.env.production? ? 'mygoodcourse' : 'fmcdevelopment')                                  # required
+  config.fog_directory  = (Rails.env.production? ? 'formycourse' : 'fmcdevelopment')                                  # required
   config.fog_public     = false                                         # optional, defaults to true
   config.fog_attributes = { 'Cache-Control' => "max-age=#{10.minutes.to_i}" } # optional, defaults to {}
 end
