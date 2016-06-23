@@ -68,9 +68,10 @@ class AttachmentsController < ApplicationController
   def download
     @pdf = @attachment.file
     unless @pdf.nil?
+      url = @pdf.url.to_s.start_with?('http')?@pdf.url:Rails.root.join(@pdf.url)
       respond_to do |format|
         format.pdf do
-          send_file(@pdf.path, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
+          send_file(@pdf.url, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
         end
       end
     end
