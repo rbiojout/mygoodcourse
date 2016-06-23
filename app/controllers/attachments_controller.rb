@@ -1,4 +1,6 @@
 class AttachmentsController < ApplicationController
+  require 'open-uri'
+
   before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download]
   before_action :authenticate_customer!, only: [:sort, :download]
 
@@ -66,14 +68,23 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments/1
   def download
-    @pdf = @attachment.file
+    @pdf = @attachment.file.file
     unless @pdf.nil?
-      url = @pdf.url.to_s.start_with?('http')?@pdf.url:Rails.root.join(@pdf.url)
+      if @pdf.is_a?(CarrierWave::SanitizedFile)
       respond_to do |format|
         format.pdf do
-          send_file(@pdf.url, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
+          send_file(@pdf.path, filename: 'MyGoodCourse.pdf', type: 'application/pdf', disposition: 'inline')
         end
       end
+      elsif @pdf.is_a?(CarrierWave::Storage::Fog::File)
+        respond_to do |format|
+          data_pdf = open(@pdf.url).read
+          format.pdf do
+            send_data(data_pdf, filename: 'MyGoodCourse.pdf', type: 'application/pdf', disposition: 'inline')
+          end
+        end
+      end
+
     end
   end
 
