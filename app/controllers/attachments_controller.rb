@@ -66,10 +66,12 @@ class AttachmentsController < ApplicationController
 
   # GET /attachments/1
   def download
-    @pdf = @attachment.file.file.file
-    respond_to do |format|
-      format.pdf do
-        send_file(@pdf, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
+    @pdf = @attachment.file
+    unless @pdf.nil?
+      respond_to do |format|
+        format.pdf do
+          send_file(@pdf.path, filename: 'my-awesome-pdf.pdf', type: 'application/pdf', disposition: 'inline')
+        end
       end
     end
   end
