@@ -42,23 +42,21 @@ RailsAdmin.config do |config|
 
   config.model "Cycle" do
     edit do
+      field :name
       field :description do
         partial 'form_summernote'
       end
     end
   end
 
-  # make sure that we have all models loaded
-  Rails.application.eager_load!
-
-  ActiveRecord::Base.descendants.each do |imodel|
-    config.model "#{imodel.name}" do
-      edit do
-        field :description do
-          partial 'form_summernote'
-        end
+  config.model "Level" do
+    edit do
+      field :name
+      field :description do
+        partial 'form_summernote'
       end
     end
   end
+  
 
 end
