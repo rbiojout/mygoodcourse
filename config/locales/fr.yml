@@ -22,24 +22,32 @@
 fr:
   hello: "Bonjour à tous"
   page:
-    title:
-      home: 'Accueil'
-      catalog: 'Catalogue'
-      my_products: 'Mes Produits'
-      my_orders: 'Mes Commandes'
-      my_account: "Mon compte"
-      my_profile: "Mon profil"
-      my_dashboard: "Tableau de bord"
+    home: 'Accueil'
+    catalog: 'Catalogue'
+    my_products: 'Mes Produits'
+    my_orders: 'Mes Commandes'
+    my_account: "Mon compte"
+    my_profile: "Mon profil"
+    my_dashboard: "Tableau de bord"
+    search: "Rechercher"
 
 
   dialog:
+    free: 'Gratuit'
     restricted: "Vous n'avez pas les droits pour accéder à cette page"
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
     shop:
-      empty_cart: 'Votre panier est vide'
+      add_cart: 'Ajouter au panier'
+      remove_cart: 'Retirer du panier'
+      empty_cart: 'Vider le panier'
+      continue_shoping: 'Continuer mes achats'
+      checkout: 'Passer commande'
+      notice_add_cart: 'Le produit a été ajouté au panier.'
+      alert_add_cart: "Product non actif."
+      alert_empty_cart: 'Votre panier est vide'
 
   activerecord:
     models:
@@ -47,15 +55,25 @@ fr:
       category:
         one: 'catégorie'
         other: 'catégories'
-      comment: 'commentaire'
+        all: 'Toutes catégories'
+      comment:
+        one: 'commentaire'
+        other: 'commentaires'
       country: 'pays'
       customer: 'client'
-      cycle: 'cycle'
+      cycle:
+        one: 'cycle'
+        other: 'cycles'
+        all: 'Tous cycles'
       employee: 'employé'
-      family: 'famille'
+      family:
+        one: 'famille'
+        other: 'familles'
+        all: 'Toutes familles'
       level:
         one: 'niveau'
         other: 'niveaux'
+        all: 'Tous niveaux'
       order: 'commande'
       payment: 'paiement'
       product: 'produit'
@@ -63,8 +81,8 @@ fr:
     attributes:
       #created_at: 'Créé le'
       #updated_at: 'Mis à jour le'
-      creation_date: 'Date de création'
-      update_date: 'Date de mise à jour'
+      creation_date: 'Date création'
+      update_date: 'Date mise à jour'
 
       attachment:
         title: 'Titre'
@@ -163,7 +181,8 @@ fr:
         price: 'Prix'
         nb_comments: 'Nombre de commentaires'
         score_comments: 'Score moyen des commentaires'
-        need_attachment_notice: "Vous devez joindre au moins un document"
+        alert_need_attachment: "Vous devez joindre au moins un document"
+        alert_need_category: ''
 
   helpers:
     action:

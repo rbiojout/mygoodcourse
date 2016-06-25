@@ -12,6 +12,15 @@ class OrderItem < ActiveRecord::Base
     joins(:order).where(orders: {status: status, customer_id: customer_id}).order(:product_id)
   end
 
+  # Recover all accepted order_items received for a particular customers buying
+  # @param customer_id [int] the id for the seller
+  # @param status [String] the status state, default 'accepted'
+  # @return [Collection]
+  def self.find_OK_product_customer(customer_id, product, status = 'accepted')
+    status = Order::STATUSES.include?(status) ? status : 'accepted'
+    joins(:order).where(orders: {status: status, customer_id: customer_id}).where(product: product)
+  end
+
   # Recover all accepted order_items received for a particular customers selling
   # @param customer_id [int] the id for the seller
   # @param status [String] the status state, default 'accepted'

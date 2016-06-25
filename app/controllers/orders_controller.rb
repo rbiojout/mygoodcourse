@@ -93,7 +93,7 @@ class OrdersController < ApplicationController
   def checkout
     current_order.customer = current_customer
 
-    redirect_to catalog_products_path, flash: { alert: t('dialog.shop.empty_cart') } if current_order.order_items.empty?
+    redirect_to catalog_products_path, flash: { alert: t('dialog.shop.alert_empty_cart') } if current_order.order_items.empty?
 
     # update the status
     current_order.ip_address = request.ip

@@ -262,10 +262,10 @@ class ProductsController < ApplicationController
     # @TODO check if already paid in another transaction
       product_to_order = Product.find(params[:product_id])
       if (product_to_order.nil? || !product_to_order.active?)
-        flash[:alert] = "Product not active."
+        flash[:alert] = t('dialog.shop.alert_add_cart')
       else
         current_order.order_items.add_item(product_to_order)
-        flash[:notice] = "Product was successfully added."
+        flash[:notice] = t('dialog.shop.notice_add_cart')
       end
 
 
@@ -305,12 +305,12 @@ class ProductsController < ApplicationController
       #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
       if params[:product][:attachments_attributes].nil?
         #@product.attachments.build
-        flash[:alert] = t('activerecord.product.need_attachment_notice')
+        flash[:alert] = t('activerecord.product.alert_need_attachment')
         #redirect_to product_path
         logger.debug "no attachment"
       else if (params[:product][:attachments_attributes].size == 1 && params[:product][:attachments_attributes].first[1][:_destroy] == 'true')
              params[:product][:attachments_attributes].first[1][:_destroy] = 'false'
-         flash[:alert] = t('activerecord.product.need_attachment_notice')
+         flash[:alert] = t('activerecord.product.alert_need_attachment')
          #redirect_to product_path
        end
 

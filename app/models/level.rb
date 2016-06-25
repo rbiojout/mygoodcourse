@@ -1,5 +1,6 @@
 class Level < ActiveRecord::Base
   belongs_to :cycle
+  acts_as_list scope: :cycle, add_new_at: :bottom
 
   has_and_belongs_to_many :products
 

@@ -1,4 +1,4 @@
-<h2><%= t('.title', resource: resource_class.model_name.human) %></h2>
+<h2><%= t('customers.passwords.edit.change_my_password') %></h2>
 
 <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
 
@@ -14,7 +14,7 @@
         <%= f.input :current_password, autocomplete: "off", hint: t('.we_need_your_current_password_to_confirm_your_changes') %>
     </div>
     <div class="form-actions">
-      <%= f.button :submit, t('.update') %>
+      <%= f.button :submit, t('.update'), class: 'btn btn-primary input-block-level form-control' %>
     </div>
 
 <% end %>

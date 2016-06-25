@@ -75,8 +75,8 @@ class OrderItemsController < ApplicationController
     @order_items = current_order.order_items
     if @order_items.empty?
       respond_to do |format|
-          format.html { redirect_to catalog_products_path, flash: { alert: t('dialog.shop.empty_cart') } }
-          format.js { render js: "window.location='#{catalog_products_path}'", flash: { alert: t('dialog.shop.empty_cart') } }
+          format.html { redirect_to catalog_products_path, flash: { alert: t('dialog.shop.alert_empty_cart') } }
+          format.js { render js: "window.location='#{catalog_products_path}'", flash: { alert: t('dialog.shop.alert_empty_cart') } }
         logger.debug("===> #{catalog_products_path}")
         end
     else

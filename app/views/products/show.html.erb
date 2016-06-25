@@ -3,7 +3,9 @@
     <p>
       <%= image_tag @product.preview, class: 'img-thumbnail center-block' %>
       <% if customer_signed_in? %>
-        <%= link_to 'Download', download_attachment_path(:format =>'pdf', :id => @product.attachment.id), class: 'btn btn-success input-block-level form-control' %>
+          <% if @product.candownload(current_customer) %>
+              <%= link_to 'Download', @product.file_url, class: 'btn btn-success input-block-level form-control' %>
+          <% end %>
       <% end %>
     </p>
   </div>
@@ -19,18 +21,18 @@
           <%= render "comments/show_stars", :score => @product.score_comments %>
         </div>      </div>
       <div class="panel-body">
-        <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||"Free" %></h4>
+        <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||t('dialog.free') %></h4>
           <span>nb pages:</span> <%= @product.nbpages %>
       </div>
       <div class="panel-body">
-        Categories:
+        <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
         <% @product.categories.each do |category| %>
             <%= link_to catalog_products_path(category_id: category.id) do%><span class="label label-default"><%= category.name %></span><% end %>
 
         <% end %>
         <br/>
 
-        Levels:
+        <%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %> :
         <% @product.levels.each do |level| %>
             <%= link_to catalog_products_path(level_id: level.id) do%><span class="label label-default"><%= level.name %></span><% end %>
 
@@ -42,7 +44,7 @@
           <% if customer_signed_in? && current_customer.own_product(@product) %>
               <%= link_to 'Edit', edit_product_path(@product), class:'btn btn-primary' %>
           <% else %>
-              <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary' do %><i class="fa fa-shopping-cart"></i> Add to cart<% end %>
+              <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <% end %>
         </p>
       </div>
@@ -58,8 +60,8 @@
 
 <div class="tabs product-tabs">
   <ul class="nav nav-tabs" role="tablist">
-    <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true">Description</a></li>
-    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false">Reviews <span id="nb_comments" class="badge"><%= @product.nb_comments||0  %></span></a></li>
+    <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true"><%= t('activerecord.attributes.product.description')%></a></li>
+    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false"><%= (I18n.translate 'activerecord.models.comment', count: 2).capitalize %> <span id="nb_comments" class="badge"><%= @product.nb_comments||0  %></span></a></li>
     <li role="presentation" class=""><a href="#video" role="tab" data-toggle="tab" aria-controls="video" aria-expanded="false">Responsive Video</a></li>
   </ul>
   <div class="tab-content">

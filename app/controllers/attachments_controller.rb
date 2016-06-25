@@ -69,7 +69,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments/1
   def download
     @pdf = @attachment.file.file
-    unless @pdf.nil?
+    if @pdf.nil? == false && (@attachment.product.candownload(current_customer))
       if @pdf.is_a?(CarrierWave::SanitizedFile)
       respond_to do |format|
         format.pdf do

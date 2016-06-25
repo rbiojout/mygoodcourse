@@ -260,6 +260,31 @@ class Product < ActiveRecord::Base
     end
   end
 
+  def file_url
+    begin
+      attachments.first.file.url()
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      "empty_preview.pdf"
+    end
+  end
+
+  def candownload(customer)
+    false
+    unless customer.nil?
+      # if the price is nil that's ok
+      if self.price.nil?
+        true
+      elsif self.customer.id == customer.id
+        # if this is a product frmo the customer, it is ok
+        true
+      else
+        # we need to find a valid order paid
+        OrderItem.find_OK_product_customer(customer.id, self, 'accepted').count > 0
+      end
+    end
+  end
+
   # return the nbpages of the file corresponding to the attachment
   # in case of problem, returns 0
   # @return [String]

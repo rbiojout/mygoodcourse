@@ -23,7 +23,7 @@
     </div>
     <%= number_to_currency order_item.product.price %>
     <hr>
-    <%= link_to "Remove from Cart", order_item, remote: true, method: :delete, dataconfirm: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: "btn btn-danger" %>
+    <%= link_to t('dialog.shop.remove_cart'), order_item, remote: true, method: :delete, dataconfirm: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: "btn btn-danger" %>
     <hr>
     <p>Nb Pages</p>
   </div>

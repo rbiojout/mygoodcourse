@@ -22,37 +22,57 @@
 en:
   hello: "Hello world"
   page:
-    title:
-      home: 'Home'
-      catalog: 'Catalog'
-      my_products: 'My Products'
-      my_orders: 'My Orders'
-      my_account: "My account"
-      my_profile: "My profile"
-      my_dashboard: "My Dashboard"
+    home: 'Home'
+    catalog: 'Catalog'
+    my_products: 'My Products'
+    my_orders: 'My Orders'
+    my_account: "My account"
+    my_profile: "My profile"
+    my_dashboard: "My Dashboard"
+    search: "Search"
 
   views:
     flash_update_message: 'Updated with success'
     flash_create_message: 'Created with success'
-    flash_delete_message: 'Deletes with success'
+    flash_delete_message: 'Deleted with success'
 
   dialog:
+    free: 'Free'
     restricted: "You don't have the right to access to this page"
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'
       no_result_found: 'No result found'
     shop:
-      empty_cart: 'Your Cart is empty'
+      add_cart: 'Add to cart'
+      remove_cart: 'Remove from cart'
+      continue_shoping: 'Continue shoping'
+      checkout: 'Checkout'
+      notice_add_cart: 'Product was successfully added to cart.'
+      alert_add_cart: "Product not active."
+      alert_empty_cart: 'Your Cart is empty'
 
   activerecord:
     models:
       category:
         one: 'category'
         other: 'categories'
+        all: 'All categories'
+      comment:
+        one: 'comment'
+        other: 'comments'
+      cycle:
+        one: 'cycle'
+        other: 'cycles'
+        all: 'All cycles'
+      family:
+        one: 'family'
+        other: 'families'
+        all: 'All families'
       level:
         one: 'level'
         other: 'levels'
+        all: 'All levels'
     attributes:
       creation_date: 'Creation date'
       update_date: 'Update date'
@@ -88,7 +108,8 @@ en:
         create: 'Create a product'
         submit: 'Save this product'
         update: 'Modify this product'
-        need_attachment_notice: "You need to provide an attachment"
+        alert_need_attachment: "You need to provide an attachment"
+
     errors:
       models:
         product:
