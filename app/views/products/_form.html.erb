@@ -4,6 +4,7 @@
 
     <!-- http://davidlesches.com/blog/rails-nested-forms-using-jquery-and-simpleform -->
     <%= f.error_notification %>
+
     <% if @product.errors.full_messages.size > 0 %>
         <ul class='alert alert-danger'>
           <% @product.errors.full_messages.each do |msg| %>
@@ -38,7 +39,7 @@
             <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
           </div>
           <!--- list all already existing attachments --->
-          <%= f.fields_for :attachments do |att| %>
+          <%= f.simple_fields_for :attachments do |att| %>
               <%= render(partial: 'products/attachment_fields', locals: {f: att, is_first: is_first }) %>
               <% is_first = false %>
           <% end %>

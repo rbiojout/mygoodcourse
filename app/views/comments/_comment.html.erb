@@ -6,7 +6,7 @@
   </div>
   <div class="media-body">
     <div class="row">
-      <div class="col-xs-9">
+      <div class="col-xs-7">
         <h3 class="media-heading"><%= comment.customer.first_name %> <%= comment.customer.name %></h3>
         <div class="meta">
           <span class="date text-muted"><%= nice_date(comment.updated_at) %></span>
@@ -14,7 +14,7 @@
         <b><%= comment.title %></b>
         <p><%= comment.description %></p>
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-5">
         <%= render "comments/show_stars", :score => comment.score %>
         <% # @TODO add report %>
         <p>REPORT problem</p>

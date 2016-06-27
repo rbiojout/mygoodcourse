@@ -39,7 +39,7 @@ class Product < ActiveRecord::Base
   # product is link to many categories
   has_and_belongs_to_many :categories, table_name: 'categories_products'
   has_many :families, through: :categories
-  validates_presence_of :categories, :message => "You need to provide at least one category."
+  validates_presence_of :categories
 
 
   # product is linked to many levels
@@ -296,6 +296,7 @@ class Product < ActiveRecord::Base
       "empty_preview.png"
     end
   end
+
 
   private
   # we want a name that start with capital

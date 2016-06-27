@@ -181,8 +181,20 @@ fr:
         price: 'Prix'
         nb_comments: 'Nombre de commentaires'
         score_comments: 'Score moyen des commentaires'
-        alert_need_attachment: "Vous devez joindre au moins un document"
-        alert_need_category: ''
+        attachments: 'Fichiers'
+        categories: 'Catégories'
+        levels: 'Niveaux'
+
+    errors:
+      models:
+        product:
+          attributes:
+            attachments:
+              blank: "Ajouter au moins un fichier"
+            categories:
+              blank: "Renseigner au moins une catégorie."
+            levels:
+              blank: "Renseigner au moins un niveau."
 
   helpers:
     action:

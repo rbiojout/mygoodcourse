@@ -11,8 +11,8 @@
   </div>
 
   <div class="caption">
-    <h4 class="pull-right"><%= number_to_currency(product.price, precision: 2)||"Free" %></h4>
-    <h4><%= link_to product.name, product_path(product.id) %>
+    <h5 class="pull-right"><%= number_to_currency(product.price, precision: 2)||"Free" %></h5>
+    <h4><%= link_to truncate(product.name, length: 20), product_path(product.id) %>
     </h4>
   </div>
 
