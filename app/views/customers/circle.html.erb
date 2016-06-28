@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="col-sm-2">
+    <div class="row">
+    <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
+    </div>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.profile'), customer_path(@customer) %></li>
+      <li role="presentation"><a href="#">Favorite</a></li>
+      <li role="presentation" class="active"><a href="#"><%= t('activerecord.attributes.customer.followers') %></a></li>
+    </ul>
+
+
+  </div>
+  <div class="col-sm-10">
+    <h4><%= t('activerecord.attributes.customer.followers') %></h4>
+    <div class="tabs customer-tabs">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#followers" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true"><%= t('activerecord.attributes.customer.followers') %></a></li>
+        <li role="presentation" class=""><a href="#followeds" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false"><%= t('activerecord.attributes.customer.followeds') %></a></li>
+      </ul>
+      <div class="tab-content">
+        <!--- followers --->
+        <div role="tabpanel" class="tab-pane active in" id="followers">
+          <%= render(partial:'customers/customer', collection: @customer.followers) %>
+        </div>
+        <!--- end followers --->
+        <!--- followeds --->
+        <div role="tabpanel" class="tab-pane" id="followeds">
+          <div id="followed-list">
+            <%= render(partial:'customers/customer', collection: @customer.followeds) %>
+          </div>
+        </div>
+        <!--- end followeds --->
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_customer_path(@customer) %> |
+<%= link_to 'Back', customers_path %>

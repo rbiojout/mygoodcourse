@@ -13,7 +13,7 @@ class Product < ActiveRecord::Base
   # we need at least one attachment
   has_many :attachments, -> { order(position: :asc) }, dependent: :destroy
   accepts_nested_attributes_for :attachments, :reject_if => proc {|attributes| attributes['file'].blank?  && attributes['file_cache'].blank?},  allow_destroy: true
-  validates_presence_of :attachments, :message => "You need to provide at least one version of attachment. Please add a new version."
+  validates_presence_of :attachments
   before_update :ensure_attachment_present
 
   # linked to customer as necessary
@@ -45,7 +45,7 @@ class Product < ActiveRecord::Base
   # product is linked to many levels
   has_and_belongs_to_many :levels, table_name: 'levels_products'
   has_many :cycles, through: :levels
-  validates_presence_of :levels, :message => "You need to provide at least one level."
+  validates_presence_of :levels
 
 
   # many comments linked, we consolidate the number and the average score

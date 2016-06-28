@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard, :circle]
   before_action :authenticate_customer!, only: [:update, :edit, :dashboard]
 
   before_action :correct_user, only: [:update, :edit]
@@ -26,6 +26,11 @@ class CustomersController < ApplicationController
 
   # GET /customers/dashboard
   def dashboard
+
+  end
+
+  # GET /customers/circle
+  def circle
 
   end
 

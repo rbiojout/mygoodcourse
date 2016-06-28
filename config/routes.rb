@@ -71,7 +71,7 @@ Rails.application.routes.draw do
   resources :customers do
     post 'attach_picture'
     member do
-      get :followeds, :followers, :dashboard
+      get :dashboard, :circle
     end
   end
 
@@ -117,13 +117,11 @@ Rails.application.routes.draw do
 
 
   # static pages
-  scope '(:locale)' do
-    get 'static_pages/home', as: 'home'
-    get 'static_pages/help', as: 'help'
-    get 'static_pages/contact', as: 'contact'
-    get 'static_pages/about', as: 'about'
-    get 'static_pages/cheating', as: 'cheating'
-  end
+  get 'static_pages/home', as: 'home'
+  get 'static_pages/help', as: 'help'
+  get 'static_pages/contact', as: 'contact'
+  get 'static_pages/about', as: 'about'
+  get 'static_pages/cheating', as: 'cheating'
 
   # root page
   root to: 'products#catalog'

@@ -31,6 +31,12 @@ en:
     my_dashboard: "My Dashboard"
     search: "Search"
 
+  actions:
+    create: 'Create'
+    read: 'Read'
+    update: 'Update'
+    delete: 'Delete'
+
   views:
     flash_update_message: 'Updated with success'
     flash_create_message: 'Created with success'
@@ -73,6 +79,9 @@ en:
         one: 'level'
         other: 'levels'
         all: 'All levels'
+      product:
+        one: 'product'
+        other: 'products'
     attributes:
       creation_date: 'Creation date'
       update_date: 'Update date'
@@ -89,6 +98,11 @@ en:
         detail: 'Detail'
       customer:
         language: 'Language'
+        profile: 'Profile'
+        followers: 'Followers'
+        followeds: 'Following'
+        located: 'Located in %{locality}'
+        since: 'Member since %{created}'
       order:
         accept_notice: 'Order has been accepted successfully'
         reject_notice: 'Order has been rejected'

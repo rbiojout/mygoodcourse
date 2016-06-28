@@ -16,7 +16,7 @@ display_info = (thisdoc)->
       success: (data) ->
         console.log(data)
     $(this).popover({
-      content: "Located in #{locality}. Member since #{created}",
+      content: "#{locality}. #{created}",
       placement: "top"})
     $(this).popover('show')
 

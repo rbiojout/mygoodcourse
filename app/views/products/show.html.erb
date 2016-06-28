@@ -42,7 +42,7 @@
         <!--- list of actions --->
         <p>
           <% if customer_signed_in? && current_customer.own_product(@product) %>
-              <%= link_to 'Edit', edit_product_path(@product), class:'btn btn-primary' %>
+              <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary' %>
           <% else %>
               <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <% end %>

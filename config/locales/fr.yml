@@ -31,6 +31,11 @@ fr:
     my_dashboard: "Tableau de bord"
     search: "Rechercher"
 
+  actions:
+    create: 'Créer'
+    read: 'Afficher'
+    update: 'Mettre à jour'
+    delete: 'Supprimer'
 
   dialog:
     free: 'Gratuit'
@@ -76,7 +81,9 @@ fr:
         all: 'Tous niveaux'
       order: 'commande'
       payment: 'paiement'
-      product: 'produit'
+      product:
+        one: 'produit'
+        other: 'produits'
       stripe_account: 'compte stripe'
     attributes:
       #created_at: 'Créé le'
@@ -125,7 +132,12 @@ fr:
         postal_code: 'Code Postal'
         locality: 'Ville'
         birthdate: 'Date de naissance'
+        profile: 'Profil'
+        followers: 'Abonnements'
+        followeds: 'Abonnés'
         remember_me: 'Se souvenir de moi'
+        located: 'Originaire de %{locality}'
+        since: 'Membre depuis %{created}'
       country:
         name: 'Nom'
         continent: 'Continent'
