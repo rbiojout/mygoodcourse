@@ -185,6 +185,9 @@ fr:
         method: 'méthode'
         accept_notice: 'payement accepté'
         reject_notice: 'payement refusé'
+      peers:
+        follow: 'Suivre'
+        unfollow: 'Ne plus suivre'
       product:
         name: 'Nom'
         description: 'Description'

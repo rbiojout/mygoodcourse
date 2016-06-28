@@ -121,6 +121,9 @@ en:
         attachments: 'Attachments'
         categories: 'Categories'
         levels: 'Levels'
+      peers:
+        follow: 'Follow'
+        unfollow: 'Unfollow'
 
     errors:
       models:
