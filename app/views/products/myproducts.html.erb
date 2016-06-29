@@ -10,6 +10,7 @@
     <th><%= sortable_bootstrap 'name', t('activerecord.attributes.product.name') %></th>
     <th><%= sortable_bootstrap 'active', t('activerecord.attributes.product.active') %></th>
     <th><%= sortable_bootstrap 'price', t('activerecord.attributes.product.price') %></th>
+    <th><%= sortable_bootstrap 'price', t('activerecord.attributes.creation_date') %></th>
     <th></th>
   </tr>
   </thead>
@@ -20,6 +21,7 @@
         <td><%= product.name %></td>
         <td><%= product.active %></td>
         <td><%= nice_price(product.price) %></td>
+        <td><%= nice_date(product.created_at) %></td>
         <td>
           <div class="btn-group pull-right">
             <%= link_to 'Show', product, class: "btn btn-default active" %>

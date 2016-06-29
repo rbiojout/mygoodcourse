@@ -16,15 +16,8 @@
     </h4>
   </div>
 
-  <div class="ratings">
-      <% unless product.score_comments.nil? %>
-          <%= render "comments/show_stars", :score => product.score_comments, :simple => true %>
-        <p><%= product.nb_comments.to_s + ' reviews' unless product.nb_comments.nil? %></p>
-
-  <% else %>
-        <%= render "comments/show_stars", :score => 0.0, :simple => true %>
-        <p>Not rated</p>
-      <% end %>
-  </div>
+  <!--- stars --->
+  <%= render :partial =>"comments/show_stars", :locals => {:score => product.score_comments, :nb_comments => product.nb_comments,:simple => true} %>
+  <!--- end stars --->
 
 </div>

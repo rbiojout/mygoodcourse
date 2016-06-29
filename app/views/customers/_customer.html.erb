@@ -26,16 +26,11 @@
     <% else %>
   <% end %>
 
-  <div class="ratings">
-    <% unless customer.score_comments.nil? %>
-        <%= render "comments/show_stars", :score => customer.score_comments, :simple => true %>
-        <p><%= customer.nb_comments.to_s + ' reviews' unless customer.nb_comments.nil? %></p>
+      <!--- stars --->
+        <%= render :partial =>"comments/show_stars", :locals => {:score => customer.score_comments, :nb_comments => customer.nb_comments,:simple => false} %>
+      <!--- end stars --->
 
-    <% else %>
-        <%= render "comments/show_stars", :score => 0.0, :simple => true %>
-        <p>Not rated</p>
-    <% end %>
-  </div>
+
 
     </div>
 </div>

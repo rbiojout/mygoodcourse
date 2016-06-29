@@ -96,6 +96,11 @@ en:
         active: 'Active'
         position: 'Position'
         detail: 'Detail'
+      comment:
+        title: 'Title'
+        description: 'Description'
+        score: 'Score'
+        not_rated: 'Not rated'
       customer:
         language: 'Language'
         profile: 'Profile'

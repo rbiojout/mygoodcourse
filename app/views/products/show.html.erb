@@ -18,7 +18,7 @@
           <span class="label label-danger">sale</span>
         </div>
         <div id="product_score">
-          <%= render "comments/show_stars", :score => @product.score_comments %>
+          <%= render :partial => "comments/show_stars", :score => @product.score_comments, :nb_comments => @product.nb_comments %>
         </div>      </div>
       <div class="panel-body">
         <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||t('dialog.free') %></h4>

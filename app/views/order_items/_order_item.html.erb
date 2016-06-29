@@ -17,7 +17,7 @@
       <p class="pull-right"><%= order_item.product.nb_comments.to_s + ' reviews' unless order_item.product.nb_comments.nil? %></p>
       <p>
         <% unless order_item.product.score_comments.nil? %>
-            <%= render "comments/show_stars", :score => order_item.product.score_comments, :simple => true %>
+            <%= render :partial =>"comments/show_stars", :locals => {:score => order_item.product.score_comments, :nb_comments => order_item.product.nb_comments, :simple => true} %>
         <% end %>
       </p>
     </div>

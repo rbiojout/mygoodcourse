@@ -1,15 +1,21 @@
+<div class="ratings">
+  <%
+     # this helper provide the stars
+     # need for font awesome to be installed
+     # default values
+     # - score (value of the score) = 0
+     # - nb_stars (total of the scale) = 5
+     # - simple ( remove the numeric value)= false
+     # - nb_comments = -1 in case there are no comments
+     score ||= 0.0
+     nb_stars ||= 5
+     simple ||= false
+     nb_comments ||= -1
 
-<%= content_tag("div", class: 'product-rating') do
-# this helper provide the stars
-# need for font awesome to be installed
-# default values
-# - score (value of the score) = 0
-# - nb_stars (total of the scale) = 5
-# - simple ( remove the numeric value)= fale
 
-  score ||= 0
-  nb_stars ||= 5
-  simple ||= false
+  %>
+  <%= content_tag("div", class: 'product-rating') do
+
   1.upto(nb_stars) do |i|
     if i<=score
       concat content_tag("span", ' ', class: "fa fa-star")+ ' '
@@ -23,3 +29,16 @@
   concat content_tag("span", score.round(2), class: 'badge') unless simple
 
 end %>
+
+<% # add the number of comments if necessary
+   unless simple   %>
+<% if nb_comments == -1 %>
+    <p><%= t('activerecord.attributes.comment.not_rated')%></p>
+<% else %>
+    <p><%= nb_comments.to_s + ' ' +(I18n.translate 'activerecord.models.comment', count: nb_comments).capitalize %></p>
+<% end %>
+<% end %>
+
+</div>
+
+

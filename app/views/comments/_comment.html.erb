@@ -1,5 +1,4 @@
 <!-- REVIEW - START -->
-
 <div class="media comment" id=<%= 'current_comment' if comment == @current_comment %> >
     <div class="row">
       <div class="col-xs-6 col-sm-3 col-md-3">
@@ -12,7 +11,10 @@
 
       </div>
       <div class="col-xs-6 col-sm-3 col-md-3">
-        <%= render "comments/show_stars", :score => comment.score %>
+        <!--- stars --->
+        <%= render :partial =>"comments/show_stars", :locals => {:score => comment.score,:simple => true} %>
+        <!--- end stars --->
+
         <% # @TODO add report %>
         <p>REPORT problem</p>
       </div>

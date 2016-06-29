@@ -109,6 +109,7 @@ fr:
         title: 'Titre'
         description: 'Description'
         score: 'Score'
+        not_rated: 'Non évalué'
       country:
         name: 'nom'
         continent: 'continent'
