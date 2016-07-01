@@ -71,21 +71,21 @@ class OrdersController < ApplicationController
 
   def accept
     @order.accept!(current_customer)
-    redirect_to @order, flash: { notice: 'activerecord.order.accept_notice' }
+    redirect_to @order, flash: { notice: t('dialog.shop.notice_order_accepted') }
   rescue Errors::PaymentDeclined => e
     redirect_to @order, flash: { alert: e.message }
   end
 
   def reject
     @order.reject!(current_customer)
-    redirect_to @order, flash: { notice: 'activerecord.order.reject_notice' }
+    redirect_to @order, flash: { notice: t('dialog.shop.notice_order_rejected')   }
   rescue Errors::PaymentDeclined => e
     redirect_to @order, flash: { alert: e.message }
   end
 
   def ship
     @order.ship!(params[:consignment_number], current_customer)
-    redirect_to @order, flash: { notice: 'activerecord.order.ship_notice' }
+    redirect_to @order, flash: { notice: t('dialog.shop.notice_orders_shiped') }
   end
 
   # GET /checkout
@@ -145,10 +145,10 @@ class OrdersController < ApplicationController
         current_order.amount_paid = current_order.total
         # save the state from the payment module as accepted
         current_order.accept!(current_customer)
-        redirect_to root_path, :notice => t('activerecord.payment.accept_notice')
+        redirect_to root_path, :notice => t('dialog.shop.notice_pay_accepted')
 
       rescue  => e
-        flash[:alert] = "#{t('activerecord.payment.reject_notice')} #{e.message}"
+        flash[:alert] = "#{I18n.translate('activerecord.attributes.order.reject_notice')} #{e.message}"
         logger.debug("Payment was declined by the bank. #{e.message}")
         # save the state from the payment module as rejected
         current_order.reject!(current_customer)

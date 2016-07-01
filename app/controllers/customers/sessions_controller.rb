@@ -14,6 +14,11 @@ class Customers::SessionsController < Devise::SessionsController
   end
 
 
+  def after_sign_in_path_for(customer)
+    root_path(:locale => customer.language||I18n.default_locale)
+  end
+
+
 
   # GET /resource/sign_in
   # def new

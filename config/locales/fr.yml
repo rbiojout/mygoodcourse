@@ -36,6 +36,8 @@ fr:
     read: 'Afficher'
     update: 'Mettre à jour'
     delete: 'Supprimer'
+    undo: 'Annuler'
+    pay: 'Payer'
 
   dialog:
     free: 'Gratuit'
@@ -52,6 +54,11 @@ fr:
       continue_shoping: 'Continuer mes achats'
       checkout: 'Passer commande'
       notice_add_cart: 'Le produit a été ajouté au panier.'
+      notice_pay_accepted: 'Payement accepté'
+      notice_order_accepted: 'La commande a été acceptée avec succès'
+      notice_order_rejected: 'La commande a été rejetée avec succès'
+      notice_orders_shiped: 'La commande a été envoyée avec succès'
+      notice_stripe_exchange: 'Impossible de valider avec Stripe. Merci de réessayer.'
       alert_add_cart: "Product non actif."
       alert_empty_cart: 'Votre panier est vide'
 
@@ -167,12 +174,9 @@ fr:
         status: 'Etat'
         received_at: 'Reçu le'
         accepted_at: 'Acceptée le'
-        accept_notice: 'La commande a été acceptée avec succès'
         consignement_number: 'Numéro de consigne'
         rejected_at: 'Refusée le'
         rejected_by: 'Refusée par'
-        reject_notice: 'La commande a été rejetée avec succès'
-        ship_notice: 'La commande a été envoyée avec succès'
         ip_address: 'Adresse IP'
         amount_paid: 'Montant payé'
         esported: 'Exportée'
@@ -185,8 +189,9 @@ fr:
         amount_refunded: 'montant remboursé'
         exported: 'exporté'
         method: 'méthode'
-        accept_notice: 'payement accepté'
-        reject_notice: 'payement refusé'
+        card_number: 'Numéro de carte'
+        expiration_date: "Date d'expiration"
+        cv_code: 'Code'
       peers:
         follow: 'Suivre'
         unfollow: 'Ne plus suivre'
@@ -248,10 +253,6 @@ fr:
       subject: 'Order Confirmation'
       accepted: 'Order Accepted'
       rejected: 'Order Rejected'
-
-  stripe:
-    dialog:
-      exchange_notice: 'Could not exchange Stripe token. Please try again.'
 
   time:
     formats:

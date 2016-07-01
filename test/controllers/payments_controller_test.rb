@@ -4,6 +4,8 @@ class PaymentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup do
     @payment = payments(:one)
+    # add a signed employee to perform the tests
+    sign_in :employee, (employees(:one))
   end
 
   test "should get index" do

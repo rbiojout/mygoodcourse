@@ -36,6 +36,8 @@ en:
     read: 'Read'
     update: 'Update'
     delete: 'Delete'
+    undo: 'Undo'
+    pay: 'Pay'
 
   views:
     flash_update_message: 'Updated with success'
@@ -56,6 +58,12 @@ en:
       continue_shoping: 'Continue shoping'
       checkout: 'Checkout'
       notice_add_cart: 'Product was successfully added to cart.'
+      notice_pay_accepted: 'Payment has been accepted'
+      notice_order_accepted: 'Order has been accepted successfully'
+      notice_pay_rejected: 'Payment refused'
+      notice_order_rejected: 'Order has been rejected'
+      notice_orders_shiped: 'Order has been shipped'
+      notice_stripe_exchange: 'Could not exchange Stripe token. Please try again.'
       alert_add_cart: "Product not active."
       alert_empty_cart: 'Your Cart is empty'
 
@@ -80,6 +88,9 @@ en:
         one: 'level'
         other: 'levels'
         all: 'All levels'
+      payment:
+        one: 'payment'
+        other: 'payments'
       product:
         one: 'product'
         other: 'products'
@@ -110,12 +121,17 @@ en:
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
       order:
-        accept_notice: 'Order has been accepted successfully'
-        reject_notice: 'Order has been rejected'
-        ship_notice: 'Order has been shipped successfully'
       payment:
-        accept_notice: 'Payment has been accepted'
-        reject_notice: 'Payment has been rejected'
+        amount: 'amount'
+        reference: 'reference'
+        confirmed: 'confirmed'
+        refundable: 'refundable'
+        amount_refunded: 'amount refunded'
+        exported: 'exported'
+        method: 'method'
+        card_number: 'Card number'
+        expiration_date: 'Expiration date'
+        cv_code: 'CV Code'
       product:
         name: 'Name'
         description: 'Description'
@@ -172,9 +188,6 @@ en:
       accepted: 'Order Accepted'
       rejected: 'Order Rejected'
 
-  stripe:
-    dialog:
-      exchange_notice: 'Could not exchange Stripe token. Please try again.'
 
   time:
     formats:

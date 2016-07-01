@@ -39,7 +39,8 @@ class Order < ActiveRecord::Base
 
 
         #payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
-      rescue ::Stripe::CardError
+      #rescue ::Stripe::CardError
+      rescue
         raise Errors::PaymentDeclined, 'Payment was declined by the payment processor.'
       end
     end
@@ -128,10 +129,11 @@ class Order < ActiveRecord::Base
 
     # take the corresponding Stripe Account
     stripe_account_seller = regrouped_orders_items.first.product.customer.stripe_account
-    if (stripe_account_seller.nil?)
-      notes += "StripeAccount null for some items."
+    if (stripe_account_seller.nil? && amout_total > 0.0)
+      #notes += "StripeAccount null for some items."
       #we charge all to the platform
       # @TODO handle exception to continue treat other charges
+
       charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, capture: true }, Rails.application.secrets.stripe_secret_key)
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
@@ -154,7 +156,7 @@ class Order < ActiveRecord::Base
       end
 
 
-    else
+    elsif amout_total > 0.0
       # we charge to the seller
       # @TODO if the OAuth is no more valid we must handle this and use the platform
       charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round, capture: true }, Rails.application.secrets.stripe_secret_key)
