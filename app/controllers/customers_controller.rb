@@ -15,6 +15,13 @@ class CustomersController < ApplicationController
   def show
   end
 
+  # additionnal page for show
+  # give all the followers and followeds
+  # GET /customers/circle
+  def circle
+
+  end
+
   # GET /customers/new
   def new
     @customer = Customer.new
@@ -24,15 +31,14 @@ class CustomersController < ApplicationController
   def edit
   end
 
+
+
   # GET /customers/dashboard
   def dashboard
 
   end
 
-  # GET /customers/circle
-  def circle
 
-  end
 
   # POST /customers
   # POST /customers.json

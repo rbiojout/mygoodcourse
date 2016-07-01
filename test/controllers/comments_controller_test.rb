@@ -4,7 +4,7 @@ class CommentsControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup do
     @comment = comments(:one)
-    # add a signed user_mailer to perform the tests
+    # add a signed customer to perform the tests
     sign_in :customer, (customers(:one))
   end
 
@@ -36,7 +36,7 @@ class CommentsControllerTest < ActionController::TestCase
     assert_response :success
     assert_select_jquery :after, '#comment-form' do
       #assert_select '.media-object img', @comment.customer.picture
-      assert_select '.media-body p', @comment.description
+      assert_select '.hidden-xs p', @comment.description
     end
 
   end

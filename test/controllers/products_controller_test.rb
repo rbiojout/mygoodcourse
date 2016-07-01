@@ -5,7 +5,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   setup do
     @product = products(:one)
-    # add a signed user_mailer to perform the tests
+    # add a signed customer to perform the tests
     sign_in :customer, (customers(:one))
   end
 

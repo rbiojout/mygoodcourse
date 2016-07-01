@@ -4,6 +4,8 @@ class CategoriesControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup do
     @category = categories(:one)
+    # add a signed employee to perform the tests
+    sign_in :employee, (employees(:one))
   end
 
   test "should get index" do

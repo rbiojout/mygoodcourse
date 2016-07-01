@@ -1,3 +1,4 @@
+# https://gist.github.com/erpe/7bc15d9216cc4df0dc05
 class @GoogleAnalytics
 
   @load: ->
@@ -31,7 +32,16 @@ class @GoogleAnalytics
       window._gaq.push ["_trackPageLoadTime"]
 
   @isLocalRequest: ->
-    GoogleAnalytics.documentDomainIncludes "local"
+    if GoogleAnalytics.documentDomainIncludes "localhost"
+      return true
+    if GoogleAnalytics.documentDomainIncludes('127.0.0.1')
+      return true
+    if GoogleAnalytics.documentDomainIncludes('0.0.0.0')
+      return true
+    if GoogleAnalytics.documentDomainIncludes('staging')
+      return true
+
+    #GoogleAnalytics.documentDomainIncludes "local"
 
   @documentDomainIncludes: (str) ->
     document.domain.indexOf(str) isnt -1

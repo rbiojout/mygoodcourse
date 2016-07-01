@@ -40,6 +40,7 @@ fr:
   dialog:
     free: 'Gratuit'
     restricted: "Vous n'avez pas les droits pour accéder à cette page"
+    need_login: "Vous devez vous connecter pour continuer"
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'

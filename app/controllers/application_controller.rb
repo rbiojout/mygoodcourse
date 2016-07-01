@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
   end
 
 
-  # needed this form of set-up for user_mailer
+  # needed this form of set-up for devise
   # instead of
   # def default_url_options
   #  { locale: I18n.locale }
@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] || I18n.default_locale
   end
 
-  # needed this form of set-up for user_mailer
+  # needed this form of set-up for devise
   def self.default_url_options(options={})
     options.merge({ :locale => I18n.locale })
   end
@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
   #  end
   #end
 
-  # add the possibility to have a custom redirect after sign in with user_mailer
+  # add the possibility to have a custom redirect after sign in with devise
   # add in the session controller
   # if params[:redirect_to].present?
   #   store_location_for(resource, params[:redirect_to])

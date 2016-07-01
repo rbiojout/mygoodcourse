@@ -5,6 +5,8 @@ class FamiliesControllerTest < ActionController::TestCase
 
   setup do
     @family = families(:one)
+    # add a signed employee to perform the tests
+    sign_in :employee, (employees(:one))
   end
 
   test "should get index" do

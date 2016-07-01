@@ -1,14 +1,52 @@
-<h1>profile links</h1>
-<h1>Sales</h1>
-<%= line_chart OrderItem.group(:status).group_by_day(:created_at).count, id: 'OrderItems' %>
-<%= area_chart Order.group(:status).group_by_day(:created_at).sum(:amount_paid), id: 'Orders' %>
-<%= bar_chart Customer.group_by_week(:created_at).count, id: 'Users' %>
-<h1>Orders</h1>
-<h1>Favorite products</h1>
-<h1>Followers</h1>
-<%= render(partial:'customers/customer', collection: current_customer.followers) %>
-<h1>Followeds</h1>
-<div id="followed-list">
-<%= render(partial:'customers/customer', collection: current_customer.followeds) %>
+<div class="row">
+  <div class="col-sm-2">
+    <div class="row">
+      <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
+    </div>
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active"><a href="#">Overview</a></li>
+      <li role="presentation"><a href="#">Credit Cards</a></li>
+      <li role="presentation"><a href="#">Cash out</a></li>
+    </ul>
+
+
+  </div>
+  <div class="col-sm-10">
+    <h4>Dashboard</h4>
+
+
+    <div class="tabs customer-tabs">
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#overview" role="tab" data-toggle="tab" aria-controls="overview" aria-expanded="true">Overview</a></li>
+        <li role="presentation" class=""><a href="#cards" role="tab" data-toggle="tab" aria-controls="cards" aria-expanded="false">Credit cards</a></li>
+        <li role="presentation" class=""><a href="#cash_out" role="tab" data-toggle="tab" aria-controls="cash_out" aria-expanded="false">Cash Out</a></li>
+      </ul>
+      <div class="tab-content">
+        <!---  --->
+        <div role="tabpanel" class="tab-pane active in" id="overview">
+          <%= line_chart OrderItem.group(:status).group_by_day(:created_at).count, id: 'OrderItems' %>
+          <%= area_chart Order.group(:status).group_by_day(:created_at).sum(:amount_paid), id: 'Orders' %>
+          <%= bar_chart Customer.group_by_week(:created_at).count, id: 'Users' %>
+        </div>
+        <!---  --->
+        <!---  --->
+        <div role="tabpanel" class="tab-pane" id="cards">
+          <div id="followed-list">
+            <%= render(partial:'customers/details/cards') %>
+          </div>
+        </div>
+        <!---  --->
+        <!---  --->
+        <div role="tabpanel" class="tab-pane" id="cash_out">
+          <div id="followed-list">
+            <%= render(partial:'customers/details/cash_out', :locals => {:customer => @customer}) %>
+          </div>
+        </div>
+        <!---  --->
+      </div>
+    </div>
+  </div>
 </div>
+
+
 

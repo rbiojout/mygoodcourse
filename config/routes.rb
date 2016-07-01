@@ -68,10 +68,27 @@ Rails.application.routes.draw do
   #  post "/sign_up", :to => "customers/registrations#create"
   #  post "/sign_in", :to => "customers/sessions#create"
   #end
+  # account : all administrative informations
+  # - notifications : email and newsletters
+  # - credit cards : credit cards used (delete only, add done at payment)
+  # - cash-out : stripe account
+  # - password change and reset
+  #
+  # profile : all presentation information
+  # - details : name, firstname, adresse, birthdate ....
+  # - confidentiality : data that as exposed
+  # - presentation : photo, message, vidéo
+  # - experience : years of teaching, diploma
+  # - circle : followers and followeds
+
   resources :customers do
     post 'attach_picture'
     member do
-      get :dashboard, :circle
+      # from the show page add some links for profile
+      get :circle
+      # from the dashbord page add some links
+      get :dashboard, :credit_cards, :cash_out
+
     end
   end
 

@@ -45,6 +45,7 @@ en:
   dialog:
     free: 'Free'
     restricted: "You don't have the right to access to this page"
+    need_login: "You need to login to proceed"
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'

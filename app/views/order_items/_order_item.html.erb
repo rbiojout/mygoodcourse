@@ -9,22 +9,14 @@
   </div>
   <div class="col-xs-6 description_part">
     <h4><%= order_item.product.name %></h4>
-    <p>By Author</p>
-    <%= order_item.product.description.html_safe %>
-  </div>
-  <div class="col-xs-3 price_part">
-    <div class="ratings">
-      <p class="pull-right"><%= order_item.product.nb_comments.to_s + ' reviews' unless order_item.product.nb_comments.nil? %></p>
-      <p>
-        <% unless order_item.product.score_comments.nil? %>
-            <%= render :partial =>"comments/show_stars", :locals => {:score => order_item.product.score_comments, :nb_comments => order_item.product.nb_comments, :simple => true} %>
-        <% end %>
-      </p>
+    <div class="pull-right">
+      <%= render :partial =>"comments/show_stars", :locals => {:score => order_item.product.score_comments, :nb_comments => order_item.product.nb_comments, :simple => true} %>
     </div>
-    <%= number_to_currency order_item.product.price %>
-    <hr>
+    <small><%= order_item.product.customer.first_name %> <%= order_item.product.customer.name %></small>
+
+  </div>
+  <div class="col-xs-4 price_part">
+    <h4><%= nice_price(order_item.product.price) %></h4>
     <%= link_to t('dialog.shop.remove_cart'), order_item, remote: true, method: :delete, dataconfirm: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: "btn btn-danger" %>
-    <hr>
-    <p>Nb Pages</p>
   </div>
 </div>

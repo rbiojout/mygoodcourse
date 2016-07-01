@@ -11,43 +11,54 @@
   </div>
   <div class="col-xs-8">
     <div class="panel panel-default">
+      <!-- title -->
       <div class="panel-heading">
-        <h3 class="panel-title"><%= @product.name %></h3>
-        <div class="product-labels">
-          <span class="label label-info">new</span>
-          <span class="label label-danger">sale</span>
-        </div>
+        <h4 class="panel-title"><%= @product.name %></h4>
         <div id="product_score">
           <%= render :partial => "comments/show_stars", :score => @product.score_comments, :nb_comments => @product.nb_comments %>
         </div>      </div>
+      <!-- title -->
       <div class="panel-body">
-        <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||t('dialog.free') %></h4>
-          <span>nb pages:</span> <%= @product.nbpages %>
+        <div class="row">
+          <!-- short description -->
+          <div class="col-xs-6 col-sm-8">
+            <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||t('dialog.free') %></h4>
+            <span>nb pages:</span> <%= @product.nbpages %>
+            <p>
+            <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
+            <% @product.categories.each do |category| %>
+                <%= link_to catalog_products_path(category_id: category.id) do%><span class="label label-default"><%= category.name %></span><% end %>
+
+            <% end %>
+            </p>
+            <p>
+            <%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %> :
+            <% @product.levels.each do |level| %>
+                <%= link_to catalog_products_path(level_id: level.id) do%><span class="label label-default"><%= level.name %></span><% end %>
+
+            <% end %>
+            </p>
+          </div>
+          <!-- end short description -->
+          <!-- author -->
+          <div class="col-xs-6 col-sm-4">
+            <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
+          </div>
+          <!-- end author -->
+        </div>
       </div>
-      <div class="panel-body">
-        <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
-        <% @product.categories.each do |category| %>
-            <%= link_to catalog_products_path(category_id: category.id) do%><span class="label label-default"><%= category.name %></span><% end %>
-
-        <% end %>
-        <br/>
-
-        <%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %> :
-        <% @product.levels.each do |level| %>
-            <%= link_to catalog_products_path(level_id: level.id) do%><span class="label label-default"><%= level.name %></span><% end %>
-
-        <% end %>
-      </div>
+      <!--- list of actions --->
       <div class="panel-footer">
-        <!--- list of actions --->
-        <p>
           <% if customer_signed_in? && current_customer.own_product(@product) %>
-              <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary' %>
+              <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
           <% else %>
-              <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
+                <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <% end %>
-        </p>
       </div>
+      <!--- end list of actions --->
+
+
+
     </div>
     <ul class="list-inline product-links">
       <li><a href="#"><i class="fa fa-heart"></i> Add to wishlist</a></li>
@@ -73,7 +84,7 @@
       <% if customer_signed_in? %>
         <%= link_to 'add comment', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
       <% else %>
-          <%= link_to 'You must log in to add a comment', new_customer_session_path(:redirect_to => product_path(id: @product.id)), class: 'btn btn-primary' %>
+          <%= link_to t('dialog.need_login'), new_customer_session_path(:redirect_to => product_path(id: @product.id)), class: 'btn btn-primary' %>
       <% end %>
     <hr>
 
@@ -90,8 +101,6 @@
         <%= will_paginate(@comments, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
       </div>
 
-      <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
-      <a class="btn btn-primary" data-toggle="modal" data-target="#addReview">Add Review</a>
 
 
     </div>

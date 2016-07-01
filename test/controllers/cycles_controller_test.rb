@@ -5,6 +5,8 @@ class CyclesControllerTest < ActionController::TestCase
 
   setup do
     @cycle = cycles(:one)
+    # add a signed employee to perform the tests
+    sign_in :employee, (employees(:one))
   end
 
   test "should get index" do

@@ -5,6 +5,8 @@ class CountriesControllerTest < ActionController::TestCase
 
   setup do
     @country = countries(:one)
+    # add a signed employee to perform the tests
+    sign_in :employee, (employees(:one))
   end
 
   test "should get index" do

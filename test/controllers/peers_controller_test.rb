@@ -3,7 +3,7 @@ require 'test_helper'
 class PeersControllerTest < ActionController::TestCase
   include Devise::TestHelpers
   setup do
-    # add a signed user_mailer to perform the tests
+    # add a signed customer to perform the tests
     sign_in :customer, (customers(:one))
   end
 

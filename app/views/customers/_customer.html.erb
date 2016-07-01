@@ -1,12 +1,21 @@
 <% withcols ||= 'true' %>
 <div class="<%= 'col-xs-6 col-sm-3' if withcols == 'true' %> customer_presentation" id="customer_presentation_<%= customer.id%>">
-  <img class="media-object img-circle center-block customer-picture"
+  <!-- picture -->
+  <div class="row">
+
+    <img class="img-circle center-block customer-picture"
        data-customer="<%=customer.id %>"
        data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
        data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>" style="width:80px;">
-    <div class="caption">
-      <h5 class="media-heading two_lines"><%= customer.first_name %> <%= customer.name %></h5>
-
+    </div>
+  <!-- end picture -->
+    <!--- name --->
+    <div class="two_lines ellipsis">
+      <h4><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h4>
+    </div>
+  <!--- name --->
+    <!-- follow -->
+    <div>
     <% if customer_signed_in? %>
       <% if current_customer.id != customer.id %>
       <h5>
@@ -20,17 +29,19 @@
       </h5>
 
       <% else %>
-          <h5>.</h5>
+          <h5>-</h5>
       <% end %>
 
     <% else %>
   <% end %>
-
+      </div>
+    <!-- end follow -->
       <!--- stars --->
+    <div>
         <%= render :partial =>"comments/show_stars", :locals => {:score => customer.score_comments, :nb_comments => customer.nb_comments,:simple => false} %>
-      <!--- end stars --->
+    </div>
+    <!--- end stars --->
 
 
 
     </div>
-</div>
