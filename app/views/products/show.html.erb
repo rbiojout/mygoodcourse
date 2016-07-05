@@ -82,14 +82,15 @@
 
     <hr>
       <% if customer_signed_in? %>
-        <%= link_to 'add comment', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+        <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
       <% else %>
           <%= link_to t('dialog.need_login'), new_customer_session_path(:redirect_to => product_path(id: @product.id)), class: 'btn btn-primary' %>
       <% end %>
     <hr>
 
       <div id="comment_table" class="comments">
-        <div id="comment-form" style="display:none;"></div>
+        <div id="comment-form" ><h4><%= t('dialog.comments.add')%></h4></div>
+
         <% @comments.each do |comment| %>
             <%# Render table row partial for each person object %>
             <%= render partial: 'comments/comment', locals: {comment: comment} %>

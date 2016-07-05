@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160620171218) do
+ActiveRecord::Schema.define(version: 20160705040546) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(version: 20160620171218) do
     t.string   "unconfirmed_email"
     t.string   "language"
     t.integer  "country_id"
+    t.string   "description"
   end
 
   add_index "customers", ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true, using: :btree
@@ -266,12 +267,11 @@ ActiveRecord::Schema.define(version: 20160620171218) do
     t.string   "sku"
     t.string   "permalink"
     t.string   "description"
-    t.string   "short_description"
-    t.boolean  "active",                                    default: true
-    t.decimal  "price",             precision: 8, scale: 2, default: 0.0
-    t.boolean  "featured",                                  default: false
-    t.datetime "created_at",                                                null: false
-    t.datetime "updated_at",                                                null: false
+    t.boolean  "active",                                 default: true
+    t.decimal  "price",          precision: 8, scale: 2, default: 0.0
+    t.boolean  "featured",                               default: false
+    t.datetime "created_at",                                             null: false
+    t.datetime "updated_at",                                             null: false
     t.integer  "customer_id"
     t.integer  "nb_comments"
     t.decimal  "score_comments"

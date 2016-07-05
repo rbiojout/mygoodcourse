@@ -5,7 +5,6 @@ one:
   sku: 
   permalink: 
   description: Product1
-  short_description: product1
   active: true
   featured: true
   price: 10.00
@@ -18,7 +17,6 @@ two:
   sku: 
   permalink: 
   description: Product2
-  short_description: Product2
   active: true
   featured: true
   price: 10.00
@@ -29,7 +27,6 @@ free_from_seller_one:
   sku:
   permalink:
   description: Free from Seller One
-  short_description: Free from Seller One
   active: true
   featured: true
   price: 0.00
@@ -40,7 +37,6 @@ one_from_seller_one:
   sku:
   permalink:
   description: One from Seller One
-  short_description: One from Seller One
   active: true
   featured: true
   price: 5.00
@@ -51,7 +47,6 @@ two_from_seller_one:
   sku:
   permalink:
   description: Two from Seller One
-  short_description: Two from Seller One
   active: true
   featured: true
   price: 10.00
@@ -62,7 +57,6 @@ free_from_seller_two:
   sku:
   permalink:
   description: Free from Seller Two
-  short_description: Free from Seller Two
   active: true
   featured: true
   price: 0.00
@@ -73,7 +67,6 @@ one_from_seller_two:
   sku:
   permalink:
   description: One from Seller Two
-  short_description: One from Seller Two
   active: true
   featured: true
   price: 5.00
@@ -84,7 +77,6 @@ two_from_seller_two:
   sku:
   permalink:
   description: Two from Seller Two
-  short_description: Two from Seller Two
   active: true
   featured: true
   price: 10.00
@@ -95,7 +87,6 @@ product_without_orders:
   sku:
   permalink:
   description: Product_without_orders
-  short_description: Product_without_orders
   active: true
   featured: true
   price: 9.99
@@ -106,7 +97,6 @@ product_with_order_rejected:
   sku:
   permalink:
   description: Product_rejected
-  short_description: Product_rejected
   active: true
   featured: true
   price: 9.99
@@ -117,7 +107,6 @@ priced_one:
   sku:
   permalink:
   description: Product1
-  short_description: product1
   active: true
   featured: true
   price: 100.00
@@ -128,7 +117,6 @@ priced_two:
   sku:
   permalink:
   description: Product2
-  short_description: Product2
   active: true
   featured: true
   price: 200.00
@@ -139,7 +127,6 @@ ProdF1C1_C1L1:
   sku:
   permalink:
   description: ProdC1L1 querytest
-  short_description: ProdC1L1
   active: true
   featured: true
   price: 200.00
@@ -152,7 +139,6 @@ ProdF1C2_C1L2:
   sku:
   permalink:
   description: ProdC2L2 querytest
-  short_description: ProdC2L2
   active: true
   featured: true
   price: 200.00
@@ -165,7 +151,6 @@ ProdF2C1_C2L1:
   sku:
   permalink:
   description: ProdC3L3 querytest
-  short_description: ProdC3L3
   active: true
   featured: true
   price: 200.00
@@ -178,7 +163,6 @@ ProdF2C2_C2L2:
   sku:
   permalink:
   description: ProdC4L4 querytest
-  short_description: ProdC4L4
   active: true
   featured: true
   price: 200.00

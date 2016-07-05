@@ -8,7 +8,6 @@
       <th><%= sortable_bootstrap "created_at", 'Creation date' %></th>
       <th><%= sortable_bootstrap "sku", 'Unique SKU' %></th>
       <th>Permalink</th>
-      <th>Short description</th>
       <th><%= sortable_bootstrap "active", 'Active' %></th>
       <th><%= sortable_bootstrap "price", 'Price' %></th>
       <th colspan="1"></th>
@@ -22,7 +21,6 @@
         <td><%= product.created_at.to_date %></td>
         <td><%= product.sku %></td>
         <td><%= product.permalink %></td>
-        <td><%= product.short_description.html_safe %></td>
         <td><%= product.active %></td>
         <td><%= product.price %></td>
         <td>

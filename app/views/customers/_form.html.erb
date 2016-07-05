@@ -19,6 +19,7 @@
       <%= f.input :birthdate, as: :date_picker, input_html: {data: {date_options: {viewMode: 'years', showTodayButton: true}}} %>
 
       <%= f.input :formatted_address, :input_html => {:geocoding => 'formatted_address', class: 'geocoding_fulladdress'} %>
+      <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'} %>
       <div class="geo-details">
           <%= f.input :street_address, as: :hidden, :input_html => {:geocoding => 'name'} %>
           <%= f.input :administrative_area_level_1, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_1'} %>

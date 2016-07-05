@@ -1,1 +1,1 @@
-json.extract! @customer, :id, :name, :first_name, :email, :mobile, :birthdate, :picture, :formatted_address, :street_address, :administrative_area_level_1, :administrative_area_level_2, :postal_code, :locality, :created_at, :updated_at
+json.extract! @customer, :id, :name, :first_name, :email, :mobile, :birthdate, :picture, :formatted_address, :street_address, :administrative_area_level_1, :administrative_area_level_2, :postal_code, :locality, :lat, :lng, :description, :created_at, :updated_at

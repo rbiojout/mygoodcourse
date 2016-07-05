@@ -38,6 +38,10 @@ en:
     delete: 'Delete'
     undo: 'Undo'
     pay: 'Pay'
+    comments:
+      new: 'Add comment'
+    products:
+      new: 'Create product'
 
   views:
     flash_update_message: 'Updated with success'
@@ -52,6 +56,8 @@ en:
       order_by: 'Order by'
       searching_for: 'Searching for'
       no_result_found: 'No result found'
+    comments:
+      add: 'Give a comment on this product'
     shop:
       add_cart: 'Add to cart'
       remove_cart: 'Remove from cart'
@@ -66,6 +72,7 @@ en:
       notice_stripe_exchange: 'Could not exchange Stripe token. Please try again.'
       alert_add_cart: "Product not active."
       alert_empty_cart: 'Your Cart is empty'
+
 
   activerecord:
     models:
@@ -114,6 +121,7 @@ en:
         score: 'Score'
         not_rated: 'Not rated'
       customer:
+        description: 'Description'
         language: 'Language'
         profile: 'Profile'
         followers: 'Followers'
@@ -134,10 +142,14 @@ en:
         cv_code: 'CV Code'
       product:
         name: 'Name'
+        hint_name: 'Tip: Think about what a teacher might type into a search engine like Google to find a product like yours.'
         description: 'Description'
-        short_description: 'Short description'
+        place_description: 'Search results are tied to product titles and descriptions. Include relevant keywords and phrases as well as your store name in your description. Describe your product and how to use it thoroughly. Check your spelling. Look for typos.'
+        hint_description: 'Be explicit in your description'
         active: 'Active'
+        hint_active: 'you can activate or not your product. Non active products can not be listed in the search'
         price: 'Price'
+        hint_price: 'Value your work appropriately.'
         nb_comments: 'Nb comments'
         score_comments: 'Comments Average Score'
         attachments: 'Attachments'

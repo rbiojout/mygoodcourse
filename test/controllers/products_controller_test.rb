@@ -59,7 +59,7 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should create product" do
     assert_difference('Product.count') do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
+      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
     end
 
     assert_redirected_to product_path(assigns(:product))
@@ -67,19 +67,19 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should not create product without category" do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku, :category_ids => [], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
+      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
     end
   end
 
   test "should not create product without level" do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
+      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }
     end
   end
 
   test "should not create product without attachment" do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: nil  }} }
+      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price,  sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: nil  }} }
     end
   end
 
@@ -96,14 +96,14 @@ class ProductsControllerTest < ActionController::TestCase
 
   test "should update product" do
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku,
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
                                             attachments_attributes: { "0" =>{ id: attachments(:one).id } } }
     assert_redirected_to product_path(assigns(:product))
   end
 
   test "should update product with ordered attachments" do
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, short_description: @product.short_description, sku: @product.sku,
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
                                             attachments_attributes: {
                                                 "1465974930533" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')},
                                                 "0" =>{ id: attachments(:one).id } } }

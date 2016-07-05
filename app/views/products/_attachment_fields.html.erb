@@ -1,3 +1,4 @@
+<% is_first ||=false %>
 <% if f.object.new_record?  %>
     <div class="nested-fields col-sm-4 col-md-4 panel-product" id="attachment_<%=f.object.id%>">
       <div style="height:590px" >
@@ -5,7 +6,10 @@
             <img class="img-responsive" src="http://placehold.it/255x122/111111/FFFFFF" alt="">
             <%= f.input :file %>
             <%= f.input :file_cache, as: :hidden  %>
+        <!--- only when remove_ok flag is received we activate the link to remove --->
+        <% unless is_first %>
         <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm center-block' %>
+            <% end %>
         </div>
     </div>
 
@@ -24,7 +28,6 @@
           <h6><strong><%= t('activerecord.attributes.attachment.version_number')%> : </strong><%= attachment.version_number||0.0.round %></h6>
         </div>
         <!--- only when remove_ok flag is received we activate the link to remove --->
-        <% is_first ||=false %>
         <% unless is_first %>
             <%= link_to_remove_association "remove version", f, class: 'btn btn-danger btn-sm center-block' %>
         <% else %>
