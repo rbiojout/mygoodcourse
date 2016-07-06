@@ -5,13 +5,11 @@
 <!-- Page Content -->
 
 <!-- search -->
-<h5><%= t('page.search')%>
 <%= form_tag(catalog_products_path, method: :get) do  %>
     <%= text_field_tag 'query' %>
-    <%= button_tag 'submit', class: 'btn btn-primary btn-sm' %>
+    <%= button_tag t('page.search'), class: 'btn btn-primary btn-sm' %>
     <%= session[:query_store] %>
 <% end %>
-</h5>
 <hr>
 <!-- end search -->
 
@@ -46,9 +44,6 @@
                 <i class="fa fa-angle-up" aria-hidden="true"></i> <% end%>
             <%= link_to catalog_products_path(:sort =>'price', :direction => 'desc' ) do %>
                 <i class="fa fa-angle-down" aria-hidden="true"></i> <% end%>
-        </div>
-        <div class="list-group-item">
-            (<%=t('dialog.free')%>)
         </div>
       </div>
       <!--- end orders --->

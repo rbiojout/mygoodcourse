@@ -11,11 +11,19 @@ Rails.application.routes.draw do
   end
   post 'undo' => 'order_items#undo', :as => 'undo_order_item'
 
-  resources :orders do
+  resources :orders, only: [:show, :new, :create] do
     collection do
       get 'myorders'
     end
   end
+
+  #
+  # Checkout
+  #
+  match 'checkout' => 'orders#checkout', :as => 'checkout', :via => [:get, :patch]
+  match 'checkout/pay' => 'orders#payment', :as => 'checkout_payment', :via => [:get, :patch]
+  match 'checkout/confirm' => 'orders#confirmation', :as => 'checkout_confirmation', :via => [:get, :patch]
+
   resources :levels do
     collection do
       post :sort
@@ -123,13 +131,6 @@ Rails.application.routes.draw do
   #delete 'basket/:order_item_id' => 'orders#change_item_quantity'
   #delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
 
-  #
-  # Checkout
-  #
-  match 'checkout' => 'orders#checkout', :as => 'checkout', :via => [:get, :patch]
-  match 'checkout/delivery' => 'orders#change_delivery_service', :as => 'change_delivery_service', :via => [:post]
-  match 'checkout/pay' => 'orders#payment', :as => 'checkout_payment', :via => [:get, :patch]
-  match 'checkout/confirm' => 'orders#confirmation', :as => 'checkout_confirmation', :via => [:get, :patch]
 
 
 

@@ -22,7 +22,7 @@
     </h4>
     <b>About</b>
     <blockquote>
-      <%= @customer.description||''.html_safe %>
+      <%= raw(@customer.description) %>
     </blockquote>
     <mark>
 

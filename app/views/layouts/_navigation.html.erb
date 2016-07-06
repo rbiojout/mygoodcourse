@@ -15,6 +15,27 @@
         <%= render 'layouts/navigation_links' %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
+        <% if customer_signed_in? %>
+            <li class="dropdown">
+              <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="padding: 2px;">
+                <img class="media-object img-circle"
+                     alt="" src="<%= current_customer.picture %>" style="width:50px; padding: 0px;">
+              </a>
+              <ul class="dropdown-menu">
+                <li><%= link_to t('customers.passwords.edit.change_my_password'), edit_customer_registration_path(:id => current_customer.id) %></li>
+                <li><%= link_to t('page.my_profile'), customer_path(current_customer) %></li>
+                <li><%= link_to t('page.my_products'), myproducts_products_path %></li>
+                <li><%= link_to t('page.my_orders'), myorders_orders_path %></li>
+                <li><%= link_to t('page.my_dashboard'), dashboard_customer_path(current_customer) %></li>
+                <li><%= link_to t('customers.sessions.signed_out'), destroy_customer_session_path, :method=>'delete' %></li>
+              </ul>
+            </li>
+        <% else %>
+            <li><%= link_to t('customers.sessions.new.sign_in'), new_customer_session_path %></li>
+            <li><%= link_to t('customers.registrations.new.sign_up'), new_customer_registration_path %></li>
+        <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <% if has_order? && current_order.has_items? %>
             <li id="cart_summary">
               <%= render 'layouts/cart_summary' %>
