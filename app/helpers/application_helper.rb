@@ -15,7 +15,8 @@ module ApplicationHelper
   # helper to render the order in lists
   def sortable(column, title = nil)
     title ||= column.titleize
-    css_class = column == sort_column ? "btn btn-primary sorting_#{sort_direction}" : "btn btn-default sorting"
+    #css_class = column == sort_column ? "btn btn-primary sorting_#{sort_direction}" : "btn btn-default sorting"
+    css_class = column == sort_column ? "sorting_#{sort_direction}" : "sorting"
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     link_to title, {:sort => column, :direction => direction}, {:class => css_class}
   end
@@ -25,9 +26,11 @@ module ApplicationHelper
     title ||= column.titleize
     direction = column == sort_column && sort_direction == "asc" ? "desc" : "asc"
     glyphicon = column == sort_column ? ( sort_direction == "asc" ? "-by-attributes" : "-by-attributes-alt" ) :""
+    #css_class = column == sort_column ? "btn btn-primary sorting_#{sort_direction}" : "btn btn-default sorting"
     css_class = column == sort_column ? "btn btn-primary sorting_#{sort_direction}" : "btn btn-default sorting"
     css_button = column == sort_column ? 'primary' : 'default'
-    link_to content_tag(:span, '', class: "glyphicon glyphicon-sort#{glyphicon}", 'aria-hidden' => "true" )+ ' '+ title, {:sort => column, :direction => direction}, :class=>"btn btn-#{css_button}", :html_options => {:'aria-label' => "Left Align"}
+    #link_to content_tag(:span, '', class: "glyphicon glyphicon-sort#{glyphicon}", 'aria-hidden' => "true" )+ ' '+ title, {:sort => column, :direction => direction}, :class=>"btn btn-#{css_button}", :html_options => {:'aria-label' => "Left Align"}
+    link_to content_tag(:span, '', class: "glyphicon glyphicon-sort#{glyphicon}", 'aria-hidden' => "true" )+ ' '+ title, {:sort => column, :direction => direction}, :html_options => {:'aria-label' => "Left Align"}
   end
 
   # helper to paginate
@@ -52,9 +55,31 @@ module ApplicationHelper
     content_tag("span", nice_date.html_safe, class: 'date')
   end
 
-  # helper to have a common way to present price
+  # helper to have a common way to present price withe the right unit
   def nice_price(price)
     nice_date = number_to_currency(price, precision: 2, unit: "EUR", format: "%n %u")||I18n.translate('dialog.free')
+  end
+
+  # helper to have a common way to present status for orders
+  # the list of status are in Order.STATUSES
+  # STATUSES = %w(building confirming received accepted rejected).freeze
+  # we need to have a common way to present without any i18n issue
+  def nice_status(status)
+    status ||= ''
+    css_class = "badge"
+    case status
+      when "building"
+        css_class = "badge badge-warning"
+      when "confirming"
+        css_class = "badge badge-warning"
+      when "received"
+        css_class = "badge badge-primary"
+      when "accepted"
+        css_class = "badge badge-success"
+      when "rejected"
+        css_class = "badge danger-danger"
+    end
+    content_tag("span", status.to_s.capitalize, class: "#{css_class}")
   end
 
 

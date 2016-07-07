@@ -1,0 +1,5 @@
+<tr>
+  <td><%= nice_date(payment.created_at) %></td>
+  <td><%= nice_price(payment.amount) %></td>
+  <td><i class="fa <%= (payment.confirmed?)?'fa-check alert-success':'fa-remove alert-danger' %>"></i></td>
+</tr>

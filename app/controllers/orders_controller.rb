@@ -77,7 +77,7 @@ class OrdersController < ApplicationController
     end
 
     # validate card infos
-    #@TODO use validation of card
+    #@TODO use validation of card (done only at js level so far)
 
 
     #if request.patch?

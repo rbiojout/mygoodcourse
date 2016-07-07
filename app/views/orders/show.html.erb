@@ -1,22 +1,99 @@
 <p id="notice"><%= notice %></p>
 
+<div class="row">
+  <div class="col-md-12">
 
-<p>
-  <strong>Customer:</strong>
-  <%= @order.customer %>
-</p>
+        <section class="content invoice">
+          <!-- title row -->
+          <div class="row">
+            <div class="col-xs-12 invoice-header">
+              <h1>
+                <i class="fa fa-globe"></i> Invoice
+                <small class="pull-right"><%= nice_status(@order.status)%></small>
+              </h1>
+            </div>
+            <!-- /.col -->
+          </div>
 
-<p>
-  <strong>Customer Name:</strong>
-  <%= @order.customer.name %>
-</p>
+          <!-- Table row -->
+          <div class="row">
+            <div class="col-xs-12 table">
+              <table class="table table-striped">
+                <thead>
+                <tr>
+                  <th style="width: 20%">Image</th>
+                  <th>Name</th>
+                  <th>Nb pages</th>
+                  <th>Taxe amount #</th>
+                  <th>Subtotal</th>
+                </tr>
+                </thead>
+                <tbody>
+                <%= render partial: 'order_items/item_invoice', collection: @order.order_items %>
+                </tbody>
+              </table>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
 
-<p>
-  <strong>Customer FirstName:</strong>
-  <%= @order.customer.first_name %>
-</p>
+          <div class="row">
+            <!-- accepted payments column -->
+            <div class="col-xs-6">
 
-<p>
-  <strong>Status:</strong>
-  <%= @order.status %>
-</p>
+            </div>
+            <!-- /.col -->
+            <div class="col-xs-6">
+              <p class="lead">TOTAL</p>
+              <div class="table-responsive">
+                <table class="table">
+                  <tbody>
+                  <tr>
+                    <th style="width:50%">Subtotal:</th>
+                    <td><%= nice_price(@order.total_before_tax) %></td>
+                  </tr>
+                  <tr>
+                    <th>Tax</th>
+                    <td><%= nice_price(@order.tax) %></td>
+                  </tr>
+                  <tr>
+                    <th>Total:</th>
+                    <td><%= nice_price(@order.total) %></td>
+                  </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <!-- /.col -->
+          </div>
+          <!-- /.row -->
+
+          <div class="row">
+            <div class="col-xs-12 table">
+            <p class="lead">Payments</p>
+            <table class="table">
+              <thead>
+              <tr>
+                <th>Date</th>
+                <th>Amount</th>
+                <th>Confirmed</th>
+              </tr>
+              </thead>
+              <tbody>
+              <%= render partial: 'payments/payment', collection: @payments %>
+              </tbody>
+            </table>
+              </div>
+          </div>
+          <!-- /.row -->
+
+          <!-- this row will not appear when printing -->
+          <div class="row no-print">
+            <div class="col-xs-12">
+              <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
+              <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
+            </div>
+          </div>
+        </section>
+  </div>
+</div>

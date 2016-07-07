@@ -1,24 +1,26 @@
-<table class ='table'>
+<h2><%= t('page.my_orders')%></h2>
+
+<table class ='table table-striped'>
   <thead>
   <tr>
+    <th><%= sortable_bootstrap "id" %></th>
     <th><%= sortable_bootstrap "status" %></th>
     <th><%= sortable_bootstrap "created_at", 'Creation date' %></th>
-    <th><%= sortable_bootstrap "price", 'Price' %></th>
+    <th><%= sortable_bootstrap "amount_paid", 'Amount paid' %></th>
     <th colspan="1"></th>
   </tr>
   </thead>
 
   <tbody>
+  <% if @orders.blank? %>
+    MESSAGE : no Order
+  <% end %>
   <% @orders.each do |order| %>
       <tr>
-        <td><%= order.status %></td>
+        <td><%= link_to order.id, order %></td>
+        <td><%= nice_status(order.status) %></td>
         <td><%= nice_date(order.created_at) %></td>
         <td><%= nice_price(order.amount_paid) %></td>
-        <td>
-          <div class="btn-group pull-right">
-            <%= link_to 'Show', order, class: "btn btn-default active" %>
-          </div>
-        </td>
       </tr>
   <% end %>
   </tbody>

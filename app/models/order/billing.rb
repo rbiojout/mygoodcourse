@@ -43,7 +43,7 @@
     #
     # @return [BigDecimal]
     def total_before_tax
-      items_sub_total
+      items_sub_total - tax
     end
 
     # The total amount of tax due on this order
