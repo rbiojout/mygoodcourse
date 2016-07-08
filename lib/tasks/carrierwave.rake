@@ -1,5 +1,6 @@
 ##
 # generated with rail g carrierwave reprocess_attachments
+# use rake carrierwave:reprocess_attachments
 ##
 namespace :carrierwave do
 

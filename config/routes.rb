@@ -3,7 +3,11 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post '/rate' => 'rater#create', :as => 'rate'
   resources :comments
-  resources :payments
+  resources :payments, only: [:show] do
+    member do
+      post 'refund'
+    end
+  end
   resources :countries
   resources :order_items do
     member do
