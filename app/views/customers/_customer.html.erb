@@ -1,8 +1,7 @@
 <% withcols ||= 'true' %>
 <div class="<%= 'col-xs-6 col-sm-3' if withcols == 'true' %> customer_presentation" id="customer_presentation_<%= customer.id%>">
   <!-- picture -->
-  <div class="row">
-
+  <div class="center-block">
     <img class="img-circle center-block customer-picture"
        data-customer="<%=customer.id %>"
        data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"

@@ -226,7 +226,7 @@ see _bootstrap-variables.sass for information
 }
 
 /* panels for preview */
-
+/* cf https://miketricking.github.io/dist/ */
 
 
 .hovereffect {
@@ -259,7 +259,7 @@ see _bootstrap-variables.sass for information
   transition: all 0.4s ease-in-out;
 }
 
-.hovereffect img {
+.hovereffect:hover img {
   display: block;
   position: relative;
   -webkit-transform: scale(1.1);
@@ -267,7 +267,7 @@ see _bootstrap-variables.sass for information
   transform: scale(1.1);
 }
 
-.hovereffect:hover img {
+.hovereffect img {
   -webkit-transform: scale(1);
   -ms-transform: scale(1);
   transform: scale(1);
@@ -287,7 +287,6 @@ see _bootstrap-variables.sass for information
   display: inline-block;
   text-decoration: none;
   padding: 7px 14px;
-  text-transform: uppercase;
   color: #fff;
   border: 1px solid #fff;
   margin: 50px 0 0 0;
@@ -300,12 +299,12 @@ see _bootstrap-variables.sass for information
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
   font-weight: normal;
-  height: 85%;
+  height: 75%;
   width: 85%;
   position: absolute;
-  top: -20%;
+  top: 5%;
   left: 8%;
-  padding: 70px;
+  padding: 10px;
 }
 
 .hovereffect:hover a.info {

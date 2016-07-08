@@ -1,10 +1,8 @@
 <!-- REVIEW - START -->
-<div class="media comment" id=<%= 'current_comment' if comment == @current_comment %> >
+<div id=<%= 'current_comment' if comment == @current_comment %> >
     <div class="row">
       <div class="col-xs-6 col-sm-3 col-md-3">
-        <div>
           <%= render('customers/customer', :customer => comment.customer, :withcols => 'false' ) %>
-        </div>
       </div>
       <div class="hidden-xs col-sm-6 col-md-6">
         <b><%= comment.title %></b>

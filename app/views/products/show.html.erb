@@ -22,7 +22,7 @@
         <div class="row">
           <!-- short description -->
           <div class="col-xs-6 col-sm-8">
-            <h4 class="pull-right"><%= number_to_currency(@product.price, precision: 2)||t('dialog.free') %></h4>
+            <h4 class="pull-right"><%= nice_price(@product.price) %></h4>
             <span>nb pages:</span> <%= @product.nbpages %>
             <p>
             <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :

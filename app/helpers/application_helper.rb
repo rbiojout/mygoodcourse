@@ -57,7 +57,7 @@ module ApplicationHelper
 
   # helper to have a common way to present price withe the right unit
   def nice_price(price)
-    nice_date = number_to_currency(price, precision: 2, unit: "EUR", format: "%n %u")||I18n.translate('dialog.free')
+    nice_date = number_to_currency(price, precision: 2, unit: "€", format: "%n %u")||I18n.translate('dialog.free')
   end
 
   # helper to have a common way to present status for orders
