@@ -52,7 +52,7 @@ fr:
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
     comments:
-      add: 'Donnez votre avis sur ce produit'
+      add: "Il n'y a pas encore de commentaire sur ce produit"
     product:
       explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'
@@ -131,7 +131,9 @@ fr:
         position: 'Position'
       comment:
         title: 'Titre'
+        place_title: 'Titre ou résumé de votre commentaire (requis)'
         description: 'Description'
+        place_description: 'Renseignez le détail de votre commentaire (requis)'
         score: 'Score'
         not_rated: 'Non évalué'
       country:

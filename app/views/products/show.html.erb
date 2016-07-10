@@ -82,13 +82,17 @@
 
     <hr>
       <% if customer_signed_in? %>
-        <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+          <% if @product.cancomment(current_customer)==true %>
+
+            <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+          <% end %>
       <% else %>
           <%= link_to t('dialog.need_login'), new_customer_session_path(:redirect_to => product_path(id: @product.id)), class: 'btn btn-primary' %>
       <% end %>
     <hr>
 
       <div id="comment_table" class="comments">
+
         <div id="comment-form" ><h4><%= t('dialog.comments.add')%></h4></div>
 
         <% @comments.each do |comment| %>

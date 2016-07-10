@@ -57,7 +57,7 @@ en:
       searching_for: 'Searching for'
       no_result_found: 'No result found'
     comments:
-      add: 'Give a comment on this product'
+      add: 'There is no comment on this product'
     product:
       explain_add: 'Create you first product by clicking here.'
       add_version: 'Add new version'
@@ -126,7 +126,9 @@ en:
         detail: 'Detail'
       comment:
         title: 'Title'
+        place_title: 'Title or summary of your comment (required)'
         description: 'Description'
+        place_description: 'Enter here your comment (required)'
         score: 'Score'
         not_rated: 'Not rated'
       customer:

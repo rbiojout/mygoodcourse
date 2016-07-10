@@ -1,6 +1,12 @@
 <tr>
-  <td><%= image_tag item_invoice.product.preview, class: 'img-thumbnail center-block' %></td>
-  <td><%= item_invoice.product.name %></td>
+  <td><%= link_to product_path(item_invoice.product) do %>
+        <%= image_tag item_invoice.product.preview, class: 'img-thumbnail center-block' %>
+       <% end %>
+  </td>
+  <td><%= link_to product_path(item_invoice.product) do %>
+        <%= item_invoice.product.name %>
+    <% end %>
+  </td>
   <td><%= item_invoice.product.nbpages %></td>
   <td><%= nice_price(item_invoice.tax_amount) %></td>
   <td><%= nice_price(item_invoice.price) %></td>

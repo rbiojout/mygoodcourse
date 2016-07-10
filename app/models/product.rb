@@ -276,7 +276,7 @@ class Product < ActiveRecord::Base
       if self.price.nil?
         true
       elsif self.customer.id == customer.id
-        # if this is a product frmo the customer, it is ok
+        # if this is a product from the customer, it is ok
         true
       else
         # we need to find a valid order paid
@@ -284,6 +284,23 @@ class Product < ActiveRecord::Base
       end
     end
   end
+
+  def cancomment(customer)
+    false
+    unless customer.nil?
+      # owner can not put comment
+      if (self.customer.id != customer.id)
+        # we need to find a valid order paid
+        if OrderItem.find_OK_product_customer(customer.id, self, 'accepted').count > 0
+          # only one comment per user per product
+          if Comment.find_by_product_customer(self.id, self.customer.id).count==0
+            true
+          end
+        end
+      end
+    end
+  end
+
 
   # return the nbpages of the file corresponding to the attachment
   # in case of problem, returns 0

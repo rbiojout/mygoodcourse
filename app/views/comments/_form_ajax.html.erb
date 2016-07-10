@@ -25,16 +25,16 @@
         </div>
         <div class="form-group">
           <%= f.label :title, :class => "control-label"  %>
-          <%= f.text_field :title, placeholder: 'Title or summary of your comment (required)', :class => "form-control" %>
+          <%= f.text_field :title, placeholder: t('activerecord.attributes.comment.place_title'), :class => "form-control" %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">
           <%= f.label :description, :class => "control-label" %>
-          <%= f.text_area :description, placeholder: 'Enter here your comment (required)', :rows => 5, :class => "form-control" %>
+          <%= f.text_area :description, placeholder: t('activerecord.attributes.comment.place_description'), :rows => 5, :class => "form-control" %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <%= f.submit  @comment.new_record? ? "Create Comment" : "Update Comment", :class => "btn btn-primary" %>
+          <%= f.submit  @comment.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
         </div>
 
 

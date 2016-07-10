@@ -50,6 +50,16 @@ class OrdersController < ApplicationController
     # store in DB
     current_order.save
     @order = current_order
+
+    # if all orders are free skip payment
+    if current_order.total ==0
+      session[:order_id] = nil
+      # save the amount paid
+      current_order.amount_paid = current_order.total
+      # save the state from the payment module as accepted
+      current_order.accept!(current_customer)
+      redirect_to root_path, :notice => t('dialog.shop.notice_pay_accepted')
+    end
   end
 
   # GET /checkout/pay
