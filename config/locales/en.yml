@@ -59,6 +59,7 @@ en:
     comments:
       add: 'Give a comment on this product'
     product:
+      explain_add: 'Create you first product by clicking here.'
       add_version: 'Add new version'
       explain_add_version: 'Add new versions if needed. Only the last saved version will be available for download. If you want to keep the active version, just procedd to the other sections.'
       explain_order_version: 'Organize your versions to order them. You can select the active version by moving it at the first version. You need at least one (active) version.'

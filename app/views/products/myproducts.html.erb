@@ -11,33 +11,34 @@
     <th><%= sortable_bootstrap 'active', t('activerecord.attributes.product.active') %></th>
     <th><%= sortable_bootstrap 'price', t('activerecord.attributes.product.price') %></th>
     <th><%= sortable_bootstrap 'price', t('activerecord.attributes.creation_date') %></th>
-    <th></th>
   </tr>
   </thead>
 
   <tbody>
   <% @products.each do |product| %>
       <tr>
-        <td><%= product.name %></td>
+        <td><%= link_to product.name, edit_product_path(product)%></td>
         <td><%= product.active %></td>
         <td><%= nice_price(product.price) %></td>
         <td><%= nice_date(product.created_at) %></td>
-        <td>
-          <div class="btn-group pull-right">
-            <%= link_to 'Show', product, class: "btn btn-default active" %>
-            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-default" %>
-            <%= link_to 'Destroy', product, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-          </div>
-        </td>
       </tr>
   <% end %>
   </tbody>
 </table>
 
-<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %><br/>
 
 
 
-<br>
+<% if @products.size > 0 %>
+    <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %>
+<% else %>
+    <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary', :data =>{toggle: "tooltip", placement: "bottom"}, :title =>t('dialog.product.explain_add') %>
+<% end %>
 
-<%= link_to 'New Product', new_product_path, class: 'btn btn-primary' %>
+<!-- needed -->
+<script language="JavaScript">
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
+</script>

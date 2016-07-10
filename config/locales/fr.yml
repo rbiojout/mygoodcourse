@@ -54,6 +54,7 @@ fr:
     comments:
       add: 'Donnez votre avis sur ce produit'
     product:
+      explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'
       explain_add_version: 'Ajouter des nouvelles versions si nécessaire. Seule la dernière version sauvegardée sera disponible pour le téléchargement. Si vous souhaitez garder la version actuellement active, passez à la suite.'
       explain_order_version: 'Classez vos versions en les triant. Vous pouvez choisir la version active en la positionnant en premier. Il vous faut au minimum une version (active).'

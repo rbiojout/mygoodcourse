@@ -35,10 +35,8 @@
           <% unless @product.new_record?  %>
               <div class="col-sm-4 col-md-4" style="height:590px">
 
+                <%= link_to_add_association t('dialog.product.add_version'), f, :attachments, class: 'btn btn-primary center-block' %>
                 <p><i class="fa fa-reply fa-2x guiding"></i> <%= t('dialog.product.explain_add_version') %></p>
-
-                <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
-                <p></p>
                 <p><i class="fa fa-share fa-2x guiding"></i> <%= t('dialog.product.explain_order_version')%></p>
                 <p><i class="fa fa-hand-pointer-o fa-2x guiding"></i> <%= t('dialog.product.explain_drag_version')%></p>
 
