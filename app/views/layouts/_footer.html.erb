@@ -9,20 +9,13 @@
     <div class="row">
       <div class="col-md-4 col-sm-4">
         <ul class="list-inline">
-          <li><a href="#">About</a></li>
-          <li><a href="#">Our Story</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Terms</a></li>
-          <li><a href="#">Contact</a></li>
+          <p><%= t('activerecord.attributes.customer.language')%></p>
+          <li><%= link_to "English", :locale=>'en'%></li>
+          <li><%= link_to "Français", :locale=>'fr'%></li>
         </ul>
       </div>
       <div class="col-md-4 col-sm-4">
-        <ul class="list-inline">
-          <li><a href="#">Careeers</a></li>
-          <li><a href="#">Team</a></li>
-          <li><a href="#">Testimonials</a></li>
-          <li><a href="#">Blog</a></li>
-        </ul>
+
       </div>
       <div class="col-md-4 col-sm-4">
         <ul class="list-inline">

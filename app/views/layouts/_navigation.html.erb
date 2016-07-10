@@ -27,13 +27,13 @@
                 <li><%= link_to t('page.my_products'), myproducts_products_path %></li>
                 <li><%= link_to t('page.my_orders'), myorders_orders_path %></li>
                 <li><%= link_to t('page.my_dashboard'), dashboard_customer_path(current_customer) %></li>
-                <li><%= link_to t('customers.sessions.signed_out'), destroy_customer_session_path, :method=>'delete' %></li>
+                <li><%= link_to destroy_customer_session_path, :method=>'delete' do%><i class="fa fa-sign-out pull-right"></i><%end%></li>
               </ul>
             </li>
         <% else %>
-            <li><%= link_to t('customers.sessions.new.sign_in'), new_customer_session_path %></li>
             <li><%= link_to t('customers.registrations.new.sign_up'), new_customer_registration_path %></li>
-        <% end %>
+            <li><%= link_to t('customers.sessions.new.sign_in'), new_customer_session_path %></li>
+      <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if has_order? && current_order.has_items? %>
