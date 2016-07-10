@@ -35,20 +35,10 @@ textarea {
 }
 
 
-
-
-
-.bs-docs-featurette, .bs-docs-footer {
-  margin-top: 0;
-  border-top: 0;
-}
-
+/* footer */
 .bs-docs-footer {
   width: 100%;
-  margin: 0;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-top: 100px;
+  padding-top: 10px;
   color: #99979c;
   text-align: center;
   background-color: #2a2730
@@ -68,11 +58,18 @@ textarea {
 .green {
   color: #1ABB9C; }
 
+$custom-aero: #9CC2CB;
+
 .aero {
-  color: #9CC2CB; }
+  color: $custom-aero }
 
 .red {
   color: #E74C3C; }
+
+$custom-yellow: #FFDC1E;
+
+.yellow {
+  color: $custom-yellow;  }
 
 .dark {
   color: #34495E; }
@@ -87,7 +84,7 @@ textarea {
   border-color: #1ABB9C !important; }
 
 .border-aero {
-  border-color: #9CC2CB !important; }
+  border-color: $custom-aero !important; }
 
 .border-red {
   border-color: #E74C3C !important; }
@@ -115,9 +112,11 @@ textarea {
   border: 1px solid #3498DB !important;
   color: #fff; }
 
+$custom-orange: #F39C12;
+
 .bg-orange {
-  background: #F39C12 !important;
-  border: 1px solid #F39C12 !important;
+  background: $custom-orange !important;
+  border: 1px solid $custom-orange !important;
   color: #fff; }
 
 .bg-purple {
@@ -131,6 +130,12 @@ textarea {
   color: #fff; }
 
 
+/* guiding users */
+.guiding {
+  color: $custom-yellow;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: $custom-orange;
+}
 
 /* we want extra colors for the badges
 see _bootstrap-variables.sass for information
@@ -155,7 +160,7 @@ see _bootstrap-variables.sass for information
 .badge-danger {
   background-color: $brand-danger;
 }
-/* tentative to add glyph to sort */
+/* add glyph to sort */
 .sorting, .sorting_asc,
 .sorting_desc, .sorting_asc_disabled,
 .sorting_desc_disabled {
@@ -206,9 +211,9 @@ see _bootstrap-variables.sass for information
 
 /* Override Rail's default error calls with Bootstrap 3 */
 #error_explanation {
-  color: red;
+  color: #E74C3C;
   ul {
-    color: red;
+    color: #E74C3C;
     margin: 0 0 30px 0;
   }
 }
@@ -298,7 +303,7 @@ see _bootstrap-variables.sass for information
   transform: scale(1.5);
   -webkit-transition: all 0.4s ease-in-out;
   transition: all 0.4s ease-in-out;
-  font-weight: normal;
+  //font-weight: normal;
   height: 75%;
   width: 85%;
   position: absolute;
@@ -330,8 +335,15 @@ see _bootstrap-variables.sass for information
 }
 
 /* fixed height when displaying a text in the grid */
-.two_lines {
-  height:  3em;
+.height_30 {
+  height:  30px;
+  width:100%;
+}
+
+/* fixed height for the caption of the files attachments */
+.caption-file{
+  height:  205px;
+  width:100%;
 }
 
 

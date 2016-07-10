@@ -34,10 +34,16 @@
         <div class="row sortgrid", id="product_attachments" data-update-url="<%= sort_attachments_path %>">
           <% unless @product.new_record?  %>
               <div class="col-sm-4 col-md-4" style="height:590px">
-            <h4>Don't forget to save</h4>
-            <h5>You need to have a file attached. You can change by adding a new version</h5>
-            <h5>Only the LATEST version is available for the users to display</h5>
-            <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
+
+                <p><i class="fa fa-reply fa-2x guiding"></i> <%= t('dialog.product.explain_add_version') %></p>
+
+                <%= link_to_add_association 'Add new version', f, :attachments, class: 'btn btn-primary center-block' %>
+                <p></p>
+                <p><i class="fa fa-share fa-2x guiding"></i> <%= t('dialog.product.explain_order_version')%></p>
+                <p><i class="fa fa-hand-pointer-o fa-2x guiding"></i> <%= t('dialog.product.explain_drag_version')%></p>
+
+                <h4><%= t('dialog.product.explain_save') %></h4>
+
           </div>
           <% end %>
               <!--- list all already existing attachments --->
@@ -54,7 +60,7 @@
         <%= f.input :permalink %>
         <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: t('activerecord.attributes.product.place_description'), hint: t('activerecord.attributes.product.hint_description') %>
         <%= f.input :active, hint: t('activerecord.attributes.product.hint_active') %>
-        <%= f.input :price, :collection => ['0.99', '4.99', '9.99', '14.99', '19.99'],hint: t('activerecord.attributes.product.hint_price') %>
+        <%= f.input :price, :collection => [nil, '0.99', '4.99', '9.99', '14.99', '19.99'].collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
         <%= f.button :submit, class: 'btn btn-primary input-block-level form-control' %>
       </div>
 

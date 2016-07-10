@@ -53,6 +53,14 @@ fr:
       no_result_found: 'Aucun résultat'
     comments:
       add: 'Donnez votre avis sur ce produit'
+    product:
+      add_version: 'Nouvelle version'
+      explain_add_version: 'Ajouter des nouvelles versions si nécessaire. Seule la dernière version sauvegardée sera disponible pour le téléchargement. Si vous souhaitez garder la version actuellement active, passez à la suite.'
+      explain_order_version: 'Classez vos versions en les triant. Vous pouvez choisir la version active en la positionnant en premier. Il vous faut au minimum une version (active).'
+      explain_drag_version: "Faites glisser les versions sauvegardées dans l'ordre souhaité. L'ordre sera enregistré lorsque vous sauvegarderez."
+      explain_save: "N'oubliez pas de sauvegarder"
+      remove_version: 'Supprimer la version'
+      active_version: 'Version active'
     shop:
       add_cart: 'Ajouter au panier'
       remove_cart: 'Retirer du panier'

@@ -58,6 +58,14 @@ en:
       no_result_found: 'No result found'
     comments:
       add: 'Give a comment on this product'
+    product:
+      add_version: 'Add new version'
+      explain_add_version: 'Add new versions if needed. Only the last saved version will be available for download. If you want to keep the active version, just procedd to the other sections.'
+      explain_order_version: 'Organize your versions to order them. You can select the active version by moving it at the first version. You need at least one (active) version.'
+      explain_drag_version: 'Just drag the saved versions in the order you want. This will be updated when saved.'
+      explain_save: "Don't forget to save"
+      remove_version: 'Delete version'
+      active_version: 'Active version'
     shop:
       add_cart: 'Add to cart'
       remove_cart: 'Remove from cart'

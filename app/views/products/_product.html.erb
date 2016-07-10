@@ -11,24 +11,23 @@
           <!--- price --->
           <h2><%= nice_price(product.price) %></h2>
           <!--- end price --->
-         <%= link_to product.name, product_path(product.id), class: 'info' %>
+         <%= link_to product_path(product.id), class: 'info'  do %>
+           <h4><%= product.name %></h4>
+          <% end %>
 
         </div>
   </div>
   <!-- end picture -->
 
   <!--- name --->
-  <div class="two_lines ellipsis" style="float: left">
+  <div class="height_30 ellipsis" style="float: left">
     <h4><%= link_to product.name, product_path(product.id) %></h4>
   </div>
   <!--- end name --->
 
   <!--- stars --->
-  <div style="float: left; width:100%">
     <%= render :partial =>"comments/show_stars", :locals => {:score => product.score_comments, :nb_comments => product.nb_comments,:simple => true} %>
-  </div>
     <!--- end stars --->
- <p class="two_lines"></p>
 
 
 </div>
