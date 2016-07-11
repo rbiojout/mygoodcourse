@@ -9,6 +9,10 @@
   <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
   <script src="https://js.stripe.com/v2/"></script>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= javascript_tag do %>
+      I18n_defaultLocale = "<%= I18n.default_locale %>";
+      I18n_locale = "<%= I18n.locale %>";
+  <% end %>
 
   <%= csrf_meta_tags %>
   <!--[if lt IE 9]>
