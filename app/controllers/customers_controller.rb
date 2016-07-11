@@ -82,7 +82,7 @@ class CustomersController < ApplicationController
     rescue
       flash[:msg] = "Can't delete"
       respond_to do |format|
-        format.html { redirect_to(root_path, error: "Can't delete") }
+        format.html { redirect_to(catalog_products_path, error: "Can't delete") }
         format.xml  { head :ok }
       end
     end
@@ -102,6 +102,6 @@ class CustomersController < ApplicationController
 
     def correct_user
       @customer = Customer.find(params[:id])
-      redirect_to root_path, alert: t('dialog.restricted') unless @customer == current_customer
+      redirect_to catalog_products_path, alert: t('dialog.restricted') unless @customer == current_customer
     end
 end

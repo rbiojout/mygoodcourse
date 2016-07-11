@@ -59,7 +59,7 @@ class CustomersControllerTest < ActionController::TestCase
       delete :destroy, id: customers(:one)
     end
 
-    assert_redirected_to root_path
+    assert_redirected_to catalog_products_path
   end
 
 end

@@ -17,7 +17,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
 
     follow_redirect!
     assert_equal 200, status
-    assert_equal root_path, path
+    assert_equal catalog_products_path, path
     assert_equal 'Signed in successfully.', flash[:notice]
 
     get '/products', :id => products(:free_from_seller_one).id

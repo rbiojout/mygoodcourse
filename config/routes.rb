@@ -146,7 +146,7 @@ Rails.application.routes.draw do
   get 'static_pages/cheating', as: 'cheating'
 
   # root page
-  root to: 'products#catalog'
+  root to: 'static_pages#home'
 
 
   # StripeAccount Connect endpoints

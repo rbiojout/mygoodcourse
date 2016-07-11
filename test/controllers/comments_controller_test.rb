@@ -81,7 +81,7 @@ class CommentsControllerTest < ActionController::TestCase
     sign_in :customer, (customers(:two))
     patch :update, id: @comment, comment: { description: @comment.description, product_id: @comment.product_id, score: @comment.score, title: @comment.title }
 
-    assert_redirected_to root_path
+    assert_redirected_to catalog_products_path
   end
 
   test "should destroy comment" do

@@ -15,7 +15,7 @@ class Customers::SessionsController < Devise::SessionsController
 
 
   def after_sign_in_path_for(customer)
-    root_path(:locale => customer.language||I18n.default_locale)
+    catalog_products_path(:locale => customer.language||I18n.default_locale)
   end
 
 

@@ -11,7 +11,7 @@ class PaymentsControllerTest < ActionController::TestCase
 
   test "should not show payment" do
     get :show, id: @payment
-    assert_redirected_to root_path
+    assert_redirected_to catalog_products_path
   end
 
   test "should show payment if signed" do

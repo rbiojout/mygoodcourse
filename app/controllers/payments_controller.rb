@@ -38,6 +38,6 @@ class PaymentsController < ApplicationController
 
     def correct_user
       @payment = Payment.find(params[:id])
-      redirect_to root_path, alert: t('dialog.restricted') if @payment.nil? || current_customer.nil? || @payment.order.customer_id != current_customer.id
+      redirect_to catalog_products_path, alert: t('dialog.restricted') if @payment.nil? || current_customer.nil? || @payment.order.customer_id != current_customer.id
     end
 end

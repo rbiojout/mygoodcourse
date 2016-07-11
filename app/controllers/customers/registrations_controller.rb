@@ -36,7 +36,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   # redirect to a specific page
   def after_sign_up_path_for(customers)
-    root_path
+    catalog_products_path
     #'/an/example/path' # Or :prefix_to_your_route
   end
 

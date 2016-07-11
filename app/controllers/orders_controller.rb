@@ -58,7 +58,7 @@ class OrdersController < ApplicationController
       current_order.amount_paid = current_order.total
       # save the state from the payment module as accepted
       current_order.accept!(current_customer)
-      redirect_to root_path, :notice => t('dialog.shop.notice_pay_accepted')
+      redirect_to catalog_products_path, :notice => t('dialog.shop.notice_pay_accepted')
     end
   end
 
@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
         current_order.amount_paid = current_order.total
         # save the state from the payment module as accepted
         current_order.accept!(current_customer)
-        redirect_to root_path, :notice => t('dialog.shop.notice_pay_accepted')
+        redirect_to catalog_products_path, :notice => t('dialog.shop.notice_pay_accepted')
 
       rescue  => e
         flash[:alert] = "#{I18n.translate('activerecord.attributes.order.reject_notice')} #{e.message}"
