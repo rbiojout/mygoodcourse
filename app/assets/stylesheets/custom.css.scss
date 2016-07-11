@@ -346,5 +346,29 @@ see _bootstrap-variables.sass for information
   width:100%;
 }
 
+/* navigation on the left */
+ul.nav-tree  {
+  margin-left: 15px;
+  padding-left: 0px;
+  display: block;
+  background-color: $gray-lighter;
+  border-radius: 4px;
+  .active {
+    color: white;
+    background-color: darkgrey;
+    border-radius: 4px;
+    a {
+      color: white;
+    }
+  }
+  li{
+    a{
+      display: block;
+      padding: 5px 15px;
+
+    }
+  }
+}
+
 
 

@@ -74,15 +74,15 @@
             <% @families.each do |fam| %>
                 <% family_active = (fam.id.to_s == session[:family_for_products_id].to_s)? true:false %>
                 <li <%= "#{ 'class=active' if family_active }"%> > <%= link_to catalog_products_path(:family_id => fam.id) do %><%= fam.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_family(fam.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
-                  <ul>
+                  <ul class="nav-tree">
                     <% fam.categories.each do |cat| %>
                         <% if @categories.include?(cat)%>
-                            <li>
-                              <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><% end %>
-                              <% if (cat.id.to_s == session[:category_for_products_id].to_s) %>
-                              SELECTED
-                              <% end %>
-                              <b>(<%= Product.count_active_filtered_for_category(cat.id, @cycles.map(&:id), @levels.map(&:id))%>)</b>
+                            <li class="nav nav-stacked <% if (cat.id.to_s == session[:category_for_products_id].to_s) %>active<% end %>">
+                              <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><span class="badge pull-right"><%= Product.count_active_filtered_for_category(cat.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
+
+
+
+
                             </li>
                         <% end %>
                     <%   end %>
@@ -105,14 +105,11 @@
             <% @cycles.each do |cyc| %>
                 <% cycle_active = (cyc.id.to_s == session[:cycle_for_products_id].to_s)? true:false %>
                 <li <%= "#{ 'class=active' if cycle_active }"%> > <%= link_to catalog_products_path(:cycle_id => cyc.id) do %><%= cyc.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_cycle(cyc.id, @families.map(&:id), @categories.map(&:id))%></span><% end %>
-                  <ul>
+                  <ul class="nav-tree">
                     <% cyc.levels.each do |lev| %>
                         <% if @levels.include?(lev) %>
-                            <li>
-                              <%= link_to catalog_products_path(:level_id => lev.id) do %><%=lev.name %><% end %>
-                              <% if (lev.id.to_s == session[:level_for_products_id].to_s) %> SELECTED
-                              <% end %>
-                              <b>(<%= Product.count_active_filtered_for_level(lev.id, @families.map(&:id), @categories.map(&:id))%>)</b>
+                            <li class="nav nav-stacked <% if (lev.id.to_s == session[:level_for_products_id].to_s) %>active<% end %>">
+                              <%= link_to catalog_products_path(:level_id => lev.id) do %><%=lev.name %><span class="badge pull-right"><%= Product.count_active_filtered_for_level(lev.id, @families.map(&:id), @categories.map(&:id))%></span><% end %>
                             </li>
                         <% end %>
                     <% end %>

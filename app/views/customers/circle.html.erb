@@ -1,5 +1,5 @@
 <div class="row">
-  < class="col-sm-2">
+  <div class="col-sm-2">
     <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
     <ul class="nav nav-pills nav-stacked">
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.profile'), customer_path(@customer) %></li>
