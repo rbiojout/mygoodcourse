@@ -46,7 +46,17 @@ RailsAdmin.config do |config|
 
   config.model "Cycle" do
     parent Country
+    list do
+      sort_by :country_id
+      field :id
+      field :name
+      field :position
+      field :country_id
+      field :created_at
+      field :updated_at
+    end
     edit do
+      field :country
       field :name
       field :description do
         partial 'form_summernote'
@@ -64,7 +74,17 @@ RailsAdmin.config do |config|
 
   config.model "Level" do
     parent Cycle
+    list do
+      sort_by :cycle_id
+      field :id
+      field :name
+      field :position
+      field :cycle_id
+      field :created_at
+      field :updated_at
+    end
     edit do
+      field :cycle
       field :name
       field :description do
         partial 'form_summernote'
@@ -74,7 +94,17 @@ RailsAdmin.config do |config|
 
   config.model "Family" do
     parent Country
+    list do
+      sort_by :country_id
+      field :id
+      field :name
+      field :position
+      field :country_id
+      field :created_at
+      field :updated_at
+    end
     edit do
+      field :country
       field :name
       field :description do
         partial 'form_summernote'
@@ -84,7 +114,17 @@ RailsAdmin.config do |config|
 
   config.model "Category" do
     parent Family
+    list do
+      sort_by :family_id
+      field :id
+      field :name
+      field :position
+      field :family_id
+      field :created_at
+      field :updated_at
+    end
     edit do
+      field :family
       field :name
       field :description do
         partial 'form_summernote'

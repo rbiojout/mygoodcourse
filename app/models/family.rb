@@ -5,6 +5,9 @@ class Family < ActiveRecord::Base
 
   has_many :products, through: :categories
 
+  belongs_to :country
+  validates :country, presence: true
+
   validates :name, presence: true
 
   default_scope -> { order(position: :asc) }

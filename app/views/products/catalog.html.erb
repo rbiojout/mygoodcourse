@@ -50,9 +50,13 @@
 
       <!--- Country selector --->
       <div class="sidebar-menu">
-        <form class=""simple_form>
+        <%= form_tag(catalog_products_path, method: :get, class: "simple_form")  do  %>
+         <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name" ), class: "select optional form-control", :onchange => "this.form.submit()") %>
+        <% end %>
+        <form class="simple_form" id="country_select">
           <div class="form-group select optional product_price">
             <label class="select optional control-label" for="product_price">Pays</label>
+
             <select class="select optional form-control" name="country[id]" id="country_id">
               <option value="France">France</option>
             <option value="USA">USA</option>

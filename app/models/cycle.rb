@@ -4,6 +4,9 @@ class Cycle < ActiveRecord::Base
 
   has_many :products, through: :levels
 
+  belongs_to :country
+  validates :country, presence: true
+
   validates :name, presence: true
 
   default_scope -> { order(position: :asc) }

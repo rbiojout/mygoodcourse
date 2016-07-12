@@ -9,17 +9,22 @@ class StaticPagesControllerTest < ActionController::TestCase
   end
 
   test "should get help" do
-    get :help
+    get :help, locale: I18n.default_locale
     assert_response :success
   end
 
   test "should get contact" do
-    get :contact
+    get :contact, locale: I18n.default_locale
     assert_response :success
   end
 
   test "should get about" do
-    get :about
+    get :about, locale: I18n.default_locale
+    assert_response :success
+  end
+
+  test "should get cheating" do
+    get :cheating, locale: I18n.default_locale
     assert_response :success
   end
 

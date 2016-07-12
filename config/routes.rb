@@ -136,18 +136,16 @@ Rails.application.routes.draw do
   #delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
 
 
-
+scope "/:locale" do
 
   # static pages
   get 'static_pages/home', as: 'home'
-  get 'static_pages/help', as: 'help'
-  get 'static_pages/contact', as: 'contact'
-  get 'static_pages/about', as: 'about'
-  get 'static_pages/cheating', as: 'cheating'
+  get 'help' => 'static_pages#help', as: 'help'
+  get 'contact' => 'static_pages#contact', as: 'contact'
+  get 'about' => 'static_pages#about', as: 'about'
+  get 'cheating' => 'static_pages#cheating', as: 'cheating'
 
-  # root page
-  root to: 'static_pages#home'
-
+end
 
   # StripeAccount Connect endpoints
   #  - oauth flow
@@ -160,6 +158,12 @@ Rails.application.routes.draw do
 
   # StripeAccount webhooks
   post '/hooks/stripe' => 'stripe_hooks#stripe'
+
+
+  # root page
+  root to: 'static_pages#home'
+  get '/:locale' => 'static_pages#home'
+
 
 
   # The priority is based upon order of creation: first created -> highest priority.

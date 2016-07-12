@@ -1,10 +1,8 @@
 
 <%= simple_form_for(@family) do |f| %>
 
-    https://www.youtube.com/watch?v=0aBsUkJMbmE
-
   <%= f.error_notification %>
-
+    <%= f.input :country_id, as: 'select', collection: Country.all, include_blank: false %>
     <%= f.input :name %>
     <%= f.input :description, as: 'text' %>
     <h3>Category</h3>
