@@ -5,25 +5,31 @@ one:
   description: MyString
   position: 1
   cycle: one
+  position: 1
 
 two:
   name: MyString
   description: MyString
   position: 2
   cycle: two
+  position: 1
 
 C1L1:
   name: C1L1
   cycle: C1
+  position: 1
 
 C1L2:
   name: C1L2
   cycle: C1
+  position: 2
 
 C2L1:
   name: C2L1
   cycle: C2
+  position: 1
 
 C2L2:
   name: C2L2
   cycle: C2
+  position: 2

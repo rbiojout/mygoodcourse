@@ -20,11 +20,14 @@ class CategoriesControllerTest < ActionController::TestCase
   end
 
   test "should create category" do
+    family = Family.find(@category.family_id)
+    last_position = family.categories.last.position
     assert_difference('Category.count') do
       post :create, category: { description: @category.description, family_id: @category.family_id, name: @category.name }
     end
-
     assert_redirected_to category_path(assigns(:category))
+    new_position = family.categories.last.position
+    assert (new_position-last_position == 1)
   end
 
   test "should show category" do

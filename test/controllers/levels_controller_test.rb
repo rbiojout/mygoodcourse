@@ -21,11 +21,16 @@ class LevelsControllerTest < ActionController::TestCase
   end
 
   test "should create level" do
+    cycle = Cycle.find(@level.cycle_id)
+    last_position = cycle.levels.last.position
     assert_difference('Level.count') do
       post :create, level: { cycle_id: @level.cycle_id, description: @level.description, name: @level.name, position: @level.position }
     end
 
     assert_redirected_to level_path(assigns(:level))
+    new_position = cycle.levels.last.position
+    assert (new_position-last_position == 1)
+
   end
 
   test "should show level" do

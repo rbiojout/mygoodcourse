@@ -3,13 +3,17 @@
 one:
   name: Family1
   description: MyString
+  position: 1
 
 two:
   name: Family2
   description: MyString
+  position: 2
 
 F1:
   name: F1
+  position: 3
 
 F2:
   name: F2
+  position: 4

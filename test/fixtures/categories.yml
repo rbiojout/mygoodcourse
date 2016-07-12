@@ -4,24 +4,30 @@ one:
   name: Category1
   description: MyString
   family: one
+  position: 1
 
 two:
   name: Category2
   description: MyString
   family: two
+  position: 1
 
 F1C1:
   name: F1C1
   family: F1
+  position: 1
 
 F1C2:
   name: F1C2
   family: F1
+  position: 2
 
 F2C1:
   name: F2C1
   family: F2
+  position: 1
 
 F2C2:
   name: F2C2
   family: F2
+  position: 2

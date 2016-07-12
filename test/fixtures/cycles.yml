@@ -12,6 +12,8 @@ two:
 
 C1:
   name: C1
+  position: 3
 
 C2:
   name: C2
+  position: 4

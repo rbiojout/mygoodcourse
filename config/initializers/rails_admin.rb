@@ -34,7 +34,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit do
-      except [StripeAccount, Peer]
+      except [File, StripeAccount, Peer]
     end
     delete
     show_in_app
@@ -51,6 +51,14 @@ RailsAdmin.config do |config|
       field :description do
         partial 'form_summernote'
       end
+    end
+  end
+
+  config.model "Comment" do
+    parent Product
+    edit do
+      field :title
+      field :description
     end
   end
 
