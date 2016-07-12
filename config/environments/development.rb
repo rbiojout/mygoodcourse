@@ -15,13 +15,16 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp.gmail.com',
-      :port           => '587',
-      :authentication => :plain,
-      :user_name      => ENV['GMAIL_USERNAME'],
-      :password       => ENV['GMAIL_PASSWORD'],
-      :enable_starttls_auto => true
+      :address        => 'smtp-fr.securemail.pro',
+      :port           => '465',
+      :domain         => 'mygoodcourse.com',
+      :authentication => :login,
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :tls            => true
   }
+
+
   config.action_mailer.raise_delivery_errors = false
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
 

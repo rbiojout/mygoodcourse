@@ -66,13 +66,21 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'https://www.mygoodcourse.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      :address        => 'smtp.gmail.com',
-      :port           => '587',
-      :authentication => :plain,
-      :user_name      => ENV['GMAIL_USERNAME'],
-      :password       => ENV['GMAIL_PASSWORD'],
-      :enable_starttls_auto => true
+      #:address        => 'smtp.gmail.com',
+      #:port           => '587',
+      #:authentication => :plain,
+      #:user_name      => ENV['GMAIL_USERNAME'],
+      #:password       => ENV['GMAIL_PASSWORD'],
+      #:enable_starttls_auto => true
+      :address        => 'smtp-fr.securemail.pro',
+      :port           => '465',
+      :domain         => 'mygoodcourse.com',
+      :authentication => :login,
+      :user_name      => ENV['SMTP_USERNAME'],
+      :password       => ENV['SMTP_PASSWORD'],
+      :tls            => true
   }
+
 
 
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
