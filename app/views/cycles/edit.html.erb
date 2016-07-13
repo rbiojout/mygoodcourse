@@ -5,17 +5,3 @@
 <%= link_to 'Show', @cycle, class: 'btn btn-default' %> |
 <%= link_to 'Back', cycles_path %>
 
-
-<script language="JavaScript">
-    $(document).ready(function(){
-
-        $('.wysihtml5').each(function(i, elem) {
-            $(elem).wysihtml5();
-        });
-        $('.summernote2').summernote({
-            lang: "<%=I18n.locale%>"
-        });
-
-
-    })
-</script>

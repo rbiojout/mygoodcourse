@@ -72,7 +72,7 @@ gem 'bootstrap-sass'
 gem 'font-awesome-sass', '~> 4.2.0'
 
 # add a WISIWYG HTML editor for bootstrap
-gem 'bootstrap-wysihtml5-rails'
+# gem 'bootstrap-wysihtml5-rails'
 # gem 'trix'
 # summernote directly added with js file
 # gem 'summernote-rails'

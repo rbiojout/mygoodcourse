@@ -65,21 +65,21 @@ class ProductsController < ApplicationController
     country_levels = country.levels || Level.first
 
     # store the country
+    # if we change the country we reset all filters
     if country_id != session[:country_store]
-      logger.debug("___________heer #{params[:country_id]}")
       family_id = country_families.pluck(:id)
       params[:family_id] = nil
-      session[:family_for_products_id] = family_id
+      session[:family_for_products_id] = nil
       category_id = country_categories.pluck(:id)
       params[:category_id] = nil
-      session[:category_for_products_id] = category_id
+      session[:category_for_products_id] = nil
 
       cycle_id = country_cycles.pluck(:id)
       params[:cycle_id] = nil
-      session[:cycle_for_products_id] = cycle_id
+      session[:cycle_for_products_id] = nil
       level_id = country_levels.pluck(:id)
       params[:level_id] = nil
-      session[:level_for_products_id] = level_id
+      session[:level_for_products_id] = nil
     end
     session[:country_store] = country.id
 
@@ -87,7 +87,9 @@ class ProductsController < ApplicationController
 
     # Get the parameters
     # for filtering regarding the Cycle, Level, Family, Category
-    # we initialize with the informations associated to the country
+    # we store the request in the cookies in order to present the level of selection
+    # we need a parameter set to '0' in order to erase the selection
+    # we initialize with the informations associated to the country if we don't have any information
 
     logger.debug("===> parameters received #{params[:family_id]}/#{params[:category_id]}/#{params[:cycle_id]}/#{params[:level_id]}")
 
@@ -106,17 +108,19 @@ class ProductsController < ApplicationController
     unless params[:family_id].nil?
       if family_id.to_s == "0"
         family_id = country_families.unscope(:order).uniq.pluck(:id) #nil
-        session[:family_for_products_id] = family_id #nil
+        session[:family_for_products_id] = nil
+      else
+        session[:family_for_products_id] = family_id
       end
       category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
-      session[:category_for_products_id] = category_id #nil
+      session[:category_for_products_id] = nil
       #logger.debug("=====> .. #{category_id}")
     end
     # unload if :category_id equal 0
     unless params[:category_id].nil?
       if category_id.to_s == "0"
         category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
-        session[:category_for_products_id] = category_id #nil
+        session[:category_for_products_id] = nil
         # if we have the category we need to have set the corresponding family
       else
         session[:category_for_products_id] = category_id
@@ -135,16 +139,18 @@ class ProductsController < ApplicationController
     unless params[:cycle_id].nil?
       if cycle_id.to_s == "0"
         cycle_id = country_cycles.unscope(:order).uniq.pluck(:id) #nil
-        session[:cycle_for_products_id] = cycle_id #nil
+        session[:cycle_for_products_id] = nil
+      else
+        session[:cycle_for_products_id] = cycle_id
       end
       level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil #nil
-      session[:level_for_products_id] = level_id #nil
+      session[:level_for_products_id] = nil
     end
     # unload if :level_id equal 0
     unless params[:level_id].nil?
       if level_id.to_s == "0"
         level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil
-        session[:level_for_products_id] = level_id #nil
+        session[:level_for_products_id] = nil
         # if we have the level we need to have set the corresponding family
       else
         session[:level_for_products_id] = level_id
@@ -169,8 +175,8 @@ class ProductsController < ApplicationController
     @categories = ( selected_categories & query_categories & Category.associated_to_cycles_levels(cycle_id, level_id, true))
 
     # store the Families and Categories
-    session[:family_for_products_id] = @families.map(&:id)
-    session[:category_for_products_id] = @categories.map(&:id)
+    #session[:family_for_products_id] = @families.map(&:id)
+    #session[:category_for_products_id] = @categories.map(&:id)
     # we filter at the lowest level
     @products = @products.for_category(@categories.map(&:id))
 
@@ -189,8 +195,8 @@ class ProductsController < ApplicationController
     @levels = (country_levels & query_levels & Level.associated_to_families_categories(family_id, category_id, true))
 
     # store the Cycles and Levels
-    session[:cycle_for_products_id] = @cycles.map(&:id)
-    session[:level_for_products_id] = @levels.map(&:id)
+    #session[:cycle_for_products_id] = @cycles.map(&:id)
+    #session[:level_for_products_id] = @levels.map(&:id)
     # we filter at the lowest level
     @products = @products.for_level(@levels.map(&:id))
 
@@ -323,6 +329,8 @@ class ProductsController < ApplicationController
       rescue ActiveRecord::RecordNotFound
 
       end
+
+      session[:country_store] = @country.id
     end
 
 

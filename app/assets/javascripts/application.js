@@ -29,8 +29,8 @@
 //= require summernote-fr.js
 
 // require bootstrap-treenav
-//= require bootstrap-wysihtml5
-//= require bootstrap-wysihtml5/locales
+// require bootstrap-wysihtml5
+// require bootstrap-wysihtml5/locales
 // require trix
 //= require jquery.geocomplete
 //= require underscore

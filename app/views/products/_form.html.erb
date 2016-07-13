@@ -59,7 +59,7 @@
         <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: t('activerecord.attributes.product.place_description'), hint: t('activerecord.attributes.product.hint_description') %>
         <%= f.input :active, hint: t('activerecord.attributes.product.hint_active') %>
         <%= f.input :price, :collection => [nil, '0.99', '4.99', '9.99', '14.99', '19.99'].collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
-        <%= f.button :submit, class: 'btn btn-primary input-block-level form-control' %>
+        <%= f.button :submit, class: 'btn btn-primary input-block-level form-control loading' %>
       </div>
 
     </div>
@@ -68,5 +68,13 @@
 
 <% end %>
 
-
+<script language="JavaScript">
+    $(".loading").on("click", function(e){
+        //e.PreventDefault();
+        $(this).addClass('disabled');
+        $(this).attr('disabled', 'disabled');
+        $(this).prop('disabled', true);
+        $(this).closest("form")[0].submit();
+    });
+</script>
 
