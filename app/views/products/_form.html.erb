@@ -54,8 +54,6 @@
         <!-- end attachments -->
 
         <%= f.input :name, hint: t('activerecord.attributes.product.hint_name') %>
-        <%= f.input :sku %>
-        <%= f.input :permalink %>
         <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: t('activerecord.attributes.product.place_description'), hint: t('activerecord.attributes.product.hint_description') %>
         <%= f.input :active, hint: t('activerecord.attributes.product.hint_active') %>
         <%= f.input :price, :collection => [nil, '0.99', '4.99', '9.99', '14.99', '19.99'].collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
