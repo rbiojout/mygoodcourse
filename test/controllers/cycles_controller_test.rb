@@ -22,7 +22,7 @@ class CyclesControllerTest < ActionController::TestCase
 
   test "should create cycle" do
     assert_difference('Cycle.count') do
-      post :create, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position }
+      post :create, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position, country_id: @cycle.country.id }
     end
 
     assert_redirected_to cycle_path(assigns(:cycle))
@@ -39,7 +39,7 @@ class CyclesControllerTest < ActionController::TestCase
   end
 
   test "should update cycle" do
-    patch :update, id: @cycle, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position }
+    patch :update, id: @cycle, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position, country_id: @cycle.country.id }
     assert_redirected_to cycle_path(assigns(:cycle))
   end
 

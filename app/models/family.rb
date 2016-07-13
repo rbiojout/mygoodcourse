@@ -18,6 +18,8 @@ class Family < ActiveRecord::Base
   # with active products
   scope :with_active_products, -> { Family.joins(:products).where(products: {active: true}).distinct }
 
+  # families with products
+  scope :with_products_for_cycle, -> (cycle_id) { Category.joins(:products).where(:cycle_id => cycle_id).distinct }
 
   # we look for the objects associated in case of a query
   def self.associated_to_query(query)

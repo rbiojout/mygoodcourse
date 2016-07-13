@@ -22,6 +22,14 @@
     <div class="hidden-xs col-md-3">
 
 
+      <!--- Country selector --->
+      <div class="sidebar-menu">
+        <%= form_tag(catalog_products_path, method: :get, class: "simple_form")  do  %>
+            <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
+        <% end %>
+      </div>
+      <!--- end Country selector --->
+
       <!--- orders --->
       <div class="list-group" id="sort_option" role="tablist" aria-multiselectable="true">
         <div class="list-group-item">
@@ -47,24 +55,6 @@
         </div>
       </div>
       <!--- end orders --->
-
-      <!--- Country selector --->
-      <div class="sidebar-menu">
-        <%= form_tag(catalog_products_path, method: :get, class: "simple_form")  do  %>
-         <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name" ), class: "select optional form-control", :onchange => "this.form.submit()") %>
-        <% end %>
-        <form class="simple_form" id="country_select">
-          <div class="form-group select optional product_price">
-            <label class="select optional control-label" for="product_price">Pays</label>
-
-            <select class="select optional form-control" name="country[id]" id="country_id">
-              <option value="France">France</option>
-            <option value="USA">USA</option>
-            </select>
-              </div>
-        </form>
-      </div>
-      <!--- end Country selector --->
 
 
       <!--- Family and Category --->

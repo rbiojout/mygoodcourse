@@ -1,4 +1,4 @@
-<div class="row panel-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
+<div class="panel-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
   <div class="panel panel-primary">
     <div class="panel-heading" role="tab" id="heading_cycle_0">
       <h2 class="panel-title">
@@ -8,7 +8,7 @@
   </div>
 
   <% is_first= true %>
-  <% Cycle.all.each do |cycle| %>
+  <% country.cycles.each do |cycle| %>
       <% if cycle.levels.to_a.length > 0  %>
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading_cycle_<%=cycle.id%>">

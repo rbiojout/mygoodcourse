@@ -2,6 +2,8 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
+  before_action :set_country, only: [:new, :create, :update, :edit]
+
   before_action :correct_user, except: :show
 
 
@@ -15,7 +17,8 @@ class ProductsController < ApplicationController
 
   # GET /catalog
   def catalog
-    # filter only on active products
+    # retrieve the search query
+    # filter only on active products when searching
     query = params[:query]
 
     query_store =  session[:query_store]
@@ -28,7 +31,6 @@ class ProductsController < ApplicationController
         query_store = query
       end
     end
-
 
     if query_store.nil?
       @products = Product.includes(:attachments).active # creates an anonymous scope
@@ -43,23 +45,59 @@ class ProductsController < ApplicationController
       end
     end
 
-
     session[:query_store] = query_store
 
-    logger.debug("===> query_store #{query_store} - #{session[:query_store]}")
+    # Look for the Country from the request or from the session cookie
+    country_id = params[:country_id] || session[:country_store]
 
-    logger.debug("===> active products #{@products.count}")
+    # validate if the Country exist
+    country = Country.first
+    begin
+      country = Country.find(country_id) unless country_id.nil?
+    rescue ActiveRecord::RecordNotFound
 
-    #@products = @products.status(params[:status]) if params[:status].present?
+    end
+
+    # select the Cycle, Level, Family, Category associated to the Country
+    country_families = country.families || Family.first
+    country_categories = country.categories || Category.first
+    country_cycles = country.cycles || Cycle.first
+    country_levels = country.levels || Level.first
+
+    # store the country
+    if country_id != session[:country_store]
+      logger.debug("___________heer #{params[:country_id]}")
+      family_id = country_families.pluck(:id)
+      params[:family_id] = nil
+      session[:family_for_products_id] = family_id
+      category_id = country_categories.pluck(:id)
+      params[:category_id] = nil
+      session[:category_for_products_id] = category_id
+
+      cycle_id = country_cycles.pluck(:id)
+      params[:cycle_id] = nil
+      session[:cycle_for_products_id] = cycle_id
+      level_id = country_levels.pluck(:id)
+      params[:level_id] = nil
+      session[:level_for_products_id] = level_id
+    end
+    session[:country_store] = country.id
+
+    #logger.debug("===> parameters country #{country_families}/#{country_categories}/#{country_cycles}/#{country_levels}")
 
     # Get the parameters
-    family_id = params[:family_id] || session[:family_for_products_id]
-    category_id = params[:category_id] || session[:category_for_products_id]
+    # for filtering regarding the Cycle, Level, Family, Category
+    # we initialize with the informations associated to the country
 
-    cycle_id = params[:cycle_id] || session[:cycle_for_products_id]
-    level_id = params[:level_id] || session[:level_for_products_id]
+    logger.debug("===> parameters received #{params[:family_id]}/#{params[:category_id]}/#{params[:cycle_id]}/#{params[:level_id]}")
 
-    logger.debug("===> parameters received #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
+    family_id = params[:family_id] || session[:family_for_products_id] || country_families
+    category_id = params[:category_id] || session[:category_for_products_id] || country_categories
+
+    cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || country_cycles
+    level_id = params[:level_id] || session[:level_for_products_id] || country_levels
+
+    logger.debug("===> parameters used #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
 
     # prepare parameters for Family and Category
@@ -67,26 +105,28 @@ class ProductsController < ApplicationController
     # unload if :family_id equal 0
     unless params[:family_id].nil?
       if family_id.to_s == "0"
-        session[:family_for_products_id] = nil
-        family_id = nil
+        family_id = country_families.unscope(:order).uniq.pluck(:id) #nil
+        session[:family_for_products_id] = family_id #nil
       end
-      session[:category_for_products_id] = nil
-      category_id = nil
+      category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
+      session[:category_for_products_id] = category_id #nil
       #logger.debug("=====> .. #{category_id}")
     end
     # unload if :category_id equal 0
-    unless category_id.nil?
+    unless params[:category_id].nil?
       if category_id.to_s == "0"
-        session[:category_for_products_id] = nil
-        category_id =nil
+        category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
+        session[:category_for_products_id] = category_id #nil
         # if we have the category we need to have set the corresponding family
       else
         session[:category_for_products_id] = category_id
         #family_id = Category.find(category_id).family_id
-        family_id = Category.where(id: category_id).pluck(:family_id)
+        family_id = Category.where(id: category_id).unscope(:order).uniq.pluck(:family_id)
         session[:family_for_products_id] = family_id
       end
     end
+
+    logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
 
     # prepare parameters for Cycle and Level
@@ -94,22 +134,23 @@ class ProductsController < ApplicationController
     # unload if :cycle_id equal 0
     unless params[:cycle_id].nil?
       if cycle_id.to_s == "0"
-        session[:cycle_for_products_id] = nil
-        cycle_id =nil
+        cycle_id = country_cycles.unscope(:order).uniq.pluck(:id) #nil
+        session[:cycle_for_products_id] = cycle_id #nil
       end
-      session[:level_for_products_id] = nil
-      level_id = nil
+      level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil #nil
+      session[:level_for_products_id] = level_id #nil
     end
     # unload if :level_id equal 0
-    unless level_id.nil?
+    unless params[:level_id].nil?
       if level_id.to_s == "0"
-        session[:level_for_products_id] = nil
-        level_id =nil
+        level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil
+        session[:level_for_products_id] = level_id #nil
         # if we have the level we need to have set the corresponding family
       else
         session[:level_for_products_id] = level_id
         #cycle_id = Level.find(level_id).cycle_id
-        cycle_id = Level.where(id: level_id).pluck(:cycle_id)
+        logger.debug("level_id #{level_id}")
+        cycle_id = Level.where(id: level_id).unscope(:order).uniq.pluck(:cycle_id)
         session[:cycle_for_products_id] = cycle_id
       end
     end
@@ -119,62 +160,43 @@ class ProductsController < ApplicationController
     # add the corresponding families, categories, cycles and levels
     query_families = Family.associated_to_query(query_store)
     query_categories = Category.associated_to_query(query_store)
-    logger.debug("....#{@products.count} -  #{query_families.count}")
-    @families = (query_families & Family.associated_to_cycles_levels(cycle_id, level_id, true))
-    @categories = (query_categories & Category.associated_to_cycles_levels(cycle_id, level_id, true))
-    # filter for Family and Category
-    # show the most detailed level of information
-    unless family_id.nil?
-      unless category_id.nil? && category_id.to_s != "0"
-        @products = @products.for_category(category_id)
-        @categories = [Category.find_by(id: category_id)]
-        @families = [@categories.first.family]
-        # store the category in session
-        session[:category_for_products_id] = category_id
-        # store the family in session
-        session[:family_for_products_id] = family_id
-        #logger.debug("===> products by category #{category_id}")
-      else if family_id.to_s != "0"
-          @products = @products.for_family(family_id)
-          # store the family in session
-          session[:family_for_products_id] = family_id
-          #logger.debug("===> products by family")
-          selected_family = Family.find_by(id: family_id)
-          @families = [selected_family]
-           @categories = selected_family.categories
-         end
-      end
-    end
+    # we want the common values from all filters
+    selected_families = Family.all
+    selected_families = Array(Family.find(family_id)) unless family_id.empty?
+    selected_categories = Category.all
+    selected_categories = Array(Category.find(category_id)) unless category_id.empty?
+    @families = ( selected_families & query_families & Family.associated_to_cycles_levels(cycle_id, level_id, true))
+    @categories = ( selected_categories & query_categories & Category.associated_to_cycles_levels(cycle_id, level_id, true))
+
+    # store the Families and Categories
+    session[:family_for_products_id] = @families.map(&:id)
+    session[:category_for_products_id] = @categories.map(&:id)
+    # we filter at the lowest level
+    @products = @products.for_category(@categories.map(&:id))
+
+    logger.debug("?? #{@categories}/#{@products}")
 
     # add the corresponding families, categories, cycles and levels
     query_cycles = Cycle.associated_to_query(query_store)
     query_levels = Level.associated_to_query(query_store)
-    @cycles = (query_cycles & Cycle.associated_to_families_categories(family_id, category_id, true))
-    @levels = (query_levels & Level.associated_to_families_categories(family_id, category_id, true))
+    # we want the common values from all filters
 
-    # filter for Cycle and Level
-    # show the most detailed level of information
-    unless cycle_id.nil?
-      unless level_id.nil? && level_id.to_s != "0"
-        @products = @products.for_level(level_id)
-        # store the level in session
-        session[:level_for_products_id] = level_id
-        # store the cycle in session
-        session[:cycle_for_products_id] = cycle_id
-        #logger.debug("===> products by level")
-        @levels = [Level.find_by(id: level_id)]
-        @cycles = [@levels.first.cycle]
-      else if cycle_id.to_s != "0"
-          @products = @products.for_cycle(cycle_id)
-          # store the cycle in session
-          session[:cycle_for_products_id] = cycle_id
-          #logger.debug("===> products by cycle")
-          selected_cycle = Cycle.find_by(id: cycle_id)
-          @cycles = [selected_cycle]
-          @levels = selected_cycle.levels
-          end
-      end
-    end
+    selected_cycles = Cycle.all
+    selected_cycles = Array(Cycle.find(cycle_id)) unless cycle_id.empty?
+    selected_levels = Level.all
+    selected_levels = Array(Level.find(level_id)) unless level_id.empty?
+    @cycles = (country_cycles & query_cycles & Cycle.associated_to_families_categories(family_id, category_id, true))
+    @levels = (country_levels & query_levels & Level.associated_to_families_categories(family_id, category_id, true))
+
+    # store the Cycles and Levels
+    session[:cycle_for_products_id] = @cycles.map(&:id)
+    session[:level_for_products_id] = @levels.map(&:id)
+    # we filter at the lowest level
+    @products = @products.for_level(@levels.map(&:id))
+
+    logger.debug("??? #{@levels}/#{@products}")
+
+    #logger.debug("#{@families.count}/#{@categories.count}/#{@cycles.count}/#{@levels.count}")
 
     # add the corresponding families, categories, cycles and levels
     #@families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
@@ -182,12 +204,12 @@ class ProductsController < ApplicationController
     #@cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
     #@levels = Level.associated_to_families_categories(family_id, category_id, true)
 
-    logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
+    #logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
 
-    logger.debug("===> #{sort_column} / #{sort_direction}")
+    #logger.debug("===> #{sort_column} / #{sort_direction}")
     @products = @products.unscope(:order).order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => Product.per_page)
 
-    logger.debug("===> active products #{@products.count}")
+    #logger.debug("===> active products #{@products.count}")
 
   end
 
@@ -287,6 +309,22 @@ class ProductsController < ApplicationController
                                       attachments_attributes: [:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :_destroy, :id],
                                       :category_ids => [], :level_ids => [])
     end
+
+    # We need to have a filter when creating and updating a product.
+    def set_country
+      # we need the country
+      # Look for the Country from the request or from the session cookie
+      country_id = params[:country_id] || session[:country_store]
+
+      # validate if the Country exist
+      @country = Country.first
+      begin
+        @country = Country.find(country_id) unless country_id.nil?
+      rescue ActiveRecord::RecordNotFound
+
+      end
+    end
+
 
     def correct_user
       redirect_to products_path, alert: t('dialog.restricted') unless @product.nil? || @product.customer_id == current_customer.id

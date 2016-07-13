@@ -69,8 +69,8 @@ class Product < ActiveRecord::Base
   scope :active, ->{ where(active: true)}
 
   # Can be an array of values
-  scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id})}
-  scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id})}
+  scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id}).distinct}
+  scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id}).distinct}
 
 
   def self.count_active_for_family(family_id)
@@ -113,8 +113,8 @@ class Product < ActiveRecord::Base
   end
 
   # Can be an array of values
-  scope :for_cycle, -> (cycle_id) {joins(:cycles).where(cycles: {id: cycle_id})}
-  scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id})}
+  scope :for_cycle, -> (cycle_id) {joins(:cycles).where(cycles: {id: cycle_id}).distinct}
+  scope :for_level, -> (level_id) {joins(:levels).where(levels: {id: level_id}).distinct}
 
   def self.count_active_for_cycle(cycle_id)
     Product.joins(:cycles).where(cycles: {id: cycle_id}).where(active: true).distinct.count

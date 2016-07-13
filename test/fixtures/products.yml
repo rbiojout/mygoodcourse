@@ -21,6 +21,8 @@ two:
   featured: true
   price: 10.00
   customer: two
+  levels: two
+  categories: two
 
 free_from_seller_one:
   name: Free from Seller One

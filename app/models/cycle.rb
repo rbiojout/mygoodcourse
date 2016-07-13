@@ -1,5 +1,6 @@
 class Cycle < ActiveRecord::Base
-  has_many :levels, dependent: :destroy, inverse_of: :cycle
+
+  has_many :levels, dependent: :destroy
   accepts_nested_attributes_for :levels, reject_if: :all_blank, allow_destroy: true
 
   has_many :products, through: :levels
@@ -19,7 +20,7 @@ class Cycle < ActiveRecord::Base
 
 
   # families with products
-  scope :with_products_for_cycle, -> (cycle_id) { Category.joins(:products).where(:family_id => family_id).distinct }
+  scope :with_products_for_family, -> (family_id) { Level.joins(:products).where(:family_id => family_id).distinct }
 
   # we look for the objects associated in case of a query
   def self.associated_to_query(query)

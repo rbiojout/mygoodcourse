@@ -1,5 +1,13 @@
 <h1><%= t('helpers.action.product.edit') %></h1>
 
+<!--- Country selector --->
+<div class="">
+  <%= form_tag(edit_product_path(@product), method: :get, class: "simple_form")  do  %>
+      <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
+  <% end %>
+</div>
+<!--- end Country selector --->
+
 
 <%= render 'form' %>
 

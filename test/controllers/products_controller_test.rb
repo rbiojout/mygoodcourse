@@ -23,30 +23,38 @@ class ProductsControllerTest < ActionController::TestCase
   end
 
   test "should filter catalog by families" do
+    # set the country
+    get :catalog, :country_id => (countries(:france)).id
     get :catalog, :family_id => [families(:one).id.to_s, families(:two).id.to_s]
-    assert_equal session[:family_for_products_id], [families(:one).id.to_s, families(:two).id.to_s]
+    assert_equal session[:family_for_products_id], [families(:one).id, families(:two).id]
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
   test "should filter catalog by family" do
+    # set the country
+    get :catalog, :country_id => (countries(:france)).id
     get :catalog, :family_id => (families(:one))
-    assert_equal session[:family_for_products_id], families(:one).id.to_s
+    assert_equal session[:family_for_products_id], Array(families(:one).id)
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
   test "should filter catalog by categories" do
+    # set the country
+    get :catalog, :country_id => (countries(:france)).id
     get :catalog, :category_id => [categories(:one).id.to_s, categories(:two).id.to_s]
-    assert_equal session[:category_for_products_id], [categories(:one).id.to_s, categories(:two).id.to_s]
+    assert_equal session[:category_for_products_id], [categories(:one).id, categories(:two).id]
     assert_equal session[:family_for_products_id].to_s, [categories(:one).family_id, categories(:two).family_id].to_s
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
   test "should filter catalog by category" do
+    # set the country
+    get :catalog, :country_id => (countries(:france)).id
     get :catalog, :category_id => (categories(:one))
-    assert_equal session[:category_for_products_id], categories(:one).id.to_s
+    assert_equal session[:category_for_products_id], [categories(:one).id]
     assert_equal session[:family_for_products_id], [categories(:one).family_id]
     assert_response :success
     assert_not_nil assigns(:products)
