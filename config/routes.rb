@@ -135,6 +135,9 @@ Rails.application.routes.draw do
   #delete 'basket/:order_item_id' => 'orders#change_item_quantity'
   #delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
 
+  # charts
+  get 'charts/accepted_orders' => 'charts#accepted_orders', :as => 'accepted_orders_chart'
+  get 'charts/created_products' => 'charts#created_products', :as => 'created_products_chart'
 
 scope "/:locale" do
 

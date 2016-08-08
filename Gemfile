@@ -141,6 +141,7 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   gem 'i18n-tasks', '~> 0.9.5'
+  gem 'derailed'
 end
 
 
