@@ -32,6 +32,7 @@ class Level < ActiveRecord::Base
   # @category_id : list of categories, default to "0"
   # @active : flag for only active, default to false
   def self.associated_to_families_categories(family_id, category_id, active)
+    logger.debug(".... #{family_id}/#{category_id}/#{active}")
     family_id ||= "0"
     category_id ||= "0"
     active ||=false

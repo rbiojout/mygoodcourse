@@ -93,11 +93,13 @@ class ProductsController < ApplicationController
 
     logger.debug("===> parameters received #{params[:family_id]}/#{params[:category_id]}/#{params[:cycle_id]}/#{params[:level_id]}")
 
-    family_id = params[:family_id] || session[:family_for_products_id] || country_families
-    category_id = params[:category_id] || session[:category_for_products_id] || country_categories
+    family_id = params[:family_id] || session[:family_for_products_id] || country_families.pluck(:id)
+    category_id = params[:category_id] || session[:category_for_products_id] || country_categories.pluck(:id)
 
-    cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || country_cycles
-    level_id = params[:level_id] || session[:level_for_products_id] || country_levels
+    logger.debug("===> family used #{params[:family_id]}/#{session[:family_for_products_id]}/#{country_families.pluck(:id)}")
+
+    cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || country_cycles.pluck(:id)
+    level_id = params[:level_id] || session[:level_for_products_id] || country_levels.pluck(:id)
 
     logger.debug("===> parameters used #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
@@ -191,8 +193,10 @@ class ProductsController < ApplicationController
     selected_cycles = Array(Cycle.find(cycle_id)) unless cycle_id.empty?
     selected_levels = Level.all
     selected_levels = Array(Level.find(level_id)) unless level_id.empty?
-    @cycles = (country_cycles & query_cycles & Cycle.associated_to_families_categories(family_id, category_id, true))
-    @levels = (country_levels & query_levels & Level.associated_to_families_categories(family_id, category_id, true))
+    @cycles = (selected_cycles & query_cycles & Cycle.associated_to_families_categories(family_id, category_id, true))
+    @levels = (selected_levels & query_levels & Level.associated_to_families_categories(family_id, category_id, true))
+
+    logger.debug("+++ #{country_levels.map(&:id)}/#{query_levels.map(&:id)}/#{Level.associated_to_families_categories(family_id, category_id, true).map(&:id)}")
 
     # store the Cycles and Levels
     #session[:cycle_for_products_id] = @cycles.map(&:id)
