@@ -12,6 +12,18 @@ two:
   position: 2
   country: france
 
+maths:
+  name: maths
+  description: maths
+  position: 3
+  country: france
+
+francais:
+  name: francais
+  description: francais
+  position: 4
+  country: france
+
 F1:
   name: F1
   position: 3

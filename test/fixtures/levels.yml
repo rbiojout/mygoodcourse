@@ -14,6 +14,36 @@ two:
   cycle: two
   position: 1
 
+cp:
+  name: cp
+  description: cp
+  position: 1
+  cycle: primaire
+
+ce1:
+  name: ce1
+  description: ce1
+  position: 2
+  cycle: primaire
+
+ce2:
+  name: ce2
+  description: ce2
+  position: 3
+  cycle: primaire
+
+cm1:
+  name: cm1
+  description: cm1
+  position: 2
+  cycle: primaire
+
+cm2:
+  name: cm2
+  description: cm2
+  position: 3
+  cycle: primaire
+
 C1L1:
   name: C1L1
   cycle: C1

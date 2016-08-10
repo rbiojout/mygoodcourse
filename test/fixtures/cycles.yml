@@ -12,6 +12,13 @@ two:
   position: 2
   country: france
 
+primaire:
+  name: primaire
+  description: MyString
+  position: 3
+  country: france
+
+
 C1:
   name: C1
   position: 3

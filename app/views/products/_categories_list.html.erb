@@ -24,9 +24,8 @@
                 </div>
               </div>
             </div>
+          <% is_first = false %>
       <% end %>
-      <% is_first = false %>
   <% end %>
-  <% f.association :categories, collection: Family.all, as: :grouped_select, group_method: :categories %>
 
 </div>

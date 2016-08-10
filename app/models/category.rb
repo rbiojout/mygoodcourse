@@ -26,6 +26,7 @@ class Category < ActiveRecord::Base
     end
   end
 
+
   # restrict if Cycle(s) and/or Level(s) is selected
   # @cycle_id : list of cycles, default to "0"
   # @level_id : list of levels, default to "0"

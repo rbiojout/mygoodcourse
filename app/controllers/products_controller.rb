@@ -114,7 +114,7 @@ class ProductsController < ApplicationController
       else
         session[:family_for_products_id] = family_id
       end
-      category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
+      category_id = Category.with_products_for_family(family_id).unscope(:order).uniq.pluck(:id)
       session[:category_for_products_id] = nil
       #logger.debug("=====> .. #{category_id}")
     end
@@ -126,7 +126,6 @@ class ProductsController < ApplicationController
         # if we have the category we need to have set the corresponding family
       else
         session[:category_for_products_id] = category_id
-        #family_id = Category.find(category_id).family_id
         family_id = Category.where(id: category_id).unscope(:order).uniq.pluck(:family_id)
         session[:family_for_products_id] = family_id
       end
@@ -145,7 +144,7 @@ class ProductsController < ApplicationController
       else
         session[:cycle_for_products_id] = cycle_id
       end
-      level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil #nil
+      level_id = Level.with_products_for_cycle(cycle_id).unscope(:order).uniq.pluck(:id) #nil
       session[:level_for_products_id] = nil
     end
     # unload if :level_id equal 0

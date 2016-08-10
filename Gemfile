@@ -159,6 +159,11 @@ group :development do
 
   # get UML
   gem 'railroady'
+
+  gem 'rack-mini-profiler', require: false
+  gem 'brakeman', :require => false
+  gem "rubycritic", :require => false
+
 end
 
 

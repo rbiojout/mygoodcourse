@@ -24,6 +24,30 @@ two:
   levels: two
   categories: two
 
+calcul_cp:
+  name: calcul_cp
+  sku:
+  permalink:
+  description: calcul_cp
+  active: true
+  featured: true
+  price: 10.00
+  customer: two
+  levels: cp
+  categories: calcul
+
+lecture_ce1:
+  name: lecture_ce1
+  sku:
+  permalink:
+  description: lecture_ce1
+  active: true
+  featured: true
+  price: 10.00
+  customer: two
+  levels: ce1
+  categories: lecture
+
 free_from_seller_one:
   name: Free from Seller One
   sku:

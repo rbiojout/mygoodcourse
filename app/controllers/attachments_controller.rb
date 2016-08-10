@@ -28,17 +28,22 @@ class AttachmentsController < ApplicationController
   # POST /attachments.json
   def create
     @attachment = Attachment.new(attachment_params)
-    logger.debug("params #{params[:product_id]}  #{params[:attachment][:product_id]}")
+    logger.debug("params for atatchment #{params[:product_id]}  #{params[:attachment][:product_id]}")
     @product = Product.find(params[:attachment][:product_id])
 
-    respond_to do |format|
-      if @attachment.save
-        format.html { redirect_to @attachment, notice: t('views.flash_create_message') }
-        format.json { render :show, status: :created, location: @attachment }
-      else
-        format.html { render :new }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
+    if @attachment.save
+      respond_to do |format|
+        format.html {
+          render :json => [@attachment.to_jq_upload].to_json,
+                 :content_type => 'text/html',
+                 :layout => false
+        }
+        format.json {
+          render :json => [@attachment.to_jq_upload].to_json
+        }
       end
+    else
+      render :json => [{:error => "custom_failure"}], :status => 304
     end
   end
 
@@ -60,10 +65,7 @@ class AttachmentsController < ApplicationController
   # DELETE /attachments/1.json
   def destroy
     @attachment.destroy
-    respond_to do |format|
-      format.html { redirect_to attachments_url, notice: t('views.flash_delete_message') }
-      format.json { head :no_content }
-    end
+    render :json => true
   end
 
   # GET /attachments/1

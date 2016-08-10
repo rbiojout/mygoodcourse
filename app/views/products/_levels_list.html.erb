@@ -24,9 +24,8 @@
                 </div>
               </div>
             </div>
+          <% is_first = false %>
       <% end %>
-      <% is_first = false %>
   <% end %>
-  <% f.association :levels, collection: Cycle.all, as: :grouped_select, group_method: :levels %>
 
 </div>
