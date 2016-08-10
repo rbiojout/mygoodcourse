@@ -1,10 +1,10 @@
 require 'test_helper'
 
 class PeersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   setup do
     # add a signed customer to perform the tests
-    sign_in :customer, (customers(:one))
+    sign_in(customers(:one), scope: :customer)
   end
 
   # test "the truth" do

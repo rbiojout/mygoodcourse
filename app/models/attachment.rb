@@ -9,18 +9,6 @@ class Attachment < ActiveRecord::Base
   mount_uploader :file, DocumentUploader
   validates :file, presence: true
 
-  #one convenient method to pass jq_upload the necessary information
-  def to_jq_upload
-    {
-        "name" => read_attribute(:file),
-        "size" => file.size,
-        "url" => file.url,
-        "thumbnail_url" => file.thumb.url,
-        "delete_url" => attachment_path(:id => id),
-        "delete_type" => "DELETE"
-    }
-  end
-
   # method for update and create
   before_save :update_file_attributes
   # method after the creation of a new attachment
@@ -49,7 +37,7 @@ class Attachment < ActiveRecord::Base
 
   def increment_version
     begin
-     self.version_number = (product.attachments.first.version_number||0) + 1.0
+      self.version_number = (product.attachments.first.version_number||0) + 1.0
     rescue
       self.version_number = 1.0
     end

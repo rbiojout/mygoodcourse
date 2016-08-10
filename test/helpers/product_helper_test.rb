@@ -1,6 +1,6 @@
 class ProductHelperTest < ActionView::TestCase
   include ProductsHelper
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @product = products(:one)
@@ -13,14 +13,14 @@ class ProductHelperTest < ActionView::TestCase
   end
 
   test "should recognize already ordered" do
-    sign_in :customer, @customer
+    sign_in(@customer, scope:  :customer)
     assert already_ordered(@product, @customer), 'product not found for customer'
   end
 
   test "should not consider bad status" do
     @product = products(:product_with_order_rejected)
     @customer = customers(:customer_with_rejected_orders)
-    sign_in :customer, @customer
+    sign_in(@customer, scope:  :customer)
     assert_not already_ordered(@product, @customer), 'product found for customer'
   end
 

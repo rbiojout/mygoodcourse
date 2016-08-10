@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class StripeAccountsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @customer = customers(:one)
@@ -10,7 +10,7 @@ class StripeAccountsControllerTest < ActionController::TestCase
   end
 
   test "should test standalone" do
-    sign_in :customer, @customer
+    sign_in(@customer, scope: :customer)
     get :standalone
     assert_redirected_to customer_path(@customer)
   end

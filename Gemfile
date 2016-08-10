@@ -4,7 +4,7 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.3'
+gem 'rails', '~> 4.2.3'
 gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 
 # Use postgresql as the database for Active Record
@@ -21,7 +21,7 @@ gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-gem 'haml'
+# gem 'haml'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -59,6 +59,9 @@ gem 'will_paginate'
 # add some order in the models for lists
 gem 'acts_as_list'
 # gem 'nested_form_fields'
+
+# we want slugs for URL instead of numbers
+gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 
 # better work for nested forms the ajax is explains in the project page
 gem 'cocoon'
@@ -140,7 +143,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'sqlite3'
-  gem 'i18n-tasks', '~> 0.9.5'
+  #gem 'i18n-tasks', '~> 0.9.5'
   gem 'derailed'
 end
 
@@ -160,6 +163,7 @@ group :development do
   # get UML
   gem 'railroady'
 
+  # the profiler used
   gem 'rack-mini-profiler', require: false
   gem 'brakeman', :require => false
   gem "rubycritic", :require => false

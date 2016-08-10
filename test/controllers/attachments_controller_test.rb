@@ -3,7 +3,7 @@ require 'test_helper'
 #http://jeffkreeftmeijer.com/2014/using-test-fixtures-with-carrierwave/
 
 class AttachmentsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @attachment = attachments(:one)

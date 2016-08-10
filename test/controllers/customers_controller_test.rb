@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class CustomersControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @customer = customers(:one)
@@ -34,13 +34,13 @@ class CustomersControllerTest < ActionController::TestCase
   end
 
   test "should get edit customer" do
-    sign_in :customer, @customer
+    sign_in(@customer, scope: :customer)
     get :edit, id: @customer
     assert_response :success
   end
 
   test "should update customer" do
-    sign_in :customer, @customer
+    sign_in(@customer, scope: :customer)
     patch :update, id: @customer, customer: { email: @customer.email, first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name, picture: @customer.picture }
     assert_redirected_to customer_path(assigns(:customer))
   end

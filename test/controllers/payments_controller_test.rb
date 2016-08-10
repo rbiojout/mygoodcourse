@@ -1,11 +1,11 @@
 require 'test_helper'
 
 class PaymentsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
   setup do
     @payment = payments(:one)
     # add a signed employee to perform the tests
-    sign_in :employee, (employees(:one))
+    sign_in(employees(:one), scope:  :employee)
   end
 
 
@@ -15,7 +15,7 @@ class PaymentsControllerTest < ActionController::TestCase
   end
 
   test "should show payment if signed" do
-    sign_in :customer, customers(:one)
+    sign_in(customers(:one), scope:  :customer)
     get :show, id: @payment
     assert_response :success
   end

@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class EmployeesControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @employee = employees(:one)
     # add a signed employee to perform the tests
-    sign_in :employee, (employees(:one))
+    sign_in(employees(:one), scope: :employee)
   end
 
   test "should get index" do

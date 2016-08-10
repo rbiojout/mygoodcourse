@@ -28,22 +28,17 @@ class AttachmentsController < ApplicationController
   # POST /attachments.json
   def create
     @attachment = Attachment.new(attachment_params)
-    logger.debug("params for atatchment #{params[:product_id]}  #{params[:attachment][:product_id]}")
+    logger.debug("params #{params[:product_id]}  #{params[:attachment][:product_id]}")
     @product = Product.find(params[:attachment][:product_id])
 
-    if @attachment.save
-      respond_to do |format|
-        format.html {
-          render :json => [@attachment.to_jq_upload].to_json,
-                 :content_type => 'text/html',
-                 :layout => false
-        }
-        format.json {
-          render :json => [@attachment.to_jq_upload].to_json
-        }
+    respond_to do |format|
+      if @attachment.save
+        format.html { redirect_to @attachment, notice: t('views.flash_create_message') }
+        format.json { render :show, status: :created, location: @attachment }
+      else
+        format.html { render :new }
+        format.json { render json: @attachment.errors, status: :unprocessable_entity }
       end
-    else
-      render :json => [{:error => "custom_failure"}], :status => 304
     end
   end
 
@@ -65,7 +60,10 @@ class AttachmentsController < ApplicationController
   # DELETE /attachments/1.json
   def destroy
     @attachment.destroy
-    render :json => true
+    respond_to do |format|
+      format.html { redirect_to attachments_url, notice: t('views.flash_delete_message') }
+      format.json { head :no_content }
+    end
   end
 
   # GET /attachments/1
@@ -73,11 +71,11 @@ class AttachmentsController < ApplicationController
     @pdf = @attachment.file.file
     if @pdf.nil? == false && (@attachment.product.candownload(current_customer))
       if @pdf.is_a?(CarrierWave::SanitizedFile)
-      respond_to do |format|
-        format.pdf do
-          send_file(@pdf.path, filename: 'MyGoodCourse.pdf', type: 'application/pdf', disposition: 'inline')
+        respond_to do |format|
+          format.pdf do
+            send_file(@pdf.path, filename: 'MyGoodCourse.pdf', type: 'application/pdf', disposition: 'inline')
+          end
         end
-      end
       elsif @pdf.is_a?(CarrierWave::Storage::Fog::File)
         respond_to do |format|
           data_pdf = open(@pdf.url).read
@@ -101,13 +99,13 @@ class AttachmentsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_attachment
-      @attachment = Attachment.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_attachment
+    @attachment = Attachment.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def attachment_params
-      params.require(:attachment).permit(:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :product_id)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def attachment_params
+    params.require(:attachment).permit(:file, :file_cache, :file_size, :file_type, :nbpages, :version_number, :active, :product_id)
+  end
 end

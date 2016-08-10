@@ -1,12 +1,12 @@
 require 'test_helper'
 
 class ProductsControllerTest < ActionController::TestCase
-  include Devise::TestHelpers
+  include Devise::Test::ControllerHelpers
 
   setup do
     @product = products(:one)
     # add a signed customer to perform the tests
-    sign_in :customer, (customers(:one))
+    sign_in(customers(:one), scope: :customer)
   end
 
   test "should get index" do
@@ -26,7 +26,7 @@ class ProductsControllerTest < ActionController::TestCase
     # set the country
     get :catalog, :country_id => (countries(:france)).id
     get :catalog, :family_id => [families(:one).id.to_s, families(:two).id.to_s]
-    assert_equal session[:family_for_products_id], [families(:one).id, families(:two).id]
+    assert_equal session[:family_for_products_id].sort, [families(:one).id.to_s, families(:two).id.to_s].sort
     assert_response :success
     assert_not_nil assigns(:products)
   end
@@ -34,8 +34,8 @@ class ProductsControllerTest < ActionController::TestCase
   test "should filter catalog by family" do
     # set the country
     get :catalog, :country_id => (countries(:france)).id
-    get :catalog, :family_id => (families(:one))
-    assert_equal session[:family_for_products_id], Array(families(:one).id)
+    get :catalog, :family_id => Array(families(:one))
+    assert_equal session[:family_for_products_id], Array(families(:one).id.to_s)
     assert_response :success
     assert_not_nil assigns(:products)
   end
@@ -44,8 +44,8 @@ class ProductsControllerTest < ActionController::TestCase
     # set the country
     get :catalog, :country_id => (countries(:france)).id
     get :catalog, :category_id => [categories(:one).id.to_s, categories(:two).id.to_s]
-    assert_equal session[:category_for_products_id], [categories(:one).id, categories(:two).id]
-    assert_equal session[:family_for_products_id].to_s, [categories(:one).family_id, categories(:two).family_id].to_s
+    assert_equal session[:category_for_products_id].sort, [categories(:one).id.to_s, categories(:two).id.to_s].sort
+    assert_equal session[:family_for_products_id].sort, [categories(:one).family_id, categories(:two).family_id].sort
     assert_response :success
     assert_not_nil assigns(:products)
   end
@@ -53,8 +53,8 @@ class ProductsControllerTest < ActionController::TestCase
   test "should filter catalog by category" do
     # set the country
     get :catalog, :country_id => (countries(:france)).id
-    get :catalog, :category_id => (categories(:one))
-    assert_equal session[:category_for_products_id], [categories(:one).id]
+    get :catalog, :category_id => Array(categories(:one))
+    assert_equal session[:category_for_products_id], Array(categories(:one).id.to_s)
     assert_equal session[:family_for_products_id], [categories(:one).family_id]
     assert_response :success
     assert_not_nil assigns(:products)

@@ -1,5 +1,8 @@
 class Product < ActiveRecord::Base
+  extend FriendlyId
   include PgSearch
+
+  friendly_id :name, use: :slugged
 
   # search options
   multisearchable :against => [:name, :description]

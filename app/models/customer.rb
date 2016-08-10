@@ -1,8 +1,19 @@
 class Customer < ActiveRecord::Base
+  extend FriendlyId
 
   EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
   PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 
+  friendly_id :slug_candidates, use: :slugged
+
+  # Try building a slug based on the following fields in
+  # increasing order of specificity.
+  def slug_candidates
+    [
+        [:first_name, :name],
+        [:first_name, :name, :administrative_area_level_2]
+    ]
+  end
 
   # Include default user_mailer modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
