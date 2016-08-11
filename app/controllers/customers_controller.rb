@@ -101,7 +101,7 @@ class CustomersController < ApplicationController
     end
 
     def correct_user
-      @customer = Customer.find(params[:id])
+      @customer = Customer.friendly.find(params[:id])
       redirect_to catalog_products_path, alert: t('dialog.restricted') unless @customer == current_customer
     end
 end

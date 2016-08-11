@@ -1,10 +1,9 @@
+<% if(current_customer.stripe_account.nil?) %>
+    <%= render(partial: 'stripe/alert_missing_stripe') %>
+<% end %>
+
 <h1><%= t('helpers.action.customer.edit')%></h1>
+
 
 <%= render 'form' %>
 
-<%= link_to 'Stripe oauth', stripe_oauth_path %> |
-
-<%= link_to 'Stripe', stripe_standalone_path(:country => 'FR'), :method => :post %> |
-
-<%= link_to 'Show', @customer %> |
-<%= link_to 'Back', customers_path %>

@@ -29,6 +29,7 @@ en:
     my_account: "My account"
     my_profile: "My profile"
     my_dashboard: "My Dashboard"
+    who_we_are : 'Who we are'
     search: "Search"
 
   actions:

@@ -1,9 +1,9 @@
 <% stripe = customer.stripe_account %>
 
 <% unless stripe.nil? %>
-    <%= stripe.stripe_user_id %>
-    <%= stripe.stripe_account_status %>
+    <p>You have connected your account to Stripe, you can get payments from other users.
+      To follow your account Balance, please log to Stripe.</p>
+    <%= link_to 'Stripe Account', 'https://dashboard.stripe.com/login', class: 'btn btn-primary', :target => '_blank' %>
 <% else %>
-    You need to create a Stripe account
-    <%= link_to 'Stripe oauth', stripe_oauth_path %>
+    <%= render(partial: 'stripe/alert_missing_stripe') %>
 <% end %>

@@ -57,16 +57,7 @@ Rails.application.routes.draw do
       post :sort
     end
   end
-  resources :products do
-    member do
-      #get 'detail'
-    end
 
-    collection do
-      get 'myproducts'
-      get 'catalog'
-    end
-  end
   devise_for :employees
   resources :employees
   devise_for :customers, controllers: {
@@ -80,29 +71,6 @@ Rails.application.routes.draw do
   #  post "/sign_up", :to => "customers/registrations#create"
   #  post "/sign_in", :to => "customers/sessions#create"
   #end
-  # account : all administrative informations
-  # - notifications : email and newsletters
-  # - credit cards : credit cards used (delete only, add done at payment)
-  # - cash-out : stripe account
-  # - password change and reset
-  #
-  # profile : all presentation information
-  # - details : name, firstname, adresse, birthdate ....
-  # - confidentiality : data that as exposed
-  # - presentation : photo, message, vidéo
-  # - experience : years of teaching, diploma
-  # - circle : followers and followeds
-
-  resources :customers do
-    post 'attach_picture'
-    member do
-      # from the show page add some links for profile
-      get :circle
-      # from the dashbord page add some links
-      get :dashboard, :credit_cards, :cash_out
-
-    end
-  end
 
   # Follow and unfollow other peer customers
   #
@@ -111,7 +79,7 @@ Rails.application.routes.draw do
   delete 'peers/unfollow' => 'peers#unfollow', :as => 'unfollow_peer'
 
   #
-  # Product browising
+  # Product browsing
   #
   #get 'products' => 'products#categories', :as => 'catalogue'
   #get 'products/filter' => 'products#filter', :as => 'product_filter'
@@ -139,16 +107,59 @@ Rails.application.routes.draw do
   get 'charts/accepted_orders' => 'charts#accepted_orders', :as => 'accepted_orders_chart'
   get 'charts/created_products' => 'charts#created_products', :as => 'created_products_chart'
 
-scope "/:locale" do
 
-  # static pages
-  get 'static_pages/home', as: 'home'
-  get 'help' => 'static_pages#help', as: 'help'
-  get 'contact' => 'static_pages#contact', as: 'contact'
-  get 'about' => 'static_pages#about', as: 'about'
-  get 'cheating' => 'static_pages#cheating', as: 'cheating'
+  #
+  # position the locale in the URL in order to have a nicer URL
+  #
+  #
+  scope "/:locale" do
 
-end
+    # static pages
+    get 'static_pages/home', as: 'home'
+    get 'help' => 'static_pages#help', as: 'help'
+    get 'contact' => 'static_pages#contact', as: 'contact'
+    get 'about' => 'static_pages#about', as: 'about'
+    get 'cheating' => 'static_pages#cheating', as: 'cheating'
+
+    # ressources
+    resources :products do
+      member do
+        #get 'detail'
+      end
+
+      collection do
+        get 'myproducts'
+        get 'catalog'
+      end
+    end
+
+    # account : all administrative informations
+    # - notifications : email and newsletters
+    # - credit cards : credit cards used (delete only, add done at payment)
+    # - cash-out : stripe account
+    # - password change and reset
+    #
+    # profile : all presentation information
+    # - details : name, firstname, adresse, birthdate ....
+    # - confidentiality : data that as exposed
+    # - presentation : photo, message, vidéo
+    # - experience : years of teaching, diploma
+    # - circle : followers and followeds
+
+    resources :customers do
+      post 'attach_picture'
+      member do
+        # from the show page add some links for profile
+        get :circle
+        # from the dashbord page add some links
+        get :dashboard, :credit_cards, :cash_out
+
+      end
+    end
+
+
+  end
+  # end of locale #
 
   # StripeAccount Connect endpoints
   #  - oauth flow
