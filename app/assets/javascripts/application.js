@@ -38,6 +38,7 @@
 //= require chartkick
 //= require gmaps/google
 //= require turbolinks
+//= require compatibility
 //= require_tree .
 
 

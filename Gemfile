@@ -10,7 +10,7 @@ gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # add some search with PostGres
-gem 'pg_search'
+gem 'pg_search', '~> 1.0.6'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
@@ -24,19 +24,19 @@ gem 'coffee-rails', '~> 4.1.0'
 # gem 'haml'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.1.1'
 
 # add some additional jquery
-gem 'jquery-ui-rails'
+gem 'jquery-ui-rails', '~> 5.0.5'
 
 # to solve problems with tough on ios
 gem 'touchpunch-rails'
 
 # to solve reloading of pages
-gem 'jquery-turbolinks'
+gem 'jquery-turbolinks', '~> 2.1.0'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
