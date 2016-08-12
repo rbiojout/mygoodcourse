@@ -1,5 +1,5 @@
 <div class="panel-group" id="accordion_cycle" role="tablist" aria-multiselectable="true">
-  <div class="panel panel-primary">
+  <div class="panel panel-<%=(@product.errors[:levels].blank?)? 'primary':'danger'%>">
     <div class="panel-heading" role="tab" id="heading_cycle_0">
       <h2 class="panel-title">
         <%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %>

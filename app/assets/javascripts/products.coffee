@@ -11,7 +11,6 @@ $ ->
       if more_products_url && $(window).scrollTop() > $('#infinite-scrolling-products').offset().top - $(window).height() - 60
         #$('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />')
         $('#infinite-scrolling-products .pagination').text("Please Wait...");
-        #alert('eee');
         $.getScript more_products_url
       return
     return

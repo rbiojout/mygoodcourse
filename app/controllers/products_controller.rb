@@ -291,7 +291,7 @@ class ProductsController < ApplicationController
   # POST /buy_product json
   def add_to_basket
     # @TODO check if already paid in another transaction
-      product_to_order = Product.find(params[:product_id])
+      product_to_order = Product.friendly.find(params[:product_id])
       if (product_to_order.nil? || !product_to_order.active?)
         flash[:alert] = t('dialog.shop.alert_add_cart')
       else

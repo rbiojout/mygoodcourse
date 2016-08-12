@@ -8,6 +8,7 @@ one:
   active: true
   featured: true
   price: 10.00
+  slug: Product1
   customer: one
   levels: one
   categories: one
@@ -20,6 +21,7 @@ two:
   active: true
   featured: true
   price: 10.00
+  slug: Product2
   customer: two
   levels: two
   categories: two
@@ -32,6 +34,7 @@ calcul_cp:
   active: true
   featured: true
   price: 10.00
+  slug: calcul_cp
   customer: two
   levels: cp
   categories: calcul
@@ -44,6 +47,7 @@ lecture_ce1:
   active: true
   featured: true
   price: 10.00
+  slug: lecture_ce1
   customer: two
   levels: ce1
   categories: lecture
@@ -56,6 +60,7 @@ free_from_seller_one:
   active: true
   featured: true
   price: 0.00
+  slug: free_from_seller_one
   customer: seller_one
 
 one_from_seller_one:
@@ -66,6 +71,7 @@ one_from_seller_one:
   active: true
   featured: true
   price: 5.00
+  slug: one_from_seller_one
   customer: seller_one
 
 two_from_seller_one:
@@ -76,6 +82,7 @@ two_from_seller_one:
   active: true
   featured: true
   price: 10.00
+  slug: two_from_seller_one
   customer: seller_one
 
 free_from_seller_two:
@@ -86,6 +93,7 @@ free_from_seller_two:
   active: true
   featured: true
   price: 0.00
+  slug: free_from_seller_two
   customer: seller_two
 
 one_from_seller_two:
@@ -96,6 +104,7 @@ one_from_seller_two:
   active: true
   featured: true
   price: 5.00
+  slug: one_from_seller_two
   customer: seller_two
 
 two_from_seller_two:
@@ -106,6 +115,7 @@ two_from_seller_two:
   active: true
   featured: true
   price: 10.00
+  slug: two_from_seller_two
   customer: seller_two
 
 product_without_orders:
@@ -116,6 +126,7 @@ product_without_orders:
   active: true
   featured: true
   price: 9.99
+  slug: product_without_orders
   customer: one
 
 product_with_order_rejected:
@@ -126,6 +137,7 @@ product_with_order_rejected:
   active: true
   featured: true
   price: 9.99
+  slug: product_with_order_rejected
   customer: seller_one
 
 priced_one:
@@ -136,6 +148,7 @@ priced_one:
   active: true
   featured: true
   price: 100.00
+  slug: priced_one
   customer: one
 
 priced_two:
@@ -146,6 +159,7 @@ priced_two:
   active: true
   featured: true
   price: 200.00
+  slug: priced_two
   customer: two
 
 ProdF1C1_C1L1:
@@ -156,6 +170,7 @@ ProdF1C1_C1L1:
   active: true
   featured: true
   price: 200.00
+  slug: ProdF1C1_C1L1
   customer: one
   categories: F1C1
   levels: C1L1
@@ -168,6 +183,7 @@ ProdF1C2_C1L2:
   active: true
   featured: true
   price: 200.00
+  slug: ProdF1C2_C1L2
   customer: one
   categories: F1C2
   levels: C1L2
@@ -180,6 +196,7 @@ ProdF2C1_C2L1:
   active: true
   featured: true
   price: 200.00
+  slug: ProdF2C1_C2L1
   customer: one
   categories: F2C1
   levels: C2L1
@@ -192,6 +209,7 @@ ProdF2C2_C2L2:
   active: true
   featured: true
   price: 200.00
+  slug: ProdF2C2_C2L2
   customer: one
   categories: F2C2
   levels: C2L2

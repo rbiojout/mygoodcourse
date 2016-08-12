@@ -1,2 +1,4 @@
 $('#catalog-products').append('<%= j render @products %>');
 $('#infinite-scrolling-products .pagination').replaceWith('<%= escape_javascript will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');
+//we use the ellipsis for the titles
+$('.ellipsis').dotdotdot();
