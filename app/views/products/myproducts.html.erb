@@ -25,10 +25,7 @@
   <% end %>
   </tbody>
 </table>
-
-<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %><br/>
-
-
+<%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
 
 <% if @products.size > 0 %>
     <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %>
