@@ -8,6 +8,11 @@
           <% end %>
       <% end %>
     </p>
+    <!-- author when small device -->
+    <div class="visible-xs-block">
+      <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
+    </div>
+    <!-- end author -->
   </div>
   <div class="col-xs-8">
     <div class="panel panel-default">
@@ -21,7 +26,7 @@
       <div class="panel-body">
         <div class="row">
           <!-- short description -->
-          <div class="col-xs-6 col-sm-8">
+          <div class="col-xs-12 col-sm-8">
             <h4 class="pull-right"><%= nice_price(@product.price) %></h4>
             <span>nb pages:</span> <%= @product.nbpages %>
             <p>
@@ -41,7 +46,7 @@
           </div>
           <!-- end short description -->
           <!-- author -->
-          <div class="col-xs-6 col-sm-4">
+          <div class="hidden-xs col-sm-4">
             <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
           </div>
           <!-- end author -->
@@ -67,6 +72,8 @@
     </ul>
 
   </div>
+
+
 </div>
 
 <div class="tabs product-tabs">

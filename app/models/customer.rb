@@ -15,6 +15,18 @@ class Customer < ActiveRecord::Base
     ]
   end
 
+  def language_enum
+    # Do not select any value, or add any blank field. RailsAdmin will do it for you.
+    langs = Array.new
+    LANGUAGES.each do |lang|
+      langs.push(lang.at(1))
+    end
+    # ['green', 'white']
+    # alternatively
+    # { green: 0, white: 1 }
+    # [ %w(Green 0), %w(White 1)]
+  end
+
   # Include default user_mailer modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :confirmable, :registerable,

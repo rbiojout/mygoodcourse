@@ -72,6 +72,48 @@ RailsAdmin.config do |config|
     end
   end
 
+  config.model "Customer" do
+    edit do
+      field :name
+      field :first_name
+      field :mobile
+      field :email
+      field :password
+      field :password_confirmation
+      field :street_address
+      field :administrative_area_level_1
+      field :administrative_area_level_2
+      field :postal_code
+      field :locality
+      field :birthdate do
+        date_format :default
+      end
+      field :confirmed_at do
+        strftime_format "%Y-%m-%d"
+      end
+      field :language
+      field :country
+      field :description
+    end
+  end
+
+  config.model "Employee" do
+    edit do
+      field :name
+      field :first_name
+      field :entry_date do
+        date_format :default
+      end
+      field :mobile
+      field :role
+      field :active
+      field :email
+      field :password
+      field :password_confirmation
+    end
+
+  end
+
   config.model "Level" do
     parent Cycle
     list do
