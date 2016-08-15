@@ -479,6 +479,9 @@ GEM
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
+    social-share-button (0.3.2)
+      coffee-rails
+      sass-rails
     sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     spring (1.7.2)
@@ -579,6 +582,7 @@ DEPENDENCIES
   sdoc (~> 0.4.0)
   selenium-webdriver
   simple_form
+  social-share-button
   spring
   sqlite3
   stripe

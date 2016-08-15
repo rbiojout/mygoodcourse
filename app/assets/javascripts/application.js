@@ -37,6 +37,7 @@
 //= require Chart.bundle
 //= require chartkick
 //= require gmaps/google
+//= require social-share-button
 //= require turbolinks
 //= require compatibility
 //= require_tree .

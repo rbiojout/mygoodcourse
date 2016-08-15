@@ -2,6 +2,7 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   include PgSearch
 
+  # we use slugs for finding the products
   friendly_id :name, use: :slugged
 
   # search options

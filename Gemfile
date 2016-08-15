@@ -114,7 +114,8 @@ gem 'fog'
 # handle file upload with javascript, in particular for progress bar
 gem 'jquery-fileupload-rails'
 
-
+# button for social networks
+gem 'social-share-button'
 
 # use of Stripe as payment solution
 gem 'stripe'

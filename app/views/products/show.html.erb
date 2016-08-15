@@ -1,5 +1,7 @@
+<% page_title= @product.name %>
+
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-sm-4">
     <p>
       <%= image_tag @product.preview, class: 'img-thumbnail center-block' %>
       <% if customer_signed_in? %>
@@ -8,13 +10,8 @@
           <% end %>
       <% end %>
     </p>
-    <!-- author when small device -->
-    <div class="visible-xs-block">
-      <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
-    </div>
-    <!-- end author -->
   </div>
-  <div class="col-xs-8">
+  <div class="col-sm-8">
     <div class="panel panel-default">
       <!-- title -->
       <div class="panel-heading">
@@ -26,8 +23,8 @@
       <div class="panel-body">
         <div class="row">
           <!-- short description -->
-          <div class="col-xs-12 col-sm-8">
-            <h4 class="pull-right"><%= nice_price(@product.price) %></h4>
+          <div class="col-sm-8">
+            <h4 class="pull-right"><%= nice_price(@product.price) %></h4><br/>
             <span>nb pages:</span> <%= @product.nbpages %>
             <p>
             <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
@@ -46,7 +43,7 @@
           </div>
           <!-- end short description -->
           <!-- author -->
-          <div class="hidden-xs col-sm-4">
+          <div class="col-sm-4">
             <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
           </div>
           <!-- end author -->
@@ -67,8 +64,9 @@
     </div>
     <ul class="list-inline product-links">
       <li><a href="#"><i class="fa fa-heart"></i> Add to wishlist</a></li>
-      <li><a href="#"><i class="fa fa-exchange"></i> Compare</a></li>
-      <li><a href="#"><i class="fa fa-envelope"></i> Email to friend</a></li>
+      <!-- social buttons -->
+      <li><a href="#"><%= social_share_button_tag(@product.name) %></li>
+      <!-- end social buttons -->
     </ul>
 
   </div>
