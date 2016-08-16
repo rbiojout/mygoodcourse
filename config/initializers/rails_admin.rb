@@ -93,7 +93,10 @@ RailsAdmin.config do |config|
       end
       field :language
       field :country
-      field :description
+      field :picture
+      field :description do
+        partial 'form_summernote'
+      end
     end
   end
 
