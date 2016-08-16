@@ -159,4 +159,14 @@ openssl req -new -newkey rsa:2048 -nodes -keyout server.key -out server.csr
 
 heroku _certs:add mygoodcourse.crt mygoodcourse.key --app ancient-chamber-37263
 
+DESIGN
+https://www.graphicsprings.com/start-your-logo
+search through https://thenounproject.com
+Use of Montserrat fonts from Google fonts
+Use for favicon http://realfavicongenerator.net (cf https://rubyplus.com/articles/1751-How-to-Add-Favicon-to-Rails-4-2-App-in-5-minutes)
+
+
+
+
+
 

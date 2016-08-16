@@ -17,7 +17,7 @@ display_info = (thisdoc)->
         console.log(data)
     $(this).popover({
       content: "#{locality}. #{created}",
-      placement: "top"})
+      placement: "bottom"})
     $(this).popover('show')
 
   .mouseleave ->
