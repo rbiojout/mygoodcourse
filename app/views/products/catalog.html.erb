@@ -98,7 +98,7 @@
             <span><%= link_to t('activerecord.models.family.all'), catalog_products_path(:family_id => 0), :class => (session[:family_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
             <% @families.each do |fam| %>
                 <% family_active = (fam.id.to_s == session[:family_for_products_id].to_s)? true:false %>
-                <span><%= link_to catalog_products_path(:family_id => fam.id), :class => (family_active)?'btn btn-primary':'btn btn-default' do %><%= fam.name %> <% end %></span>
+                <span><%= link_to catalog_products_path(:family_id => fam.id), :class => (family_active)?'btn btn-primary':'btn btn-info' do %><%= fam.name %> <% end %></span>
 
                     <% fam.categories.each do |cat| %>
                         <% if @categories.include?(cat)%>
@@ -146,7 +146,7 @@
           <span><%= link_to t('activerecord.models.level.all'), catalog_products_path(:cycle_id => 0), :class => (session[:cycle_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
           <% @cycles.each do |cyc| %>
               <% cycle_active = (cyc.id.to_s == session[:cycle_for_products_id].to_s)? true:false %>
-              <span><%= link_to catalog_products_path(:cycle_id => cyc.id), :class => (cycle_active)?'btn btn-primary':'btn btn-default' do %><%= cyc.name %> <% end %></span>
+              <span><%= link_to catalog_products_path(:cycle_id => cyc.id), :class => (cycle_active)?'btn btn-primary':'btn btn-info' do %><%= cyc.name %> <% end %></span>
 
               <% cyc.levels.each do |lev| %>
                   <% if @levels.include?(lev)%>
