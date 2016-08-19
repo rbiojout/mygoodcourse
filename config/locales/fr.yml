@@ -81,6 +81,9 @@ fr:
 
   activerecord:
     models:
+      article:
+        one: 'article'
+        other: 'articles'
       attachment: 'document'
       category:
         one: 'catégorie'
@@ -109,6 +112,9 @@ fr:
       product:
         one: 'produit'
         other: 'produits'
+      topic:
+        one: 'rubrique'
+        other: 'rubriques'
       stripe_account: 'compte stripe'
     attributes:
       #created_at: 'Créé le'

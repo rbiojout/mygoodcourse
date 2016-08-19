@@ -1,0 +1,16 @@
+<!-- we have Articles associated to Topic -->
+<% @articles = @object.articles %>
+
+<h3><%= (I18n.translate 'activerecord.models.article', count: 2).capitalize %></h3>
+<ol id="articles_sortable" class="list-group sortable" data-update-url="/<%= locale %>/articles/sort">
+  <% @articles.each do |article| %>
+
+      <li class="list-group-item" id="article_<%=article.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= article.name %>
+      </li>
+  <% end %>
+</ol>
+

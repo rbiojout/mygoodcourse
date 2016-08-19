@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @article.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= raw(@article.description) %>
+</p>
+
+<p>
+  <strong>Position:</strong>
+  <%= @article.position %>
+</p>
+
+<p>
+  <strong>Visits:</strong>
+  <%= @article.visits %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @article.slug %>
+</p>
+
+<p>
+  <strong>Topic:</strong>
+  <%= @article.topic %>
+</p>
+
+<%= link_to 'Edit', edit_topic_article_path(@article, :topic_id => @article.topic_id) %> |
+<%= link_to 'Back', topic_articles_path %>

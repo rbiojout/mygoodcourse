@@ -1,0 +1,6 @@
+<h1>Editing Article</h1>
+
+<%= render 'form' %>
+
+<%= link_to 'Show', topic_article_path(@article, :topic_id => @article.topic_id) %> |
+<%= link_to 'Back', topic_articles_path %>

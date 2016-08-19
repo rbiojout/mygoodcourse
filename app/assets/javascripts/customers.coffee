@@ -10,7 +10,7 @@ display_info = (thisdoc)->
     created = $(this).data('created')
     locality = $(this).data('locality')
     $.ajax
-      url: "/customers/#{id}",
+      url: "/fr/customers/#{id}",
       type: "GET",
       dataType: "json"
       success: (data) ->

@@ -1,0 +1,47 @@
+<!-- we have Cycles associated to Country -->
+<% @cycles = @object.cycles %>
+
+<h3><%= (I18n.translate 'activerecord.models.cycle', count: 2).capitalize %></h3>
+<ol id="cycles_sortable" class="list-group sortable" data-update-url="/cycles/sort">
+  <% @cycles.each do |cycle| %>
+
+      <li class="list-group-item" id="cycle_<%=cycle.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= cycle.name %>
+      </li>
+  <% end %>
+</ol>
+
+<!-- we have Families associated to Country -->
+<% @families = @object.families %>
+
+<h3><%= (I18n.translate 'activerecord.models.family', count: 2).capitalize %></h3>
+<ol id="families_sortable" class="list-group sortable" data-update-url="/families/sort">
+  <% @families.each do |family| %>
+
+      <li class="list-group-item" id="cycle_<%=family.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= family.name %>
+      </li>
+  <% end %>
+</ol>
+
+<!-- we have Topics associated to Country -->
+<% @topics = @object.topics %>
+
+<h3><%= (I18n.translate 'activerecord.models.topic', count: 2).capitalize %></h3>
+<ol id="topics_sortable" class="list-group sortable" data-update-url="/<%= locale %>/topics/sort">
+  <% @topics.each do |topic| %>
+
+      <li class="list-group-item" id="topic_<%=topic.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= topic.name %>
+      </li>
+  <% end %>
+</ol>

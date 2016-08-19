@@ -166,7 +166,7 @@ group :development do
 
   # the profiler used
   gem 'rack-mini-profiler', require: false
-  gem 'brakeman', :require => false
+  #gem 'brakeman', :require => false
   gem "rubycritic", :require => false
 
 end

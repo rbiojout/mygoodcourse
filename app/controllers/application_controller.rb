@@ -7,6 +7,9 @@ class ApplicationController < ActionController::Base
 
 
   before_action :set_i18n_locale_from_params
+
+  before_filter :reload_rails_admin, if: :rails_admin_path?
+
   # ...
   protected
   def set_i18n_locale_from_params
@@ -93,5 +96,18 @@ class ApplicationController < ActionController::Base
 
   helper_method :current_order, :has_order?
 
+  def reload_rails_admin
+    models = %W(Article, Category, Country, Customer, Comment, Cycle, Employee, Family, Level, Product, Topic)
+    models.each do |m|
+      RailsAdmin::Config.reset_model(m)
+    end
+    RailsAdmin::Config::Actions.reset
+
+    load("#{Rails.root}/config/initializers/rails_admin.rb")
+  end
+
+  def rails_admin_path?
+    controller_path =~ /rails_admin/ && Rails.env.development?
+  end
 
 end

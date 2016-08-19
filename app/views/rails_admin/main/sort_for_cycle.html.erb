@@ -1,0 +1,16 @@
+<!-- we have Articles associated to Topic -->
+<% @levels = @object.levels %>
+
+<h3><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h3>
+<ol id="levels_sortable" class="list-group sortable" data-update-url="/levels/sort">
+  <% @levels.each do |level| %>
+
+      <li class="list-group-item" id="level_<%=level.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-move handle">move</span>
+        <% end %>
+        <%= level.name %>
+      </li>
+  <% end %>
+</ol>
+

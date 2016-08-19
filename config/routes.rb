@@ -157,6 +157,14 @@ Rails.application.routes.draw do
       end
     end
 
+    # elements for the FAQ organized in topics with articles
+    resources :topics do
+      collection do
+        post :sort
+      end
+      resources :articles
+    end
+    post 'articles/sort' => 'articles#sort', as: 'articles_sort'
 
   end
   # end of locale #

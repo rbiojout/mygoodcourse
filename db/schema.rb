@@ -11,13 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810144224) do
+ActiveRecord::Schema.define(version: 20160818091325) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "unaccent"
   enable_extension "pg_trgm"
   enable_extension "fuzzystrmatch"
+
+  create_table "articles", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "position"
+    t.integer  "visits"
+    t.string   "slug"
+    t.integer  "topic_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "articles", ["topic_id"], name: "index_articles_on_topic_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
@@ -308,6 +321,19 @@ ActiveRecord::Schema.define(version: 20160810144224) do
 
   add_index "stripe_accounts", ["customer_id"], name: "index_stripe_accounts_on_customer_id", using: :btree
 
+  create_table "topics", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "position"
+    t.string   "slug"
+    t.integer  "country_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "topics", ["country_id"], name: "index_topics_on_country_id", using: :btree
+
+  add_foreign_key "articles", "topics"
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
   add_foreign_key "comments", "customers"
@@ -322,4 +348,5 @@ ActiveRecord::Schema.define(version: 20160810144224) do
   add_foreign_key "payments", "orders"
   add_foreign_key "products", "customers"
   add_foreign_key "stripe_accounts", "customers"
+  add_foreign_key "topics", "countries"
 end

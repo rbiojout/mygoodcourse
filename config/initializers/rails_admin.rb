@@ -1,3 +1,6 @@
+require Rails.root.join('lib','rails_admin', 'custom_actions.rb')
+
+
 RailsAdmin.config do |config|
 
   config.main_app_name = ["MyGoodCourse", "BackOffice"]
@@ -22,13 +25,14 @@ RailsAdmin.config do |config|
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
 
+
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
   config.actions do
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      only [Category, Country, Customer, Comment, Cycle, Employee, Family, Level, Product] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
+      only [Article, Category, Country, Customer, Comment, Cycle, Employee, Family, Level, Product, Topic] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
     end
     export
     bulk_delete
@@ -37,11 +41,72 @@ RailsAdmin.config do |config|
       except [File, StripeAccount, Peer]
     end
     delete
+    # Set the custom action here
+    sort_for_country
+    sort_for_topic
+    sort_for_cycle
+    sort_for_family
+
+
     show_in_app
+
 
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+  end
+
+  config.model "Article" do
+    parent Topic
+    list do
+      sort_by :topic_id
+      field :id
+      field :name
+      field :topic_id
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :topic
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+    end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :topic
+    end
+
+  end
+
+  config.model "Country" do
+    list do
+      field :id
+      field :name
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :name
+      field :continent
+      field :currency
+      field :eu_member
+      field :code2
+      field :code3
+      field :tld
+      field :topics do
+        orderable true
+        removable false
+        inline_add false
+        help 'Topic association is disabled in this screen. Only the sort is possible'
+      end
+    end
   end
 
   config.model "Cycle" do
@@ -61,7 +126,19 @@ RailsAdmin.config do |config|
       field :description do
         partial 'form_summernote'
       end
+      field :levels
     end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :country
+      field :levels
+    end
+
   end
 
   config.model "Comment" do
@@ -135,6 +212,15 @@ RailsAdmin.config do |config|
         partial 'form_summernote'
       end
     end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :cycle
+    end
   end
 
   config.model "Family" do
@@ -154,6 +240,16 @@ RailsAdmin.config do |config|
       field :description do
         partial 'form_summernote'
       end
+    end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :country
+      field :categories
     end
   end
 
@@ -175,6 +271,16 @@ RailsAdmin.config do |config|
         partial 'form_summernote'
       end
     end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :family
+    end
+
   end
 
   config.model "OrderItem" do
@@ -201,6 +307,28 @@ RailsAdmin.config do |config|
 
   config.model "StripeAccount" do
     parent Customer
+  end
+
+  config.model "Topic" do
+    parent Country
+    list do
+      sort_by :country_id
+      field :id
+      field :name
+      field :country_id
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :country
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :articles do
+        orderable true
+      end
+    end
   end
 
 end

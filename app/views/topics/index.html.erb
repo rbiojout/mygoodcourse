@@ -1,0 +1,7 @@
+<% @page_title = (I18n.translate 'activerecord.models.topic', count: 2).capitalize %>
+
+<h2><%= @country.name %></h2>
+
+<ul class="list-unstyled">
+  <%= render(:partial => 'topics/topic', collection: @topics) %>
+</ul>

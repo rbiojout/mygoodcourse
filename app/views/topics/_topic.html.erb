@@ -1,0 +1,8 @@
+<li>
+  <h3><%= link_to(topic_articles_path(:topic_id => topic.id)) do %>
+    <i class="fa fa-file-text" aria-hidden="true"></i> <%= topic.name %>
+      <% end %>
+  </h3>
+
+  <%= raw(topic.description) %>
+</li>

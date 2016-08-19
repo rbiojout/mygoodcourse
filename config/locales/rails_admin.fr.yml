@@ -110,6 +110,21 @@ fr:
         title: "Historique %{model_label} '%{object_label}'"
         menu: "Historique"
         breadcrumb: "Historique"
+      sort_for: &sortfor
+        title: "Trier %{model_label} '%{object_label}'"
+        menu: "Trier"
+        breadcrumb: "trier"
+        link: "Trier '%{object_label}'"
+        done: "trié(e)"
+      # we reuse the generic values for sort
+      sort_for_country:
+        <<: *sortfor
+      sort_for_cycle:
+        <<: *sortfor
+      sort_for_family:
+        <<: *sortfor
+      sort_for_topic:
+        <<: *sortfor
     form:
       cancel: "Annuler"
       basic_info: "Informations de base"

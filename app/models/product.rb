@@ -61,7 +61,7 @@ class Product < ActiveRecord::Base
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 
   # pagination
-  self.per_page = 10
+  self.per_page = 3
 
   # All active products
   scope :active, -> { where(active: true) }
@@ -322,7 +322,7 @@ class Product < ActiveRecord::Base
   private
   # we want a name that start with capital
   def capitalize_name
-    self.name = self.name.camelize
+    self.name = self.name.capitalize
   end
 
   # ensure that there are no line items referencing this product

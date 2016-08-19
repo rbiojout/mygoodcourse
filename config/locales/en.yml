@@ -86,6 +86,9 @@ en:
 
   activerecord:
     models:
+      article:
+        one: 'article'
+        other: 'articles'
       category:
         one: 'category'
         other: 'categories'
@@ -111,6 +114,9 @@ en:
       product:
         one: 'product'
         other: 'products'
+      topic:
+        one: 'topic'
+        other: 'topics'
     attributes:
       creation_date: 'Creation date'
       update_date: 'Update date'

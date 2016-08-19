@@ -1,0 +1,13 @@
+<%= simple_form_for([@topic, @article]) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :name %>
+    <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'} %>
+    <%= f.association :topic, :include_blank => false %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

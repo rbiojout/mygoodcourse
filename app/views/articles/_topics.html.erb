@@ -1,0 +1,9 @@
+<ul class="list-unstyled">
+  <% @topics.each do |top|%>
+    <li>
+      <h4><i class="fa fa-file-text<%= '-o' if (top.id != @topic.id) %>" aria-hidden="true"></i>
+        <%= link_to top.name, topic_articles_path(:topic_id => top.id) %>
+        </h4>
+    </li>
+  <% end %>
+</ul>

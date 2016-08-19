@@ -7,6 +7,7 @@ class Cycle < ActiveRecord::Base
 
   belongs_to :country
   validates :country, presence: true
+  acts_as_list scope: :country, add_new_at: :bottom
 
   validates :name, presence: true
 

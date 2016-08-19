@@ -1,0 +1,18 @@
+en:
+  admin:
+    actions:
+      sort_for: &sortfor
+        title: "Sort %{model_label} '%{object_label}'"
+        menu: "Sort"
+        breadcrumb: "sort"
+        link: "Sort '%{object_label}'"
+        done: "sorted"
+      # we reuse the generic values for sort
+      sort_for_country:
+        <<: *sortfor
+      sort_for_cycle:
+        <<: *sortfor
+      sort_for_family:
+        <<: *sortfor
+      sort_for_topic:
+        <<: *sortfor
