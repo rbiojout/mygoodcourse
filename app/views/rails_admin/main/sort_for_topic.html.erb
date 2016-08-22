@@ -2,7 +2,7 @@
 <% @articles = @object.articles %>
 
 <h3><%= (I18n.translate 'activerecord.models.article', count: 2).capitalize %></h3>
-<ol id="articles_sortable" class="list-group sortable" data-update-url="/<%= locale %>/articles/sort">
+<ol id="articles_sortable" class="list-group sortable" data-update-url="<%= main_app.sort_articles_path(:locale => locale) %>">
   <% @articles.each do |article| %>
 
       <li class="list-group-item" id="article_<%=article.id%>">

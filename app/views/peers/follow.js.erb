@@ -1,4 +1,9 @@
-$("#follow_form_<%= @followed.id%>").html("<%= escape_javascript(link_to("Unfollow", unfollow_peer_path(followed_id: @followed.id), method: :delete, remote: true )) %>")
+$(document).ready(function() {
+    $(".follow_form_<%= @customer.id%>").html("<%= escape_javascript(link_to(t('activerecord.attributes.peers.unfollow'), unfollow_peer_path(followed_id: @customer.id), method: :delete, remote: true )) %>")
 
-// we add the new followed from the list
-$('#followed-list').prepend("<%= j render partial: 'customers/customer', locals: {customer: @followed}  %>");
+// first we need to hide before to show
+    $('.customer_presentation_<%= @customer.id %>').focus();
+    $('.customer_presentation_<%= @customer.id %>').hide();
+    $('.customer_presentation_<%= @customer.id %>').fadeIn(900);
+
+});

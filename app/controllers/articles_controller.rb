@@ -3,6 +3,8 @@ class ArticlesController < ApplicationController
   before_action :set_topic, only: [:index, :show, :new, :edit, :update]
   before_action :set_country, only: [:index]
 
+  before_action :authenticate_employee!, except: [:index, :show]
+
 
   # GET /articles
   # GET /articles.json
@@ -71,11 +73,13 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # POST /topics/sort
+  # POST /articles/sort
   def sort
+    logger.debug("===> params[:article] #{params[:article]}")
     unless params[:article].nil?
       params[:article].each .each_with_index do |id, index|
         Article.update(id, position: index+1)
+        logger.debug("===> id #{id} index #{index}")
       end
     end
     render nothing:true

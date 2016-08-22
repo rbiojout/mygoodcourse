@@ -2,7 +2,7 @@
 <% @categories = @object.categories %>
 
 <h3><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h3>
-<ol id="articles_sortable" class="list-group sortable" data-update-url="/categories/sort">
+<ol id="articles_sortable" class="list-group sortable" data-update-url="<%= main_app.sort_categories_path %>">
   <% @categories.each do |category| %>
 
       <li class="list-group-item" id="category_<%=category.id%>">

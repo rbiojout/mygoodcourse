@@ -1,4 +1,5 @@
-require Rails.root.join('lib','rails_admin', 'custom_actions.rb')
+require Rails.root.join('lib','rails_admin','custom_actions.rb')
+require Rails.root.join('lib','rails_admin','custom_dashboards.rb')
 
 
 RailsAdmin.config do |config|
@@ -6,7 +7,7 @@ RailsAdmin.config do |config|
   config.main_app_name = ["MyGoodCourse", "BackOffice"]
 
   require 'i18n'
-  I18n.default_locale = :en
+  I18n.default_locale = :fr
 
   ### Popular gems integration
 
@@ -28,7 +29,10 @@ RailsAdmin.config do |config|
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
+  config.browser_validations = false # Default is true
+
   config.actions do
+    stats_users
     dashboard                     # mandatory
     index                         # mandatory
     new do
@@ -62,7 +66,8 @@ RailsAdmin.config do |config|
       sort_by :topic_id
       field :id
       field :name
-      field :topic_id
+      field :topic
+      field :visits
       field :created_at
       field :updated_at
     end
@@ -115,8 +120,7 @@ RailsAdmin.config do |config|
       sort_by :country_id
       field :id
       field :name
-      field :position
-      field :country_id
+      field :country
       field :created_at
       field :updated_at
     end
@@ -199,9 +203,10 @@ RailsAdmin.config do |config|
     list do
       sort_by :cycle_id
       field :id
-      field :name
-      field :position
-      field :cycle_id
+      field :name do
+        required(true)
+      end
+      field :cycle
       field :created_at
       field :updated_at
     end
@@ -229,8 +234,7 @@ RailsAdmin.config do |config|
       sort_by :country_id
       field :id
       field :name
-      field :position
-      field :country_id
+      field :country
       field :created_at
       field :updated_at
     end
@@ -259,8 +263,7 @@ RailsAdmin.config do |config|
       sort_by :family_id
       field :id
       field :name
-      field :position
-      field :family_id
+      field :family
       field :created_at
       field :updated_at
     end
@@ -315,7 +318,7 @@ RailsAdmin.config do |config|
       sort_by :country_id
       field :id
       field :name
-      field :country_id
+      field :country
       field :created_at
       field :updated_at
     end

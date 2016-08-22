@@ -1,5 +1,6 @@
 <% withcols ||= 'true' %>
-<div class="<%= 'col-xs-6 col-sm-3' if withcols == 'true' %> customer_presentation" id="customer_presentation_<%= customer.id%>">
+<% customer ||= @customer %>
+<div class="<%= 'col-xs-6 col-sm-3 customer_presentation_'+customer.id.to_s if withcols == 'true' %> customer_presentation" id="customer_presentation_<%= customer.id%>">
   <!-- picture -->
   <div class="center-block">
     <img class="img-circle center-block customer-picture"
@@ -18,7 +19,7 @@
     <% if customer_signed_in? %>
       <% if current_customer.id != customer.id %>
       <h5>
-      <div class="follow_form" id="follow_form_<%= customer.id%>">
+      <div class="follow_form follow_form_<%= customer.id%>" id="follow_form_<%= customer.id%>">
         <% if current_customer.following?(customer) %>
             <%= link_to t('activerecord.attributes.peers.unfollow'), unfollow_peer_path(followed_id: customer.id), method: :delete, remote: true %>
         <% else %>

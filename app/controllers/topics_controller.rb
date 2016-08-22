@@ -2,6 +2,8 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :set_country, only: [:index]
 
+  before_action :authenticate_employee!, except: [:index, :show]
+
   # GET /topics
   # GET /topics.json
   def index

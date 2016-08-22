@@ -10,7 +10,9 @@ class Product < ActiveRecord::Base
   pg_search_scope :search_by_text, :against => [:name, :description, ], :ignoring => :accents
 
   # we want a name with a Capital
+  include CapitalizeNameConcern
   before_save :capitalize_name
+
   after_save :update_for_customer
 
 
@@ -320,10 +322,6 @@ class Product < ActiveRecord::Base
 
 
   private
-  # we want a name that start with capital
-  def capitalize_name
-    self.name = self.name.capitalize
-  end
 
   # ensure that there are no line items referencing this product
   def ensure_not_referenced

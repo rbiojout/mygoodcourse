@@ -18,6 +18,14 @@ two:
   currency: DOLLAR
   eu_member: false
 
+not_linked:
+  name: NotLinked
+  code2: NL
+  code3: NOTLINKED
+  continent: AMERICA
+  tld:
+  currency: DOLLAR
+  eu_member: false
 
 uk:
   name:        'United Kingdom'

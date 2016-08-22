@@ -164,7 +164,7 @@ Rails.application.routes.draw do
       end
       resources :articles
     end
-    post 'articles/sort' => 'articles#sort', as: 'articles_sort'
+    post 'articles/sort' => 'articles#sort', as: 'sort_articles'
 
   end
   # end of locale #

@@ -1,6 +1,8 @@
 class Article < ActiveRecord::Base
   extend FriendlyId
 
+
+
   include PgSearch
 
   # we use slugs for finding the articles
@@ -12,6 +14,7 @@ class Article < ActiveRecord::Base
   acts_as_list scope: :topic, add_new_at: :bottom
 
   # we want a name with a Capital
+  include CapitalizeNameConcern
   before_save :capitalize_name
 
   validates :name, :description, presence: true
@@ -26,9 +29,6 @@ class Article < ActiveRecord::Base
 
   private
 
-  # we want a name that start with capital
-  def capitalize_name
-    self.name = self.name.capitalize
-  end
+
 
 end

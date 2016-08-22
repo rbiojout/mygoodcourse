@@ -4,7 +4,7 @@ class PeersController < ApplicationController
 
   # POST /peers/follow?followed_id=
   def follow
-    current_customer.follow(@followed)
+    current_customer.follow(@customer)
     respond_to do |format|
       format.html {redirect_to current_customer}
       format.js { }
@@ -13,7 +13,7 @@ class PeersController < ApplicationController
 
   # DELETE /peers/unfollow?followed_id=
   def unfollow
-    current_customer.unfollow(@followed)
+    current_customer.unfollow(@customer)
     respond_to do |format|
       format.html {redirect_to current_customer}
       format.js { }
@@ -23,7 +23,7 @@ class PeersController < ApplicationController
   private
   # Use callbacks to share common setup or constraints between actions.
   def set_followed
-    @followed = Customer.find(params[:followed_id])
+    @customer = Customer.find(params[:followed_id])
   end
 
 end

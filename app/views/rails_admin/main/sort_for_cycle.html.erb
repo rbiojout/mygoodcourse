@@ -2,7 +2,7 @@
 <% @levels = @object.levels %>
 
 <h3><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h3>
-<ol id="levels_sortable" class="list-group sortable" data-update-url="/levels/sort">
+<ol id="levels_sortable" class="list-group sortable" data-update-url="<%= main_app.sort_levels_path %>">
   <% @levels.each do |level| %>
 
       <li class="list-group-item" id="level_<%=level.id%>">
