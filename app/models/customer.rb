@@ -41,8 +41,13 @@ class Customer < ActiveRecord::Base
   validates :name, :first_name, :mobile, presence: true
   validates :mobile,   format: { with: PHONE_REGEX }
 
-
+  # producst links
+  # owned products
   has_many :products, dependent: :destroy
+  # wished products
+  has_many :wish_lists, dependent: :destroy
+  has_many :wish_products, through: :wish_lists, source: :product
+
   belongs_to :country
 
   def own_product(product)
@@ -65,17 +70,32 @@ class Customer < ActiveRecord::Base
   # payment solution StripeAccount
   has_one :stripe_account, dependent: :destroy
 
-  # Follows a user_mailer.
+  # Follows a customer.
   def follow(other_customer)
     active_peers.create(followed: other_customer)
   end
-  # Unfollows a user_mailer.
+  # Unfollows a customer.
   def unfollow(other_customer)
     active_peers.find_by(followed: other_customer).destroy
   end
-  # Returns true if the current user_mailer is following the other user_mailer.
+  # Returns true if the current customer is following the other customer.
   def following?(other_customer)
     followeds.include?(other_customer)
+  end
+
+
+  # Wishs a product.
+  def wish(product)
+    wish_lists.create(product: product) unless wishing?(product)
+  end
+  # Unwishs a product.
+  def unwish(product)
+    logger.debug("@@@@@ #{product} #{wish_lists.find_by(product: product)}")
+    wish_lists.find_by(product: product).destroy if wishing?(product)
+  end
+  # Returns true if the current customer has the product in his wish list.
+  def wishing?(product)
+    wish_products.include?(product)
   end
 
 

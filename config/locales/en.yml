@@ -68,6 +68,8 @@ en:
       explain_save: "Don't forget to save"
       remove_version: 'Delete version'
       active_version: 'Active version'
+      wish: 'Add to wished products'
+      unwish: 'remove from wished products'
     shop:
       add_cart: 'Add to cart'
       remove_cart: 'Remove from cart'
@@ -144,6 +146,7 @@ en:
         profile: 'Profile'
         followers: 'Followers'
         followeds: 'Following'
+        wishes: 'Favorite Products'
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
       order:

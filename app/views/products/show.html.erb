@@ -12,7 +12,7 @@
     </p>
   </div>
   <div class="col-sm-8">
-    <div class="panel panel-default">
+    <div class="panel panel-default product_presentation_<%= @product.id %>">
       <!-- title -->
       <div class="panel-heading">
         <h4 class="panel-title"><%= @product.name %></h4>
@@ -40,6 +40,7 @@
 
             <% end %>
             </p>
+
           </div>
           <!-- end short description -->
           <!-- author -->
@@ -63,7 +64,17 @@
 
     </div>
     <ul class="list-inline product-links">
-      <li><a href="#"><i class="fa fa-heart"></i> Add to wishlist</a></li>
+      <li>
+        <% if customer_signed_in? %>
+            <div class="wish_form wish_form_<%= @product.id%>" id="wish_form_<%= @product.id%>">
+
+              <% if current_customer.wishing?(@product) %>
+                  <i class="fa fa-heart fa-2x"> </i> <%= link_to 'UnWish', unwish_product_path(:product_id => @product.id), :method => :delete, remote: true %>
+              <% else %>
+                  <i class="fa fa-heart-o fa-2x"> </i> <%= link_to 'Wish', wish_product_path(:product_id => @product.id), :method => :post, remote: true %>
+              <% end %>
+            </div>
+        <% end %>
       <!-- social buttons -->
       <li><a href="#"><%= social_share_button_tag(@product.name) %></li>
       <!-- end social buttons -->

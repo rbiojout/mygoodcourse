@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard, :circle]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard, :circle, :wishlist]
   before_action :authenticate_customer!, only: [:update, :edit, :dashboard]
 
   before_action :correct_user, only: [:update, :edit]
@@ -38,7 +38,10 @@ class CustomersController < ApplicationController
 
   end
 
-
+  # GET /whislist
+  def wishlist
+    @products = @customer.wish_products
+  end
 
   # POST /customers
   # POST /customers.json

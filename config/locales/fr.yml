@@ -63,6 +63,8 @@ fr:
       explain_save: "N'oubliez pas de sauvegarder"
       remove_version: 'Supprimer la version'
       active_version: 'Version active'
+      wish: 'Ajouter aux favoris'
+      unwish: 'Supprimer des favoris'
     shop:
       add_cart: 'Ajouter au panier'
       remove_cart: 'Retirer du panier'
@@ -168,8 +170,9 @@ fr:
         birthdate: 'Date de naissance'
         description: 'Description'
         profile: 'Profil'
-        followers: 'Abonnements'
-        followeds: 'Abonnés'
+        followers: 'Abonnés'
+        followeds: 'Abonnements'
+        wishes: 'Produits Favoris'
         remember_me: 'Se souvenir de moi'
         located: 'Originaire de %{locality}'
         since: 'Membre depuis %{created}'

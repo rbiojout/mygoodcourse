@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160818091325) do
+ActiveRecord::Schema.define(version: 20160823034033) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -333,6 +333,16 @@ ActiveRecord::Schema.define(version: 20160818091325) do
 
   add_index "topics", ["country_id"], name: "index_topics_on_country_id", using: :btree
 
+  create_table "wish_lists", force: :cascade do |t|
+    t.integer  "customer_id"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "wish_lists", ["customer_id"], name: "index_wish_lists_on_customer_id", using: :btree
+  add_index "wish_lists", ["product_id"], name: "index_wish_lists_on_product_id", using: :btree
+
   add_foreign_key "articles", "topics"
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
@@ -349,4 +359,6 @@ ActiveRecord::Schema.define(version: 20160818091325) do
   add_foreign_key "products", "customers"
   add_foreign_key "stripe_accounts", "customers"
   add_foreign_key "topics", "countries"
+  add_foreign_key "wish_lists", "customers"
+  add_foreign_key "wish_lists", "products"
 end

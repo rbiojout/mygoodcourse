@@ -89,6 +89,13 @@ Rails.application.routes.draw do
   post 'products/:product_id/buy' => 'products#add_to_basket', :as => 'buy_product'
   delete 'products/:order_item_id/remove_from_basket' => 'products#remove_from_basket', :as => 'remove_basket_item'
 
+  # Wish and unwish products
+  #
+  #
+  post 'wish_lists/wish' => 'wish_lists#wish', :as => 'wish_product'
+  delete 'wish_lists/unwish' => 'wish_lists#unwish', :as => 'unwish_product'
+
+
   #
   # Order status
   #
@@ -151,6 +158,8 @@ Rails.application.routes.draw do
       member do
         # from the show page add some links for profile
         get :circle
+        #
+        get :wishlist, as: 'wish_list'
         # from the dashbord page add some links
         get :dashboard, :credit_cards, :cash_out
 

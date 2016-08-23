@@ -24,6 +24,12 @@ class Product < ActiveRecord::Base
 
   # linked to customer as necessary
   belongs_to :customer
+  # or through wish_list
+  # wished products
+  has_many :wish_lists, dependent: :destroy
+  has_many :wish_customers, through: :wish_lists, source: :customer
+
+
   # validators
   validates :customer_id, :name, :description, presence: true
 
