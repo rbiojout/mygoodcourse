@@ -118,6 +118,17 @@ two_from_seller_two:
   slug: two_from_seller_two
   customer: seller_two
 
+one_from_seller_no_stripe:
+  name: One from Seller No Stripe
+  sku:
+  permalink:
+  description: One from Seller No Stripe
+  active: true
+  featured: true
+  price: 10.00
+  slug: one_from_seller_no_stripe
+  customer: seller_no_stripe
+
 product_without_orders:
   name: Product_without_orders
   sku:

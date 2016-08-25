@@ -20,7 +20,7 @@
           <h3>Sold products</h3>
           <%= line_chart accepted_orders_chart_path, id: 'AcceptedOrders' %>
           <h3>Created Products</h3>
-          <%= line_chart created_products_chart_path, id: 'CreatedProducts' %>
+          <%= column_chart created_products_chart_path, id: 'CreatedProducts', stacked: true, discrete: true %>
 
         </div>
         <!---  --->

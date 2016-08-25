@@ -1,7 +1,6 @@
-<p id="notice"><%= notice %></p>
+<% @page_title = (I18n.translate 'activerecord.models.cycle', count: 2).capitalize %>
 
-<h1>Listing Cycles</h1>
-
+<h1><%= (I18n.translate 'activerecord.models.cycle', count: 2).capitalize %></h1>
 
 
 <ul id="cycles_sortable" class="list-group sortable" data-update-url="<%= sort_cycles_path %>">

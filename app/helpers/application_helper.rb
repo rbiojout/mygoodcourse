@@ -33,7 +33,7 @@ module ApplicationHelper
     link_to content_tag(:span, '', class: "glyphicon glyphicon-sort#{glyphicon}", 'aria-hidden' => "true" )+ ' '+ title, {:sort => column, :direction => direction}, :html_options => {:'aria-label' => "Left Align"}
   end
 
-  # helper to paginate
+  # helper to paginate with bootsrap presentation
   def pagination_links(collection, options = {})
     options[:renderer] ||= BootstrapPaginationHelper::LinkRenderer
     options[:class] ||= 'pagination pagination-centered'
@@ -45,12 +45,13 @@ module ApplicationHelper
   # helper to format date
   # consider the config locales for the names that appear
   def nice_date(date)
-    nice_date = (date||Time.now).strftime("%D")
+    #nice_date = (date||Time.now).strftime("%D")
+    nice_date = I18n.localize( (date||Time.now), :format => :short)
     how_many_days = (Time.now - date)/1.day
     if (how_many_days < 1)
-      nice_date += ' '+ content_tag("span", :new, class: 'badge alert-success')
+      nice_date += ' '+ content_tag("span", I18n.translate('time.new'), class: 'badge alert-success')
     elsif (how_many_days < 10)
-      nice_date += ' ' + content_tag("span", :recent, class: 'badge alert-info')
+      nice_date += ' ' + content_tag("span", I18n.translate('time.recent'), class: 'badge alert-info')
     end
     content_tag("span", nice_date.html_safe, class: 'date')
   end

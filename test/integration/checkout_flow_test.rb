@@ -28,6 +28,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     post buy_product_path(:product_id => products(:one_from_seller_one).id)
     post buy_product_path(:product_id => products(:two_from_seller_one).id)
     post buy_product_path(:product_id => products(:one_from_seller_two).id)
+    post buy_product_path(:product_id => products(:one_from_seller_no_stripe).id)
 
     get checkout_path
 

@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% @page_title = (I18n.translate 'activerecord.models.family', count: 2).capitalize %>
 
-<h1>Listing Families</h1>
+<h1><%= (I18n.translate 'activerecord.models.family', count: 2).capitalize %></h1>
+
 
 <ul id="families_sortable" class="list-group sortable" data-update-url="<%= sort_families_path %>">
     <% @families.each do |family| %>

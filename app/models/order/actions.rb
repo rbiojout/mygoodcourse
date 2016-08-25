@@ -173,7 +173,12 @@ class Order < ActiveRecord::Base
 # @TODO add method stripe in the list of methods for payment
 # @TODO add a split of payments to the owner and to the platform
 # if the user_mailer is managed, send money else keep and schedule when possible
-        payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
+        begin
+          payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
+        rescue => e
+          logger.debug("Problem saving payment. #{e.message}")
+        end
+
       else
         notes += "Some items where not accepted by the Bank."
       end

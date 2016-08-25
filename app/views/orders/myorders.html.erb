@@ -4,9 +4,9 @@
   <thead>
   <tr>
     <th><%= sortable_bootstrap "id" %></th>
-    <th><%= sortable_bootstrap "status" %></th>
-    <th><%= sortable_bootstrap "created_at", 'Creation date' %></th>
-    <th><%= sortable_bootstrap "amount_paid", 'Amount paid' %></th>
+    <th><%= sortable_bootstrap "status", t('activerecord.attributes.order.status') %></th>
+    <th><%= sortable_bootstrap "created_at", t('activerecord.attributes.creation_date') %></th>
+    <th><%= sortable_bootstrap "amount_paid", t('activerecord.attributes.order.amount_paid')  %></th>
     <th colspan="1"></th>
   </tr>
   </thead>

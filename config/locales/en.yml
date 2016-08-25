@@ -30,6 +30,7 @@ en:
     my_profile: "My profile"
     my_dashboard: "My Dashboard"
     who_we_are : 'Who we are'
+    help: 'Help/Faq'
     search: "Search"
 
   actions:
@@ -84,7 +85,7 @@ en:
       notice_stripe_exchange: 'Could not exchange Stripe token. Please try again.'
       alert_add_cart: "Product not active."
       alert_empty_cart: 'Your Cart is empty'
-
+      alert_rejected_order: 'Order rejected'
 
   activerecord:
     models:
@@ -110,6 +111,9 @@ en:
         one: 'level'
         other: 'levels'
         all: 'All levels'
+      order:
+        one: 'order'
+        other: 'orders'
       payment:
         one: 'payment'
         other: 'payments'
@@ -133,6 +137,7 @@ en:
         active: 'Active'
         position: 'Position'
         detail: 'Detail'
+        preview: 'Preview'
       comment:
         title: 'Title'
         place_title: 'Title or summary of your comment (required)'
@@ -150,6 +155,20 @@ en:
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
       order:
+        status: 'Status'
+        received_at: 'Received at'
+        accepted_at: 'Accepted ad'
+        consignement_number: 'Consignement number'
+        rejected_at: 'Rejected at'
+        rejected_by: 'Rejected by'
+        ip_address: 'IP Address'
+        amount_paid: 'Amount paid'
+        subtotal: 'Subtotal'
+        total: 'Total'
+        tax_amount: 'Tax amount'
+        esported: 'Exported'
+        invoice: 'Invoice'
+        incoice_number: 'Invoice Number'
       payment:
         amount: 'amount'
         reference: 'reference'
@@ -224,7 +243,7 @@ en:
 
   time:
     formats:
-      short: "%D"
+      short: "%m/%d/%Y"
     new: 'New'
     recent: 'Recent'
 

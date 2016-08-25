@@ -36,6 +36,15 @@ seller_two:
   confirmation_token: seller_two
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
+seller_no_stripe:
+  name: SellerNoStripe
+  first_name: FirstName
+  email: sellernostripe@test.com
+  mobile: +33663220909
+  picture:
+  confirmation_token: seller_no_stripe
+  confirmed_at: <%= 5.day.ago.to_s(:db) %>
+
 buyer_one:
   name: Buyer1
   first_name: FirstName

@@ -1,0 +1,19 @@
+<!-- Additional navbar items -->
+<%
+#<div class="collapse navbar-collapse navbar-right">
+#  <!--                      pull-right keeps the drop-down in line -->
+#  <ul class="nav navbar-nav pull-right">
+#    <li><a href="#">HELP</a></li>
+#  </ul>
+#</div>
+
+%>
+
+
+<div class="collapse navbar-collapse navbar-right">
+    <!--                      pull-right keeps the drop-down in line -->
+    <ul class="nav navbar-nav pull-right">
+      <li><%= link_to t('page.catalog'), catalog_products_path %></li>
+      <li><%= link_to t('page.who_we_are'), home_path %></li>
+    </ul>
+  </div>

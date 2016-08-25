@@ -107,7 +107,7 @@ class OrdersController < ApplicationController
         redirect_to catalog_products_path, :notice => t('dialog.shop.notice_pay_accepted')
 
       rescue  => e
-        flash[:alert] = "#{I18n.translate('activerecord.attributes.order.reject_notice')} #{e.message}"
+        flash[:alert] = "#{I18n.translate('dialog.shop.alert_rejected_order')} #{e.message}"
         logger.debug("Payment was declined by the bank. #{e.message}")
         # save the state from the payment module as rejected
         current_order.reject!(current_customer)

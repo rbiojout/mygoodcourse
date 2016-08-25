@@ -30,6 +30,7 @@ fr:
     my_profile: "Mon profil"
     my_dashboard: "Tableau de bord"
     who_we_are : 'Qui sommes nous'
+    help: 'Aide/Faq'
     search: "Rechercher"
 
   actions:
@@ -79,6 +80,7 @@ fr:
       notice_stripe_exchange: 'Impossible de valider avec Stripe. Merci de réessayer.'
       alert_add_cart: "Product non actif."
       alert_empty_cart: 'Votre panier est vide'
+      alert_rejected_order: 'Commande rejetée'
 
 
   activerecord:
@@ -109,7 +111,9 @@ fr:
         one: 'niveau'
         other: 'niveaux'
         all: 'Tous niveaux'
-      order: 'commande'
+      order:
+        one: 'commande'
+        other: 'commandes'
       payment: 'paiement'
       product:
         one: 'produit'
@@ -134,6 +138,7 @@ fr:
         active: 'Actif'
         position: 'Position'
         detail: 'Détail'
+        preview: 'Pré-visualisation'
       category:
         name: 'Nom'
         description: 'Description'
@@ -208,7 +213,11 @@ fr:
         rejected_by: 'Refusée par'
         ip_address: 'Adresse IP'
         amount_paid: 'Montant payé'
+        subtotal: 'Sous-total'
+        total: 'Total'
+        tax_amount: 'Montant de taxes'
         esported: 'Exportée'
+        invoice: 'Facture'
         incoice_number: 'Numéro de facture'
       payment:
         amount: 'montant'
@@ -289,7 +298,7 @@ fr:
 
   time:
     formats:
-      short: "%D"
+      short: "%d/%m/%Y"
     new: 'Nouveau'
     recent: 'Récent'
 

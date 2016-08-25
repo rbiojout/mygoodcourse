@@ -1,6 +1,7 @@
-<p id="notice"><%= notice %></p>
+<% @page_title = (I18n.translate 'activerecord.models.category', count: 2).capitalize %>
 
-<h1>Listing Categories</h1>
+<h1><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h1>
+
 
 <table>
   <thead>

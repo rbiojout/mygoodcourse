@@ -1,14 +1,8 @@
-<p id="notice"><%= notice %></p>
-
-<div class="row">
-  <div class="col-md-12">
-
         <section class="content invoice">
           <!-- title row -->
           <div class="row">
             <div class="col-xs-12 invoice-header">
-              <h1>
-                <i class="fa fa-globe"></i> Invoice
+              <h1> <%= t('activerecord.attributes.order.invoice') %>
                 <small class="pull-right"><%= nice_status(@order.status)%></small>
               </h1>
             </div>
@@ -21,11 +15,11 @@
               <table class="table table-striped">
                 <thead>
                 <tr>
-                  <th style="width: 20%">Image</th>
-                  <th>Name</th>
-                  <th>Nb pages</th>
-                  <th>Taxe amount #</th>
-                  <th>Subtotal</th>
+                  <th style="width: 20%"><%= t('activerecord.attributes.attachment.preview')%></th>
+                  <th><%= t('activerecord.attributes.product.name')%></th>
+                  <th><%= t('activerecord.attributes.attachment.nbpages')%></th>
+                  <th><%= t('activerecord.attributes.order_item.tax_amount')%></th>
+                  <th><%= t('activerecord.attributes.order.amount_paid')%></th>
                 </tr>
                 </thead>
                 <tbody>
@@ -44,20 +38,20 @@
             </div>
             <!-- /.col -->
             <div class="col-xs-6">
-              <p class="lead">TOTAL</p>
+              <p class="lead"><%= t('activerecord.attributes.order.total').upcase %></p>
               <div class="table-responsive">
                 <table class="table">
                   <tbody>
                   <tr>
-                    <th style="width:50%">Subtotal:</th>
+                    <th style="width:50%"><%= t('activerecord.attributes.order.subtotal')%>:</th>
                     <td><%= nice_price(@order.total_before_tax) %></td>
                   </tr>
                   <tr>
-                    <th>Tax</th>
+                    <th><%= t('activerecord.attributes.order.tax_amount')%>:</th>
                     <td><%= nice_price(@order.tax) %></td>
                   </tr>
                   <tr>
-                    <th>Total:</th>
+                    <th><%= t('activerecord.attributes.order.total')%>:</th>
                     <td><%= nice_price(@order.total) %></td>
                   </tr>
                   </tbody>
@@ -68,15 +62,16 @@
           </div>
           <!-- /.row -->
 
+          <% if @payments.size >0 %>
           <div class="row">
             <div class="col-xs-12 table">
-            <p class="lead">Payments</p>
+            <p class="lead"><%= (I18n.translate 'activerecord.models.payment', count: 2).capitalize %></p>
             <table class="table">
               <thead>
               <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Confirmed</th>
+                <th><%= t('activerecord.attributes.creation_date') %></th>
+                <th><%= t('activerecord.attributes.payment.amount') %>></th>
+                <th><%= t('activerecord.attributes.payment.confirmed') %></th>
               </tr>
               </thead>
               <tbody>
@@ -86,14 +81,15 @@
               </div>
           </div>
           <!-- /.row -->
+          <% end %>
+          <!-- end payments -->
+
 
           <!-- this row will not appear when printing -->
-          <div class="row no-print">
+          <div class="row hidden-print">
             <div class="col-xs-12">
               <button class="btn btn-default" onclick="window.print();"><i class="fa fa-print"></i> Print</button>
               <button class="btn btn-primary pull-right" style="margin-right: 5px;"><i class="fa fa-download"></i> Generate PDF</button>
             </div>
           </div>
         </section>
-  </div>
-</div>

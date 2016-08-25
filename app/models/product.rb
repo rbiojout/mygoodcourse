@@ -69,7 +69,7 @@ class Product < ActiveRecord::Base
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 
   # pagination
-  self.per_page = 3
+  self.per_page = 10
 
   # All active products
   scope :active, -> { where(active: true) }
