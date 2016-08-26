@@ -169,6 +169,8 @@ Use for favicon http://realfavicongenerator.net (cf https://rubyplus.com/article
 USER ONBOARDING
 look at bootstrap TOUR http://bootstraptour.com/api/
 
+SEO look http://www.antoine-brisset.com/blog/seo-ruby-on-rails-1/ and http://www.antoine-brisset.com/blog/seo-ruby-on-rails-2/
+
 
 
 

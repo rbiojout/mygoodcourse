@@ -1,9 +1,6 @@
-$(document).ready(function() {
-    $(".wish_form_<%= @product.id%>").html("<%= escape_javascript(link_to(' '+t('dialog.product.wish'), wish_product_path(:product_id => @product.id), :title => t('dialog.product.unwish'), class: 'fa fa-heart-o   red', :method => :post, remote: true )) %>")
+    $(".wish_form_<%= @product.id%>").html("<%= escape_javascript(render(partial: 'wish', locale: locale)) %>")
 
 // first we need to hide before to show
     $('.product_presentation_<%= @product.id %>').focus();
     $('.product_presentation_<%= @product.id %>').hide();
     $('.product_presentation_<%= @product.id %>').fadeIn(900);
-
-});

@@ -96,10 +96,12 @@ class ProductsController < ApplicationController
     family_id = params[:family_id] || session[:family_for_products_id] || country_families.pluck(:id)
     category_id = params[:category_id] || session[:category_for_products_id] || country_categories.pluck(:id)
 
-    logger.debug("===> family used #{params[:family_id]}/#{session[:family_for_products_id]}/#{country_families.pluck(:id)}")
+    logger.debug("===> family used #{family_id} from #{params[:family_id]}/#{session[:family_for_products_id]}/#{country_families.pluck(:id)}")
 
     cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || country_cycles.pluck(:id)
     level_id = params[:level_id] || session[:level_for_products_id] || country_levels.pluck(:id)
+
+    logger.debug("===> level_id from #{params[:level_id]}/#{session[:level_for_products_id]}/#{country_levels.pluck(:id)}")
 
     logger.debug("===> parameters used #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
@@ -115,8 +117,7 @@ class ProductsController < ApplicationController
         session[:family_for_products_id] = family_id
       end
       category_id = Category.with_products_for_family(family_id).unscope(:order).uniq.pluck(:id)
-      session[:category_for_products_id] = nil
-      #logger.debug("=====> .. #{category_id}")
+      session[:category_for_products_id] = category_id
     end
     # unload if :category_id equal 0
     unless params[:category_id].nil?
@@ -145,7 +146,7 @@ class ProductsController < ApplicationController
         session[:cycle_for_products_id] = cycle_id
       end
       level_id = Level.with_products_for_cycle(cycle_id).unscope(:order).uniq.pluck(:id) #nil
-      session[:level_for_products_id] = nil
+      session[:level_for_products_id] = level_id
     end
     # unload if :level_id equal 0
     unless params[:level_id].nil?
@@ -162,7 +163,7 @@ class ProductsController < ApplicationController
       end
     end
 
-    logger.debug("===> parameters corrected #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
+    logger.debug("===> parameters corrected pass 2 #{family_id}/#{category_id}/#{cycle_id}/#{level_id}")
 
     # add the corresponding families, categories, cycles and levels
     query_families = Family.associated_to_query(query_store)
@@ -219,6 +220,12 @@ class ProductsController < ApplicationController
     @products = @products.unscope(:order).order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => Product.per_page)
 
     #logger.debug("===> active products #{@products.count}")
+
+    # store values for next iteration
+    #session[:family_for_products_id] = @families.map(&:id)
+    #session[:category_for_products_id] = @categories.map(&:id)
+    #session[:cycle_for_products_id] = @cycles.map(&:id)
+    #session[:level_for_products_id] = @levels.map(&:id)
 
   end
 

@@ -69,9 +69,9 @@
             <div class="wish_form wish_form_<%= @product.id%>" id="wish_form_<%= @product.id%>">
 
               <% if current_customer.wishing?(@product) %>
-                  <i class="fa fa-heart fa-2x"> </i> <%= link_to(' '+t('dialog.product.unwish'), unwish_product_path(:product_id => @product.id), :title => t('dialog.product.unwish'), class: 'fa fa-heart red', :method => :delete, remote: true) %>
+                   <%= render(partial: 'wish_lists/unwish', locale: locale) %>
               <% else %>
-                  <i class="fa fa-heart-o fa-2x"> </i> <%= link_to(' '+t('dialog.product.wish'), wish_product_path(:product_id => @product.id), :title => t('dialog.product.unwish'), class: 'fa fa-heart-o   red', :method => :post, remote: true) %>
+                   <%= render(partial: 'wish_lists/wish', locale: locale) %>
               <% end %>
             </div>
         <% end %>

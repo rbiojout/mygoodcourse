@@ -1,0 +1,4 @@
+<%= link_to(wish_product_path(:product_id => @product.id), :title => t('dialog.product.wish'), class: 'btn btn-default', :method => :post, remote: true ) do %>
+
+    <i class="fa fa-heart-o red"> </i> <%= t('dialog.product.wish') %>
+<% end %>
