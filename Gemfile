@@ -133,6 +133,7 @@ gem 'rails_admin'
 group :production do
   gem 'rails_12factor'
   gem 'puma'
+  gem 'tunemygc'
 end
 
 group :test do

@@ -171,6 +171,9 @@ look at bootstrap TOUR http://bootstraptour.com/api/
 
 SEO look http://www.antoine-brisset.com/blog/seo-ruby-on-rails-1/ and http://www.antoine-brisset.com/blog/seo-ruby-on-rails-2/
 
+MEMORY ISSUES
+cf https://devcenter.heroku.com/articles/tunemygc
+need to move to new region https://devcenter.heroku.com/articles/app-migration
 
 
 
