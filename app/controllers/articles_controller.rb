@@ -117,7 +117,9 @@ class ArticlesController < ApplicationController
       @topic = @country.topics.first
 
       # change the topic if the country is changing
-      params[:topic_id] = @topic.id unless session[:country_store] == @country.id
+      unless @topic.nil?
+        params[:topic_id] = @topic.id unless session[:country_store] == @country.id
+      end
 
       session[:country_store] = @country.id
     end

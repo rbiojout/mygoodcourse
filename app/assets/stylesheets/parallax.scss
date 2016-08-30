@@ -1,0 +1,43 @@
+.photo {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-color: black;
+    background-repeat: no-repeat;
+    height: 300px;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.photo span {
+    bottom: 0;
+    color: white;
+    display: block;
+    //left: 50%;
+    //margin-left: -600px;
+    //font-size: 38px;
+    padding: 10px;
+    position: absolute;
+    //text-shadow: 0 2px 0 black, 0 0 10px black;
+    //width: 1200px;
+}
+.banner_1 {
+    background-image: image-url('banner_1.png');
+}
+.banner_2 {
+    background-image: image-url('banner_2.png');
+}
+.banner_3 {
+    background-image: image-url('banner_3.png');
+}
+.banner_4 {
+    background-image: image-url('banner_4.png');
+}
+.banner_5 {
+  background-image: image-url('banner_5.png');
+}
+.banner_6 {
+  background-image: image-url('banner_6.png');
+}
+.banner_7 {
+  background-image: image-url('banner_7.png');
+}

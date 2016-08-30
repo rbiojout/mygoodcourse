@@ -19,6 +19,10 @@
 //= require jquery.turbolinks
 //= require jquery-fileupload/basic
 //= require jquery-fileupload/vendor/tmpl
+// used for Parallax effect
+//= require jquery.stellar
+// used for positioning pointer
+//= require jquery.waypoints
 //= require bootstrap-sprockets
 //= require moment
 //= require moment/fr
