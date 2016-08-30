@@ -1,7 +1,7 @@
 class ArticlesController < ApplicationController
-  before_action :set_article, only: [:show, :edit, :update, :destroy]
-  before_action :set_topic, only: [:index, :show, :new, :edit, :update]
   before_action :set_country, only: [:index]
+  before_action :set_topic, only: [:index, :show, :new, :edit, :update]
+  before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_employee!, except: [:index, :show]
 
@@ -93,7 +93,7 @@ class ArticlesController < ApplicationController
 
     # Use callbacks to share common setup or constraints between actions.
     def set_topic
-      @topic = Topic.friendly.find(params[:topic_id])
+      @topic = Topic.friendly.find(params[:topic_id]) unless params[:topic_id].nil?
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
@@ -112,8 +112,12 @@ class ArticlesController < ApplicationController
       begin
         @country = Country.find(country_id) unless country_id.nil?
       rescue ActiveRecord::RecordNotFound
-
+        logger.error("Unable to find country #{country_id}")
       end
+      @topic = @country.topics.first
+
+      # change the topic if the country is changing
+      params[:topic_id] = @topic.id unless session[:country_store] == @country.id
 
       session[:country_store] = @country.id
     end

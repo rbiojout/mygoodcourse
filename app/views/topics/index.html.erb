@@ -1,6 +1,14 @@
 <% @page_title = (I18n.translate 'activerecord.models.topic', count: 2).capitalize %>
 
-<h2><%= @country.name %></h2>
+<h2><%= t('page.help')%></h2>
+
+<!--- Country selector --->
+<div class="sidebar-menu">
+  <%= form_tag(topics_path, method: :get, class: "simple_form")  do  %>
+      <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
+  <% end %>
+</div>
+
 
 <ul class="list-unstyled">
   <%= render(:partial => 'topics/topic', collection: @topics) %>
