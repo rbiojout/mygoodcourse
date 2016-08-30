@@ -84,5 +84,5 @@ test:
 production:
   <<: *default
   database: formycourse_production
-  username: formycourse
-  password: <%= ENV['FORMYCOURSE_DATABASE_PASSWORD'] %>
+  #username: formycourse
+  #password: <%= ENV['FORMYCOURSE_DATABASE_PASSWORD'] %>

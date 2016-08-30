@@ -37,7 +37,7 @@ class Order < ActiveRecord::Base
 
   # This search the orders with a state 'accepted' for a particular customer_id
   # the collection is ordered by creation date descending
-  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: ['received', 'accepted']).order(:created_at => :desc)}
+  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: %w(received accepted)).order(:created_at => :desc)}
 
   # The order number
   #

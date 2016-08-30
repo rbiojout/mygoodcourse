@@ -2,6 +2,13 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   include PgSearch
 
+  # contants values for Product
+  # price list
+  PRICE_LIST = [nil, '0.99', '4.99', '9.99', '14.99', '19.99']
+  # pagination
+  self.per_page = 10
+
+
   # we use slugs for finding the products
   friendly_id :name, use: :slugged
 

@@ -54,7 +54,7 @@ fr:
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
     comments:
-      add: "Il n'y a pas encore de commentaire sur ce produit"
+      add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier laisser un commentaire!"
     product:
       explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'
@@ -68,10 +68,11 @@ fr:
       unwish: 'Supprimer des favoris'
     shop:
       add_cart: 'Ajouter au panier'
+      explain_add: "Pour accéder à cette ressource, vous devez être membre de MyGoodCourse. Si ce n'est pas encore fait, vous devez commander ce produit. Pour les ressources gratuites, vous devrez aller jusqu'à la validation de la commande, mais aucun paiement ne sera exigé."
       remove_cart: 'Retirer du panier'
       empty_cart: 'Vider le panier'
       continue_shoping: 'Continuer mes achats'
-      checkout: 'Passer commande'
+      checkout: 'Valider mon panier'
       notice_add_cart: 'Le produit a été ajouté au panier.'
       notice_pay_accepted: 'Payement accepté'
       notice_order_accepted: 'La commande a été acceptée avec succès'

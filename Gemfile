@@ -146,7 +146,6 @@ group :development, :test do
   gem 'byebug'
   gem 'sqlite3'
   #gem 'i18n-tasks', '~> 0.9.5'
-  gem 'derailed'
 end
 
 
@@ -165,10 +164,13 @@ group :development do
   # get UML
   gem 'railroady'
 
+  # memory usage
+  gem 'derailed_benchmarks'
+
   # the profiler used
   gem 'rack-mini-profiler', require: false
   #gem 'brakeman', :require => false
-  gem "rubycritic", :require => false
+  # gem "rubycritic", :require => false
 
 end
 

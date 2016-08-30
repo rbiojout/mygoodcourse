@@ -1,7 +1,19 @@
 <ul class="list-unstyled">
   <% @topics.each do |top|%>
     <li>
-      <h4><i class="fa fa-file-text<%= '-o' if (top.id != @topic.id) %>" aria-hidden="true"></i>
+      <h4>
+        <% if (top.id != @topic.id) %>
+          <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x text-muted"></i>
+              <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+          </span>
+        <% else %>
+          <span class="fa-stack">
+              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+              <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+          </span>
+        <% end %>
+
         <%= link_to top.name, topic_articles_path(:topic_id => top.id) %>
         </h4>
     </li>
