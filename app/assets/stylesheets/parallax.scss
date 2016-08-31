@@ -1,4 +1,6 @@
-.photo {
+// parallax is based on stellar.js and jquery.waypoints
+// there is a limitation on ios devices.... use only one parallax element per page at the top
+.parallaxed {
     background-attachment: fixed;
     background-position: 50% 0;
     background-color: black;
@@ -9,7 +11,7 @@
     margin-top: 10px;
     margin-bottom: 10px;
 }
-.photo span {
+.parallaxed span {
     bottom: 0;
     color: white;
     display: block;
@@ -21,6 +23,7 @@
     //text-shadow: 0 2px 0 black, 0 0 10px black;
     //width: 1200px;
 }
+// space pictures
 .banner_1 {
     background-image: image-url('banner_1.png');
 }
@@ -41,4 +44,42 @@
 }
 .banner_7 {
   background-image: image-url('banner_7.png');
+}
+.banner_8 {
+  background-image: image-url('banner_8.png');
+}
+.banner_9 {
+  background-image: image-url('banner_9.png');
+}
+
+// abstract pictures
+.banner_100 {
+  background-image: image-url('banner_100.png');
+}
+.banner_101 {
+  background-image: image-url('banner_101.png');
+}
+.banner_102 {
+  background-image: image-url('banner_102.png');
+}
+.banner_103 {
+  background-image: image-url('banner_103.png');
+}
+.banner_104 {
+  background-image: image-url('banner_104.png');
+}
+.banner_105 {
+  background-image: image-url('banner_105.png');
+}
+.banner_106 {
+  background-image: image-url('banner_106.png');
+}
+.banner_107 {
+  background-image: image-url('banner_107.png');
+}
+.banner_108 {
+  background-image: image-url('banner_108.png');
+}
+.banner_109 {
+  background-image: image-url('banner_109.png');
 }

@@ -6,7 +6,7 @@ class Product < ActiveRecord::Base
   # price list
   PRICE_LIST = [nil, '0.99', '4.99', '9.99', '14.99', '19.99']
   # pagination
-  self.per_page = 10
+  self.per_page = 30
 
 
   # we use slugs for finding the products
@@ -74,9 +74,6 @@ class Product < ActiveRecord::Base
 
   # Before validation, set the permalink if we don't already have one
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
-
-  # pagination
-  self.per_page = 10
 
   # All active products
   scope :active, -> { where(active: true) }
