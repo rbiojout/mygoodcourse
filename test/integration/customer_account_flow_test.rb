@@ -26,12 +26,13 @@ class CustomerAccountFlowTest < ActionDispatch::IntegrationTest
     post customers_path, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
     assert_equal 302, status
 
-    puts assigns(:customer).email
+    new_customer = assigns(:customer)
 
     puts 'remove'
     # we delete the account
-    delete customer_path(id: @customer.id, locale: I18n.default_locale)
-    assert_equal 200, status
+    delete customer_path(id: new_customer.id, locale: I18n.default_locale)
+    assert_equal 302, status
+    assert_nil Customer.find_by_email('tralala@test.com')
 
     # we recreate the account
     post customers_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
