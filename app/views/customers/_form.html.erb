@@ -10,8 +10,8 @@
       <% end %>
       <%= f.input :language, :collection => LANGUAGES,:label => "Language" ,:include_blank => false %>
       <%= f.association :country, :include_blank => false %>
-      <%= f.input :name %>
       <%= f.input :first_name %>
+      <%= f.input :name %>
       <%= f.input :mobile, as: :tel %>
 
       <%= f.input :picture, :as => :image_preview %>

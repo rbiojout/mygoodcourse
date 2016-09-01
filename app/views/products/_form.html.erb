@@ -56,7 +56,13 @@
         <%= f.input :name, hint: t('activerecord.attributes.product.hint_name') %>
         <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: t('activerecord.attributes.product.place_description'), hint: t('activerecord.attributes.product.hint_description') %>
         <%= f.input :active, hint: t('activerecord.attributes.product.hint_active') %>
-        <%= f.input :price, :collection => Product::PRICE_LIST.collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
+        <!-- price can be set only if Stripe is ok -->
+        <% if(current_customer.stripe_account.nil?) %>
+            <%= render(partial: 'stripe/alert_missing_stripe') %>
+            <%= f.input :price, :collection => [nil].collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
+        <% else %>
+            <%= f.input :price, :collection => Product::PRICE_LIST.collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
+        <% end %>
         <%= f.button :submit, class: 'btn btn-primary input-block-level form-control loading' %>
       </div>
 
@@ -66,13 +72,66 @@
 
 <% end %>
 
+
+<!-- Modal -->
+<div id="prepareProductModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title">Operation in progress</h4>
+      </div>
+      <div id="myInput" class="modal-body center-block">
+          <h3>We are preparing your product</h3>
+                        <span class="fa-stack fa-1x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-diamond fa-stack-1x fa-inverse fa-spin fa-fw"></i>
+                        </span>
+                        <span class="fa-stack fa-2x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-diamond fa-stack-1x fa-inverse fa-spin fa-fw"></i>
+                        </span>
+                        <span class="fa-stack fa-3x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-diamond fa-stack-1x fa-inverse fa-spin fa-fw"></i>
+                        </span>
+                        <span class="fa-stack fa-4x">
+                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                              <i class="fa fa-diamond fa-stack-1x fa-inverse fa-spin fa-fw"></i>
+                        </span>
+        <h4>Voilà!</h4>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
 <script language="JavaScript">
-    $(".loading").on("click", function(e){
-        //e.PreventDefault();
+
+    jQuery(".loading").click(function(e){
+        // wait for all operations before to submit
+        e.preventDefault();
         $(this).addClass('disabled');
         $(this).attr('disabled', 'disabled');
         $(this).prop('disabled', true);
-        $(this).closest("form")[0].submit();
+        // remove the submit button
+        jQuery(this).hide();
+        window.scrollTo(0, 0);
+        // hide as a security
+        jQuery('#prepareProductModal').modal('hide');
+        // show the modal
+        jQuery('#prepareProductModal').modal('show');
+        $('#prepareProductModal').on('shown.bs.modal', function () {
+            // do something...
+            // when the modal as been presented
+            $('.loading').closest("form")[0].submit();
+        })
     });
 </script>
+
+
 

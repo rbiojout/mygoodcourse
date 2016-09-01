@@ -1,5 +1,5 @@
 ##
-# use rake db:import_from_heroku RAILS_ENV=development
+# use rake aws:copy_bucket_locally RAILS_ENV=development
 ##
 namespace :aws do
   desc "Operations linked to aws."
