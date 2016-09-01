@@ -1,12 +1,12 @@
 <div class="center-block text-center">
   <br/>
   <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
-  You need to have a Stripe Account in order to receive payments
+  <%= t('dialog.customer.alert_stripe_needed') %>
   <br/>
   <% if(current_customer.nil?) %>
       <%= link_to t('customers.registrations.new.sign_up'), new_customer_registration_path, class: 'btn btn-primary' %>
   <% else %>
-      <%= link_to 'Manage Stripe Account', stripe_oauth_path, class: 'btn btn-danger' %>
+      <%= link_to t('actions.stripe_account.new'), stripe_oauth_path, class: 'btn btn-danger' %>
   <% end %>
 
 </div>

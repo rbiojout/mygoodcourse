@@ -44,17 +44,22 @@ fr:
       new: 'Ajouter un commentaire'
     products:
       new: 'Créer un produit'
+    stripe_account:
+      new: 'Créer un compte Stripe'
 
   dialog:
     free: 'Gratuit'
     restricted: "Vous n'avez pas les droits pour accéder à cette page"
     need_login: "Vous devez vous connecter pour continuer"
+    operation_in_progress: 'Operation en cours'
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
     comments:
       add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier laisser un commentaire!"
+    customer:
+      alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
     product:
       explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'
@@ -66,6 +71,7 @@ fr:
       active_version: 'Version active'
       wish: 'Ajouter aux favoris'
       unwish: 'Supprimer des favoris'
+      notice_preparing: 'Votre produit est en cours de préparation, un peu de patience...'
     shop:
       add_cart: 'Ajouter au panier'
       explain_add: "Pour accéder à cette ressource, vous devez être membre de MyGoodCourse. Si ce n'est pas encore fait, vous devez commander ce produit. Pour les ressources gratuites, vous devrez aller jusqu'à la validation de la commande, mais aucun paiement ne sera exigé."

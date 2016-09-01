@@ -44,6 +44,8 @@ en:
       new: 'Add comment'
     products:
       new: 'Create product'
+    stripe_account:
+      new: 'Create a Stripe account'
 
   views:
     flash_update_message: 'Updated with success'
@@ -54,12 +56,15 @@ en:
     free: 'Free'
     restricted: "You don't have the right to access to this page"
     need_login: "You need to login to proceed"
+    operation_in_progress: 'Operation in progress'
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'
       no_result_found: 'No result found'
     comments:
       add: 'There is no comment on this product, you can be the first one to comment it!'
+    customer:
+      alert_stripe_needed: 'You need to have a Stripe Account in order to receive payments.'
     product:
       explain_add: 'Create you first product by clicking here.'
       add_version: 'Add new version'
@@ -71,6 +76,7 @@ en:
       active_version: 'Active version'
       wish: 'Add to wished products'
       unwish: 'remove from wished products'
+      notice_preparing: 'We are preparing your product, just keep relax...'
     shop:
       add_cart: 'Add to cart'
       explain_add: "In order to access to this ressource, you need to be a member of MyGoodCourse. In case it is not already in your product list, you need to order this product. For the free ressources, you need to proceed up to the end of the order process; no paiment will be asked."
