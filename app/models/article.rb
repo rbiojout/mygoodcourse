@@ -9,7 +9,7 @@ class Article < ActiveRecord::Base
   friendly_id :name, use: :slugged
 
   # associated to a topic and ordered in the list
-  belongs_to :topic
+  belongs_to :topic, :inverse_of => :articles
   validates :topic, :presence => true
   acts_as_list scope: :topic, add_new_at: :bottom
 

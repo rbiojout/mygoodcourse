@@ -1,5 +1,5 @@
 class Category < ActiveRecord::Base
-  belongs_to :family
+  belongs_to :family, :inverse_of => :categories
   acts_as_list scope: :family, add_new_at: :bottom
 
   has_and_belongs_to_many :products

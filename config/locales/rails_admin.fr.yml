@@ -17,6 +17,7 @@ fr:
       starts_with: Commence par
       ends_with: Termine par
     loading: "Chargement..."
+    toggle_navigation: "Suivre la navigation"
     home:
       name: Home
     pagination:
@@ -110,6 +111,9 @@ fr:
         title: "Historique %{model_label} '%{object_label}'"
         menu: "Historique"
         breadcrumb: "Historique"
+      #################################################
+      # custom actions
+      #################################################
       sort_for: &sortfor
         title: "Trier %{model_label} '%{object_label}'"
         menu: "Trier"
@@ -125,6 +129,11 @@ fr:
         <<: *sortfor
       sort_for_topic:
         <<: *sortfor
+      stats_users:
+        title: "Statistiques Utilisateurs"
+        menu: "Statistiques Utilisateurs"
+        breadcrumb: "Statistiques Utilisateurs"
+        done: "Statistiques Utilisateurs OK"
     form:
       cancel: "Annuler"
       basic_info: "Informations de base"

@@ -29,7 +29,7 @@ fr:
     my_account: "Mon compte"
     my_profile: "Mon profil"
     my_dashboard: "Tableau de bord"
-    who_we_are : 'Qui sommes nous'
+    who_we_are: 'Qui sommes nous'
     help: 'Aide/Faq'
     search: "Rechercher"
 
@@ -97,8 +97,12 @@ fr:
       comment:
         one: 'commentaire'
         other: 'commentaires'
-      country: 'pays'
-      customer: 'client'
+      country:
+        one: 'pays'
+        other: 'pays'
+      customer:
+        one: 'client'
+        other: 'clients'
       cycle:
         one: 'cycle'
         other: 'cycles'

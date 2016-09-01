@@ -36,7 +36,7 @@ RailsAdmin.config do |config|
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      only [Article, Category, Country, Customer, Comment, Cycle, Employee, Family, Level, Product, Topic] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
+      only [Article, Category, Country, Customer, Cycle, Employee, Family, Level, Topic] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
     end
     export
     bulk_delete
@@ -105,11 +105,13 @@ RailsAdmin.config do |config|
       field :code2
       field :code3
       field :tld
+      field :cycles
+      field :families
       field :topics do
-        orderable true
-        removable false
-        inline_add false
-        help 'Topic association is disabled in this screen. Only the sort is possible'
+        #orderable false
+        #removable false
+        #inline_add false
+        #help 'Topic association is disabled in this screen. Only the sort is possible'
       end
     end
   end
@@ -147,13 +149,45 @@ RailsAdmin.config do |config|
 
   config.model "Comment" do
     parent Product
-    edit do
+    list do
+      sort_by :updated_at
+      field :id
       field :title
-      field :description
+      field :updated_at
+      field :customer
+      field :product
+    end
+    edit do
+      field :product do
+        inline_add false
+        inline_edit false
+        read_only true
+      end
+      field :customer do
+        inline_add false
+        inline_edit false
+        read_only true
+      end
+      field :title
+      field :description do
+        partial 'form_summernote'
+      end
     end
   end
 
   config.model "Customer" do
+    list do
+      field :id
+      field :first_name
+      field :name
+      field :email
+      field :sign_in_count
+      field :created_at
+      field :postal_code
+      field :locality
+      field :country
+      field :language
+    end
     edit do
       field :name
       field :first_name
@@ -244,6 +278,7 @@ RailsAdmin.config do |config|
       field :description do
         partial 'form_summernote'
       end
+      field :categories
     end
     show do
       field :name
@@ -286,8 +321,56 @@ RailsAdmin.config do |config|
 
   end
 
+  config.model "Order" do
+    edit do
+      field :customer do
+        inline_add false
+        inline_edit false
+        read_only true
+      end
+      field :products do
+        read_only true
+      end
+      field :status
+      field :received_at do
+        strftime_format "%Y-%m-%d"
+      end
+      field :accepted_at do
+        strftime_format "%Y-%m-%d"
+      end
+      field :rejected_at do
+        strftime_format "%Y-%m-%d"
+      end
+      field :rejecter do
+        read_only true
+      end
+      field :amount_paid
+      field :invoice_number
+      field :payments do
+        read_only true
+      end
+      field :order_items do
+        read_only true
+      end
+    end
+  end
+
   config.model "OrderItem" do
     parent Order
+  end
+
+  config.model "Product" do
+    list do
+      scopes [nil, :featured]
+      sort_by :updated_at
+      field :id
+      field :name
+      field :price
+      field :active
+      field :featured
+      field :customer
+      field :updated_at
+    end
   end
 
   config.model "Payment" do
@@ -328,9 +411,7 @@ RailsAdmin.config do |config|
       field :description do
         partial 'form_summernote'
       end
-      field :articles do
-        orderable true
-      end
+      field :articles
     end
   end
 

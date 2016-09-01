@@ -111,8 +111,14 @@ Rails.application.routes.draw do
   #delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
 
   # charts
+  #
+  #for customers
   get 'charts/accepted_orders' => 'charts#accepted_orders', :as => 'accepted_orders_chart'
   get 'charts/created_products' => 'charts#created_products', :as => 'created_products_chart'
+  # for employees
+  get 'charts/created_customers' => 'charts#created_customers', :as => 'created_customers_chart'
+  get 'charts/sign_in_customers' => 'charts#sign_in_customers', :as => 'sign_in_customers_chart'
+  get 'charts/created_comments' => 'charts#created_comments', :as => 'created_comments_chart'
 
 
   #

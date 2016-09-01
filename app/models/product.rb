@@ -75,9 +75,6 @@ class Product < ActiveRecord::Base
   # Before validation, set the permalink if we don't already have one
   before_validation { self.permalink = name.parameterize if permalink.blank? && name.is_a?(String) }
 
-  # All active products
-  scope :active, -> { where(active: true) }
-
   # All featured products
   scope :featured, -> { where(featured: true) }
 

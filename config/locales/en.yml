@@ -29,7 +29,7 @@ en:
     my_account: "My account"
     my_profile: "My profile"
     my_dashboard: "My Dashboard"
-    who_we_are : 'Who we are'
+    who_we_are: 'Who we are'
     help: 'Help/Faq'
     search: "Search"
 
@@ -100,6 +100,12 @@ en:
       comment:
         one: 'comment'
         other: 'comments'
+      country:
+        one: 'country'
+        other: 'countries'
+      customer:
+        one: 'customer'
+        other: 'customers'
       cycle:
         one: 'cycle'
         other: 'cycles'
