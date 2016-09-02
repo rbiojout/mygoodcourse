@@ -56,10 +56,13 @@ fr:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
-    comments:
-      add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier laisser un commentaire!"
+    comment:
+      alert_add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier à laisser un commentaire!"
     customer:
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
+    order:
+      alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
+      alert_add_link: "Explorer le catalogue"
     product:
       explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'

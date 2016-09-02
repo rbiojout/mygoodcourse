@@ -61,10 +61,13 @@ en:
       order_by: 'Order by'
       searching_for: 'Searching for'
       no_result_found: 'No result found'
-    comments:
-      add: 'There is no comment on this product, you can be the first one to comment it!'
+    comment:
+      alert_add: 'There is no comment on this product, you can be the first one to comment it!'
     customer:
       alert_stripe_needed: 'You need to have a Stripe Account in order to receive payments.'
+    order:
+        alert_add: "Yu don't have any order. Even for the free products, you need to process the order to keep track of your products. Let's start to add ressources!"
+        alert_add_link: "Explore the catalog"
     product:
       explain_add: 'Create you first product by clicking here.'
       add_version: 'Add new version'

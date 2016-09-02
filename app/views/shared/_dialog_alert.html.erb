@@ -1,0 +1,26 @@
+    <%#
+    # COMPULSARY alert_message: the message to display
+    # OPTIONAL alert_link_text: the text for the call to action
+    # OPTIONAL alert_link_link: the link for the call to action
+    # OPTIONAL alert_remote: for remote action
+    # we set default values for alert_link
+    %>
+<% alert_link_text ||='' %>
+<% alert_link_path ||='' %>
+<% alert_remote ||=false %>
+<!-- alert that there is no order yet -->
+<div class="alert alert-warning" role="alert">
+  <p class="lead">
+    <span class="fa fa-bullhorn fa-2x" aria-hidden="true"></span>
+    <span class="sr-only">Error:</span>
+    <%= alert_message %>
+  </p>
+  <% unless (alert_link_text.blank? || alert_link_path.blank?) %>
+      <hr/>
+      <div class="text-center center-block">
+        <%= link_to( alert_link_text, alert_link_path, remote: alert_remote, class: 'btn btn-primary') %>
+      </div>
+  <% end %>
+
+</div>
+<!-- end alert -->
