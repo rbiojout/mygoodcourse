@@ -14,8 +14,13 @@
 
   </div>
   <div class="col-md-10">
-    <h4><%= t('activerecord.attributes.customer.wishes') %>
-    </h4>
+    <h2><%= t('activerecord.attributes.customer.wishes') %>
+    </h2>
+    <!-- alert if blank -->
+    <% if @products.blank? %>
+        <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.product.alert_wishes'), alert_link_text: t('dialog.order.alert_add_link'), alert_link_path: catalog_products_path}) %>
+    <% else %>
+
       <% @products.each do |product|%>
         <div class="row">
           <div class="col-xs-2">
@@ -45,15 +50,28 @@
           </div>
           <div class="col-xs-4">
             <h3><%= nice_price(product.price) %></h3>
+            <!-- main action buy or edit -->
             <% if customer_signed_in? && current_customer.own_product(product) %>
                 <%= link_to t('helpers.action.edit'), edit_product_path(product), class:'btn btn-primary input-block-level form-control' %>
             <% else %>
                 <%= link_to buy_product_path(product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
             <% end %>
+            <!-- end main action -->
+            <!-- add to wish action -->
+            <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+
+              <% if current_customer.wishing?(product) %>
+                  <%= render(partial: 'wish_lists/unwish', locals: {:product => product}, locale: locale) %>
+              <% else %>
+                  <%= render(partial: 'wish_lists/wish', locals: {:product => product}, locale: locale) %>
+              <% end %>
+            </div>
+            <!-- end wish action -->
+
           </div>
         </div>
       <% end %>
-
+    <% end %>
   </div>
 </div>
 

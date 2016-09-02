@@ -11,15 +11,14 @@
     </div>
   <!-- end picture -->
     <!--- name --->
-    <div class="height_30 ellipsis">
-      <h4><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h4>
+    <div class="height_40 ellipsis">
+      <h5 class="height_40 ellipsis"><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h5>
     </div>
   <!--- name --->
     <!-- follow -->
     <div>
     <% if customer_signed_in? %>
       <% if current_customer.id != customer.id %>
-      <h5>
       <div class="follow_form follow_form_<%= customer.id%>" id="follow_form_<%= customer.id%>">
         <% if current_customer.following?(customer) %>
             <%= render(partial: 'peers/unfollow',  locals: {:followed => customer, locale: locale} ) %>
@@ -27,10 +26,9 @@
             <%= render(partial: 'peers/follow',  locals: {:followed => customer, locale: locale})  %>
         <% end %>
       </div>
-      </h5>
-
+      <!-- if customer is signed, direct link to his profile -->
       <% else %>
-          <h5>-</h5>
+          <%= link_to(t('page.my_profile'), customer_path(customer), class: 'btn btn-default btn-sm' )  %>
       <% end %>
 
     <% else %>

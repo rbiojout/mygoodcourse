@@ -4,10 +4,10 @@ $(document).ready(function() {
 // first we need to hide before to show
     $('.customer_presentation_<%= @followed.id %>').focus();
     $('.customer_presentation_<%= @followed.id %>').hide();
-    $('.customer_presentation_<%= @followed.id %>').fadeIn(300);
+    $('.customer_presentation_<%= @followed.id %>').fadeIn(900);
 
     // we add the new follower to the list of the followed
     $('#follower-list_<%= @followed.id%>').prepend("<%= j render partial: 'customers/customer', locals: {customer: current_customer}  %>");
-    //$('.customer_presentation_<%= current_customer.id%>').hide();
-    //$('.customer_presentation_<%= current_customer.id%>').fadeIn(900);
+    $('#follower-list_<%= @followed.id%> > .customer_presentation_<%= current_customer.id%>').hide();
+    $('#follower-list_<%= @followed.id%> > .customer_presentation_<%= current_customer.id%>').fadeIn(900);
 });

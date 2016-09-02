@@ -16,7 +16,7 @@
     <div class="panel panel-default product_presentation_<%= @product.id %>">
       <!-- title -->
       <div class="panel-heading">
-        <h4 class="panel-title"><%= @product.name %></h4>
+        <h3><%= @product.name %></h3>
         <div id="product_score">
           <%= render :partial => "comments/show_stars", :score => @product.score_comments, :nb_comments => @product.nb_comments %>
         </div>      </div>
@@ -26,7 +26,7 @@
           <!-- short description -->
           <div class="col-sm-8">
             <h4 class="pull-right"><%= nice_price(@product.price) %></h4><br/>
-            <span>nb pages:</span> <%= @product.nbpages %>
+            <p><%= t('activerecord.attributes.attachment.nbpages')%> : <%= @product.nbpages %></p>
             <p>
             <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
             <% @product.categories.each do |category| %>
@@ -65,22 +65,28 @@
 
 
     </div>
-    <ul class="list-inline product-links">
-      <li>
+    <div class="row product-links" >
+      <div class="col-sm-6">
         <% if customer_signed_in? %>
+            <!-- add to wish list -->
             <div class="wish_form wish_form_<%= @product.id%>" id="wish_form_<%= @product.id%>">
 
               <% if current_customer.wishing?(@product) %>
-                   <%= render(partial: 'wish_lists/unwish', locale: locale) %>
+                  <%= render(partial: 'wish_lists/unwish', locale: locale) %>
               <% else %>
-                   <%= render(partial: 'wish_lists/wish', locale: locale) %>
+                  <%= render(partial: 'wish_lists/wish', locale: locale) %>
               <% end %>
             </div>
+            <!-- end wish list -->
         <% end %>
-      <!-- social buttons -->
-      <li><a href='#'><%= social_share_button_tag(@product.name) %></li>
-      <!-- end social buttons -->
-    </ul>
+      </div>
+      <div class="col-sm-6">
+        <!-- social buttons -->
+        <p><a href='#'><%= social_share_button_tag(@product.name) %></p>
+        <!-- end social buttons -->
+      </div>
+    </div>
+
 
   </div>
 
@@ -99,40 +105,41 @@
     <div role="tabpanel" class="tab-pane" id="reviews">
 
     <!-- placeholder for the new comments -->
+      <hr>
     <div id="comment-form"></div>
-    <hr>
+      <hr>
+
       <!-- only signed users can add comment -->
       <% if customer_signed_in? %>
+          <!-- only customer that have ordered the product can comment -->
           <% if @product.cancomment(current_customer)==true %>
               <!-- alert if empty -->
-              <% if @comments.count!=0 %>
+              <% if @comments.count==0 %>
                   <!-- add alert with call action to add comment -->
-                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_comment_path(product_id: @product.id), alert_remote: true}) %>
+                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_comment_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
               <% else %>
                 <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+              <% end %>
+          <% elsif !current_customer.own_product(@product) %>
+          <!-- product is not ordered by the customer -->
+              <% if @comments.count==0 %>
+                  <!-- add alert with call action to add to basket -->
+                  <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
+              <% else %>
+                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary' %>
               <% end %>
           <% end %>
       <% else %>
           <!-- we alert for empty comments -->
           <% if @comments.count==0 %>
               <!-- add alert with call action to login -->
-              <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_customer_session_path(:redirect_to => product_path(id: @product.id))}) %>
+              <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_customer_session_path(:redirect_to => product_path(id: @product.id, locale: locale))}) %>
           <% else %>
               <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
           <% end %>
       <% end %>
-    <hr>
 
       <div id="comment_table" class="comments">
-
-        <% if @comments.count ==0 %>
-            <div class="alert alert-warning" role="alert">
-              <span class="fa fa-bullhorn" aria-hidden="true"></span>
-              <span class="sr-only">Error:</span>
-              <%= t('dialog.comment.alert_add')%>
-            </div>
-        <% end %>
-
 
         <% @comments.each do |comment| %>
             <%# Render table row partial for each person object %>

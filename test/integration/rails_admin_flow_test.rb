@@ -75,7 +75,7 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
   ####################################
   test "stats users dashboard" do
     get "/admin/stats_users"
-    assert_response :success
+    assert_response 302
   end
 
   private

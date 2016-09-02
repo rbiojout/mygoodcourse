@@ -1,13 +1,16 @@
     <%#
+    # this partial is intended to have a common way to present alert messages with optional call to action
     # COMPULSARY alert_message: the message to display
     # OPTIONAL alert_link_text: the text for the call to action
     # OPTIONAL alert_link_link: the link for the call to action
     # OPTIONAL alert_remote: for remote action
+    # OPTIONAL alert_link_method: by default GET
     # we set default values for alert_link
     %>
 <% alert_link_text ||='' %>
 <% alert_link_path ||='' %>
 <% alert_remote ||=false %>
+<% alert_link_method ||='get' %>
 <!-- alert that there is no order yet -->
 <div class="alert alert-warning" role="alert">
   <p class="lead">
@@ -18,7 +21,7 @@
   <% unless (alert_link_text.blank? || alert_link_path.blank?) %>
       <hr/>
       <div class="text-center center-block">
-        <%= link_to( alert_link_text, alert_link_path, remote: alert_remote, class: 'btn btn-primary') %>
+        <%= link_to( alert_link_text, alert_link_path, remote: alert_remote, :method => alert_link_method, locale: locale, class: 'btn btn-primary') %>
       </div>
   <% end %>
 

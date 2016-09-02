@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-2">
+  <div class="col-md-3">
       <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
 
     <ul class="nav nav-pills nav-stacked">
@@ -10,27 +10,23 @@
 
 
   </div>
-  <div class="col-md-4">
-    <h4><%= t('activerecord.attributes.customer.profile') %>
+  <div class="col-md-9">
+    <h1><%= t('activerecord.attributes.customer.profile') %>
       <!--- list of actions --->
       <% if (customer_signed_in? && current_customer.id == @customer.id) %>
             <%= link_to(t('actions.update'), edit_customer_path(current_customer), class: 'btn btn-default btn-sm' ) %>
       <% end %>
       <!--- end list of actions --->
-    </h4>
-    <b>About</b>
+    </h1>
     <blockquote>
       <%= raw(@customer.description) %>
     </blockquote>
-    <mark>
-
-    </mark>
-  </div>
-  <div class="col-md-6">
-    <h4><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h4>
-    <% @customer.products.active.each do |product| %>
-        <%= render "products/product", :product => product %>
-    <% end %>
-  </div>
+    <h3><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h3>
+      <div class="row">
+        <% @customer.products.active.each do |product| %>
+            <%= render "products/product", :product => product %>
+        <% end %>
+      </div>
+    </div>
 </div>
 

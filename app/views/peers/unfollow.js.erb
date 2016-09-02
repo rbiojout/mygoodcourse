@@ -4,7 +4,7 @@ $(document).ready(function() {
     // first we need to hide before to show
     $('.customer_presentation_<%= @followed.id %>').focus();
     $('.customer_presentation_<%= @followed.id %>').hide();
-    $('.customer_presentation_<%= @followed.id %>').fadeIn(300);
+    $('.customer_presentation_<%= @followed.id %>').fadeIn(900);
 
     // we remove the follower from the followed list
     $('div#follower-list_<%= @followed.id%> > div#customer_presentation_<%= current_customer.id%>').fadeOut(900, function() {
