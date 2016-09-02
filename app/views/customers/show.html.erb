@@ -13,9 +13,9 @@
   <div class="col-md-4">
     <h4><%= t('activerecord.attributes.customer.profile') %>
       <!--- list of actions --->
-      <small>
-            <%= link_to t('actions.update'), edit_customer_path(current_customer) if (customer_signed_in? && current_customer.id = @customer.id) %>
-      </small>
+      <% if (customer_signed_in? && current_customer.id == @customer.id) %>
+            <%= link_to(t('actions.update'), edit_customer_path(current_customer), class: 'btn btn-default btn-sm' ) %>
+      <% end %>
       <!--- end list of actions --->
     </h4>
     <b>About</b>

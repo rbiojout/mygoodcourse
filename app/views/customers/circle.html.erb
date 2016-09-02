@@ -20,12 +20,14 @@
       <div class="tab-content">
         <!--- followers --->
         <div role="tabpanel" class="tab-pane active in" id="followers">
+          <div id="follower-list_<%=@customer.id%>">
           <%= render(partial:'customers/customer', collection: @customer.followers) %>
+          </div>
         </div>
         <!--- end followers --->
         <!--- followeds --->
         <div role="tabpanel" class="tab-pane" id="followeds">
-          <div id="followed-list">
+          <div id="followed-list_<%=@customer.id%>">
             <%= render(partial:'customers/customer', collection: @customer.followeds) %>
           </div>
         </div>

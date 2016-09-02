@@ -1,0 +1,4 @@
+<%= link_to(unfollow_peer_path(followed_id: followed.id, locale: locale), class: 'btn btn-default btn-sm', :method => :delete, remote: true ) do %>
+
+    <i class="fa fa-heart red"> </i> <%= t('activerecord.attributes.peers.unfollow') %>
+<% end %>

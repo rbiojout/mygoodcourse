@@ -1,9 +1,14 @@
 $(document).ready(function() {
-    $(".follow_form_<%= @customer.id%>").html("<%= escape_javascript(link_to(t('activerecord.attributes.peers.follow'), follow_peer_path(followed_id: @customer.id), method: :post, remote: true )) %>");
+    $(".follow_form_<%= @followed.id%>").html("<%= escape_javascript(render(partial: 'follow',  locals: {:followed => @followed, locale: locale})) %>");
 
     // first we need to hide before to show
-    $('.customer_presentation_<%= @customer.id %>').focus();
-    $('.customer_presentation_<%= @customer.id %>').hide();
-    $('.customer_presentation_<%= @customer.id %>').fadeIn(900);
+    $('.customer_presentation_<%= @followed.id %>').focus();
+    $('.customer_presentation_<%= @followed.id %>').hide();
+    $('.customer_presentation_<%= @followed.id %>').fadeIn(300);
+
+    // we remove the follower from the followed list
+    $('div#follower-list_<%= @followed.id%> > div#customer_presentation_<%= current_customer.id%>').fadeOut(900, function() {
+        $(this).remove();
+    });
 
 });
