@@ -246,7 +246,7 @@ class Product < ActiveRecord::Base
   # @return [Collection]
   def self.find_ordered_by_customer(customer_id, status = 'accepted')
     status = Order::STATUSES.include?(status) ? status : 'accepted'
-    joins(:orders).where(orders: {status: status}).distinct.order(created_at: 'desc')
+    joins(:orders).where(orders: {status: status, customer_id: customer_id}).distinct.order(created_at: 'desc')
   end
 
   # return the URL of the file corresponding to the preview prepared

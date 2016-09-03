@@ -126,7 +126,7 @@
                   <!-- add alert with call action to add to basket -->
                   <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
               <% else %>
-                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary' %>
+                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %>
               <% end %>
           <% end %>
       <% else %>

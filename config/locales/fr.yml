@@ -26,6 +26,8 @@ fr:
     catalog: 'Catalogue'
     my_products: 'Mes Produits'
     my_orders: 'Mes Commandes'
+    my_orders_products: 'Mes produits commandés'
+    my_orders_history: 'Mon historique de commandes'
     my_account: "Mon compte"
     my_profile: "Mon profil"
     my_dashboard: "Tableau de bord"

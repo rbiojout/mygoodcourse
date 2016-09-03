@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
   # GET /myorders
   def myorders
     @orders = Order.accepted_for_customer(current_customer.id).order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
-    @products = Product.find_ordered_by_customer(current_customer.id).paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    logger.debug("--------------------------")
+    @products = Product.find_ordered_by_customer(current_customer.id)
   end
 
   # GET /orders/1

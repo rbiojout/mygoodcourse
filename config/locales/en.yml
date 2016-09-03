@@ -26,6 +26,8 @@ en:
     catalog: 'Catalog'
     my_products: 'My Products'
     my_orders: 'My Orders'
+    my_orders_products: 'My ordered products'
+    my_orders_history: 'My history of orders'
     my_account: "My account"
     my_profile: "My profile"
     my_dashboard: "My Dashboard"

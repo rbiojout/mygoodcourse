@@ -1,31 +1,55 @@
 <h2><%= t('page.my_orders')%></h2>
 
-
 <% if @orders.blank? %>
     <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.order.alert_add'), alert_link_text: t('dialog.order.alert_add_link'), alert_link_path: catalog_products_path}) %>
 <% else %>
 
-<table class ='table table-striped'>
-  <thead>
-  <tr>
-    <th><%= sortable_bootstrap "id" %></th>
-    <th><%= sortable_bootstrap "status", t('activerecord.attributes.order.status') %></th>
-    <th><%= sortable_bootstrap "created_at", t('activerecord.attributes.creation_date') %></th>
-    <th><%= sortable_bootstrap "amount_paid", t('activerecord.attributes.order.amount_paid')  %></th>
-    <th colspan="1"></th>
-  </tr>
-  </thead>
+<div class="tabs myorders-tabs">
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#orders_products" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true"><%= t('page.my_orders_products')%></a></li>
+    <li role="presentation" class=""><a href="#orders_history" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false"><%= t('page.my_orders_history')%></a></li>
+  </ul>
+  <div class="tab-content">
+    <!--- Orders products --->
+    <div role="tabpanel" class="tab-pane active in" id="orders_products">
+      <br/>
+      <div id="customer-products" class="row">
 
-  <tbody>
-  <% @orders.each do |order| %>
-      <tr>
-        <td><%= link_to order.id, order %></td>
-        <td><%= nice_status(order.status) %></td>
-        <td><%= nice_date(order.created_at) %></td>
-        <td><%= nice_price(order.amount_paid) %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+        <%= render(partial:'products/product', collection: @products) %>
+
+
+      </div>
+
+    </div>
+    <!--- end followers --->
+    <!--- Orders history --->
+    <div role="tabpanel" class="tab-pane" id="orders_history">
+      <br/>
+        <table class ='table table-striped'>
+          <thead>
+          <tr>
+            <th><%= sortable_bootstrap "id" %></th>
+            <th><%= sortable_bootstrap "status", t('activerecord.attributes.order.status') %></th>
+            <th><%= sortable_bootstrap "created_at", t('activerecord.attributes.creation_date') %></th>
+            <th><%= sortable_bootstrap "amount_paid", t('activerecord.attributes.order.amount_paid')  %></th>
+            <th colspan="1"></th>
+          </tr>
+          </thead>
+
+          <tbody>
+          <% @orders.each do |order| %>
+              <tr>
+                <td><%= link_to order.id, order %></td>
+                <td><%= nice_status(order.status) %></td>
+                <td><%= nice_date(order.created_at) %></td>
+                <td><%= nice_price(order.amount_paid) %></td>
+              </tr>
+          <% end %>
+          </tbody>
+        </table>
+    </div>
+    <!--- end followeds --->
+  </div>
+</div>
 
 <% end %>
