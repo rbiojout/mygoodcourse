@@ -20,15 +20,27 @@
       <div class="tab-content">
         <!--- followers --->
         <div role="tabpanel" class="tab-pane active in" id="followers">
+          <br/>
           <div id="follower-list_<%=@customer.id%>">
-          <%= render(partial:'customers/customer', collection: @customer.followers) %>
+            <!-- we alert for empty followeds -->
+            <% if @customer.followers.count ==0 %>
+                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_no_followers')}) %>
+            <% else %>
+                <%= render(partial:'customers/customer', collection: @customer.followers) %>
+            <% end %>
           </div>
         </div>
         <!--- end followers --->
         <!--- followeds --->
         <div role="tabpanel" class="tab-pane" id="followeds">
+          <br/>
           <div id="followed-list_<%=@customer.id%>">
-            <%= render(partial:'customers/customer', collection: @customer.followeds) %>
+            <!-- we alert for empty followeds -->
+            <% if @customer.followeds.count ==0 %>
+                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_no_followeds')}) %>
+            <% else %>
+                <%= render(partial:'customers/customer', collection: @customer.followeds) %>
+            <% end %>
           </div>
         </div>
         <!--- end followeds --->

@@ -22,10 +22,26 @@
       <%= raw(@customer.description) %>
     </blockquote>
     <h3><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h3>
+      <!-- products of the customer -->
       <div class="row">
-        <% @customer.products.active.each do |product| %>
-            <%= render "products/product", :product => product %>
+        <!-- we alert for empty followeds -->
+        <% if @products.count ==0 %>
+            <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_empty_products')}) %>
+        <% else %>
+            <div id="catalog-products" class="row">
+
+              <%= render(partial:'products/product', collection: @products) %>
+
+
+            </div>
+
+            <div id="infinite-scrolling-products-disabled" class="row">
+              <%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+            </div>
+
+
         <% end %>
+
       </div>
     </div>
 </div>

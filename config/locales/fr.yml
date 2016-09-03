@@ -60,6 +60,9 @@ fr:
       alert_add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier à laisser un commentaire!"
     customer:
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
+      alert_no_followers: "Cet utilisateur n'est suivi par aucun autre utilisateur. Pour suivre un utilisateur en particulier, il suffit de cliquer sur l'action associée. Vous pouvez changer à tout moment à partir de tous les liens correspondants !!"
+      alert_no_followeds: "Cet utilisateur ne suit aucun autre utilisateur. A partir de cette page, vous pouvez vous aussi suivre les utilisateurs qui s'afficheront si vous souhaitez être en lien privilégié avec ces utilisateurs."
+      alert_empty_products: "Il n'y a pas encore de produits pour ce client.Vous pouvez suivre cet utilisateur et revenir plus tard..."
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
       alert_add_link: "Explorer le catalogue"
@@ -72,8 +75,8 @@ fr:
       explain_save: "N'oubliez pas de sauvegarder"
       remove_version: 'Supprimer la version'
       active_version: 'Version active'
-      wish: 'Ajouter aux favoris'
-      unwish: 'Supprimer des favoris'
+      wish: 'Ajouter à mes favoris'
+      unwish: 'Supprimer de mes favoris'
       notice_preparing: 'Votre produit est en cours de préparation, un peu de patience...'
       alert_wishes: "Il n'y a pas de produit favori pour le moment. Chaque utilisateur peut se constituer sa liste de produits préférés pour les retrouver plus facilement. Explorez le catalogue pour trouver votre sélection de produits favoris!"
     shop:

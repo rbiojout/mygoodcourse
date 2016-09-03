@@ -13,6 +13,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
+    @products = @customer.products.active.paginate(page: params[:page], :per_page => Product.per_page) unless @customer.nil?
   end
 
   # additionnal page for show
