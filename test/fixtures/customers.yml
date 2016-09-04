@@ -110,6 +110,15 @@ stripe_oauth:
   confirmation_token: stripe_oauth
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
+no_wish:
+  name: NoWish
+  first_name: NoWish
+  email: NoWish@test.com
+  mobile: +33663220909
+  picture:
+  confirmation_token: NoWish
+  confirmed_at: <%= 5.day.ago.to_s(:db) %>
+
 
 JoeBloggs:
   first_name: Joe

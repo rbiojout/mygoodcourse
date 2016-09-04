@@ -11,7 +11,6 @@
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.followers'), circle_customer_path(@customer) %></li>
     </ul>
 
-
   </div>
   <div class="col-md-10">
     <h2><%= t('activerecord.attributes.customer.wishes') %>
@@ -57,13 +56,15 @@
                 <%= link_to buy_product_path(product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
             <% end %>
             <!-- end main action -->
-            <!-- add to wish action -->
-            <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
 
+            <!-- add to wish action for logged users -->
+            <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+            <% if customer_signed_in? %>
               <% if current_customer.wishing?(product) %>
                   <%= render(partial: 'wish_lists/unwish', locals: {:product => product}, locale: locale) %>
               <% else %>
                   <%= render(partial: 'wish_lists/wish', locals: {:product => product}, locale: locale) %>
+              <% end %>
               <% end %>
             </div>
             <!-- end wish action -->

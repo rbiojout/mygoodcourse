@@ -20,7 +20,8 @@ class CustomersController < ApplicationController
   # give all the followers and followeds
   # GET /customers/circle
   def circle
-
+    @followers = @customer.followers
+    @followeds = @customer.followeds
   end
 
   # GET /customers/new

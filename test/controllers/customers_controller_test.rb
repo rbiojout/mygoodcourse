@@ -62,4 +62,49 @@ class CustomersControllerTest < ActionController::TestCase
     assert_redirected_to catalog_products_path
   end
 
+  test "should have circle" do
+    # test the routing with customer one
+    get :circle, id: @customer.id, locale: I18n.default_locale
+    assert_response :success
+    assert_not_nil assigns(:followers)
+    assert_not_nil assigns(:followeds)
+    assert_select 'div#followers'
+    assert_select 'div#followeds'
+
+    # we use after a signed user
+    sign_in(@customer, scope: :customer)
+
+    get :circle, id: customers(:two).id, locale: I18n.default_locale
+    assert_response :success
+    assert_not_nil assigns(:followers)
+    assert_not_nil assigns(:followeds)
+    assert_select 'div#followers'
+    assert_select 'div#followeds'
+  end
+
+  test "should have wishlist" do
+    get :wishlist, id: @customer.id, locale: I18n.default_locale
+    assert_response :success
+    assert_not_nil assigns(:products)
+
+    # we use after a signed user
+    sign_in(@customer, scope: :customer)
+
+    get :wishlist, id: customers(:two).id, locale: I18n.default_locale
+
+    assert_response :success
+    assert_not_nil assigns(:products)
+  end
+
+  test "should have dashboard" do
+    # protected if not signed
+    get :dashboard, id: @customer.id, locale: I18n.default_locale
+    assert_response 302
+
+    # access if signed in customer
+    sign_in(@customer, scope: :customer)
+    get :dashboard, id: @customer.id, locale: I18n.default_locale
+    assert_response :success
+  end
+
 end

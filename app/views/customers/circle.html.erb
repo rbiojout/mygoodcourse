@@ -26,7 +26,7 @@
             <% if @customer.followers.count ==0 %>
                 <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_no_followers')}) %>
             <% else %>
-                <%= render(partial:'customers/customer', collection: @customer.followers) %>
+                <%= render(partial:'customers/customer', collection: @followers) %>
             <% end %>
           </div>
         </div>
@@ -39,7 +39,7 @@
             <% if @customer.followeds.count ==0 %>
                 <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_no_followeds')}) %>
             <% else %>
-                <%= render(partial:'customers/customer', collection: @customer.followeds) %>
+                <%= render(partial:'customers/customer', collection: @followeds) %>
             <% end %>
           </div>
         </div>
