@@ -176,7 +176,7 @@ cf https://devcenter.heroku.com/articles/tunemygc
 need to move to new region https://devcenter.heroku.com/articles/app-migration
 
 COOL STUFF
-https://github.com/ekremkaraca/awesome-rails 
+https://github.com/ekremkaraca/awesome-rails
 
 
 
