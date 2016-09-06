@@ -61,6 +61,7 @@ fr:
     comment:
       alert_add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier à laisser un commentaire!"
     customer:
+      info_email_validation: 'Compte créé. Vous y êtes presque! Pour activer votre compte, un email de confirmation a été envoyé à: %{email}'
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
       alert_no_followers: "Cet utilisateur n'est suivi par aucun autre utilisateur. Pour suivre un utilisateur en particulier, il suffit de cliquer sur l'action associée. Vous pouvez changer à tout moment à partir de tous les liens correspondants !!"
       alert_no_followeds: "Cet utilisateur ne suit aucun autre utilisateur. A partir de cette page, vous pouvez vous aussi suivre les utilisateurs qui s'afficheront si vous souhaitez être en lien privilégié avec ces utilisateurs."
@@ -312,9 +313,9 @@ fr:
 
   order_mailer:
     received:
-      subject: 'Order Confirmation'
-      accepted: 'Order Accepted'
-      rejected: 'Order Rejected'
+      subject: 'Confirmation de commande'
+      accepted: 'Commande Acceptée'
+      rejected: 'Commande Rejetée'
 
   time:
     formats:

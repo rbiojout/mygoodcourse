@@ -52,7 +52,8 @@ class CustomersController < ApplicationController
 
     respond_to do |format|
       if @customer.save
-        format.html { redirect_to @customer, notice: t('views.flash_create_message') }
+        #format.html { redirect_to @customer, notice: t('views.flash_create_message') }
+        format.html { redirect_to @customer, notice: t('dialog.customer.info_email_validation', email: @customer.email) }
         format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }

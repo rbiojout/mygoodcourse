@@ -41,6 +41,8 @@
 
             <% end %>
             </p>
+            <p><%= t('activerecord.attributes.creation_date')%> : <%= nice_date(@product.created_at)%></p>
+            <p><%= t('activerecord.attributes.update_date')%> : <%= nice_date(@product.updated_at)%></p>
 
           </div>
           <!-- end short description -->
@@ -57,7 +59,7 @@
               <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
           <% else %>
                 <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
-            <a href=""><small><%= t('dialog.shop.explain_add') %></small></a>
+            <small><%= t('dialog.shop.explain_add') %></small>
           <% end %>
       </div>
       <!--- end list of actions --->
