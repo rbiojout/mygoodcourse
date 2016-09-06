@@ -275,8 +275,12 @@ GEM
     heapy (0.1.2)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httpclient (2.8.2.3)
     i18n (0.7.0)
     i18n_data (0.7.0)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     jbuilder (2.6.0)
@@ -506,6 +510,7 @@ DEPENDENCIES
   gmaps4rails
   grim
   groupdate
+  impressionist
   jbuilder (~> 2.0)
   jquery-fileupload-rails
   jquery-rails (~> 4.1.1)

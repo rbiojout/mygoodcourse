@@ -239,6 +239,10 @@ class ProductsController < ApplicationController
   def show
     @attachments = @product.attachments
     @comments = @product.comments.paginate(page: params[:page], :per_page => Product.per_page)
+    # follow activity on pages
+    # we keep track of the current customer in impressions
+    @current_user = current_customer
+    impressionist(@product)
   end
 
   # GET /products/new

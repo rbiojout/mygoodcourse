@@ -97,6 +97,17 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should impression show product" do
+    product = products(:one)
+    assert_difference ('product.counter_cache') do
+      # @TODO why needed double?
+      get :show, locale: I18n.default_locale, id: product
+      get :show, locale: I18n.default_locale, id: product
+      product = assigns(:product)
+    end
+  end
+
+
   test "should show product with slug" do
     get :show, id: @product.slug, locale: I18n.default_locale
     assert_response :success

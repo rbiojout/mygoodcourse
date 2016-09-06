@@ -23,7 +23,7 @@ class ArticlesControllerTest < ActionController::TestCase
     # add a signed employee to perform the tests
     sign_in(employees(:one), scope: :employee)
     assert_difference('Article.count') do
-      post :create, locale: I18n.default_locale, :topic_id => @article.topic_id, article: { description: @article.description, name: @article.name, position: @article.position, slug: @article.slug, topic_id: @article.topic_id, visits: @article.visits }
+      post :create, locale: I18n.default_locale, :topic_id => @article.topic_id, article: { description: @article.description, name: @article.name, position: @article.position, slug: @article.slug, topic_id: @article.topic_id }
     end
 
     assert_redirected_to topic_article_path(assigns(:article), :topic_id => @article.topic_id)
@@ -32,6 +32,16 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should show article" do
     get :show, locale: I18n.default_locale, :topic_id => @article.topic_id, id: @article
     assert_response :success
+  end
+
+  test "should impression show article" do
+    article = articles(:one)
+    assert_difference ('article.counter_cache') do
+      # @TODO why needed double?
+      get :show, locale: I18n.default_locale, :topic_id => @article.topic_id, id: article
+      get :show, locale: I18n.default_locale, :topic_id => @article.topic_id, id: article
+      article = assigns(:article)
+    end
   end
 
   test "should protect edit" do
@@ -50,7 +60,7 @@ class ArticlesControllerTest < ActionController::TestCase
   test "should update article" do
     # add a signed employee to perform the tests
     sign_in(employees(:one), scope: :employee)
-    patch :update, locale: I18n.default_locale, :topic_id => @article.topic_id, id: @article, article: { description: @article.description, name: @article.name, position: @article.position, slug: @article.slug, topic_id: @article.topic_id, visits: @article.visits }
+    patch :update, locale: I18n.default_locale, :topic_id => @article.topic_id, id: @article, article: { description: @article.description, name: @article.name, position: @article.position, slug: @article.slug, topic_id: @article.topic_id }
     assert_redirected_to topic_article_path(assigns(:article), :topic_id => @article.topic_id)
   end
 

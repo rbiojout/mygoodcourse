@@ -1,6 +1,11 @@
 class Customer < ActiveRecord::Base
   extend FriendlyId
 
+  # follow activities
+  # we explicitely indicate the reference because of rails_admin issues
+  include Impressionist::IsImpressionable
+  is_impressionable :counter_cache => true, :column_name => :counter_cache, :unique => :all
+
   EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
   PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 

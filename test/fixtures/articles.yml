@@ -4,15 +4,13 @@ one:
   name: MyString
   description: MyText
   position: 1
-  visits: 1
   slug: MyString
   topic: one
-
+  counter_cache: 1
 two:
   name: MyString
   description: MyText
   position: 2
-  visits: 1
   slug: MyString
   topic: two
 
@@ -20,7 +18,6 @@ order_one:
   name: OrderOne
   description: OrderOne
   position: 1
-  visits: 1
   slug: OrderOne
   topic: one
 
@@ -28,6 +25,5 @@ order_two:
   name: OrderTwo
   description: OrderTwo
   position: 2
-  visits: 1
   slug: OrderTwo
   topic: one

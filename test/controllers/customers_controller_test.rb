@@ -33,6 +33,16 @@ class CustomersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should impression show customer" do
+    customer = customers(:one)
+    assert_difference ('customer.counter_cache') do
+      # @TODO why needed double?
+      get :show, locale: I18n.default_locale, id: customer
+      get :show, locale: I18n.default_locale, id: customer
+      customer = assigns(:customer)
+    end
+  end
+
   test "should get edit customer" do
     sign_in(@customer, scope: :customer)
     get :edit, id: @customer, locale: I18n.default_locale

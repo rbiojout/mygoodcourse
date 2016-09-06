@@ -67,7 +67,7 @@ RailsAdmin.config do |config|
       field :id
       field :name
       field :topic
-      field :visits
+      field :counter_cache
       field :created_at
       field :updated_at
     end
@@ -86,6 +86,7 @@ RailsAdmin.config do |config|
         end
       end
       field :topic
+      field :counter_cache
     end
 
   end

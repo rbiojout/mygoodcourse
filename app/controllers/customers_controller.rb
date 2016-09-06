@@ -14,6 +14,10 @@ class CustomersController < ApplicationController
   # GET /customers/1.json
   def show
     @products = @customer.products.active.paginate(page: params[:page], :per_page => Product.per_page) unless @customer.nil?
+    # follow activity on pages
+    # we keep track of the current customer in impressions
+    @current_user = current_customer
+    impressionist(@customer)
   end
 
   # additionnal page for show
@@ -22,6 +26,10 @@ class CustomersController < ApplicationController
   def circle
     @followers = @customer.followers
     @followeds = @customer.followeds
+    # follow activity on pages
+    # we keep track of the current customer in impressions
+    @current_user = current_customer
+    impressionist(@customer)
   end
 
   # GET /customers/new

@@ -16,12 +16,13 @@ class ArticlesController < ApplicationController
   # GET /articles/1
   # GET /articles/1.json
   def show
-    # increment the number of visits if visit don't come from edit/update
-    unless (request.referrer == edit_topic_article_url(@article, :topic_id => @article.topic_id))
-      visits = @article.visits || 0
-      @article.visits = visits + 1
-      @article.save
-    end
+    # follow activity on pages
+    # we keep track of the current customer in impressions
+    @current_user = current_customer
+    impressionist(@article)
+    # need to reload object
+    @article = @article.reload
+
   end
 
   # GET /articles/new
@@ -75,11 +76,9 @@ class ArticlesController < ApplicationController
 
   # POST /articles/sort
   def sort
-    logger.debug("===> params[:article] #{params[:article]}")
     unless params[:article].nil?
       params[:article].each .each_with_index do |id, index|
         Article.update(id, position: index+1)
-        logger.debug("===> id #{id} index #{index}")
       end
     end
     render nothing:true

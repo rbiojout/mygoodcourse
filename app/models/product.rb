@@ -2,6 +2,11 @@ class Product < ActiveRecord::Base
   extend FriendlyId
   include PgSearch
 
+  # follow activities
+  # we explicitely indicate the reference because of rails_admin issues
+  include Impressionist::IsImpressionable
+  is_impressionable :counter_cache => true, :column_name => :counter_cache, :unique => :all
+
   # contants values for Product
   # price list
   PRICE_LIST = [nil, '0.99', '4.99', '9.99', '14.99', '19.99']

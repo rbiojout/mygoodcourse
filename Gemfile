@@ -59,6 +59,8 @@ gem 'will_paginate'
 # add some order in the models for lists
 gem 'acts_as_list'
 # gem 'nested_form_fields'
+# add a counter for the visits
+gem 'impressionist'
 
 # we want slugs for URL instead of numbers
 gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
