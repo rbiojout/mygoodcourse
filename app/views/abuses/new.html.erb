@@ -1,0 +1,9 @@
+<h1>New Attachment for <%= @context.class %> - <%= @context.id %></h1>
+
+<%= @context %>|
+<%= @context.class %>|
+<%= @context.class.to_s.downcase+"_"+@context.id.to_s %>
+
+<%= render 'form' %>
+
+<%= link_to 'Back', abuses_path %>

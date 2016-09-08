@@ -11,13 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906091745) do
+ActiveRecord::Schema.define(version: 20160906180000) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
   enable_extension "unaccent"
+
+  create_table "abuses", force: :cascade do |t|
+    t.integer "abusable_id"
+    t.string  "abusable_type"
+    t.integer "customer_id"
+    t.text    "description"
+    t.string  "status"
+  end
+
+  add_index "abuses", ["abusable_type", "abusable_id"], name: "index_abuses_on_abusable_type_and_abusable_id", using: :btree
+  add_index "abuses", ["customer_id"], name: "index_abuses_on_customer_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -370,6 +381,7 @@ ActiveRecord::Schema.define(version: 20160906091745) do
   add_index "wish_lists", ["customer_id"], name: "index_wish_lists_on_customer_id", using: :btree
   add_index "wish_lists", ["product_id"], name: "index_wish_lists_on_product_id", using: :btree
 
+  add_foreign_key "abuses", "customers"
   add_foreign_key "articles", "topics"
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"

@@ -1,0 +1,40 @@
+<% provide(:title, (I18n.translate 'activerecord.models.abuse', count: 2).capitalize) %>
+
+
+<h1><%= (I18n.translate 'activerecord.models.abuse', count: 2).capitalize %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Status</th>
+      <th>Customer Id</th>
+      <th>Abusable Id</th>
+      <th>Abusable Type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @abuses.each do |abuse| %>
+      <tr>
+        <td><%= abuse.description %></td>
+        <td><%= abuse.status %></td>
+        <td><%= abuse.customer_id %></td>
+        <td><%= abuse.abusable_id %></td>
+        <td><%= abuse.abusable_type %></td>
+        <td><%= link_to 'Show', abuse %></td>
+        <td><%= link_to 'Edit', edit_abus_path(abuse, abuse.abusable_type.to_s.downcase+'_id' => abuse.abusable_id ) %></td>
+        <td><%= link_to 'Destroy', abuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Abuse for comment', new_abus_path(:comment_id => Comment.first.id) %>|
+<%= link_to 'New Abuse for comment REMOTE', new_abus_path(:comment_id => Comment.last.id), :remote => true %>|
+<%= link_to 'New Abuse for product', new_abus_path(:product_id => Product.first.id) %>
+
+

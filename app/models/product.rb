@@ -41,6 +41,8 @@ class Product < ActiveRecord::Base
   has_many :wish_lists, dependent: :destroy
   has_many :wish_customers, through: :wish_lists, source: :customer
 
+  # we have some abuses that can be reported by customers
+  has_many :abuses, class_name: "Abuse", as: :abusable
 
   # validators
   validates :customer_id, :name, :description, presence: true
@@ -322,16 +324,40 @@ class Product < ActiveRecord::Base
 
   # return the nbpages of the file corresponding to the attachment
   # in case of problem, returns 0
-  # @return [String]
+  # @return [int]
   def nbpages
     begin
-      attachments.order(version_number: 'asc').first.nbpages
+      attachments.order(position: 'asc').first.nbpages
     rescue Exception => exc
       logger.error("Message for the log file #{exc.message}")
-      "empty_preview.png"
+      0
     end
   end
 
+  # return the filesize of the file corresponding to the attachment
+  # in case of problem, returns 0
+  # @return [int]
+  def file_size
+    begin
+      # pretty value
+      attachments.order(position: 'asc').first.file_size
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      0
+    end
+  end
+
+  # return the filesize of the file corresponding to the attachment
+  # in case of problem, returns 0
+  # @return [String]
+  def file_type
+    begin
+      attachments.order(position: 'asc').first.file_type
+    rescue Exception => exc
+      logger.error("Message for the log file #{exc.message}")
+      "application/pdf"
+    end
+  end
 
   private
 

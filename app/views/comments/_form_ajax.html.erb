@@ -1,7 +1,7 @@
 
 
 
-<%= form_for(@comment, remote: true, :html => { :role => "form", 'data-model' => 'comment' }) do |f| %>
+<%= form_for(@comment, remote: true, :html => { :role => "form", 'data-model' => 'comment', :class => 'ajax_form' }) do |f| %>
 
     <div id="error_explanation" class="bg-danger text-danger">
       <% if @comment.errors.any? %>

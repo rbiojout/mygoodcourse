@@ -42,6 +42,8 @@ fr:
     delete: 'Supprimer'
     undo: 'Annuler'
     pay: 'Payer'
+    abuses:
+      new: 'Signaler un abus'
     comments:
       new: 'Ajouter un commentaire'
     products:
@@ -102,6 +104,9 @@ fr:
 
   activerecord:
     models:
+      abuse:
+        one: 'problème'
+        other: 'problèmes'
       article:
         one: 'article'
         other: 'articles'
@@ -148,7 +153,9 @@ fr:
       #updated_at: 'Mis à jour le'
       creation_date: 'Date création'
       update_date: 'Date mise à jour'
-
+      abuse:
+        description: 'Description'
+        place_description: 'Précisez la nature du problème (requis)'
       attachment:
         title: 'Titre'
         description: 'Description'

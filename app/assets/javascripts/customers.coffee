@@ -9,12 +9,14 @@ display_info = (thisdoc)->
     id = $(this).data('customer')
     created = $(this).data('created')
     locality = $(this).data('locality')
-    $.ajax
-      url: "/fr/customers/#{id}",
-      type: "GET",
-      dataType: "json"
-      success: (data) ->
-        console.log(data)
+    # no need to get the object
+    # all relevant data is already in the call
+    #$.ajax
+    #  url: "/fr/customers/#{id}",
+    #  type: "GET",
+    #  dataType: "json"
+    #  success: (data) ->
+    #    console.log(data)
     $(this).popover({
       content: "#{locality}. #{created}",
       placement: "bottom"})
@@ -28,7 +30,7 @@ $(document).ready ->
   display_info($.document)
 
 
-# display more comments
+# display more comments when displaying the comments of a customer
 $ ->
   if $('#infinite-scrolling-comments').length > 0
     $(window).on 'scroll', ->

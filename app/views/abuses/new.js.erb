@@ -1,5 +1,5 @@
 // TODO : need to handle the NOT AUTHORIZE
-$('#app_dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Comment");
+$('#app_dialog h3').html('<%= j I18n.translate('actions.abuses.new')%>');
 
 $('#app_dialog .modal-body').html('<%= j render("form_ajax") %>');
 

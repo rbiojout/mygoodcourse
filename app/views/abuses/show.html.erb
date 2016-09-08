@@ -1,0 +1,34 @@
+
+
+<p>
+  <strong>description:</strong>
+  <%= @abuse.description %>
+</p>
+
+<p>
+  <strong>status:</strong>
+  <%= @abuse.status %>
+</p>
+
+<p>
+  <strong>customer_id:</strong>
+  <%= @abuse.customer_id %>
+</p>
+
+<p>
+  <strong>abusable_id:</strong>
+  <%= @abuse.abusable_id %>
+</p>
+
+<p>
+  <strong>abusable_type:</strong>
+  <%= @abuse.abusable_type %>
+</p>
+
+<p>
+  <strong>abusable:</strong>
+  <%= @abuse.abusable %>
+</p>
+
+<%= link_to 'Edit', edit_abus_path(@abuse) %> |
+<%= link_to 'Back', abuses_path %>

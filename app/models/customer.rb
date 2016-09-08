@@ -75,6 +75,10 @@ class Customer < ActiveRecord::Base
   # payment solution StripeAccount
   has_one :stripe_account, dependent: :destroy
 
+
+  # we have some abuses that has been reported by this customer
+  has_many :reported_abuses, class_name: "Abuse", foreign_key: "customer_id"
+
   # Follows a customer.
   def follow(other_customer)
     active_peers.create(followed: other_customer)

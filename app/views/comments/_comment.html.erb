@@ -16,7 +16,9 @@
         <!--- end stars --->
 
         <% # @TODO add report %>
-        <p>REPORT problem</p>
+        <div id="abus_comment_<%= comment.id%>">
+            <p><%= link_to t('actions.abuses.new'), new_abus_path(:comment_id => comment.id), :remote => true %></p>
+        </div>
       </div>
     </div>
 </div>

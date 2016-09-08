@@ -5,11 +5,27 @@
   <div class="col-sm-4">
     <p>
       <%= image_tag @product.preview, class: 'img-thumbnail center-block' %>
+      <!-- download link if available -->
+    <div id="product_download">
       <% if customer_signed_in? %>
           <% if @product.candownload(current_customer) %>
               <%= link_to 'Download', @product.file_url, class: 'btn btn-success input-block-level form-control' %>
           <% end %>
-     <% end %>
+      <% end %>
+    </div>
+      <!-- end download link -->
+   <br/>
+      <!--- list of actions --->
+    <div id="product_actions">
+      <% if customer_signed_in? && current_customer.own_product(@product) %>
+          <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
+      <% else %>
+          <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
+          <small><%= t('dialog.shop.explain_add') %></small>
+      <% end %>
+    </div>
+    <!--- end list of actions --->
+
     </p>
   </div>
   <div class="col-sm-8">
@@ -27,6 +43,8 @@
           <div class="col-sm-8">
             <h4 class="pull-right"><%= nice_price(@product.price) %></h4><br/>
             <p><%= t('activerecord.attributes.attachment.nbpages')%> : <%= @product.nbpages %></p>
+            <p><%= t('activerecord.attributes.attachment.file_type')%> : <%= @product.file_type %></p>
+            <p><%= t('activerecord.attributes.attachment.file_size')%> : <%= number_to_human_size(@product.file_size) %></p>
             <p>
             <%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %> :
             <% @product.categories.each do |category| %>
@@ -53,16 +71,13 @@
           <!-- end author -->
         </div>
       </div>
-      <!--- list of actions --->
       <div class="panel-footer">
-          <% if customer_signed_in? && current_customer.own_product(@product) %>
-              <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
-          <% else %>
-                <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
-            <small><%= t('dialog.shop.explain_add') %></small>
-          <% end %>
+        <!-- report abuse problem -->
+        <div id="abus_product_<%= @product.id%>">
+          <p class="text-right"><small><%= link_to new_abus_path(:product_id => @product.id), :remote => true do %><span class="fa fa-bolt red"></span> <%= t('actions.abuses.new') %><% end %></small></p>
+        </div>
+        <!-- end abuse -->
       </div>
-      <!--- end list of actions --->
 
 
 

@@ -42,6 +42,8 @@ en:
     delete: 'Delete'
     undo: 'Undo'
     pay: 'Pay'
+    abuses:
+      new: 'Report abuse'
     comments:
       new: 'Add comment'
     products:
@@ -107,6 +109,9 @@ en:
 
   activerecord:
     models:
+      abuse:
+        one: 'abuse'
+        other: 'abuses'
       article:
         one: 'article'
         other: 'articles'
@@ -150,7 +155,9 @@ en:
     attributes:
       creation_date: 'Creation date'
       update_date: 'Update date'
-
+      abuse:
+        description: 'Description'
+        place_description: 'Enter here the description of the abuse (required)'
       attachment:
         title: 'Title'
         description: 'Description'

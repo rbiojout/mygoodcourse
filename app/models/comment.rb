@@ -2,6 +2,9 @@ class Comment < ActiveRecord::Base
   belongs_to :product
   belongs_to :customer
 
+  # we have some abuses that can be reported by customers
+  has_many :abuses, class_name: "Abuse", as: :abusable
+
   validates :title, :description, :score, :product, presence: true
 
   after_save :update_for_product

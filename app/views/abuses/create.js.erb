@@ -1,0 +1,19 @@
+
+
+// close the modal
+$('#app_dialog').modal_success();
+
+
+$('#app_dialog').on('hidden.bs.modal', function () {
+// first we need to hide before to show
+    $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').focus();
+    $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').hide();
+    $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').show(900);
+//$('#current_comment').focus();
+//$('#current_comment').hide();
+//$('#current_comment').show(600);
+})
+
+
+
+
