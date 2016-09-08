@@ -6,14 +6,17 @@ namespace :carrierwave do
 
   task :reprocess_attachments => :environment do |task|
     desc "Reprocess all attachments"
-    Attachment.find_each(batch_size: 10) do |attachment|
-      begin
-      attachment.file.recreate_versions!
-      attachment.save!
-        puts "done attachment "+attachment.id.to_s
-      rescue
-        false
+    Attachment.find_in_batches(batch_size: 10) do |attachments|
+      attachments.each do |attachment|
+        begin
+        attachment.file.recreate_versions!
+        attachment.save!
+          puts "done attachment "+attachment.id.to_s
+        rescue
+          false
+        end
       end
+
     end
 
   end
