@@ -24,8 +24,8 @@ class Attachment < ActiveRecord::Base
       self.file.retrieve_from_cache!(file.cache_name)
       self.file.recreate_versions!
       self.save!
-    rescue => e
-      STDERR.puts  "ERROR: MyModel: #{id} -> #{e.to_s}"
+    rescue => ex
+      STDERR.puts  "ERROR: MyModel: #{id} -> #{ex.backtrace}: #{ex.message} (#{ex.class})"
     end
   end
 
