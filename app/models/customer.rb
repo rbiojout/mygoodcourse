@@ -77,7 +77,7 @@ class Customer < ActiveRecord::Base
 
 
   # we have some abuses that has been reported by this customer
-  has_many :reported_abuses, class_name: "Abuse", foreign_key: "customer_id"
+  has_many :reported_abuses, class_name: "Abuse", foreign_key: "customer_id", inverse_of: :customer
 
   # Follows a customer.
   def follow(other_customer)

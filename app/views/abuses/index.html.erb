@@ -24,7 +24,7 @@
         <td><%= abuse.abusable_id %></td>
         <td><%= abuse.abusable_type %></td>
         <td><%= link_to 'Show', abuse %></td>
-        <td><%= link_to 'Edit', edit_abus_path(abuse, abuse.abusable_type.to_s.downcase+'_id' => abuse.abusable_id ) %></td>
+        <td><%= link_to 'Edit', edit_abuse_path(abuse, abuse.abusable_type.to_s.downcase+'_id' => abuse.abusable_id ) %></td>
         <td><%= link_to 'Destroy', abuse, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
@@ -33,8 +33,8 @@
 
 <br>
 
-<%= link_to 'New Abuse for comment', new_abus_path(:comment_id => Comment.first.id) %>|
-<%= link_to 'New Abuse for comment REMOTE', new_abus_path(:comment_id => Comment.last.id), :remote => true %>|
-<%= link_to 'New Abuse for product', new_abus_path(:product_id => Product.first.id) %>
+<%= link_to 'New Abuse for comment', new_abuse_path(:comment_id => Comment.first.id) %>|
+<%= link_to 'New Abuse for comment REMOTE', new_abuse_path(:comment_id => Comment.last.id), :remote => true %>|
+<%= link_to 'New Abuse for product', new_abuse_path(:product_id => Product.first.id) %>
 
 

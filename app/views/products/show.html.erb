@@ -74,7 +74,7 @@
       <div class="panel-footer">
         <!-- report abuse problem -->
         <div id="abus_product_<%= @product.id%>">
-          <p class="text-right"><small><%= link_to new_abus_path(:product_id => @product.id), :remote => true do %><span class="fa fa-bolt red"></span> <%= t('actions.abuses.new') %><% end %></small></p>
+          <p class="text-right"><small><%= link_to new_abuse_path(:product_id => @product.id), :remote => true do %><span class="fa fa-bolt red"></span> <%= t('actions.abuses.new') %><% end %></small></p>
         </div>
         <!-- end abuse -->
       </div>

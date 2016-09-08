@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   post '/rate' => 'rater#create', :as => 'rate'
   resources :comments
+  # abuses reported for Comments and Products
   resources :abuses, only: [:new, :create]
+  #, only: [:new, :create]
   resources :payments, only: [:show] do
     member do
       post 'refund'
