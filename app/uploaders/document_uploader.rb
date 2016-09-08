@@ -63,8 +63,8 @@ class DocumentUploader < CarrierWave::Uploader::Base
 
   end
 
-  version :preview do
-    process :add_backgroung => [250, 350]
+  version :large do
+    process :add_backgroung => [375, 525]
     process :convert => :png
     process :set_content_type
 
@@ -73,6 +73,26 @@ class DocumentUploader < CarrierWave::Uploader::Base
     end
   end
 
+
+  version :preview, from_version: :large do
+    process resize_to_fit: [250, 350]
+    process :convert => :png
+    process :set_content_type
+
+    def full_filename (for_file = model.source.file)
+      super.chomp(File.extname(super)) + '.png'
+    end
+  end
+
+  version :small, from_version: :large do
+    process resize_to_fit: [125, 175]
+    process :convert => :png
+    process :set_content_type
+
+    def full_filename (for_file = model.source.file)
+      super.chomp(File.extname(super)) + '.png'
+    end
+  end
 
 
   def set_content_type(*args)

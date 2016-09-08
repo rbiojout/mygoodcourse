@@ -275,7 +275,31 @@ class Product < ActiveRecord::Base
     begin
      attachments.first.file.url(:preview)
     rescue Exception => exc
-      logger.error("Message for the log file #{exc.message}")
+      logger.error("Message for the log file while retrieving preview #{exc.message}")
+      "empty_preview.png"
+    end
+  end
+
+  # return the URL of the file corresponding to the small preview prepared
+  # in case of problem, returns the defaut preview
+  # @return [String]
+  def small
+    begin
+      attachments.first.file.url(:small)
+    rescue Exception => exc
+      logger.error("Message for the log file while retrieving small preview #{exc.message}")
+      "empty_preview.png"
+    end
+  end
+
+  # return the URL of the file corresponding to the large preview prepared
+  # in case of problem, returns the defaut preview
+  # @return [String]
+  def large
+    begin
+      attachments.first.file.url(:large)
+    rescue Exception => exc
+      logger.error("Message for the log file while retrieving large preview #{exc.message}")
       "empty_preview.png"
     end
   end
