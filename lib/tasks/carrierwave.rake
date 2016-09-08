@@ -10,6 +10,7 @@ namespace :carrierwave do
       begin
       attachment.file.recreate_versions!
       attachment.save!
+        puts "done attachment "+attachment.id.to_s
       rescue
         false
       end
