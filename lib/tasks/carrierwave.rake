@@ -6,7 +6,7 @@ namespace :carrierwave do
 
   task :reprocess_attachments => :environment do |task|
     desc "Reprocess all attachments"
-    Attachment.find_each do |attachment|
+    Attachment.find_each(batch_size: 10) do |attachment|
       begin
       attachment.file.recreate_versions!
       attachment.save!

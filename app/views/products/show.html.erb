@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-sm-4">
     <p>
-      <%= image_tag @product.large, class: 'img-thumbnail center-block' %>
+      <%= image_tag @product.preview, class: 'img-thumbnail center-block' %>
       <!-- download link if available -->
     <div id="product_download">
       <% if customer_signed_in? %>
