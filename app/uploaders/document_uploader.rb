@@ -54,7 +54,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
     #image = image.write("png:"+current_path)
     target = ::Magick::Image.new(width, height) do
       self.background_color = 'white'
-      end
+    end
 
     thumb.write(current_path+"thumb.png")
     # some issues of transparency appear...
@@ -124,7 +124,6 @@ class DocumentUploader < CarrierWave::Uploader::Base
       super.chomp(File.extname(super)) + '.png'
     end
   end
-
 
 
   # Add a white list of extensions which are allowed to be uploaded.

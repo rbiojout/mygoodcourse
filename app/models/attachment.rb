@@ -16,6 +16,19 @@ class Attachment < ActiveRecord::Base
 
   default_scope -> { order(position: :asc) }
 
+  def reprocess_versions
+    begin
+      # only if backgrounder
+      #self.process_file_upload = true
+      self.file.cache_stored_file!
+      self.file.retrieve_from_cache!(file.cache_name)
+      self.file.recreate_versions!
+      self.save!
+    rescue => e
+      STDERR.puts  "ERROR: MyModel: #{id} -> #{e.to_s}"
+    end
+  end
+
   private
 
   def update_file_attributes
