@@ -316,12 +316,13 @@ class Product < ActiveRecord::Base
   def candownload(customer)
     false
     unless customer.nil?
+      # if this is a product from the customer, it is ok
+      if self.customer.id == customer.id
+        true
+      # CHANGED TO HAVE AN ORDER EVEN IF FREE
       # if the price is nil that's ok
-      if self.price.nil?
-        true
-      elsif self.customer.id == customer.id
-        # if this is a product from the customer, it is ok
-        true
+      #elsif self.price.nil?
+      #  true
       else
         # we need to find a valid order paid
         OrderItem.find_OK_product_customer(customer.id, self, 'accepted').count > 0

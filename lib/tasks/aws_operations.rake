@@ -1,5 +1,6 @@
 ##
 # use rake aws:copy_bucket_locally RAILS_ENV=development
+# use rake aws:clean_attachments RAILS_ENV=development
 ##
 namespace :aws do
   desc "Operations linked to aws."
@@ -51,11 +52,12 @@ namespace :aws do
 
   end
 
-  task :clean do
+  task :clean_attachments   => :environment do
+    desc "This is going to destroy the attachments that are no longer used. MUST BE AGAINST THE RIGHT DATABASE"
     connection = Fog::Storage.new({
                                       :provider                 => 'AWS',
-                                      :aws_access_key_id        => "AKIAJSWJDKWLZCEIEDOA",
-                                      :aws_secret_access_key    => "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",
+                                      :aws_access_key_id        => ENV["AWS_ACCESS_KEY_ID"],
+                                      :aws_secret_access_key    => ENV["AWS_SECRET_ACCESS_KEY"],
                                       :region               => 'eu-west-1'
                                   })
     # list directories
@@ -65,46 +67,6 @@ namespace :aws do
     directory = connection.directories.get('formycourse')
     #directory = connection.directories.find { |d| d.key == 'formycourse' }
 
-    counter = 1
-    directory.files.each do |file|
-      counter +=1
-    end
-    counter
-
-    directory.files.map do |file|
-
-      "(("+File.dirname(file.key)+"))"+File.basename(file.key)
-    end
-
-    # iterate over the files in S3
-    counter = 1
-    # directory.files.map is limited to 1000 files
-    # need for directory.files.each
-    directory.files.each do |s3_file|
-      s3_file.key
-      # retrieve file
-      attachment = Attachment.find_by_file(File.basename(s3_file.key)) if ((File.dirname(s3_file.key).include?"uploads/attachment/file/") && !(s3_file.key.include?"png"))
-      unless attachment.nil?
-        counter+=1
-        attachment.id.to_s+"---"+attachment.file.to_s
-      else
-        "ALERT"
-      end
-    end
-    counter
-
-
-    # iterate over the files in S3
-    directory.files.each do |s3_file|
-      # retrieve date
-      unless s3_file.last_modified > Time.now - 6.hours
-        # test path if we really have attachment
-        if(File.dirname(s3_file.key).include?"uploads/attachment/file/19/cb5a7952-7dfd-498b-961f-140c4d38c321.png")
-          s3_file.key
-        end
-
-      end
-    end
 
     counter = 0
     result=""
@@ -120,6 +82,8 @@ namespace :aws do
       end
     end
 
+    puts "#{counter} files deleted"
+    puts "#{result}"
 
   end
 
