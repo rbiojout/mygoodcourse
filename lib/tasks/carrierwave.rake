@@ -7,6 +7,7 @@ namespace :carrierwave do
   task :reprocess_attachments => :environment do |task|
     desc "Reprocess all attachments"
     Attachment.find_each do |attachment|
+      puts "done attachment #{attachment.id}"
       begin
       attachment.reprocess_versions
       rescue => e

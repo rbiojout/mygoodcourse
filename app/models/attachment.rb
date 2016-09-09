@@ -10,9 +10,9 @@ class Attachment < ActiveRecord::Base
   validates :file, presence: true
 
   # method for update and create
-  before_save :update_file_attributes
+  before_create :update_file_attributes
   # method after the creation of a new attachment
-  before_create :increment_version
+  before_save :increment_version
 
   default_scope -> { order(position: :asc) }
 
@@ -20,8 +20,8 @@ class Attachment < ActiveRecord::Base
     begin
       # only if backgrounder
       #self.process_file_upload = true
-      #self.file.cache_stored_file!
-      self.file.retrieve_from_cache!(file.cache_name)
+      self.file.cache_stored_file!
+      self.file.retrieve_from_cache!(self.file.cache_name)
       self.file.recreate_versions!
       self.save!
     rescue => ex

@@ -2,6 +2,8 @@
 
 class DocumentUploader < CarrierWave::Uploader::Base
 
+  after :store, :delete_thumb_file
+
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
   include CarrierWave::MimeTypes
@@ -49,18 +51,20 @@ class DocumentUploader < CarrierWave::Uploader::Base
       self.colorspace = Magick::RGBColorspace
     }.first
 
-    thumb = image.resize_to_fit(width, height)
+    @thumb = image.resize_to_fit(width, height)
     # we set to png to better transparency result
     #image = image.write("png:"+current_path)
     target = ::Magick::Image.new(width, height) do
       self.background_color = 'white'
     end
 
-    thumb.write(current_path+"thumb.png")
+    @thumb.write(current_path+"thumb.png")
     # some issues of transparency appear...
     #target.alpha(::Magick::TransparentAlphaChannel)
-    target.composite(thumb, ::Magick::CenterGravity, ::Magick::OverCompositeOp).write(current_path)
-
+    target.composite(@thumb, ::Magick::CenterGravity, ::Magick::OverCompositeOp).write(current_path)
+    # free memory
+    @thumb.destroy!
+    File.delete(current_path+"thumb.png") if File.exist?(current_path+"thumb.png")
   end
 
   version :large do
@@ -71,6 +75,7 @@ class DocumentUploader < CarrierWave::Uploader::Base
     def full_filename (for_file = model.source.file)
       super.chomp(File.extname(super)) + '.png'
     end
+
   end
 
 
@@ -148,6 +153,10 @@ class DocumentUploader < CarrierWave::Uploader::Base
   def secure_token
     var = :"@#{mounted_as}_secure_token"
     model.instance_variable_get(var) or model.instance_variable_set(var, SecureRandom.uuid)
+  end
+
+  def delete_thumb_file(dummy)
+    @thumb.try :delete
   end
 
 end
