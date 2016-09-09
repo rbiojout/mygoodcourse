@@ -16,6 +16,9 @@ class Attachment < ActiveRecord::Base
 
   default_scope -> { order(position: :asc) }
 
+  # All featured products
+  scope :featured, -> { where(featured: true) }
+
   def reprocess_versions
     begin
       # only if backgrounder
