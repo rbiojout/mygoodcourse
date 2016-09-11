@@ -10,6 +10,16 @@ class Product < ActiveRecord::Base
   # contants values for Product
   # price list
   PRICE_LIST = [nil, '0.99', '4.99', '9.99', '14.99', '19.99']
+
+  def price_enum
+    # Do not select any value, or add any blank field. RailsAdmin will do it for you.
+    PRICE_LIST
+    # ['green', 'white']
+    # alternatively
+    # { green: 0, white: 1 }
+    # [ %w(Green 0), %w(White 1)]
+  end
+
   # pagination
   self.per_page = 30
 

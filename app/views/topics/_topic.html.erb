@@ -1,12 +1,14 @@
 <li>
-  <h3><%= link_to(topic_articles_path(:topic_id => topic.id)) do %>
+  <h2><%= link_to(topic_articles_path(:topic_id => topic.id)) do %>
      <span class="fa-stack">
       <i class="fa fa-circle fa-stack-2x text-primary"></i>
       <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
     </span>
      <%= topic.name %>
       <% end %>
-  </h3>
+  </h2>
 
-  <%= raw(topic.description) %>
+  <blockquote>
+    <%= raw(topic.description) %>
+  </blockquote>
 </li>

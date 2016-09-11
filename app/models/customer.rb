@@ -49,6 +49,8 @@ class Customer < ActiveRecord::Base
   # producst links
   # owned products
   has_many :products, dependent: :destroy
+
+
   # wished products
   has_many :wish_lists, dependent: :destroy
   has_many :wish_products, through: :wish_lists, source: :product

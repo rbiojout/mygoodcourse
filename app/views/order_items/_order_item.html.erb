@@ -6,7 +6,7 @@
 <div class="row" id="order_item_<%=order_item.id%>">
   <div class="col-xs-2 picture_part">
     <%= link_to product_path(order_item.product) do %>
-        <%= image_tag order_item.product.preview, class: 'img-thumbnail center-block' %>
+        <%= image_tag order_item.product.small, class: 'img-thumbnail center-block' %>
     <% end %>
   </div>
   <div class="col-xs-6 description_part">

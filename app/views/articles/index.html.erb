@@ -1,7 +1,7 @@
 <% provide(:title, (I18n.translate 'activerecord.models.article', count: 2).capitalize) %>
 
 
-<h2><%= (I18n.translate 'activerecord.models.article', count: 2).capitalize %></h2>
+<h1><%= (I18n.translate 'activerecord.models.article', count: 2).capitalize %></h1>
 
 <div class="row">
   <div class="col-sm-4">
@@ -16,15 +16,16 @@
     <!-- list of topics -->
     <%= render(partial: 'articles/topics', :current_topic => @topic) %>
     <!-- end list of topics -->
+    <hr/>
   </div>
   <div class="col-sm-8">
-    <h3>
+    <h2>
       <span class="fa-stack">
           <i class="fa fa-circle fa-stack-2x"></i>
           <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
       </span>
       <%= @topic.name %>
-    </h3>
+    </h2>
     <ul class="list-unstyled">
       <%= render(partial: 'articles/article', :collection => @articles) %>
     </ul>

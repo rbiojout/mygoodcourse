@@ -167,8 +167,10 @@ Rails.application.routes.draw do
       member do
         # from the show page add some links for profile
         get :circle
-        #
+        # prefered products for customer
         get :wishlist, as: 'wish_list'
+        # comments received by customer
+        get :comments_list, as: 'comments_list'
         # from the dashbord page add some links
         get :dashboard, :credit_cards, :cash_out
 
@@ -201,8 +203,11 @@ Rails.application.routes.draw do
 
 
   # root page
-  root to: 'static_pages#home'
-  get '/:locale' => 'static_pages#home'
+  #root to: 'static_pages#home'
+  #get '/:locale' => 'static_pages#home'
+
+  root to: 'products#catalog'
+  get '/:locale' => 'products#catalog'
 
 
 

@@ -6,6 +6,7 @@
       <li role="presentation" class="active"><a href='#'><%= t('activerecord.attributes.customer.profile') %></a></li>
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.wishes'), wish_list_customer_path %></li>
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.followers'), circle_customer_path(@customer) %></li>
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.comments'), comments_list_customer_path(@customer) %></li>
     </ul>
 
 
@@ -23,7 +24,7 @@
     </blockquote>
     <h3><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h3>
       <!-- products of the customer -->
-      <div class="row">
+      <div id="products_customer">
         <!-- we alert for empty followeds -->
         <% if @products.count ==0 %>
             <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_empty_products')}) %>

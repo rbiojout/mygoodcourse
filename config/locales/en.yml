@@ -72,6 +72,7 @@ en:
       alert_stripe_needed: 'You need to have a Stripe Account in order to receive payments.'
       alert_no_followers: "This user is not followed for the moment. To follow a particular user, you just have to click on the link when presented. You can revert anytime by clicking again to the corresponding link !!"
       alert_no_followeds: "This user follows no other user for the moment. From this page, you can also decide to start following the users when they will appear. You will be connected to the users and will be more easily in touch with them to grow you connexions easily !!"
+      alert_no_comments: "There is not yet any comment related to the products of this user. from this page, you are able to follow all the comments made by the buyers on all the products of this seller. In order to provide yourself a comment, you need to have this product in your downloaded list."
       alert_empty_products: "There is no product at the moment for this user. You can follow this user and come back later..."
     order:
         alert_add: "You don't have any order. Even for the free products, you need to process the order to keep track of your products. Let's start to add ressources!"
@@ -183,6 +184,7 @@ en:
         followers: 'Followers'
         followeds: 'Following'
         wishes: 'Favorite Products'
+        comments: 'Comments'
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
       order:

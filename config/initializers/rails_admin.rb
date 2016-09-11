@@ -372,6 +372,18 @@ RailsAdmin.config do |config|
       field :customer
       field :updated_at
     end
+    edit do
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :active
+      field :price
+      field :featured
+      field :levels
+      field :categories
+      field :customer
+    end
   end
 
   config.model "Payment" do

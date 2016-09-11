@@ -1,7 +1,7 @@
 <ul class="list-unstyled">
   <% @topics.each do |top|%>
     <li>
-      <h4>
+      <h3>
         <% if (top.id != @topic.id) %>
           <span class="fa-stack">
               <i class="fa fa-circle fa-stack-2x text-muted"></i>
@@ -15,7 +15,7 @@
         <% end %>
 
         <%= link_to top.name, topic_articles_path(:topic_id => top.id) %>
-        </h4>
+        </h3>
     </li>
   <% end %>
 </ul>

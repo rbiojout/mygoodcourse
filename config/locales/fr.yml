@@ -67,6 +67,7 @@ fr:
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
       alert_no_followers: "Cet utilisateur n'est suivi par aucun autre utilisateur. Pour suivre un utilisateur en particulier, il suffit de cliquer sur l'action associée. Vous pouvez changer à tout moment à partir de tous les liens correspondants !!"
       alert_no_followeds: "Cet utilisateur ne suit aucun autre utilisateur. A partir de cette page, vous pouvez vous aussi suivre les utilisateurs qui s'afficheront si vous souhaitez être en lien privilégié avec ces utilisateurs."
+      alert_no_comments: "Cet utilisateur n'a pas encore été évalué. A partir de cette page, vous pouvez suivre les différentes évaluations des ressources proposées par un utilisateur. Pour faire vous-même une évaluation, vous devez avoir téléchargé le produit."
       alert_empty_products: "Il n'y a pas encore de produits pour ce client.Vous pouvez suivre cet utilisateur et revenir plus tard..."
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
@@ -206,6 +207,7 @@ fr:
         followers: 'Abonnés'
         followeds: 'Abonnements'
         wishes: 'Produits Favoris'
+        comments: 'Evaluations'
         remember_me: 'Se souvenir de moi'
         located: 'Originaire de %{locality}'
         since: 'Membre depuis %{created}'

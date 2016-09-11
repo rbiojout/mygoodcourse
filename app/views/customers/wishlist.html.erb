@@ -9,6 +9,7 @@
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.profile'), customer_path(@customer) %></li>
       <li role="presentation" class="active"><%= link_to t('activerecord.attributes.customer.wishes'), wish_list_customer_path %></li>
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.followers'), circle_customer_path(@customer) %></li>
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.comments'), comments_list_customer_path(@customer) %></li>
     </ul>
 
   </div>
