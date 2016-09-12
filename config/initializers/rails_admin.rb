@@ -183,6 +183,7 @@ RailsAdmin.config do |config|
       field :name
       field :email
       field :sign_in_count
+      field :counter_cache
       field :created_at
       field :postal_code
       field :locality
@@ -369,6 +370,7 @@ RailsAdmin.config do |config|
       field :price
       field :active
       field :featured
+      field :counter_cache
       field :customer
       field :updated_at
     end

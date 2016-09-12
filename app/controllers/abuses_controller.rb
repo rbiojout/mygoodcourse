@@ -36,6 +36,9 @@ class AbusesController < ApplicationController
 
     respond_to do |format|
       if @abuse.save
+        # Tell the AbuseMailer to send a confirmation after save
+        AbuseMailer.received(@abuse).deliver_later
+        # display the new abuse
         format.html { redirect_to context_url(context), notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @abuse }
         # added

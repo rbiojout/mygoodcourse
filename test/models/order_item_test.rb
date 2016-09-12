@@ -45,7 +45,7 @@ class OrderItemTest < ActiveSupport::TestCase
 
 
   test 'that changes to a order items quantity after order confirmation updates stock allocation' do
-    # get a user to mark the order as shipped
+    # get a user to mark the order as ok
     user = customers(:JoeBloggs)
     assert @order.confirm!
     assert @order.accept!(user)

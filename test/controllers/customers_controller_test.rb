@@ -106,6 +106,12 @@ class CustomersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:products)
   end
 
+  test "should have comments list" do
+    get :comments_list, id: @customer.id, locale: I18n.default_locale
+    assert_response :success
+    assert_not_nil assigns(:comments)
+  end
+
   test "should have dashboard" do
     # protected if not signed
     get :dashboard, id: @customer.id, locale: I18n.default_locale

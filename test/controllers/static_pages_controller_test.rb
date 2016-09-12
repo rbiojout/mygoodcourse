@@ -4,7 +4,7 @@ class StaticPagesControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
 
   test "should get home" do
-    get :home
+    get :home, locale: I18n.default_locale
     assert_response :success
   end
 

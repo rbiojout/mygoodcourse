@@ -1,8 +1,5 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <strong>File:</strong>
-  <%= @attachment.file %>
+  <%= image_tag @attachment.file.large, class: 'img-thumbnail center-block' %>
 </p>
 
 <p>
@@ -32,8 +29,6 @@
 
 <p>
   <strong>Product:</strong>
-  <%= @attachment.product %>
+  <%= link_to product_path(@attachment.product), :class => 'btn btn-primary' %>
 </p>
 
-<%= link_to 'Edit', edit_attachment_path(@attachment) %> |
-<%= link_to 'Back', attachments_path %>

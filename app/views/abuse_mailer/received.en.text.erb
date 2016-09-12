@@ -1,0 +1,21 @@
+Hello <%=@abuse.customer.first_name%>!
+
+We have taken into account your request for reporting an abuse linked to this element:
+
+<%=
+   case @abuse.abusable
+     when Product
+       (I18n.translate 'activerecord.models.product.one').capitalize + ": " + @abuse.abusable.name
+     when Comment
+       (I18n.translate 'activerecord.models.comment.one').capitalize + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
+     else
+       ''
+   end
+   %>
+
+With your description: <%= @abuse.description %>
+
+We will e-mail you again when this abuse has been reviewed.
+
+Many thanks to help us make MyGoodCourse even better,
+

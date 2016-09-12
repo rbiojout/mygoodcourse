@@ -121,8 +121,8 @@ en:
         other: 'categories'
         all: 'All categories'
       comment:
-        one: 'comment'
-        other: 'comments'
+        one: 'evaluation'
+        other: 'evaluations'
       country:
         one: 'country'
         other: 'countries'
@@ -172,9 +172,9 @@ en:
         preview: 'Preview'
       comment:
         title: 'Title'
-        place_title: 'Title or summary of your comment (required)'
+        place_title: 'Title or summary of your eveluation (required)'
         description: 'Description'
-        place_description: 'Enter here your comment (required)'
+        place_description: 'Enter here your evaluation (required)'
         score: 'Score'
         not_rated: 'Not rated'
       customer:
@@ -184,7 +184,7 @@ en:
         followers: 'Followers'
         followeds: 'Following'
         wishes: 'Favorite Products'
-        comments: 'Comments'
+        comments: 'Evaluations'
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
       order:
@@ -223,8 +223,9 @@ en:
         hint_active: 'you can activate or not your product. Non active products can not be listed in the search'
         price: 'Price'
         hint_price: 'Value your work appropriately.'
-        nb_comments: 'Nb comments'
-        score_comments: 'Comments Average Score'
+        nb_comments: 'Nb evaluations'
+        score_comments: 'Evaluation Score'
+        counter_cache: 'Nb Visits'
         attachments: 'Attachments'
         categories: 'Categories'
         levels: 'Levels'
@@ -267,11 +268,20 @@ en:
         submit: 'Save this product'
         update: 'Update this product'
 
+  abuse_mailer:
+    received:
+      subject: 'Abuse Confirmation'
+    accepted:
+      subject: 'Abuse Accepted'
+    rejected:
+      subject: 'Abuse Rejected'
   order_mailer:
     received:
       subject: 'Order Confirmation'
-      accepted: 'Order Accepted'
-      rejected: 'Order Rejected'
+    accepted:
+      subject: 'Order Accepted'
+    rejected:
+      subject: 'Order Rejected'
 
 
   time:

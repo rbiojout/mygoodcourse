@@ -34,7 +34,7 @@
       <div class="panel-heading">
         <h3><%= @product.name %></h3>
         <div id="product_score">
-          <%= render :partial => "comments/show_stars", :score => @product.score_comments, :nb_comments => @product.nb_comments %>
+          <%= render :partial => "comments/show_stars", locals: {:score => @product.score_comments, :nb_comments => @product.nb_comments} %>
         </div>      </div>
       <!-- title -->
       <div class="panel-body">

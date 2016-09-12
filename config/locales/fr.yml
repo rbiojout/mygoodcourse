@@ -45,7 +45,7 @@ fr:
     abuses:
       new: 'Signaler un abus'
     comments:
-      new: 'Ajouter un commentaire'
+      new: 'Ajouter une évaluation'
     products:
       new: 'Créer un produit'
     stripe_account:
@@ -61,7 +61,7 @@ fr:
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
     comment:
-      alert_add: "Il n'y a pas encore de commentaire sur ce produit, soyez le premier à laisser un commentaire!"
+      alert_add: "Il n'y a pas encore d'évaluation sur ce produit, soyez le premier à laisser une évaluation!"
     customer:
       info_email_validation: 'Compte créé. Vous y êtes presque! Pour activer votre compte, un email de confirmation a été envoyé à: %{email}'
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
@@ -117,8 +117,8 @@ fr:
         other: 'catégories'
         all: 'Toutes catégories'
       comment:
-        one: 'commentaire'
-        other: 'commentaires'
+        one: 'évaluation'
+        other: 'évaluations'
       country:
         one: 'pays'
         other: 'pays'
@@ -174,9 +174,9 @@ fr:
         position: 'Position'
       comment:
         title: 'Titre'
-        place_title: 'Titre ou résumé de votre commentaire (requis)'
+        place_title: 'Titre ou résumé de votre évaluation (requis)'
         description: 'Description'
-        place_description: 'Renseignez le détail de votre commentaire (requis)'
+        place_description: 'Renseignez le détail de votre évaluation (requis)'
         score: 'Score'
         not_rated: 'Non évalué'
       country:
@@ -273,8 +273,9 @@ fr:
         hint_active: 'Activez ou non votre produit. Les produits non actifs ne sont pas présents dans les recherches.'
         price: 'Prix'
         hint_price: 'Valorisez votre travail correctement'
-        nb_comments: 'Nombre de commentaires'
-        score_comments: 'Score moyen des commentaires'
+        nb_comments: "Nombre d'évaluations"
+        score_comments: 'Score moyen des évaluations'
+        counter_cache: 'Nb Visites'
         attachments: 'Fichiers'
         categories: 'Catégories'
         levels: 'Niveaux'
@@ -320,11 +321,20 @@ fr:
     flash_create_message: 'Création avec succès'
     flash_delete_message: 'Suppression avec succès'
 
+  abuse_mailer:
+    received:
+      subject: "Votre signalement d'abus a été pris en compte"
+    accepted:
+      subject: "Votre signalement d'abus a été accepté"
+    rejected:
+      subject: "Votre signalement d'abus a été rejeté"
   order_mailer:
     received:
       subject: 'Confirmation de commande'
-      accepted: 'Commande Acceptée'
-      rejected: 'Commande Rejetée'
+    accepted:
+      subject: 'Commande Acceptée'
+    rejected:
+      subject: 'Commande Rejetée'
 
   time:
     formats:
