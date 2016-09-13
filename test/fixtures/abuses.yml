@@ -4,6 +4,7 @@ comment_one:
   description: CommentOne
   customer: one
   abusable: one(Comment)
+  status: created
 comment_two:
   description: CommentTwo
   customer: two

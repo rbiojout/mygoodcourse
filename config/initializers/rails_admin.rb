@@ -2,6 +2,11 @@ require Rails.root.join('lib','rails_admin','custom_actions.rb')
 require Rails.root.join('lib','rails_admin','custom_dashboards.rb')
 
 
+# state engine
+# refer to http://dmitrypol.github.io/2016/01/01/rails-admin-state-machine.html
+require Rails.root.join('lib','rails_admin','state_engine_actions.rb')
+
+
 RailsAdmin.config do |config|
 
   config.main_app_name = ["MyGoodCourse", "BackOffice"]
@@ -51,6 +56,12 @@ RailsAdmin.config do |config|
     sort_for_cycle
     sort_for_family
 
+    # state engine
+    receive_abuse
+    accept_abuse
+    reject_abuse
+    cancel_abuse
+
 
     show_in_app
 
@@ -58,6 +69,15 @@ RailsAdmin.config do |config|
     ## With an audit adapter, you can add:
     # history_index
     # history_show
+  end
+
+  config.model "Abuse" do
+    configure :status do
+      read_only true
+    end
+    list do
+      scopes    [nil, 'created', 'received', 'accepted', 'rejected', 'corrected']
+    end
   end
 
   config.model "Article" do

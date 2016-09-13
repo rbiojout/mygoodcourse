@@ -24,3 +24,36 @@ en:
         menu: "Statistiques Utilisateurs"
         breadcrumb: "Statistiques Utilisateurs"
         done: "Statistiques Utilisateurs OK"
+      ##### custom actions for state engine
+      receive: &receive
+        title: "Receive %{model_label} '%{object_label}'"
+        menu: "Receive"
+        breadcrumb: "receive"
+        link: "receive '%{object_label}'"
+        done: "received"
+      receive_abuse:
+        <<: *receive
+      accept: &accept
+        title: "Accept %{model_label} '%{object_label}'"
+        menu: "Accept"
+        breadcrumb: "accept"
+        link: "accept '%{object_label}'"
+        done: "accepted"
+      accept_abuse:
+        <<: *accept
+      reject: &reject
+        title: "Reject %{model_label} '%{object_label}'"
+        menu: "Reject"
+        breadcrumb: "reject"
+        link: "reject '%{object_label}'"
+        done: "rejected"
+      reject_abuse:
+        <<: *reject
+      cancel: &cancel
+        title: "Cancel %{model_label} '%{object_label}'"
+        menu: "Cancel"
+        breadcrumb: "cancel"
+        link: "cancel '%{object_label}'"
+        done: "canceled"
+      cancel_abuse:
+        <<: *cancel

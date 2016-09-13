@@ -74,8 +74,37 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
   # test custom dashboards
   ####################################
   test "stats users dashboard" do
+    login_as_admin
+
     get "/admin/stats_users"
-    assert_response 302
+    assert_response :success
+  end
+
+  ####################################
+  # test machine engine
+  ####################################
+  test "test state abuse" do
+    login_as_admin
+
+    get "/admin/abuse"
+    assert_response :success
+
+    abuse = abuses(:comment_one)
+    get "/admin/abuse/#{abuse.id}/receive_abuse"
+    assert assigns(:object).received?
+
+    get "/admin/abuse/#{abuse.id}/accept_abuse"
+    assert assigns(:object).accepted?
+
+    get "/admin/abuse/#{abuse.id}/cancel_abuse"
+    assert assigns(:object).created?
+
+    get "/admin/abuse/#{abuse.id}/receive_abuse"
+    assert assigns(:object).received?
+
+    get "/admin/abuse/#{abuse.id}/reject_abuse"
+    assert assigns(:object).rejected?
+
   end
 
   private

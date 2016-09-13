@@ -68,6 +68,9 @@ gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.
 # better work for nested forms the ajax is explains in the project page
 gem 'cocoon'
 
+# state engine for the models
+# see https://github.com/aasm/aasm
+gem 'aasm'
 
 # add some CSS
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
