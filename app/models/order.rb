@@ -10,14 +10,26 @@ class Order < ActiveRecord::Base
 
   # Require dependencies
   require_dependency 'order/states'
-  require_dependency 'order/actions'
   require_dependency 'order/billing'
   require_dependency 'order/stripe_order'
   #require_dependency 'shoppe/order/delivery'
 
 
-  # the customer linked to the order
+  # The Employee who accepted the order
+  #
+  # @return [Customer]
   belongs_to :customer
+
+  # The Employee who accepted the order
+  #
+  # @return [Employee]
+  belongs_to :accepter, class_name: 'Employee', foreign_key: 'accepted_by'
+
+  # The Employee who rejected the order
+  #
+  # @return [Employee]
+  belongs_to :rejecter, class_name: 'Employee', foreign_key: 'rejected_by'
+
 
   # All items which make up this order
   has_many :order_items, dependent: :destroy
@@ -38,6 +50,14 @@ class Order < ActiveRecord::Base
   # This search the orders with a state 'accepted' for a particular customer_id
   # the collection is ordered by creation date descending
   scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: %w(received accepted)).order(:created_at => :desc)}
+
+  # All orders which have been accepted
+  scope :accepted, -> { where(status: 'accepted') }
+
+  # All orders which have been rejected
+  scope :rejected, -> { where(status: 'rejected') }
+
+
 
   # The order number
   #

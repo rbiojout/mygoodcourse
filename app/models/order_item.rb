@@ -32,7 +32,7 @@ class OrderItem < ActiveRecord::Base
 
   # Before saving an order item which belongs to a received order, cache the pricing again if appropriate.
   before_save do
-    if order.received? && (price_changed? )
+    if (price_changed? )
       cache_pricing
     end
   end

@@ -8,7 +8,7 @@ class OrderTest < ActiveSupport::TestCase
   test 'a completely clean new order' do
     #order = orders(:one)
     order = Order.create
-    assert_equal true, order.building?
+    assert_equal true, order.created?
     assert_equal false, order.received?
     assert_equal true, order.empty?
     assert_equal 0, order.total_items

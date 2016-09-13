@@ -6,7 +6,12 @@
     Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>');
 </script>
 
-<h3><%= t('dialog.shop.checkout') %></h3>
+<h1><%= t('dialog.shop.checkout') %></h1>
+
+<%= current_order.status if Rails.env.development? %>
+<%= current_order.total if Rails.env.development? %>
+<%= current_order.amount_paid if Rails.env.development? %>
+
 
 <div class="row">
 

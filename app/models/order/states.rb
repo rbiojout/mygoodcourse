@@ -1,64 +1,173 @@
-  class Order < ActiveRecord::Base
-    # An array of all the available statuses for an order
-    STATUSES = %w(building confirming received accepted rejected).freeze
+class Order < ActiveRecord::Base
 
-    # The Shoppe::User who accepted the order
-    #
-    # @return [Shoppe::User]
-    belongs_to :accepter, class_name: 'Customer', foreign_key: 'accepted_by'
+  STATUSES = %w(created confirming received accepted rejected).freeze
 
-    # The Shoppe::User who rejected the order
-    #
-    # @return [Shoppe::User]
-    belongs_to :rejecter, class_name: 'Customer', foreign_key: 'rejected_by'
+  # State Machine
+  include AASM
 
-    # Validations
-    validates :status, inclusion: { in: STATUSES }
+  aasm :column => 'status' do
+    state :created, :initial => true
+    state :confirmed, :received, :accepted, :rejected
 
-    # Set the status to building if we don't have a status
-    after_initialize { self.status = STATUSES.first if status.blank? }
-
-    # All orders which have been received
-    scope :received, -> { where('received_at is not null') }
-
-    # All orders which are currently pending acceptance/rejection
-    scope :pending, -> { where(status: 'received') }
-
-    # All ordered ordered by their ID desending
-    scope :ordered, -> { order(id: :desc) }
-
-    # Is this order still being built by the user_mailer?
-    #
-    # @return [Boolean]
-    def building?
-      status == 'building'
+    event :confirm do
+      before do
+        logger.debug('Preparing to confirm')
+      end
+      transitions :from => :created, :to => :confirmed
     end
 
-    # Is this order in the user_mailer confirmation step?
-    #
-    # @return [Boolean]
-    def confirming?
-      status == 'confirming'
+    event :receive do
+      transitions :from => :confirmed, :to => :received, :after => :runConfirm
     end
 
-    # Has this order been rejected?
-    #
-    # @return [Boolean]
-    def rejected?
-      !!rejected_at
+    event :accept do
+      transitions :from => :received, :to => :accepted, :guard => :confirmingOk?, :after => :runAccept
     end
 
-    # Has this order been accepted?
-    #
-    # @return [Boolean]
-    def accepted?
-      !!accepted_at
+    event :reject do
+      transitions :from => :received, :to => :rejected, :after => :runReject
     end
 
-    # Has the order been received?
-    #
-    # @return [Boolean]
-    def received?
-      !!received_at?
+    event :reset do
+      transitions :from => [:rejected, :received], :to => :received
+    end
+
+
+  end
+
+  def confirmingOk?
+    # don't consider confirmation if total amount is null
+    if (total == 0)
+      true
+    elsif self.stripe_customer_token && total > 0.0
+      not_charged_to_sellers = 0.0
+      ref_charges = ""
+      # group by seller
+      group_by_seller = self.order_items.group_by{ |d| Product.find(d[:product_id])[:customer_id]}
+      begin
+        # we collect for each seller
+        group_by_seller.each do |key, value|
+          # take the corresponding Stripe Account
+          stripe_account_seller = value.first.product.customer.stripe_account
+
+          transfer_to_stripe(value)
+          true
+        end
+
+          #payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
+          #rescue ::Stripe::CardError
+      rescue => e
+        logger.debug("----------- error #{e}")
+        raise Errors::PaymentDeclined, 'Payment was declined by the payment processor.'
+        false
+      end
     end
   end
+
+  def runConfirm
+    self.received_at = Time.now
+    save!
+    order_items.each(&:confirm!)
+
+    # Send an email to the customer
+    deliver_received_order_email
+  end
+
+  def runAccept
+    self.accepted_at = Time.now
+    order_items.each(&:accept!)
+    deliver_accepted_order_email
+  end
+
+  def runReject
+    self.rejected_at = Time.now
+    order_items.each(&:reject!)
+    deliver_rejected_order_email
+  end
+
+  def deliver_accepted_order_email
+    OrderMailer.accepted(self).deliver_now
+  end
+
+  def deliver_rejected_order_email
+    OrderMailer.rejected(self).deliver_now
+  end
+
+  def deliver_received_order_email
+    OrderMailer.received(self).deliver_now
+  end
+
+  private
+
+  def transfer_to_stripe(regrouped_orders_items)
+    # we prepare the sum of all orders_item
+    amout_total = 0.0
+    application_fee_total = 0.0
+    share_seller = 0.0
+    regrouped_orders_items.each do |roi|
+      amout_total += roi.unit_price
+      application_fee_total += roi.application_fee
+      share_seller += roi.unit_cost_price
+    end
+
+    #@TODO if the total amount is 0.0 we don't charge with Stripe
+
+
+    # take the corresponding Stripe Account
+    stripe_account_seller = regrouped_orders_items.first.product.customer.stripe_account
+    if (stripe_account_seller.nil? && amout_total > 0.0)
+      #notes += "StripeAccount null for some items."
+      #we charge all to the platform
+      # @TODO handle exception to continue treat other charges
+
+      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, capture: true }, Rails.application.secrets.stripe_secret_key)
+      # we log the reference in the lines or orders_items
+      regrouped_orders_items.each do |roi|
+        roi.method = "Stripe"
+        # we keep track of the needed CashOut
+        roi.status = charge.paid? ? "tocashout":"refused"
+        roi.processing_reference = charge.id
+      end
+      # we log at the order level
+      if charge.paid
+        self.amount_paid += amout_total
+        self.save
+# @TODO add method stripe in the list of methods for payment
+# @TODO add a split of payments to the owner and to the platform
+# if the user_mailer is managed, send money else keep and schedule when possible
+        payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
+
+      else
+        notes += "Some items where not accepted by the Bank."
+      end
+
+
+    elsif amout_total > 0.0
+      # we charge to the seller
+      # @TODO if the OAuth is no more valid we must handle this and use the platform
+      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round, capture: true }, Rails.application.secrets.stripe_secret_key)
+      # we log the reference in the lines or orders_items
+      regrouped_orders_items.each do |roi|
+        roi.method = "Stripe"
+        roi.status = charge.paid? ? "accepted":"refused"
+        roi.processing_reference = charge.id
+      end
+      # we log at the order level
+      if charge.paid
+        self.amount_paid += amout_total
+        self.save
+# @TODO add method stripe in the list of methods for payment
+# @TODO add a split of payments to the owner and to the platform
+# if the user_mailer is managed, send money else keep and schedule when possible
+        begin
+          payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
+        rescue => e
+          logger.debug("Problem saving payment. #{e.message}")
+        end
+
+      else
+        notes += "Some items where not accepted by the Bank."
+      end
+    end
+  end
+end

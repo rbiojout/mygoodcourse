@@ -48,7 +48,8 @@ class OrderItemTest < ActiveSupport::TestCase
     # get a user to mark the order as ok
     user = customers(:JoeBloggs)
     assert @order.confirm!
-    assert @order.accept!(user)
+    assert @order.receive!
+    assert @order.reject!
     assert @order.reload
 
     # the item we're going to use to test with

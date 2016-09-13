@@ -63,13 +63,13 @@ module ApplicationHelper
 
   # helper to have a common way to present status for orders
   # the list of status are in Order.STATUSES
-  # STATUSES = %w(building confirming received accepted rejected).freeze
+  # STATUSES = %w(created confirming received accepted rejected).freeze
   # we need to have a common way to present without any i18n issue
   def nice_status(status)
     status ||= ''
     css_class = "badge"
     case status
-      when "building"
+      when "created"
         css_class = "badge badge-warning"
       when "confirming"
         css_class = "badge badge-warning"

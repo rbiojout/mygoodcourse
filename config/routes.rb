@@ -28,7 +28,6 @@ Rails.application.routes.draw do
   # Checkout
   #
   match 'checkout' => 'orders#checkout', :as => 'checkout', :via => [:get, :patch]
-  match 'checkout/pay' => 'orders#payment', :as => 'checkout_payment', :via => [:get, :patch]
   match 'checkout/confirm' => 'orders#confirmation', :as => 'checkout_confirmation', :via => [:get, :patch]
 
   resources :levels do
