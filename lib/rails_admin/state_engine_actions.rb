@@ -21,7 +21,13 @@ module RailsAdmin
         end
       end
 
-      class ReceiveAbuse < StateEngineActions
+      class AbuseStateEngineActions < StateEngineActions
+        register_instance_option :only do
+          Abuse
+        end
+      end
+
+      class ReceiveAbuse < AbuseStateEngineActions
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :only do
           Abuse
@@ -44,7 +50,7 @@ module RailsAdmin
           end
         end
       end
-      class AcceptAbuse < StateEngineActions
+      class AcceptAbuse < AbuseStateEngineActions
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :only do
           Abuse
@@ -67,7 +73,7 @@ module RailsAdmin
           end
         end
       end
-      class RejectAbuse < StateEngineActions
+      class RejectAbuse < AbuseStateEngineActions
         register_instance_option :only do
           Abuse
         end
@@ -90,7 +96,7 @@ module RailsAdmin
           end
         end
       end
-      class CancelAbuse < StateEngineActions
+      class CancelAbuse < AbuseStateEngineActions
         register_instance_option :only do
           Abuse
         end

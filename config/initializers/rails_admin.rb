@@ -57,7 +57,9 @@ RailsAdmin.config do |config|
     sort_for_family
 
     # state engine
-    receive_abuse
+    receive_abuse do
+      only [Abuse] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
+    end
     accept_abuse
     reject_abuse
     cancel_abuse
