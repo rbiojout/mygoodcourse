@@ -21,20 +21,14 @@ module RailsAdmin
         end
       end
 
-      class AbuseStateEngineActions < StateEngineActions
-        register_instance_option :only do
-          Abuse
-        end
-      end
-
-      class ReceiveAbuse < AbuseStateEngineActions
+      class ReceiveAbuse < StateEngineActions
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :only do
           Abuse
         end
         register_instance_option :visible? do
           begin
-            bindings[:object].may_receive?
+            bindings[:object].may_receive? && bindings[:object].class == Abuse
           rescue
             false
           end
@@ -50,14 +44,14 @@ module RailsAdmin
           end
         end
       end
-      class AcceptAbuse < AbuseStateEngineActions
+      class AcceptAbuse < StateEngineActions
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :only do
           Abuse
         end
         register_instance_option :visible? do
           begin
-            bindings[:object].may_accept?
+            bindings[:object].may_accept? && bindings[:object].class == Abuse
           rescue
             false
           end
@@ -73,14 +67,14 @@ module RailsAdmin
           end
         end
       end
-      class RejectAbuse < AbuseStateEngineActions
+      class RejectAbuse < StateEngineActions
         register_instance_option :only do
           Abuse
         end
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-            bindings[:object].may_reject?
+            bindings[:object].may_reject? && bindings[:object].class == Abuse
           rescue
             false
           end
@@ -96,14 +90,14 @@ module RailsAdmin
           end
         end
       end
-      class CancelAbuse < AbuseStateEngineActions
+      class CancelAbuse < StateEngineActions
         register_instance_option :only do
           Abuse
         end
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-            bindings[:object].may_cancel?
+            bindings[:object].may_cancel? && bindings[:object].class == Abuse
           rescue
             false
           end

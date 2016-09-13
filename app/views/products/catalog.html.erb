@@ -14,11 +14,9 @@
     <%= text_field_tag 'query' %>
     <%= button_tag t('page.search'), class: 'btn btn-primary btn-sm' %>
     <% unless (session[:query_store]).nil? %>
-        <%= button_tag :style => 'border:none;' do %>
-            <span class="label label-default">
+        <%= button_tag :class => 'btn btn-success' do %>
               <%= session[:query_store] %>
               <i class="fa fa-times"></i>
-            </span>
         <% end %>
     <% end %>
 <% end %>

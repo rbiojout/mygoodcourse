@@ -41,7 +41,7 @@ class ProductsController < ApplicationController
         flash.now[:alert] = "#{t('dialog.method.no_result_found')} (#{query_store})"
         query_store = nil
       else
-        flash.now[:notice] = "#{t('dialog.method.searching_for')}: #{query_store}"
+        #flash.now[:notice] = "#{t('dialog.method.searching_for')}: #{query_store}"
       end
     end
 
