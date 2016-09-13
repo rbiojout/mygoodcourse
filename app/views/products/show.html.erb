@@ -175,6 +175,15 @@
   </div>
 </div>
 
+<div class="row">
+  <% associated_products = Product.associated_products(@product) %>
+  <h3><%= t('activerecord.attributes.product.similar') unless associated_products.count==0 %></h3>
+
+  <% associated_products.each do |associated| %>
+    <%= render(partial: 'products/product', locals: {:product => associated}) %>
+  <% end %>
+</div>
+
 
 
 

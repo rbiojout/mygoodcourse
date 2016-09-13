@@ -279,6 +279,7 @@ fr:
         attachments: 'Fichiers'
         categories: 'Catégories'
         levels: 'Niveaux'
+        similar: 'Produits recommandés'
 
     errors:
       models:

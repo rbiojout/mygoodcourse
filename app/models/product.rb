@@ -102,11 +102,19 @@ class Product < ActiveRecord::Base
   scope :for_family, -> (family_id) {joins(:families).where(families: {id: family_id}).distinct}
   scope :for_category, -> (category_id) {joins(:categories).where(categories: {id: category_id}).distinct}
 
+  # associated product for a given product
+  # based on the categories and levels
+  # sor by the score and updated date
+  def self.associated_products(product)
+    Product.joins(:categories).where(categories: {id: product.categories}).joins(:levels).where(levels: {id: product.levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: product.id).limit(9)
+  end
 
+  # count the active products for a list of families
   def self.count_active_for_family(family_id)
     Product.joins(:families).where(families: {id: family_id}).where(active: true).distinct.count
   end
 
+  # count the active products for a list of families filtered by the cycles and levels
   def self.count_active_filtered_for_family(family_id, cycle_id, level_id)
     # use low level if present
     unless level_id.nil?
@@ -122,6 +130,7 @@ class Product < ActiveRecord::Base
     end
   end
 
+  # count the
   def self.count_active_for_category(category_id)
     Product.joins(:categories).where(categories: {id: category_id}).where(active: true).distinct.count
   end
