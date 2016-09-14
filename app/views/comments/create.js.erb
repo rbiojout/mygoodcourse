@@ -4,12 +4,15 @@ $('#comment-form').after("<%= j render partial: 'comments/comment', locals: {com
 $('#comment-form').hide();
 
 
-// we update the associated informations
+// we update the associated informations for the total
 $('#nb_comments').html("<%= @comment.product.nb_comments %>");
 $('#product_score').html("<%= j render partial: 'comments/show_stars', locals: {:score => @comment.product.score_comments } %>");
 
+// we refresh also the view of the customer linked to the product
+$('#customer_presentation_<%=@comment.product.customer_id.to_s%>').html("<%= j render :partial => 'customers/customer', :locals => {customer: @comment.product.customer, :withcols => 'false'} %>");
 
 // close the modal
+// REMOVED no more use of the modal
 // $('#app_dialog').modal_success();
 
 // first we need to hide before to show

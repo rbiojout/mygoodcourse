@@ -15,6 +15,7 @@ class OrderItemTest < ActiveSupport::TestCase
     assert new_item = @order.order_items.add_item(product2)
     assert_equal true, new_item.is_a?(OrderItem)
     assert_equal product2, new_item.product
+    assert_equal product2.price, new_item.price
   end
 
 
@@ -56,6 +57,29 @@ class OrderItemTest < ActiveSupport::TestCase
     item = @order.order_items.first
 
     assert item.save!
+  end
+
+  test 'should be associated to orders' do
+    assert_not_empty OrderItem.find_ordered_by_customer(customers(:one).id)
+    #@TODO verify the status
+  end
+
+  test 'bought by customer' do
+    # we need an OrderItem with a status "accepted"
+    @item.status = "accepted"
+    @item.save!
+    # we need a customer to have bought the product
+    customer = customers(:one)
+    @order.customer = customer
+    @order.save!
+    assert_not_empty OrderItem.find_bought_by_customer(customer.id)
+    # we must have the product available for the customer
+    assert_not_empty Product.find_bought_by_customer(customer.id)
+  end
+
+  test 'sold by customer' do
+    customer = customers(:one)
+    assert_not_empty OrderItem.find_sold_by_customer(customer.id)
   end
 
 

@@ -11,6 +11,15 @@ two:
   token: two
   customer: two
 
+buyer_one_received:
+  token: buyer_one_received
+  customer: buyer_one
+  status: 'received'
+
+buyer_one_accepted:
+  token: buyer_one_accepted
+  customer: buyer_one
+  status: 'accepted'
 
 rejected:
   token: one

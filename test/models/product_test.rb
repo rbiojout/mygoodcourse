@@ -75,5 +75,26 @@ class ProductTest < ActiveSupport::TestCase
     assert_equal 0, Product.count_active_filtered_for_category(categories(:F1C1), nil, levels(:C2L1))
   end
 
+  test 'should be associated to orders' do
+    assert_not_empty Product.find_ordered_by_customer(customers(:one).id)
+    #@TODO verify the status
+  end
+
+  test 'should be associated to accepted order' do
+    assert_not_empty Product.find_bought_by_customer(customers(:one).id)
+    #@TODO verify the status
+  end
+
+  test 'should be confirm owned product' do
+    # product
+    product = products(:free_from_seller_one)
+    customer = customers(:buyer_one)
+    assert product.is_bought_by_customer(customer.id)
+
+    # negative
+    product = products(:two_from_seller_one)
+    assert !product.is_bought_by_customer(customer.id)
+  end
+
 
 end

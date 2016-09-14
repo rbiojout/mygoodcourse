@@ -104,9 +104,10 @@ class Product < ActiveRecord::Base
 
   # associated product for a given product
   # based on the categories and levels
-  # sor by the score and updated date
+  # sort by the score and updated date
+  # limit to 3x2 to have a display OK in both sizes of devices
   def self.associated_products(product)
-    Product.joins(:categories).where(categories: {id: product.categories}).joins(:levels).where(levels: {id: product.levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: product.id).limit(9)
+    Product.joins(:categories).where(categories: {id: product.categories}).joins(:levels).where(levels: {id: product.levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: product.id).limit(6)
   end
 
   # count the active products for a list of families
@@ -130,11 +131,12 @@ class Product < ActiveRecord::Base
     end
   end
 
-  # count the
+  # count the active products based on a list of categories
   def self.count_active_for_category(category_id)
     Product.joins(:categories).where(categories: {id: category_id}).where(active: true).distinct.count
   end
 
+  # count the number of active products based on a list of categories filtered by cycles and levels
   def self.count_active_filtered_for_category(category_id, cycle_id, level_id)
     # use low level if present
     unless level_id.nil?
@@ -272,7 +274,17 @@ class Product < ActiveRecord::Base
   # @return [Collection]
   def self.find_ordered_by_customer(customer_id, status = 'accepted')
     status = Order::STATUSES.include?(status) ? status : 'accepted'
-    joins(:orders).where(orders: {status: status, customer_id: customer_id}).distinct.order(created_at: 'desc')
+    Product.joins(:orders).where(orders: {status: status, customer_id: customer_id}).distinct.order(created_at: 'desc')
+    #Product.joins(:orders).where(orders: {status: status, customer_id: 4})
+  end
+
+  def self.find_bought_by_customer(customer_id)
+    Product.joins(:orders).where(orders: {status: 'accepted', customer_id: customer_id}).distinct.order(created_at: 'desc')
+  end
+
+  def is_bought_by_customer(customer_id)
+    #Product.joins(:orders).where(orders: {status: 'accepted', customer_id: customer_id}).distinct.order(created_at: 'desc')
+    Product.joins(:orders).where(orders: {status: 'accepted', customer_id: customer_id}).joins(:order_items).where(order_items: {product_id: self.id}).count > 0
   end
 
   # return the URL of the file corresponding to the preview prepared
@@ -332,6 +344,7 @@ class Product < ActiveRecord::Base
     end
   end
 
+
   def candownload(customer)
     false
     unless customer.nil?
@@ -344,7 +357,7 @@ class Product < ActiveRecord::Base
       #  true
       else
         # we need to find a valid order paid
-        OrderItem.find_OK_product_customer(customer.id, self, 'accepted').count > 0
+        is_bought_by_customer(customer.id)
       end
     end
   end
@@ -355,7 +368,7 @@ class Product < ActiveRecord::Base
       # owner can not put comment
       if (self.customer.id != customer.id)
         # we need to find a valid order paid
-        if OrderItem.find_OK_product_customer(customer.id, self, 'accepted').count > 0
+        if is_bought_by_customer(customer.id)
           # only one comment per user per product
           if Comment.find_by_product_customer(self.id, self.customer.id).count==0
             true
@@ -365,6 +378,9 @@ class Product < ActiveRecord::Base
     end
   end
 
+  #####
+  # common method to access quickly
+  #####
 
   # return the nbpages of the file corresponding to the attachment
   # in case of problem, returns 0

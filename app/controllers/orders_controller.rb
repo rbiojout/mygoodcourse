@@ -8,7 +8,7 @@ class OrdersController < ApplicationController
   # GET /myorders
   def myorders
     @orders = Order.accepted_for_customer(current_customer.id).order( sort_column + " " + sort_direction)
-    @products = Product.find_ordered_by_customer(current_customer.id)
+    @products = Product.find_bought_by_customer(current_customer.id)
   end
 
   # GET /orders/1

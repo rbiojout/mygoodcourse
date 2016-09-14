@@ -19,7 +19,7 @@
     <div id="product_actions">
       <% if customer_signed_in? && current_customer.own_product(@product) %>
           <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
-      <% else %>
+      <% elsif (!customer_signed_in? || (customer_signed_in? && !@product.is_bought_by_customer(current_customer.id))) %>
           <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <small><%= t('dialog.shop.explain_add') %></small>
       <% end %>
@@ -137,8 +137,9 @@
               <% else %>
                 <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
               <% end %>
-          <% elsif !current_customer.own_product(@product) %>
-          <!-- product is not ordered by the customer -->
+
+          <% elsif (!current_customer.own_product(@product) && !@product.is_bought_by_customer(current_customer.id))  %>
+          <!-- product is not owned nor ordered by the customer -->
               <% if @comments.count==0 %>
                   <!-- add alert with call action to add to basket -->
                   <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
@@ -146,6 +147,7 @@
                   <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %>
               <% end %>
           <% end %>
+      <!-- customer not signed -->
       <% else %>
           <!-- we alert for empty comments -->
           <% if @comments.count==0 %>
@@ -175,15 +177,17 @@
   </div>
 </div>
 
+<!--- list of associated products --->
 <div class="row">
   <% associated_products = Product.associated_products(@product) %>
-  <h3><%= t('activerecord.attributes.product.similar') unless associated_products.count==0 %></h3>
-
+  <div class="col-xs-12">
+    <h3><%= t('activerecord.attributes.product.similar') unless associated_products.count==0 %></h3>
+  </div>
   <% associated_products.each do |associated| %>
     <%= render(partial: 'products/product', locals: {:product => associated}) %>
   <% end %>
 </div>
-
+<!--- end list of associated products --->
 
 
 

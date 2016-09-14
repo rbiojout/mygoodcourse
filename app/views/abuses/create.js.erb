@@ -4,7 +4,7 @@
 $('#app_dialog').modal_success();
 
 
-$('#app_dialog').on('hidden.bs.modal', function () {
+$('#app_dialog').on('hidden.bs.modal', function (event) {
 // first we need to hide before to show
     $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').focus();
     $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').hide();

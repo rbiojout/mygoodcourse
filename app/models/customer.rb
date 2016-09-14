@@ -101,7 +101,6 @@ class Customer < ActiveRecord::Base
   end
   # Unwishs a product.
   def unwish(product)
-    logger.debug("@@@@@ #{product} #{wish_lists.find_by(product: product)}")
     wish_lists.find_by(product: product).destroy if wishing?(product)
   end
   # Returns true if the current customer has the product in his wish list.

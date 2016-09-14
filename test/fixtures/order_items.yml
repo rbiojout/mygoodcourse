@@ -14,6 +14,30 @@ two:
   tax_amount: 9.99
   order: one
 
+buyer_one_received_free:
+  product: free_from_seller_one
+  price: 0.00
+  status: received
+  order: buyer_one_received
+
+buyer_one_received_one:
+  product: one_from_seller_one
+  price: 5.00
+  status: received
+  order: buyer_one_received
+
+buyer_one_accepted_free:
+  product: free_from_seller_one
+  price: 0.00
+  status: received
+  order: buyer_one_accepted
+
+buyer_one_accepted_one:
+  product: one_from_seller_one
+  price: 5.00
+  status: received
+  order: buyer_one_accepted
+
 rejected:
   product: product_with_order_rejected
   price: 9.99

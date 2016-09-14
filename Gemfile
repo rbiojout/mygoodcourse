@@ -4,44 +4,44 @@ source 'https://rubygems.org'
 ruby '2.3.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2'
+gem 'rails'
 
-gem 'rails-i18n', '~> 4.0.0' # For 4.0.x
+gem 'rails-i18n'
 
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg'
 # add some search with PostGres
-gem 'pg_search', '~> 1.0.6'
+gem 'pg_search'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
-gem 'uglifier', '>= 1.3.0'
+gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # gem 'haml'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.1.1'
+gem 'jquery-rails'
 
 # add some additional jquery
-gem 'jquery-ui-rails', '~> 5.0.5'
+gem 'jquery-ui-rails'
 
 # to solve problems with tough on ios
 gem 'touchpunch-rails'
 
 # to solve reloading of pages
-gem 'jquery-turbolinks', '~> 2.1.0'
+gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.0.1'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.0'
+gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
-gem 'sdoc', '~> 0.4.0', group: :doc
+gem 'sdoc', group: :doc
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
@@ -64,7 +64,7 @@ gem 'acts_as_list'
 gem 'impressionist'
 
 # we want slugs for URL instead of numbers
-gem 'friendly_id', '~> 5.1.0' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
+gem 'friendly_id' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
 
 # better work for nested forms the ajax is explains in the project page
 gem 'cocoon'
@@ -78,7 +78,7 @@ gem 'aasm'
 gem 'autoprefixer-rails'
 gem 'bootstrap-sass'
 # add extra icon fonts
-gem 'font-awesome-sass', '~> 4.2.0'
+gem 'font-awesome-sass'
 
 # add a WISIWYG HTML editor for bootstrap
 # gem 'bootstrap-wysihtml5-rails'
@@ -139,7 +139,7 @@ gem 'rails_admin'
 group :production do
   gem 'rails_12factor'
   gem 'puma'
-  #gem 'tunemygc'
+  gem 'tunemygc'
 end
 
 group :test do
@@ -157,7 +157,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
@@ -166,10 +166,12 @@ group :development do
   gem "better_errors"
   gem "binding_of_caller"
   gem 'meta_request'
+  gem 'quiet_assets'
 
   # get UML
   gem 'railroady'
 
+  # look at https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   # memory usage
   gem 'derailed_benchmarks'
 

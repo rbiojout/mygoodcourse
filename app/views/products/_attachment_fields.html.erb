@@ -4,6 +4,7 @@
       <div class="thumbnail" >
         <%= image_tag "empty_file.png", class: 'img-responsive panel-image-product' %>
         <div class="caption caption-file">
+            <b>(Format: PDF)</b>
             <%= f.input :file, as: :attachment_preview %>
             <%= f.input :file_cache, as: :hidden  %>
             <!--- only when remove_ok flag is received we activate the link to remove --->
