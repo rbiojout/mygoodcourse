@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160906180000) do
+ActiveRecord::Schema.define(version: 20160914153219) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -338,8 +338,8 @@ ActiveRecord::Schema.define(version: 20160906180000) do
     t.datetime "created_at",                                             null: false
     t.datetime "updated_at",                                             null: false
     t.integer  "customer_id"
-    t.integer  "nb_comments"
-    t.decimal  "score_comments"
+    t.integer  "nb_comments",                            default: 0
+    t.decimal  "score_comments",                         default: 0.0
     t.string   "slug"
     t.integer  "counter_cache",                          default: 0
   end

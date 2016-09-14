@@ -171,6 +171,9 @@ group :development do
   # get UML
   gem 'railroady'
 
+  # New relic
+  gem 'newrelic_rpm'
+
   # look at https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   # memory usage
   gem 'derailed_benchmarks'
