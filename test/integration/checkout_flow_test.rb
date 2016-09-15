@@ -6,6 +6,24 @@ require 'test_helper'
 
 class CheckoutFlowTest < ActionDispatch::IntegrationTest
 
+  # make a wrong login
+  test "wrong login" do
+    # login via https
+    https!(false)
+    get new_customer_session_path
+    assert_equal 200, status
+    hash = Devise::Encryptor.digest(Customer, "BadPassword")
+
+    # make a bad login
+    post new_customer_session_path, 'customer[email]' => customers(:buyer_one).email, 'customer[password]' => "BadPassword"
+
+    assert_equal new_customer_session_path, path
+    assert_equal I18n.t('customers.failure.invalid'), flash[:alert]
+    assert_select '.alert-danger > p', I18n.t('customers.failure.invalid')
+
+  end
+
+  # fill cart after login
   test "fill cart" do
     # login via https
     https!(false)
@@ -13,12 +31,15 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     assert_equal 200, status
     hash = Devise::Encryptor.digest(Customer, "Helloworld1*")
 
-    post new_customer_session_path, 'customer[email]' => customers(:buyer_one).email, 'customer[password]' => "Helloworld1*"
 
+    # make a good login
+    post new_customer_session_path, 'customer[email]' => customers(:buyer_one).email, 'customer[password]' => "Helloworld1*"
     follow_redirect!
+
     assert_equal 200, status
     assert_equal catalog_products_path, path
     assert_equal I18n.t('customers.sessions.signed_in'), flash[:notice]
+    assert_select '.alert-success > p', I18n.t('customers.sessions.signed_in')
 
     get '/products', :id => products(:free_from_seller_one).id
     assert_response :success
