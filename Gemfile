@@ -135,7 +135,7 @@ gem 'groupdate'
 gem 'rails_admin'
 #gem "wysiwyg-rails", "~> 1.2.7"
 
-# New relic to follow performance
+# New relic to monitor performances
 gem 'newrelic_rpm'
 
 
