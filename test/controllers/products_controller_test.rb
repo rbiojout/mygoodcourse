@@ -168,4 +168,39 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to catalog_products_path
   end
 
+  test "should see download is owner" do
+    sign_in(customers(:seller_one), scope: :customer)
+    product = products(:one_from_seller_one)
+
+    get :show, id: product, locale: I18n.default_locale
+
+    assert_select "#product_download a[href=?]", product.file_url
+  end
+
+  test "should see edit if owned" do
+    customer = customers(:seller_one)
+    sign_in(customer, scope: :customer)
+    product = products(:one_from_seller_one)
+
+    get :show, id: product, locale: I18n.default_locale
+
+    assert customer.own_product(product)
+    assert_select "#product_actions a[href=?]", edit_product_path(product)
+
+    customer = customers(:buyer_one)
+    sign_in(customer, scope: :customer)
+
+
+
+  end
+
+  test "should see add to cart is not signed" do
+    product = products(:one_from_seller_one)
+
+    get :show, id: product, locale: I18n.default_locale
+
+    assert_select "#product_actions a[href=?]", buy_product_path(product)
+    assert_select "#product_actions a[data-method=?]", :post
+  end
+
 end

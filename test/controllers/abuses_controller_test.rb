@@ -43,9 +43,11 @@ class AbusesControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    #assert_select_jquery :after, '#comment-form' do
-    #  assert_select '.hidden-xs p', @comment.description
-    #end
+
+    assert_select_jquery :html, '#alert_notice_holder' do
+      assert_select '.alert'
+      assert_select '.alert p', I18n.translate('views.flash_create_message')
+    end
 
   end
 
@@ -70,9 +72,10 @@ class AbusesControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    #assert_select_jquery :after, '#comment-form' do
-    #  assert_select '.hidden-xs p', @comment.description
-    #end
+    assert_select_jquery :html, '#alert_notice_holder' do
+      assert_select '.alert'
+      assert_select '.alert p', I18n.translate('views.flash_create_message')
+    end
 
   end
 

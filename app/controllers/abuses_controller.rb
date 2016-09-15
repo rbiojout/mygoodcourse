@@ -43,7 +43,10 @@ class AbusesController < ApplicationController
         format.html { redirect_to context_url(context), notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @abuse }
         # added
-        format.js   { @current_abuse = @abuse }
+        format.js   {
+          @current_abuse = @abuse
+          render :create, :flash => { :notice => "Yeepee!" }
+        }
       else
         format.html { render :new }
         format.json { render json: @abuse.errors, status: :unprocessable_entity }
