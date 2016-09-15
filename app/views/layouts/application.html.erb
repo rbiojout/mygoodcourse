@@ -55,18 +55,10 @@
 
   </div>
   <% if notice %>
-      <div class='alert alert-success alert-block'>
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4></h4>
-        <p><%= notice %></p>
-      </div>
+      <%= render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: notice}) %>
   <% end %>
   <% if alert %>
-      <div class="alert alert-danger alert-block">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <h4></h4>
-        <p><%= alert %></p>
-      </div>
+      <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
   <% end %>
 
   <%= yield %>
