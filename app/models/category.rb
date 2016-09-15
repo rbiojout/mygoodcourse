@@ -6,6 +6,9 @@ class Category < ActiveRecord::Base
 
   validates :name, presence: true
 
+  # categories associated to products
+  # Category.joins(:products).where(products: {:id => products})
+
   default_scope -> { order(position: :asc) }
 
   # families with products

@@ -105,9 +105,14 @@ class Product < ActiveRecord::Base
   # associated product for a given product
   # based on the categories and levels
   # sort by the score and updated date
-  # limit to 3x2 to have a display OK in both sizes of devices
-  def self.associated_products(product)
-    Product.joins(:categories).where(categories: {id: product.categories}).joins(:levels).where(levels: {id: product.levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: product.id).limit(6)
+  # limit to 4x3 to have a display OK in both sizes of devices inline with the grid system of 12
+  def self.associated_products(products)
+    categories = Category.joins(:products).where(products: {:id => products}).unscope(:order).distinct
+    levels = Level.joins(:products).where(products: {:id => products}).unscope(:order).distinct
+    #Product.joins(:categories).where(categories: {id: categories}).where.not(id: products)
+
+
+    Product.joins(:categories).where(categories: {id: categories}).joins(:levels).where(levels: {id: levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: products).limit(12)
   end
 
   # count the active products for a list of families

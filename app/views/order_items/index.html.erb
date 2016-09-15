@@ -1,7 +1,8 @@
 
-  <div class="well">
-    <%= link_to t('dialog.shop.continue_shoping'), catalog_products_path, class: "btn btn-primary" %>
-    <%= link_to t('dialog.shop.checkout'), checkout_path, class: "btn btn-success pull-right" %>
+  <div id="order_items_actions">
+    <%= link_to t('dialog.shop.continue_shoping'), catalog_products_path, class: "btn btn-primary btn-sm" %>
+    <%= link_to checkout_path, class: "btn btn-success pull-right" do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.checkout') %><% end %>
+    <br/>
   </div>
   <div class="new-orderitem"></div>
 
@@ -11,6 +12,20 @@
   <div id="order_items_index">
   <%= render(partial: "order_items/order_item", collection: @order_items) %>
   </div>
+
+
+  <!--- list of associated products --->
+  <div class="row">
+    <% associated_products = Product.associated_products(@products) %>
+    <div class="col-xs-12">
+      <h3><%= t('activerecord.attributes.product.similar') unless associated_products.count==0 %></h3>
+    </div>
+    <% associated_products.each do |associated| %>
+        <%= render(partial: 'products/product_cart', locals: {:product => associated}) %>
+    <% end %>
+  </div>
+  <!--- end list of associated products --->
+
 
 
 

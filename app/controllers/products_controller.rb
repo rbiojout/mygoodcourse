@@ -204,28 +204,10 @@ class ProductsController < ApplicationController
     # we filter at the lowest level
     @products = @products.for_level(@levels.map(&:id))
 
-    logger.debug("??? #{@levels}/#{@products}")
-
-    #logger.debug("#{@families.count}/#{@categories.count}/#{@cycles.count}/#{@levels.count}")
-
-    # add the corresponding families, categories, cycles and levels
-    #@families = Family.associated_to_cycles_levels(cycle_id, level_id, true)
-    #@categories = Category.associated_to_cycles_levels(cycle_id, level_id, true)
-    #@cycles = Cycle.associated_to_families_categories(family_id, category_id, true)
-    #@levels = Level.associated_to_families_categories(family_id, category_id, true)
-
-    #logger.debug("===> session #{session[:family_for_products_id]}/#{session[:category_for_products_id]}/#{session[:cycle_for_products_id]}/#{session[:level_for_products_id]}")
-
-    #logger.debug("===> #{sort_column} / #{sort_direction}")
+    # @TODO if after all filter in combination to the search, we should take all product and add a flash alert
     @products = @products.unscope(:order).order( sort_column + " " + sort_direction).paginate(page: params[:page], :per_page => Product.per_page)
 
-    #logger.debug("===> active products #{@products.count}")
 
-    # store values for next iteration
-    #session[:family_for_products_id] = @families.map(&:id)
-    #session[:category_for_products_id] = @categories.map(&:id)
-    #session[:cycle_for_products_id] = @cycles.map(&:id)
-    #session[:level_for_products_id] = @levels.map(&:id)
 
   end
 

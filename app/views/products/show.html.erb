@@ -144,7 +144,7 @@
                   <!-- add alert with call action to add to basket -->
                   <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
               <% else %>
-                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %>
+                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %><br/>
               <% end %>
           <% end %>
       <!-- customer not signed -->
@@ -184,7 +184,7 @@
     <h3><%= t('activerecord.attributes.product.similar') unless associated_products.count==0 %></h3>
   </div>
   <% associated_products.each do |associated| %>
-    <%= render(partial: 'products/product', locals: {:product => associated}) %>
+    <%= render(partial: 'products/product_cart', locals: {:product => associated}) %>
   <% end %>
 </div>
 <!--- end list of associated products --->

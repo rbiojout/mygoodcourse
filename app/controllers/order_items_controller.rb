@@ -8,6 +8,7 @@ class OrderItemsController < ApplicationController
   def index
     @order = current_order
     @order_items = current_order.order_items
+    @products = current_order.products
   end
 
   def show
