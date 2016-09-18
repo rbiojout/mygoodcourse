@@ -187,9 +187,7 @@
 
       <div id="catalog-products" class="row">
         <% @products.each do |product| %>
-            <% product do %>
                 <%= render(partial:'products/product', locals: {product: product}) %>
-            <% end %>
         <% end %>
 
       </div>
