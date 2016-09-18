@@ -80,7 +80,7 @@
 
 
       <!--- Family and Category --->
-      <div class="panel panel-default sidebar-menu hidden-xs">
+      <div id="selector_family_category" class="panel panel-default sidebar-menu hidden-xs">
         <div class="panel-heading">
           <h3 class="panel-title"><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h3>
         </div>
@@ -132,7 +132,7 @@
       <!--- end Family and Category --->
 
       <!--- Cycle and Level --->
-      <div class="panel panel-default sidebar-menu hidden-xs">
+      <div id="selector_cycle_level" class="panel panel-default sidebar-menu hidden-xs">
         <div class="panel-heading">
           <h3 class="panel-title"><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h3>
         </div>
@@ -187,7 +187,7 @@
 
       <div id="catalog-products" class="row">
         <% @products.each do |product| %>
-            <% cache product do %>
+            <% product do %>
                 <%= render(partial:'products/product', locals: {product: product}) %>
             <% end %>
         <% end %>
