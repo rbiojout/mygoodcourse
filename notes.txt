@@ -178,6 +178,9 @@ need to move to new region https://devcenter.heroku.com/articles/app-migration
 COOL STUFF
 https://github.com/ekremkaraca/awesome-rails
 
+MATH AJAX : use of LaTEX and MathML in the browser with Javascript
+http://docs.mathjax.org/
+
 
 
 

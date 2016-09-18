@@ -186,9 +186,11 @@
     <div class="col-xs-12 col-md-9">
 
       <div id="catalog-products" class="row">
-
-        <%= render(partial:'products/product', collection: @products) %>
-
+        <% @products.each do |product| %>
+            <% cache product do %>
+                <%= render(partial:'products/product', locals: {product: product}) %>
+            <% end %>
+        <% end %>
 
       </div>
 

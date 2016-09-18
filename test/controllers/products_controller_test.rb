@@ -200,7 +200,7 @@ class ProductsControllerTest < ActionController::TestCase
     get :show, id: product, locale: I18n.default_locale
 
     assert_select "#product_actions a[href=?]", buy_product_path(product)
-    assert_select "#product_actions a[data-method=?]", :post
+    assert_select "#product_actions a[data-method=?]", "post"
   end
 
 end
