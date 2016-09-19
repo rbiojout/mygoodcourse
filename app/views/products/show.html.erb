@@ -22,6 +22,9 @@
           <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <small><%= t('dialog.shop.explain_add') %></small>
       <% end %>
+      <% if Rails.env.development? %>
+      <%= link_to 'BUY', buy_product_path(@product), :method => :post %>
+      <% end %>
     </div>
     <!--- end list of actions --->
 

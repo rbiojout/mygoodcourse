@@ -13,11 +13,11 @@ class Order < ActiveRecord::Base
       before do
         logger.debug('Preparing to confirm')
       end
-      transitions :from => :created, :to => :confirmed
+      transitions :from => :created, :to => :confirmed, :after => :runConfirm
     end
 
     event :receive do
-      transitions :from => :confirmed, :to => :received, :after => :runConfirm
+      transitions :from => :confirmed, :to => :received, :after => :runReceive
     end
 
     event :accept do
@@ -29,7 +29,7 @@ class Order < ActiveRecord::Base
     end
 
     event :reset do
-      transitions :from => [:rejected, :received], :to => :received
+      transitions :from => [:rejected, :confirmed, :received], :to => :received, :after => :runReset
     end
 
 
@@ -58,6 +58,10 @@ class Order < ActiveRecord::Base
           #rescue ::Stripe::CardError
       rescue => e
         logger.debug("----------- error #{e}")
+
+        logger.error e.message
+        e.backtrace.each { |line| logger.error line }
+
         raise Errors::PaymentDeclined, 'Payment was declined by the payment processor.'
         false
       end
@@ -65,9 +69,16 @@ class Order < ActiveRecord::Base
   end
 
   def runConfirm
+    order_items.each do |oi|
+      oi.confirm!
+    end
+  end
+
+  def runReceive
     self.received_at = Time.now
-    save!
-    order_items.each(&:confirm!)
+    order_items.each do |oi|
+      oi.receive!
+    end
 
     # Send an email to the customer
     deliver_received_order_email
@@ -75,14 +86,20 @@ class Order < ActiveRecord::Base
 
   def runAccept
     self.accepted_at = Time.now
-    order_items.each(&:accept!)
+
     deliver_accepted_order_email
   end
 
   def runReject
     self.rejected_at = Time.now
-    order_items.each(&:reject!)
+
     deliver_rejected_order_email
+  end
+
+  def runReset
+    order_items.each do |oi|
+      oi.reset!
+    end
   end
 
   def deliver_accepted_order_email
@@ -125,8 +142,14 @@ class Order < ActiveRecord::Base
       regrouped_orders_items.each do |roi|
         roi.method = "Stripe"
         # we keep track of the needed CashOut
-        roi.status = charge.paid? ? "tocashout":"refused"
         roi.processing_reference = charge.id
+        # add the fact that we have confirmation from Stripe
+        roi.receive!
+        if charge.paid?
+          roi.accept!
+        else
+          roi.reject!
+        end
       end
       # we log at the order level
       if charge.paid
@@ -149,8 +172,14 @@ class Order < ActiveRecord::Base
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
         roi.method = "Stripe"
-        roi.status = charge.paid? ? "accepted":"refused"
         roi.processing_reference = charge.id
+        # add the fact that we have confirmation from Stripe
+        roi.receive!
+        if charge.paid
+          roi.cash_out!
+        else
+          roi.reject!
+        end
       end
       # we log at the order level
       if charge.paid

@@ -94,6 +94,7 @@ fr:
       checkout: 'Valider mon panier'
       notice_add_cart: 'Le produit a été ajouté au panier.'
       notice_pay_accepted: 'Payement accepté'
+      notice_pay_rejected: 'Payment refused'
       notice_order_accepted: 'La commande a été acceptée avec succès'
       notice_order_rejected: 'La commande a été rejetée avec succès'
       notice_orders_shiped: 'La commande a été envoyée avec succès'

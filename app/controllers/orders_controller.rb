@@ -1,13 +1,15 @@
 class OrdersController < ApplicationController
   before_action :set_order, only: [:show]
-  before_action :authenticate_customer!, only: [:checkout, :payment, :confirmation, :myorders]
+  before_action :authenticate_customer!, only: [:show, :checkout, :payment, :confirmation, :myorders]
+
+  before_action :correct_user, only: :show
 
   helper_method :sort_column, :sort_direction
 
 
   # GET /myorders
   def myorders
-    @orders = Order.accepted_for_customer(current_customer.id).order( sort_column + " " + sort_direction)
+    @orders = Order.for_customer(current_customer.id).unscope(:order).order( sort_column + " " + sort_direction)
     @products = Product.find_bought_by_customer(current_customer.id)
   end
 
@@ -100,6 +102,10 @@ class OrdersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def order_params
       params.require(:order).permit(:customer_id, :notes, order_item_attributes: [:id, :product_id, :price, :tax_rate, :tax_amount, :_destroy])
+    end
+
+    def correct_user
+      redirect_to catalog_products_path, alert: t('dialog.restricted') unless @order.nil? || @order.customer_id == current_customer.id
     end
 
     # Used for sorting the list

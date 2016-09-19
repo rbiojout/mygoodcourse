@@ -48,10 +48,12 @@ class OrderItemTest < ActiveSupport::TestCase
   test 'that changes to a order items quantity after order confirmation updates stock allocation' do
     # get a user to mark the order as ok
     user = customers(:JoeBloggs)
-    assert @order.confirm!
-    assert @order.receive!
-    assert @order.reject!
-    assert @order.reload
+    @order.confirm!
+    assert @order.confirmed?
+    @order.receive!
+    assert @order.received?
+    @order.reject!
+    assert @order.rejected?
 
     # the item we're going to use to test with
     item = @order.order_items.first

@@ -47,9 +47,13 @@ class Order < ActiveRecord::Base
   # Some methods for setting the billing & delivery addresses
   attr_accessor :save_addresses, :billing_address_id, :delivery_address_id
 
+  # This search the orders for a particular customer_id
+  # the collection is ordered by creation date descending
+  scope :for_customer, -> (customer_id) {where(:customer_id => customer_id).order(:created_at => :desc)}
+
   # This search the orders with a state 'accepted' for a particular customer_id
   # the collection is ordered by creation date descending
-  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: %w(received accepted)).order(:created_at => :desc)}
+  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: %w(accepted)).order(:created_at => :desc)}
 
   # All orders which have been accepted
   scope :accepted, -> { where(status: 'accepted') }

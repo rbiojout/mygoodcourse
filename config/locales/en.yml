@@ -95,6 +95,7 @@ en:
       add_cart: 'Add to cart'
       explain_add: "In order to access to this ressource, you need to be a member of MyGoodCourse. In case it is not already in your product list, you need to order this product. For the free ressources, you need to proceed up to the end of the order process; no paiment will be asked."
       remove_cart: 'Remove from cart'
+      empty_cart: 'Empty cart'
       continue_shoping: 'Continue shoping'
       checkout: 'Validate my cart'
       notice_add_cart: 'Product was successfully added to cart.'

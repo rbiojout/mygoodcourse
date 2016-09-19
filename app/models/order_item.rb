@@ -2,6 +2,40 @@ class OrderItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
 
+  # State Machine
+  include AASM
+
+  aasm :column => 'status' do
+    state :created, :initial => true
+    state :confirmed, :received, :accepted, :cashed_out, :rejected
+
+    event :confirm do
+      transitions :from => :created, :to => :confirmed
+    end
+
+    event :receive do
+      transitions :from => :confirmed, :to => :received
+    end
+
+    event :accept do
+      transitions :from => :received, :to => :accepted
+    end
+
+    event :cash_out do
+      transitions :from => :received, :to => :cashed_out
+    end
+
+    event :reject do
+      transitions :from => [:confirmed, :received], :to => :rejected
+    end
+
+    event :reset do
+      transitions :from => [:confirmed, :rejected, :received], :to => :confirmed
+    end
+
+
+  end
+
 
   # Recover all accepted order_items received for a particular customers buying
   # @param customer_id [int] the id for the seller
@@ -27,14 +61,6 @@ class OrderItem < ActiveRecord::Base
     status = Order::STATUSES.include?(status) ? status : 'accepted'
     joins(:order).where(orders: {status: status}).joins(:product).where(products: {customer_id: customer_id}).order(:product_id)
   end
-
-  # Before saving an order item which belongs to a received order, cache the pricing again if appropriate.
-  before_save do
-    if (price_changed? )
-      cache_pricing
-    end
-  end
-
 
   # This allows you to add a product to the scoped order. For example Order.first.order_items.add_product(...).
   # This will either increase the quantity of the value in the order or create a new item if one does not
@@ -146,31 +172,5 @@ class OrderItem < ActiveRecord::Base
   def total_without_tax
      sub_total - tax_amount
   end
-
-  # Cache the pricing for this order item
-  def cache_pricing
-    write_attribute :price, price
-  end
-
-  # Cache the pricing for this order item and save
-  def cache_pricing!
-    cache_pricing
-    save!
-  end
-
-  # Trigger when the associated order is confirmed. It handles caching the values
-  # of the monetary items and allocating stock as appropriate.
-  def confirm!
-    cache_pricing!
-  end
-
-  # Trigger when the associated order is accepted
-  def accept!
-  end
-
-  # Trigged when the associated order is rejected..
-  def reject!
-  end
-
 
 end
