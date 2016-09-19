@@ -31,7 +31,7 @@
                 <li><%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %></li>
                 <li><%= link_to t('page.my_products'), myproducts_products_path %></li>
                 <li><%= link_to t('page.my_orders'), myorders_orders_path %></li>
-                <li><%= link_to t('page.my_dashboard'), dashboard_customer_path(current_customer) %></li>
+                <li><%= link_to t('page.my_dashboard.title'), dashboard_customer_path(current_customer) %></li>
                 <li><%= link_to destroy_customer_session_path, :method=>'delete' do%><i class="fa fa-sign-out pull-right"> </i><%= t('customers.sessions.sign_out') %><%end%></li>
               </ul>
             </li>

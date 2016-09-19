@@ -30,7 +30,11 @@ fr:
     my_orders_history: 'Mon historique de commandes'
     my_account: "Mon compte"
     my_profile: "Mon profil"
-    my_dashboard: "Tableau de bord"
+    my_dashboard:
+      title: "Tableau de bord"
+      product_visits: "Visites de mes produits"
+      product_creations: 'Suivi des créations de produits'
+      product_revenues: 'Revenues générés par mes produits'
     who_we_are: 'Qui sommes nous'
     help: 'Aide/Faq'
     search: "Rechercher"
@@ -53,6 +57,7 @@ fr:
 
   dialog:
     free: 'Gratuit'
+    not_free: 'Payant'
     restricted: "Vous n'avez pas les droits pour accéder à cette page"
     need_login: "Vous devez vous connecter pour continuer"
     operation_in_progress: 'Operation en cours'

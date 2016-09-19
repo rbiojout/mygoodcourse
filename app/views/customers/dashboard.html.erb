@@ -1,36 +1,32 @@
+<% provide(:title, I18n.translate('page.my_dashboard.title')) %>
+
 <div class="row">
-  <div class="col-sm-2">
+  <div class="col-sm-3">
       <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
 
 
   </div>
-  <div class="col-sm-10">
-    <h4>Dashboard</h4>
+  <div class="col-sm-9">
+    <h1><%= t('page.my_dashboard.title')%></h1>
 
 
     <div class="tabs customer-tabs">
       <ul class="nav nav-tabs" role="tablist">
         <li role="presentation" class="active"><a href="#overview" role="tab" data-toggle="tab" aria-controls="overview" aria-expanded="true">Overview</a></li>
-        <li role="presentation" class=""><a href="#cards" role="tab" data-toggle="tab" aria-controls="cards" aria-expanded="false">Credit cards</a></li>
         <li role="presentation" class=""><a href="#cash_out" role="tab" data-toggle="tab" aria-controls="cash_out" aria-expanded="false">Cash Out</a></li>
       </ul>
       <div class="tab-content">
         <!---  --->
         <div role="tabpanel" class="tab-pane active in" id="overview">
-          <h3>Sold products</h3>
-          <%= line_chart accepted_orders_chart_path, id: 'AcceptedOrders' %>
-          <h3>Created Products</h3>
+          <h2><%= t('page.my_dashboard.product_visits')%></h2>
+          <%= line_chart visited_products_chart_path, id: 'VisitedProducts', stacked: false, discrete: false %>
+          <h2><%= t('page.my_dashboard.product_creations') %></h2>
           <%= column_chart created_products_chart_path, id: 'CreatedProducts', stacked: true, discrete: true %>
+          <h2><%= t('page.my_dashboard.product_revenues')%></h2>
+          <%= line_chart accepted_orders_chart_path, id: 'AcceptedOrders' %>
+        </div>
+        <!---  --->
 
-        </div>
-        <!---  --->
-        <!---  --->
-        <div role="tabpanel" class="tab-pane" id="cards">
-          <div id="followed-list">
-            <%= render(partial:'customers/details/cards') %>
-          </div>
-        </div>
-        <!---  --->
         <!---  --->
         <div role="tabpanel" class="tab-pane" id="cash_out">
           <div id="followed-list">

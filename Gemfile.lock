@@ -80,6 +80,10 @@ GEM
       json (>= 1.7)
       mime-types (>= 1.16)
       mimemagic (>= 0.3.0)
+    carrierwave_encrypter_decrypter (0.0.6)
+      carrierwave
+      logger
+      rails
     chartkick (2.1.1)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
@@ -305,6 +309,7 @@ GEM
     kaminari (0.17.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
+    logger (1.2.8)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
     mail (2.6.4)
@@ -499,6 +504,7 @@ DEPENDENCIES
   byebug
   capybara
   carrierwave
+  carrierwave_encrypter_decrypter
   chartkick
   cocoon
   coffee-rails

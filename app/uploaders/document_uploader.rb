@@ -159,4 +159,5 @@ class DocumentUploader < CarrierWave::Uploader::Base
     @thumb.try :delete
   end
 
+
 end

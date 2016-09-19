@@ -109,6 +109,9 @@ gem "country_select"
 
 # upload images
 gem 'carrierwave'
+# secure files with encryption
+gem "carrierwave_encrypter_decrypter"
+
 # handle image manipulation
 # gem 'mini_magick'
 gem 'rmagick'

@@ -50,6 +50,19 @@ class Customer < ActiveRecord::Base
   # owned products
   has_many :products, dependent: :destroy
 
+  # free products associated to the customer
+  # include active and non active
+  # @return [Products]
+  def free_products
+    Product.joins(:customer).where(price: '0.0').where(customers: {id: self.id} )
+  end
+
+  # paid products associated to the customer
+  # include active and non active
+  # @return [Products]
+  def paid_products
+    Product.joins(:customer).where.not(price: '0.0').where(customers: {id: self.id} )
+  end
 
   # wished products
   has_many :wish_lists, dependent: :destroy
