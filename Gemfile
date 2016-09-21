@@ -80,6 +80,9 @@ gem 'bootstrap-sass'
 # add extra icon fonts
 gem 'font-awesome-sass'
 
+# new some Cross Domain Help for the fonts
+gem 'rack-cors'
+
 # add a WISIWYG HTML editor for bootstrap
 # gem 'bootstrap-wysihtml5-rails'
 # gem 'trix'
@@ -109,8 +112,6 @@ gem "country_select"
 
 # upload images
 gem 'carrierwave'
-# secure files with encryption
-gem "carrierwave_encrypter_decrypter"
 
 # handle image manipulation
 # gem 'mini_magick'

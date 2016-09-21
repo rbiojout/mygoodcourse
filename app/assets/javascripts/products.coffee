@@ -1,8 +1,4 @@
 $ ->
-  $('[data-provider="summernote"]').each ->
-    $(this).summernote()
-
-
   if $('#infinite-scrolling-products').size() > 0
     $(window).on 'scroll', ->
       more_products_url = $('#infinite-scrolling-products .pagination a.next').attr('href')
