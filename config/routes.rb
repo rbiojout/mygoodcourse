@@ -1,7 +1,12 @@
 Rails.application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  post '/rate' => 'rater#create', :as => 'rate'
+
+  # protect from having all ressources exposed via CDN Cloudfront
+  # Deny everything but /assets
+  match '*path', via: :all, to: 'errors#not_found',
+        constraints: CloudfrontConstraint.new
+
   resources :comments
   # abuses reported for Comments and Products
   resources :abuses, only: [:new, :create]
