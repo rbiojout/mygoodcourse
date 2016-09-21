@@ -60,7 +60,7 @@ Rails.application.configure do
   # see http://ricostacruz.com/til/rails-and-cloudfront
   # for detailed informations regarding the use of CDN cloudfront
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
-  config.action_controller.asset_host = 'http://d1b6d82jm5evkl.cloudfront.net'
+  config.action_controller.asset_host = 'https://d1b6d82jm5evkl.cloudfront.net'
 
 
   # Ignore bad email addresses and do not raise email delivery errors.
