@@ -3,7 +3,10 @@
 <%= form.text_area field.method_name, field.html_attributes.reverse_merge({ value: field.form_value, class: 'form-control summernote', required: field.required }) %>
 
 <script type="text/javascript">
-    $(document).ready(function() {
+    // to follow turbolink 5
+    //$(document).ready(function() {
+
+    $(document).on("turbolinks:load", function() {
         $('.summernote').summernote({
             lang: '<%= I18n.locale %>'
         });

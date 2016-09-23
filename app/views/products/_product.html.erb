@@ -1,11 +1,7 @@
-<div class="col-xs-6 col-sm-4 col-lg-4 col-md-4 panel-product">
+<div class="col-xs-6 col-sm-4 col-lg-4 col-md-4 panel-product" id="panel_product_<%=product.id%>">
   <!-- picture -->
   <div class="hovereffect center-block panel-image-product">
-        <% if product.preview.nil? %>
-            <%= image_tag "product.preview", class: 'img-thumbnail center-block' %>
-        <% else %>
             <%= image_tag product.preview, class: 'img-thumbnail center-block' %>
-        <% end %>
 
         <div class="overlay">
           <!--- price --->

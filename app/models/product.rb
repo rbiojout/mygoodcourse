@@ -21,7 +21,7 @@ class Product < ActiveRecord::Base
   end
 
   # pagination
-  self.per_page = 30
+  self.per_page = 12
 
 
   # we use slugs for finding the products
@@ -312,7 +312,7 @@ class Product < ActiveRecord::Base
      attachments.first.file.url(:preview)
     rescue Exception => exc
       logger.error("Message for the log file while retrieving preview #{exc.message}")
-      "empty_preview.png"
+      "empty_file.png"
     end
   end
 
@@ -324,7 +324,7 @@ class Product < ActiveRecord::Base
       attachments.first.file.url(:small)
     rescue Exception => exc
       logger.error("Message for the log file while retrieving small preview #{exc.message}")
-      "empty_preview.png"
+      "empty_file.png"
     end
   end
 
@@ -336,7 +336,7 @@ class Product < ActiveRecord::Base
       attachments.first.file.url(:large)
     rescue Exception => exc
       logger.error("Message for the log file while retrieving large preview #{exc.message}")
-      "empty_preview.png"
+      "empty_file.png"
     end
   end
 
@@ -345,7 +345,7 @@ class Product < ActiveRecord::Base
       attachments.first.file.url()
     rescue Exception => exc
       logger.error("Message for the log file #{exc.message}")
-      "empty_preview.pdf"
+      "empty_file.pdf"
     end
   end
 
