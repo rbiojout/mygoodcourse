@@ -275,10 +275,12 @@ GEM
     heapy (0.1.2)
     http-cookie (1.0.2)
       domain_name (~> 0.5)
+    httpclient (2.8.2.4)
     i18n (0.7.0)
     i18n_data (0.7.0)
-    impressionist (1.5.2)
-      nokogiri (~> 1.6)
+    impressionist (1.5.1)
+      httpclient (~> 2.2)
+      nokogiri (~> 1.5)
     inflecto (0.0.2)
     ipaddress (0.8.3)
     jbuilder (2.6.0)
@@ -497,11 +499,11 @@ DEPENDENCIES
   carrierwave
   chartkick
   cocoon
-  coffee-rails
+  coffee-rails (~> 4.2)
   country_select
   datetimepicker-rails!
   derailed_benchmarks
-  devise
+  devise (~> 4.2)
   fog
   font-awesome-sass
   friendly_id
@@ -510,29 +512,29 @@ DEPENDENCIES
   gmaps4rails
   grim
   groupdate
-  impressionist
+  impressionist (= 1.5.1)
   jbuilder
   jquery-fileupload-rails
-  jquery-rails
+  jquery-rails (~> 4.2)
   jquery-turbolinks
   jquery-ui-rails
   meta_request
   momentjs-rails
   newrelic_rpm
   oauth2
-  pg
+  pg (~> 0.19)
   pg_search
   puma
   quiet_assets
   rack-cors
   rack-mini-profiler
   railroady
-  rails
+  rails (~> 4.2.7)
   rails-i18n
   rails_12factor
   rails_admin
   rmagick
-  sass-rails
+  sass-rails (~> 5.0)
   sdoc
   selenium-webdriver
   simple_form
@@ -542,7 +544,7 @@ DEPENDENCIES
   stripe
   touchpunch-rails
   tunemygc
-  turbolinks
+  turbolinks (~> 5.0)
   uglifier
   underscore-rails
   web-console

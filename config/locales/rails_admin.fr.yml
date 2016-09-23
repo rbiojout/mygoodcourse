@@ -51,7 +51,7 @@ fr:
       object_not_found: "%{model} avec id '%{id}' n'a pas été trouvé"
     table_headers:
       model_name: "Nom du modèle"
-      last_used: "Utilisé"
+      last_created: "Créé"
       records: "Enregistrements"
       username: "Utilisateur"
       changes: "Changements"

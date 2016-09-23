@@ -4,28 +4,28 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
+gem 'rails', '~> 4.2.7'
 
 gem 'rails-i18n'
 
 # Use postgresql as the database for Active Record
-gem 'pg'
+gem 'pg', '~> 0.19'
 # add some search with PostGres
 gem 'pg_search'
 
 # Use SCSS for stylesheets
-gem 'sass-rails'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails'
+gem 'coffee-rails', '~> 4.2'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
 # gem 'haml'
 
 # Use jquery as the JavaScript library
-gem 'jquery-rails'
+gem 'jquery-rails', '~> 4.2'
 
 # add some additional jquery
 gem 'jquery-ui-rails'
@@ -37,7 +37,7 @@ gem 'touchpunch-rails'
 gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 # bundle exec rake doc:rails generates the API under doc/api.
@@ -53,7 +53,7 @@ gem 'sdoc', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # add devise for the users
-gem 'devise'
+gem 'devise', '~> 4.2'
 
 # add pagination helper for listing the data
 gem 'will_paginate'
@@ -61,7 +61,7 @@ gem 'will_paginate'
 gem 'acts_as_list'
 # gem 'nested_form_fields'
 # add a counter for the visits
-gem 'impressionist'
+gem 'impressionist', '1.5.1'
 
 # we want slugs for URL instead of numbers
 gem 'friendly_id' # Note: You MUST use 5.0.0 or greater for Rails 4.0+
