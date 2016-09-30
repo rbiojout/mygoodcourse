@@ -43,7 +43,7 @@ class AttachmentsController < ApplicationController
       elsif enc_file.is_a?(CarrierWave::Storage::Fog::File)
         file_type = enc_file.content_type
         if (@attachment.key.nil? || @attachment.key.blank?)
-          outf  = open(enc_file.url)
+          outf  = open(enc_file.url).read
         else
           cipher.key = @attachment.key
           cipher.iv = @attachment.iv # key and iv are the ones from above
