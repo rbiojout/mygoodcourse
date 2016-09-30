@@ -29,6 +29,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     @attachment.save!
 
     get :download, id: @attachment
+    assert @attachment.product.candownload(customers(:one))
     assert_response :success
   end
 
@@ -50,7 +51,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     sign_in(customers(:two), scope: :customer)
 
     get :download, id: @attachment
-    assert_redirected_to products_path
+    assert_redirected_to catalog_products_path
   end
 
 end

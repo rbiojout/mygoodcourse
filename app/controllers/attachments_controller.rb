@@ -99,7 +99,7 @@ class AttachmentsController < ApplicationController
   end
 
   def correct_user
-    redirect_to products_path, alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !current_customer.own_product(@attachment.product))
+    redirect_to catalog_products_path, alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !@attachment.product.candownload(current_customer))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
