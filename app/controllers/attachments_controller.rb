@@ -26,7 +26,7 @@ class AttachmentsController < ApplicationController
       if enc_file.is_a?(CarrierWave::SanitizedFile)
         file_type = MIME::Types.type_for(enc_file.file).first.content_type
         # if no encryption take only the file
-        if (@attachment.key.nil?)
+        if (@attachment.key.nil? || @attachment.key.blank?)
           outf = File.read(enc_file.file)
         else
           cipher.key = @attachment.key
@@ -42,7 +42,7 @@ class AttachmentsController < ApplicationController
 
       elsif enc_file.is_a?(CarrierWave::Storage::Fog::File)
         file_type = enc_file.content_type
-        if (@attachment.key.nil?)
+        if (@attachment.key.nil? || @attachment.key.blank?)
           outf  = open(enc_file.url)
         else
           cipher.key = @attachment.key

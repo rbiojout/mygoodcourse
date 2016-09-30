@@ -8,7 +8,7 @@
     <div id="product_download">
       <% if customer_signed_in? %>
           <% if @product.candownload(current_customer) %>
-              <%= link_to 'Download', @product.file_url, class: 'btn btn-success input-block-level form-control' %>
+              <%= link_to 'Download', download_attachment_path(@product.attachment, format: :pdf), class: 'btn btn-success input-block-level form-control' %>
           <% end %>
       <% end %>
     </div>
