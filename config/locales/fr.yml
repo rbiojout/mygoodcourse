@@ -38,6 +38,7 @@ fr:
     who_we_are: 'Qui sommes nous'
     help: 'Aide/Faq'
     search: "Rechercher"
+    t_and_c: 'Conditions générales'
 
   actions:
     create: 'Créer'

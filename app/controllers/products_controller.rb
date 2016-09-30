@@ -12,7 +12,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.order(sort_column + " " + sort_direction)
+    @products = Product.paginate(page: params[:page], :per_page => Product.per_page)
   end
 
   # GET /catalog

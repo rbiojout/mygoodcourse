@@ -46,24 +46,22 @@ class OrderTest < ActiveSupport::TestCase
 
     # check all prices for the first item
     assert_equal BigDecimal(100), item1.unit_price
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), item1.unit_price_without_tax
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item1.unit_cost_price
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, item1.unit_price_without_tax
+    assert_equal 100-(100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), item1.unit_cost_price
     assert_equal TAX_RATE, item1.tax_rate
-    assert_equal BigDecimal(100*(TAX_RATE/100*COMMISSION_RATE/100)), item1.tax_amount
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item1.total_cost
+    assert_equal (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*(TAX_RATE/100), item1.tax_amount
+    assert_equal 100- (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), item1.total_cost
     assert_equal BigDecimal(100), item1.sub_total
     assert_equal BigDecimal(100), item1.total
 
     # check that no item prices have been persisted
     assert_equal nil, item1.read_attribute(:unit_price)
     assert_equal nil, item1.read_attribute(:unit_cost_price)
-    assert_equal nil, item1.read_attribute(:tax_amount)
-    assert_equal nil, item1.read_attribute(:tax_rate)
 
     # check the order's totals are looking OK
     assert_equal BigDecimal(100), order.items_sub_total
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), item1.unit_price_without_tax
-    assert_equal BigDecimal(100*COMMISSION_RATE/100*TAX_RATE/100), order.tax
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, item1.unit_price_without_tax
+    assert_equal (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, order.tax
     assert_equal BigDecimal(100), order.total
 
     # check the item totals are OK
@@ -77,9 +75,9 @@ class OrderTest < ActiveSupport::TestCase
     # check all prices for the second item
 
     assert_equal BigDecimal(200), item2.unit_price
-    assert_equal BigDecimal(200*(1-COMMISSION_RATE/100*TAX_RATE/100)), item2.unit_price_without_tax
-    assert_equal BigDecimal(200*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), item2.unit_cost_price
-    assert_equal BigDecimal(200*(TAX_RATE/100*COMMISSION_RATE/100)), item2.tax_amount
+    assert_equal 200 - (200*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, item2.unit_price_without_tax
+    assert_equal 200-(200*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), item2.unit_cost_price
+    assert_equal (200*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, item2.tax_amount
     assert_equal TAX_RATE, item2.tax_rate
     assert_equal BigDecimal(200), item2.sub_total
     assert_equal BigDecimal(200), item2.total
@@ -90,7 +88,8 @@ class OrderTest < ActiveSupport::TestCase
 
     # check order totals again
     assert_equal BigDecimal(300), order.items_sub_total
-    assert_equal BigDecimal(300*(TAX_RATE/100 * COMMISSION_RATE/100)), order.tax
+    # this is for 2 products, one at 100 and one at 200
+    assert_equal (300*COMMISSION_RATE/100+2*TRANSACTION_COST/100).round(2)*TAX_RATE/100, order.tax
     assert_equal BigDecimal(300), order.total
   end
 

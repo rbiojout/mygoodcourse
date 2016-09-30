@@ -22,24 +22,25 @@ class OrderItemTest < ActiveSupport::TestCase
   # with VAT = TAX_RATE
   # with commission_rate = COMMISSION_RATE
   test 'financials' do
+    new_item = @order.order_items.add_item(@product)
     assert_equal BigDecimal(100), @item.unit_price
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), @item.unit_price_without_tax
-    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), @item.unit_cost_price
-    assert_equal TAX_RATE, @item.tax_rate
-    assert_equal 100*(TAX_RATE/100 * COMMISSION_RATE/100), @item.tax_amount
-    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), @item.total_cost
-    assert_equal BigDecimal(100), @item.sub_total
-    assert_equal (100), @item.total
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, new_item.unit_price_without_tax
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), new_item.unit_cost_price
+    assert_equal TAX_RATE, new_item.tax_rate
+    assert_equal (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, new_item.tax_amount
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), new_item.total_cost
+    assert_equal BigDecimal(100), new_item.sub_total
+    assert_equal (100), new_item.total
   end
 
   test 'add item' do
-    new_item = OrderItem.add_item(@product)
-    assert_equal BigDecimal(100), new_item.unit_price
-    assert_equal BigDecimal(100*(1-COMMISSION_RATE/100*TAX_RATE/100)), new_item.unit_price_without_tax
-    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), new_item.unit_cost_price
+    new_item = @order.order_items.create!(product: @product)
+    assert_equal BigDecimal(100), @item.unit_price
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, new_item.unit_price_without_tax
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), new_item.unit_cost_price
     assert_equal TAX_RATE, new_item.tax_rate
-    assert_equal 100*(TAX_RATE/100 * COMMISSION_RATE/100), new_item.tax_amount
-    assert_equal (100*(1-COMMISSION_RATE/100*(1+TAX_RATE/100))), new_item.total_cost
+    assert_equal (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2)*TAX_RATE/100, new_item.tax_amount
+    assert_equal 100 - (100*COMMISSION_RATE/100+TRANSACTION_COST/100).round(2), new_item.total_cost
     assert_equal BigDecimal(100), new_item.sub_total
     assert_equal (100), new_item.total
   end

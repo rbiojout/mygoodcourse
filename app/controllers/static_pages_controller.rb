@@ -15,4 +15,8 @@ class StaticPagesController < ApplicationController
 
   def cheating
   end
+
+  def terms_and_conditions
+    render layout: 'home'
+  end
 end

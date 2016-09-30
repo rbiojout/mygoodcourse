@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160919103940) do
+ActiveRecord::Schema.define(version: 20160930041729) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20160919103940) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.integer  "position"
+    t.binary   "iv"
+    t.binary   "key"
   end
 
   add_index "attachments", ["product_id"], name: "index_attachments_on_product_id", using: :btree
@@ -255,15 +257,17 @@ ActiveRecord::Schema.define(version: 20160919103940) do
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "product_id"
-    t.decimal  "price",                precision: 8, scale: 2
+    t.decimal  "price",                precision: 8, scale: 2, default: 0.0
     t.decimal  "tax_rate",             precision: 8, scale: 2
-    t.decimal  "tax_amount",           precision: 8, scale: 2
+    t.decimal  "tax_amount",           precision: 8, scale: 2, default: 0.0
     t.integer  "order_id"
-    t.datetime "created_at",                                   null: false
-    t.datetime "updated_at",                                   null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.string   "processing_reference"
     t.string   "method"
     t.string   "status"
+    t.decimal  "cost_price",           precision: 8, scale: 2, default: 0.0
+    t.decimal  "application_fee",      precision: 8, scale: 2, default: 0.0
   end
 
   add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree

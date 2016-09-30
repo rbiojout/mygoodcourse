@@ -56,7 +56,12 @@ Rails.application.routes.draw do
       post :sort
     end
   end
-  resources :attachments do
+
+  # attachments are handled directly by product
+  get 'attachments/:id/download' => 'attachments#download', :as => 'download_attachment'
+  get 'attachments/sort' => 'attachments#sort', :as => 'sort_attachments'
+
+  resources :attachments, only: [:destroy] do
     member do
       get 'download'
     end
@@ -141,6 +146,7 @@ Rails.application.routes.draw do
     get 'contact' => 'static_pages#contact', as: 'contact'
     get 'about' => 'static_pages#about', as: 'about'
     get 'cheating' => 'static_pages#cheating', as: 'cheating'
+    get 'terms_and_conditions' => 'static_pages#terms_and_conditions', as: 'terms_and_conditions'
 
     # ressources
     resources :products do

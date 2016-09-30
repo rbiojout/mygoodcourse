@@ -1,40 +1,22 @@
+<% provide(:title, (I18n.translate 'activerecord.models.product', count: 2).capitalize) %>
 
-<h1>Listing Products</h1>
 
-<table class ='table'>
-  <thead>
-    <tr>
-      <th><%= sortable_bootstrap "name" %></th>
-      <th><%= sortable_bootstrap "created_at", 'Creation date' %></th>
-      <th><%= sortable_bootstrap "sku", 'Unique SKU' %></th>
-      <th>Permalink</th>
-      <th><%= sortable_bootstrap "active", 'Active' %></th>
-      <th><%= sortable_bootstrap "price", 'Price' %></th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
+<h1><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h1>
 
-  <tbody>
+<% @products.each do |product|%>
+    <%= render(partial: 'products/product', locals: {product: product}) %>
+<% end %>
+
+
+  <div id="catalog-products" class="row">
     <% @products.each do |product| %>
-      <tr>
-        <td><%= product.name %></td>
-        <td><%= product.created_at.to_date %></td>
-        <td><%= product.sku %></td>
-        <td><%= product.permalink %></td>
-        <td><%= product.active %></td>
-        <td><%= product.price %></td>
-        <td>
-          <div class="btn-group pull-right">
-            <%= link_to 'Show', product, class: "btn btn-default active" %>
-            <%= link_to 'Edit', edit_product_path(product), class: "btn btn-default" %>
-            <%= link_to 'Destroy', product, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-          </div>
-        </td>
-      </tr>
+        <% cache product do %>
+            <%= render(partial:'products/product', locals: {product: product}) %>
+        <% end %>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+  </div>
 
-<%= link_to 'New Product', new_product_path %>
+  <div class="row">
+    <%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+  </div>

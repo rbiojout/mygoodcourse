@@ -1,73 +1,67 @@
 class AttachmentsController < ApplicationController
   require 'open-uri'
 
-  before_action :set_attachment, only: [:show, :edit, :update, :destroy, :download]
+  before_action :set_attachment, only: [:download]
   before_action :authenticate_customer!, only: [:sort, :download]
 
-  # GET /attachments
-  # GET /attachments.json
-  def index
-    @attachments = Attachment.all
-  end
+  before_action :correct_user, only: [:download]
 
-  # GET /attachments/1
-  # GET /attachments/1.json
-  def show
-  end
 
-  # GET /attachments/new
-  def new
-    @attachment = Attachment.new
-  end
 
-  # GET /attachments/1/edit
-  def edit
-  end
-
-  # POST /attachments
-  # POST /attachments.json
-  def create
-    @attachment = Attachment.new(attachment_params)
-    logger.debug("params #{params[:product_id]}  #{params[:attachment][:product_id]}")
-    @product = Product.find(params[:attachment][:product_id])
-
-    respond_to do |format|
-      if @attachment.save
-        format.html { redirect_to @attachment, notice: t('views.flash_create_message') }
-        format.json { render :show, status: :created, location: @attachment }
-      else
-        format.html { render :new }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /attachments/1
-  # PATCH/PUT /attachments/1.json
-  def update
-    respond_to do |format|
-      if @attachment.update(attachment_params)
-        format.html { redirect_to @attachment, notice: t('views.flash_update_message') }
-        format.json { render :show, status: :ok, location: @attachment }
-      else
-        format.html { render :edit }
-        format.json { render json: @attachment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /attachments/1
-  # DELETE /attachments/1.json
-  def destroy
-    @attachment.destroy
-    respond_to do |format|
-      format.html { redirect_to attachments_url, notice: t('views.flash_delete_message') }
-      format.json { head :no_content }
-    end
-  end
-
-  # GET /attachments/1
+  # GET /attachments/1/download
+  # no format needed in parameters for the response
+  # file sent inline with the content-type founded
   def download
+    # decryption
+    cipher = OpenSSL::Cipher.new('aes-256-cbc')
+    cipher.decrypt
+
+    buf = ""
+    enc_file = @attachment.file.file
+    file_name =  "MyGoodCourse_"+@attachment.product.name + File.extname(enc_file.filename)
+    file_type = "application/pdf"
+
+    outf = ""
+    if (enc_file.nil? == false)
+      if enc_file.is_a?(CarrierWave::SanitizedFile)
+        file_type = MIME::Types.type_for(enc_file.file).first.content_type
+        # if no encryption take only the file
+        if (@attachment.key.nil?)
+          outf = File.read(enc_file.file)
+        else
+          cipher.key = @attachment.key
+          cipher.iv = @attachment.iv # key and iv are the ones from above
+          File.open(enc_file.file, "rb") do |inf|
+            while inf.read(4096, buf)
+              outf << cipher.update(buf)
+            end
+            outf << cipher.final
+          end
+        end
+
+
+      elsif enc_file.is_a?(CarrierWave::Storage::Fog::File)
+        file_type = enc_file.content_type
+        if (@attachment.key.nil?)
+          outf  = open(enc_file.url)
+        else
+          cipher.key = @attachment.key
+          cipher.iv = @attachment.iv # key and iv are the ones from above
+          web_contents  = open(enc_file.url) do |inf|
+            while inf.read(4096, buf)
+              outf << cipher.update(buf)
+            end
+            outf << cipher.final
+          end
+        end
+      end
+      # send the file
+      send_data(outf, filename: file_name, type: file_type, disposition: :inline)
+    end
+  end
+
+  # GET /attachments/1
+  def download_old
     @pdf = @attachment.file.file
     if @pdf.nil? == false && (@attachment.product.candownload(current_customer))
       if @pdf.is_a?(CarrierWave::SanitizedFile)
@@ -102,6 +96,10 @@ class AttachmentsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_attachment
     @attachment = Attachment.find(params[:id])
+  end
+
+  def correct_user
+    redirect_to products_path, alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !current_customer.own_product(@attachment.product))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

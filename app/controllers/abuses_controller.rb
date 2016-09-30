@@ -1,14 +1,7 @@
 class AbusesController < ApplicationController
-  before_action :context, only: [:new, :edit, :create, :update]
-  before_action :set_abuse, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_customer!, except: [:index]
+  before_action :context, only: [:new, :create]
+  before_action :authenticate_customer!
 
-
-  # GET /abuses
-  # GET /abuses.json
-  def index
-    @abuses = Abuse.all
-  end
 
   # GET /abuses/1
   # GET /abuses/1.json

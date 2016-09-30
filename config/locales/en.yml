@@ -38,6 +38,7 @@ en:
     who_we_are: 'Who we are'
     help: 'Help/Faq'
     search: "Search"
+    t_and_c: 'Terms of service'
 
   actions:
     create: 'Create'

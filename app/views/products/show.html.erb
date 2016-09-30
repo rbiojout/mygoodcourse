@@ -23,7 +23,7 @@
           <small><%= t('dialog.shop.explain_add') %></small>
       <% end %>
       <% if Rails.env.development? %>
-      <%= link_to 'BUY', buy_product_path(@product), :method => :post %>
+      <%= link_to 'BUY', buy_product_path(@product), :method => :post, class: 'btn btn-warning' %>
       <% end %>
     </div>
     <!--- end list of actions --->
@@ -148,6 +148,10 @@
               <% else %>
                   <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %><br/>
               <% end %>
+          <% end %>
+          <% if Rails.env.development? %>
+              <%= link_to 'COMMENT REMOTE', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-warning' %>
+              <%= link_to 'COMMENT', new_comment_path(product_id: @product.id), class: 'btn btn-warning' %>
           <% end %>
       <!-- customer not signed -->
       <% else %>

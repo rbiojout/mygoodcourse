@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1

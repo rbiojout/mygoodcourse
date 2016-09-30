@@ -11,6 +11,9 @@ class OrderItemsControllerTest < ActionController::TestCase
     assert_difference('OrderItem.count') do
       post :create, order_item: { order_id: @order_item.order_id, price: @order_item.price, product_id: @order_item.product_id, tax_amount: @order_item.tax_amount, tax_rate: @order_item.tax_rate }
     end
+    assert assigns(:order_item)
+    assert assigns(:order)
+
   end
 
 

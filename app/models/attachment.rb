@@ -14,10 +14,13 @@ class Attachment < ActiveRecord::Base
   # method after the creation of a new attachment
   before_save :increment_version
 
+
+
   default_scope -> { order(position: :asc) }
 
   # All featured products
   scope :featured, -> { where(featured: true) }
+
 
   def reprocess_versions
     begin
@@ -39,7 +42,7 @@ class Attachment < ActiveRecord::Base
       self.file_type = file.file.content_type
       self.file_size = file.file.size
       # count the number of pages for the pdf with ImageMagic identity
-
+      # slow method
       #image = MiniMagick::Image.open(file.file.file)
       # this method is to slow we use Grim instead
       #pdf = ::Magick::Image.read(file.file.file)
@@ -48,6 +51,35 @@ class Attachment < ActiveRecord::Base
       #image.identify do |b|
       # b.format '%n'
       #end
+      # we encrypt to seal the file
+      encrypt
+    end
+  end
+
+  # the file is encrypted
+  # we need the iv and key to decrypt
+  def encrypt
+    if file.present? && file
+      # encryption
+      cipher = OpenSSL::Cipher.new('aes-256-cbc')
+      cipher.encrypt
+      self.key = cipher.random_key
+      self.iv = cipher.random_iv
+
+      buf = ""
+      updloaded_file = file.file.file
+      File.rename(updloaded_file, updloaded_file+".enc")
+      Rails.logger.debug(".........#{updloaded_file+'.enc'}")
+      File.open(updloaded_file, "wb") do |outf|
+        File.open(updloaded_file+".enc", "rb") do |inf|
+          while inf.read(4096, buf)
+            outf << cipher.update(buf)
+          end
+          outf << cipher.final
+        end
+      end
+      File.delete(updloaded_file+".enc")
+
     end
   end
 
