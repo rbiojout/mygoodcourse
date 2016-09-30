@@ -173,7 +173,7 @@ Rails.application.routes.draw do
     # - experience : years of teaching, diploma
     # - circle : followers and followeds
 
-    resources :customers do
+    resources :customers, except: [:new, :create] do
       post 'attach_picture'
       member do
         # from the show page add some links for profile

@@ -1,6 +1,6 @@
 class Customers::RegistrationsController < Devise::RegistrationsController
 
-  def create
+  def create2
     #build_resource
 
     @customer = Customer.new(customer_params)
@@ -34,11 +34,6 @@ class Customers::RegistrationsController < Devise::RegistrationsController
 
   end
 
-  # redirect to a specific page
-  def after_sign_up_path_for(customers)
-    catalog_products_path
-    #'/an/example/path' # Or :prefix_to_your_route
-  end
 
 
 

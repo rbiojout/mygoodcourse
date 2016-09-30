@@ -194,6 +194,14 @@ en:
         comments: 'Evaluations'
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
+        ##### added in form
+        hint_email: "Promise, we will not spam you!"
+        hint_password_lenght: "%{minimum_password_length} characters minimum"
+        hint_mobile: "In case we need to reach you"
+        hint_picture: "For others, to look at you!"
+        hint_birthdate: '...for your birthday'
+        hint_full_address: "We will only present your city"
+        hint_description: 'What do you want to say about You when presenting to Others?'
       order:
         status: 'Status'
         received_at: 'Received at'

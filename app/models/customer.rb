@@ -34,7 +34,7 @@ class Customer < ActiveRecord::Base
 
   # Include default user_mailer modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :confirmable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
   # add a file for image
@@ -43,8 +43,8 @@ class Customer < ActiveRecord::Base
 
   # Validations
   # validate in addition to Devise
-  validates :name, :first_name, :mobile, presence: true
-  validates :mobile,   format: { with: PHONE_REGEX }
+  validates :name, :first_name, presence: true
+  validates :mobile, :allow_blank => true, format: { with: PHONE_REGEX }
 
   # producst links
   # owned products

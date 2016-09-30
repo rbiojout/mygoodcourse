@@ -1,12 +1,12 @@
 
-<%= simple_form_for(@customer, :wrapper => 'vertical_form') do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= f.error_notification %>
 
     <div class="form-group2">
       <% if @customer.new_record? %>
-      <%= f.input :email, required: true, placeholder: t('activerecord.attributes.customer.hint_email'), autofocus: true %>
-      <%= f.input :password, required: true, placeholder: t('activerecord.attributes.customer.hint_password_lenght', minimum_password_length: @minimum_password_length || 0)  %>
-      <%= f.input :password_confirmation, required: true %>
+          <%= f.input :email, required: true, placeholder: t('activerecord.attributes.customer.hint_email'), autofocus: true %>
+          <%= f.input :password, required: true, placeholder: t('activerecord.attributes.customer.hint_password_lenght', minimum_password_length: @minimum_password_length || 0)  %>
+          <%= f.input :password_confirmation, required: true %>
       <% end %>
       <%= f.input :first_name %>
       <%= f.input :name %>
@@ -20,13 +20,13 @@
       <%= f.input :formatted_address, placeholder: t('activerecord.attributes.customer.hint_full_address'), :input_html => {:geocoding => 'formatted_address', class: 'geocoding_fulladdress'} %>
       <%= f.input :description, as: 'text', hint: t('activerecord.attributes.customer.hint_description'), :input_html => {:class => 'summernote'} %>
       <div class="geo-details">
-          <%= f.input :street_address, as: :hidden, :input_html => {:geocoding => 'name'} %>
-          <%= f.input :administrative_area_level_1, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_1'} %>
-          <%= f.input :administrative_area_level_2, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_2'} %>
-          <%= f.input :postal_code, as: :hidden, :input_html => {:geocoding => 'postal_code'} %>
-          <%= f.input :locality, as: :hidden, :input_html => {:geocoding => 'locality'} %>
-          <%= f.input :lat, as: :hidden, :input_html => {:geocoding => 'lat'} %>
-          <%= f.input :lng, as: :hidden, :input_html => {:geocoding => 'lng'} %>
+        <%= f.input :street_address, as: :hidden, :input_html => {:geocoding => 'name'} %>
+        <%= f.input :administrative_area_level_1, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_1'} %>
+        <%= f.input :administrative_area_level_2, as: :hidden, :input_html => {:geocoding => 'administrative_area_level_2'} %>
+        <%= f.input :postal_code, as: :hidden, :input_html => {:geocoding => 'postal_code'} %>
+        <%= f.input :locality, as: :hidden, :input_html => {:geocoding => 'locality'} %>
+        <%= f.input :lat, as: :hidden, :input_html => {:geocoding => 'lat'} %>
+        <%= f.input :lng, as: :hidden, :input_html => {:geocoding => 'lng'} %>
       </div>
 
     </div>

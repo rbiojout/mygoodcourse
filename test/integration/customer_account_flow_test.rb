@@ -17,13 +17,13 @@ class CustomerAccountFlowTest < ActionDispatch::IntegrationTest
     puts 'added blocked'
 
     # we test with the same user (same email)
-    post customers_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
+    post customer_registration_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
     assert_equal 200, status
     assert_equal [I18n.t('errors.messages.taken')], assigns(:customer).errors[:email]
 
     puts 'added ok'
     # we test with a new user (different email)
-    post customers_path, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
+    post customer_registration_path, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
     assert_equal 302, status
 
     new_customer = assigns(:customer)
@@ -35,7 +35,7 @@ class CustomerAccountFlowTest < ActionDispatch::IntegrationTest
     assert_nil Customer.find_by_email('tralala@test.com')
 
     # we recreate the account
-    post customers_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
+    post customer_registration_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
     assert_equal 200, status
 
 

@@ -32,10 +32,6 @@ class CustomersController < ApplicationController
     impressionist(@customer)
   end
 
-  # GET /customers/new
-  def new
-    @customer = Customer.new
-  end
 
   # GET /customers/1/edit
   def edit
@@ -58,23 +54,6 @@ class CustomersController < ApplicationController
     @comments = Comment.find_for_all_product_of_customer(@customer.id)
   end
 
-
-  # POST /customers
-  # POST /customers.json
-  def create
-    @customer = Customer.new(customer_params)
-
-    respond_to do |format|
-      if @customer.save
-        #format.html { redirect_to @customer, notice: t('views.flash_create_message') }
-        format.html { redirect_to @customer, notice: t('dialog.customer.info_email_validation', email: @customer.email) }
-        format.json { render :show, status: :created, location: @customer }
-      else
-        format.html { render :new }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json

@@ -19,7 +19,7 @@ two: # generated id:298486374
   product: two
 
 free_from_seller_one: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -28,7 +28,7 @@ free_from_seller_one: # generated id:980190962
   product: free_from_seller_one
 
 one_from_seller_one: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -37,7 +37,7 @@ one_from_seller_one: # generated id:980190962
   product: one_from_seller_one
 
 two_from_seller_one: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -46,7 +46,7 @@ two_from_seller_one: # generated id:980190962
   product: two_from_seller_one
 
 free_from_seller_two: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -55,7 +55,7 @@ free_from_seller_two: # generated id:980190962
   product: free_from_seller_two
 
 one_from_seller_two: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -64,7 +64,7 @@ one_from_seller_two: # generated id:980190962
   product: one_from_seller_two
 
 two_from_seller_two: # generated id:980190962
-  file: Rails.root.join("test/fixtures/files/Sommaire.pdf")
+  file: "Sommaire.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1

@@ -15,18 +15,6 @@ class CustomersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:customers)
   end
 
-  test "should get new" do
-    get :new, locale: I18n.default_locale
-    assert_response :success
-  end
-
-  test "should create customer" do
-    assert_difference('Customer.count') do
-      post :create, customer: { email: 'tralala@test.com', password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
-    end
-
-    assert_redirected_to customer_path(assigns(:customer))
-  end
 
   test "should show customer" do
     get :show, id: @customer, locale: I18n.default_locale

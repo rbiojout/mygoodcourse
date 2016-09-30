@@ -218,6 +218,14 @@ fr:
         remember_me: 'Se souvenir de moi'
         located: 'Originaire de %{locality}'
         since: 'Membre depuis %{created}'
+        ##### added in form
+        hint_email: "Promis, nous le gardons pour nous"
+        hint_password_lenght: "%{minimum_password_length} caratères minimum"
+        hint_mobile: "Si nous devons vous joindre"
+        hint_picture: "Votre image auprès des utilisateurs"
+        hint_birthdate: '...pour votre anniversaire'
+        hint_full_address: "Nous n'indiquerons que votre ville"
+        hint_description: 'Que souhaitez vous donner comme présentation auprès des autres utilisateurs?'
       country:
         name: 'Nom'
         continent: 'Continent'
