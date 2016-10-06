@@ -253,7 +253,22 @@ RailsAdmin.config do |config|
       field :password
       field :password_confirmation
     end
+  end
 
+  config.model "Impression" do
+    list do
+      field :id
+      field :impressionable
+      field :controller_name
+      field :user_id
+      field :ip_address
+      field :referrer
+      field :created_at
+      field :updated_at
+    end
+    edit do
+      field :message
+    end
   end
 
   config.model "Level" do

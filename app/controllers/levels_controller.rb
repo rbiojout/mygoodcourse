@@ -1,7 +1,7 @@
 class LevelsController < ApplicationController
-  before_action :set_level, only: [:show, :edit, :update, :destroy]
+  before_action :set_level, only: [:show]
 
-  before_action :authenticate_employee!
+  before_action :authenticate_employee!, except: [:index, :show]
 
 
   # GET /levels
@@ -15,54 +15,6 @@ class LevelsController < ApplicationController
   def show
   end
 
-  # GET /levels/new
-  def new
-    @level = Level.new
-  end
-
-  # GET /levels/1/edit
-  def edit
-  end
-
-  # POST /levels
-  # POST /levels.json
-  def create
-    @level = Level.new(level_params)
-
-    respond_to do |format|
-      if @level.save
-        format.html { redirect_to @level, notice: t('views.flash_create_message') }
-        format.json { render :show, status: :created, location: @level }
-      else
-        format.html { render :new }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /levels/1
-  # PATCH/PUT /levels/1.json
-  def update
-    respond_to do |format|
-      if @level.update(level_params)
-        format.html { redirect_to @level, notice: t('views.flash_update_message') }
-        format.json { render :show, status: :ok, location: @level }
-      else
-        format.html { render :edit }
-        format.json { render json: @level.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /levels/1
-  # DELETE /levels/1.json
-  def destroy
-    @level.destroy
-    respond_to do |format|
-      format.html { redirect_to levels_url, notice: t('views.flash_delete_message') }
-      format.json { head :no_content }
-    end
-  end
 
   def sort
     unless params[:level].nil?

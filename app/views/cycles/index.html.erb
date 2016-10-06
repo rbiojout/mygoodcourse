@@ -3,25 +3,11 @@
 
 <h1><%= (I18n.translate 'activerecord.models.cycle', count: 2).capitalize %></h1>
 
-
-<ul id="cycles_sortable" class="list-group sortable" data-update-url="<%= sort_cycles_path %>">
+<ul>
   <% @cycles.each do |cycle| %>
-
-      <li class="list-group-item" id="cycle_<%=cycle.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
-            <span class="glyphicon glyphicon-sort handle">move</span>
-        <% end %>
-        <%= cycle.name %>
-        <div class="btn-group pull-right">
-          <%= link_to 'Show', cycle, class: "btn btn-default active" %>
-          <%= link_to 'Edit', edit_cycle_path(cycle), class: "btn btn-default" %>
-          <%= link_to 'Destroy', cycle, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-        </div>
+      <li>
+        <%= link_to cycle.name, cycle_path(cycle) %>
       </li>
   <% end %>
 
 </ul>
-
-<%= link_to 'New Cycle', new_cycle_path, class: 'btn btn-primary' %>
-
-

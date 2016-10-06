@@ -1,29 +1,23 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @family.name) %>
+
+<h1><%= @family.name %></h1>
 
 <p>
-  <strong>Name:</strong>
-  <%= @family.name %>
-</p>
-
-<p>
-  <strong>Description:</strong>
+  <strong><%= t('activerecord.attributes.family.description')%>:</strong>
   <%= raw(@family.description) %>
 </p>
 
+<h2><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h2>
 
-<h3>Associated Categories</h3>
-<ul id="categories_sortable" class="list-group sortable" data-update-url="<%= sort_categories_url %>">
+<ul id="family_categories">
   <% @family.categories.each  do |cat| %>
 
-      <li class="list-group-item" id="category_<%= cat.id %>">
-        <a href="#" class="btn btn-success btn-sm handle"><span class="glyphicon glyphicon-sort" aria-hidden="true"></span> move</a>
-        <%= cat.name %>,
-        <%= cat.description %>
+      <li id="category_<%= cat.id %>">
+        <%= link_to category_path(cat) do %>
+            <%= cat.name %>
+        <% end %>
       </li>
 
   <% end %>
 </ul>
-<div class="btn-group">
-  <%= link_to 'Edit', edit_family_path(@family), class: "btn btn-default" %>
-  <%= link_to 'Back', families_path, class: "btn btn-default active" %>
-</div>
+

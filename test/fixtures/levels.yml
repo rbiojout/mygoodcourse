@@ -12,7 +12,7 @@ two:
   description: MyString
   position: 2
   cycle: two
-  position: 1
+  position: 2
 
 cp:
   name: cp

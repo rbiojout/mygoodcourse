@@ -1,24 +1,10 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @level.name) %>
+
+<h1><%= @level.name %></h1>
 
 <p>
-  <strong>Name:</strong>
-  <%= @level.name %>
+  <strong><%= t('activerecord.attributes.level.description')%>:</strong>
+  <%= raw(@level.description) %>
 </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @level.description %>
-</p>
 
-<p>
-  <strong>Position:</strong>
-  <%= @level.position %>
-</p>
-
-<p>
-  <strong>Cycle:</strong>
-  <%= @level.cycle %>
-</p>
-
-<%= link_to 'Edit', edit_level_path(@level) %> |
-<%= link_to 'Back', levels_path %>

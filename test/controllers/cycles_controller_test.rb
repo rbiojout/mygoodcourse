@@ -15,39 +15,43 @@ class CyclesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:cycles)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create cycle" do
-    assert_difference('Cycle.count') do
-      post :create, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position, country_id: @cycle.country.id }
-    end
-
-    assert_redirected_to cycle_path(assigns(:cycle))
-  end
-
   test "should show cycle" do
     get :show, id: @cycle
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @cycle
+  test "should sort cycles if logged" do
+    assert(cycles(:one).position == 1)
+    assert(cycles(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "cycle"=>[cycles(:two).id.to_s, cycles(:one).id.to_s]  do
+      assert(cycles(:one).position == 2)
+      assert(cycles(:two).position == 1)
+    end
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
     assert_response :success
   end
 
-  test "should update cycle" do
-    patch :update, id: @cycle, cycle: { description: @cycle.description, name: @cycle.name, position: @cycle.position, country_id: @cycle.country.id }
-    assert_redirected_to cycle_path(assigns(:cycle))
+  test "should not sort cycles if not logged" do
+    assert(cycles(:one).position == 1)
+    assert(cycles(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+    sign_out(:employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "cycle"=>[cycles(:two).id.to_s, cycles(:one).id.to_s]
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
+    assert_response 302
   end
 
-  test "should destroy cycle" do
-    assert_difference('Cycle.count', -1) do
-      delete :destroy, id: @cycle
-    end
 
-    assert_redirected_to cycles_path
-  end
+
 end

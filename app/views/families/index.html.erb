@@ -4,22 +4,12 @@
 <h1><%= (I18n.translate 'activerecord.models.family', count: 2).capitalize %></h1>
 
 
-<ul id="families_sortable" class="list-group sortable" data-update-url="<%= sort_families_path %>">
-    <% @families.each do |family| %>
-      <li class="list-group-item" id="family_<%=family.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
-            <span class="glyphicon glyphicon-sort handle"> move</span>
-        <% end %>
-        <%= family.name %>
-        <div class="btn-group pull-right">
-          <%= link_to 'Show', family, class: "btn btn-default active" %>
-          <%= link_to 'Edit', edit_family_path(family), class: "btn btn-default" %>
-          <%= link_to 'Destroy', family, method: :delete, class: 'btn btn-danger', data: { confirm: 'Are you sure?' } %>
-        </div>
+<ul>
+  <% @families.each do |family| %>
+      <li>
+        <%= link_to family.name, family_path(family) %>
       </li>
   <% end %>
 
 </ul>
 
-
-<%= link_to 'New Family', new_family_path, class: 'btn btn-primary' %>

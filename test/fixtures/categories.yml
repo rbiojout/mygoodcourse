@@ -10,7 +10,7 @@ two:
   name: Category2
   description: MyString
   family: two
-  position: 1
+  position: 2
 
 lecture:
   name: lecture

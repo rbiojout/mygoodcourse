@@ -1,7 +1,7 @@
 class FamiliesController < ApplicationController
-  before_action :set_family, only: [:show, :edit, :update, :destroy]
+  before_action :set_family, only: [:show]
 
-  before_action :authenticate_employee!
+  before_action :authenticate_employee!, except: [:index, :show]
 
 
 
@@ -14,56 +14,6 @@ class FamiliesController < ApplicationController
   # GET /families/1
   # GET /families/1.json
   def show
-  end
-
-  # GET /families/new
-  def new
-    @family = Family.new
-  end
-
-  # GET /families/1/edit
-  def edit
-  end
-
-  # POST /families
-  # POST /families.json
-  def create
-    @family = Family.new(family_params)
-
-    respond_to do |format|
-      if @family.save
-        format.html { redirect_to @family, notice: t('views.flash_create_message') }
-        format.json { render :show, status: :created, location: @family }
-      else
-        format.html { render :new }
-        format.json { render json: @family.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /families/1
-  # PATCH/PUT /families/1.json
-  def update
-    logger.debug ("===== #{family_params}")
-    respond_to do |format|
-      if @family.update(family_params)
-        format.html { redirect_to @family, notice: t('views.flash_update_message') }
-        format.json { render :show, status: :ok, location: @family }
-      else
-        format.html { render :edit }
-        format.json { render json: @family.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /families/1
-  # DELETE /families/1.json
-  def destroy
-    @family.destroy
-    respond_to do |format|
-      format.html { redirect_to families_url, notice: t('views.flash_delete_message') }
-      format.json { head :no_content }
-    end
   end
 
   # POST /families/sort

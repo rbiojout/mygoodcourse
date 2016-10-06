@@ -15,44 +15,42 @@ class LevelsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:levels)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create level" do
-    cycle = Cycle.find(@level.cycle_id)
-    last_position = cycle.levels.last.position
-    assert_difference('Level.count') do
-      post :create, level: { cycle_id: @level.cycle_id, description: @level.description, name: @level.name, position: @level.position }
-    end
-
-    assert_redirected_to level_path(assigns(:level))
-    new_position = cycle.levels.last.position
-    assert (new_position-last_position == 1)
-
-  end
 
   test "should show level" do
     get :show, id: @level
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @level
+  test "should sort levels if logged" do
+    assert(levels(:one).position == 1)
+    assert(levels(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "level"=>[levels(:two).id.to_s, levels(:one).id.to_s]  do
+      assert(levels(:one).position == 2)
+      assert(levels(:two).position == 1)
+    end
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
     assert_response :success
   end
 
-  test "should update level" do
-    patch :update, id: @level, level: { cycle_id: @level.cycle_id, description: @level.description, name: @level.name, position: @level.position }
-    assert_redirected_to level_path(assigns(:level))
+  test "should not sort levels if not logged" do
+    assert(levels(:one).position == 1)
+    assert(levels(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+    sign_out(:employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "level"=>[levels(:two).id.to_s, levels(:one).id.to_s]
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
+    assert_response 302
   end
 
-  test "should destroy level" do
-    assert_difference('Level.count', -1) do
-      delete :destroy, id: @level
-    end
-
-    assert_redirected_to levels_path
-  end
 end

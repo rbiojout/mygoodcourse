@@ -1,39 +1,48 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @country.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @country.name %>
-</p>
+<h1><%= @country.name %></h1>
 
-<p>
-  <strong>Code2:</strong>
-  <%= @country.code2 %>
-</p>
+<!-- we have Cycles associated to Country -->
+<% @cycles = @country.cycles %>
 
-<p>
-  <strong>Code3:</strong>
-  <%= @country.code3 %>
-</p>
+<h2><%= (I18n.translate 'activerecord.models.cycle', count: 2).capitalize %></h2>
+<ul id="country_cycles">
+  <% @cycles.each do |cycle| %>
 
-<p>
-  <strong>Continent:</strong>
-  <%= @country.continent %>
-</p>
+      <li id="cycle_<%=cycle.id%>">
+        <%= link_to cycle_path(cycle) do %>
+            <%= cycle.name %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
 
-<p>
-  <strong>Tld:</strong>
-  <%= @country.tld %>
-</p>
+<!-- we have Families associated to Country -->
+<% @families = @country.families %>
 
-<p>
-  <strong>Currency:</strong>
-  <%= @country.currency %>
-</p>
+<h2><%= (I18n.translate 'activerecord.models.family', count: 2).capitalize %></h2>
+<ul id="country_families">
+  <% @families.each do |family| %>
 
-<p>
-  <strong>Eu member:</strong>
-  <%= @country.eu_member %>
-</p>
+      <li id="cycle_<%=family.id%>">
+        <%= link_to family_path(family) do %>
+            <%= family.name %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>
 
-<%= link_to 'Edit', edit_country_path(@country) %> |
-<%= link_to 'Back', countries_path %>
+<!-- we have Topics associated to Country -->
+<% @topics = @country.topics %>
+
+<h2><%= (I18n.translate 'activerecord.models.topic', count: 2).capitalize %></h2>
+<ul id="country_topics">
+  <% @topics.each do |topic| %>
+
+      <li id="topic_<%=topic.id%>">
+        <%= link_to topic_path(topic) do %>
+        <%= topic.name %>
+        <% end %>
+      </li>
+  <% end %>
+</ul>

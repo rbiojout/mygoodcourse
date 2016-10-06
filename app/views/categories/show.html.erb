@@ -1,19 +1,8 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @category.name) %>
+
+<h1><%= @category.name %></h1>
 
 <p>
-  <strong>Name:</strong>
-  <%= @category.name %>
+  <strong><%= t('activerecord.attributes.category.description')%>:</strong>
+  <%= raw(@category.description) %>
 </p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @category.description %>
-</p>
-
-<p>
-  <strong>Family:</strong>
-  <%= @category.family %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

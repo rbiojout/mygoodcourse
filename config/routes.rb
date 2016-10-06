@@ -16,7 +16,7 @@ Rails.application.routes.draw do
       post 'refund'
     end
   end
-  resources :countries
+  resources :countries, only: [:index, :show]
   resources :order_items do
     member do
     end
@@ -35,23 +35,23 @@ Rails.application.routes.draw do
   match 'checkout' => 'orders#checkout', :as => 'checkout', :via => [:get, :patch]
   match 'checkout/confirm' => 'orders#confirmation', :as => 'checkout_confirmation', :via => [:get, :patch]
 
-  resources :levels do
+  resources :levels, only: [:index, :show] do
     collection do
       post :sort
     end
   end
-  resources :cycles do
+  resources :cycles, only: [:index, :show] do
     collection do
       post :sort
     end
   end
-  resources :categories do
+  resources :categories, only: [:index, :show] do
     collection do
       post :sort
     end
   end
 
-  resources :families do
+  resources :families, only: [:index, :show] do
     collection do
       post :sort
     end

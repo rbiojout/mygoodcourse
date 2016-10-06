@@ -14,42 +14,42 @@ class CategoriesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:categories)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create category" do
-    family = Family.find(@category.family_id)
-    last_position = family.categories.last.position
-    assert_difference('Category.count') do
-      post :create, category: { description: @category.description, family_id: @category.family_id, name: @category.name }
-    end
-    assert_redirected_to category_path(assigns(:category))
-    new_position = family.categories.last.position
-    assert (new_position-last_position == 1)
-  end
-
   test "should show category" do
     get :show, id: @category
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @category
+  test "should sort categories if logged" do
+    assert(categories(:one).position == 1)
+    assert(categories(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "category"=>[categories(:two).id.to_s, categories(:one).id.to_s]  do
+      assert(categories(:one).position == 2)
+      assert(categories(:two).position == 1)
+    end
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
     assert_response :success
   end
 
-  test "should update category" do
-    patch :update, id: @category, category: { description: @category.description, family_id: @category.family_id, name: @category.name }
-    assert_redirected_to category_path(assigns(:category))
+  test "should not sort categories if not logged" do
+    assert(categories(:one).position == 1)
+    assert(categories(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+    sign_out(:employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "category"=>[categories(:two).id.to_s, categories(:one).id.to_s]
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
+    assert_response 302
   end
 
-  test "should destroy category" do
-    assert_difference('Category.count', -1) do
-      delete :destroy, id: @category
-    end
 
-    assert_redirected_to categories_path
-  end
 end

@@ -1,7 +1,0 @@
-
-<div class="nested-fields form-inline" id="level_<%= f.object.id %>">
-    <%= link_to_remove_association f, class: "btn #{(f.object.id.nil?)?'btn-default':'btn-danger'} btn-sm" do %><i class="fa fa-remove" aria-hidden="true"></i> remove level<% end %>
-    <%= f.input :name, label:false, placeholder: 'name' %>
-    <%= f.input :description, label:false, placeholder: 'description' %>
-
-</div>

@@ -15,39 +15,40 @@ class FamiliesControllerTest < ActionController::TestCase
     assert_not_nil assigns(:families)
   end
 
-  test "should get new" do
-    get :new
-    assert_response :success
-  end
-
-  test "should create family" do
-    assert_difference('Family.count') do
-      post :create, family: { description: @family.description, name: @family.name, position: @family.position, country_id: @family.country.id }
-    end
-
-    assert_redirected_to family_path(assigns(:family))
-  end
-
   test "should show family" do
     get :show, id: @family
     assert_response :success
   end
 
-  test "should get edit" do
-    get :edit, id: @family
+  test "should sort families if logged" do
+    assert(families(:one).position == 1)
+    assert(families(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "family"=>[families(:two).id.to_s, families(:one).id.to_s]  do
+      assert(families(:one).position == 2)
+      assert(families(:two).position == 1)
+    end
+    # we Need assigns to recover the modifications from the Controller
+    #end
+
     assert_response :success
   end
 
-  test "should update family" do
-    patch :update, id: @family, family: { description: @family.description, name: @family.name, position: @family.position, country_id: @family.country.id }
-    assert_redirected_to family_path(assigns(:family))
-  end
+  test "should not sort families if not logged" do
+    assert(families(:one).position == 1)
+    assert(families(:two).position == 2)
+    # add a signed employee to perform the tests
+    sign_in(employees(:one), scope: :employee)
+    sign_out(:employee)
 
-  test "should destroy family" do
-    assert_difference('Family.count', -1) do
-      delete :destroy, id: @family
-    end
+    #assert_equal(@order_one.position, 2) do
+    post :sort, locale: I18n.default_locale, "family"=>[families(:two).id.to_s, families(:one).id.to_s]
+    # we Need assigns to recover the modifications from the Controller
+    #end
 
-    assert_redirected_to families_path
+    assert_response 302
   end
 end
