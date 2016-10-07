@@ -38,7 +38,6 @@ en:
     who_we_are: 'Who we are'
     help: 'Help/Faq'
     search: "Search"
-    t_and_c: 'Terms of service'
 
   actions:
     create: 'Create'
@@ -194,6 +193,9 @@ en:
         comments: 'Evaluations'
         located: 'Located in %{locality}'
         since: 'Member since %{created}'
+        ##### terms and conditions
+        terms_of_service: 'Terms of service'
+        terms_of_service_explain_html: 'By creating this account, I agree with the %{terms_of_service} for this service.'
         ##### added in form
         hint_email: "Promise, we will not spam you!"
         hint_password_lenght: "%{minimum_password_length} characters minimum"

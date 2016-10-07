@@ -1,16 +1,12 @@
 
-<% provide(:title, t('page.t_and_c')) %>
-
-<!-- Image Header -->
-<h1><%= t('page.t_and_c') %></h1>
-<!-- /.row -->
+<% provide(:title, t('activerecord.attributes.customer.terms_of_service')) %>
 
 
 <div class="container">
   <div class="row">
 
     <div class="col-md-3" id="navScrollspy" role="navigation">
-      <ul  class="nav nav-pills nav-stacked hidden-xs hidden-sm" id="affix_nav">
+      <ul  class="t-and-c-sidebar nav nav-pills nav-stacked hidden-xs hidden-sm affix" id="affix_nav2">
         <li><a href="#forewords">Preamble - Definitions</a></li>
         <li><a href="#obligation_platform">Bonds MyGoodCourse</a></li>
         <li><a href="#obligation_member">Member Obligations</a></li>
@@ -28,6 +24,9 @@
     </div>
 
     <div role="main" class="col-md-9" >
+      <!-- Image Header -->
+      <h1><%= t('activerecord.attributes.customer.terms_of_service') %></h1>
+      <!-- /.row -->
       <section id="forewords">
         <h2>
       <span class="fa-stack">
@@ -688,6 +687,7 @@
 
 
 <script language="JavaScript">
+    $('body').scrollspy({ target: '#navScrollspy' });
     $('#affix_nav').affix({
         offset: {
             top: 0,

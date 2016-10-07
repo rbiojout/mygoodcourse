@@ -45,6 +45,8 @@ class Customer < ActiveRecord::Base
   # validate in addition to Devise
   validates :name, :first_name, presence: true
   validates :mobile, :allow_blank => true, format: { with: PHONE_REGEX }
+  # terms of service
+  validates :terms_of_service, acceptance: true
 
   # producst links
   # owned products

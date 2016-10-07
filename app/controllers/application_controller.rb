@@ -91,7 +91,7 @@ class ApplicationController < ActionController::Base
 
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, :keys => [:email, :password, :password_confirmation, :language, :country_id, :name, :first_name, :mobile, :birthdate, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng, :description])
+    devise_parameter_sanitizer.permit(:sign_up, :keys => [:email, :password, :password_confirmation, :language, :country_id, :name, :first_name, :mobile, :birthdate, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng, :description, :terms_of_service])
   end
 
   # Returns the active order for this session

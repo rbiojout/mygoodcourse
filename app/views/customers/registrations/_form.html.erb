@@ -28,7 +28,7 @@
         <%= f.input :lat, as: :hidden, :input_html => {:geocoding => 'lat'} %>
         <%= f.input :lng, as: :hidden, :input_html => {:geocoding => 'lng'} %>
       </div>
-
+      <p><%= f.input :terms_of_service, as: :boolean %> <small><%= t('activerecord.attributes.customer.terms_of_service_explain_html', terms_of_service: link_to(t('activerecord.attributes.customer.terms_of_service'), terms_and_conditions_path)) %></small></p>
     </div>
     <div class="form-actions">
       <%= f.button :submit, class: 'btn btn-primary input-block-level form-control' %>

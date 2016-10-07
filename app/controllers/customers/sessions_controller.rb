@@ -4,6 +4,7 @@ class Customers::SessionsController < Devise::SessionsController
   # force the redirect to html form even with js by changing the view
   # add a way to specify the redirect with the parameter redirect_to
   def new
+    logger.debug('hho')
     self.resource = resource_class.new(sign_in_params)
     clean_up_passwords(resource)
     yield resource if block_given?

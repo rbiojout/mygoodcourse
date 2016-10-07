@@ -38,7 +38,6 @@ fr:
     who_we_are: 'Qui sommes nous'
     help: 'Aide/Faq'
     search: "Rechercher"
-    t_and_c: 'Conditions générales'
 
   actions:
     create: 'Créer'
@@ -218,6 +217,9 @@ fr:
         remember_me: 'Se souvenir de moi'
         located: 'Originaire de %{locality}'
         since: 'Membre depuis %{created}'
+        ##### terms and conditions
+        terms_of_service: 'Conditions générales'
+        terms_of_service_explain_html: 'En créant mon compte, je reconnais accepter les %{terms_of_service} liées au service.'
         ##### added in form
         hint_email: "Promis, nous le gardons pour nous"
         hint_password_lenght: "%{minimum_password_length} caratères minimum"

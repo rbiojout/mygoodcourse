@@ -16,9 +16,16 @@
   </div>
   <div class="tab-pane fade" role="tabpanel" id="sign_up" aria-labelledby="sign_up_tab">
         <h1><%= t('devise.registrations.new.sign_up')%></h1>
-
+    <div class="row">
+      <div class="col-sm-8">
         <%= render "customers/registrations/form" %>
         <%= render "customers/shared/links" %>
+
+      </div>
+      <div class="col-sm-4">
+        <%= render "customers/shared/why_register" %>
+      </div>
+    </div>
 
   </div>
 </div>

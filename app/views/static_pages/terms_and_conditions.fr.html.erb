@@ -1,33 +1,33 @@
 
-<% provide(:title, t('page.t_and_c')) %>
+<% provide(:title, t('activerecord.attributes.customer.terms_of_service')) %>
 
-<!-- Image Header -->
-  <h1><%= t('page.t_and_c') %></h1>
-<!-- /.row -->
 
 
 <div class="container">
 <div class="row">
 
 <div class="col-md-3" id="navScrollspy" role="navigation">
-  <ul  class="nav nav-pills nav-stacked hidden-xs hidden-sm" id="affix_nav">
-    <li><a href="#forewords">Preamble - Definitions</a></li>
-    <li><a href="#obligation_platform">Bonds MyGoodCourse</a></li>
-    <li><a href="#obligation_member">Member Obligations</a></li>
-    <li><a href="#obligation_seller">Seller's obligations</a> </li>
-    <li><a href="#obligation_buyer">Buyer's Obligations</a> </li>
-    <li><a href="#sales_process">Selling process</a></li>
-    <li><a href="#sales_cancel">Claims and Returns Policy</a></li>
-    <li><a href="#financials">Financial provisions</a></li>
-    <li><a href="#intellectual_prop">Property</a></li>
-    <li><a href="#law_respect">Compliance with Law</a></li>
-    <li><a href="#duration">Duration and Termination of the GC</a></li>
-    <li><a href="#responsability">Responsibility</a></li>
-    <li><a href="#general">General provisions</a></li>
+  <ul  class="nav nav-pills nav-stacked hidden-xs hidden-sm affix" id="affix_nav2">
+    <li><a href="#forewords">Préambule - Définitions</a></li>
+    <li><a href="#obligation_platform">Obligations de MyGoodCourse</a></li>
+    <li><a href="#obligation_member">Obligations du Membre</a></li>
+    <li><a href="#obligation_seller">Obligations du Vendeur</a> </li>
+    <li><a href="#obligation_buyer">Obligations de l'Acheteur</a> </li>
+    <li><a href="#sales_process">Processus de Vente</a></li>
+    <li><a href="#sales_cancel">Réclamation et droit de rétractation</a></li>
+    <li><a href="#financials">Dispositions financières</a></li>
+    <li><a href="#intellectual_prop">Propriété de la Plateforme</a></li>
+    <li><a href="#law_respect">Conformité à la loi</a></li>
+    <li><a href="#duration">Durée et résiliation</a></li>
+    <li><a href="#responsability">Responsabilité</a></li>
+    <li><a href="#general">Stipulations générales</a></li>
   </ul>
 </div>
 
 <div role="main" class="col-md-9" >
+  <!-- Image Header -->
+  <h1><%= t('activerecord.attributes.customer.terms_of_service') %></h1>
+  <!-- /.row -->
   <section id="forewords">
     <h2>
       <span class="fa-stack">
@@ -865,6 +865,7 @@
 </div><!--end of .container-->
 
 <script language="JavaScript">
+    $('body').scrollspy({ target: '#navScrollspy' });
     $('#affix_nav').affix({
         offset: {
             top: 0,
