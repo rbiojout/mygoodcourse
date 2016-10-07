@@ -1,22 +1,25 @@
+<ul class="nav nav-tabs" id="tab_customer" role="tablist">
+  <li role="presentation">
+    <a href="#sign_in" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false"><%= t('devise.sessions.new.sign_in') %></a>
+  </li>
+  <li role="presentation" class="active">
+    <a href="#sign_up" id="home-tab" role="tab" data-toggle="tab" aria-controls="home" aria-expanded="false"><%= t('devise.registrations.new.sign_up') %></a>
+  </li>
+</ul>
 
-<div class="row">
-  <div class="col-xs-0 col-sm-3">
+<div class="tab-content" id="tab_customer_content">
+  <div class="tab-pane fade" role="tabpanel" id="sign_in" aria-labelledby="sign_in_tab">
+        <h1><%= t('devise.sessions.new.sign_in') %></h1>
 
+        <%= render "customers/sessions/form" %>
+        <%= render "customers/shared/links" %>
   </div>
-  <div class="col-xs-0 col-sm-6">
-    <h1><%= t('.sign_up')%></h1>
+  <div class="tab-pane fade active in" role="tabpanel" id="sign_up" aria-labelledby="sign_up_tab">
+        <h1><%= t('devise.registrations.new.sign_up')%></h1>
 
-<%= render "customers/registrations/form" %>
-
-
-<%= render "customers/shared/links" %>
-
-  </div>
-  <div class="col-xs-0 col-sm-3">
+        <%= render "customers/registrations/form" %>
+        <%= render "customers/shared/links" %>
 
   </div>
 </div>
-
-
-
 

@@ -213,8 +213,8 @@ RailsAdmin.config do |config|
       field :language
     end
     edit do
-      field :name
       field :first_name
+      field :name
       field :mobile
       field :email
       field :password
@@ -237,7 +237,36 @@ RailsAdmin.config do |config|
         partial 'form_summernote'
       end
     end
+    show do
+      field :first_name
+      field :name
+      field :picture
+      field :mobile
+      field :last_sign_in_at do
+        strftime_format "%Y-%m-%d"
+      end
+      field :counter_cache
+      field :email
+      field :street_address
+      field :administrative_area_level_1
+      field :administrative_area_level_2
+      field :postal_code
+      field :locality
+      field :birthdate do
+        date_format :default
+      end
+      field :language
+      field :country
+      field :description do
+        formatted_value do
+          value.html_safe unless value.nil?
+        end
+      end
+      field :orders
+      field :products
+    end
   end
+
 
   config.model "Employee" do
     edit do

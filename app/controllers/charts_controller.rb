@@ -51,7 +51,8 @@ class ChartsController < ApplicationController
   # stats for current employee
   ###################
   def created_customers
-    render json: Customer.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count
+    sum = Customer.all.where.not(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).count
+    render json: Customer.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge).chart_json
   end
 
   def sign_in_customers
@@ -59,7 +60,8 @@ class ChartsController < ApplicationController
   end
 
   def created_comments
-    render json: Comment.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count
+    sum = Comment.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).count
+    render json: Comment.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge).chart_json
   end
 
 end

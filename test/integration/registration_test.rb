@@ -10,10 +10,12 @@ class RegistrationTest < ActionDispatch::IntegrationTest
     visit('/')
     click_on(I18n.translate('customers.sessions.new.sign_in'))
     customer = customers(:one)
-    fill_in(I18n.translate('activerecord.attributes.customer.email'), :with => customer.email)
-    fill_in(I18n.translate('activerecord.attributes.customer.password'), :with => customer.password)
-    within("#new_customer") do
-      click_on(I18n.translate('customers.sessions.new.sign_in'))
+    within("#sign_in") do
+      fill_in(I18n.translate('activerecord.attributes.customer.email'), :with => customer.email)
+      fill_in(I18n.translate('activerecord.attributes.customer.password'), :with => customer.password)
+      within("#new_customer") do
+        click_on(I18n.translate('customers.sessions.new.sign_in'))
+      end
     end
 
   end

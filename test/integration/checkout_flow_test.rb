@@ -78,7 +78,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     assert_equal false, token[:livemode]
     assert_equal "card", token[:type]
     assert_not_equal nil, token[:card][:id]
-    puts token
 
     get checkout_confirmation_path, :stripeToken => token[:id]
 

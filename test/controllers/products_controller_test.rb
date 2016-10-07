@@ -174,8 +174,6 @@ class ProductsControllerTest < ActionController::TestCase
 
     get :show, id: product, locale: I18n.default_locale
 
-    puts product.file_url
-
     assert_select "#product_download a"
   end
 
