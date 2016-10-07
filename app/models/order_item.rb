@@ -36,16 +36,21 @@ class OrderItem < ActiveRecord::Base
   end
 
   def runInit
-    fee = (unit_price * (COMMISSION_RATE/100) + TRANSACTION_COST/100) || BigDecimal(0)
-    if unit_price == 0.0 || application_fee < 0.0
+    initPrice(unit_price)
+    save!
+  end
+
+  def initPrice(value)
+    self.price = value
+    fee = (value * (COMMISSION_RATE/100) + TRANSACTION_COST/100) || BigDecimal(0)
+    if value == 0.0 || fee < 0.0
       fee = 0.0
     end
     fee.round(2)
     self.application_fee = fee
     self.tax_rate = TAX_RATE
     self.tax_amount = (fee * TAX_RATE / 100).round(2)
-    self.cost_price = unit_price - application_fee
-    save!
+    self.cost_price = value - application_fee
   end
 
   # Recover all accepted order_items received for a particular customers buying
@@ -101,13 +106,17 @@ class OrderItem < ActiveRecord::Base
 
   after_create :runInit
 
+  attr_accessor :unit_price
+
   # The unit price for the item
   # the price is for individual sellers, they don't pay the VAT
   # the VAT is only paid by the marketplace on the commission
   # @return [BigDecimal]
   def unit_price
-    read_attribute(:unit_price) || product.price || BigDecimal(0)
+    read_attribute(:unit_price) || (product.nil? ? BigDecimal(0):product.price) || BigDecimal(0)
   end
+
+
 
 
   # The unit price for the item without tax
@@ -118,6 +127,7 @@ class OrderItem < ActiveRecord::Base
   def unit_price_without_tax
     unit_price - tax_amount
   end
+
 
 
   # The cost price for the item meaning the part for the seller
@@ -137,10 +147,10 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def share_seller
-    if unit_price == 0.0
+    if price == 0.0
       100.0
     else
-      unit_cost_price/unit_price*100
+      cost_price/price*100
     end
   end
 

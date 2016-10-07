@@ -602,10 +602,8 @@
           <th>Pourcentage du Vendeur</th>
         </tr>
         <% Product::PRICE_LIST.each do |pp| price=BigDecimal.new(pp) %>
-            <% product = Product.new
-               product.price = price
-               oi = OrderItem.new
-               oi.product = product %>
+            <% oi = OrderItem.new
+               oi.initPrice(price) %>
             <tr>
               <td><%=nice_price(price)%></td>
               <td><%= nice_price(oi.application_fee) %></td>
