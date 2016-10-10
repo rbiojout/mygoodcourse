@@ -1,0 +1,13 @@
+<h1>Hello <%=@order.customer.first_name%>!</h1>
+
+<h3>Re: Order #<%=@order.number%></h3>
+
+<p>
+  We're pleased to let you know that we have accepted your order and your payment of <%=number_to_currency @order.amount_paid%> has been taken from your card successfully.
+  This product is now available in the list of products you can download.
+</p>
+
+
+<p>Many thanks,</p>
+
+

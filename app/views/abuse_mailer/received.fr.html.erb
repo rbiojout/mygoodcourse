@@ -1,0 +1,30 @@
+<h1>Bonjour <%=@abuse.customer.first_name%>!</h1>
+
+<h3>Nous accusons la réception de votre demande de vérification</h3>
+
+
+<p>suite à votre demande, nous allons vérifier les éléments suivants:</p>
+<ul>
+  <li>
+    <%=
+        case @abuse.abusable
+          when Product
+            (I18n.translate 'activerecord.models.product.one').capitalize + ": " + @abuse.abusable.name
+          when Comment
+            (I18n.translate 'activerecord.models.comment.one').capitalize + ": " + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
+          else
+            ''
+        end
+    %>
+  </li>
+  <li>
+    Avec la description que vous avez communiquée et qui est la suivante: <%= @abuse.description %>
+  </li>
+</ul>
+
+<p>
+  Nous vous enverrons un email pour vous indiquer la suite que nous donnons à votre signalement.
+</p>
+
+<p>Merci de votre aide pour rendre MyGoodCourse meilleur!</p>
+

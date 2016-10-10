@@ -1,0 +1,30 @@
+<h1>Hello <%=@abuse.customer.first_name%>!</h1>
+
+<h3>We have taken into account your request for reporting an abuse</h3>
+
+
+<p>based on your feedback, we will consider this information:</p>
+<ul>
+  <li>
+    <%=
+        case @abuse.abusable
+          when Product
+            (I18n.translate 'activerecord.models.product.one').capitalize + ": " + @abuse.abusable.name
+          when Comment
+            (I18n.translate 'activerecord.models.comment.one').capitalize + ": " + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
+          else
+            ''
+        end
+    %>
+  </li>
+  <li>
+    With your given description: <%= @abuse.description %>
+  </li>
+</ul>
+
+<p>
+  We will e-mail you again when this abuse has been reviewed.
+</p>
+
+<p>Many thanks to help us make MyGoodCourse even better!</p>
+
