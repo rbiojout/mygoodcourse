@@ -21,6 +21,8 @@
 
 en:
   hello: "Hello world"
+  keywords: "MyGoodCourse, My Good Course, teaching resources pédagogiques, school, course, free pdf"
+  description: "The marketplace MyGoodCourse offers teaching resources made by teachers, from primary to higher education, free or paid."
   page:
     home: 'Home'
     catalog: 'Catalog'
@@ -113,6 +115,9 @@ en:
       alert_add_cart: "Product not active."
       alert_empty_cart: 'Your Cart is empty'
       alert_rejected_order: 'Order rejected'
+      securized_payment: 'Securized payment'
+      my_cards: 'My cards'
+      other_card: 'Other card'
 
   activerecord:
     models:

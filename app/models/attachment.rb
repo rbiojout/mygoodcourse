@@ -1,3 +1,30 @@
+# == Schema Information
+#
+# Table name: attachments
+#
+#  id             :integer          not null, primary key
+#  file           :string
+#  file_size      :integer
+#  file_type      :string
+#  nbpages        :integer
+#  version_number :decimal(, )
+#  active         :boolean
+#  product_id     :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  position       :integer
+#  iv             :binary
+#  key            :binary
+#
+# Indexes
+#
+#  index_attachments_on_product_id  (product_id)
+#
+# Foreign Keys
+#
+#  fk_rails_1e84c5b1fb  (product_id => products.id)
+#
+
 class Attachment < ActiveRecord::Base
 
   #attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active

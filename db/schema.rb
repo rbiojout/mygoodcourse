@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160930041729) do
+ActiveRecord::Schema.define(version: 20161012150107) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -363,6 +363,34 @@ ActiveRecord::Schema.define(version: 20160930041729) do
 
   add_index "stripe_accounts", ["customer_id"], name: "index_stripe_accounts_on_customer_id", using: :btree
 
+  create_table "stripe_cards", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.string   "name"
+    t.string   "brand"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.integer  "last4"
+    t.string   "country"
+    t.boolean  "default_source",     default: false
+    t.integer  "stripe_customer_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+  end
+
+  add_index "stripe_cards", ["stripe_customer_id"], name: "index_stripe_cards_on_stripe_customer_id", using: :btree
+
+  create_table "stripe_customers", force: :cascade do |t|
+    t.string   "stripe_id"
+    t.integer  "account_balance"
+    t.string   "currency"
+    t.boolean  "delinquent",      default: false
+    t.integer  "customer_id"
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
+  end
+
+  add_index "stripe_customers", ["customer_id"], name: "index_stripe_customers_on_customer_id", using: :btree
+
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -401,6 +429,8 @@ ActiveRecord::Schema.define(version: 20160930041729) do
   add_foreign_key "payments", "orders"
   add_foreign_key "products", "customers"
   add_foreign_key "stripe_accounts", "customers"
+  add_foreign_key "stripe_cards", "stripe_customers"
+  add_foreign_key "stripe_customers", "customers"
   add_foreign_key "topics", "countries"
   add_foreign_key "wish_lists", "customers"
   add_foreign_key "wish_lists", "products"

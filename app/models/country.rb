@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: countries
+#
+#  id         :integer          not null, primary key
+#  name       :string
+#  code2      :string
+#  code3      :string
+#  continent  :string
+#  tld        :string
+#  currency   :string
+#  eu_member  :boolean
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class Country < ActiveRecord::Base
 
   # we organize the products into cycles and levels for a country

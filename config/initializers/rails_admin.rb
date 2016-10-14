@@ -47,7 +47,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit do
-      except [File, StripeAccount, Peer]
+      except [File, StripeAccount, StripeCard, StripeCustomer, Peer]
     end
     delete
     # Set the custom action here
@@ -474,6 +474,14 @@ RailsAdmin.config do |config|
 
   config.model "StripeAccount" do
     parent Customer
+  end
+
+  config.model "StripeCard" do
+    parent StripeCustomer
+  end
+
+  config.model "StripeCustomer" do
+    parent Order
   end
 
   config.model "Topic" do

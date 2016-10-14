@@ -1,3 +1,58 @@
+# == Schema Information
+#
+# Table name: customers
+#
+#  id                          :integer          not null, primary key
+#  name                        :string
+#  first_name                  :string
+#  mobile                      :string
+#  picture                     :string
+#  created_at                  :datetime         not null
+#  updated_at                  :datetime         not null
+#  email                       :string           default(""), not null
+#  encrypted_password          :string           default(""), not null
+#  reset_password_token        :string
+#  reset_password_sent_at      :datetime
+#  remember_created_at         :datetime
+#  sign_in_count               :integer          default(0), not null
+#  current_sign_in_at          :datetime
+#  last_sign_in_at             :datetime
+#  current_sign_in_ip          :inet
+#  last_sign_in_ip             :inet
+#  formatted_address           :string
+#  street_address              :string
+#  administrative_area_level_1 :string
+#  administrative_area_level_2 :string
+#  postal_code                 :string
+#  locality                    :string
+#  lat                         :decimal(, )
+#  lng                         :decimal(, )
+#  birthdate                   :date
+#  score_comments              :decimal(, )
+#  nb_comments                 :integer
+#  confirmation_token          :string
+#  confirmed_at                :datetime
+#  confirmation_sent_at        :datetime
+#  unconfirmed_email           :string
+#  language                    :string
+#  country_id                  :integer
+#  description                 :string
+#  slug                        :string
+#  counter_cache               :integer          default(0)
+#
+# Indexes
+#
+#  index_customers_on_confirmation_token    (confirmation_token) UNIQUE
+#  index_customers_on_country_id            (country_id)
+#  index_customers_on_email                 (email) UNIQUE
+#  index_customers_on_reset_password_token  (reset_password_token) UNIQUE
+#  index_customers_on_slug                  (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_595506fbcf  (country_id => countries.id)
+#
+
 class Customer < ActiveRecord::Base
   extend FriendlyId
 
@@ -90,7 +145,10 @@ class Customer < ActiveRecord::Base
   has_many :followers, through: :passive_peers, source: :follower
 
   # payment solution StripeAccount
-  has_one :stripe_account, dependent: :destroy
+  has_one :stripe_account, :class_name => 'StripeAccount', dependent: :destroy
+
+  has_one :stripe_customer, :class_name => 'StripeCustomer', dependent: :destroy
+  has_many :stripe_cards, through: :stripe_customer
 
 
   # we have some abuses that has been reported by this customer

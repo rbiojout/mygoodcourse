@@ -62,7 +62,7 @@ class Order < ActiveRecord::Base
         logger.error e.message
         e.backtrace.each { |line| logger.error line }
 
-        raise Errors::PaymentDeclined, 'Payment was declined by the payment processor.'
+        raise StandardError, "Payment was declined by the payment processor #{e.message}."
         false
       end
     end
@@ -117,6 +117,7 @@ class Order < ActiveRecord::Base
   private
 
   def transfer_to_stripe(regrouped_orders_items)
+
     # we prepare the sum of all orders_item
     amout_total = 0.0
     application_fee_total = 0.0
@@ -133,6 +134,7 @@ class Order < ActiveRecord::Base
     # take the corresponding Stripe Account
     stripe_account_seller = regrouped_orders_items.first.product.customer.stripe_account
     if (stripe_account_seller.nil? && amout_total > 0.0)
+
       #notes += "StripeAccount null for some items."
       #we charge all to the platform
       # @TODO handle exception to continue treat other charges
@@ -144,11 +146,18 @@ class Order < ActiveRecord::Base
         # we keep track of the needed CashOut
         roi.processing_reference = charge.id
         # add the fact that we have confirmation from Stripe
+        begin
         roi.receive!
         if charge.paid?
           roi.accept!
         else
           roi.reject!
+        end
+        rescue => e
+          logger.error e.message
+          e.backtrace.each { |line| logger.error line }
+
+          raise StandardError, "Error during change state #{e.message}."
         end
       end
       # we log at the order level
@@ -192,11 +201,13 @@ class Order < ActiveRecord::Base
           payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
         rescue => e
           logger.debug("Problem saving payment. #{e.message}")
+          raise StandardError, "Problem saving payment. #{e.message}"
         end
 
       else
         notes += "Some items where not accepted by the Bank."
       end
     end
+
   end
 end

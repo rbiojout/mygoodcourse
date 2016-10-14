@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: categories
+#
+#  id          :integer          not null, primary key
+#  name        :string           not null
+#  description :string
+#  family_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  position    :integer
+#
+# Indexes
+#
+#  index_categories_on_family_id  (family_id)
+#  index_categories_on_name       (name)
+#
+# Foreign Keys
+#
+#  fk_rails_22ababf336  (family_id => families.id)
+#
+
 class Category < ActiveRecord::Base
   belongs_to :family, :inverse_of => :categories
   acts_as_list scope: :family, add_new_at: :bottom

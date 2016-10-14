@@ -21,6 +21,8 @@
 
 fr:
   hello: "Bonjour à tous"
+  keywords: "MyGoodCourse, My Good Course, ressources pédagogiques, scolaire, cours, pdf gratuit"
+  description: "La place de marché MyGoodCourse propose des ressources pédagogiques à partir des pratiques d'enseignants, du primaire au supérieur, gratuites ou payantes."
   page:
     home: 'Accueil'
     catalog: 'Catalogue'
@@ -107,6 +109,9 @@ fr:
       alert_add_cart: "Product non actif."
       alert_empty_cart: 'Votre panier est vide'
       alert_rejected_order: 'Commande rejetée'
+      securized_payment: 'Paiement sécurisé'
+      my_cards: 'Mes cartes'
+      other_card: 'Autre carte'
 
 
   activerecord:

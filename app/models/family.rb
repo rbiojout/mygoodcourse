@@ -1,3 +1,25 @@
+# == Schema Information
+#
+# Table name: families
+#
+#  id          :integer          not null, primary key
+#  name        :string           not null
+#  description :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  position    :integer
+#  country_id  :integer
+#
+# Indexes
+#
+#  index_families_on_country_id  (country_id)
+#  index_families_on_name        (name)
+#
+# Foreign Keys
+#
+#  fk_rails_67b345b356  (country_id => countries.id)
+#
+
 class Family < ActiveRecord::Base
 
   has_many :categories, dependent: :destroy

@@ -164,6 +164,7 @@ https://www.graphicsprings.com/start-your-logo
 search through https://thenounproject.com
 Use of Montserrat fonts from Google fonts
 Use for favicon http://realfavicongenerator.net (cf https://rubyplus.com/articles/1751-How-to-Add-Favicon-to-Rails-4-2-App-in-5-minutes)
+Use for https://google.github.io/material-design-icons from google
 
 
 USER ONBOARDING
@@ -180,6 +181,18 @@ https://github.com/ekremkaraca/awesome-rails
 
 MATH AJAX : use of LaTEX and MathML in the browser with Javascript
 http://docs.mathjax.org/
+
+DOCUMENTATION
+RDOC the normal way
+YARD nicer
+
+DEVELOPMENT
+annotate to have informations inside models rake annotate_models, insite routes rake annotate_routes
+ATT! in this case for yard
+--markup markdown
+--markup-provider kramdown
+
+
 
 
 

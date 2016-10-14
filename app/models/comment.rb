@@ -1,3 +1,27 @@
+# == Schema Information
+#
+# Table name: comments
+#
+#  id          :integer          not null, primary key
+#  title       :string
+#  description :string
+#  score       :decimal(, )
+#  product_id  :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  customer_id :integer
+#
+# Indexes
+#
+#  index_comments_on_customer_id  (customer_id)
+#  index_comments_on_product_id   (product_id)
+#
+# Foreign Keys
+#
+#  fk_rails_1eff374fe1  (customer_id => customers.id)
+#  fk_rails_a0d280f6e4  (product_id => products.id)
+#
+
 class Comment < ActiveRecord::Base
   belongs_to :product
   belongs_to :customer

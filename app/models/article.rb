@@ -1,3 +1,26 @@
+# == Schema Information
+#
+# Table name: articles
+#
+#  id            :integer          not null, primary key
+#  name          :string
+#  description   :text
+#  position      :integer
+#  slug          :string
+#  topic_id      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  counter_cache :integer          default(0)
+#
+# Indexes
+#
+#  index_articles_on_topic_id  (topic_id)
+#
+# Foreign Keys
+#
+#  fk_rails_ce7582c81f  (topic_id => topics.id)
+#
+
 class Article < ActiveRecord::Base
   extend FriendlyId
 

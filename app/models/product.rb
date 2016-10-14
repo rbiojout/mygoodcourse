@@ -1,3 +1,33 @@
+# == Schema Information
+#
+# Table name: products
+#
+#  id             :integer          not null, primary key
+#  name           :string
+#  sku            :string
+#  permalink      :string
+#  description    :string
+#  active         :boolean          default(TRUE)
+#  price          :decimal(8, 2)    default(0.0)
+#  featured       :boolean          default(FALSE)
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  customer_id    :integer
+#  nb_comments    :integer          default(0)
+#  score_comments :decimal(, )      default(0.0)
+#  slug           :string
+#  counter_cache  :integer          default(0)
+#
+# Indexes
+#
+#  index_products_on_customer_id  (customer_id)
+#  index_products_on_slug         (slug) UNIQUE
+#
+# Foreign Keys
+#
+#  fk_rails_252452a41b  (customer_id => customers.id)
+#
+
 class Product < ActiveRecord::Base
   extend FriendlyId
   include PgSearch

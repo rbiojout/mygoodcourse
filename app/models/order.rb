@@ -1,3 +1,34 @@
+# == Schema Information
+#
+# Table name: orders
+#
+#  id                 :integer          not null, primary key
+#  customer_id        :integer
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  token              :string
+#  status             :string
+#  received_at        :datetime
+#  accepted_at        :datetime
+#  accepted_by        :integer
+#  consignment_number :string
+#  rejected_at        :datetime
+#  rejected_by        :integer
+#  ip_address         :string
+#  notes              :text
+#  amount_paid        :decimal(8, 2)    default(0.0)
+#  exported           :boolean
+#  invoice_number     :string
+#
+# Indexes
+#
+#  index_orders_on_customer_id  (customer_id)
+#
+# Foreign Keys
+#
+#  fk_rails_3dad120da9  (customer_id => customers.id)
+#
+
 class Order < ActiveRecord::Base
 
   EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
@@ -12,7 +43,6 @@ class Order < ActiveRecord::Base
   require_dependency 'order/states'
   require_dependency 'order/billing'
   require_dependency 'order/stripe_order'
-  #require_dependency 'shoppe/order/delivery'
 
 
   # The Employee who accepted the order

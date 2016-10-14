@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: levels
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :string
+#  position    :integer
+#  cycle_id    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#
+# Indexes
+#
+#  index_levels_on_cycle_id  (cycle_id)
+#
+# Foreign Keys
+#
+#  fk_rails_3d7ea94142  (cycle_id => cycles.id)
+#
+
 class Level < ActiveRecord::Base
   belongs_to :cycle, :inverse_of => :levels
   acts_as_list scope: :cycle, add_new_at: :bottom

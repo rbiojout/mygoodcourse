@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: cycles
+#
+#  id          :integer          not null, primary key
+#  name        :string
+#  description :string
+#  position    :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  country_id  :integer
+#
+# Indexes
+#
+#  index_cycles_on_country_id  (country_id)
+#
+# Foreign Keys
+#
+#  fk_rails_74cd77e9b7  (country_id => countries.id)
+#
+
 class Cycle < ActiveRecord::Base
 
   has_many :levels, dependent: :destroy

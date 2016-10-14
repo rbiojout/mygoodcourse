@@ -70,7 +70,85 @@ class OrdersController < ApplicationController
 
     #if request.patch?
       begin
-        current_order.accept_stripe_token(params[:stripeToken])
+        token = params[:stripeToken]
+        db_stripe_customer = current_customer.stripe_customer
+        # if we receive a token: it is coming from a fresh card
+        if token.start_with?('tok')
+          #create a customer if needed
+          if db_stripe_customer.nil?
+            stripe_customer = ::Stripe::Customer.create({ description: "Customer for order #{current_order.id}", card: token }, Rails.application.secrets.stripe_secret_key)
+            db_stripe_customer = StripeCustomer.create(customer: current_customer, stripe_id: stripe_customer.id, currency: stripe_customer.currency, delinquent: stripe_customer.delinquent)
+            card = stripe_customer.sources.retrieve(stripe_customer.default_source)
+            db_stripe_customer.stripe_cards.create(stripe_id: card.id, name: card.name, brand: card.brand, exp_month: card.exp_month, exp_year: card.exp_year, last4: card.last4, country: card.country, default_source: true)
+          else
+            # we add the card else and set as the prefered card
+            stripe_customer = Stripe::Customer.retrieve(db_stripe_customer.stripe_id)
+
+            card = stripe_customer.sources.create({:source => token})
+            db_stripe_customer.stripe_cards.create(stripe_id: card.id, name: card.name, brand: card.brand, exp_month: card.exp_month, exp_year: card.exp_year, last4: card.last4, country: card.country, default_source: true)
+
+            # set as the prefered
+            stripe_customer.default_source = card.id
+            stripe_customer.save
+            # unset all other cards to unprefered
+            db_stripe_customer.stripe_cards.each do |db_card|
+              if db_card.stripe_id != card.id
+                db_card.default_source = false
+                db_card.save
+              end
+            end
+          end
+          token = stripe_customer.id
+
+          #if we receive a customer: we use the default card
+        elsif token.start_with?('cus')
+          #we keep the token
+          # we need to make sure the customer is the same as db
+          db_stripe_customer = StripeCustomer.find_by_stripe_id(token)
+
+          if db_stripe_customer.customer.id != current-customer.id
+            flash[:alert] = "#{I18n.translate('dialog.shop.alert_rejected_order')} #{e.message}"
+            logger.debug("Wrong customer without rights")
+            current_order.reset! if current_order.may_reset?
+            current_order.reject!
+            redirect_to checkout_path
+            return
+          end
+        elsif token.start_with?('card')
+          #we need to get the customer
+          db_stripe_card = StripeCard.find_by_stripe_id(token)
+          db_stripe_customer = db_stripe_card.stripe_customer
+          token = db_stripe_customer.stripe_id
+          # make as the default card
+
+
+          if db_stripe_customer.customer.id != current_customer.id
+            flash[:alert] = "#{I18n.translate('dialog.shop.alert_rejected_order')} #{e.message}"
+            logger.debug("Wrong customer without rights")
+            current_order.reset! if current_order.may_reset?
+            current_order.reject!
+            redirect_to checkout_path
+            return
+          end
+
+          # we add the card else and set as the prefered card
+          stripe_customer = Stripe::Customer.retrieve(db_stripe_customer.stripe_id)
+
+          # set as the prefered
+          stripe_customer.default_source = db_stripe_card.stripe_id
+          stripe_customer.save
+          # unset all other cards to unprefered
+          db_stripe_customer.stripe_cards.each do |db_card|
+            if db_card.stripe_id != db_stripe_card.stripe_id
+              db_card.default_source = false
+              db_card.save
+            end
+          end
+
+        end
+
+        # if we receive a customer: it is coming from a customer already created with a store card
+        current_order.accept_stripe_token(token)
         # This payment method should usually be called in a payment module or elsewhere but for the demo
         # we are adding a payment to the order straight away.
         # charge = ::Stripe::Charge.create({ customer: current_order.stripe_customer_token, amount: (current_order.total * BigDecimal(100)).round, currency: 'EUR', capture: false }, Rails.application.secrets.stripe_secret_key)
@@ -114,6 +192,6 @@ class OrdersController < ApplicationController
     end
 
     def sort_direction
-      %w[asc desc].include?(params[:direction]) ? params[:direction] : "asc"
+      %w[asc desc].include?(params[:direction]) ? params[:direction] : "desc"
     end
 end

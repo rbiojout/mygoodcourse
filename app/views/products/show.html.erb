@@ -101,7 +101,8 @@
       </div>
       <div class="col-sm-6">
         <!-- social buttons -->
-        <p><a href='#'><%= social_share_button_tag(@product.name) %></p>
+        <%= image_url(@product.preview) if Rails.env.development? %>
+        <p><a href='#'><%= social_share_button_tag(@product.name, :image => image_url(@product.preview), :'data-source' => image_url(@product.preview), :'data-type' => 'photo') %></p>
         <!-- end social buttons -->
       </div>
     </div>

@@ -176,6 +176,11 @@ group :development do
   gem 'meta_request'
   gem 'quiet_assets'
 
+  # annotate the informations
+  gem 'annotate'
+  # use special markdown needed, in particular when using doc generated YARD
+  gem 'kramdown', :require => false
+
   # get UML
   gem 'railroady'
 
@@ -187,6 +192,7 @@ group :development do
   gem 'rack-mini-profiler', require: false
   #gem 'brakeman', :require => false
   # gem "rubycritic", :require => false
+
 
 end
 

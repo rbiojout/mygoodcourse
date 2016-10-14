@@ -20,7 +20,7 @@ class PaymentsController < ApplicationController
     else
       render layout: false
     end
-  rescue Errors::RefundFailed => e
+  rescue StandardError => e
     redirect_to @order, flash: { alert: e.message }
   end
 

@@ -1,3 +1,24 @@
+# == Schema Information
+#
+# Table name: abuses
+#
+#  id            :integer          not null, primary key
+#  abusable_id   :integer
+#  abusable_type :string
+#  customer_id   :integer
+#  description   :text
+#  status        :string
+#
+# Indexes
+#
+#  index_abuses_on_abusable_type_and_abusable_id  (abusable_type,abusable_id)
+#  index_abuses_on_customer_id                    (customer_id)
+#
+# Foreign Keys
+#
+#  fk_rails_0f23e3c2cf  (customer_id => customers.id)
+#
+
 class Abuse < ActiveRecord::Base
   # polymorphic association
   belongs_to :abusable, polymorphic: true

@@ -1,3 +1,32 @@
+# == Schema Information
+#
+# Table name: order_items
+#
+#  id                   :integer          not null, primary key
+#  product_id           :integer
+#  price                :decimal(8, 2)    default(0.0)
+#  tax_rate             :decimal(8, 2)
+#  tax_amount           :decimal(8, 2)    default(0.0)
+#  order_id             :integer
+#  created_at           :datetime         not null
+#  updated_at           :datetime         not null
+#  processing_reference :string
+#  method               :string
+#  status               :string
+#  cost_price           :decimal(8, 2)    default(0.0)
+#  application_fee      :decimal(8, 2)    default(0.0)
+#
+# Indexes
+#
+#  index_order_items_on_order_id    (order_id)
+#  index_order_items_on_product_id  (product_id)
+#
+# Foreign Keys
+#
+#  fk_rails_e3cb28f071  (order_id => orders.id)
+#  fk_rails_f1a29ddd47  (product_id => products.id)
+#
+
 class OrderItem < ActiveRecord::Base
   belongs_to :product
   belongs_to :order
@@ -85,7 +114,7 @@ class OrderItem < ActiveRecord::Base
   # @param ordered_item [Object] an object which implements the Shoppe::OrderableItem protocol
   # @return [OrderItem]
   def self.add_item(product)
-    #fail Errors::UnorderableItem, product: product unless product.active?
+    #fail AppErrors::UnorderableItem, product: product unless product.active?
     if product.active
       transaction do
         if existing = where(product_id: product.id).first
