@@ -90,7 +90,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
   test "accept payment" do
     prepare_cart
 
-    get checkout_path
 
     # we have an order
     @current_order = assigns(:current_order)
@@ -120,8 +119,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
   test "bypass pending balance" do
     prepare_cart
 
-    get checkout_path
-
     # we have an order
     @current_order = assigns(:current_order)
 
@@ -135,7 +132,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
             :cvc => "314"
         },
     )
-    @current_order = assigns(:current_order)
 
     get checkout_confirmation_path, :stripeToken => token[:id]
 
@@ -151,8 +147,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
 
   test "charge failed even if customer ok" do
     prepare_cart
-
-    get checkout_path
 
     # we have an order
     @current_order = assigns(:current_order)
@@ -182,12 +176,6 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
   test "checkout" do
     prepare_cart
 
-    assert @current_order.may_confirm?
-    get checkout_path
-    assert_response :success
-
-
-
     assert_select "#stripe-form"
 
     assert_select "#stripe-form input[value=?]", I18n.t('actions.pay')
@@ -198,6 +186,10 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     assert_not_nil @current_customer
     assert_not_nil @current_order.customer
     assert @current_order.received?
+
+  end
+
+  test "customer can not order its own products" do
 
   end
 
@@ -228,8 +220,22 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
 
     # we have an order
     @current_order = assigns(:current_order)
+    assert @current_order.order_items.count, 5
+
+    get checkout_path
+
+    # some products have already been ordered
+    assert_equal I18n.t('dialog.shop.notice_already_ordered'), flash[:notice]
+
+    assert @current_order.may_confirm?
+
+    assert @current_order.order_items.count, 3
+    # submit with less products
+    get checkout_path
+
 
   end
+
 
 
 end

@@ -106,6 +106,7 @@ en:
       continue_shoping: 'Continue shoping'
       checkout: 'Validate my cart'
       notice_add_cart: 'Product was successfully added to cart.'
+      notice_already_ordered: 'Product that can already be downloaded have been removed from cart.'
       notice_pay_accepted: 'Payment has been accepted'
       notice_order_accepted: 'Order has been accepted successfully'
       notice_pay_rejected: 'Payment refused'

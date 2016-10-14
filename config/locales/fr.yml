@@ -100,6 +100,7 @@ fr:
       continue_shoping: 'Continuer mes achats'
       checkout: 'Valider mon panier'
       notice_add_cart: 'Le produit a été ajouté au panier.'
+      notice_already_ordered: 'Les produits auxquels vous avez déjà accès ont été retirés de votre panier.'
       notice_pay_accepted: 'Payement accepté'
       notice_pay_rejected: 'Payment refused'
       notice_order_accepted: 'La commande a été acceptée avec succès'

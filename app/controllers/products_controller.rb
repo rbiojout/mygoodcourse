@@ -283,7 +283,8 @@ class ProductsController < ApplicationController
   # POST /buy_product
   # POST /buy_product json
   def add_to_basket
-    # @TODO check if already paid in another transaction
+      # if the customer is not signed, we can not check if an order has been already made
+      #  it is checked during the confirmation state
       product_to_order = Product.friendly.find(params[:product_id])
       if (product_to_order.nil? || !product_to_order.active?)
         flash[:alert] = t('dialog.shop.alert_add_cart')

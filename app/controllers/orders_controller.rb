@@ -34,6 +34,22 @@ class OrdersController < ApplicationController
     end
     # update the status
     current_order.ip_address = request.ip
+
+    # we want to remove the items already paid by the customer
+    # we can only do it at this stage because we need to have a customer signed
+    already_ordered = false
+    current_order.order_items.each do |item|
+      if item.product.candownload(current_customer)
+        item.destroy
+        already_ordered = true
+      end
+    end
+    if already_ordered
+      flash[:notice] = I18n.translate('dialog.shop.notice_already_ordered')
+      redirect_to checkout_path
+      return
+    end
+
     # change the state and save
     current_order.confirm! if current_order.may_confirm?
 
