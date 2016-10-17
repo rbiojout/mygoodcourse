@@ -29,6 +29,13 @@ class Comment < ActiveRecord::Base
   # we have some abuses that can be reported by customers
   has_many :abuses, class_name: "Abuse", as: :abusable
 
+  # we have some likes that can be reported by customers
+  has_many :likes, class_name: "Like", as: :likeable
+
+  def liked?(customer)
+    Like.where(:likeable_id => self.id).where(:likeable_type => 'Comment').where(:customer => customer).count > 0
+  end
+
   validates :title, :description, :score, :product, presence: true
 
   after_save :update_for_product

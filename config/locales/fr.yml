@@ -52,6 +52,8 @@ fr:
       new: 'Signaler un abus'
     comments:
       new: 'Ajouter une évaluation'
+    likes:
+      new: 'Like it!'
     products:
       new: 'Créer un produit'
     stripe_account:
@@ -150,6 +152,9 @@ fr:
         one: 'niveau'
         other: 'niveaux'
         all: 'Tous niveaux'
+      like:
+        one: 'like'
+        other: 'likes'
       order:
         one: 'commande'
         other: 'commandes'

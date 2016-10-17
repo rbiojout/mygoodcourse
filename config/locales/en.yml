@@ -52,6 +52,8 @@ en:
       new: 'Report abuse'
     comments:
       new: 'Add comment'
+    likes:
+      new: 'Like it!'
     products:
       new: 'Create product'
     stripe_account:
@@ -153,6 +155,9 @@ en:
         one: 'level'
         other: 'levels'
         all: 'All levels'
+      like:
+        one: 'like'
+        other: 'likes'
       order:
         one: 'order'
         other: 'orders'

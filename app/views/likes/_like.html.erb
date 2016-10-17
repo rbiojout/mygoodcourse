@@ -1,0 +1,13 @@
+<%
+   # context : parameter to refer to the polymorphic
+   context_type = context.class.name.downcase
+   context_param = context.class.name.downcase + "_id"
+   context_value = context.id
+%>
+<div id=<%="like_#{context_type}_#{context_value}"%> >
+  <%= link_to(like_like_path(context_param => context_value), alt: 'Like!', method: :post, remote: true ) do %>
+
+      <i class="fa fa-thumbs-up"> </i>
+  <% end %>
+  <%= context.likes.size unless context.likes.size ==0 %>
+</div>

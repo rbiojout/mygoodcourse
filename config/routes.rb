@@ -173,6 +173,14 @@
 
 Rails.application.routes.draw do
 
+  #resources :likes
+  # Like and unlike other ressources (polymorphic)
+  #
+  #
+  post 'likes/like' => 'likes#like', :as => 'like_like'
+  delete 'likes/unlike' => 'likes#unlike', :as => 'unlike_like'
+
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # protect from having all ressources exposed via CDN Cloudfront

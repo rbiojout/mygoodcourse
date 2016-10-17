@@ -79,6 +79,17 @@
           <p class="text-right"><small><%= link_to new_abuse_path(:product_id => @product.id), :remote => true do %><span class="fa fa-bolt red"></span> <%= t('actions.abuses.new') %><% end %></small></p>
         </div>
         <!-- end abuse -->
+        <!-- like it! -->
+        <% if customer_signed_in? %>
+        <div id="like_product_<%= @product.id%>">
+          <% if @product.liked?(current_customer) %>
+             <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
+          <% else %>
+              <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
+          <% end %>
+          </div>
+        <% end %>
+        <!-- end like it! -->
       </div>
 
 

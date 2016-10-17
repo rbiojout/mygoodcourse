@@ -154,6 +154,12 @@ class Customer < ActiveRecord::Base
   # we have some abuses that has been reported by this customer
   has_many :reported_abuses, class_name: "Abuse", foreign_key: "customer_id", inverse_of: :customer
 
+  # we have some likes that has been reported by this customer
+  has_many :reported_likes, class_name: "Like", foreign_key: "customer_id", inverse_of: :customer
+
+  has_many :likes, dependent: :delete_all
+
+
   # Follows a customer.
   def follow(other_customer)
     active_peers.create(followed: other_customer)

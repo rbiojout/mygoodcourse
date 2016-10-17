@@ -84,6 +84,14 @@ class Product < ActiveRecord::Base
   # we have some abuses that can be reported by customers
   has_many :abuses, class_name: "Abuse", as: :abusable
 
+  # we have some likes that can be reported by customers
+  has_many :likes, class_name: "Like", as: :likeable
+
+  def liked?(customer)
+    Like.where(:likeable_id => self.id).where(:likeable_type => 'Product').where(:customer => customer).count > 0
+  end
+
+
   # validators
   validates :customer_id, :name, :description, presence: true
 
