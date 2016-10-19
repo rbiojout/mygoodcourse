@@ -1,6 +1,6 @@
 class ChartsController < ApplicationController
   before_action :authenticate_customer!, only: [:accepted_orders, :created_products, :amount_orders]
-  before_action :authenticate_employee!, only: [:created_customers, :sign_in_customers, :created_comments]
+  before_action :authenticate_employee!, only: [:created_customers, :sign_in_customers, :created_reviews]
 
   ###################
   # stats for current customer
@@ -59,9 +59,9 @@ class ChartsController < ApplicationController
     render json: Customer.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("updated_at").sum(:sign_in_count)
   end
 
-  def created_comments
-    sum = Comment.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).count
-    render json: Comment.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge).chart_json
+  def created_reviews
+    sum = Review.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).count
+    render json: Review.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge).chart_json
   end
 
 end

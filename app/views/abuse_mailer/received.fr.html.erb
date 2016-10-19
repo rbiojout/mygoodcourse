@@ -10,8 +10,8 @@
         case @abuse.abusable
           when Product
             (I18n.translate 'activerecord.models.product.one').capitalize + ": " + @abuse.abusable.name
-          when Comment
-            (I18n.translate 'activerecord.models.comment.one').capitalize + ": " + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
+          when Review
+            (I18n.translate 'activerecord.models.review.one').capitalize + ": " + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
           else
             ''
         end

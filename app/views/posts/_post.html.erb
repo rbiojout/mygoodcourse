@@ -1,0 +1,20 @@
+
+<li class="media">
+<div class="media-left media-top">
+  <%= link_to (post_path(post)) do %>
+
+    <%# image_tag post.visual, class: "media-object" %>
+      <%= image_tag 'http://fakeimg.pl/240x180/', class: "media-object" %>
+  <% end %>
+</div>
+<div class="media-body">
+  <%= link_to (post_path(post)) do %>
+      <h4 class="media-heading"><%= post.name %></h4>
+  <% end %>
+  <%# truncate(post.description, :length => 20, :omission => "" , :escape => false) %>
+<div class="ellipsis" style="height:150px;">
+  <%= raw(post.description) %>
+</div>
+</div>
+
+</li>

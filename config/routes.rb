@@ -1,16 +1,18 @@
 # == Route Map
 #
 #                       Prefix Verb      URI Pattern                                              Controller#Action
+#                    like_like POST      /likes/like(.:format)                                    likes#like
+#                  unlike_like DELETE    /likes/unlike(.:format)                                  likes#unlike
 #                  rails_admin           /admin                                                   RailsAdmin::Engine
 #                                        /*path(.:format)                                         errors#not_found
-#                     comments GET       /comments(.:format)                                      comments#index
-#                              POST      /comments(.:format)                                      comments#create
-#                  new_comment GET       /comments/new(.:format)                                  comments#new
-#                 edit_comment GET       /comments/:id/edit(.:format)                             comments#edit
-#                      comment GET       /comments/:id(.:format)                                  comments#show
-#                              PATCH     /comments/:id(.:format)                                  comments#update
-#                              PUT       /comments/:id(.:format)                                  comments#update
-#                              DELETE    /comments/:id(.:format)                                  comments#destroy
+#                      reviews GET       /reviews(.:format)                                       reviews#index
+#                              POST      /reviews(.:format)                                       reviews#create
+#                   new_review GET       /reviews/new(.:format)                                   reviews#new
+#                  edit_review GET       /reviews/:id/edit(.:format)                              reviews#edit
+#                       review GET       /reviews/:id(.:format)                                   reviews#show
+#                              PATCH     /reviews/:id(.:format)                                   reviews#update
+#                              PUT       /reviews/:id(.:format)                                   reviews#update
+#                              DELETE    /reviews/:id(.:format)                                   reviews#destroy
 #                       abuses POST      /abuses(.:format)                                        abuses#create
 #                    new_abuse GET       /abuses/new(.:format)                                    abuses#new
 #               refund_payment POST      /payments/:id/refund(.:format)                           payments#refund
@@ -92,7 +94,7 @@
 #       visited_products_chart GET       /charts/visited_products(.:format)                       charts#visited_products
 #      created_customers_chart GET       /charts/created_customers(.:format)                      charts#created_customers
 #      sign_in_customers_chart GET       /charts/sign_in_customers(.:format)                      charts#sign_in_customers
-#       created_comments_chart GET       /charts/created_comments(.:format)                       charts#created_comments
+#        created_reviews_chart GET       /charts/created_reviews(.:format)                        charts#created_reviews
 #                         home GET       /:locale/static_pages/home(.:format)                     static_pages#home
 #                         help GET       /:locale/help(.:format)                                  static_pages#help
 #                      contact GET       /:locale/contact(.:format)                               static_pages#contact
@@ -112,7 +114,7 @@
 #      customer_attach_picture POST      /:locale/customers/:customer_id/attach_picture(.:format) customers#attach_picture
 #              circle_customer GET       /:locale/customers/:id/circle(.:format)                  customers#circle
 #           wish_list_customer GET       /:locale/customers/:id/wishlist(.:format)                customers#wishlist
-#       comments_list_customer GET       /:locale/customers/:id/comments_list(.:format)           customers#comments_list
+#        reviews_list_customer GET       /:locale/customers/:id/reviews_list(.:format)            customers#reviews_list
 #           dashboard_customer GET       /:locale/customers/:id/dashboard(.:format)               customers#dashboard
 #        credit_cards_customer GET       /:locale/customers/:id/credit_cards(.:format)            customers#credit_cards
 #            cash_out_customer GET       /:locale/customers/:id/cash_out(.:format)                customers#cash_out
@@ -173,6 +175,8 @@
 
 Rails.application.routes.draw do
 
+  resources :updates
+  resources :posts
   #resources :likes
   # Like and unlike other ressources (polymorphic)
   #
@@ -188,8 +192,8 @@ Rails.application.routes.draw do
   match '*path', via: :all, to: 'errors#not_found',
         constraints: CloudfrontConstraint.new
 
-  resources :comments
-  # abuses reported for Comments and Products
+  resources :reviews
+  # abuses reported for Reviews and Products
   resources :abuses, only: [:new, :create]
   #, only: [:new, :create]
   resources :payments, only: [:show] do
@@ -312,7 +316,7 @@ Rails.application.routes.draw do
   # for employees
   get 'charts/created_customers' => 'charts#created_customers', :as => 'created_customers_chart'
   get 'charts/sign_in_customers' => 'charts#sign_in_customers', :as => 'sign_in_customers_chart'
-  get 'charts/created_comments' => 'charts#created_comments', :as => 'created_comments_chart'
+  get 'charts/created_reviews' => 'charts#created_reviews', :as => 'created_reviews_chart'
 
 
   #
@@ -361,8 +365,8 @@ Rails.application.routes.draw do
         get :circle
         # prefered products for customer
         get :wishlist, as: 'wish_list'
-        # comments received by customer
-        get :comments_list, as: 'comments_list'
+        # reviews received by customer
+        get :reviews_list, as: 'reviews_list'
         # from the dashbord page add some links
         get :dashboard, :credit_cards, :cash_out
 
@@ -432,13 +436,13 @@ Rails.application.routes.draw do
 
   # Example resource route with sub-resources:
   #   resources :products do
-  #     resources :comments, :sales
+  #     resources :reviews, :sales
   #     resource :seller
   #   end
 
   # Example resource route with more complex sub-resources:
   #   resources :products do
-  #     resources :comments
+  #     resources :reviews
   #     resources :sales do
   #       get 'recent', on: :collection
   #     end

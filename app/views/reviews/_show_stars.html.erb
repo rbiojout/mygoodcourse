@@ -1,0 +1,44 @@
+<div class="ratings" style="display: block">
+  <%
+     # this helper provide the stars
+     # need for font awesome to be installed
+     # default values
+     # - score (value of the score) = 0
+     # - nb_stars (total of the scale) = 5
+     # - simple ( remove the numeric value)= false
+     # - nb_reviews = -1 in case there are no reviews
+     score ||= 0.0
+     nb_stars ||= 5
+     simple ||= false
+     nb_reviews ||= -1
+
+
+  %>
+  <%= content_tag("div", class: 'product-rating') do
+
+  1.upto(nb_stars) do |i|
+    if i<=score
+      concat content_tag("span", ' ', class: "fa fa-star active-star")+ ' '
+    else
+      concat content_tag("span", ' ', class: "fa fa-star-o aero")+ ' '
+    end
+    # make some space for the stars
+    concat ' '
+  end
+  # add the score in a visual way
+  concat content_tag("span", score.round(2), class: 'badge') unless simple
+
+end %>
+
+<% # add the number of reviews if necessary
+   unless simple   %>
+<% if nb_reviews == -1 %>
+    <p><%= t('activerecord.attributes.review.not_rated')%></p>
+<% else %>
+    <p><%= nb_reviews.to_s + ' ' +(I18n.translate 'activerecord.models.review', count: nb_reviews).capitalize %></p>
+<% end %>
+<% end %>
+
+</div>
+
+

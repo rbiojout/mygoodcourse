@@ -2,21 +2,21 @@
 #
 # Table name: products
 #
-#  id             :integer          not null, primary key
-#  name           :string
-#  sku            :string
-#  permalink      :string
-#  description    :string
-#  active         :boolean          default(TRUE)
-#  price          :decimal(8, 2)    default(0.0)
-#  featured       :boolean          default(FALSE)
-#  created_at     :datetime         not null
-#  updated_at     :datetime         not null
-#  customer_id    :integer
-#  nb_comments    :integer          default(0)
-#  score_comments :decimal(, )      default(0.0)
-#  slug           :string
-#  counter_cache  :integer          default(0)
+#  id            :integer          not null, primary key
+#  name          :string
+#  sku           :string
+#  permalink     :string
+#  description   :string
+#  active        :boolean          default(TRUE)
+#  price         :decimal(8, 2)    default(0.0)
+#  featured      :boolean          default(FALSE)
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  customer_id   :integer
+#  nb_reviews    :integer          default(0)
+#  score_reviews :decimal(, )      default(0.0)
+#  slug          :string
+#  counter_cache :integer          default(0)
 #
 # Indexes
 #
@@ -122,8 +122,8 @@ class Product < ActiveRecord::Base
   validates_presence_of :levels
 
 
-  # many comments linked, we consolidate the number and the average score
-  has_many :comments, dependent: :destroy
+  # many reviews linked, we consolidate the number and the average score
+  has_many :reviews, dependent: :destroy
 
 
 
@@ -150,7 +150,7 @@ class Product < ActiveRecord::Base
     #Product.joins(:categories).where(categories: {id: categories}).where.not(id: products)
 
 
-    Product.joins(:categories).where(categories: {id: categories}).joins(:levels).where(levels: {id: levels}).distinct.order(score_comments: :desc).order(updated_at: :desc).where.not(id: products).limit(12)
+    Product.joins(:categories).where(categories: {id: categories}).joins(:levels).where(levels: {id: levels}).distinct.order(score_reviews: :desc).order(updated_at: :desc).where.not(id: products).limit(12)
   end
 
   # count the active products for a list of families
@@ -405,15 +405,15 @@ class Product < ActiveRecord::Base
     end
   end
 
-  def cancomment(customer)
+  def canreview(customer)
     false
     unless customer.nil?
-      # owner can not put comment
+      # owner can not put review
       if (self.customer.id != customer.id)
         # we need to find a valid order paid
         if is_bought_by_customer(customer.id)
-          # only one comment per user per product
-          if Comment.find_by_product_customer(self.id, self.customer.id).count==0
+          # only one review per user per product
+          if Review.find_by_product_customer(self.id, self.customer.id).count==0
             true
           end
         end
@@ -484,13 +484,13 @@ class Product < ActiveRecord::Base
     end
   end
 
-  # aggregate the score of comments for user_mailer
+  # aggregate the score of reviews for user_mailer
   def update_for_customer
-    comments = Comment.find_for_all_product_of_customer(customer.id)
-    nb_comments = comments.size
-    score_comments = comments.average(:score)
-    customer.nb_comments = nb_comments
-    customer.score_comments = score_comments
+    reviews = Review.find_for_all_product_of_customer(customer.id)
+    nb_reviews = reviews.size
+    score_reviews = reviews.average(:score)
+    customer.nb_reviews = nb_reviews
+    customer.score_reviews = score_reviews
     customer.save
   end
 

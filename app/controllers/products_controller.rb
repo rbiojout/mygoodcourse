@@ -220,7 +220,7 @@ class ProductsController < ApplicationController
   # GET /products/1.json
   def show
     @attachments = @product.attachments
-    @comments = @product.comments.paginate(page: params[:page], :per_page => Product.per_page)
+    @reviews = @product.reviews.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
     # follow activity on pages
     # we keep track of the current customer in impressions
     @current_user = current_customer
@@ -348,12 +348,12 @@ class ProductsController < ApplicationController
       #logger.debug "@product.attachments.length #{@product.attachments.length}  #{@product.attachments.first} #{params[:product][:attachments_attributes]["0"][:_destroy] == 'true'}"
       if params[:product][:attachments_attributes].nil?
         #@product.attachments.build
-        flash[:alert] = t('activerecord.product.alert_need_attachment')
+        flash[:alert] = t('dialog.product.alert_need_attachment')
         #redirect_to product_path
         logger.debug "no attachment"
       else if (params[:product][:attachments_attributes].size == 1 && params[:product][:attachments_attributes].first[1][:_destroy] == 'true')
              params[:product][:attachments_attributes].first[1][:_destroy] = 'false'
-         flash[:alert] = t('activerecord.product.alert_need_attachment')
+         flash[:alert] = t('dialog.product.alert_need_attachment')
          #redirect_to product_path
        end
 

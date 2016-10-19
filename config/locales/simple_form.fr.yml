@@ -10,8 +10,6 @@ fr:
       # html: '<abbr title="required">*</abbr>'
     error_notification:
       default_message: "merci de corriger les erreurs suivantes:"
-    labels:
-      customer:
 
     # Examples
     # labels:

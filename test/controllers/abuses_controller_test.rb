@@ -3,13 +3,13 @@ require 'test_helper'
 class AbusesControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   setup do
-    @abuse = abuses(:comment_one)
+    @abuse = abuses(:review_one)
     # add a signed customer to perform the tests
     sign_in(customers(:one), scope: :customer)
   end
 
   test "should get new" do
-    get :new, :comment_id => comments(:one).id
+    get :new, :review_id => reviews(:one).id
     assert_response :success
 
     assert_not_nil '#app_dialog #modal-dialog'
@@ -18,28 +18,28 @@ class AbusesControllerTest < ActionController::TestCase
   test "should not create abuse if not signed-in" do
     sign_out(customers(:one))
     assert_no_difference('Abuse.count') do
-      post :create, abuse: { description: @abuse.description }, comment_id: comments(:one).id
+      post :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
     end
 
     assert_redirected_to new_customer_session_path
   end
 
-  test "should create abuse for Comment" do
+  test "should create abuse for review" do
     assert_difference('Abuse.count') do
-      post :create, abuse: { description: @abuse.description }, comment_id: comments(:one).id
+      post :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
     end
 
     # check customer
     assert_equal assigns(:abuse).customer, customers(:one)
 
-    assert_redirected_to comment_path(id: comments(:one).id)
+    assert_redirected_to review_path(id: reviews(:one).id)
   end
 
 
-  test "should create abuse for Comment via ajax" do
+  test "should create abuse for review via ajax" do
     sign_in(customers(:one), scope: :customer)
     assert_difference('Abuse.count') do
-      xhr :post, :create, abuse: { description: @abuse.description }, comment_id: comments(:one).id
+      xhr :post, :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
     end
 
     assert_response :success

@@ -1,0 +1,24 @@
+
+// we had the new review at the top, just after the form and hide the fomr
+$('#review-form').after("<%= j render partial: 'reviews/review', locals: {review: @review}  %>");
+$('#review-form').hide();
+
+
+// we update the associated informations for the total
+$('#nb_reviews').html("<%= @review.product.nb_reviews %>");
+$('#product_score').html("<%= j render partial: 'reviews/show_stars', locals: {:score => @review.product.score_reviews } %>");
+
+// we refresh also the view of the customer linked to the product
+$('#customer_presentation_<%=@review.product.customer_id.to_s%>').html("<%= j render :partial => 'customers/customer', :locals => {customer: @review.product.customer, :withcols => 'false'} %>");
+
+// close the modal
+// REMOVED no more use of the modal
+// $('#app_dialog').modal_success();
+
+// first we need to hide before to show
+$('#current_review').focus();
+$('#current_review').hide();
+$('#current_review').show(600);
+
+
+

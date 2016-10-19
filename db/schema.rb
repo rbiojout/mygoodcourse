@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161016180050) do
+ActiveRecord::Schema.define(version: 20161019091143) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -80,19 +80,6 @@ ActiveRecord::Schema.define(version: 20161016180050) do
   add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id", using: :btree
   add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id", using: :btree
 
-  create_table "comments", force: :cascade do |t|
-    t.string   "title"
-    t.string   "description"
-    t.decimal  "score"
-    t.integer  "product_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "customer_id"
-  end
-
-  add_index "comments", ["customer_id"], name: "index_comments_on_customer_id", using: :btree
-  add_index "comments", ["product_id"], name: "index_comments_on_product_id", using: :btree
-
   create_table "countries", force: :cascade do |t|
     t.string   "name"
     t.string   "code2"
@@ -131,8 +118,8 @@ ActiveRecord::Schema.define(version: 20161016180050) do
     t.decimal  "lat"
     t.decimal  "lng"
     t.date     "birthdate"
-    t.decimal  "score_comments"
-    t.integer  "nb_comments"
+    t.decimal  "score_reviews"
+    t.integer  "nb_reviews"
     t.string   "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
@@ -410,25 +397,52 @@ ActiveRecord::Schema.define(version: 20161016180050) do
 
   add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
+  create_table "posts", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "customer_id"
+    t.integer  "counter_cache", default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.string   "slug"
+    t.string   "visual"
+  end
+
+  add_index "posts", ["customer_id"], name: "index_posts_on_customer_id", using: :btree
+  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
+
   create_table "products", force: :cascade do |t|
     t.string   "name"
     t.string   "sku"
     t.string   "permalink"
     t.string   "description"
-    t.boolean  "active",                                 default: true
-    t.decimal  "price",          precision: 8, scale: 2, default: 0.0
-    t.boolean  "featured",                               default: false
-    t.datetime "created_at",                                             null: false
-    t.datetime "updated_at",                                             null: false
+    t.boolean  "active",                                default: true
+    t.decimal  "price",         precision: 8, scale: 2, default: 0.0
+    t.boolean  "featured",                              default: false
+    t.datetime "created_at",                                            null: false
+    t.datetime "updated_at",                                            null: false
     t.integer  "customer_id"
-    t.integer  "nb_comments",                            default: 0
-    t.decimal  "score_comments",                         default: 0.0
+    t.integer  "nb_reviews",                            default: 0
+    t.decimal  "score_reviews",                         default: 0.0
     t.string   "slug"
-    t.integer  "counter_cache",                          default: 0
+    t.integer  "counter_cache",                         default: 0
   end
 
   add_index "products", ["customer_id"], name: "index_products_on_customer_id", using: :btree
   add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
+
+  create_table "reviews", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.decimal  "score"
+    t.integer  "product_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "customer_id"
+  end
+
+  add_index "reviews", ["customer_id"], name: "index_reviews_on_customer_id", using: :btree
+  add_index "reviews", ["product_id"], name: "index_reviews_on_product_id", using: :btree
 
   create_table "stripe_accounts", force: :cascade do |t|
     t.integer "customer_id"
@@ -482,6 +496,16 @@ ActiveRecord::Schema.define(version: 20161016180050) do
 
   add_index "topics", ["country_id"], name: "index_topics_on_country_id", using: :btree
 
+  create_table "updates", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.integer  "customer_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "updates", ["customer_id"], name: "index_updates_on_customer_id", using: :btree
+
   create_table "wish_lists", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "product_id"
@@ -496,8 +520,6 @@ ActiveRecord::Schema.define(version: 20161016180050) do
   add_foreign_key "articles", "topics"
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
-  add_foreign_key "comments", "customers"
-  add_foreign_key "comments", "products"
   add_foreign_key "customers", "countries"
   add_foreign_key "cycles", "countries"
   add_foreign_key "families", "countries"
@@ -512,11 +534,15 @@ ActiveRecord::Schema.define(version: 20161016180050) do
   add_foreign_key "order_items", "products"
   add_foreign_key "orders", "customers"
   add_foreign_key "payments", "orders"
+  add_foreign_key "posts", "customers"
   add_foreign_key "products", "customers"
+  add_foreign_key "reviews", "customers"
+  add_foreign_key "reviews", "products"
   add_foreign_key "stripe_accounts", "customers"
   add_foreign_key "stripe_cards", "stripe_customers"
   add_foreign_key "stripe_customers", "customers"
   add_foreign_key "topics", "countries"
+  add_foreign_key "updates", "customers"
   add_foreign_key "wish_lists", "customers"
   add_foreign_key "wish_lists", "products"
 end

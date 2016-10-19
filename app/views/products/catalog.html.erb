@@ -41,10 +41,10 @@
       <!--- orders --->
       <div class="list-group" id="sort_option" role="tablist" aria-multiselectable="true">
         <div class="list-group-item">
-          <%= t('dialog.method.order_by')%> <%= t('activerecord.attributes.product.score_comments') %>
-          <%= link_to catalog_products_path(:sort =>'score_comments', :direction => 'asc' ) do %>
+          <%= t('dialog.method.order_by')%> <%= t('activerecord.attributes.product.score_reviews') %>
+          <%= link_to catalog_products_path(:sort =>'score_reviews', :direction => 'asc' ) do %>
               <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> <% end%>
-          <%= link_to catalog_products_path(:sort =>'score_comments', :direction => 'desc' ) do %>
+          <%= link_to catalog_products_path(:sort =>'score_reviews', :direction => 'desc' ) do %>
               <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
         </div>
         <div class="list-group-item">

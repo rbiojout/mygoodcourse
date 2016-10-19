@@ -36,7 +36,7 @@
       <div class="panel-heading">
         <h3><%= @product.name %></h3>
         <div id="product_score">
-          <%= render :partial => "comments/show_stars", locals: {:score => @product.score_comments, :nb_comments => @product.nb_comments} %>
+          <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
         </div>      </div>
       <!-- title -->
       <div class="panel-body">
@@ -81,13 +81,11 @@
         <!-- end abuse -->
         <!-- like it! -->
         <% if customer_signed_in? %>
-        <div id="like_product_<%= @product.id%>">
           <% if @product.liked?(current_customer) %>
              <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
           <% else %>
-              <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
+              <%= render(partial: 'likes/like', locals: {context: @product}, locale: locale) %>
           <% end %>
-          </div>
         <% end %>
         <!-- end like it! -->
       </div>
@@ -112,7 +110,6 @@
       </div>
       <div class="col-sm-6">
         <!-- social buttons -->
-        <%= image_url(@product.preview) if Rails.env.development? %>
         <p><a href='#'><%= social_share_button_tag(@product.name, :image => image_url(@product.preview), :'data-source' => image_url(@product.preview), :'data-type' => 'photo') %></p>
         <!-- end social buttons -->
       </div>
@@ -127,7 +124,7 @@
 <div class="tabs product-tabs">
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#description" role="tab" data-toggle="tab" aria-controls="description" aria-expanded="true"><%= t('activerecord.attributes.product.description')%></a></li>
-    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false"><%= (I18n.translate 'activerecord.models.comment', count: 2).capitalize %> <span id="nb_comments" class="badge"><%= @product.nb_comments||0  %></span></a></li>
+    <li role="presentation" class=""><a href="#reviews" role="tab" data-toggle="tab" aria-controls="reviews" aria-expanded="false"><%= (I18n.translate 'activerecord.models.review', count: 2).capitalize %> <span id="nb_reviews" class="badge"><%= @product.nb_reviews||0  %></span></a></li>
   </ul>
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane active in" id="description">
@@ -135,58 +132,58 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="reviews">
 
-    <!-- placeholder for the new comments -->
+    <!-- placeholder for the new reviews -->
       <hr>
-    <div id="comment-form"></div>
+    <div id="review-form"></div>
       <hr>
 
-      <!-- only signed users can add comment -->
+      <!-- only signed users can add review -->
       <% if customer_signed_in? %>
-          <!-- only customer that have ordered the product can comment -->
-          <% if @product.cancomment(current_customer)==true %>
+          <!-- only customer that have ordered the product can review -->
+          <% if @product.canreview(current_customer)==true %>
               <!-- alert if empty -->
-              <% if @comments.count==0 %>
-                  <!-- add alert with call action to add comment -->
-                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_comment_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
+              <% if @reviews.count==0 %>
+                  <!-- add alert with call action to add review -->
+                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('actions.reviews.new'), alert_link_path: new_review_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
               <% else %>
-                <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+                <%= link_to t('actions.reviews.new'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
               <% end %>
 
           <% elsif (!current_customer.own_product(@product) && !@product.is_bought_by_customer(current_customer.id))  %>
           <!-- product is not owned nor ordered by the customer -->
-              <% if @comments.count==0 %>
+              <% if @reviews.count==0 %>
                   <!-- add alert with call action to add to basket -->
-                  <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
+                  <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
               <% else %>
                   <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %><br/>
               <% end %>
           <% end %>
           <% if Rails.env.development? %>
-              <%= link_to 'COMMENT REMOTE', new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-warning' %>
-              <%= link_to 'COMMENT', new_comment_path(product_id: @product.id), class: 'btn btn-warning' %>
+              <%= link_to 'REVIEW REMOTE', new_review_path(product_id: @product.id), remote: true, class: 'btn btn-warning' %>
+              <%= link_to 'REVIEW', new_review_path(product_id: @product.id), class: 'btn btn-warning' %>
           <% end %>
       <!-- customer not signed -->
       <% else %>
-          <!-- we alert for empty comments -->
-          <% if @comments.count==0 %>
+          <!-- we alert for empty reviews -->
+          <% if @reviews.count==0 %>
               <!-- add alert with call action to login -->
-              <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add'), alert_link_text: t('actions.comments.new'), alert_link_path: new_customer_session_path(:redirect_to => product_path(id: @product.id, locale: locale))}) %>
+              <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('actions.reviews.new'), alert_link_path: new_customer_session_path(:redirect_to => product_path(id: @product.id, locale: locale))}) %>
           <% else %>
-              <%= link_to t('actions.comments.new'), new_comment_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+              <%= link_to t('actions.reviews.new'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
           <% end %>
       <% end %>
 
-      <div id="comment_table" class="comments">
+      <div id="review_table" class="reviews">
 
-        <% @comments.each do |comment| %>
+        <% @reviews.each do |review| %>
             <%# Render table row partial for each person object %>
-            <%= render partial: 'comments/comment', locals: {comment: comment} %>
+            <%= render partial: 'reviews/review', locals: {review: review} %>
         <% end %>
 
       </div>
 
-      <div id="infinite-scrolling-comments" class="row">
-        <%= will_paginate(@comments, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+      <div id="infinite-scrolling-reviews" class="row">
+        <%= will_paginate(@reviews, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
       </div>
 
 
@@ -248,9 +245,9 @@
       </div>
       <div class="modal-body">
 
-        <form class="comment-form">
+        <form class="review-form">
           <input type="hidden" name="product_id" value=<%= @product.id%> >
-          <p class="comment-notes"><span id="email-notes">You need to be logged in to comment</span> Required fields are marked<span class="required">*</span></p>
+          <p class="review-notes"><span id="email-notes">You need to be logged in to review</span> Required fields are marked<span class="required">*</span></p>
           <div class="row">
             <div class="form-group col-sm-3">
               <label for="author">Score<span class="required">*</span></label>

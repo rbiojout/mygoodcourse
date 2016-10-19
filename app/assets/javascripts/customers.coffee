@@ -30,15 +30,15 @@ $(document).ready ->
   display_info($.document)
 
 
-# display more comments when displaying the comments of a customer
+# display more reviews when displaying the reviews of a customer
 $ ->
-  if $('#infinite-scrolling-comments').length > 0
+  if $('#infinite-scrolling-reviews').length > 0
     $(window).on 'scroll', ->
-      more_comments_url = jQuery('#infinite-scrolling-comments > .pagination > a.next').attr('href')
-      if more_comments_url && $(window).scrollTop() > $('#infinite-scrolling-comments').offset().top - $(window).height() - 60
+      more_reviews_url = jQuery('#infinite-scrolling-reviews .pagination a.next').attr('href')
+      if more_reviews_url && $(window).scrollTop() > $('#infinite-scrolling-reviews').offset().top - $(window).height() - 60
         #$('.pagination').html('<img src="/assets/ajax-loader.gif" alt="Loading..." title="Loading..." />')
-        $('#infinite-scrolling-comments > .pagination').text("Please Wait...");
-        $.getScript more_comments_url
+        $('#infinite-scrolling-reviews .pagination').text("Please Wait...");
+        $.getScript more_reviews_url
         # update the dom for mouse over of the new elements
         display_info($.document)
       return

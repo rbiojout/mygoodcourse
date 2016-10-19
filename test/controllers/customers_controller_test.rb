@@ -94,10 +94,10 @@ class CustomersControllerTest < ActionController::TestCase
     assert_not_nil assigns(:products)
   end
 
-  test "should have comments list" do
-    get :comments_list, id: @customer.id, locale: I18n.default_locale
+  test "should have reviews list" do
+    get :reviews_list, id: @customer.id, locale: I18n.default_locale
     assert_response :success
-    assert_not_nil assigns(:comments)
+    assert_not_nil assigns(:reviews)
   end
 
   test "should have dashboard" do

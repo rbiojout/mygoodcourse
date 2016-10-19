@@ -91,17 +91,17 @@ class AbusesController < ApplicationController
     if params[:product_id]
       id = params[:product_id]
       Product.find(params[:product_id])
-    elsif params[:comment_id]
-      id = params[:comment_id]
-      Comment.find(params[:comment_id])
+    elsif params[:review_id]
+      id = params[:review_id]
+      Review.find(params[:review_id])
     end
   end
 
   def context_url(context)
     if Product === context
       product_path(context)
-    elsif Comment === context
-      comment_path(context)
+    elsif Review === context
+      review_path(context)
     end
   end
 

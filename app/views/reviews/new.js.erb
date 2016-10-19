@@ -1,0 +1,19 @@
+$('#review-form').html("<%= j (render 'form_ajax') %>");
+$('#review-form').slideDown(350);
+$('#review_score').focus();
+// we add the locale to translate the scoring
+$('#review_score').rating({language: '<%=I18n.locale %>', min: 0, max: 5, step: 1, stars: 5});
+
+// we remove the alert if necessary
+$('#reviews > .alert').hide();
+
+// TODO : need to handle the NOT AUTHORIZE
+//$('#dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New review");
+
+//$('.modal-body').html('<%= j render("form_ajax") %>');
+
+//$('#dialog').modal("show");
+
+//$('#dialog').on('shown.bs.modal', function () {
+//    $('.first_input').focus()
+//})

@@ -7,7 +7,7 @@ $('#alert_notice_holder').html("<%= escape_javascript(render(partial: 'shared/di
 %>
 
 // replace the like to unlike
-$('#<%="like_#{context_type}_#{context_value}"%>').replaceWith("<%= escape_javascript(render(partial: 'likes/like',  locals: {context: @context, locale: locale})) %>");
+$('.<%="like_#{context_type}_#{context_value}"%>').replaceWith("<%= escape_javascript(render(partial: 'likes/like',  locals: {context: @context, locale: locale})) %>");
 
 // move to the top
 $(window).scrollTop(0);

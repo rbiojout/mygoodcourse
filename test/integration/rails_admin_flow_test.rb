@@ -83,13 +83,13 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
   ####################################
   # test machine engine
   ####################################
-  test "test state abuse" do
+  test "has admin state abuse" do
     login_as_admin
 
     get "/admin/abuse"
     assert_response :success
 
-    abuse = abuses(:comment_one)
+    abuse = abuses(:review_one)
     get "/admin/abuse/#{abuse.id}/receive_abuse"
     assert assigns(:object).received?
 
@@ -105,6 +105,18 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
     get "/admin/abuse/#{abuse.id}/reject_abuse"
     assert assigns(:object).rejected?
 
+  end
+
+  test "has admin stat dashboard" do
+    login_as_admin
+
+    get "/admin/stats_users"
+
+    assert_select "#CreatedCustomersChart"
+
+    assert_select "#SignInCustomerChart"
+
+    assert_select "#CreatedReviewsChart"
   end
 
   private

@@ -1,2 +1,2 @@
-$('#comment_table').append('<%= j render @comments %>');
-$('#infinite-scrolling-comments .pagination').replaceWith('<%= escape_javascript will_paginate(@comments, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');
+$('#review_table').append('<%= j render @reviews %>');
+$('#infinite-scrolling-reviews .pagination').replaceWith('<%= escape_javascript will_paginate(@reviews, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');

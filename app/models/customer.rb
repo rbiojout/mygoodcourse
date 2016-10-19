@@ -28,8 +28,8 @@
 #  lat                         :decimal(, )
 #  lng                         :decimal(, )
 #  birthdate                   :date
-#  score_comments              :decimal(, )
-#  nb_comments                 :integer
+#  score_reviews               :decimal(, )
+#  nb_reviews                  :integer
 #  confirmation_token          :string
 #  confirmed_at                :datetime
 #  confirmation_sent_at        :datetime
@@ -131,7 +131,7 @@ class Customer < ActiveRecord::Base
     self.products.include?(product)
   end
 
-  has_many :comments, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   # We don't want to delete if some orders have been done
   has_many :orders, dependent: :restrict_with_exception
@@ -158,6 +158,8 @@ class Customer < ActiveRecord::Base
   has_many :reported_likes, class_name: "Like", foreign_key: "customer_id", inverse_of: :customer
 
   has_many :likes, dependent: :delete_all
+
+  has_many :posts, dependent: :delete_all
 
 
   # Follows a customer.

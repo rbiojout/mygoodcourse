@@ -1,0 +1,19 @@
+<% provide(:title, (I18n.translate 'activerecord.models.post', count: 2).capitalize) %>
+
+
+
+<!-- Image Header -->
+<div class="parallaxed banner_6" data-stellar-background-ratio="0.5"><span>
+    <h1><%= t('activerecord.models.post', count: 2)%></h1>
+</span>
+</div>
+<!-- /.row -->
+
+
+<div class="media-list">
+
+  <%= render(:partial => 'posts/post', collection: @posts) %>
+
+</div>
+
+<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>

@@ -1,0 +1,10 @@
+// TODO : need to handle the NOT AUTHORIZE
+$('#app_dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Add New Review");
+
+$('#app_dialog .modal-body').html('<%= j render("form_ajax") %>');
+
+$('#app_dialog').modal("show");
+
+$('#app_dialog').on('shown.bs.modal', function () {
+    $('.first_input').focus()
+})

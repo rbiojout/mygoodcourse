@@ -118,7 +118,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order, :has_order?
 
   def reload_rails_admin
-    models = %W(Article, Category, Country, Customer, Comment, Cycle, Employee, Family, Impression, Level, Product, Topic)
+    models = %W(Article, Category, Country, Customer, Cycle, Employee, Family, Impression, Level, Post, Product, Review, Topic, Update)
     models.each do |m|
       RailsAdmin::Config.reset_model(m)
     end

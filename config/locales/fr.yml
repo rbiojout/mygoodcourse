@@ -50,7 +50,7 @@ fr:
     pay: 'Payer'
     abuses:
       new: 'Signaler un abus'
-    comments:
+    reviews:
       new: 'Ajouter une évaluation'
     likes:
       new: 'Like it!'
@@ -69,14 +69,14 @@ fr:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
-    comment:
+    review:
       alert_add: "Il n'y a pas encore d'évaluation sur ce produit, soyez le premier à laisser une évaluation!"
     customer:
       info_email_validation: 'Compte créé. Vous y êtes presque! Pour activer votre compte, un email de confirmation a été envoyé à: %{email}'
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
       alert_no_followers: "Cet utilisateur n'est suivi par aucun autre utilisateur. Pour suivre un utilisateur en particulier, il suffit de cliquer sur l'action associée. Vous pouvez changer à tout moment à partir de tous les liens correspondants !!"
       alert_no_followeds: "Cet utilisateur ne suit aucun autre utilisateur. A partir de cette page, vous pouvez vous aussi suivre les utilisateurs qui s'afficheront si vous souhaitez être en lien privilégié avec ces utilisateurs."
-      alert_no_comments: "Cet utilisateur n'a pas encore été évalué. A partir de cette page, vous pouvez suivre les différentes évaluations des ressources proposées par un utilisateur. Pour faire vous-même une évaluation, vous devez avoir téléchargé le produit."
+      alert_no_reviews: "Cet utilisateur n'a pas encore été évalué. A partir de cette page, vous pouvez suivre les différentes évaluations des ressources proposées par un utilisateur. Pour faire vous-même une évaluation, vous devez avoir téléchargé le produit."
       alert_empty_products: "Il n'y a pas encore de produits pour ce client.Vous pouvez suivre cet utilisateur et revenir plus tard..."
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
@@ -93,6 +93,7 @@ fr:
       wish: 'Ajouter à mes favoris'
       unwish: 'Supprimer de mes favoris'
       notice_preparing: 'Votre produit est en cours de préparation, un peu de patience...'
+      alert_need_attachment: 'Vous devez ajouter au moins un fichier.'
       alert_wishes: "Il n'y a pas de produit favori pour le moment. Chaque utilisateur peut se constituer sa liste de produits préférés pour les retrouver plus facilement. Explorez le catalogue pour trouver votre sélection de produits favoris!"
     shop:
       add_cart: 'Ajouter au panier'
@@ -130,7 +131,7 @@ fr:
         one: 'catégorie'
         other: 'catégories'
         all: 'Toutes catégories'
-      comment:
+      review:
         one: 'évaluation'
         other: 'évaluations'
       country:
@@ -159,6 +160,9 @@ fr:
         one: 'commande'
         other: 'commandes'
       payment: 'paiement'
+      post:
+        one: 'article'
+        other: 'articles'
       product:
         one: 'produit'
         other: 'produits'
@@ -189,7 +193,7 @@ fr:
         name: 'Nom'
         description: 'Description'
         position: 'Position'
-      comment:
+      review:
         title: 'Titre'
         place_title: 'Titre ou résumé de votre évaluation (requis)'
         description: 'Description'
@@ -224,7 +228,7 @@ fr:
         followers: 'Abonnés'
         followeds: 'Abonnements'
         wishes: 'Produits Favoris'
-        comments: 'Evaluations'
+        reviews: 'Evaluations'
         remember_me: 'Se souvenir de moi'
         located: 'Originaire de %{locality}'
         since: 'Membre depuis %{created}'
@@ -288,6 +292,9 @@ fr:
         card_number: 'Numéro de carte'
         expiration_date: "Date d'expiration"
         cv_code: 'Code'
+      post:
+        name: 'Nom'
+        decsription: 'Description'
       peers:
         follow: 'Suivre'
         unfollow: 'Ne plus suivre'
@@ -301,8 +308,8 @@ fr:
         hint_active: 'Activez ou non votre produit. Les produits non actifs ne sont pas présents dans les recherches.'
         price: 'Prix'
         hint_price: 'Valorisez votre travail correctement'
-        nb_comments: "Nombre d'évaluations"
-        score_comments: 'Score moyen des évaluations'
+        nb_reviews: "Nombre d'évaluations"
+        score_reviews: 'Score moyen des évaluations'
         counter_cache: 'Nb Visites'
         attachments: 'Fichiers'
         categories: 'Catégories'
@@ -329,10 +336,14 @@ fr:
         create: 'Créer un compte'
         edit: 'Editer mon profil'
         delete: 'Supprimer mon compte'
+      post:
+        create: 'Créer un article'
+        edit: 'Editer cet article'
+        delete: 'Supprimer cet article'
       product:
         create: 'Créer un produit'
         edit: 'Editer ce produit'
-        delete: 'Supprimer ce procuit'
+        delete: 'Supprimer ce produit'
 
     submit:
       # helpers.submit.<model>.<action>
@@ -340,6 +351,10 @@ fr:
         create: 'Créer mon compte'
         submit: 'Enregistrer mon compte'
         update: 'Modifier mon compte'
+      post:
+        create: 'Créer un article'
+        submit: 'Sauver cet article'
+        update: 'Modifier cet article'
       product:
         create: 'Créer un produit'
         submit: 'Enregistrer ce produit'

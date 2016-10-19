@@ -1,5 +1,5 @@
 class CustomersController < ApplicationController
-  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard, :circle, :wishlist, :comments_list]
+  before_action :set_customer, only: [:show, :edit, :update, :destroy, :dashboard, :circle, :wishlist, :reviews_list]
   before_action :authenticate_customer!, only: [:update, :edit, :dashboard]
 
   before_action :correct_user, only: [:update, :edit]
@@ -49,9 +49,9 @@ class CustomersController < ApplicationController
     @products = @customer.wish_products
   end
 
-  # GET /commentlist
-  def comments_list
-    @comments = Comment.find_for_all_product_of_customer(@customer.id)
+  # GET /reviewlist
+  def reviews_list
+    @reviews = Review.find_for_all_product_of_customer(@customer.id)
   end
 
 

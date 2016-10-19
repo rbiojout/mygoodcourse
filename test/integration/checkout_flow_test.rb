@@ -37,7 +37,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_equal 200, status
-    assert_equal catalog_products_path, path
+    assert_equal root_path, path
     assert_equal I18n.t('customers.sessions.signed_in'), flash[:notice]
     assert_select '.alert-success > p', I18n.t('customers.sessions.signed_in')
 
@@ -203,7 +203,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     follow_redirect!
 
     assert_equal 200, status
-    assert_equal catalog_products_path, path
+    assert_equal root_path, path
     assert_equal I18n.t('customers.sessions.signed_in'), flash[:notice]
     assert_select '.alert-success > p', I18n.t('customers.sessions.signed_in')
 

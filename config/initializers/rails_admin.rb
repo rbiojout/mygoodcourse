@@ -47,7 +47,7 @@ RailsAdmin.config do |config|
     bulk_delete
     show
     edit do
-      except [File, StripeAccount, StripeCard, StripeCustomer, Peer]
+      except [File, Like, OrderItem, StripeAccount, StripeCard, StripeCustomer, Peer]
     end
     delete
     # Set the custom action here
@@ -170,7 +170,7 @@ RailsAdmin.config do |config|
 
   end
 
-  config.model "Comment" do
+  config.model "Review" do
     parent Product
     list do
       sort_by :updated_at
@@ -427,6 +427,22 @@ RailsAdmin.config do |config|
     parent Order
   end
 
+  config.model "Post" do
+    parent Customer
+    list do
+      field :id
+      field :name
+      field :customer
+    end
+    edit do
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :visual
+    end
+  end
+
   config.model "Product" do
     list do
       scopes [nil, :featured]
@@ -502,6 +518,10 @@ RailsAdmin.config do |config|
       end
       field :articles
     end
+  end
+
+  config.model "Update" do
+    parent Customer
   end
 
 end

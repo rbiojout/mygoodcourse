@@ -1,0 +1,25 @@
+<!-- REVIEW - START -->
+<div id=<%= 'current_review' if review == @current_review %> >
+    <div class="row">
+      <div class="col-xs-6 col-sm-3 col-md-3">
+          <%= render('customers/customer', :customer => review.customer, :withcols => 'false' ) %>
+      </div>
+      <div class="hidden-xs col-sm-6 col-md-6">
+        <b><%= review.title %></b>
+        <p><%= review.description %></p>
+        <p><span class="date text-muted"><%= nice_date(review.updated_at) %></span></p>
+
+      </div>
+      <div class="col-xs-6 col-sm-3 col-md-3">
+        <!--- stars --->
+        <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
+        <!--- end stars --->
+
+        <% # @TODO add report %>
+        <div id="abus_review_<%= review.id%>">
+            <p><%= link_to t('actions.abuses.new'), new_abuse_path(:review_id => review.id), :remote => true %></p>
+        </div>
+      </div>
+    </div>
+</div>
+<!-- REVIEW - END -->

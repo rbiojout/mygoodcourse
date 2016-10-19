@@ -9,7 +9,7 @@
             <h2><%= pluralize(@abuse.errors.count, "error") %> prohibited this abuse from being saved:</h2>
 
             <ul>
-              <% @comment.errors.full_messages.each do |msg| %>
+              <% @abuse.errors.full_messages.each do |msg| %>
                   <li><%= msg %></li>
               <% end %>
             </ul>

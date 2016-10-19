@@ -1,0 +1,17 @@
+$('#review_table').prepend("<%= j render partial: 'reviews/review', locals: {review: @review}  %>");
+
+// we update the associated informations
+$('#nb_reviews').html("<%= @review.product.nb_reviews %>");
+$('#product_score').html("<%= j render partial: 'reviews/show_stars', locals: {:score => @review.product.score_reviews } %>");
+
+
+// close the modal
+$('#app_dialog').modal_success();
+
+// first we need to hide before to show
+$('#current_review').focus();
+$('#current_review').hide();
+$('#current_review').show(600);
+
+
+

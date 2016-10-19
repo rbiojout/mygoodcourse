@@ -65,12 +65,27 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not get new if not identified" do
+    sign_out(customers(:one))
+    get :new, locale: I18n.default_locale
+    assert_response :found
+    assert_redirected_to new_customer_session_path
+  end
+
   test "should create product" do
     assert_difference('Product.count') do
       post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
     end
 
     assert_redirected_to product_path(assigns(:product))
+  end
+
+  test "should not get create if not identified" do
+    sign_out(customers(:one))
+    post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
+
+    assert_response :found
+    assert_redirected_to new_customer_session_path
   end
 
   test "should not create product without category" do
@@ -123,12 +138,52 @@ class ProductsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "should not get edit if not identified" do
+    sign_out(customers(:one))
+    get :edit, id: @product.slug, locale: I18n.default_locale
+
+    assert_response :found
+    assert_redirected_to new_customer_session_path
+  end
+
+  test "should not get edit if not product owner" do
+    sign_out(customers(:one))
+    sign_in(customers(:two), scope: :customer)
+    get :edit, id: @product.slug, locale: I18n.default_locale
+
+    assert_response :found
+    assert_redirected_to products_path, locale: I18n.default_locale
+  end
+
   test "should update product" do
     @attachment = attachments(:one)
     patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
                                             attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
 
     assert_redirected_to product_path(assigns(:product))
+  end
+
+  test "should not get update if not identified" do
+    sign_out(customers(:one))
+    @attachment = attachments(:one)
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
+
+    assert_response :found
+    assert_redirected_to new_customer_session_path
+  end
+
+
+  test "should not get update if not product owner" do
+    sign_out(customers(:one))
+    sign_in(customers(:two), scope: :customer)
+    @attachment = attachments(:one)
+    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
+
+
+    assert_response :found
+    assert_redirected_to products_path, locale: I18n.default_locale
   end
 
   test "should update product with ordered attachments" do
@@ -146,6 +201,13 @@ class ProductsControllerTest < ActionController::TestCase
     end
 
     assert_redirected_to products_url
+  end
+
+  test "should not destroy product if not identified" do
+    sign_out(customers(:one))
+    delete :destroy, id: products(:product_without_orders), locale: I18n.default_locale
+    assert_response :found
+    assert_redirected_to new_customer_session_path
   end
 
   test "should not destroy product ordered" do
@@ -190,8 +252,6 @@ class ProductsControllerTest < ActionController::TestCase
     customer = customers(:buyer_one)
     sign_in(customer, scope: :customer)
 
-
-
   end
 
   test "should see add to cart is not signed" do
@@ -201,6 +261,14 @@ class ProductsControllerTest < ActionController::TestCase
 
     assert_select "#product_actions a[href=?]", buy_product_path(product)
     assert_select "#product_actions a[data-method=?]", "post"
+  end
+
+  test "should see comments" do
+    product = products(:one_from_seller_one)
+
+    get :show, id: product, locale: I18n.default_locale
+
+    assert_select "#review_table"
   end
 
 end

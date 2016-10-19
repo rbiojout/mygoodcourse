@@ -1,14 +1,14 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-comment_one:
-  description: CommentOne
+review_one:
+  description: ReviewOne
   customer: one
-  abusable: one(Comment)
+  abusable: one(Review)
   status: created
-comment_two:
-  description: CommentTwo
+review_two:
+  description: ReviewTwo
   customer: two
-  abusable: one(Comment)
+  abusable: one(Review)
 product_one:
   description: ProductOne
   customer: one

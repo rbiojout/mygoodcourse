@@ -193,6 +193,8 @@ group :development do
   #gem 'brakeman', :require => false
   # gem "rubycritic", :require => false
 
+  gem 'i18n-tasks', '~> 0.9.5'
+
 
 end
 

@@ -14,10 +14,7 @@ class Customers::SessionsController < Devise::SessionsController
     respond_with(resource, serialize_options(resource))
   end
 
-
-  def after_sign_in_path_for(customer)
-    catalog_products_path(:locale => customer.language.presence||I18n.default_locale)
-  end
+  # redirect to the
 
 
 

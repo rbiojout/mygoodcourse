@@ -4,11 +4,5 @@
 <h3>Sign In</h3>
 <%= line_chart main_app.sign_in_customers_chart_path, id: 'SignInCustomerChart' %>
 
-<h3><%= (I18n.translate 'activerecord.models.comment', count: 2).capitalize %></h3>
-<%= line_chart main_app.created_comments_chart_path, id: 'CreatedCommentsChart' %>
-
-creation users
-activated users
-Peer users
-comments users
-profile completion
+<h3><%= (I18n.translate 'activerecord.models.review', count: 2).capitalize %></h3>
+<%= line_chart main_app.created_reviews_chart_path, id: 'CreatedReviewsChart' %>

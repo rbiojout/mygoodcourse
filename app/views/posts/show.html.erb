@@ -1,0 +1,50 @@
+<% provide(:title, (I18n.translate 'activerecord.models.article', count: 1).capitalize + ' | ' + @post.name ) %>
+
+
+<h1><%= @post.name %></h1>
+Published on <%= nice_date(@post.created_at) %>
+<hr>
+<%= @post.customer.name %>
+<%= link_to 'Follow', '#' %> |
+<!-- like it! -->
+<% if customer_signed_in? %>
+      <% if @post.liked?(current_customer) %>
+          <%= render(partial: 'likes/unlike', locals: {context: @post}, locale: locale) %>
+      <% else %>
+          <%= render(partial: 'likes/like', locals: {context: @post}, locale: locale) %>
+      <% end %>
+<% end %>
+<!-- end like it! -->
+ |
+<%= link_to '#' do %>
+    <span class="fa fa-comments fa-2x"></span>
+<% end %>
+    |
+<hr>
+
+<p>
+  <%= raw(@post.description) %>
+</p>
+
+<!-- like it! -->
+<% if customer_signed_in? %>
+      <% if @post.liked?(current_customer) %>
+          <%= render(partial: 'likes/unlike', locals: {context: @post}, locale: locale) %>
+      <% else %>
+          <%= render(partial: 'likes/like', locals: {context: @post}, locale: locale) %>
+      <% end %>
+<% end %>
+<!-- end like it! -->
+ |
+<%= link_to 'Add Comment', '#', class: 'btn btn-default' %> |
+
+<%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-primary' %> |
+<%= link_to 'Back', posts_path, class: 'btn btn-default' %>
+
+<ul class="list-unstyled">
+  Other Posts from <%= @post.customer.name %>:
+  <% @post.customer.posts.each do |post| %>
+    <%= render(partial: 'posts/post', locals: {post: post}) unless post.id == @post.id %>
+  <% end %>
+</ul>
+
