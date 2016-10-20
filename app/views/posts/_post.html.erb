@@ -1,20 +1,14 @@
-
-<li class="media">
-<div class="media-left media-top">
+<div class="col-md-4">
   <%= link_to (post_path(post)) do %>
-
-    <%# image_tag post.visual, class: "media-object" %>
-      <%= image_tag 'http://fakeimg.pl/240x180/', class: "media-object" %>
+      <%= image_tag 'http://fakeimg.pl/300x150/', class: "img-responsive" %>
   <% end %>
-</div>
-<div class="media-body">
+      <p><small><%= "#{post.customer.first_name} #{post.customer.name}"%> <%= image_tag post.customer.picture, style: 'height:50px', class: 'img-circle pull-left' %></small></p>
+      <p><small><%= nice_date(post.created_at)%></small></p>
   <%= link_to (post_path(post)) do %>
-      <h4 class="media-heading"><%= post.name %></h4>
+      <h3><%= post.name %></h3>
   <% end %>
-  <%# truncate(post.description, :length => 20, :omission => "" , :escape => false) %>
-<div class="ellipsis" style="height:150px;">
-  <%= raw(post.description) %>
-</div>
-</div>
+      <div class="ellipsis" style="height:150px;">
+        <p><%= raw(post.description) %></p>
+      </div>
 
-</li>
+</div>

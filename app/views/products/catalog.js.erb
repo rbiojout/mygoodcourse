@@ -2,15 +2,15 @@
 <% cache product do %>
     $('#catalog-products').append('<%= j render(partial:'products/product', locals: {product: product}) %>');
     //console.log('panel_product_<%=product.id%>')
+    //we use the ellipsis for the titles just added
     $('#panel_product_<%=product.id%> .ellipsis').dotdotdot();
 <% end %>
 <% end %>
 
 
-
-
-
+<% if @products.next_page %>
 $('#infinite-scrolling-products .pagination').replaceWith('<%= escape_javascript will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');
-//we use the ellipsis for the titles just added
-
-//$('.ellipsis').dotdotdot();
+<% else %>
+$(window).off('scroll');
+$('#infinite-scrolling-products .pagination').remove();
+<% end %>

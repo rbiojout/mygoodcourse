@@ -4,7 +4,7 @@
    context_param = context.class.name.downcase + "_id"
    context_value = context.id
 %>
-<div class='<%="like_#{context_type}_#{context_value}"%> pull-right' >
+<div class='<%="like_#{context_type}_#{context_value}"%> pull-right btn' >
   <%= link_to(like_like_path(context_param => context_value), alt: 'Like!', method: :post, remote: true ) do %>
 
       <i class="fa fa-thumbs-o-up fa-2x"> </i>

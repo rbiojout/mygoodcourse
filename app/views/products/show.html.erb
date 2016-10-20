@@ -72,22 +72,29 @@
           </div>
           <!-- end author -->
         </div>
+
       </div>
       <div class="panel-footer">
-        <!-- report abuse problem -->
-        <div id="abus_product_<%= @product.id%>">
-          <p class="text-right"><small><%= link_to new_abuse_path(:product_id => @product.id), :remote => true do %><span class="fa fa-bolt red"></span> <%= t('actions.abuses.new') %><% end %></small></p>
+        <div class="row list-group-item-actions">
+          <div class="pull-right">
+
+            <!-- like it! -->
+            <% if customer_signed_in? %>
+                <% if @product.liked?(current_customer) %>
+                    <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
+                <% else %>
+                    <%= render(partial: 'likes/like', locals: {context: @product}, locale: locale) %>
+                <% end %>
+            <% end %>
+            <!-- end like it! -->
+
+            <!-- report abuse problem -->
+            <%= link_to new_abuse_path(:product_id => @product.id),title: I18n.translate('actions.abuses.new'), alt: I18n.translate('actions.abuses.new'), class: 'btn', :remote => true do %>
+                <span class="fa fa-bolt fa-2x"> </span>
+            <% end %>
+            <!-- end abuse -->
+          </div>
         </div>
-        <!-- end abuse -->
-        <!-- like it! -->
-        <% if customer_signed_in? %>
-          <% if @product.liked?(current_customer) %>
-             <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
-          <% else %>
-              <%= render(partial: 'likes/like', locals: {context: @product}, locale: locale) %>
-          <% end %>
-        <% end %>
-        <!-- end like it! -->
       </div>
 
 

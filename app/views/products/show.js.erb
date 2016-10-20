@@ -1,2 +1,9 @@
 $('#review_table').append('<%= j render @reviews %>');
+<% if @reviews.next_page %>
 $('#infinite-scrolling-reviews .pagination').replaceWith('<%= escape_javascript will_paginate(@reviews, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>');
+<% else %>
+$(window).off('scroll');
+$('#infinite-scrolling-reviews .pagination').remove();
+<% end %>
+
+

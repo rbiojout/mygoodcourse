@@ -347,6 +347,10 @@ fr:
 
     submit:
       # helpers.submit.<model>.<action>
+      abuse:
+        create: 'Signaler un abus'
+        submit: 'Enregistrer cet abus'
+        update: 'Mettre à jour cet abus'
       customer:
         create: 'Créer mon compte'
         submit: 'Enregistrer mon compte'

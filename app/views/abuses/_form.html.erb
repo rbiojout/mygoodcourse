@@ -4,6 +4,7 @@
     <%= f.input :description %>
     <%= tag(:input, name: @context.class.to_s.downcase+'_id', type: 'hidden', value: @context.id)%>
   <div class="form-actions">
+    <%= f.submit  @abuse.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
     <%= f.button :submit %>
   </div>
 <% end %>
