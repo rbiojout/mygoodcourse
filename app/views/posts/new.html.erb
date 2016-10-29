@@ -1,5 +1,6 @@
-<h1>New Post</h1>
+<% provide(:title, t('actions.posts.new')) %>
+
+<h1><%= t('actions.posts.new')%></h1>
 
 <%= render 'form' %>
 
-<%= link_to 'Back', posts_path %>

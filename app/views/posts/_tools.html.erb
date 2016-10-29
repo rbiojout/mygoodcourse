@@ -1,0 +1,36 @@
+<div class="pull-right">
+  <!-- like it! -->
+  <% if customer_signed_in? %>
+      <% if post.liked?(current_customer) %>
+          <%= render(partial: 'likes/unlike', locals: {context: post}, locale: locale) %>
+      <% else %>
+          <%= render(partial: 'likes/like', locals: {context: post}, locale: locale) %>
+      <% end %>
+  <% end %>
+  <!-- end like it! -->
+
+  <%= link_to new_comment_path(:post_id => post.id), :remote => true, class: 'btn pull-right' do %>
+      <span class="fa fa-comments fa-lg"></span> <span class="badge"><%= post.comments.count unless post.comments.count ==0 %></span>
+  <% end %>
+
+  <% if Rails.env.development? %>
+      <%= link_to new_comment_path(:post_id => post.id), class: 'btn btn-warning pull-right' do %>
+          <span class="fa fa-comments fa-lg"></span>
+      <% end %>
+      <%= link_to new_comment_path(:post_id => post.id), :remote => true, class: 'btn btn-warning pull-right' do %>
+          R<span class="fa fa-comments fa-lg"></span> <span class="badge"></span>
+      <% end %>
+  <% end %>
+
+  <span class="btn pull-right">
+      <span class="fa fa-eye fa-lg"></span> <span class="badge"><%= post.counter_cache unless post.counter_cache ==0 %></span>
+  </span>
+
+  <% if post.owned?(current_customer) %>
+
+    <%= link_to edit_post_path(post), class: 'btn pull-right' do %>
+      <span class="fa fa-pencil fa-lg"></span>
+    <% end %>
+  <% end %>
+
+</div>

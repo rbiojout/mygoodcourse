@@ -8,8 +8,10 @@
     <div id="product_download">
       <% if customer_signed_in? %>
           <% if @product.candownload(current_customer) %>
-              <%= link_to 'Download', download_attachment_path(@product.attachment, format: :pdf), class: 'btn btn-success input-block-level form-control' %>
-          <% end %>
+              <%= link_to download_attachment_path(@product.attachment, format: :pdf), class: 'btn btn-success input-block-level form-control' do %>
+              <span class="fa fa-download"></span> Download
+              <% end %>
+    <% end %>
       <% end %>
     </div>
       <!-- end download link -->
@@ -17,7 +19,9 @@
       <!--- list of actions --->
     <div id="product_actions">
       <% if customer_signed_in? && current_customer.own_product(@product) %>
-          <%= link_to t('helpers.action.edit'), edit_product_path(@product), class:'btn btn-primary input-block-level form-control' %>
+          <%= link_to  edit_product_path(@product), class:'btn btn-primary input-block-level form-control' do %>
+          <span class="fa fa-pencil"></span> <%= t('helpers.action.edit') %>
+          <% end %>
       <% elsif (!customer_signed_in? || (customer_signed_in? && !@product.is_bought_by_customer(current_customer.id))) %>
           <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary input-block-level form-control' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <small><%= t('dialog.shop.explain_add') %></small>
@@ -37,7 +41,8 @@
         <h3><%= @product.name %></h3>
         <div id="product_score">
           <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
-        </div>      </div>
+        </div>
+      </div>
       <!-- title -->
       <div class="panel-body">
         <div class="row">
@@ -90,7 +95,7 @@
 
             <!-- report abuse problem -->
             <%= link_to new_abuse_path(:product_id => @product.id),title: I18n.translate('actions.abuses.new'), alt: I18n.translate('actions.abuses.new'), class: 'btn', :remote => true do %>
-                <span class="fa fa-bolt fa-2x"> </span>
+                <span class="fa fa-bolt fa-lg"> </span>
             <% end %>
             <!-- end abuse -->
           </div>

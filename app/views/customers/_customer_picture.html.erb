@@ -1,18 +1,17 @@
 <% withcols ||= 'true' %>
 <% customer ||= @customer %>
 
-<div class="<%= 'col-xs-6 col-sm-3' if withcols == 'true' %> customer_presentation_<%=customer.id.to_s%>" id="customer_presentation_<%= customer.id%>">
-  <!-- picture -->
-  <div class="center-block">
-    <img class="img-circle center-block customer-picture img-80"
+
+
+
+<div style="clear: both; width: 80px" class="relative" >
+  <img class="img-circle customer-picture img-80"
        data-customer="<%=customer.id %>"
        data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
        data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>"
-         alt="" src="<%= customer.picture %>" >
-    </div>
-  <!-- end picture -->
+       alt="" src="<%= customer.picture %>" >
+  <span class="btn-top-right">
     <!-- follow -->
-    <div>
     <% if customer_signed_in? %>
       <% if current_customer.id != customer.id %>
       <div class="follow_form follow_form_<%= customer.id%>" id="follow_form_<%= customer.id%>">
@@ -24,19 +23,21 @@
       </div>
       <!-- if customer is signed, direct link to his profile -->
       <% else %>
-          <%= link_to(customer_path(customer), class: 'btn btn-default btn-sm' )  do %><i class="glyphicon glyphicon-user green" aria-hidden="true"></i> <%=t('page.my_profile')%><% end %>
+          <%= link_to(customer_path(customer), class: 'btn btn-default btn-sm', alt: t('page.my_profile'), title: t('page.my_profile') )  do %><i class="fa fa-pencil fa-lg" aria-hidden="true"></i><% end %>
       <% end %>
 
     <% else %>
-  <% end %>
-      </div>
+    <% end %>
     <!-- end follow -->
+  </span>
+</div>
       <!--- stars --->
     <div>
-        <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => false} %>
+        <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => true} %>
     </div>
     <!--- end stars --->
-
-
-
-    </div>
+<!--- name --->
+<div>
+  <p><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></p>
+</div>
+<!--- name --->

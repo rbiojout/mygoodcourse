@@ -94,6 +94,9 @@ class AbusesController < ApplicationController
     elsif params[:review_id]
       id = params[:review_id]
       Review.find(params[:review_id])
+    elsif params[:comment_id]
+      id = params[:comment_id]
+      Comment.find(params[:comment_id])
     end
   end
 
@@ -102,6 +105,8 @@ class AbusesController < ApplicationController
       product_path(context)
     elsif Review === context
       review_path(context)
+    elsif Comment === context
+      comment_path(context)
     end
   end
 

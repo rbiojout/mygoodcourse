@@ -9,11 +9,16 @@
 </div>
 <!-- /.row -->
 
+<%= link_to t('actions.posts.new'), new_post_path, class: 'btn btn-primary' %>
 
-<div class="row">
-
-  <%= render(:partial => 'posts/post', collection: @posts) %>
-
+<div id="index-posts" class="row">
+  <% @posts.each do |post| %>
+      <%# cache post do %>
+        <%= render(:partial => 'posts/post', locals: {post: post, with_body: true, with_cols: true}) %>
+      <%# end %>
+  <% end %>
 </div>
 
-<%= link_to 'New Post', new_post_path, class: 'btn btn-primary' %>
+ <div id="infinite-scrolling-posts" class="row">
+  <%= will_paginate(@posts, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+ </div>

@@ -2,67 +2,76 @@
 
 
 <h1><%= @post.name %></h1>
+<div class="row">
+  <div class="col-xs-12">
+
 <% customer = @post.customer %>
-<p><%= "#{@post.customer.first_name} #{@post.customer.name}"%>
-  <%= image_tag(
-              @post.customer.picture,
-              style: 'height:50px',
-              class: 'img-circle pull-left customer-picture',
-                data: {
-                        customer: customer.id,
-                        locality:  t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???'),
-                        created: t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short))
-                },
-                style: "width:80px;")
+<%= image_tag(
+            @post.customer.picture,
+            class: 'pull-left img-circle customer-picture img-80',
+            data: {
+                    customer: customer.id,
+                    locality:  t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???'),
+                    created: t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short))
+            })
 
-  %></p>
-<p><%= nice_date(@post.created_at)%></p>
-<hr>
-<div class="pull-right">
-  <!-- like it! -->
-  <% if customer_signed_in? %>
-      <% if @post.liked?(current_customer) %>
-          <%= render(partial: 'likes/unlike', locals: {context: @post}, locale: locale) %>
-      <% else %>
-          <%= render(partial: 'likes/like', locals: {context: @post}, locale: locale) %>
-      <% end %>
-  <% end %>
-  <!-- end like it! -->
+    %>
+    <div class="pull-left">
+      <p class="lead"><%= "#{@post.customer.first_name} #{@post.customer.name}"%></p>
+      <p><%= nice_date(@post.created_at)%></p>
+    </div>
 
-  <%= link_to '#', class: 'btn pull-right' do %>
-      <span class="fa fa-comments fa-2x"></span>
-  <% end %>
-
-  <%= link_to edit_post_path(@post), class: 'btn pull-right' do %>
-      <span class="fa fa-pencil fa-2x"></span>
-  <% end %>
+  </div>
 </div>
-<hr>
+<div class="row">
+  <div class="col-md-8">
 
-<%= image_tag 'http://fakeimg.pl/1200x600/', class: 'img-responsive' %>
+
+<!-- tools -->
+<%= render(partial: 'posts/tools', locals: {post: @post}) %>
+<!-- end tools -->
+
+<%# image_tag 'http://fakeimg.pl/1200x600/', class: 'img-responsive' %>
+<%= image_tag @post.visual, class: 'img-responsive' %>
 
 <p>
   <%= raw(@post.description) %>
 </p>
 
-<!-- like it! -->
-<% if customer_signed_in? %>
-      <% if @post.liked?(current_customer) %>
-          <%= render(partial: 'likes/unlike', locals: {context: @post}, locale: locale) %>
-      <% else %>
-          <%= render(partial: 'likes/like', locals: {context: @post}, locale: locale) %>
-      <% end %>
+<!-- tools -->
+<%= render(partial: 'posts/tools', locals: {post: @post}) %>
+<!-- end tools -->
+
+<h2><%= t('activerecord.models.comment', count: 2)%></h2>
+
+<div id="comment-form"></div>
+
+<% @post.comments.each do |comment|%>
+    <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
+
 <% end %>
-<!-- end like it! -->
- |
-<%= link_to 'Add Comment', '#', class: 'btn btn-default' %> |
+  </div>
+  <div class="col-md-4">
+    <%= link_to posts_path do %>
+        <h3><%= t('activerecord.models.post.all') %></h3>
+    <% end %>
+    <h3><%= t('dialog.post.populars')%></h3>
+    <ul class="list-unstyled">
+      <% @top_posts.each do |post| %>
+          <li>
+            <%= render(:partial => 'posts/post', locals: {post: post, with_body: false, with_cols: false}) %>
+          </li>
+      <% end %>
+    </ul>
+  </div>
 
-<%= link_to 'Back', posts_path, class: 'btn btn-default' %>
+</div>
 
-<h2>Other Posts from <%= @post.customer.name %></h2>
+
+<h2><%= t('dialog.post.other_posts', :customer => @post.customer.full_name) %></h2>
 <div class="row">
   <% @post.customer.posts.each do |post| %>
-    <%= render(partial: 'posts/post', locals: {post: post}) unless post.id == @post.id %>
+    <%= render(partial: 'posts/post', locals: {post: post, with_body: false, with_cols: true}) unless post.id == @post.id %>
   <% end %>
 </div>
 

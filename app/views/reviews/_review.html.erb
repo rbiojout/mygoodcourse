@@ -17,7 +17,11 @@
 
         <% # @TODO add report %>
         <div id="abus_review_<%= review.id%>">
-            <p><%= link_to t('actions.abuses.new'), new_abuse_path(:review_id => review.id), :remote => true %></p>
+            <p>
+              <%= link_to new_abuse_path(:review_id => review.id), :remote => true do %>
+                  <span class="fa fa-bolt"></span> <%= t('actions.abuses.new') %>
+              <% end %>
+            </p>
         </div>
       </div>
     </div>

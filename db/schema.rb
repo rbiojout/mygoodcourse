@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161019091143) do
+ActiveRecord::Schema.define(version: 20161027062926) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,6 +79,18 @@ ActiveRecord::Schema.define(version: 20161019091143) do
 
   add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id", using: :btree
   add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id", using: :btree
+
+  create_table "comments", force: :cascade do |t|
+    t.text     "text"
+    t.integer  "customer_id"
+    t.integer  "commentable_id"
+    t.string   "commentable_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+  add_index "comments", ["customer_id"], name: "index_comments_on_customer_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
@@ -520,6 +532,7 @@ ActiveRecord::Schema.define(version: 20161019091143) do
   add_foreign_key "articles", "topics"
   add_foreign_key "attachments", "products"
   add_foreign_key "categories", "families"
+  add_foreign_key "comments", "customers"
   add_foreign_key "customers", "countries"
   add_foreign_key "cycles", "countries"
   add_foreign_key "families", "countries"

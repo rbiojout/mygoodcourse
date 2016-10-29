@@ -54,6 +54,8 @@ en:
       new: 'Add review'
     likes:
       new: 'Like it!'
+    posts:
+      new: 'Write an article'
     products:
       new: 'Create product'
     stripe_account:
@@ -70,6 +72,7 @@ en:
     restricted: "You don't have the right to access to this page"
     need_login: "You need to login to proceed"
     operation_in_progress: 'Operation in progress'
+    read_next: 'read next'
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'
@@ -84,8 +87,11 @@ en:
       alert_no_reviews: "There is not yet any review related to the products of this user. from this page, you are able to follow all the reviews made by the buyers on all the products of this seller. In order to provide yourself a review, you need to have this product in your downloaded list."
       alert_empty_products: "There is no product at the moment for this user. You can follow this user and come back later..."
     order:
-        alert_add: "You don't have any order. Even for the free products, you need to process the order to keep track of your products. Let's start to add ressources!"
-        alert_add_link: "Explore the catalog"
+      alert_add: "You don't have any order. Even for the free products, you need to process the order to keep track of your products. Let's start to add ressources!"
+      alert_add_link: "Explore the catalog"
+    post:
+      populars: 'Popular posts'
+      other_posts: "Other posts from %{customer}"
     product:
       explain_add: 'Create you first product by clicking here.'
       add_version: 'Add new version'
@@ -137,6 +143,9 @@ en:
       review:
         one: 'review'
         other: 'reviews'
+      comment:
+        one: 'comment'
+        other: 'comments'
       country:
         one: 'country'
         other: 'countries'
@@ -165,6 +174,7 @@ en:
       post:
         one: 'post'
         other: 'posts'
+        all: 'All posts'
       product:
         one: 'product'
         other: 'products'
@@ -195,6 +205,8 @@ en:
         place_description: 'Enter here your evaluation (required)'
         score: 'Score'
         not_rated: 'Not rated'
+      comment:
+        text: 'Your comment'
       customer:
         description: 'Description'
         language: 'Language'
@@ -233,7 +245,8 @@ en:
         incoice_number: 'Invoice Number'
       post:
         name: 'Name'
-        decsription: 'Description'
+        description: 'Description'
+        visual: 'Image'
       payment:
         amount: 'amount'
         reference: 'reference'

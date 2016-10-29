@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
 
-  before_action :correct_user, except: :show
+  before_action :correct_user, excep: [:index, :show]
 
   # GET /reviews
   # GET /reviews.json

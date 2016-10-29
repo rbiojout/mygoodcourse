@@ -1,0 +1,22 @@
+
+// we had the new comment at the top, just after the form and hide the form
+
+$('.comment_<%= @comment.id%>').html("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>")
+
+// close the modal
+// REMOVED no more use of the modal
+// $('#app_dialog').modal_success();
+
+// first we need to hide before to show
+var target = $('.comment_<%= @comment.id%>');
+$('html,body').animate({
+    scrollTop: target.offset().top-100
+}, 1000);
+
+
+
+
+
+
+
+

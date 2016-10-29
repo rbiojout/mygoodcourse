@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    @posts = Post.all.unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
   end
 
   # GET /posts/1
@@ -17,6 +17,7 @@ class PostsController < ApplicationController
     # we keep track of the current customer in impressions
     @current_user = current_customer
     impressionist(@post)
+    @top_posts = Post.where.not(id: @post.id).order(counter_cache: :desc).limit(10)
   end
 
   # GET /posts/new
@@ -81,6 +82,6 @@ class PostsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:name, :description, :customer_id)
+      params.require(:post).permit(:name, :description, :visual, :visual_cache, :customer_id)
     end
 end

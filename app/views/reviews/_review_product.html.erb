@@ -10,10 +10,10 @@
         <b><%= review.title %></b>
         <p><%= review.description %></p>
         <% customer = review.customer %>
-        <img class="img-circle align-left customer-picture"
+        <img class="img-circle align-left customer-picture img-50"
              data-customer="<%=customer.id %>"
              data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
-             data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>" style="width:40px;">
+             data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
 
         <h6><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h6>
 
@@ -27,7 +27,9 @@
 
         <% # @TODO add report %>
         <div id="abus_review_<%= review.id%>">
-            <p><%= link_to t('actions.abuses.new'), new_abuse_path(:review_id => review.id), :remote => true %></p>
+            <p><%= link_to new_abuse_path(:review_id => review.id), :remote => true do %>
+                  <span class="fa fa-bolt"></span> <%= t('actions.abuses.new') %>
+              <% end %></p>
         </div>
       </div>
     </div>

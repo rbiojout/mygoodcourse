@@ -49,6 +49,9 @@ textarea {
   margin-bottom: 20px;
 }
 /**  Additional colors ------------------------------------------  **/
+.white {
+  color: #FFFFFF; }
+
 .blue {
   color: #3498DB; }
 
@@ -73,6 +76,9 @@ $custom-yellow: #FFDC1E;
 
 .dark {
   color: #34495E; }
+
+.border-white {
+  border-color: #FFFFFF !important; }
 
 .border-blue {
   border-color: #3498DB !important; }
@@ -129,6 +135,81 @@ $custom-orange: #F39C12;
   border: 1px solid #50C1CF !important;
   color: #fff; }
 
+/* img utilities */
+.img-50 {
+  height:50px;
+  width: 50px;
+}
+
+.img-80 {
+  height:80px;
+  width: 80px;
+}
+
+/* positioning layers
+ example
+  <a class="pull-left relative" href="#">
+    <img class="img-responsive" src="http://placekitten.com/300/150">
+    <span class="bottom-right white">Jean <img class="img-circle img-50 bg-white" src="http://placekitten.com/40/60"></span>
+  </a>
+
+*/
+.relative {
+  position: relative;
+}
+.btn-top-right {
+  position: absolute;
+  right: -20px;
+  top: 2px;
+}
+
+.top-right {
+  position: absolute;
+  right: 3px;
+  top: 2px;
+}
+
+.bottom-right {
+  position: absolute;
+  right: 3px;
+  bottom: 2px;
+}
+
+/* we use fixed height for ellipsis */
+/* fixed height when displaying a text in the grid */
+// for products
+.height_30 {
+  height:  30px;
+  width:100%;
+  float: left;
+}
+
+.height_40 {
+  height:  30px;
+  width:100%;
+  float: left;
+}
+
+// for posts
+.height_150 {
+  height:  150px;
+  width:100%;
+  float: left;
+}
+
+// for atatchments of products
+.panel-attachment {
+  height:  540px;
+  float: left;
+  padding: 6px;
+}
+
+.sort-placeholder {
+  border: 2px dashed grey;
+  background: lightgrey;
+  height: 550px;
+  width: 250px;
+}
 
 /* guiding users */
 .active-star, .guiding {
@@ -356,20 +437,10 @@ see _bootstrap-variables.sass for information
   display: none;
 }
 
-/* fixed height when displaying a text in the grid */
-.height_30 {
-  height:  30px;
-  width:100%;
-}
-
-.height_40 {
-  height:  30px;
-  width:100%;
-}
 
 /* fixed height for the caption of the files attachments */
 .caption-file{
-  height:  205px;
+  height:  180px;
   width:100%;
 }
 

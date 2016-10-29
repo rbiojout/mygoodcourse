@@ -1,0 +1,22 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @comment.text %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @comment.customer %>
+</p>
+
+<p>
+  <strong>Commentable:</strong>
+  <%= @comment.commentable %>
+</p>
+
+
+<% @context = @comment.commentable %>
+
+<%= link_to 'Edit', edit_comment_path(@comment, @context.class.to_s.downcase+'_id' => @context.id) %> |
+<%= link_to 'Back', comments_path %>

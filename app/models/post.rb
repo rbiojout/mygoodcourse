@@ -47,6 +47,34 @@ class Post < ActiveRecord::Base
   # we have some likes that can be reported by customers
   has_many :likes, class_name: "Like", as: :likeable
 
+  # we have some comments that can be reported by customers
+  has_many :comments, class_name: "Comment", as: :commentable
+
+
+  mount_uploader :visual, VisualUploader
+  attr_accessor :visual_width, :visual_height
+  validates :visual, :description, :customer, presence: true
+  #validate :check_dimensions, :on => [:create, :update]
+  def check_dimensions
+    #puts "------"
+    #logger.debug("#{visual.width} - #{visual.height}")
+    if !visual_cache.nil? && (visual.width < 1200 || visual.height < 600)
+      errors.add :visual, "Dimension too small."
+    end
+  end
+
+  def preview
+    visual.nil? ? "http://fakeimg.pl/300x150/":visual.preview
+  end
+
+  def owned?(current_customer)
+    if (current_customer.nil?)
+      false
+    else
+      current_customer.id == customer_id
+    end
+  end
+
   def liked?(customer)
     Like.where(:likeable_id => self.id).where(:likeable_type => 'Post').where(:customer => customer).count > 0
   end

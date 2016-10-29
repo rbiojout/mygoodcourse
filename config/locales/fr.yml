@@ -54,6 +54,8 @@ fr:
       new: 'Ajouter une évaluation'
     likes:
       new: 'Like it!'
+    posts:
+      new: 'Rédiger un article'
     products:
       new: 'Créer un produit'
     stripe_account:
@@ -65,6 +67,7 @@ fr:
     restricted: "Vous n'avez pas les droits pour accéder à cette page"
     need_login: "Vous devez vous connecter pour continuer"
     operation_in_progress: 'Operation en cours'
+    read_next: 'lire la suite'
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
@@ -81,6 +84,9 @@ fr:
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
       alert_add_link: "Explorer le catalogue"
+    post:
+      populars: 'Articles populaires'
+      other_posts: "Autres articles de %{customer}"
     product:
       explain_add: 'Créez votre premier produit en cliquant ici.'
       add_version: 'Nouvelle version'
@@ -134,6 +140,9 @@ fr:
       review:
         one: 'évaluation'
         other: 'évaluations'
+      comment:
+        one: 'commentaire'
+        other: 'commentaires'
       country:
         one: 'pays'
         other: 'pays'
@@ -163,6 +172,7 @@ fr:
       post:
         one: 'article'
         other: 'articles'
+        all: 'Tous les articles'
       product:
         one: 'produit'
         other: 'produits'
@@ -200,6 +210,8 @@ fr:
         place_description: 'Renseignez le détail de votre évaluation (requis)'
         score: 'Score'
         not_rated: 'Non évalué'
+      comment:
+        text: 'Votre commentaire'
       country:
         name: 'nom'
         continent: 'continent'
@@ -294,7 +306,8 @@ fr:
         cv_code: 'Code'
       post:
         name: 'Nom'
-        decsription: 'Description'
+        description: 'Description'
+        visual: 'Image'
       peers:
         follow: 'Suivre'
         unfollow: 'Ne plus suivre'

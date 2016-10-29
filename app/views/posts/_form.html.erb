@@ -4,6 +4,7 @@
 
   <div class="form-inputs">
     <%= f.input :name %>
+    <%= f.input :visual, :as => :visual_preview, :input_html =>{:preview_version => 'preview'} %>
     <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'} %>
     <%= f.input :customer_id, as: 'hidden' %>
   </div>

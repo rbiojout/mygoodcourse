@@ -1,14 +1,28 @@
-<div class="col-md-4">
-  <%= link_to (post_path(post)) do %>
-      <%= image_tag 'http://fakeimg.pl/300x150/', class: "img-responsive" %>
-  <% end %>
-      <p><small><%= "#{post.customer.first_name} #{post.customer.name}"%> <%= image_tag post.customer.picture, style: 'height:50px', class: 'img-circle pull-left' %></small></p>
-      <p><small><%= nice_date(post.created_at)%></small></p>
-  <%= link_to (post_path(post)) do %>
-      <h3><%= post.name %></h3>
-  <% end %>
-      <div class="ellipsis" style="height:150px;">
-        <p><%= raw(post.description) %></p>
-      </div>
+<%
+   with_body ||= false
+   with_cols ||= false
+%>
 
+<div class="<%= 'col-md-4' if with_cols %>">
+  <div style="clear:both;">
+      <%= link_to(post_path(post), class: 'pull-left relative') do %>
+          <%= image_tag post.preview, class: "img-responsive" %>
+          <span class="bottom-right white">
+        <small><%= "#{post.customer.first_name} #{post.customer.name}"%></small>
+            <%= image_tag post.customer.picture, class: 'img-circle img-50 bg-white' %>
+      </span>
+      <% end %>
+  </div>
+  <div style="clear: both;" id="panel_post_<%=post.id%>">
+    <p style="clear: both; height: 18px;"><small><%= nice_date(post.created_at)%></small></p>
+  <div class="ellipsis" style="width: 100%; height: <%= (with_body==true)? '300px':(with_cols==true)?'80px':'auto'%>">
+      <%= link_to (post_path(post)) do %>
+          <h3><%= post.name %></h3>
+      <% end %>
+      <% if with_body %>
+            <div classe="height_150"><%= raw(post.description) %></div>
+      <% end %>
+    </div>
+    <p class="pull-right"><%= link_to (post_path(post)) do %><small><%= t('dialog.read_next')%></small><% end %></p>
+  </div>
 </div>

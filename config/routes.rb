@@ -175,6 +175,7 @@
 
 Rails.application.routes.draw do
 
+  resources :comments
   resources :updates
   resources :posts
   #resources :likes

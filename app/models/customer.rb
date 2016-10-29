@@ -161,6 +161,10 @@ class Customer < ActiveRecord::Base
 
   has_many :posts, dependent: :delete_all
 
+  # full name helper
+  def full_name
+    self.first_name + ' '+ self.name
+  end
 
   # Follows a customer.
   def follow(other_customer)
