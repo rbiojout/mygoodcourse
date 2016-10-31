@@ -6,11 +6,11 @@
             <%= image_tag review.product.small, class: 'img-thumbnail center-block' %>
         <% end %>
       </div>
-      <div class="col-xs-5">
+      <div class="col-xs-8">
         <b><%= review.title %></b>
         <p><%= review.description %></p>
         <% customer = review.customer %>
-        <img class="img-circle align-left customer-picture img-50"
+        <img class="img-circle align-left customer-picture-sm"
              data-customer="<%=customer.id %>"
              data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
              data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
@@ -20,7 +20,7 @@
         <p><span class="date text-muted"><%= nice_date(review.updated_at) %></span></p>
 
       </div>
-      <div class="col-xs-3">
+      <div class="col-xs-8 col-xs-offset-4 col-sm-offset-0">
         <!--- stars --->
         <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
         <!--- end stars --->

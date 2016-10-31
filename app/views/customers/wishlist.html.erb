@@ -23,7 +23,7 @@
 
       <% @products.each do |product|%>
         <div class="row">
-          <div class="col-xs-2">
+          <div class="col-xs-4 col-md-3">
             <!-- picture -->
             <div class="hovereffect center-block panel-image-product">
               <% if product.preview.nil? %>
@@ -35,11 +35,11 @@
             </div>
             <!-- end picture -->
           </div>
-          <div class="col-xs-5">
+          <div class="col-xs-8 col-md-5">
             <h4><%= link_to product.name, product_path(product) %></h4>
             <!-- author -->
             <% customer = product.customer %>
-            <img class="img-circle align-left customer-picture img-50"
+            <img class="img-circle align-left customer-picture-sm"
                  data-customer="<%=customer.id %>"
                  data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
                  data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
@@ -48,7 +48,7 @@
 
             <!-- end author -->
           </div>
-          <div class="col-xs-4">
+          <div class="col-xs-12 col-md-4">
             <h3><%= nice_price(product.price) %></h3>
             <!-- main action buy or edit -->
             <% if customer_signed_in? && current_customer.own_product(product) %>

@@ -101,8 +101,8 @@ en:
       explain_save: "Don't forget to save"
       remove_version: 'Delete version'
       active_version: 'Active version'
-      wish: 'Add to my wished products'
-      unwish: 'remove from my wished products'
+      wish: 'I Wish it!'
+      unwish: 'I unwish'
       notice_preparing: 'We are preparing your product, just keep relax...'
       alert_need_attachment: 'You need to provide at least one file.'
       alert_wishes: "There is no prefered product in this wish list. Each user can build its list by adding products to its own list and then retrieve it easily latter. You can explore the catalog to get your best wished products!"
