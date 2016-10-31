@@ -175,7 +175,7 @@
 
 Rails.application.routes.draw do
 
-  resources :comments
+  resources :comments, except: [:index]
   resources :updates
   resources :posts
   #resources :likes

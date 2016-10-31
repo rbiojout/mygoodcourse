@@ -22,7 +22,7 @@ class VisualUploader < CarrierWave::Uploader::Base
   #   # For Rails 3.1+ asset pipeline compatibility:
   #   # ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default.png"].compact.join('_'))
   #
-     "/images/" + [version_name, "default_viual.png"].compact.join('_')
+     "/images/" + [version_name, "default_visual.png"].compact.join('_')
   end
 
   # for visual size validation

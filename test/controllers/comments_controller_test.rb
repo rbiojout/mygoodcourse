@@ -1,0 +1,52 @@
+require 'test_helper'
+
+class CommentsControllerTest < ActionController::TestCase
+  include Devise::Test::ControllerHelpers
+  setup do
+    @comment = comments(:one)
+    # add a signed customer to perform the tests
+    sign_in(customers(:one), scope: :customer)
+  end
+
+  test "should get index" do
+    get :index
+    assert_response :success
+    assert_not_nil assigns(:comments)
+  end
+
+  test "should get new for Post" do
+    get :new, post_id: posts(:one).id
+    assert_response :success
+  end
+
+  test "should create comment for Post" do
+    assert_difference('Comment.count') do
+      post :create, post_id: posts(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    end
+
+    assert_redirected_to post_path(posts(:one))
+  end
+
+  test "should show comment" do
+    get :show, id: @comment
+    assert_response :success
+  end
+
+  test "should get edit for Post" do
+    get :edit, id: @comment, post_id: posts(:one).id
+    assert_response :success
+  end
+
+  test "should update comment for Post" do
+    patch :update, post_id: posts(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    assert_redirected_to post_path(posts(:one))
+  end
+
+  test "should destroy comment for Post" do
+    assert_difference('Comment.count', -1) do
+      delete :destroy, id: @comment, post_id: posts(:one).id
+    end
+
+    assert_redirected_to post_path(posts(:one))
+  end
+end

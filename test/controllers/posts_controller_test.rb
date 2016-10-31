@@ -28,7 +28,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should create post" do
     assert_difference('Post.count') do
-      post :create, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
+      post :create, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     end
 
     assert_redirected_to post_path(assigns(:post))
@@ -78,13 +78,13 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "should update post" do
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
+    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_redirected_to post_path(assigns(:post))
   end
 
   test "should not update post if not identified" do
     sign_out(customers(:one))
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
+    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
@@ -92,7 +92,7 @@ class PostsControllerTest < ActionController::TestCase
   test "should not get update if not post owner" do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
+    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_response :found
     assert_redirected_to posts_path, locale: I18n.default_locale
   end

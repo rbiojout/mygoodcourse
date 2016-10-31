@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
 
   before_action :correct_user, excep: [:index, :show]
 
-  before_action :context, only: [:like, :unlike]
+  before_action :context
 
   # GET /comments
   # GET /comments.json
@@ -73,9 +73,10 @@ class CommentsController < ApplicationController
   # DELETE /comments/1
   # DELETE /comments/1.json
   def destroy
+    @context = context
     @comment.destroy
     respond_to do |format|
-      format.html { redirect_to comments_url, notice: t('views.flash_delete_message') }
+      format.html { redirect_to context_url(context), notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end

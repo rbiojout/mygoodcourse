@@ -322,13 +322,54 @@ en:
         submit: 'Save this product'
         update: 'Update this product'
 
-  abuse_mailer:
-    received:
-      subject: 'Abuse Confirmation'
-    accepted:
-      subject: 'Abuse Accepted'
-    rejected:
-      subject: 'Abuse Rejected'
+  mailer:
+    salutation: 'Hello %{customer_name}!'
+    salutation_html: '<h1>Hello %{customer_name}!</h1>'
+    abuse_mailer:
+      signature: 'Many thanks to help us make MyGoodCourse even better!'
+      signature_html: '<p>Many thanks to help us make MyGoodCourse even better!</p>'
+      received:
+        subject: 'Abuse Confirmation'
+        text: >
+          We have taken into account your request for reporting an abuse linked to this element:
+
+          related to "%{abusable_name}"
+
+          With your given description: "%{description}"
+
+          We will e-mail you again when this abuse has been reviewed.
+        text_html: >
+          <h3>We have taken into account your request for reporting an abuse</h3>
+          <p>based on your feedback, we will consider this information:</p>
+          <ul>
+            <li>Related to %{abusable_name}</li>
+            <li>With your given description: %{description}</li>
+            <p>We will e-mail you again when this abuse has been reviewed.</p>
+      accepted:
+        subject: 'Abuse Accepted'
+        text: >
+          Problem %{abuse_name}.
+
+          Your submission has been taken into account and is now accepted for %{abuse_name}.
+
+          We will update if when we treat this problem.
+
+        text_html: >
+          <h3>Your submission has been taken into account and is now accepted for %{abuse_name}</h3>
+          <p>We will update if when we treat this problem.</p>
+      rejected:
+        subject: 'Abuse Rejected'
+        text: >
+          Problem %{abuse_name}.
+
+          Your submission has been taken into account and is now rejected for %{abuse_name}.
+
+
+          You can still contact us if you consider this is a mistake by providing a new report and giving more details.
+        text_html: >
+          <h3>Your submission has been taken into account and is now rejected for %{abuse_name}</h3>
+          <p>Your submission has been rejected and we don't consider there is a problem.</p>
+          <p>You can still contact us if you consider this is a mistake by providing a new report and giving more details.</p>
   order_mailer:
     received:
       subject: 'Order Confirmation'

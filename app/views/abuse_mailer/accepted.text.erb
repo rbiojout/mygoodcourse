@@ -1,10 +1,5 @@
-Hello <%=@abuse.customer.first_name%>!
+<%= t('mailer.salutation', customer_name: @abuse.customer.first_name)%>
 
-Abuse #<%=@abuse.id%>
+<%= t('mailer.abuse_mailer.accepted.text', abuse_name: @abuse.id) %>
 
-Your abuse has been taken into account.
-
-We will return to you as soon as we have verified it.
-
-Many thanks,
-
+<%= t('mailer.abuse_mailer.signature')%>

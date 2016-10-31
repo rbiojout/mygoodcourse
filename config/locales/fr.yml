@@ -382,20 +382,61 @@ fr:
     flash_create_message: 'Création avec succès'
     flash_delete_message: 'Suppression avec succès'
 
-  abuse_mailer:
-    received:
-      subject: "Votre signalement d'abus a été pris en compte"
-    accepted:
-      subject: "Votre signalement d'abus a été accepté"
-    rejected:
-      subject: "Votre signalement d'abus a été rejeté"
-  order_mailer:
-    received:
-      subject: 'Confirmation de commande'
-    accepted:
-      subject: 'Commande Acceptée'
-    rejected:
-      subject: 'Commande Rejetée'
+  mailer:
+    salutation: 'Bonjour %{customer_name}!'
+    salutation_html: '<h1>Bonjour %{customer_name}!</h1>'
+    abuse_mailer:
+      signature: 'Merci de votre aide pour rendre MyGoodCourse meilleur!'
+      signature_html: '<p>Merci de votre aide pour rendre MyGoodCourse meilleur!</p>'
+      received:
+        subject: "Votre signalement d'abus a été pris en compte"
+        text: >
+          Nous accusons la réception de votre demande de vérification pour l'élément suivant:
+
+          en lien avec "%{abusable_name}"
+
+          Avec la description que vous avez communiquée et qui est la suivante: "%{description}"
+
+          Nous vous enverrons un email pour vous indiquer la suite que nous donnons à votre signalement.
+        text_html: >
+          <h3>Nous accusons la réception de votre demande de vérification</h3>
+          <p>suite à votre demande, nous allons vérifier les éléments suivants:</p>
+          <ul>
+            <li>En lien avec %{abusable_name}</li>
+            <li>Avec la description que vous avez communiquée et qui est la suivante: %{description}</li>
+            <p>Nous vous enverrons un email pour vous indiquer la suite que nous donnons à votre signalement.</p>
+      accepted:
+        subject: "Votre signalement d'abus a été accepté"
+        text: >
+          Problème %{abuse_name}.
+
+          Votre signalement de problème a été pris en compte et est accepté pour traitement.
+
+
+          Nous vous tiendrons au courant sitôt que nous l'auront revu.
+        text_html: >
+          <h3>Nous avons pris en compte votre signalement %{abuse_name}</h3>
+          <p>Nous vous tiendrons au courant sitôt que nous l'auront revu.</p>
+      rejected:
+        subject: "Votre signalement d'abus a été rejeté"
+        text: >
+          Problème %{abuse_name}.
+
+          Votre signalement de problème a été pris en compte et est rejeté pour traitement.
+
+
+          Vous pouvez nous contacter si vous considérez que c'est une erreur.
+        text_html: >
+          <h3>Nous avons pris en compte votre signalement %{abuse_name}</h3>
+          <p>Votre signalement de problème a été rejeté pour traitement.</p>
+          <p>Vous pouvez nous contacter si vous considérez que c'est une erreur.</p>
+    order_mailer:
+      received:
+        subject: 'Confirmation de commande'
+      accepted:
+        subject: 'Commande Acceptée'
+      rejected:
+        subject: 'Commande Rejetée'
 
   time:
     formats:
