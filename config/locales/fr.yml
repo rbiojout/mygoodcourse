@@ -72,8 +72,8 @@ fr:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'
       no_result_found: 'Aucun résultat'
-    review:
-      alert_add: "Il n'y a pas encore d'évaluation sur ce produit, soyez le premier à laisser une évaluation!"
+    comment:
+      alert_add: "Il n'y a pas encore de commentaire rédigé, soyez le premier à laisser un commentaire!"
     customer:
       info_email_validation: 'Compte créé. Vous y êtes presque! Pour activer votre compte, un email de confirmation a été envoyé à: %{email}'
       alert_stripe_needed: 'Il vous faut un compte Stripe pour accepter les paiements.'
@@ -101,6 +101,8 @@ fr:
       notice_preparing: 'Votre produit est en cours de préparation, un peu de patience...'
       alert_need_attachment: 'Vous devez ajouter au moins un fichier.'
       alert_wishes: "Il n'y a pas de produit favori pour le moment. Chaque utilisateur peut se constituer sa liste de produits préférés pour les retrouver plus facilement. Explorez le catalogue pour trouver votre sélection de produits favoris!"
+    review:
+      alert_add: "Il n'y a pas encore d'évaluation sur ce produit, soyez le premier à laisser une évaluation!"
     shop:
       add_cart: 'Ajouter au panier'
       explain_add: "Pour accéder à cette ressource, vous devez être membre de MyGoodCourse. Si ce n'est pas encore fait, vous devez commander ce produit. Pour les ressources gratuites, vous devrez aller jusqu'à la validation de la commande, mais aucun paiement ne sera exigé."

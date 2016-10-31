@@ -15,6 +15,8 @@ class CommentsController < ApplicationController
   # GET /comments/1
   # GET /comments/1.json
   def show
+    @context = @comment.commentable
+    redirect_to context_url(@context)
   end
 
   # GET /comments/new

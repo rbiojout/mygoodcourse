@@ -21,14 +21,28 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to post_path(posts(:one))
   end
 
-  test "should show comment" do
+  test "should show comment for Post" do
     get :show, id: @comment
-    assert_response :success
+    assert_redirected_to post_path(posts(:one))
   end
 
   test "should get edit for Post" do
     get :edit, id: @comment, post_id: posts(:one).id
     assert_response :success
+  end
+
+  test "should create comment for Post via ajax" do
+    sign_in(customers(:one), scope: :customer)
+    assert_difference('Comment.count') do
+      xhr :post, :create, post_id: posts(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    end
+
+    assert_response :success
+    assert_select_jquery :after, '#comment-form' do
+      #assert_select '.media-object img', @review.customer.picture
+      assert_select '.hidden-xs p', @comment.description
+    end
+
   end
 
   test "should update comment for Post" do

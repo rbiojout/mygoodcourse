@@ -44,25 +44,41 @@
 
 <h2><%= t('activerecord.models.comment', count: 2)%></h2>
 
-<div id="comment-form"></div>
+    <!-- comments -->
+    <div id="comment-form"></div>
+        <!-- alert if empty -->
+        <% if @post.comments.count==0 %>
+            <!-- add alert with call action to add comment -->
+            <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add')}) %>
+        <% else %>
+            <% @post.comments.each do |comment|%>
+                <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
+            <% end %>
+        <% end %>
 
-<% @post.comments.each do |comment|%>
-    <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
-
-<% end %>
-  </div>
+      </div>
+    <!-- end comments -->
   <div class="col-md-4">
     <%= link_to posts_path do %>
-        <h3><%= t('activerecord.models.post.all') %></h3>
+        <h2><%= t('activerecord.models.post.all') %></h2>
     <% end %>
-    <h3><%= t('dialog.post.populars')%></h3>
-    <ul class="list-unstyled">
+    <h2><%= t('dialog.post.populars')%></h2>
+    <div class="most-viewed-posts">
+    <ol class="list-unstyled">
       <% @top_posts.each do |post| %>
-          <li>
-            <%= render(:partial => 'posts/post', locals: {post: post, with_body: false, with_cols: false}) %>
+          <li class>
+
+            <%= link_to (post_path(post)) do %>
+                <h3><i class="fa fa-star-o fa-1x active-star"></i>
+
+            </span><%= post.name %></h3>
+            <% end %>
+
+            <%# render(:partial => 'posts/post', locals: {post: post, with_body: false, with_cols: false}) %>
           </li>
       <% end %>
-    </ul>
+    </ol>
+    </div>
   </div>
 
 </div>

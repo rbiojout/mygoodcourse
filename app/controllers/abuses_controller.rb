@@ -105,6 +105,7 @@ class AbusesController < ApplicationController
       product_path(context)
     elsif Review === context
       review_path(context)
+     #@TODO redirect to the commentable
     elsif Comment === context
       comment_path(context)
     end
