@@ -8,12 +8,6 @@ class CommentsControllerTest < ActionController::TestCase
     sign_in(customers(:one), scope: :customer)
   end
 
-  test "should get index" do
-    get :index
-    assert_response :success
-    assert_not_nil assigns(:comments)
-  end
-
   test "should get new for Post" do
     get :new, post_id: posts(:one).id
     assert_response :success
