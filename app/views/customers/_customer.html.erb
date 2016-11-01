@@ -24,7 +24,13 @@
               <!-- end follow -->
               <!-- if customer is signed, direct link to his profile -->
               <% else %>
-                  <%= link_to(customer_path(customer), class: 'btn btn-default btn-sm', alt: t('page.my_profile'), title: t('page.my_profile') )  do %><i class="fa fa-pencil fa-lg" aria-hidden="true"></i><% end %>
+                  <%= button_to(customer_path(customer),
+                              class: 'btn-tool btn btn-default btn-sm',
+                              alt: t('page.my_profile'),
+                              title: t('page.my_profile'),
+                              data: {toggle: 'tooltip', placement: 'left'} ) do %>
+
+                  <i class="fa fa-pencil fa-lg"> </i><% end %>
               <% end %>
           <% end %>
         </span>

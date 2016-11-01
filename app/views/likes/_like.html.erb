@@ -4,13 +4,20 @@
    context_param = context.class.name.downcase + "_id"
    context_value = context.id
 %>
-<div class='<%="like_#{context_type}_#{context_value}"%> pull-right btn' >
+<div class='<%="like_#{context_type}_#{context_value}"%> pull-right'>
   <%= link_to(like_like_path(context_param => context_value),
               alt: 'Like!',
               title: 'Like!',
+              data: {toggle: 'tooltip', placement: 'left'},
+              class: 'btn-tool btn',
               method: :post, remote: true ) do %>
 
       <i class="fa fa-thumbs-o-up fa-lg"> </i>
   <% end %>
   <span class="badge"><%= context.likes.size unless context.likes.size ==0 %></span>
 </div>
+
+<script language="JavaScript">
+    $('.btn-tool[data-toggle="tooltip"]').tooltip();
+</script>
+

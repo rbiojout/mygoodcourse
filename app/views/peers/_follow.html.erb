@@ -1,7 +1,8 @@
 <%= link_to(follow_peer_path(followed_id: followed.id, locale: locale),
-            class: 'btn btn-default btn-sm',
+            class: 'btn-tool btn btn-default btn-sm',
             alt: t('activerecord.attributes.peers.follow'),
             title: t('activerecord.attributes.peers.follow'),
+            data: {toggle: 'tooltip', placement: 'left'},
             :method => :post, remote: true ) do %>
 
     <i class="fa fa-heart-o red fa-lg"> </i>

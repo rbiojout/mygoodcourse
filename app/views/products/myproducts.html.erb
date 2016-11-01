@@ -29,12 +29,7 @@
 <% if @products.size > 0 %>
     <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %>
 <% else %>
-    <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary', :data =>{toggle: "tooltip", placement: "bottom"}, :title =>t('dialog.product.explain_add') %>
+    <%= link_to t('actions.products.new'), new_product_path, class: 'btn-tool btn btn-primary',
+                :data =>{toggle: "tooltip", placement: "bottom"}, :title =>t('dialog.product.explain_add') %>
 <% end %>
 
-<!-- needed -->
-<script language="JavaScript">
-    $(function () {
-        $('[data-toggle="tooltip"]').tooltip()
-    })
-</script>

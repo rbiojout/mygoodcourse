@@ -1,4 +1,3 @@
-$('#alert_notice_holder').html("<%= escape_javascript(render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: I18n.translate('views.flash_delete_message')}, locale: locale)) %>");
 
 <%
    # context : parameter to refer to the polymorphic
@@ -8,21 +7,3 @@ $('#alert_notice_holder').html("<%= escape_javascript(render(partial: 'shared/di
 
 // replace the like to unlike
 $('.<%="like_#{context_type}_#{context_value}"%>').replaceWith("<%= escape_javascript(render(partial: 'likes/like',  locals: {context: @context, locale: locale})) %>");
-
-// move to the top
-$(window).scrollTop(0);
-
-// animate
-$('#alert_notice_holder .alert').fadeTo(4000, 0).slideUp(500, function() {
-    $(this).remove();
-});
-
-// close the modal
-$('#app_dialog').modal_success();
-
-
-$('#app_dialog').on('hidden.bs.modal', function (event) {
-// first we need to hide before to show
-    $('#like_<%=@context.class.to_s.downcase%>_<%=@context.id%>').hide();
-    $('#like_<%=@context.class.to_s.downcase%>_<%=@context.id%>').show(900);
-})
