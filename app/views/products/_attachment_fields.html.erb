@@ -1,22 +1,21 @@
 <% is_first ||=false %>
+<div class="nested-fields col-sm-4 col-md-4 panel-attachment" id="attachment_<%=f.object.id%>">
+
 <% if f.object.new_record?  %>
-    <div class="nested-fields col-sm-4 col-md-4 panel-attachment" id="attachment_<%=f.object.id%>">
       <div class="thumbnail" >
         <%= image_tag "empty_file.png", class: 'img-responsive panel-image-product' %>
         <div class="caption caption-file">
             <b>(Format: PDF)</b>
             <%= f.input :file, as: :attachment_preview %>
             <%= f.input :file_cache, as: :hidden  %>
-            </div>
+        </div>
         <!--- only when remove_ok flag is received we activate the link to remove --->
         <% unless is_first %>
             <%= link_to_remove_association t('dialog.product.remove_version'), f, class: 'btn btn-danger btn-sm center-block' %>
         <% end %>
         </div>
-    </div>
 
 <% else %>
-    <div class="nested-fields col-sm-4 col-md-4 panel-attachment" id="attachment_<%=f.object.id%>">
       <!--- we put the anchor on thumbnail --->
       <div class="thumbnail" >
         <% attachment = f.object %>
@@ -36,7 +35,7 @@
             <%= button_tag t('dialog.product.active_version'), class: 'btn btn-success btn-sm center-block' %>
         <% end %>
       </div>
-    </div>
 <% end %>
 
+</div>
 

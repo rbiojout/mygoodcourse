@@ -5,7 +5,10 @@
    context_value = context.id
 %>
 <div class='<%="like_#{context_type}_#{context_value}"%> pull-right btn' >
-    <%= link_to(unlike_like_path(context_param => context_value), alt: 'Unlike', method: :delete, remote: true ) do %>
+    <%= link_to(unlike_like_path(context_param => context_value),
+                alt: 'Unlike',
+                title: 'Unlike',
+                method: :delete, remote: true ) do %>
 
         <i class="fa fa-thumbs-up fa-lg"> </i>
   <span class="badge"><%= context.likes.size unless context.likes.size ==0 %></span>

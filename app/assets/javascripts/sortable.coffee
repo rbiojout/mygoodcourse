@@ -5,13 +5,12 @@ $ ->
   $('.sortable').sortable
     axis: 'y'
     handle: '.handle'
-    placeholder: 'sort-placeholder'
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
 
   $( ".sortgrid" ).sortable
     handle: ".thumbnail"
-    placeholder: 'sort-placeholder'
+    appendTo: $('')
     update: ->
       $.post($(this).data('update-url'), $(this).sortable('serialize'))
 

@@ -177,7 +177,6 @@ Rails.application.routes.draw do
 
   resources :comments, except: [:index]
   resources :updates
-  resources :posts
   #resources :likes
   # Like and unlike other ressources (polymorphic)
   #
@@ -373,6 +372,8 @@ Rails.application.routes.draw do
 
       end
     end
+
+    resources :posts
 
     # elements for the FAQ organized in topics with articles
     resources :topics do

@@ -1,3 +1,5 @@
+<div class="row">
+  <div class="col-xs-12">
 <div class="pull-right">
   <!-- like it! -->
   <% if customer_signed_in? %>
@@ -22,10 +24,6 @@
       <% end %>
   <% end %>
 
-  <span class="btn pull-right">
-      <span class="fa fa-eye fa-lg"></span> <span class="badge"><%= post.counter_cache unless post.counter_cache ==0 %></span>
-  </span>
-
   <% if post.owned?(current_customer) %>
 
     <%= link_to edit_post_path(post), class: 'btn pull-right' do %>
@@ -33,4 +31,7 @@
     <% end %>
   <% end %>
 
+</div>
+
+  </div>
 </div>

@@ -1,0 +1,9 @@
+<ul>
+<% @order.products.each do |product| %>
+    <li>
+    <%= link_to download_attachment_url(product.attachment, format: :pdf) do %>
+        <%= product.name %>
+    <% end %>
+    </li>
+<% end %>
+</ul>

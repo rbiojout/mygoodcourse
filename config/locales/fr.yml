@@ -433,10 +433,26 @@ fr:
           <p>Votre signalement de problème a été rejeté pour traitement.</p>
           <p>Vous pouvez nous contacter si vous considérez que c'est une erreur.</p>
     order_mailer:
+      signature: 'Merci de votre confiance à MyGoodCourse!'
+      signature_html: '<p>Merci de votre confiance à MyGoodCourse!</p>'
       received:
         subject: 'Confirmation de commande'
       accepted:
         subject: 'Commande Acceptée'
+        text: >
+          Commande %{order}
+
+          Nous sommes heureux de vous annoncer que votre commande ainsi que votre paiement de %{amount_total} ont été acceptés.
+
+          Détail de votre commande:
+              %{order_products}
+        text_html: >
+          <h3>Commande %{order}</h3>
+
+
+          <p>Nous sommes heureux de vous annoncer que votre commande ainsi que votre paiement de %{amount_total} ont été acceptés.</p>
+          <p>Détail de votre commande:</p>
+              %{order_products}
       rejected:
         subject: 'Commande Rejetée'
 

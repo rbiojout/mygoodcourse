@@ -32,7 +32,14 @@
 <!-- end tools -->
 
 <%# image_tag 'http://fakeimg.pl/1200x600/', class: 'img-responsive' %>
-<%= image_tag @post.visual, class: 'img-responsive' %>
+    <div class="relative">
+      <%= image_tag @post.visual, class: 'img-responsive' %>
+      <span class="bottom-right">
+        <span class="btn btn-default">
+          <span class="fa fa-eye fa-lg"></span> <span class="badge"><%= @post.counter_cache unless @post.counter_cache ==0 %></span>
+        </span>
+      </span>
+    </div>
 
 <p>
   <%= raw(@post.description) %>

@@ -371,13 +371,29 @@ en:
           <h3>Your submission has been taken into account and is now rejected for %{abuse_name}</h3>
           <p>Your submission has been rejected and we don't consider there is a problem.</p>
           <p>You can still contact us if you consider this is a mistake by providing a new report and giving more details.</p>
-  order_mailer:
-    received:
-      subject: 'Order Confirmation'
-    accepted:
-      subject: 'Order Accepted'
-    rejected:
-      subject: 'Order Rejected'
+    order_mailer:
+      signature: 'Many thanks to help MyGoodCourse grow!'
+      signature_html: '<p>Many thanks to help MyGoodCourse grow!</p>'
+      received:
+        subject: 'Order Confirmation'
+      accepted:
+        subject: 'Order Accepted'
+        text: >
+          Order %{order}
+
+          We're pleased to let you know that we have accepted your order and your payment of %{amount_total} has been taken from your card successfully.
+
+          Your order details:
+              %{order_products}
+        text_html: >
+          <h3>Order %{order}</h3>
+
+          <p>We're pleased to let you know that we have accepted your order and your payment of %{amount_total} has been taken from your card successfully.</p>
+
+          <p>Your order details:</p>
+                %{order_products}
+      rejected:
+        subject: 'Order Rejected'
 
 
   time:

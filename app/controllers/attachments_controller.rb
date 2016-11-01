@@ -2,7 +2,7 @@ class AttachmentsController < ApplicationController
   require 'open-uri'
 
   before_action :set_attachment, only: [:download]
-  before_action :authenticate_customer!, only: [:sort, :download]
+  #before_action :authenticate_customer!, only: [:sort, :download]
 
   before_action :correct_user, only: [:download]
 
@@ -99,7 +99,7 @@ class AttachmentsController < ApplicationController
   end
 
   def correct_user
-    redirect_to catalog_products_path, alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !@attachment.product.candownload(current_customer))
+    redirect_to catalog_products_path(format: :html), alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !@attachment.product.candownload(current_customer))
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

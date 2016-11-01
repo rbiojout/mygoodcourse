@@ -14,25 +14,25 @@ class OrderMailerPreview < ActionMailer::Preview
   end
 
   def accepted_en
-    order = Order.first
+    order = Order.where(status: Order::STATE_ACCEPTED).first
     I18n.locale = 'en'
     OrderMailer.accepted(order)
   end
 
   def accepted_fr
-    order = Order.first
+    order = Order.where(status: Order::STATE_ACCEPTED).first
     I18n.locale = 'fr'
     OrderMailer.accepted(order)
   end
 
   def rejected_en
-    order = Order.first
+    order = Order.where(status: Order::STATE_REJECTED).first
     I18n.locale = 'en'
     OrderMailer.rejected(order)
   end
 
   def rejected_fr
-    order = Order.first
+    order = Order.where(status: Order::STATE_REJECTED).first
     I18n.locale = 'fr'
     OrderMailer.rejected(order)
   end

@@ -81,18 +81,20 @@ class Order < ActiveRecord::Base
     end
 
     # Send an email to the customer
-    deliver_received_order_email
+    # deliver_received_order_email
   end
 
   def runAccept
     self.accepted_at = Time.now
 
+    # Send an email to the customer
     deliver_accepted_order_email
   end
 
   def runReject
     self.rejected_at = Time.now
 
+    # Send an email to the customer
     deliver_rejected_order_email
   end
 
