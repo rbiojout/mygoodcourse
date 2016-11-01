@@ -4,12 +4,19 @@
 
 <!-- Image Header -->
 <div class="parallaxed banner_6" data-stellar-background-ratio="0.5"><span>
-    <h1><%= t('activerecord.models.post', count: 2)%></h1>
+    <h1><%= t('activerecord.models.post', count: 2).capitalize %></h1>
 </span>
 </div>
 <!-- /.row -->
-
-<%= link_to t('actions.posts.new'), new_post_path, class: 'btn btn-primary' %>
+<!-- new Post -->
+<% if customer_signed_in? %>
+    <div class="row">
+      <div class="col-xs-12" style="padding-bottom: 10px;">
+        <%= link_to new_post_path, class: 'btn btn-primary pull-right' do %><span class="fa fa-pencil fa-lg"></span> <%= t('actions.posts.new') %><% end %>
+      </div>
+    </div>
+<% end %>
+<!-- end new Post -->
 
 <div id="index-posts" class="row">
   <% @posts.each do |post| %>

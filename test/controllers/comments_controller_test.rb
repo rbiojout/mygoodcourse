@@ -38,16 +38,19 @@ class CommentsControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_select_jquery :after, '#comment-form' do
-      #assert_select '.media-object img', @review.customer.picture
-      assert_select '.hidden-xs p', @comment.description
-    end
 
   end
 
   test "should update comment for Post" do
     patch :update, post_id: posts(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
     assert_redirected_to post_path(posts(:one))
+  end
+
+  test "should update comment for Post via ajax" do
+    sign_in(customers(:one), scope: :customer)
+    patch :update, xhr: true, post_id: posts(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+
+
   end
 
   test "should destroy comment for Post" do

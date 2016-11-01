@@ -1,0 +1,11 @@
+<%= t('mailer.salutation_html', customer_name: @order.customer.first_name)%>
+
+<%= t('mailer.order_mailer.received.text_html',
+      order: link_to(@order.number, order_url(@order)) ,
+      amount_total: number_to_currency(@order.amount_paid),
+      order_products: render(partial: 'order_mailer/order_products', locals: {products: @order.products})
+    ) %>
+
+<%= t('mailer.order_mailer.signature_html')%>
+
+

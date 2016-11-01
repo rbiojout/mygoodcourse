@@ -71,3 +71,66 @@ two_from_seller_two: # generated id:980190962
   version_number: 9.99
   active: true
   product: two_from_seller_two
+
+one_from_seller_no_stripe:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: one_from_seller_no_stripe
+
+priced_one:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: priced_one
+
+priced_two:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: priced_two
+
+ProdF1C1_C1L1:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: ProdF1C1_C1L1
+
+ProdF1C2_C1L2:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: ProdF1C2_C1L2
+
+ProdF2C1_C2L1:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: ProdF2C1_C2L1
+
+ProdF2C2_C2L2:
+  file: "Sommaire.pdf"
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 9.99
+  active: true
+  product: ProdF2C2_C2L2

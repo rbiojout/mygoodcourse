@@ -9,13 +9,13 @@ class PostsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    get :index
+    get :index, locale: I18n.default_locale
     assert_response :success
     assert_not_nil assigns(:posts)
   end
 
   test "should get new" do
-    get :new
+    get :new, locale: I18n.default_locale
     assert_response :success
   end
 
@@ -28,7 +28,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should create post" do
     assert_difference('Post.count') do
-      post :create, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
+      post :create, locale: I18n.default_locale, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     end
 
     assert_redirected_to post_path(assigns(:post))
@@ -36,34 +36,34 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should not create post if not identified" do
     sign_out(customers(:one))
-    post :create, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
+    post :create, locale: I18n.default_locale, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name }
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
 
   test "should show post" do
-    get :show, id: @post
+    get :show, locale: I18n.default_locale, id: @post
     assert_response :success
   end
 
   test "should show post with slug" do
-    get :show, id: @post.slug, locale: I18n.default_locale
+    get :show, locale: I18n.default_locale, id: @post.slug
     assert_response :success
   end
 
   test "should get edit" do
-    get :edit, id: @post
+    get :edit, locale: I18n.default_locale, id: @post
     assert_response :success
   end
 
   test "should get edit with slug" do
-    get :edit, id: @post.slug, locale: I18n.default_locale
+    get :edit, locale: I18n.default_locale, id: @post.slug
     assert_response :success
   end
 
   test "should get edit if not identified" do
     sign_out(customers(:one))
-    get :edit, id: @post
+    get :edit, locale: I18n.default_locale, id: @post
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
@@ -71,20 +71,20 @@ class PostsControllerTest < ActionController::TestCase
   test "should not get edit if not post owner" do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
-    get :edit, id: @post.slug, locale: I18n.default_locale
+    get :edit, locale: I18n.default_locale, id: @post.slug
 
     assert_response :found
     assert_redirected_to posts_path, locale: I18n.default_locale
   end
 
   test "should update post" do
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
+    patch :update, locale: I18n.default_locale, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_redirected_to post_path(assigns(:post))
   end
 
   test "should not update post if not identified" do
     sign_out(customers(:one))
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
+    patch :update, locale: I18n.default_locale, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
@@ -92,14 +92,14 @@ class PostsControllerTest < ActionController::TestCase
   test "should not get update if not post owner" do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
-    patch :update, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
+    patch :update, locale: I18n.default_locale, id: @post, post: { customer_id: @post.customer_id, description: @post.description, name: @post.name, visual: fixture_file_upload('files/default_visual.png', 'image/png') }
     assert_response :found
     assert_redirected_to posts_path, locale: I18n.default_locale
   end
 
   test "should destroy post" do
     assert_difference('Post.count', -1) do
-      delete :destroy, id: @post
+      delete :destroy, locale: I18n.default_locale, id: @post
     end
 
     assert_redirected_to posts_path
@@ -107,7 +107,7 @@ class PostsControllerTest < ActionController::TestCase
 
   test "should not destroy post if not identified" do
     sign_out(customers(:one))
-    delete :destroy, id: @post
+    delete :destroy, locale: I18n.default_locale, id: @post
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
@@ -115,7 +115,7 @@ class PostsControllerTest < ActionController::TestCase
   test "should not destroy post if not post owner" do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
-    delete :destroy, id: @post
+    delete :destroy, locale: I18n.default_locale, id: @post
     assert_response :found
     assert_redirected_to posts_path, locale: I18n.default_locale
   end

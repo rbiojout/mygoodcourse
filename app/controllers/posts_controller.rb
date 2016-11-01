@@ -7,6 +7,7 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
+    #@posts = Post.where(status: POST::STATE_ACCEPTED).unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
     @posts = Post.all.unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
   end
 
@@ -36,6 +37,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        @post.accept!
         format.html { redirect_to @post, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @post }
       else
@@ -50,6 +52,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
+        @post.cancel!
         format.html { redirect_to @post, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @post }
       else

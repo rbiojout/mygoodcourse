@@ -18,7 +18,7 @@
   </div>
 </div>
 <div class="row ">
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="slideInUp" data-os-animation-delay="0.5s">
+  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
     <div class="panel panel-default text-center noborder">
       <div class="panel-heading">
                         <span class="fa-stack fa-5x">
@@ -32,7 +32,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="slideInUp" data-os-animation-delay="1.5s">
+  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="1.5s">
     <div class="panel panel-default text-center noborder">
       <div class="panel-heading">
                         <span class="fa-stack fa-5x">
@@ -46,7 +46,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="slideInUp" data-os-animation-delay="2.5s">
+  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="2.5s">
     <div class="panel panel-default text-center noborder">
       <div class="panel-heading">
                         <span class="fa-stack fa-5x">
@@ -60,7 +60,7 @@
       </div>
     </div>
   </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="slideInUp" data-os-animation-delay="3.5s">
+  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="3.5s">
     <div class="panel panel-default text-center noborder">
       <div class="panel-heading">
                         <span class="fa-stack fa-5x">
@@ -285,9 +285,12 @@
 </div>
 <!-- /.row -->
 
-<div class="row os-animation" data-os-animation="swing" data-os-animation-delay="1s">
+<div class="row os-animation" data-os-animation="zoomIn" data-os-animation-delay="1.5s">
   <div class="col-md-6 col-md-offset-3 text-center">
-    <%= link_to 'Inscrivez vous à MyGoodCourse et commencez votre aventure', new_customer_registration_path, class: "btn btn-success text-center" %>
+    <%= link_to 'Inscrivez vous et commencez votre aventure', new_customer_registration_path, class: "btn btn-success text-center" %>
+    <p>ou bien</p>
+    <%= link_to 'Explorez le catalogue', catalog_products_path, class: "btn btn-primary text-center" %>
+
   </div>
 </div>
 

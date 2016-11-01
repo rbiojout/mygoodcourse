@@ -401,11 +401,11 @@ Rails.application.routes.draw do
 
 
   # root page
-  #root to: 'static_pages#home'
-  #get '/:locale' => 'static_pages#home'
+  root to: 'static_pages#home'
+  get '/:locale' => 'static_pages#home'
 
-  root to: 'products#catalog'
-  get '/:locale' => 'products#catalog'
+  #root to: 'products#catalog'
+  #get '/:locale' => 'products#catalog'
 
 
 

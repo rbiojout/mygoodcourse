@@ -26,6 +26,7 @@ fr:
   page:
     home: 'Accueil'
     catalog: 'Catalogue'
+    posts: 'Articles'
     my_products: 'Mes Produits'
     my_orders: 'Mes Commandes'
     my_orders_products: 'Mes produits commandés'
@@ -437,6 +438,25 @@ fr:
       signature_html: '<p>Merci de votre confiance à MyGoodCourse!</p>'
       received:
         subject: 'Confirmation de commande'
+        text: >
+          Commande %{order}
+
+          Nous sommes heureux de vous annoncer que votre commande a bien été enregistrée et qu'elle sera bientôt traitée.
+
+          Détail de votre commande:
+              %{order_products}
+
+          Montant de votre commande: %{amount_total}.
+
+
+          Nous vous confirmerons son état après acceptation de votre paiement par notre partenaire bancaire.
+        text_html: >
+          <h3>Commande %{order}</h3>
+          <p>Nous sommes heureux de vous annoncer que votre commande a bien été enregistrée et qu'elle sera bientôt traitée.</p>
+          <p>Détail de votre commande:</p>
+              %{order_products}
+          <p>Montant de votre commande: %{amount_total}.</p>
+          <p>Nous vous confirmerons son état après acceptation de votre paiement par notre partenaire bancaire.</p>
       accepted:
         subject: 'Commande Acceptée'
         text: >
@@ -455,7 +475,24 @@ fr:
               %{order_products}
       rejected:
         subject: 'Commande Rejetée'
+        text: >
+          Commande %{order}
 
+          Malheureusement votre commande a été rejetée. Il s'agit certainement d'un problème de paiement. Vous pouvez néanmoins recommencer le paiement de cette commande.
+
+          Détail de votre commande:
+              %{order_products}
+
+          Montant de la commande: %{amount_total}
+
+        text_html: >
+          <h3>Commande %{order}</h3>
+
+
+          <p>Malheureusement votre commande a été rejetée. Il s'agit certainement d'un problème de paiement. Vous pouvez néanmoins recommencer le paiement de cette commande.</p>
+          <p>Détail de votre commande:</p>
+              %{order_products}
+          <p>Montant de la commande: %{amount_total}</p>
   time:
     formats:
       short: "%d/%m/%Y"

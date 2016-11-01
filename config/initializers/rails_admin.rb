@@ -64,6 +64,10 @@ RailsAdmin.config do |config|
     reject_abuse
     cancel_abuse
 
+    receive_post
+    accept_post
+    reject_post
+    cancel_post
 
     show_in_app
 
@@ -441,6 +445,18 @@ RailsAdmin.config do |config|
       end
       field :visual
     end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe
+        end
+      end
+      field :counter_cache
+      field :status
+      field :customer
+    end
+
   end
 
   config.model "Product" do

@@ -113,7 +113,104 @@ module RailsAdmin
           end
         end
       end
+
+      class ReceivePost < StateEngineActions
+        RailsAdmin::Config::Actions.register(self)
+        register_instance_option :only do
+          Post
+        end
+        register_instance_option :visible? do
+          begin
+            bindings[:object].may_receive? && bindings[:object].class == Post
+          rescue
+            false
+          end
+        end
+        register_instance_option :link_icon do
+          'fa fa-flag'
+        end
+        register_instance_option :controller do
+          Proc.new do
+            object.receive!
+            flash[:notice] = "Received #{@object.id}"
+            redirect_to show_path
+          end
+        end
+      end
+      class AcceptPost < StateEngineActions
+        RailsAdmin::Config::Actions.register(self)
+        register_instance_option :only do
+          Post
+        end
+        register_instance_option :visible? do
+          begin
+            bindings[:object].may_accept? && bindings[:object].class == Post
+          rescue
+            false
+          end
+        end
+        register_instance_option :link_icon do
+          'fa fa-thumbs-up'
+        end
+        register_instance_option :controller do
+          Proc.new do
+            object.accept!
+            flash[:notice] = "Accepted #{@object.id}"
+            redirect_to show_path
+          end
+        end
+      end
+      class RejectPost < StateEngineActions
+        register_instance_option :only do
+          Post
+        end
+        RailsAdmin::Config::Actions.register(self)
+        register_instance_option :visible? do
+          begin
+            bindings[:object].may_reject? && bindings[:object].class == Post
+          rescue
+            false
+          end
+        end
+        register_instance_option :link_icon do
+          'fa fa-thumbs-down'
+        end
+        register_instance_option :controller do
+          Proc.new do
+            object.reject!
+            flash[:notice] = "Rejected #{@object.id}"
+            redirect_to show_path
+          end
+        end
+      end
+      class CancelPost < StateEngineActions
+        register_instance_option :only do
+          Post
+        end
+        RailsAdmin::Config::Actions.register(self)
+        register_instance_option :visible? do
+          begin
+            bindings[:object].may_cancel? && bindings[:object].class == Post
+          rescue
+            false
+          end
+        end
+        register_instance_option :link_icon do
+          'fa fa-undo'
+        end
+        register_instance_option :controller do
+          Proc.new do
+            object.cancel!
+            flash[:notice] = "Canceled #{@object.id}"
+            redirect_to show_path
+          end
+        end
+      end
+
     end
+
+
+
 
   end
 end

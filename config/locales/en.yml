@@ -26,6 +26,7 @@ en:
   page:
     home: 'Home'
     catalog: 'Catalog'
+    posts: 'Articles'
     my_products: 'My Products'
     my_orders: 'My Orders'
     my_orders_products: 'My ordered products'
@@ -376,6 +377,24 @@ en:
       signature_html: '<p>Many thanks to help MyGoodCourse grow!</p>'
       received:
         subject: 'Order Confirmation'
+        text: >
+          Order %{order}
+
+          We're pleased to let you know that we have received your order and one of our team will be accepting it shortly.
+
+          Your order details:
+              %{order_products}
+
+          Your order amount: %{amount_total}
+
+          We will e-mail you again when your order has been accepted by our financial partner.
+        text_html: >
+          <h3>Order %{order}</h3>
+          <p>We're pleased to let you know that we have received your order and one of our team will be accepting it shortly.<p>
+          <p>Your order details:</p>
+                %{order_products}
+          <p>Your order amount: %{amount_total}</p>
+          <p>We will e-mail you again when your order has been accepted by our financial partner.</p>
       accepted:
         subject: 'Order Accepted'
         text: >
@@ -394,8 +413,23 @@ en:
                 %{order_products}
       rejected:
         subject: 'Order Rejected'
+        text: >
+          Order %{order}
 
+          Unfortunately, this attached order was rejected. This is most likely due to an issue with the bank. You should try again if you believe there is no reason for this problem.
 
+          Your order details:
+              %{order_products}
+          Order amount: %{amount_total}
+        text_html: >
+          <h3>Order %{order}</h3>
+
+          <p>Unfortunately, this attached order was rejected. This is most likely due to an issue with the bank. You should try again if you believe there is no reason for this problem.</p>
+
+          <p>Your order details:</p>
+                %{order_products}
+
+          <p>Order amount: %{amount_total}</p>
   time:
     formats:
       short: "%m/%d/%Y"

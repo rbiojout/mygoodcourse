@@ -61,7 +61,7 @@ class Abuse < ActiveRecord::Base
     end
 
     event :cancel do
-      transitions :from => [:accepted, :rejected], :to => :created
+      transitions :from => [:accepted, :rejected], :to => :received
     end
   end
 

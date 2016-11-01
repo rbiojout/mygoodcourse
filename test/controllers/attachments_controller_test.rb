@@ -40,7 +40,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     sign_out(customers(:one))
 
     get :download, id: @attachment
-    assert_redirected_to new_customer_session_path
+    assert_redirected_to catalog_products_path(format: :html)
   end
 
   test "need correct user" do
@@ -51,7 +51,7 @@ class AttachmentsControllerTest < ActionController::TestCase
     sign_in(customers(:two), scope: :customer)
 
     get :download, id: @attachment
-    assert_redirected_to catalog_products_path
+    assert_redirected_to catalog_products_path(format: :html)
   end
 
 end

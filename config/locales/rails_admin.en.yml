@@ -33,6 +33,8 @@ en:
         done: "received"
       receive_abuse:
         <<: *receive
+      receive_post:
+        <<: *receive
       accept: &accept
         title: "Accept %{model_label} '%{object_label}'"
         menu: "Accept"
@@ -40,6 +42,8 @@ en:
         link: "accept '%{object_label}'"
         done: "accepted"
       accept_abuse:
+        <<: *accept
+      accept_post:
         <<: *accept
       reject: &reject
         title: "Reject %{model_label} '%{object_label}'"
@@ -49,6 +53,8 @@ en:
         done: "rejected"
       reject_abuse:
         <<: *reject
+      reject_post:
+        <<: *reject
       cancel: &cancel
         title: "Cancel %{model_label} '%{object_label}'"
         menu: "Cancel"
@@ -56,4 +62,6 @@ en:
         link: "cancel '%{object_label}'"
         done: "canceled"
       cancel_abuse:
+        <<: *cancel
+      cancel_post:
         <<: *cancel

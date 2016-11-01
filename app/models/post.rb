@@ -11,6 +11,7 @@
 #  updated_at    :datetime         not null
 #  slug          :string
 #  visual        :string
+#  status        :string
 #
 # Indexes
 #
@@ -41,6 +42,34 @@ class Post < ActiveRecord::Base
   # we want a name with a Capital
   include CapitalizeNameConcern
   before_save :capitalize_name
+
+
+  # State Machine
+  include AASM
+
+  aasm :column => 'status' do
+    state :created, :initial => true
+    state :received, :accepted, :rejected, :corrected
+
+    event :receive do
+      before do
+        logger.debug('Preparing to receive')
+      end
+      transitions :from => :created, :to => :received
+    end
+
+    event :accept do
+      transitions :from => :received, :to => :accepted
+    end
+
+    event :reject do
+      transitions :from => :received, :to => :rejected
+    end
+
+    event :cancel do
+      transitions :from => [:accepted, :rejected], :to => :received
+    end
+  end
 
   belongs_to :customer
 
