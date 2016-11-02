@@ -1,20 +1,6 @@
 <%= t('mailer.salutation_html', customer_name: @abuse.customer.first_name)%>
-<%
-abusable_name=
-    case @abuse.abusable
-      when Product
-        (I18n.translate 'activerecord.models.product.one').capitalize + ": " + @abuse.abusable.name
-      when Review
-        (I18n.translate 'activerecord.models.review.one').capitalize + ": " + @abuse.abusable.title+", related to "+@abuse.abusable.product.name
-      when Comment
-        (I18n.translate 'activerecord.models.comment.one').capitalize + ": " + @abuse.abusable.commentable.name
-      else
-        ''
-    end
 
-%>
-
-<%= t('mailer.abuse_mailer.received.text_html', abusable_name: abusable_name, description: @abuse.description) %>
+<%= t('mailer.abuse_mailer.received.text_html', abusable_name: " #{abusable_name(@abuse)}", description: @abuse.description) %>
 
 <%= t('mailer.abuse_mailer.signature_html')%>
 

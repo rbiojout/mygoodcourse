@@ -440,6 +440,18 @@ ul.nav-tree  {
   }
 }
 
+.nav > li > a {
+  padding-right: 10px;
+  padding-left: 10px;
+}
+
+.cart-summary {
+  padding-top: 15px;
+}
+
+.cart-summary a {
+  color: #9d9d9d;
+}
 /* decorate the picture of the customer */
 .customer-profile{
   width:50px;

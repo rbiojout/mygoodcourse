@@ -1,6 +1,6 @@
 <%= t('mailer.salutation', customer_name: @abuse.customer.first_name)%>
 
-<%= t('mailer.abuse_mailer.rejected.text', abuse_name: @abuse.id) %>
+<%= t('mailer.abuse_mailer.rejected.text', abuse_name: " #{abusable_name(@abuse)}") %>
 
 <%= t('mailer.abuse_mailer.signature')%>
 

@@ -24,6 +24,7 @@
       <% @products.each do |product|%>
         <div class="row">
           <div class="col-xs-4 col-md-3">
+            <div class="relative">
             <!-- picture -->
             <div class="hovereffect center-block panel-image-product">
               <% if product.preview.nil? %>
@@ -34,6 +35,20 @@
 
             </div>
             <!-- end picture -->
+              <span class="top-right">
+                <!-- add to wish action for logged users -->
+                <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+                  <% if customer_signed_in? %>
+                      <% if current_customer.wishing?(product) %>
+                          <%= render(partial: 'wish_lists/unwish', locals: {:product => product}, locale: locale) %>
+                      <% else %>
+                          <%= render(partial: 'wish_lists/wish', locals: {:product => product}, locale: locale) %>
+                      <% end %>
+                  <% end %>
+                </div>
+                <!-- end wish action -->
+              </span>
+            </div>
           </div>
           <div class="col-xs-8 col-md-5">
             <h4><%= link_to product.name, product_path(product) %></h4>
@@ -58,17 +73,7 @@
             <% end %>
             <!-- end main action -->
 
-            <!-- add to wish action for logged users -->
-            <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
-            <% if customer_signed_in? %>
-              <% if current_customer.wishing?(product) %>
-                  <%= render(partial: 'wish_lists/unwish', locals: {:product => product}, locale: locale) %>
-              <% else %>
-                  <%= render(partial: 'wish_lists/wish', locals: {:product => product}, locale: locale) %>
-              <% end %>
-              <% end %>
-            </div>
-            <!-- end wish action -->
+
 
           </div>
         </div>

@@ -1,3 +1,6 @@
+# we use the MutationObserver in order to have the correct behaviour
+# of button when loading AND adding btn to the DOM
+
 inspector =
   selectors: []
   process: (node) ->

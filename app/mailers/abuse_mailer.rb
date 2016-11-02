@@ -1,4 +1,5 @@
 class AbuseMailer < ApplicationMailer
+  helper :abuses
   def received(abuse)
     @abuse = abuse
     mail to: abuse.customer.email, subject: I18n.t('mailer.abuse_mailer.received.subject', default: 'Abuse Confirmation')

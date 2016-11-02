@@ -75,14 +75,13 @@ class Abuse < ActiveRecord::Base
   def sendAcceptedEmail
     # Tell the AbuseMailer to send a confirmation after save
     AbuseMailer.accepted(self).deliver_later
-
   end
 
   # send email Rejected
   def sendRejectedEmail
     # Tell the AbuseMailer to send a confirmation after save
     AbuseMailer.rejected(self).deliver_later
-
   end
+
 
 end

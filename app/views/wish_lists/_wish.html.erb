@@ -1,5 +1,9 @@
 <% product ||= @product %>
-<%= link_to(wish_product_path(:product_id => product.id), :title => t('dialog.product.wish'), class: 'float-left btn btn-block btn-default', :method => :post, remote: true ) do %>
+<%= link_to(wish_product_path(:product_id => product.id),
+            class: 'btn-tool btn btn-default btn-sm',
+            :title => t('dialog.product.wish'),
+            data: {toggle: 'tooltip', placement: 'top'},
+            :method => :post, remote: true ) do %>
 
-    <i class="fa fa-heart-o red"> </i> <%= t('dialog.product.wish') %>
+    <i class="fa fa-heart-o fa-lg red"> </i>
 <% end %>

@@ -1,6 +1,6 @@
   <%= if (has_order? && current_order.has_items?)
-        link_to  order_items_path, class: 'navbar-brand' do %>
-      <i class="fa fa-shopping-cart" aria-hidden="true"></i> <span class="badge"><%= current_order.order_items.size %></span> <span class="badge bg-red pull-right"><%=nice_price(current_order.total) %></span>
+        link_to  order_items_path do %>
+      <i class="fa fa-shopping-cart fa-lg" aria-hidden="true"></i> <span class="badge"><%= current_order.order_items.size %></span> <span class="badge bg-red pull-right"><%=nice_price(current_order.total) %></span>
   <% end
      end%>
 

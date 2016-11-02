@@ -1,5 +1,9 @@
 <% product ||= @product %>
-<%= link_to(unwish_product_path(:product_id => product.id), :title => t('dialog.product.unwish'), class: 'float-left btn btn-block btn-default', :method => :delete, remote: true ) do %>
+<%= link_to(unwish_product_path(:product_id => product.id),
+            class: 'btn-tool btn btn-default btn-sm',
+            :title => t('dialog.product.unwish'),
+            data: {toggle: 'tooltip', placement: 'top'},
+            :method => :delete, remote: true ) do %>
 
-    <i class="fa fa-heart red"> </i> <%= t('dialog.product.unwish') %>
+    <i class="fa fa-heart fa-lg red"> </i>
 <% end %>
