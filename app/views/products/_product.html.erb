@@ -15,15 +15,15 @@
   </div>
   <!-- end picture -->
 
-  <!--- name --->
-  <div class="height_30 ellipsis">
-    <h4><%= link_to product.name, product_path(product) %></h4>
-  </div>
-  <!--- end name --->
 
   <!--- stars --->
     <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
     <!--- end stars --->
 
+  <!--- name --->
+  <div class="product-name ellipsis">
+    <h4><%= link_to product.name, product_path(product) %></h4>
+  </div>
+  <!--- end name --->
 
 </div>

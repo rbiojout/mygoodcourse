@@ -1,50 +1,13 @@
-<script type="text/javascript">
-    Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>');
-</script>
-
-
-<%= form_tag(checkout_confirmation_path, method: 'get', id:'payment-form') do %>
-    <span class="payment-errors"></span>
-
-    <div class="form-row">
-      <label>
-        <span>Card Number</span>
-        <input type="text" size="20" data-stripe="number">
-      </label>
-    </div>
-
-    <div class="form-row">
-      <label>
-        <span>Expiration (MM/YY)</span>
-        <input type="text" size="2" data-stripe="exp_month">
-      </label>
-      <span> / </span>
-      <input type="text" size="2" data-stripe="exp_year">
-    </div>
-
-    <div class="form-row">
-      <label>
-        <span>CVC</span>
-        <input type="text" size="4" data-stripe="cvc">
-      </label>
-    </div>
-
-    <div class="form-row">
-      <label>
-        <span>Billing Zip</span>
-        <input type="text" size="6" data-stripe="address_zip">
-      </label>
-    </div>
-
-    <input type="submit" class="submit" value="Submit Payment">
-<% end %>
-
 
 <h1>Customers</h1>
 <p>avatars : 140 x 140</p>
 <p>avatar comment : 80 x 80</p>
 <div class="row">
-  <%= render(partial: 'customers/customer', object: Customer.first) %>
+  <%= render(partial: 'customers/customer', locals: {customer: Customer.first, withcols: true}) %>
+</div>
+<hr>
+<div class="row">
+  <%= render(partial: 'customers/customer_picture', locals: {customer: Customer.first, withcols: false}) %>
 </div>
 <hr>
 
@@ -53,12 +16,30 @@
 <p>images preview : 174 x 225</p>
 <p>image full : 272 x 350</p>
 <div class="row">
-<%= render(partial: 'products/product', object: Product.first) %>
+<%= render(partial: 'products/product', locals: {product: Product.first, with_cols: true}) %>
+</div>
+  <%= render(partial: 'products/product', locals: {product: Product.first, with_cols: false}) %>
+<div class="row">
+  <%= render(partial: 'products/product_cart', locals: {product: Product.first}) %>
 </div>
 <hr>
 
+<h1>Posts</h1>
+<div class="row">
+  <%= render(partial: 'posts/post', locals: {post: Post.first, with_cols: true, with_body: true}) %>
+  <%= render(partial: 'posts/post', locals: {post: Post.first, with_cols: true, with_body: false}) %>
+</div>
+<%= render(partial: 'posts/post', locals: {post: Post.first, with_cols: false, with_body: true}) %>
+<%= render(partial: 'posts/post', locals: {post: Post.first, with_cols: false, with_body: false}) %>
+<hr>
+
+
 <h1>Reviews</h1>
 <%= render(partial: 'reviews/review', object: Review.first) %>
+<hr>
+
+<h1>Comments</h1>
+<%= render(partial: 'comments/comment', locals: {comment: Comment.first}) %>
 <hr>
 
 <h1>Order Item</h1>

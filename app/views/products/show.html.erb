@@ -1,5 +1,6 @@
 <% provide(:title, @product.name) %>
 
+
 <div class="row">
   <div class="col-sm-4">
     <p>
@@ -25,7 +26,6 @@
       <% end %>
     </div>
       <!-- end download link -->
-   <br/>
       <!--- list of actions --->
     <div id="product_actions">
       <% if customer_signed_in? && current_customer.own_product(@product) %>
@@ -49,9 +49,6 @@
       <!-- title -->
       <div class="panel-heading">
         <h3><%= @product.name %></h3>
-        <div id="product_score">
-          <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
-        </div>
         <!-- tools -->
         <div class="row">
           <div class="col-xs-12">
@@ -99,6 +96,12 @@
           </div>
         </div>
         <!-- end tools -->
+        <div id="product_score">
+          <%= link_to 'javascript:show_reviews();' do %>
+            <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
+          <% end %>
+        </div>
+
       </div>
       <!-- title -->
       <div class="panel-body">
@@ -306,3 +309,28 @@
 <!-- ==========================
     ADD REVIEW - END
 =========================== -->
+
+<script language="JavaScript">
+  function show_reviews() {
+      $('.nav-tabs a[href="#reviews"]').tab('show');
+      var target = $('.nav-tabs a[href="#reviews"]');
+      $('html,body').animate({
+          scrollTop: target.offset().top-100
+      }, 1000);
+  }
+</script>
+
+<script language="JavaScript">
+    // Javascript to enable link to tab
+    var hash = document.location.hash;
+    var prefix = "tab_";
+    if (hash) {
+        console.log('.nav-tabs a[href="'+hash.replace(prefix,"")+'"]');
+        $('.nav-tabs a[href="'+hash.replace(prefix,"")+'"]').tab('show');
+    }
+
+    // Change hash for page-reload
+    $('.nav-tabs a').on('shown', function (e) {
+        window.location.hash = e.target.hash.replace("#", "#" + prefix);
+    });
+</script>

@@ -1,6 +1,6 @@
 <% product ||= @product %>
 <%= link_to(unwish_product_path(:product_id => product.id),
-            class: 'btn-tool btn btn-default btn-sm',
+            class: 'btn-tool btn btn-sm',
             :title => t('dialog.product.unwish'),
             data: {toggle: 'tooltip', placement: 'top'},
             :method => :delete, remote: true ) do %>
