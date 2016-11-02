@@ -47,8 +47,3 @@
 //= require_tree .
 
 
-document.addEventListener('turbolinks:load', function() {
-    $('.btn-tool[data-toggle="tooltip"]').tooltip();
-});
-
-

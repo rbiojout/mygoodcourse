@@ -3,7 +3,18 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 
-display_info = (thisdoc)->
+inspector =
+  selectors: []
+  process: (node) ->
+    return unless node.querySelectorAll
+    for [selector, callback] in @selectors
+      for foundNode in node.querySelectorAll(selector)
+        callback(foundNode)
+  watch: (selector, callback) ->
+    @selectors.push([selector, callback])
+
+
+display_info = (node) ->
   $('.customer-picture')
   .mouseenter ->
     id = $(this).data('customer')
@@ -25,9 +36,15 @@ display_info = (thisdoc)->
   .mouseleave ->
     $(this).popover('hide')
 
-# initiate the mouse over with the first elements
-$(document).ready ->
-  display_info($.document)
+inspector.watch('.customer-picture', display_info)
+
+observer = new MutationObserver (mutations) ->
+  for mutation in mutations
+    for node in mutation.addedNodes
+      inspector.process(node)
+
+observer.observe document, childList: true, subtree: true
+
 
 
 

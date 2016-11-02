@@ -14,7 +14,7 @@
   <div class="pull-right" style="height: 30px">
     <%= link_to new_comment_path(:post_id => post.id),
                 title: t('activerecord.models.comment.other'),
-                data: {toggle: 'tooltip', placement: 'left'},
+                data: {toggle: 'tooltip', placement: 'top'},
                 :remote => true,
                 class: 'btn-tool btn pull-right' do %>
         <span class="fa fa-comments fa-lg"></span> <span class="badge"><%= post.comments.count unless post.comments.count ==0 %></span>
@@ -26,7 +26,7 @@
     <div class="pull-right" style="height: 30px">
       <%= link_to edit_post_path(post),
                   title: t('helpers.action.edit'),
-                  data: {toggle: 'tooltip', placement: 'left'},
+                  data: {toggle: 'tooltip', placement: 'top'},
                   class: 'btn-tool btn pull-right' do %>
           <span class="fa fa-pencil fa-lg"></span>
       <% end %>

@@ -18,6 +18,13 @@
 #$(window).off('scroll');
 #$('#infinite-scrolling-products .pagination').remove();
 #<# end %>
+
+
+
+
+
+
+
 # display more reviews when displaying the reviews of a customer
 $ ->
   if $('#infinite-scrolling-reviews').length > 0
@@ -28,7 +35,7 @@ $ ->
         $('#infinite-scrolling-reviews .pagination').text("Please Wait...");
         $.getScript more_reviews_url
         # update the dom for mouse over of the new elements
-        display_info($.document)
+        # display_info($.document)
       return
     return
 
