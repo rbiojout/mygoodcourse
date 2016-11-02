@@ -3,7 +3,17 @@
 <div class="row">
   <div class="col-sm-4">
     <p>
+    <div class="relative">
       <%= image_tag @product.large, class: 'img-thumbnail center-block' %>
+      <!-- counter views -->
+      <span class="bottom-right">
+        <span class="btn btn-default">
+          <span class="fa fa-eye fa-lg"></span> <span class="badge"><%= @product.counter_cache unless @product.counter_cache ==0 %></span>
+        </span>
+      </span>
+      <!-- end counter views -->
+      </div>
+
       <!-- download link if available -->
     <div id="product_download">
       <% if customer_signed_in? %>

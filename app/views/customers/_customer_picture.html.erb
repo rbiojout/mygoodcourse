@@ -11,7 +11,7 @@
        data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
        data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>"
        alt="" src="<%= customer.picture %>" >
-        <span class="btn-top-right">
+        <span class="top-right">
         <!-- follow -->
           <% if customer_signed_in? %>
               <% if current_customer.id != customer.id %>
