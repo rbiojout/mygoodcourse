@@ -20,6 +20,12 @@
   <!-- end picture -->
 
   <!--- name --->
+  <div class="height_60 ellipsis">
+    <h4><%= link_to product.name, product_path(product) %></h4>
+  </div>
+  <!--- end name --->
+
+  <!--- actions --->
   <div>
     <%= link_to buy_product_path(product), :method => :post, class:'float-left btn btn-block btn-primary btn-sm' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
     <% if customer_signed_in? %>
@@ -34,7 +40,7 @@
         </div>
         <!-- end wish list -->
     <% end %>  </div>
-  <!--- end name --->
+  <!--- end actions --->
 
 
 
