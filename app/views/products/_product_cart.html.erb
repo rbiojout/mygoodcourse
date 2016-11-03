@@ -1,18 +1,5 @@
 <div class="col-xs-6 col-sm-3 panel-product">
-  <!-- add to wish list -->
-  <div class="pull-right">
-    <% if customer_signed_in? %>
-        <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
 
-          <% if current_customer.wishing?(product) %>
-              <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
-          <% else %>
-              <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
-          <% end %>
-        </div>
-    <% end %>
-  </div>
-  <!-- end wish list -->
 
   <!-- picture -->
   <div class="hovereffect center-block panel-image-product">
@@ -23,6 +10,20 @@
         <% end %>
 
         <div class="overlay">
+          <!-- add to wish list -->
+          <div class="pull-right">
+            <% if customer_signed_in? %>
+                <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+
+                  <% if current_customer.wishing?(product) %>
+                      <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+                  <% else %>
+                      <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
+                  <% end %>
+                </div>
+            <% end %>
+          </div>
+          <!-- end wish list -->
           <!--- price --->
           <h2><%= nice_price(product.price) %></h2>
           <!--- end price --->
