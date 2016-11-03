@@ -24,7 +24,7 @@
               <!-- end follow -->
               <!-- if customer is signed, direct link to his profile -->
               <% else %>
-                  <%= button_to(customer_path(customer),
+                  <%= link_to(edit_customer_path(customer),
                               class: 'btn-tool btn btn-default btn-sm',
                               alt: t('page.my_profile'),
                               title: t('page.my_profile'),
