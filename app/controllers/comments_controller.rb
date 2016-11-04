@@ -67,7 +67,7 @@ class CommentsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @comment.errors, status: :unprocessable_entity }
         # added
-        format.js   { @current_comment = @comment }
+        format.js   { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -103,12 +103,17 @@ class CommentsController < ApplicationController
     if params[:post_id]
       id = params[:post_id]
       Post.find(params[:post_id])
+    elsif params[:forumanswer_id]
+      id = params[:forumanswer_id]
+      ForumAnswer.find(params[:forumanswer_id])
     end
   end
 
   def context_url(context)
     if Post === context
       post_path(context)
+    elsif ForumAnswer === context
+      forum_subject_path(context.forum_subject)
     end
   end
 

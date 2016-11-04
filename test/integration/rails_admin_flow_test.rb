@@ -97,9 +97,6 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
     assert assigns(:object).accepted?
 
     get "/admin/abuse/#{abuse.id}/cancel_abuse"
-    assert assigns(:object).created?
-
-    get "/admin/abuse/#{abuse.id}/receive_abuse"
     assert assigns(:object).received?
 
     get "/admin/abuse/#{abuse.id}/reject_abuse"

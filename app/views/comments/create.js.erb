@@ -1,7 +1,15 @@
+<%
+
+   # context : parameter to refer to the polymorphic
+   context ||=@context
+   context_type = context.class.name.downcase
+   context_param = context.class.name.downcase + "_id"
+   context_value = context.id
+%>
 
 // we had the new comment at the top, just after the form and hide the form
-$('#comment-form').html("");
-$('#comment-form').after("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
+$('#comment-form_<%="#{context_type}_#{context_value}"%>').html("");
+$('#comment-form_<%="#{context_type}_#{context_value}"%>').after("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
 
 
 // close the modal

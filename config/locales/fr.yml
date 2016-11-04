@@ -27,6 +27,7 @@ fr:
     home: 'Accueil'
     catalog: 'Catalogue'
     posts: 'Articles'
+    forum: 'Forum'
     my_products: 'Mes Produits'
     my_orders: 'Mes Commandes'
     my_orders_products: 'Mes produits commandés'
@@ -156,11 +157,25 @@ fr:
         one: 'cycle'
         other: 'cycles'
         all: 'Tous cycles'
-      employee: 'employé'
+      employee:
+        one: 'employé'
+        other: 'employés'
       family:
         one: 'famille'
         other: 'familles'
         all: 'Toutes familles'
+      forum_family:
+        one: 'famille du forum'
+        other: 'familles du forum'
+      forum_category:
+        one: 'catégorie du forum'
+        other: 'catégories du forum'
+      forum_subject:
+        one: 'sujet du forum'
+        other: 'sujets du forum'
+      forum_answer:
+        one: 'réponse du forum'
+        other: 'réponses du forum'
       level:
         one: 'niveau'
         other: 'niveaux'
@@ -270,6 +285,20 @@ fr:
         name: 'Nom'
         description: 'Description'
         position: 'Position'
+      forum_family:
+        name: 'Nom'
+        description: 'Description'
+        visual: 'Visuel'
+      forum_category:
+        name: 'Nom'
+        description: 'Description'
+        visual: 'Visuel'
+      forum_subject:
+        name: 'Titre du sujet'
+        text: 'Texte du sujet'
+        counter_cache: 'Nombre de vues'
+      forum_answer:
+        text: 'Texte de la réponse'
       level:
         name: 'Nom'
         description: 'Description'
@@ -352,6 +381,14 @@ fr:
         create: 'Créer un compte'
         edit: 'Editer mon profil'
         delete: 'Supprimer mon compte'
+      forum_subject:
+        create: 'Créer un sujet du forum'
+        edit: 'Editer ce sujet du forum'
+        delete: 'Supprimer ce sujet du forum'
+      forum_answer:
+        create: 'Créer une réponse'
+        edit: 'Editer cette réponse'
+        delete: 'Supprimer cette réponse'
       post:
         create: 'Créer un article'
         edit: 'Editer cet article'
@@ -371,6 +408,14 @@ fr:
         create: 'Créer mon compte'
         submit: 'Enregistrer mon compte'
         update: 'Modifier mon compte'
+      forum_subject:
+        create: 'Créer un sujet du forum'
+        submit: 'Sauver ce sujet'
+        update: 'Modifier ce sujet'
+      forum_answer:
+        create: 'Créer une réponse'
+        submit: 'Sauver cette réponse'
+        update: 'Modifier cette réponse'
       post:
         create: 'Créer un article'
         submit: 'Sauver cet article'

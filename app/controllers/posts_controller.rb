@@ -37,7 +37,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        @post.accept!
+        @post.accept! if @post.may_accept?
         format.html { redirect_to @post, notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @post }
       else
@@ -52,7 +52,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        @post.cancel!
+        @post.cancel! if @post.may_cancel?
         format.html { redirect_to @post, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @post }
       else

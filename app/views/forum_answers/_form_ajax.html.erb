@@ -1,0 +1,41 @@
+
+
+
+<%= form_for(@forum_answer, remote: true, :html => { :role => "form", 'data-model' => 'forum_answer', :class => 'ajax_form' }) do |f| %>
+
+    <div id="error_explanation" class="bg-danger text-danger">
+      <% if @forum_answer.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@forum_answer.errors.count, "error") %> prohibited this element from being saved:</h2>
+
+            <ul>
+              <% @forum_answer.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+    </div>
+    <div class="form-group">
+      <%= f.hidden_field :forum_subject_id %>
+      <%= f.hidden_field :customer_id %>
+      <%= f.label :text, t('activerecord.attributes.forum_answer.text'), :class => "control-label" %>
+      <%= f.text_area :text, :rows => 5, :class => "form-control summernote" %>
+      <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+      <%= f.submit  @forum_answer.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
+    </div>
+
+
+<% end %>
+
+<script language="JavaScript">
+    $('form[data-model="forum_answer"] .summernote').summernote({
+        lang: I18n_locale,
+        // adjust initial height for the Summernote Editor
+        height: '200px'
+    });
+
+</script>

@@ -1,6 +1,15 @@
+<%
 
-$('#comment-form').html("<%= j (render 'comments/form_ajax') %>");
-var target = $('#comment-form');
+   # context : parameter to refer to the polymorphic
+   context ||=@context
+   context_type = context.class.name.downcase
+   context_param = context.class.name.downcase + "_id"
+   context_value = context.id
+%>
+
+
+$('#comment-form_<%="#{context_type}_#{context_value}"%>').html("<%= j (render 'comments/form_ajax') %>");
+var target = $('#comment-form_<%="#{context_type}_#{context_value}"%>');
 $('html,body').animate({
     scrollTop: target.offset().top-90
 }, 1000);

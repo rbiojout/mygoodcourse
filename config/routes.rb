@@ -175,6 +175,18 @@
 
 Rails.application.routes.draw do
 
+  resources :forum_answers
+  resources :forum_subjects
+  resources :forum_categories, only: [:index, :show] do
+    collection do
+      post :sort
+    end
+  end
+  resources :forum_families, only: [:index, :show] do
+    collection do
+      post :sort
+    end
+  end
   resources :comments, except: [:index]
   resources :updates
   #resources :likes

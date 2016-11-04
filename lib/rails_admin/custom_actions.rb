@@ -39,6 +39,7 @@ module RailsAdmin
           end
         end
       end
+
       # order the childs for Country
       class SortForCountry < Customaction
         RailsAdmin::Config::Actions.register(self)
@@ -89,6 +90,22 @@ module RailsAdmin
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :only do
           Topic
+        end
+        register_instance_option :link_icon do
+          'fa fa-sort' # use any of font-awesome icons
+        end
+        register_instance_option :http_methods do
+          [:get, :post]
+        end
+        # By default, Rails Admin will render a view with the same name as our action
+        # else we can define a controller
+      end
+
+      # order the childs for ForumFamily
+      class SortForForumFamily < Customaction
+        RailsAdmin::Config::Actions.register(self)
+        register_instance_option :only do
+          ForumFamily
         end
         register_instance_option :link_icon do
           'fa fa-sort' # use any of font-awesome icons

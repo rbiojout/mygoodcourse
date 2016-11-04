@@ -36,6 +36,7 @@ class LikesController < ApplicationController
   private
 
   # as a polymorphic object, we need the context
+  # param is constructed from the Class name to lower case
   def context
     if params[:product_id]
       id = params[:product_id]
@@ -46,6 +47,9 @@ class LikesController < ApplicationController
     elsif params[:review_id]
       id = params[:review_id]
       Review.find(params[:review_id])
+    elsif params[:forumsubject_id]
+      id = params[:forumsubject_id]
+      ForumSubject.find(params[:forumsubject_id])
     end
   end
 
@@ -55,6 +59,8 @@ class LikesController < ApplicationController
     elsif Post === context
       post_path(context)
     elsif Review === context
+      review_path(context)
+    elsif ForumSubject === context
       review_path(context)
     end
   end

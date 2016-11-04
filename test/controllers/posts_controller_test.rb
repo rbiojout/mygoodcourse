@@ -4,6 +4,7 @@ class PostsControllerTest < ActionController::TestCase
   include Devise::Test::ControllerHelpers
   setup do
     @post = posts(:one)
+    @post.receive!
     # add a signed customer to perform the tests
     sign_in(customers(:one), scope: :customer)
   end

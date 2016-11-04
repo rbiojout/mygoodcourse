@@ -1,0 +1,16 @@
+<!-- we have Articles associated to Topic -->
+<% @forum_categories = @object.forum_categories %>
+
+<h3><%= (I18n.translate 'activerecord.models.forum_category', count: 2).capitalize %></h3>
+<ol id="forum_categories_sortable" class="list-group sortable" data-update-url="<%= main_app.sort_forum_categories_path(:locale => locale) %>">
+  <% @forum_categories.each do |forum_category| %>
+
+      <li class="list-group-item" id="forum_category_<%=forum_category.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= forum_category.name %>
+      </li>
+  <% end %>
+</ol>
+

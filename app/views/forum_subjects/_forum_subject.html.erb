@@ -1,0 +1,22 @@
+<%
+   forum_subject ||= @forum_subject
+%>
+<div class="row" style="background-color: #eeeeee">
+  <div class="col-xs-4">
+    <%= render(partial: 'customers/customer', locals: {customer: forum_subject.customer}) %>
+
+  </div>
+  <div class="col-xs-8">
+    <p><%= raw(@forum_subject.text) %></p>
+    <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.created_at) %></small>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render(partial: 'forum_subjects/tools', locals: {forum_subject: forum_subject})%>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>

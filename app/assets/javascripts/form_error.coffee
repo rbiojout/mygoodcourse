@@ -9,6 +9,7 @@ $(document).ready ->
     # in case of not authorized, redirect to login page
     window.location = '/customers/sign_in?locale='+I18n_locale if jqxhr.status == 401
 # note: jqxhr.responseJSON undefined, parsing responseText instead
+    console.log(jqxhr.responseText)
     $(event.data).render_form_errors $.parseJSON(jqxhr.responseText)
     return
   return
@@ -26,6 +27,7 @@ $(document).ready ->
 
   $.fn.render_form_errors = (errors) ->
     $form = this
+    console.log(errors)
     @clear_previous_errors()
     model = @data('model')
     # show error messages in input form-group help-block

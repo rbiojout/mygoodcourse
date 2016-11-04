@@ -45,3 +45,19 @@
       </li>
   <% end %>
 </ol>
+
+<!-- we have ForumFamilies associated to Country -->
+<% @forum_families = @object.forum_families %>
+
+<h3><%= (I18n.translate 'activerecord.models.forum_family', count: 2).capitalize %></h3>
+<ol id="forum_families_sortable" class="list-group sortable" data-update-url="<%= main_app.sort_forum_families_path %>">
+  <% @forum_families.each do |forum_family| %>
+
+      <li class="list-group-item" id="forum_family_<%=forum_family.id%>">
+        <%= link_to '#', class: "btn btn-success" do %>
+            <span class="fa fa-sort handle"> move</span>
+        <% end %>
+        <%= forum_family.name %>
+      </li>
+  <% end %>
+</ol>

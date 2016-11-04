@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101162620) do
+ActiveRecord::Schema.define(version: 20161104150227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -209,61 +209,53 @@ ActiveRecord::Schema.define(version: 20161101162620) do
   add_index "followings", ["customer_id"], name: "index_followings_on_customer_id", using: :btree
   add_index "followings", ["followingable_type", "followingable_id"], name: "index_followings_on_followingable_type_and_followingable_id", using: :btree
 
-  create_table "forum_categories", force: :cascade do |t|
-    t.string   "name"
-    t.string   "slug"
-    t.text     "description"
-    t.integer  "topics_count", default: 0
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-  end
-
-  add_index "forum_categories", ["slug"], name: "index_forum_categories_on_slug", unique: true, using: :btree
-
-  create_table "forum_comments", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.integer  "commentable_id"
-    t.string   "commentable_type"
-    t.text     "body"
-    t.integer  "likes_count",      default: 0
-    t.boolean  "trashed",          default: false
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
-  end
-
-  add_index "forum_comments", ["commentable_type", "commentable_id"], name: "index_forum_comments_on_commentable_type_and_commentable_id", using: :btree
-  add_index "forum_comments", ["customer_id"], name: "index_forum_comments_on_customer_id", using: :btree
-
-  create_table "forum_notifications", force: :cascade do |t|
+  create_table "forum_answers", force: :cascade do |t|
+    t.text     "text"
     t.integer  "customer_id"
     t.integer  "forum_subject_id"
-    t.string   "forum_subject_type"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "forum_answers", ["customer_id"], name: "index_forum_answers_on_customer_id", using: :btree
+  add_index "forum_answers", ["forum_subject_id"], name: "index_forum_answers_on_forum_subject_id", using: :btree
+
+  create_table "forum_categories", force: :cascade do |t|
     t.string   "name"
-    t.boolean  "read",               default: false
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.text     "description"
+    t.string   "visual"
+    t.integer  "forum_family_id"
+    t.integer  "position"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
-  add_index "forum_notifications", ["customer_id"], name: "index_forum_notifications_on_customer_id", using: :btree
-  add_index "forum_notifications", ["forum_subject_type", "forum_subject_id"], name: "index_forum_notifications_on_forum_subject", using: :btree
+  add_index "forum_categories", ["forum_family_id"], name: "index_forum_categories_on_forum_family_id", using: :btree
 
-  create_table "forum_topics", force: :cascade do |t|
-    t.integer  "forum_category_id"
+  create_table "forum_families", force: :cascade do |t|
+    t.string   "name"
+    t.text     "description"
+    t.string   "visual"
+    t.integer  "country_id"
+    t.integer  "position"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "forum_families", ["country_id"], name: "index_forum_families_on_country_id", using: :btree
+
+  create_table "forum_subjects", force: :cascade do |t|
+    t.string   "name"
+    t.text     "text"
     t.integer  "customer_id"
-    t.string   "title"
-    t.text     "body"
-    t.float    "hot",               default: 0.0
-    t.integer  "comments_count",    default: 0
-    t.integer  "likes_count",       default: 0
-    t.integer  "followings_count",  default: 0
-    t.boolean  "active",            default: true
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.integer  "forum_category_id"
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.integer  "counter_cache",     default: 0
   end
 
-  add_index "forum_topics", ["customer_id"], name: "index_forum_topics_on_customer_id", using: :btree
-  add_index "forum_topics", ["forum_category_id"], name: "index_forum_topics_on_forum_category_id", using: :btree
-  add_index "forum_topics", ["hot"], name: "index_forum_topics_on_hot", using: :btree
+  add_index "forum_subjects", ["customer_id"], name: "index_forum_subjects_on_customer_id", using: :btree
+  add_index "forum_subjects", ["forum_category_id"], name: "index_forum_subjects_on_forum_category_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -538,10 +530,12 @@ ActiveRecord::Schema.define(version: 20161101162620) do
   add_foreign_key "cycles", "countries"
   add_foreign_key "families", "countries"
   add_foreign_key "followings", "customers"
-  add_foreign_key "forum_comments", "customers"
-  add_foreign_key "forum_notifications", "customers"
-  add_foreign_key "forum_topics", "customers"
-  add_foreign_key "forum_topics", "forum_categories"
+  add_foreign_key "forum_answers", "customers"
+  add_foreign_key "forum_answers", "forum_subjects"
+  add_foreign_key "forum_categories", "forum_families"
+  add_foreign_key "forum_families", "countries"
+  add_foreign_key "forum_subjects", "customers"
+  add_foreign_key "forum_subjects", "forum_categories"
   add_foreign_key "levels", "cycles"
   add_foreign_key "likes", "customers"
   add_foreign_key "order_items", "orders"

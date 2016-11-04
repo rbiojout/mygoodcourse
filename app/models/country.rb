@@ -29,6 +29,8 @@ class Country < ActiveRecord::Base
   has_many :topics
   has_many :articles, through: :topics
 
+  has_many :forum_families
+
   # order the articles from rails_admin
   def topic_ids=(ids)
     unless (ids = ids.map(&:to_s)) == (current_ids = self.topics.map(&:id).map(&:to_s))

@@ -44,7 +44,7 @@ class AbusesController < ApplicationController
         format.html { render :new }
         format.json { render json: @abuse.errors, status: :unprocessable_entity }
         # added
-        # needed for errors, cf abuse.coffee
+        # needed for errors, cf form_error.coffee
         format.js   { render json: @abuse.errors, status: :unprocessable_entity }
       end
     end

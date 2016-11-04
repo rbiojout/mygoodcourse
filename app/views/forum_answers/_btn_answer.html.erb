@@ -1,0 +1,12 @@
+<div class='pull-right'>
+  <%= link_to(new_forum_answer_path(forum_subject_id: forum_subject_id),
+              alt: t('helpers.action.forum_answer.create'),
+              title: t('helpers.action.forum_answer.create'),
+              data: {toggle: 'tooltip', placement: 'top'},
+              class: 'btn-tool btn',
+              remote: true ) do %>
+
+      <i class="fa fa-reply fa-lg"> </i>
+  <% end %>
+</div>
+

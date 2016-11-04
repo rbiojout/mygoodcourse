@@ -41,7 +41,7 @@ RailsAdmin.config do |config|
     dashboard                     # mandatory
     index                         # mandatory
     new do
-      only [Article, Category, Country, Customer, Cycle, Employee, Family, Level, Topic] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
+      only [Article, Category, Country, Customer, Cycle, Employee, Family, ForumFamily, ForumCategory, Level, Topic] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
     end
     export
     bulk_delete
@@ -55,6 +55,7 @@ RailsAdmin.config do |config|
     sort_for_topic
     sort_for_cycle
     sort_for_family
+    sort_for_forum_family
 
     # state engine
     receive_abuse do
@@ -286,6 +287,24 @@ RailsAdmin.config do |config|
       field :password
       field :password_confirmation
     end
+  end
+
+  config.model "ForumFamily" do
+
+  end
+
+  config.model "ForumCategory" do
+    parent ForumFamily
+
+  end
+
+  config.model "ForumSubject" do
+    parent ForumCategory
+
+  end
+
+  config.model "ForumAnswer" do
+    parent ForumSubject
   end
 
   config.model "Impression" do

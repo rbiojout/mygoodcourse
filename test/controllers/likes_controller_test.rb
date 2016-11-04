@@ -36,10 +36,6 @@ class LikesControllerTest < ActionController::TestCase
 
     assert_response :success
 
-    assert_select_jquery :html, '#alert_notice_holder' do
-      assert_select '.alert'
-      assert_select '.alert p', I18n.translate('views.flash_create_message')
-    end
 
     #assert_select 'like_review_'+reviews(:one).id.to_s
 

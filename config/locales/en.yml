@@ -27,6 +27,7 @@ en:
     home: 'Home'
     catalog: 'Catalog'
     posts: 'Articles'
+    forum: 'Forum'
     my_products: 'My Products'
     my_orders: 'My Orders'
     my_orders_products: 'My ordered products'
@@ -157,9 +158,24 @@ en:
       cycle:
         one: 'cycle'
         other: 'cycles'
+      employee:
+        one: 'employee'
+        other: 'employees'
       family:
         one: 'family'
         other: 'families'
+      forum_family:
+        one: 'forum family'
+        other: 'forum families'
+      forum_category:
+        one: 'forum category'
+        other: 'forum categories'
+      forum_subject:
+        one: 'forum subject'
+        other: 'forum subjects'
+      forum_answer:
+        one: 'forum answer'
+        other: 'forum answers'
       level:
         one: 'level'
         other: 'levels'
@@ -230,6 +246,20 @@ en:
         hint_birthdate: '...for your birthday'
         hint_full_address: "We will only present your city"
         hint_description: 'What do you want to say about You when presenting to Others?'
+      forum_family:
+        name: 'Name'
+        description: 'Description'
+        visual: 'Visual'
+      forum_category:
+        name: 'Name'
+        description: 'Description'
+        visual: 'Visual'
+      forum_subject:
+        name: 'Subject title'
+        text: 'Subject text'
+        counter_cache: 'Number of views'
+      forum_answer:
+        text: 'Answer text'
       order:
         status: 'Status'
         received_at: 'Received at'
@@ -300,6 +330,14 @@ en:
         create: 'Create an account'
         edit: 'Edit my profile'
         delete: 'Delete my account'
+      forum_subject:
+        create: 'Create a forum subject'
+        edit: 'Edit this forum subject'
+        delete: 'Delete this forum subject'
+      forum_answer:
+        create: 'Create an answer'
+        edit: 'Edit this answer'
+        delete: 'Delete this answer'
       post:
         create: 'Create a post'
         edit: 'Edit this article'
@@ -315,6 +353,14 @@ en:
         create: 'Create my account'
         submit: 'Save my account'
         update: 'Update my account'
+      forum_subject:
+        create: 'Create a forum subject'
+        submit: 'Save a forum subject'
+        update: 'Update this forum subject'
+      forum_answer:
+        create: 'Create an answer'
+        submit: 'Save this answer'
+        update: 'Update this answer'
       post:
         create: 'Create a post'
         submit: 'Save this post'

@@ -1,0 +1,22 @@
+<%
+   forum_subject ||= @forum_subject
+%>
+
+<% if Rails.env.development? %>
+<%= link_to new_forum_answer_path(forum_subject_id: forum_subject.id), class: 'btn btn-primary pull-right' do %>
+    <span class="fa fa-reply fa-lg"></span>
+<% end %>
+<% end %>
+
+<%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_subject.id}) %>
+
+<!-- like it! -->
+<% if customer_signed_in? %>
+    <% if forum_subject.liked?(current_customer) %>
+        <%= render(partial: 'likes/unlike', locals: {context: forum_subject}, locale: locale) %>
+    <% else %>
+        <%= render(partial: 'likes/like', locals: {context: forum_subject}, locale: locale) %>
+    <% end %>
+<% end %>
+<!-- end like it! -->
+

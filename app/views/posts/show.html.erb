@@ -54,7 +54,7 @@
 <h2><%= t('activerecord.models.comment', count: 2)%></h2>
 
     <!-- comments -->
-    <div id="comment-form"></div>
+    <div id="comment-form_post_<%= @post.id %>"></div>
         <!-- alert if empty -->
         <% if @post.comments.count==0 %>
             <!-- add alert with call action to add comment -->

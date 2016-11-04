@@ -1,0 +1,22 @@
+
+// we had the new comment at the top, just after the form and hide the form
+
+$('.forumanswer_<%= @forum_answer.id%>').html("<%= j render partial: 'forum_answers/forum_answer', locals: {forum_answer: @forum_answer}  %>")
+
+// close the modal
+// REMOVED no more use of the modal
+// $('#app_dialog').modal_success();
+
+// first we need to hide before to show
+var target = $('.forumanswer_<%= @forum_answer.id%>');
+$('html,body').animate({
+    scrollTop: target.offset().top-100
+}, 1000);
+
+
+
+
+
+
+
+
