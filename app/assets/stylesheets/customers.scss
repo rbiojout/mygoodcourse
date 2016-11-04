@@ -1,12 +1,13 @@
+
 .container-customer {
   float: none;
   margin: 0 auto;
-  width: 140px;
+  width: 85px;
 }
 
 .customer-picture {
-  height: 80px;
-  width: 80px;
+  height: 70px;
+  width: 70px;
 }
 
 .customer-picture-sm {
@@ -17,4 +18,17 @@
 /* allow two lines for name */
 .customer-name {
   height: 30px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .container-customer {
+    width: 140px;
+  }
+
+  .customer-picture {
+    height: 80px;
+    width: 80px;
+  }
+
 }

@@ -33,9 +33,9 @@ end %>
 <% # add the number of reviews if necessary
    unless simple   %>
 <% if nb_reviews == -1 %>
-    <p><%= t('activerecord.attributes.review.not_rated')%></p>
+    <small><%= t('activerecord.attributes.review.not_rated')%></small>
 <% else %>
-    <p><%= nb_reviews.to_s + ' ' +(I18n.translate 'activerecord.models.review', count: nb_reviews).capitalize %></p>
+    <small><%= nb_reviews.to_s + ' ' +(I18n.translate 'activerecord.models.review', count: nb_reviews).capitalize %></small>
 <% end %>
 <% end %>
 

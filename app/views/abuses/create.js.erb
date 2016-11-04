@@ -14,8 +14,8 @@ $('#app_dialog').modal_success();
 
 $('#app_dialog').on('hidden.bs.modal', function (event) {
 // first we need to hide before to show
-    $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').hide();
-    $('#abus_<%=@context.class.to_s.downcase%>_<%=@context.id%>').show(900);
+    $('#abus_<%=@context.class.to_s.underscore%>_<%=@context.id%>').hide();
+    $('#abus_<%=@context.class.to_s.underscore%>_<%=@context.id%>').show(900);
 })
 
 

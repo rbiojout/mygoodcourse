@@ -60,4 +60,52 @@ class CommentsControllerTest < ActionController::TestCase
 
     assert_redirected_to post_path(posts(:one))
   end
+
+  test "should get new for ForumAnswer" do
+    get :new, forum_answer_id: forum_answers(:one).id
+    assert_response :success
+  end
+
+  test "should create comment for ForumAnswer" do
+    assert_difference('Comment.count') do
+      post :create, forum_answer_id: forum_answers(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    end
+
+    assert_redirected_to forum_subject_path(forum_answers(:one).forum_subject)
+  end
+
+  test "should get edit for ForumAnswer" do
+    get :edit, id: @comment, forum_answer_id: forum_answers(:one).id
+    assert_response :success
+  end
+
+  test "should create comment for ForumAnswer via ajax" do
+    sign_in(customers(:one), scope: :customer)
+    assert_difference('Comment.count') do
+      xhr :post, :create, forum_answer_id: forum_answers(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    end
+
+    assert_response :success
+
+  end
+
+  test "should update comment for ForumAnswer" do
+    patch :update, forum_answer_id: forum_answers(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+    assert_redirected_to forum_subject_path(forum_answers(:one).forum_subject)
+  end
+
+  test "should update comment for ForumAnswer via ajax" do
+    sign_in(customers(:one), scope: :customer)
+    patch :update, xhr: true, forum_answer_id: forum_answers(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+
+
+  end
+
+  test "should destroy comment for ForumAnswer" do
+    assert_difference('Comment.count', -1) do
+      delete :destroy, id: @comment, forum_answer_id: forum_answers(:one).id
+    end
+
+    assert_redirected_to forum_subject_path(forum_answers(:one).forum_subject)
+  end
 end

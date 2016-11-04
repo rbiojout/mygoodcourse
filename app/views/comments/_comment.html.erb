@@ -13,7 +13,7 @@
       <% if customer_signed_in?
            @context = comment.commentable %>
           <% if comment.customer.id == current_customer.id %>
-              <%= link_to( edit_comment_path(comment, @context.class.to_s.downcase+'_id' => @context.id), remote: true) do %>
+              <%= link_to( edit_comment_path(comment, @context.class.to_s.underscore+'_id' => @context.id), remote: true) do %>
                   <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
               <% end %>
           <% end %>

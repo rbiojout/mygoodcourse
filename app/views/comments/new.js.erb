@@ -2,8 +2,8 @@
 
    # context : parameter to refer to the polymorphic
    context ||=@context
-   context_type = context.class.name.downcase
-   context_param = context.class.name.downcase + "_id"
+   context_type = context.class.name.underscore
+   context_param = context.class.name.underscore + "_id"
    context_value = context.id
 %>
 

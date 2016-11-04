@@ -103,9 +103,9 @@ class CommentsController < ApplicationController
     if params[:post_id]
       id = params[:post_id]
       Post.find(params[:post_id])
-    elsif params[:forumanswer_id]
-      id = params[:forumanswer_id]
-      ForumAnswer.find(params[:forumanswer_id])
+    elsif params[:forum_answer_id]
+      id = params[:forum_answer_id]
+      ForumAnswer.find(params[:forum_answer_id])
     end
   end
 

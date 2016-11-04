@@ -18,5 +18,5 @@
 
 <% @context = @comment.commentable %>
 
-<%= link_to 'Edit', edit_comment_path(@comment, @context.class.to_s.downcase+'_id' => @context.id) %> |
+<%= link_to 'Edit', edit_comment_path(@comment, @context.class.to_s.underscore+'_id' => @context.id) %> |
 <%= link_to 'Back', comments_path %>

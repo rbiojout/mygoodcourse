@@ -1,4 +1,4 @@
-<div class="row forumanswer_<%= forum_answer.id%>">
+<div class="row forum_answer_<%= forum_answer.id%>">
   <div class="col-xs-4">
     <%= render(partial: 'customers/customer', locals: {customer: forum_answer.customer}) %>
 
@@ -12,6 +12,7 @@
         <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_answer.forum_subject.id}) %>
         <%= render(partial: 'comments/btn_comment', locals: {context: forum_answer}) %>
         <%= render(partial: 'forum_answers/btn_edit', locals: {forum_answer: forum_answer}) %>
+        <%= link_to 'Delete', forum_answer_path, method: :delete %>
       </div>
     </div>
 
@@ -22,7 +23,7 @@
       <% forum_answer.comments.each do |comment| %>
           <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
       <% end %>
-      <div id=<%="comment-form_forumanswer_#{forum_answer.id}"%> ></div>
+      <div id=<%="comment-form_forum_answer_#{forum_answer.id}"%> ></div>
     </div>
   </div>
 

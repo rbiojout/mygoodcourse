@@ -47,9 +47,9 @@ class LikesController < ApplicationController
     elsif params[:review_id]
       id = params[:review_id]
       Review.find(params[:review_id])
-    elsif params[:forumsubject_id]
-      id = params[:forumsubject_id]
-      ForumSubject.find(params[:forumsubject_id])
+    elsif params[:forum_subject_id]
+      id = params[:forum_subject_id]
+      ForumSubject.find(params[:forum_subject_id])
     end
   end
 
