@@ -1,3 +1,12 @@
+<% object = Product.first %>
+
+<%= calculated_path = "/#{object.class.name.underscore}s" %>
+
+<%= main_app.url_for(controller: calculated_path,
+                     action: 'show',
+                     id: object.id,
+                     locale: I18n.default_locale) %>
+
 <!-- we have Cycles associated to Country -->
 <% @cycles = @object.cycles %>
 

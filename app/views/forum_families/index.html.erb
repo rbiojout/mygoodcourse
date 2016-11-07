@@ -1,0 +1,33 @@
+<% provide(:title, t('page.forum')) %>
+
+<h1><%= yield :title %></h1>
+
+
+<% @forum_families.each do |forum_family| %>
+    <div data-roll="main">
+      <div class="forum-family-name">
+        <h3><span class="fa fa-bullseye fa-lg"></span> <%= forum_family.name %></h3>
+      </div>
+      <% forum_family.forum_categories.each do |forum_category|%>
+      <div class="forum-category-name">
+        <div class="media-left">
+          <% link_to forum_category_path(forum_category) do %>
+            <img class="media-object" src="<%= forum_category.visual %>" alt="<%= forum_category.name %>">
+          <% end %>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading"><span class="fa fa-circle-o fa-lg"></span> <%= link_to forum_category.name, forum_category_path(forum_category) %></h4>
+            <small><%= forum_category.count_subjects %> <%= t('activerecord.models.forum_subject', count: forum_category.count_subjects) %></small>
+            <small><i class="fa fa-comments"></i> <%= forum_category.count_messages %> <%= t('activerecord.models.forum_answer', count: forum_category.count_messages) %></small>
+          <% unless forum_category.last_activity_date.nil? %>
+              <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_category.last_activity_date) %></small>
+          <% end %>
+          <% unless forum_category.last_activity_customer.nil? %>
+              <%= link_to forum_category.last_activity_customer.full_name, customer_path(forum_category.last_activity_customer) %>
+          <% end %>
+        </div>
+      </div>
+      <% end %>
+    </div>
+<% end %>
+

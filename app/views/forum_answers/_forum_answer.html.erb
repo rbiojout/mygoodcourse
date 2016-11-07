@@ -12,7 +12,6 @@
         <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_answer.forum_subject.id}) %>
         <%= render(partial: 'comments/btn_comment', locals: {context: forum_answer}) %>
         <%= render(partial: 'forum_answers/btn_edit', locals: {forum_answer: forum_answer}) %>
-        <%= link_to 'Delete', forum_answer_path, method: :delete %>
       </div>
     </div>
 

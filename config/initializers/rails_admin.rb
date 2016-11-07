@@ -1,6 +1,9 @@
 require Rails.root.join('lib','rails_admin','custom_actions.rb')
 require Rails.root.join('lib','rails_admin','custom_dashboards.rb')
 
+# we need the locale to be passed
+require Rails.root.join('lib','rails_admin','show_in_app_with_locale.rb')
+
 
 # state engine
 # refer to http://dmitrypol.github.io/2016/01/01/rails-admin-state-machine.html
@@ -49,7 +52,9 @@ RailsAdmin.config do |config|
     edit do
       except [File, Like, OrderItem, StripeAccount, StripeCard, StripeCustomer, Peer]
     end
-    delete
+    delete do
+      only [Article, Category, Comment, Country, Cycle, Employee, Family,ForumAnswer, ForumCategory, ForumFamily, ForumSubject, Level, Post, Review, Topic, Update]
+    end
     # Set the custom action here
     sort_for_country
     sort_for_topic
@@ -58,19 +63,16 @@ RailsAdmin.config do |config|
     sort_for_forum_family
 
     # state engine
-    receive_abuse do
-      only [Abuse] # no other model will have the `new` action visible. Note the extra brackets '[]' when there is more than one model.
-    end
-    accept_abuse
-    reject_abuse
-    cancel_abuse
+    receive_state
+    accept_state
+    reject_state
+    cancel_state
 
-    receive_post
-    accept_post
-    reject_post
-    cancel_post
 
     show_in_app
+    show_in_app_with_locale do
+      only [Product, Customer, Post, Topic]
+    end
 
 
     ## With an audit adapter, you can add:
@@ -83,7 +85,7 @@ RailsAdmin.config do |config|
       read_only true
     end
     list do
-      scopes    [nil, 'created', 'received', 'accepted', 'rejected', 'corrected']
+      scopes    [nil, Abuse::STATE_CREATED, Abuse::STATE_RECEIVED, Abuse::STATE_ACCEPTED, Abuse::STATE_REJECTED, Abuse::STATE_CORRECTED]
     end
   end
 
@@ -474,6 +476,9 @@ RailsAdmin.config do |config|
       field :counter_cache
       field :status
       field :customer
+    end
+    list do
+      scopes    [nil, Post::STATE_CREATED, Post::STATE_RECEIVED, Post::STATE_ACCEPTED, Post::STATE_REJECTED]
     end
 
   end

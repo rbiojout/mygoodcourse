@@ -1,0 +1,22 @@
+<% provide(:title, t('activerecord.models.forum_subject', count: 1).capitalize) %>
+
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
+    <% end %>
+  </li>
+  <li>
+    <span class="fa fa-bullseye fa-lg"></span> <%= @forum_subject.forum_category.forum_family.name %>
+  </li>
+  <li>
+    <%= link_to forum_category_path(@forum_subject.forum_category) do %>
+        <span class="fa fa-circle-o -fa-lg"></span> <%= @forum_subject.forum_category.name %>
+    <% end %>
+  </li>
+</ol>
+
+<h1><%= yield :title %></h1>
+
+<%= render 'form' %>
+

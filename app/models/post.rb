@@ -81,8 +81,8 @@ class Post < ActiveRecord::Base
 
 
   mount_uploader :visual, VisualUploader
+  validates :visual, presence: true
   attr_accessor :visual_width, :visual_height
-  validates :visual, :description, :customer, presence: true
   #validate :check_dimensions, :on => [:create, :update]
   def check_dimensions
     #puts "------"

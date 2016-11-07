@@ -4,6 +4,8 @@ en:
       #################################################
       # custom actions
       #################################################
+      show_in_app_with_locale:
+        menu: "Show in app"
       sort_for: &sortfor
         title: "Sort %{model_label} '%{object_label}'"
         menu: "Sort"
@@ -25,43 +27,27 @@ en:
         breadcrumb: "Statistiques Utilisateurs"
         done: "Statistiques Utilisateurs OK"
       ##### custom actions for state engine
-      receive: &receive
+      receive_state:
         title: "Receive %{model_label} '%{object_label}'"
         menu: "Receive"
         breadcrumb: "receive"
         link: "receive '%{object_label}'"
         done: "received"
-      receive_abuse:
-        <<: *receive
-      receive_post:
-        <<: *receive
-      accept: &accept
+      accept_state:
         title: "Accept %{model_label} '%{object_label}'"
         menu: "Accept"
         breadcrumb: "accept"
         link: "accept '%{object_label}'"
         done: "accepted"
-      accept_abuse:
-        <<: *accept
-      accept_post:
-        <<: *accept
-      reject: &reject
+      reject_state:
         title: "Reject %{model_label} '%{object_label}'"
         menu: "Reject"
         breadcrumb: "reject"
         link: "reject '%{object_label}'"
         done: "rejected"
-      reject_abuse:
-        <<: *reject
-      reject_post:
-        <<: *reject
-      cancel: &cancel
+      cancel_state: &cancel
         title: "Cancel %{model_label} '%{object_label}'"
         menu: "Cancel"
         breadcrumb: "cancel"
         link: "cancel '%{object_label}'"
         done: "canceled"
-      cancel_abuse:
-        <<: *cancel
-      cancel_post:
-        <<: *cancel

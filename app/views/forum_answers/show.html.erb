@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Text:</strong>
+  <%= @forum_answer.text %>
+</p>
+
+<p>
+  <strong>Customer:</strong>
+  <%= @forum_answer.customer %>
+</p>
+
+<p>
+  <strong>Forum subject:</strong>
+  <%= @forum_answer.forum_subject %>
+</p>
+
+<%= link_to 'Edit', edit_forum_answer_path(@forum_answer) %> |
+<%= link_to 'Back', forum_answers_path %>

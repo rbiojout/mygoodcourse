@@ -10,9 +10,14 @@ one:
   description: <%= str %>
   slug: one
   customer: one
+  status: created
+  visual: "default_visual.png"
+
 
 two:
   name: Two
   description: <%= str %>
   slug: two
   customer: two
+  status: created
+  visual: "default_visual.png"

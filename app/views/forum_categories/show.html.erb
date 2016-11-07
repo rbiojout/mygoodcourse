@@ -1,0 +1,47 @@
+<% provide(:title, @forum_category.name) %>
+
+
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
+    <% end %>
+  </li>
+  <li>
+    <span class="fa fa-bullseye fa-lg"></span> <%= @forum_category.forum_family.name %>
+  </li>
+  <li class="active">
+    <span class="fa fa-circle-o fa-lg"></span> <%= @forum_category.name %>
+  </li>
+</ol>
+
+<h1><%= @forum_category.name %></h1>
+
+<%= link_to t('helpers.action.forum_subject.create'), new_forum_subject_path(forum_category_id: @forum_category.id), class: 'btn btn-primary' %>
+
+<h2><%= t('activerecord.models.forum_subject', count:2).capitalize %></h2>
+<% @forum_subjects.each do |forum_subject| %>
+
+    <div class="row">
+      <div class="col-xs-12">
+          <h3><span class="fa fa-bullhorn fa-lg"></span> <%= link_to forum_subject.name, forum_subject_path(forum_subject) %></h3>
+        <p>Created by <%= link_to forum_subject.customer.full_name, customer_path(forum_subject.customer) %>  - <%= nice_date(forum_subject.created_at) %></p>
+        <% unless forum_subject.forum_answers.count == 0 %>
+            <small><i class="fa fa-comments"></i> <%= forum_subject.forum_answers.count %> <%= t('activerecord.models.forum_answer', count: forum_subject.forum_answers.count) %></small>
+      <% end %>
+        <small><i class="fa fa-eye"></i> <%= forum_subject.counter_cache %> vues</small>
+
+        <% unless forum_subject.last_activity_date.nil? %>
+            <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.last_activity_date) %></small>
+        <% end %>
+        <% unless forum_subject.last_activity_customer.nil? %>
+            <%= link_to forum_subject.last_activity_customer.full_name, customer_path(forum_subject.last_activity_customer) %>
+        <% end %>
+      </div>
+
+    </div>
+<% end %>
+
+<div id="infinite-scrolling-subjects" class="row">
+  <%= will_paginate(@forum_subjects, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+</div>

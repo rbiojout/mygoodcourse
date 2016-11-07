@@ -29,7 +29,9 @@ display_info = (node) ->
     #  success: (data) ->
     #    console.log(data)
     $(this).popover({
-      content: "#{locality}. #{created}",
+      content: "<span class='fa fa-map-marker'></span> #{locality}<br/><span class='fa fa-calendar'></span> #{created}",
+      # needed this option to display the HTML in the popover
+      html: true,
       placement: "bottom"})
     $(this).popover('show')
 

@@ -1,0 +1,35 @@
+<% provide(:title, @forum_subject.name) %>
+
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
+    <% end %>
+  </li>
+  <li>
+    <span class="fa fa-bullseye fa-lg"></span> <%= @forum_subject.forum_category.forum_family.name %>
+  </li>
+  <li>
+    <%= link_to forum_category_path(@forum_subject.forum_category) do %>
+        <span class="fa fa-circle-o -fa-lg"></span> <%= @forum_subject.forum_category.name %>
+    <% end %>
+  </li>
+</ol>
+
+<h1><%= @forum_subject.name %></h1>
+
+<%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
+
+
+<% @forum_answers.each do |forum_answer| %>
+    <%= render(partial: 'forum_answers/forum_answer', locals: {forum_answer: forum_answer}) %>
+<% end %>
+
+
+<div id="forum-answer-form"></div>
+
+<%= render "forum_subjects/tools" %>
+
+<div id="infinite-scrolling-answers" class="row">
+  <%= will_paginate(@forum_answers, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+</div>

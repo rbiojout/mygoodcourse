@@ -3,6 +3,7 @@ require 'test_helper'
 class RailsAdminFlowTest < ActionDispatch::IntegrationTest
   include Warden::Test::Helpers
 
+
   test "login as admin" do
     login_as_admin
     get "/admin"
@@ -90,16 +91,58 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
     assert_response :success
 
     abuse = abuses(:review_one)
-    get "/admin/abuse/#{abuse.id}/receive_abuse"
+    get "/admin/abuse/#{abuse.id}/receive_state"
     assert assigns(:object).received?
 
-    get "/admin/abuse/#{abuse.id}/accept_abuse"
+    get "/admin/abuse/#{abuse.id}/accept_state"
     assert assigns(:object).accepted?
 
-    get "/admin/abuse/#{abuse.id}/cancel_abuse"
+    get "/admin/abuse/#{abuse.id}/cancel_state"
     assert assigns(:object).received?
 
-    get "/admin/abuse/#{abuse.id}/reject_abuse"
+    get "/admin/abuse/#{abuse.id}/reject_state"
+    assert assigns(:object).rejected?
+
+
+  end
+
+  test "has admin state post" do
+    post = posts(:one)
+
+    # prepare the file
+    # we need to prepare in order to have the file present during the validation of the model
+    post.visual =  fixture_file_upload(Rails.root.join('test/fixtures/files/default_visual.png'), 'image/png')
+    post.save
+
+    login_as_admin
+
+    get "/admin/post"
+    assert_response :success
+
+    assert post.may_receive?
+    assert_select 'a[href=?]', root_url+ "post/#{post.id}/receive_state"
+    get "/admin/post/#{post.id}/receive_state"
+    follow_redirect!
+    assert assigns(:object).received?
+
+    assert assigns(:object).may_accept?
+    assert_select 'a[href=?]', root_url+ "post/#{post.id}/accept_state"
+    get "/admin/post/#{post.id}/accept_state"
+    follow_redirect!
+    assert assigns(:object).accepted?
+
+    assert assigns(:object).may_cancel?
+    assert_select 'a[href=?]', root_url+ "post/#{post.id}/cancel_state"
+    get "/admin/post/#{post.id}/cancel_state"
+    follow_redirect!
+    assert assigns(:object).received?
+
+    assert assigns(:object).may_reject?
+    assert_select 'a[href=?]', root_url+ "post/#{post.id}/reject_state"
+    get "/admin/post/#{post.id}/reject_state"
+    puts "" + assigns(:object).to_s
+    post = Post.find(post.id)
+    puts post.status
     assert assigns(:object).rejected?
 
   end

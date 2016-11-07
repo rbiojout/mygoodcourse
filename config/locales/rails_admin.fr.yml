@@ -114,6 +114,8 @@ fr:
       #################################################
       # custom actions
       #################################################
+      show_in_app_with_locale:
+        menu: "Voir dans l'application"
       sort_for: &sortfor
         title: "Trier %{model_label} '%{object_label}'"
         menu: "Trier"
@@ -135,46 +137,30 @@ fr:
         breadcrumb: "Statistiques Utilisateurs"
         done: "Statistiques Utilisateurs OK"
       ##### custom actions for state engine
-      receive: &receive
+      receive_state:
         title: "Recevoir %{model_label} '%{object_label}'"
         menu: "Recevoir"
         breadcrumb: "recevoir"
         link: "recevoir '%{object_label}'"
         done: "reçu(e)"
-      receive_abuse:
-        <<: *receive
-      receive_post:
-        <<: *receive
-      accept: &accept
+      accept_state:
         title: "Accepter %{model_label} '%{object_label}'"
         menu: "Accepter"
         breadcrumb: "accepter"
         link: "accepter '%{object_label}'"
         done: "accepté(e)"
-      accept_abuse:
-        <<: *accept
-      accept_post:
-        <<: *accept
-      reject: &reject
+      reject_state:
         title: "Rejeter %{model_label} '%{object_label}'"
         menu: "Rejeter"
         breadcrumb: "rejeter"
         link: "rejeter '%{object_label}'"
         done: "rejeté(e)"
-      reject_abuse:
-        <<: *reject
-      reject_post:
-        <<: *reject
-      cancel: &cancel
+      cancel_state:
         title: "Annuler %{model_label} '%{object_label}'"
         menu: "Annuler"
         breadcrumb: "annuler"
         link: "annuler '%{object_label}'"
         done: "annulé(e)"
-      cancel_abuse:
-        <<: *cancel
-      cancel_post:
-        <<: *cancel
     form:
       cancel: "Annuler"
       basic_info: "Informations de base"

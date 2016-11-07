@@ -6,8 +6,8 @@
       <!-- picture -->
       <div class="relative">
         <img class="img-circle center-block customer-picture"
-           data-customer="<%=customer.id %>"
-           data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
+           data-customer=" <%=customer.id %>"
+           data-locality="<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
            data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>"
              alt="" src="<%= customer.picture %>" >
         <span class="top-right">
