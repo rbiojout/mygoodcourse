@@ -8,7 +8,7 @@
   </div>
 
   <% is_first= true %>
-  <% country.families.each do |family| %>
+  <% @current_country.families.each do |family| %>
       <% if family.categories.to_a.length > 0  %>
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading_family_<%=family.id%>">

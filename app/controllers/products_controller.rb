@@ -2,8 +2,6 @@ class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
-  before_action :set_country, only: [:new, :create, :update, :edit]
-
   before_action :correct_user, except: :show
 
 
@@ -47,26 +45,34 @@ class ProductsController < ApplicationController
 
     session[:query_store] = query_store
 
-    # Look for the Country from the request or from the session cookie
-    country_id = params[:country_id] || session[:country_store]
-
-    # validate if the Country exist
-    country = Country.first
-    begin
-      country = Country.find(country_id) unless country_id.nil?
-    rescue ActiveRecord::RecordNotFound
-
-    end
 
     # select the Cycle, Level, Family, Category associated to the Country
-    country_families = country.families || Family.first
-    country_categories = country.categories || Category.first
-    country_cycles = country.cycles || Cycle.first
-    country_levels = country.levels || Level.first
+    country_families = current_country.families || Family.first
+    country_categories = current_country.categories || Category.first
+    country_cycles = current_country.cycles || Cycle.first
+    country_levels = current_country.levels || Level.first
+
+    #we need to have data relevant to the country
+    # we reset if necessary
+    session[:family_for_products_id] ||= []
+    session[:family_for_products_id] = session[:family_for_products_id] & country_families.pluck(:id)
+    session[:family_for_products_id] = nil if session[:family_for_products_id].count == 0
+
+    session[:category_for_products_id] ||= []
+    session[:category_for_products_id] = session[:category_for_products_id] & country_categories.pluck(:id)
+    session[:category_for_products_id] = nil if session[:category_for_products_id].count == 0
+
+    session[:cycle_for_products_id] ||= []
+    session[:cycle_for_products_id] = session[:cycle_for_products_id] & country_cycles.pluck(:id)
+    session[:cycle_for_products_id] = nil if session[:cycle_for_products_id].count == 0
+
+    session[:level_for_products_id] ||= []
+    session[:level_for_products_id] = session[:level_for_products_id] & country_levels.pluck(:id)
+    session[:level_for_products_id] = nil if session[:level_for_products_id].count == 0
 
     # store the country
     # if we change the country we reset all filters
-    if country_id != session[:country_store]
+    if current_country.id != session[:current_country_id]
       family_id = country_families.pluck(:id)
       params[:family_id] = nil
       session[:family_for_products_id] = nil
@@ -81,9 +87,16 @@ class ProductsController < ApplicationController
       params[:level_id] = nil
       session[:level_for_products_id] = nil
     end
-    session[:country_store] = country.id
 
-    #logger.debug("===> parameters country #{country_families}/#{country_categories}/#{country_cycles}/#{country_levels}")
+    logger.debug("===> #{current_country.name}")
+    logger.debug("===> parameters country #{country_families}/#{country_categories.pluck(:id)}/#{country_cycles}/#{country_levels}")
+
+    # normalize parameters to array
+    # so we can make diff of arrays
+    params[:family_id] = Array.new.push(params[:family_id].to_i) unless Array.try_convert(params[:family_id]) if !params[:family_id].nil?
+    params[:category_id] = Array.new.push(params[:category_id].to_i) unless Array.try_convert(params[:category_id]) if !params[:category_id].nil?
+    params[:cycle_id] = Array.new.push(params[:cycle_id].to_i) unless Array.try_convert(params[:cycle_id]) if !params[:cycle_id].nil?
+    params[:level_id] = Array.new.push(params[:level_id].to_i) unless Array.try_convert(params[:level_id]) if !params[:level_id].nil?
 
     # Get the parameters
     # for filtering regarding the Cycle, Level, Family, Category
@@ -93,10 +106,12 @@ class ProductsController < ApplicationController
 
     logger.debug("===> parameters received #{params[:family_id]}/#{params[:category_id]}/#{params[:cycle_id]}/#{params[:level_id]}")
 
+
     family_id = params[:family_id] || session[:family_for_products_id] || country_families.pluck(:id)
     category_id = params[:category_id] || session[:category_for_products_id] || country_categories.pluck(:id)
 
     logger.debug("===> family used #{family_id} from #{params[:family_id]}/#{session[:family_for_products_id]}/#{country_families.pluck(:id)}")
+    logger.debug("===> category used #{category_id} from #{params[:category_id]}/#{session[:category_for_products_id]}/#{country_categories.pluck(:id)}")
 
     cycle_id = params[:cycle_id] || session[:cycle_for_products_id] || country_cycles.pluck(:id)
     level_id = params[:level_id] || session[:level_for_products_id] || country_levels.pluck(:id)
@@ -110,7 +125,7 @@ class ProductsController < ApplicationController
     # do we have to delete some parameters?
     # unload if :family_id equal 0
     unless params[:family_id].nil?
-      if family_id.to_s == "0"
+      if family_id == [0]
         family_id = country_families.unscope(:order).uniq.pluck(:id) #nil
         session[:family_for_products_id] = nil
       else
@@ -121,7 +136,7 @@ class ProductsController < ApplicationController
     end
     # unload if :category_id equal 0
     unless params[:category_id].nil?
-      if category_id.to_s == "0"
+      if category_id == [0]
         category_id = country_categories.unscope(:order).uniq.pluck(:id) #nil
         session[:category_for_products_id] = nil
         # if we have the category we need to have set the corresponding family
@@ -139,7 +154,7 @@ class ProductsController < ApplicationController
     # do we have to delete some parameters?
     # unload if :cycle_id equal 0
     unless params[:cycle_id].nil?
-      if cycle_id.to_s == "0"
+      if cycle_id == [0]
         cycle_id = country_cycles.unscope(:order).uniq.pluck(:id) #nil
         session[:cycle_for_products_id] = nil
       else
@@ -150,7 +165,7 @@ class ProductsController < ApplicationController
     end
     # unload if :level_id equal 0
     unless params[:level_id].nil?
-      if level_id.to_s == "0"
+      if level_id == [0]
         level_id = country_levels.unscope(:order).uniq.pluck(:id) #nil
         session[:level_for_products_id] = nil
         # if we have the level we need to have set the corresponding family
@@ -313,22 +328,6 @@ class ProductsController < ApplicationController
                                       :category_ids => [], :level_ids => [])
     end
 
-    # We need to have a filter when creating and updating a product.
-    def set_country
-      # we need the country
-      # Look for the Country from the request or from the session cookie
-      country_id = params[:country_id] || session[:country_store]
-
-      # validate if the Country exist
-      @country = Country.first
-      begin
-        @country = Country.find(country_id) unless country_id.nil?
-      rescue ActiveRecord::RecordNotFound
-
-      end
-
-      session[:country_store] = @country.id
-    end
 
 
     def correct_user

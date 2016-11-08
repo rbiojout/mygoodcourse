@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
   pg_search_scope :search_by_text, :against => [:name, :description, ], :ignoring => :accents
 
   # we want a name with a Capital
-  include CapitalizeNameConcern
+  include CapitalizeName
   before_save :capitalize_name
 
 

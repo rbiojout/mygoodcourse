@@ -62,7 +62,7 @@ class Product < ActiveRecord::Base
   pg_search_scope :search_by_text, :against => [:name, :description, ], :ignoring => :accents
 
   # we want a name with a Capital
-  include CapitalizeNameConcern
+  include CapitalizeName
   before_save :capitalize_name
 
   after_save :update_for_customer

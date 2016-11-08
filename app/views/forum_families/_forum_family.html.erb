@@ -1,0 +1,20 @@
+
+<li class="panel-forum_family media">
+  <div class="media-left">
+    <%= link_to forum_family_path(forum_family) do %>
+        <%= image_tag(forum_family.visual.square, class: 'img-rounded visual-forum_family') %>
+    <% end %>
+  </div>
+  <div class="media-body">
+    <div class="media-description">
+    <h3 class="media-heading"><span class="fa fa-bullseye fa-lg"></span> <%= forum_family.name %></h3>
+    <p><%= raw(forum_family.description)%></p>
+    </div>
+    <ul class="media-list">
+      <% forum_family.forum_categories.each do |forum_category|%>
+          <%= render(partial: 'forum_categories/forum_category', locals: {forum_category: forum_category}) %>
+      <% end %>
+    </ul>
+  </div>
+
+</li>

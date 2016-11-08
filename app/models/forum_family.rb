@@ -33,4 +33,9 @@ class ForumFamily < ActiveRecord::Base
 
   validates :name, :country, presence: true
 
+  mount_uploader :visual, VisualUploader
+  validates :visual, presence: true
+
+  default_scope -> { order(position: :asc) }
+
 end

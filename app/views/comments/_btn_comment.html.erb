@@ -4,7 +4,7 @@
    context_param = context.class.name.underscore + "_id"
    context_value = context.id
 %>
-<div class='<%="comment_#{context_type}_#{context_value}"%> pull-right'>
+<div class='<%="btn-comment_#{context_type}_#{context_value}"%> pull-right'>
   <%= link_to(new_comment_path(context_param => context_value),
               alt: t('activerecord.models.comment.other'),
               title: t('activerecord.models.comment.other'),

@@ -41,7 +41,7 @@ class Topic < ActiveRecord::Base
   validates :name, presence: true
 
   # we want a name with a Capital
-  include CapitalizeNameConcern
+  include CapitalizeName
   before_save :capitalize_name
 
   

@@ -29,7 +29,12 @@ class ForumCategory < ActiveRecord::Base
 
   acts_as_list scope: :forum_family, add_new_at: :bottom
 
+  mount_uploader :visual, VisualUploader
+  validates :visual, presence: true
+
   validates :name, :description, :forum_family, presence: true
+
+  default_scope -> { order(position: :asc) }  
 
   def count_subjects
     forum_subjects.count

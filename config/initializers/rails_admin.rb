@@ -292,11 +292,45 @@ RailsAdmin.config do |config|
   end
 
   config.model "ForumFamily" do
+    edit do
+      field :country
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :visual
+    end
+    show do
+      field :country
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe unless value.nil?
+        end
+      end
+      field :visual
+    end
 
   end
 
   config.model "ForumCategory" do
     parent ForumFamily
+    edit do
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :visual
+    end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value.html_safe unless value.nil?
+        end
+      end
+      field :visual
+    end
 
   end
 

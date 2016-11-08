@@ -5,13 +5,13 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <!--- Country selector --->
-    <div class="sidebar-menu">
-      <%= form_tag(topic_articles_path, method: :get, class: "simple_form")  do  %>
-          <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
-      <% end %>
+    <!-- country selector -->
+    <div class="row">
+      <div class="col-xs-12" style="padding-bottom: 10px;">
+        <%= render(partial: 'countries/btn_countries') %>
+      </div>
     </div>
-    <!--- end Country selector --->
+    <!-- end country selector -->
 
     <!-- list of topics -->
     <%= render(partial: 'articles/topics', :current_topic => @topic) %>

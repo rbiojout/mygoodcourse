@@ -8,7 +8,7 @@
   </div>
 
   <% is_first= true %>
-  <% country.cycles.each do |cycle| %>
+  <% @current_country.cycles.each do |cycle| %>
       <% if cycle.levels.to_a.length > 0  %>
             <div class="panel panel-default">
               <div class="panel-heading" role="tab" id="heading_cycle_<%=cycle.id%>">

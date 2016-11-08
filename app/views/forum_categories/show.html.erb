@@ -17,9 +17,13 @@
 
 <h1><%= @forum_category.name %></h1>
 
+<%= image_tag(@forum_category.visual, class: 'img-responsive') %>
+
 <%= link_to t('helpers.action.forum_subject.create'), new_forum_subject_path(forum_category_id: @forum_category.id), class: 'btn btn-primary' %>
 
 <h2><%= t('activerecord.models.forum_subject', count:2).capitalize %></h2>
+
+
 <% @forum_subjects.each do |forum_subject| %>
 
     <div class="row">

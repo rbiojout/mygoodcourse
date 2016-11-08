@@ -6,7 +6,7 @@ class ForumFamiliesController < ApplicationController
   # GET /forum_families
   # GET /forum_families.json
   def index
-    @forum_families = ForumFamily.all
+    @forum_families = current_country.forum_families
   end
 
   # GET /forum_families/1

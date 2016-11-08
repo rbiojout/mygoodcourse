@@ -1,13 +1,13 @@
 <%
    forum_subject ||= @forum_subject
 %>
-<div class="row" style="background-color: #eeeeee">
+<div class="row panel-forum_subject">
   <div class="col-xs-4">
     <%= render(partial: 'customers/customer', locals: {customer: forum_subject.customer}) %>
 
   </div>
   <div class="col-xs-8">
-    <p><%= raw(@forum_subject.text) %></p>
+    <p><%= raw(forum_subject.text) %></p>
     <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.created_at) %></small>
 
     <div class="row">

@@ -1,33 +1,16 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, t('activerecord.models.forum_subject', count:2).capitalize) %>
 
-<h1>Listing Forum Subjects</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Text</th>
-      <th>Customer</th>
-      <th>Forum category</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @forum_subjects.each do |forum_subject| %>
-      <tr>
-        <td><%= forum_subject.name %></td>
-        <td><%= forum_subject.text %></td>
-        <td><%= forum_subject.customer %></td>
-        <td><%= forum_subject.forum_category %></td>
-        <td><%= link_to 'Show', forum_subject %></td>
-        <td><%= link_to 'Edit', edit_forum_subject_path(forum_subject) %></td>
-        <td><%= link_to 'Destroy', forum_subject, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
     <% end %>
-  </tbody>
-</table>
+  </li>
+</ol>
 
-<br>
+<h1><%= yield :title %></h1>
 
-<%= link_to 'New Forum subject', new_forum_subject_path %>
+<% @forum_subjects.each do |forum_subject| %>
+    <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: forum_subject}) %>
+    <h3><%= link_to '...'+t('dialog.read_next'), forum_subject_path(forum_subject) %></h3>
+<% end %>

@@ -1,13 +1,12 @@
 class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
-  before_action :set_country, only: [:index]
 
   before_action :authenticate_employee!, except: [:index, :show]
 
   # GET /topics
   # GET /topics.json
   def index
-    @topics = @country.topics
+    @topics = current_country.topics
   end
 
   # GET /topics/1
@@ -86,20 +85,4 @@ class TopicsController < ApplicationController
       params.require(:topic).permit(:name, :description, :position, :country_id)
     end
 
-    # We need to have a filter when listing the articles.
-    def set_country
-      # we need the country
-      # Look for the Country from the request or from the session cookie
-      country_id = params[:country_id] || session[:country_store]
-
-      # validate if the Country exist
-      @country = Country.first
-      begin
-        @country = Country.find(country_id) unless country_id.nil?
-      rescue ActiveRecord::RecordNotFound
-
-      end
-
-      session[:country_store] = @country.id
-    end
 end

@@ -14,6 +14,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_i18n_locale_from_params
 
+  before_action :current_country
+
   before_filter :reload_rails_admin, if: :rails_admin_path?
 
   # ...
@@ -32,6 +34,49 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  # We need to have a filter when listing.
+  def current_country_2
+    if params[:country_id]
+      country_id = params[:country_id]
+      # validate if the Country exist
+      @current_country = Country.find(country_id)
+      session[:current_country_id] = @current_country.id
+      @current_country
+    else
+      country_id = session[:current_country_id]
+      @current_country = @current_country || begin Country.find(country_id)
+      session[:current_country_id] = Country.find(country_id).id
+      rescue
+        Country.first
+        session[:current_country_id] =  Country.first.id
+      end
+      @current_country
+    end
+  end
+
+  def current_country
+    if params[:country_id]
+      logger.debug(" got a country change")
+      begin
+        @current_country = Country.find(params[:country_id])
+        logger.debug(@current_country.name)
+        session[:current_country_id] = @current_country.id
+        @current_country
+      rescue ActiveRecord::RecordNotFound
+        @current_country = Country.first
+        session[:current_country_id] = @current_country.id
+        @current_country
+      end
+    else
+      if session[:current_country_id]
+        @current_country ||= Country.find(session[:current_country_id])
+      else
+        @current_country ||= @current_country = Country.first
+        session[:current_country_id] = @current_country.id
+        @current_country
+      end
+    end
+  end
 
   # needed this form of set-up for devise
   # instead of
@@ -46,6 +91,7 @@ class ApplicationController < ActionController::Base
   def self.default_url_options(options={})
     options.merge({ :locale => I18n.locale })
   end
+
 
 
   # Returns the active order for this session
@@ -118,7 +164,7 @@ class ApplicationController < ActionController::Base
   helper_method :current_order, :has_order?
 
   def reload_rails_admin
-    models = %W(Article, Category, Country, Customer, Cycle, Employee, Family, Impression, Level, Post, Product, Review, Topic, Update)
+    models = %W(Article, Category, Country, Customer, Cycle, Employee, Family, ForumFamily, ForumCategory, ForumSubject, ForumAnswer, Impression, Level, Post, Product, Review, Topic, Update)
     models.each do |m|
       RailsAdmin::Config.reset_model(m)
     end

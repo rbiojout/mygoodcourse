@@ -8,6 +8,10 @@ gem 'rails', '~> 4.2.7'
 
 gem 'rails-i18n'
 
+# country informations and flags
+gem 'countries'
+gem 'famfamfam_flags_rails'
+
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.19'
 # add some search with PostGres

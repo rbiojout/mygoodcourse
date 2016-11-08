@@ -1,5 +1,4 @@
 class ArticlesController < ApplicationController
-  before_action :set_country, only: [:index]
   before_action :set_topic, only: [:index, :show, :new, :edit, :update]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
@@ -9,7 +8,7 @@ class ArticlesController < ApplicationController
   # GET /articles
   # GET /articles.json
   def index
-    @topics = @country.topics
+    @topics = current_country.topics
     @articles = @topic.articles
   end
 
@@ -100,27 +99,5 @@ class ArticlesController < ApplicationController
       params.require(:article).permit(:name, :description, :position, :topic_id)
     end
 
-    # We need to have a filter when listing the articles.
-    def set_country
-      # we need the country
-      # Look for the Country from the request or from the session cookie
-      country_id = params[:country_id] || session[:country_store]
-
-      # validate if the Country exist
-      @country = Country.first
-      begin
-        @country = Country.find(country_id) unless country_id.nil?
-      rescue ActiveRecord::RecordNotFound
-        logger.error("Unable to find country #{country_id}")
-      end
-      @topic = @country.topics.first
-
-      # change the topic if the country is changing
-      unless @topic.nil?
-        params[:topic_id] = @topic.id unless session[:country_store] == @country.id
-      end
-
-      session[:country_store] = @country.id
-    end
 
 end

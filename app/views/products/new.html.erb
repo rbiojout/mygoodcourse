@@ -4,10 +4,9 @@
 
 <!--- Country selector --->
 <div class="">
-  <%= form_tag(new_product_path, method: :get, class: "simple_form")  do  %>
-      <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
-  <% end %>
+  <%= render(partial: 'countries/btn_countries') %>
 </div>
+<br/><br/>
 <!--- end Country selector --->
 
 <%= render 'form' %>

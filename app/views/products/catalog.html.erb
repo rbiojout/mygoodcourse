@@ -32,9 +32,7 @@
 
       <!--- Country selector --->
       <div class="sidebar-menu">
-        <%= form_tag(catalog_products_path, method: :get, class: "simple_form")  do  %>
-            <%= select_tag('country_id', options_from_collection_for_select(Country.all,"id", "name", session[:country_store] ), class: "select optional form-control", :onchange => "this.form.submit()") %>
-        <% end %>
+        <%= render(partial: 'countries/btn_countries') %>
       </div>
       <!--- end Country selector --->
 

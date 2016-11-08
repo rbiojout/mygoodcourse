@@ -40,7 +40,7 @@ class Article < ActiveRecord::Base
   acts_as_list scope: :topic, add_new_at: :bottom
 
   # we want a name with a Capital
-  include CapitalizeNameConcern
+  include CapitalizeName
   before_save :capitalize_name
 
   validates :name, :description, presence: true

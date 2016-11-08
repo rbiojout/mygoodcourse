@@ -1,32 +1,19 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, t('activerecord.models.forum_category', count:2).capitalize) %>
 
-<h1>Listing Forum Categories</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Description</th>
-      <th>Visual</th>
-      <th>Forum family</th>
-      <th>Position</th>
-      <th colspan="1"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @forum_categories.each do |forum_category| %>
-      <tr>
-        <td><%= forum_category.name %></td>
-        <td><%= forum_category.description %></td>
-        <td><%= forum_category.visual %></td>
-        <td><%= forum_category.forum_family %></td>
-        <td><%= forum_category.position %></td>
-        <td><%= link_to 'Show', forum_category %></td>
-      </tr>
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
     <% end %>
-  </tbody>
-</table>
+  </li>
+</ol>
 
-<br>
+<h1><%= yield :title %></h1>
+
+<% @forum_categories.each do |forum_category| %>
+    <%= render(partial:'forum_categories/forum_category', locals: {forum_category: forum_category}) %>
+<% end %>
+
+
 

@@ -16,7 +16,7 @@
   </li>
 </ol>
 
-<h1><%= @forum_subject.name %></h1>
+<h1><%= yield :title %></h1>
 
 <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
 

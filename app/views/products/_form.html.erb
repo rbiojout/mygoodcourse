@@ -20,10 +20,10 @@
     <div class="row">
       <div class="col-md-3">
         <!--- Categories List --->
-        <%= render(partial: 'categories_list', locals: {f: f, country: @country})  %>
+        <%= render(partial: 'categories_list', locals: {f: f, country: @current_country})  %>
 
         <!--- Levels List -->
-        <%= render(partial: 'levels_list', locals: {f: f, country: @country})  %>
+        <%= render(partial: 'levels_list', locals: {f: f, country: @current_country})  %>
 
       </div>
       <div class="col-md-9">

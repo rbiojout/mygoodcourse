@@ -1,4 +1,4 @@
-module CapitalizeNameConcern
+module CapitalizeName
   extend ActiveSupport::Concern
 
   private
