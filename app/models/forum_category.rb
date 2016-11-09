@@ -34,7 +34,7 @@ class ForumCategory < ActiveRecord::Base
 
   validates :name, :description, :forum_family, presence: true
 
-  default_scope -> { order(position: :asc) }  
+  default_scope -> { order(position: :asc) }
 
   def count_subjects
     forum_subjects.count

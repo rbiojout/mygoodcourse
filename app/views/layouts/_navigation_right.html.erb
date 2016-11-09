@@ -14,7 +14,7 @@
     <!--                      pull-right keeps the drop-down in line -->
     <ul class="nav navbar-nav pull-right">
       <li><%= link_to t('page.catalog'), catalog_products_path %></li>
-      <% if (Article.all.count > 5) %>
+      <% if (Post.all.count > 5) %>
         <li><%= link_to t('page.posts'), posts_path %></li>
       <% end %>
       <li><%= link_to t('page.who_we_are'), home_path %></li>

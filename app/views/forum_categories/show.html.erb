@@ -1,5 +1,16 @@
 <% provide(:title, @forum_category.name) %>
 
+<!-- Image Header -->
+<div class="parallaxed banner" data-stellar-background-ratio="0.5"><span>
+    <h1><%= yield :title %></h1>
+</span>
+</div>
+<!-- /.row -->
+
+<script language="JavaScript">
+    $('.banner').css('background-image', 'url(<%= @forum_category.visual %>)');
+</script>
+
 
 <ol class="breadcrumb">
   <li>
@@ -14,10 +25,6 @@
     <span class="fa fa-circle-o fa-lg"></span> <%= @forum_category.name %>
   </li>
 </ol>
-
-<h1><%= @forum_category.name %></h1>
-
-<%= image_tag(@forum_category.visual, class: 'img-responsive') %>
 
 <%= link_to t('helpers.action.forum_subject.create'), new_forum_subject_path(forum_category_id: @forum_category.id), class: 'btn btn-primary' %>
 
