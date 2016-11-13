@@ -31,11 +31,14 @@
 </header>
 
 <div class="container">
+  <div id="alert_notice_holder">
+
+  </div>
   <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <%= render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: notice}) %>
   <% end %>
   <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
   <% end %>
 
   <%= yield %>
@@ -48,7 +51,7 @@
 
 
 <!-- FOOTER -->
-<footer class="bs-docs-footer" role="contentinfo">
+<footer class="footer bs-docs-footer" role="contentinfo">
   <%= render 'layouts/footer' %>
 </footer>
 

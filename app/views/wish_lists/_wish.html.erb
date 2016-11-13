@@ -2,7 +2,7 @@
 <%= link_to(wish_product_path(:product_id => product.id),
             class: 'btn-tool btn btn-sm',
             :title => t('dialog.product.wish'),
-            data: {toggle: 'tooltip', placement: 'top'},
+            data: {toggle: 'tooltip', placement: 'left'},
             :method => :post, remote: true ) do %>
 
     <i class="fa fa-heart-o fa-lg red"> </i>

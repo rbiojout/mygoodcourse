@@ -111,8 +111,10 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     sign_in_url = new_customer_session_url
     if request.referer == sign_in_url
+      logger.debug("%%%%")
       super
     else
+      logger.debug('ffff')
       stored_location_for(resource) || request.referer || root_path
     end
   end

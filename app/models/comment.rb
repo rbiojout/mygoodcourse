@@ -28,4 +28,5 @@ class Comment < ActiveRecord::Base
   has_many :abuses, class_name: "Abuse", as: :abusable
 
   validates :text, presence: true
+
 end

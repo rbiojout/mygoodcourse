@@ -131,6 +131,10 @@ fr:
         <<: *sortfor
       sort_for_topic:
         <<: *sortfor
+      sort_for_forum_family:
+        <<: *sortfor
+      sort_for_forum_category:
+        <<: *sortfor
       stats_users:
         title: "Statistiques Utilisateurs"
         menu: "Statistiques Utilisateurs"

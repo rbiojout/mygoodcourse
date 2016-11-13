@@ -83,6 +83,8 @@ fr:
       alert_no_followeds: "Cet utilisateur ne suit aucun autre utilisateur. A partir de cette page, vous pouvez vous aussi suivre les utilisateurs qui s'afficheront si vous souhaitez être en lien privilégié avec ces utilisateurs."
       alert_no_reviews: "Cet utilisateur n'a pas encore été évalué. A partir de cette page, vous pouvez suivre les différentes évaluations des ressources proposées par un utilisateur. Pour faire vous-même une évaluation, vous devez avoir téléchargé le produit."
       alert_empty_products: "Il n'y a pas encore de produits pour ce client.Vous pouvez suivre cet utilisateur et revenir plus tard..."
+    forum_subject:
+      populars: 'Sujets populaires'
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
       alert_add_link: "Explorer le catalogue"

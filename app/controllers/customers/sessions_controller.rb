@@ -28,7 +28,20 @@ class Customers::SessionsController < Devise::SessionsController
   #   super
   # end
 
-  # DELETE /resource/sign_out
+  # POST /resource/sign_in
+  def create
+    self.resource = warden.authenticate!(auth_options)
+    set_flash_message!(:notice, :signed_in)
+    sign_in(resource_name, resource)
+    # set the locale
+    I18n.locale = resource.language
+    # set the country
+    session[:current_country_id] = resource.country_id
+    yield resource if block_given?
+    respond_with resource, location: after_sign_in_path_for(resource), locale: I18n.locale, country_id: resource.country_id
+  end
+
+    # DELETE /resource/sign_out
   # def destroy
   #   super
   # end

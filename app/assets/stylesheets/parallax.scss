@@ -5,7 +5,7 @@
     background-position: 50% 0;
     background-color: black;
     background-repeat: no-repeat;
-    height: 300px;
+    height: 200px;
     width: auto;
     position: relative;
     margin-top: 10px;
@@ -23,6 +23,15 @@
     //text-shadow: 0 2px 0 black, 0 0 10px black;
     //width: 1200px;
 }
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .parallaxed {
+    height: 300px;
+  }
+
+}
+
 // space pictures
 .banner {
   background-image: image-url('banner.jpg');

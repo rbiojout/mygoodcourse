@@ -299,6 +299,7 @@ RailsAdmin.config do |config|
         partial 'form_summernote'
       end
       field :visual
+      field :forum_categories
     end
     show do
       field :country
@@ -309,6 +310,7 @@ RailsAdmin.config do |config|
         end
       end
       field :visual
+      field :forum_categories
     end
 
   end
@@ -321,6 +323,7 @@ RailsAdmin.config do |config|
         partial 'form_summernote'
       end
       field :visual
+      field :forum_family
     end
     show do
       field :name
@@ -330,6 +333,7 @@ RailsAdmin.config do |config|
         end
       end
       field :visual
+      field :forum_family
     end
 
   end

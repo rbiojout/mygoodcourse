@@ -1,29 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @topic.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @topic.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @topic.description %>
-</p>
+<h1><%= yield :title %></h1>
 
-<p>
-  <strong>Position:</strong>
-  <%= @topic.position %>
-</p>
+<%= link_to t('activerecord.models.topic', count:2).capitalize, topics_path(), class: 'btn btn-primary' %>
 
-<p>
-  <strong>Slug:</strong>
-  <%= @topic.slug %>
-</p>
+<ul class="list-unstyled">
+  <%= render(:partial => 'topics/topic', locals: {topic: @topic}) %>
+</ul>
 
-<p>
-  <strong>Country:</strong>
-  <%= @topic.country %>
-</p>
-
-<%= link_to 'Edit', edit_topic_path(@topic) %> |
-<%= link_to 'Back', topics_path %>

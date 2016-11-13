@@ -18,18 +18,45 @@
 
 <h1><%= yield :title %></h1>
 
-<%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
+<div class="row">
+  <div class="col-md-8">
+    <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
 
 
-<% @forum_answers.each do |forum_answer| %>
-    <%= render(partial: 'forum_answers/forum_answer', locals: {forum_answer: forum_answer}) %>
-<% end %>
+    <% @forum_answers.each do |forum_answer| %>
+        <%= render(partial: 'forum_answers/forum_answer', locals: {forum_answer: forum_answer}) %>
+    <% end %>
 
 
-<div id="forum-answer-form"></div>
+    <div id="forum-answer-form"></div>
 
-<%= render "forum_subjects/tools" %>
+    <%= render "forum_subjects/tools" %>
 
-<div id="infinite-scrolling-answers" class="row">
-  <%= will_paginate(@forum_answers, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+    <div id="infinite-scrolling-answers" class="row">
+      <%= will_paginate(@forum_answers, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+    <!-- top forum_subjects -->
+    <h2><%= t('dialog.forum_subject.populars')%></h2>
+    <div class="most-viewed-posts">
+      <ol class="list-unstyled">
+        <% @top_forum_subjects.each do |forum_subject| %>
+            <li class>
+
+              <%= link_to (forum_subject_path(forum_subject)) do %>
+                  <h3><i class="fa fa-star-o fa-1x active-star"></i>
+
+                    </span><%= forum_subject.name %></h3>
+              <% end %>
+
+              <%# render(:partial => 'posts/post', locals: {post: post, with_body: false, with_cols: false}) %>
+            </li>
+        <% end %>
+      </ol>
+      </div>
+      <!-- end top forum_subjects -->
+  </div>
 </div>
+

@@ -10,20 +10,7 @@
         <% end %>
 
         <div class="overlay">
-          <!-- add to wish list -->
-          <div class="pull-right">
-            <% if customer_signed_in? %>
-                <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
 
-                  <% if current_customer.wishing?(product) %>
-                      <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
-                  <% else %>
-                      <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
-                  <% end %>
-                </div>
-            <% end %>
-          </div>
-          <!-- end wish list -->
           <!--- price --->
           <h2><%= nice_price(product.price) %></h2>
           <!--- end price --->
@@ -42,6 +29,20 @@
   <!--- end name --->
 
   <!--- actions --->
+  <!-- add to wish list -->
+  <div class="pull-right">
+    <% if customer_signed_in? %>
+        <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+
+          <% if current_customer.wishing?(product) %>
+              <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+          <% else %>
+              <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
+  <!-- end wish list -->
   <div>
     <%= link_to buy_product_path(product), :method => :post, class:'float-left btn btn-block btn-primary btn-sm' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
     <% if customer_signed_in? %>

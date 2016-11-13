@@ -22,6 +22,8 @@ class ForumSubjectsController < ApplicationController
     impressionist(@forum_subject)
 
     @forum_answers = @forum_subject.forum_answers.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+
+    @top_forum_subjects = ForumSubject.where.not(id: @forum_subject.id).order(counter_cache: :desc).limit(10)
   end
 
   # GET /forum_subjects/new

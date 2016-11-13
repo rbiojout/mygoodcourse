@@ -1,34 +1,11 @@
-<p id="notice"><%= notice %></p>
+<% provide(:title, @article.name) %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @article.name %>
-</p>
 
-<p>
-  <strong>Description:</strong>
-  <%= raw(@article.description) %>
-</p>
+<h1><%= yield :title %></h1>
 
-<p>
-  <strong>Position:</strong>
-  <%= @article.position %>
-</p>
+<%= link_to @article.topic.name, topic_articles_path(topic_id: @article.topic_id), class: 'btn btn-primary' %>
 
-<p>
-  <strong>Visits:</strong>
-  <%= @article.counter_cache %>
-</p>
+<ul class="list-unstyled">
+  <%= render(partial: 'articles/article', :locals => {article: @article}) %>
+</ul>
 
-<p>
-  <strong>Slug:</strong>
-  <%= @article.slug %>
-</p>
-
-<p>
-  <strong>Topic:</strong>
-  <%= @article.topic %>
-</p>
-
-<%= link_to 'Edit', edit_topic_article_path(@article, :topic_id => @article.topic_id) %> |
-<%= link_to 'Back', topic_articles_path %>
