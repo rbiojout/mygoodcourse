@@ -4,23 +4,19 @@
   <div class="comment-customer"><%= render(partial: 'customers/customer', locals: {customer: comment.customer, withcols: 'false'}) %></div>
   <!-- Comment text -->
   <div class="comment-panel">
-    <div class="comment-heading"><p><span class="date text-muted"><%= nice_date(comment.updated_at) %></span></p>
-      <div class="comment-tools">
-        <% if customer_signed_in?
-             @context = comment.commentable %>
-            <% if comment.customer.id == current_customer.id %>
-                <%= link_to( edit_comment_path(comment, @context.class.to_s.underscore+'_id' => @context.id), remote: true) do %>
-                    <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
-                <% end %>
-            <% end %>
-        <% end %>
-        <div id="abus_comment_<%= comment.id%>">
-          <p><%= link_to new_abuse_path(:comment_id => comment.id), :remote => true do %>
-                <span class="fa fa-bolt fa-lg"></span> <%= I18n.translate('actions.abuses.new') %>
-            <% end %></p>
-        </div>
+    <div class="arrow"></div>
+    <div class="comment-tools">
+      <% if customer_signed_in?
+           context = comment.commentable %>
+          <% if comment.customer.id == current_customer.id %>
+              <%= render(partial: 'comments/btn_edit', locals: {comment: comment}) %>
+          <% end %>
+      <% end %>
+      <div id="abus_comment_<%= comment.id%>">
+        <%= render(partial: 'abuses/btn_create', locals: {context: comment}) %>
       </div>
     </div>
+    <div class="comment-heading"><p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(comment.created_at) %></small></p></div>
     <div class="comment-body">
       <p><%= comment.text %></p>
     </div>

@@ -1,5 +1,26 @@
 <% provide(:title, @forum_subject.name) %>
 
+<% forum_category = @forum_subject.forum_category %>
+
+<ol class="breadcrumb">
+  <li>
+    <%= link_to forum_families_path do %>
+        <span class="fa fa-home fa-lg"></span> <%= t('page.forum') %>
+    <% end %>
+  </li>
+  <li>
+    <span class="fa fa-bullseye fa-lg"></span> <%= forum_category.forum_family.name %>
+  </li>
+  <li>
+    <span class="fa fa-circle-o fa-lg"></span> <%= link_to forum_category.name, forum_category_path(forum_category) %>
+  </li>
+  <li class="active">
+    <span class="fa fa-circle-o fa-lg"></span> <%= @forum_subject.name %>
+  </li>
+</ol>
+
+<h1><%= @forum_subject.name %></h1>
+
 
 <div class="row">
   <div class="col-md-8">

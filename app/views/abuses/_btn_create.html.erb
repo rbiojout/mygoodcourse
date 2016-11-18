@@ -1,0 +1,19 @@
+<%
+
+   # context : parameter to refer to the polymorphic
+   context ||=@context
+   context_type = context.class.name.underscore
+   context_param = context.class.name.underscore + "_id"
+   context_value = context.id
+%>
+
+<div class="pull-right">
+    <%= link_to new_abuse_path(context_param => context_value),
+                alt: t('actions.abuses.new'),
+                title: t('actions.abuses.new'),
+                data: {toggle: 'tooltip', placement: 'top'},
+                class: 'btn-tool btn',
+                :remote => true do %>
+        <span class="fa fa-bolt fa-lg"></span> <%= I18n.translate('actions.abuses.new') %>
+    <% end %>
+</div>

@@ -1,8 +1,10 @@
 @import "bootstrap/variables";
+@import "bootstrap/mixins/vendor-prefixes";
 
 $customer_picture: 70px;
 $customer_container: 85px;
 $customer_name: 30px;
+$customer_padding-top: 15px;
 
 @media (min-width: 768px) {
   $customer_picture: 80px;
@@ -32,10 +34,11 @@ $customer_name: 30px;
   }
 
   /* List of replies for the forum */
-  .replies {
+  .replies, .comments {
     list-style: none;
-    padding: 20px 0 20px;
+    padding: 10px 0 10px;
     position: relative;
+    width: 100%;
   }
 
   .replies:before {
@@ -43,13 +46,15 @@ $customer_name: 30px;
     bottom: 0;
     position: absolute;
     content: " ";
-    width: 3px;
-    background-color: #eeeeee;
+    //width: 3px;
+    border-left: 3px dashed;
+    border-left-color: #CCCCCC;
+    background-color: #FFFFFF;
     left: 50%;
     margin-left: -1.5px;
   }
 
-  ul.replies:before {
+  ul.replies:before, ul.comments:before {
     left: $customer_container/2;
   }
 
@@ -60,88 +65,87 @@ $customer_name: 30px;
   }
 
 
-  ul.replies > li > .reply-customer {
-    left: 0px;
-    margin-left: 0;
-    top: 16px;
+  ul.replies > li > .reply-customer, ul.comments > li > .comment-customer {
+      left: 0px;
+      margin-left: 0;
   }
 
-  ul.replies > li > .reply-panel {
-    float: right;
+  ul.replies, ul.comments {
+    &> li > .reply-panel {
+      float: right;
+    }
   }
 
 
-  .replies > li {
-    margin-bottom: 20px;
-    position: relative;
+  .replies, .comments {
+    &> li {
+      margin-bottom: 10px;
+      position: relative;
+    }
   }
 
-  .replies > li:before,
-  .replies > li:after {
-    content: " ";
-    display: table;
-  }
-
-  .replies > li:after {
+  .replies > li:after, .comments > li:after {
     clear: both;
   }
 
-  .replies > li:before,
-  .replies > li:after {
-    content: " ";
-    display: table;
-  }
-
-  .replies > li:after {
-    clear: both;
-  }
-
-  .replies > li > .reply-panel {
+  .replies > li > .reply-panel, .comments > li > .comment-panel {
     min-height: $customer_picture + $customer_name + 80px;
     float: right;
-    border: 1px solid $gray-dark;
-    border-radius: 2px;
     padding: 20px;
     position: relative;
-    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    //border: 1px solid $gray-dark;
+    //border-radius: 2px;
+    border: 1px solid $popover-fallback-border-color;
+    border: 1px solid $popover-border-color;
+    border-radius: $border-radius-large;
+    @include box-shadow(0 5px 10px rgba(0,0,0,.2));
   }
 
-  .replies > li > .reply-panel:before {
-    position: absolute;
-    top: 1px+ $customer_picture/2;
-    left: -15px;
-    display: inline-block;
-    border-top: 15px solid transparent;
-    border-left: 0 solid $gray-dark;
-    border-right: 15px solid $gray-dark;
-    border-bottom: 15px solid transparent;
-    content: " ";
+  .reply-panel > .arrow, .comment-panel > .arrow {
+    &,
+    &:after {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+  .reply-panel > .arrow, .comment-panel > .arrow {
+    border-width: $popover-arrow-outer-width;
+  }
+  .reply-panel > .arrow:after, .comment-panel > .arrow:after {
+    border-width: $popover-arrow-width;
+    content: "";
   }
 
-  .replies > li > .reply-panel:after {
-    position: absolute;
-    top: 2px+ $customer_picture/2;
-    left: -14px;
-    display: inline-block;
-    border-top: 14px solid transparent;
-    border-left: 0 solid #fff;
-    border-right: 14px solid #fff;
-    border-bottom: 14px solid transparent;
-    content: " ";
+  .reply-panel > .arrow, .comment-panel > .arrow {
+       top: 1px+ $customer_picture/2+$customer_padding-top;
+       left: -$popover-arrow-outer-width;
+       margin-top: -$popover-arrow-outer-width;
+       border-left-width: 0;
+       border-right-color: $popover-arrow-outer-fallback-color; // IE8 fallback
+       border-right-color: $popover-arrow-outer-color;
+       &:after {
+         content: " ";
+         left: 1px;
+         bottom: -$popover-arrow-width;
+         border-left-width: 0;
+         border-right-color: $popover-arrow-color;
+       }
   }
 
-
-  .replies > li > .reply-customer {
+  .replies > li > .reply-customer, .comments > li > .comment-customer {
     width: $customer_picture;
     height: $customer_picture;
     position: absolute;
-    top: 16px;
+    top: $customer_padding-top;
     left: 50%;
     margin-left: -25px;
   }
 
-  .reply-title {
+  .reply-title, .comment-title {
     margin-top: 0;
     color: inherit;
   }
@@ -162,11 +166,9 @@ $customer_name: 30px;
   .comments {
     padding-top: 10px;
     padding-left: $customer_picture/2;
-    list-style: none;
     float: left;
     width: 100%;
   }
-
 
 
   ul.comments > li > .comment-panel {
@@ -176,98 +178,21 @@ $customer_name: 30px;
   }
 
 
-  ul.comments > li > .comment-customer {
-    left: 0px;
-    margin-left: 0;
-  }
-
-  .comment-customer .container-customer{
-    padding-top: 16px;
-  }
-
-  ul.comments > li > .comment-panel {
-    float: right;
-  }
-
-  ul.comments > li > .comment-panel:before {
-    border-left-width: 0;
-    border-right-width: 15px;
-    left: -15px;
-    right: auto;
-  }
-
-  ul.comments > li > .comment-panel:after {
-    border-left-width: 0;
-    border-right-width: 14px;
-    left: -14px;
-    right: auto;
-  }
 
 
-  .comments > li {
-    margin-bottom: 5px;
-    position: relative;
-  }
 
-  .comments > li:before,
   .replies > li:after {
     content: " ";
     display: table;
   }
 
-  .comments > li:after {
-    clear: both;
-  }
 
-  .comments > li:before,
   .comments > li:after {
     content: " ";
     display: table;
   }
 
-  .comments > li:after {
-    clear: both;
-  }
 
-  .comments > li > .comment-panel {
-    min-height: $customer_picture + $customer_name + 80px;
-    float: right;
-    border: 1px solid $gray-light;
-    border-style: dashed;
-    border-radius: 2px;
-    padding: 20px;
-    position: relative;
-    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-  }
-
-  .comments > li > .comment-panel:before {
-    position: absolute;
-    top: 1px+ $customer_picture/2;
-    left: -15px;
-    right: auto;
-    display: inline-block;
-    border-style: dashed;
-    border-top: 15px solid transparent;
-    border-left: 0 solid $gray-light;
-    border-right: 15px solid $gray-light;
-    border-bottom: 15px solid transparent;
-    content: " ";
-  }
-
-  .comments > li > .comment-panel:after {
-    position: absolute;
-    top: 2px+ $customer_picture/2;
-    left: -14px;
-    right: auto;
-    display: inline-block;
-    border-style: dashed;
-    border-top: 14px solid transparent;
-    border-left: 0 solid #fff;
-    border-right: 14px solid #fff;
-    border-bottom: 14px solid transparent;
-    content: " ";
-  }
 
 }
 

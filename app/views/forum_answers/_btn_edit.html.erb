@@ -1,5 +1,10 @@
 <div class="pull-right">
-<%= link_to( edit_forum_answer_path(forum_answer), remote: true, class: 'btn-tool btn ') do %>
+<%= link_to( edit_forum_answer_path(forum_answer),
+             alt: t('helpers.action.edit'),
+             title: t('helpers.action.edit'),
+             data: {toggle: 'tooltip', placement: 'top'},
+             class: 'btn-tool btn',
+             remote: true) do %>
     <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
 <% end %>
 </div>

@@ -1,0 +1,11 @@
+<% context = comment.commentable %>
+<div class="pull-right">
+  <%= link_to( edit_comment_path(comment, context.class.to_s.underscore+'_id' => context.id),
+               alt: t('helpers.action.edit'),
+               title: t('helpers.action.edit'),
+               data: {toggle: 'tooltip', placement: 'top'},
+               class: 'btn-tool btn',
+               remote: true) do %>
+      <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
+  <% end %>
+</div>
