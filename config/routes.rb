@@ -329,6 +329,8 @@ Rails.application.routes.draw do
   get 'charts/created_customers' => 'charts#created_customers', :as => 'created_customers_chart'
   get 'charts/sign_in_customers' => 'charts#sign_in_customers', :as => 'sign_in_customers_chart'
   get 'charts/created_reviews' => 'charts#created_reviews', :as => 'created_reviews_chart'
+  get 'charts/catalog_products' => 'charts#catalog_products', :as => 'catalog_products_chart'
+  get 'charts/catalog_visits' => 'charts#catalog_visits', :as => 'catalog_visits_chart'
 
 
   #
@@ -339,6 +341,7 @@ Rails.application.routes.draw do
 
     # static pages
     get 'static_pages/home', as: 'home'
+    get 'how_it_works' => 'static_pages#how_it_works', as: 'how_it_works'
     get 'help' => 'static_pages#help', as: 'help'
     get 'contact' => 'static_pages#contact', as: 'contact'
     get 'about' => 'static_pages#about', as: 'about'

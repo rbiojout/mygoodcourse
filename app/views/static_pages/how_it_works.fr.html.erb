@@ -1,0 +1,138 @@
+<% provide(:title, t('page.how_it_works')) %>
+
+<div class="row">
+  <div class="col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+      <li role="presentation" class="active"><a href="#">Comment ça marche</a></li>
+      <li role="presentation"><a href="#">Confiance et sécurité</a></li>
+      <li role="presentation"><a href="#">FAQ</a></li>
+    </ul>
+  </div>
+  <div class="col-md-9">
+    <h2><%= yield :title %></h2>
+    <div>
+
+      <!-- Nav tabs -->
+      <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active">
+          <a href="#seller" aria-controls="seller" role="tab" data-toggle="tab">
+            <h3>Vous êtes Vendeur</h3>
+            <p>Comment proposer vos ressources?</p>
+          </a>
+        </li>
+        <li role="presentation">
+          <a href="#buyer" aria-controls="buyer" role="tab" data-toggle="tab">
+            <h3>Vous êtes Acquéreur</h3>
+            <p>Comment trouver une ressource?</p>
+          </a>
+        </li>
+      </ul>
+
+      <!-- Tab panes -->
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="seller">
+          <%= image_tag 'face_1.jpg', class: 'img-responsive' %>
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-cloud fa-stack-1x"></i>
+                </span>
+              Vous publiez votre ressource
+              </h4>
+              <p>Connectez-vous à votre compte, ajoutez un fichier ressource, indiquez le titre, les classements et mettez en place une description précise et attractive, nous faisons le reste pour la préparation!
+              Il vous faudra indiquer le prix et dès que les traitements automatiques sont terminés, votre ressource apparaît dans les recherches par mot clef et par classement des utilisateurs.</p>
+          </div>
+
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+            <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-download fa-stack-1x"></i>
+                </span>
+            Un utilisateur sélectionne votre ressource
+          </h4>
+          <p>L'utilisateur qui souhaite accéder à votre ressource l'ajoute à son panier puis valide le paiement (sans donner sa carte bancaire si les ressources sont gratuites).
+          Les ressources deviennent alors disponibles dans sont espace. Il ne peut y accéder que lorsqu'il s'est connecté à la plateforme.
+          </p>
+          </div>
+
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-diamond fa-stack-1x"></i>
+                </span>
+            Vous enrichissez votre boutique
+          </h4>
+          <p>Une fois que votre utilisateur a utilisé votre ressource, il peut mettre un commentaire et évaluer votre travail. Plus qu'un jugement, c'est une source extraordinaire pour mesurer l'impact de votre travail et sans doute pour améliorer cette ressource ou les prochaines que vous publierez sur la plateforme.
+          </p>
+          </div>
+
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-bank fa-stack-1x"></i>
+                </span>
+            Vous suivez les ventes de votre boutique
+          </h4>
+          <p>Connectez vous pour suivre sur votre tableau de bord les consultations de votre catalogue de ressources.
+            Ajustez les descriptions pour être plus pertinent vis-à-vis des recherches.
+            Suivez la consultation de votre catalogue, vous pouvez en particulier ajuster votre politique tarifaire si nécessaire.
+            Votre compte en banque reçois au fur et à mesure le produit de vos ventes sur la plateforme.
+          </p>
+        </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="buyer">
+          <%= image_tag 'face_2.jpg', class: 'img-responsive' %>
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-search fa-stack-1x"></i>
+                </span>
+            Vous recherchez des ressources
+          </h4>
+          <p>En explorant le catalogue des ressources, en y ajoutant des filtres, des recherches par mot clef, des tris vous ajoutez les ressources à votre panier.
+          Vous consultez les fiches des ressources, les évaluations des utilisateurs.
+            Vous pouvez les mettre uniquement à vos favoris pour pouvoir y reenir ultérieurement si vous ne souhaitez pas les acheter tout de suite.</p>
+        </div>
+
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-download fa-stack-1x"></i>
+                </span>
+            Vous validez votre panier
+          </h4>
+          <p>Lorsque vous avez terminez votre sélection, vous validez votre panier.
+            Si toutes les ressources sont gratuites vous n'aurez pas à fournir vos informations de carte bancaire.
+          Sitôt que le paiement est validé, vous avez accès au téléchargement des fichiers.</p>
+        </div>
+
+          <div class="point-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+          <h4>
+                <span class="fa-stack fa-lg">
+                  <i class="fa fa-square-o fa-stack-2x aero"></i>
+                  <i class="fa fa-star-o fa-stack-1x"></i>
+                </span>
+            Vous faites une évaluation
+          </h4>
+          <p>Chaque ressource est le fruit d'un travail intense d'un autre utilisateur... il souhaite sans doute avoir votre retour.
+          Il vous faudra être le plus constructif possible pour profiter de votre évaluation pour faire progresser sa boutique.</p>
+
+        </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+<script language="JavaScript">
+    onScrollInit( $('.point-animation'));
+</script>
+

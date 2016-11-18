@@ -1,8 +1,14 @@
 <h3><%= (I18n.translate 'activerecord.models.customer', count: 2).capitalize %></h3>
-<%= line_chart main_app.created_customers_chart_path, id: 'CreatedCustomersChart' %>
+<%= area_chart main_app.created_customers_chart_path, id: 'CreatedCustomersChart' %>
 
 <h3>Sign In</h3>
 <%= line_chart main_app.sign_in_customers_chart_path, id: 'SignInCustomerChart' %>
 
 <h3><%= (I18n.translate 'activerecord.models.review', count: 2).capitalize %></h3>
 <%= line_chart main_app.created_reviews_chart_path, id: 'CreatedReviewsChart' %>
+
+<h3><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h3>
+<%= area_chart main_app.catalog_products_chart_path, id: 'CatalogProductsChart', stacked: true %>
+
+<h3>Visits for Products</h3>
+<%= area_chart main_app.catalog_visits_chart_path, id: 'CatalogVisitsChart', stacked: true %>

@@ -69,7 +69,9 @@ RailsAdmin.config do |config|
     cancel_state
 
 
-    show_in_app
+    show_in_app do
+      except [Attachment, OrderItem]
+    end
     show_in_app_with_locale do
       only [Product, Customer, Post, Topic]
     end

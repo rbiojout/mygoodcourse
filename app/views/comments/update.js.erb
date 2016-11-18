@@ -1,7 +1,7 @@
 
 // we had the new comment at the top, just after the form and hide the form
 
-$('.comment_<%= @comment.id%>').html("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>")
+$('.comment_<%= @comment.id%>').replaceWith("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>")
 
 // close the modal
 // REMOVED no more use of the modal

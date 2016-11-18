@@ -3,6 +3,10 @@ class StaticPagesController < ApplicationController
     render layout: 'home'
   end
 
+  def how_it_works
+    render layout: 'home'
+  end
+
   def help
   end
 

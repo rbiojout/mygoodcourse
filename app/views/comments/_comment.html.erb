@@ -1,29 +1,30 @@
 <!-- COMMENT - START -->
-<div id='<%= "current_comment" if comment == @current_comment %>' class='comment_<%= comment.id%>' >
-  <div class="row">
-    <div class="col-xs-5 col-sm-3 col-md-3">
-      <%= render('customers/customer_picture', :customer => comment.customer, :withcols => 'false' ) %>
-    </div>
-    <div class="col-xs-7 col-sm-6 col-md-6">
-      <p><%= comment.text %></p>
-      <p><span class="date text-muted"><%= nice_date(comment.updated_at) %></span></p>
-
-    </div>
-    <div class="col-xs-7 col-xs-offset-5 col-sm-3 col-sm-offset-0 col-md-3">
-      <% if customer_signed_in?
-           @context = comment.commentable %>
-          <% if comment.customer.id == current_customer.id %>
-              <%= link_to( edit_comment_path(comment, @context.class.to_s.underscore+'_id' => @context.id), remote: true) do %>
-                  <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
-              <% end %>
-          <% end %>
-      <% end %>
-      <div id="abus_comment_<%= comment.id%>">
-        <p><%= link_to new_abuse_path(:comment_id => comment.id), :remote => true do %>
-              <span class="fa fa-bolt fa-lg"></span> <%= I18n.translate('actions.abuses.new') %>
-           <% end %></p>
+<li id='<%= "current_comment" if comment == @current_comment %>' class='comment_<%= comment.id%>'>
+  <!-- Customer picture -->
+  <div class="comment-customer"><%= render(partial: 'customers/customer', locals: {customer: comment.customer, withcols: 'false'}) %></div>
+  <!-- Comment text -->
+  <div class="comment-panel">
+    <div class="comment-heading"><p><span class="date text-muted"><%= nice_date(comment.updated_at) %></span></p>
+      <div class="comment-tools">
+        <% if customer_signed_in?
+             @context = comment.commentable %>
+            <% if comment.customer.id == current_customer.id %>
+                <%= link_to( edit_comment_path(comment, @context.class.to_s.underscore+'_id' => @context.id), remote: true) do %>
+                    <span class="fa fa-pencil fa-lg"></span> <%= I18n.translate('helpers.action.edit') %>
+                <% end %>
+            <% end %>
+        <% end %>
+        <div id="abus_comment_<%= comment.id%>">
+          <p><%= link_to new_abuse_path(:comment_id => comment.id), :remote => true do %>
+                <span class="fa fa-bolt fa-lg"></span> <%= I18n.translate('actions.abuses.new') %>
+            <% end %></p>
+        </div>
       </div>
     </div>
+    <div class="comment-body">
+      <p><%= comment.text %></p>
+    </div>
   </div>
-</div>
-<!-- REVIEW - END -->
+</li>
+
+<!-- COMMENT - END -->

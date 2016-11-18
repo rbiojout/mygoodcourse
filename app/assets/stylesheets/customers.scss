@@ -1,34 +1,279 @@
+@import "bootstrap/variables";
 
-.container-customer {
-  float: none;
-  margin: 0 auto;
-  width: 85px;
-}
+$customer_picture: 70px;
+$customer_container: 85px;
+$customer_name: 30px;
 
-.customer-picture {
-  height: 70px;
-  width: 70px;
-}
-
-.customer-picture-sm {
-  height: 50px;
-  width: 50px;
-}
-
-/* allow two lines for name */
-.customer-name {
-  height: 30px;
-}
-
-/* Small devices (tablets, 768px and up) */
 @media (min-width: 768px) {
+  $customer_picture: 80px;
+  $customer_container: 140px;
+}
+
+@mixin styling($customer_picture, $customer_container) {
   .container-customer {
-    width: 140px;
+    float: left;
+    margin: 0 auto;
+    width: $customer_container;
   }
 
   .customer-picture {
-    height: 80px;
-    width: 80px;
+    height: $customer_picture;
+    width: $customer_picture;
   }
 
+  .customer-picture-xs {
+    height: 50px;
+    width: 50px;
+  }
+
+  /* allow two lines for name */
+  .customer-name {
+    height: $customer_name;
+  }
+
+  /* List of replies for the forum */
+  .replies {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+  }
+
+  .replies:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    background-color: #eeeeee;
+    left: 50%;
+    margin-left: -1.5px;
+  }
+
+  ul.replies:before {
+    left: $customer_container/2;
+  }
+
+  ul.replies > li > .reply-panel {
+    width: calc(100% - #{$customer_container} - 10px);
+    width: -moz-calc(100% - #{$customer_container} - 10px);
+    width: -webkit-calc(100% - #{$customer_container} - 10px);
+  }
+
+
+  ul.replies > li > .reply-customer {
+    left: 0px;
+    margin-left: 0;
+    top: 16px;
+  }
+
+  ul.replies > li > .reply-panel {
+    float: right;
+  }
+
+
+  .replies > li {
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .replies > li:before,
+  .replies > li:after {
+    content: " ";
+    display: table;
+  }
+
+  .replies > li:after {
+    clear: both;
+  }
+
+  .replies > li:before,
+  .replies > li:after {
+    content: " ";
+    display: table;
+  }
+
+  .replies > li:after {
+    clear: both;
+  }
+
+  .replies > li > .reply-panel {
+    min-height: $customer_picture + $customer_name + 80px;
+    float: right;
+    border: 1px solid $gray-dark;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  }
+
+  .replies > li > .reply-panel:before {
+    position: absolute;
+    top: 1px+ $customer_picture/2;
+    left: -15px;
+    display: inline-block;
+    border-top: 15px solid transparent;
+    border-left: 0 solid $gray-dark;
+    border-right: 15px solid $gray-dark;
+    border-bottom: 15px solid transparent;
+    content: " ";
+  }
+
+  .replies > li > .reply-panel:after {
+    position: absolute;
+    top: 2px+ $customer_picture/2;
+    left: -14px;
+    display: inline-block;
+    border-top: 14px solid transparent;
+    border-left: 0 solid #fff;
+    border-right: 14px solid #fff;
+    border-bottom: 14px solid transparent;
+    content: " ";
+  }
+
+
+  .replies > li > .reply-customer {
+    width: $customer_picture;
+    height: $customer_picture;
+    position: absolute;
+    top: 16px;
+    left: 50%;
+    margin-left: -25px;
+  }
+
+  .reply-title {
+    margin-top: 0;
+    color: inherit;
+  }
+
+  .reply-body > p,
+  .reply-body > ul {
+    margin-bottom: 0;
+  }
+
+  .reply-body > p + p {
+    margin-top: 5px;
+  }
+
+
+  /*** comments ***/
+
+
+  .comments {
+    padding-top: 10px;
+    padding-left: $customer_picture/2;
+    list-style: none;
+    float: left;
+    width: 100%;
+  }
+
+
+
+  ul.comments > li > .comment-panel {
+    width: calc(100% - #{$customer_container} - 10px);
+    width: -moz-calc(100% - #{$customer_container} - 10px);
+    width: -webkit-calc(100% - #{$customer_container} - 10px);
+  }
+
+
+  ul.comments > li > .comment-customer {
+    left: 0px;
+    margin-left: 0;
+  }
+
+  .comment-customer .container-customer{
+    padding-top: 16px;
+  }
+
+  ul.comments > li > .comment-panel {
+    float: right;
+  }
+
+  ul.comments > li > .comment-panel:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    left: -15px;
+    right: auto;
+  }
+
+  ul.comments > li > .comment-panel:after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -14px;
+    right: auto;
+  }
+
+
+  .comments > li {
+    margin-bottom: 5px;
+    position: relative;
+  }
+
+  .comments > li:before,
+  .replies > li:after {
+    content: " ";
+    display: table;
+  }
+
+  .comments > li:after {
+    clear: both;
+  }
+
+  .comments > li:before,
+  .comments > li:after {
+    content: " ";
+    display: table;
+  }
+
+  .comments > li:after {
+    clear: both;
+  }
+
+  .comments > li > .comment-panel {
+    min-height: $customer_picture + $customer_name + 80px;
+    float: right;
+    border: 1px solid $gray-light;
+    border-style: dashed;
+    border-radius: 2px;
+    padding: 20px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+  }
+
+  .comments > li > .comment-panel:before {
+    position: absolute;
+    top: 1px+ $customer_picture/2;
+    left: -15px;
+    right: auto;
+    display: inline-block;
+    border-style: dashed;
+    border-top: 15px solid transparent;
+    border-left: 0 solid $gray-light;
+    border-right: 15px solid $gray-light;
+    border-bottom: 15px solid transparent;
+    content: " ";
+  }
+
+  .comments > li > .comment-panel:after {
+    position: absolute;
+    top: 2px+ $customer_picture/2;
+    left: -14px;
+    right: auto;
+    display: inline-block;
+    border-style: dashed;
+    border-top: 14px solid transparent;
+    border-left: 0 solid #fff;
+    border-right: 14px solid #fff;
+    border-bottom: 14px solid transparent;
+    content: " ";
+  }
+
+}
+
+@include styling($customer_picture: 70px, $customer_container: 85px);
+
+
+@media (min-width: 768px) {
+  @include styling($customer_picture: 80px, $customer_container: 140px);
 }

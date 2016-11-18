@@ -1,7 +1,7 @@
 
 // we had the new comment at the top, just after the form and hide the form
 
-$('.forum_answer_<%= @forum_answer.id%>').html("<%= j render partial: 'forum_answers/forum_answer', locals: {forum_answer: @forum_answer}  %>")
+$('.forum_answer_<%= @forum_answer.id%>').replaceWith("<%= j render partial: 'forum_answers/forum_answer', locals: {forum_answer: @forum_answer}  %>")
 
 // close the modal
 // REMOVED no more use of the modal

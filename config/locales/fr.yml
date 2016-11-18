@@ -26,6 +26,7 @@ fr:
   page:
     home: 'Accueil'
     catalog: 'Catalogue'
+    how_it_works: 'Comment ça marche'
     posts: 'Articles'
     forum: 'Forum'
     my_products: 'Mes Produits'

@@ -1,3 +1,5 @@
+require 'bigdecimal'
+
 class ChartsController < ApplicationController
   before_action :authenticate_customer!, only: [:accepted_orders, :created_products, :amount_orders]
   before_action :authenticate_employee!, only: [:created_customers, :sign_in_customers, :created_reviews]
@@ -64,4 +66,41 @@ class ChartsController < ApplicationController
     render json: Review.all.where(:created_at => (Time.now - 6.month)..Time.now).unscope(:order).group_by_day("created_at").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge).chart_json
   end
 
+  def catalog_products
+    start_free = Product.where.not(:created_at => (Time.now - 6.month)..Time.now).where(:price => 0.0).count
+    start_paid = Product.where.not(:created_at => (Time.now - 6.month)..Time.now).where.not(:price => 0.0).count
+
+    for_free = Product.where(:created_at => (Time.now - 6.month)..Time.now).where(:price => 0.0).group_by_day(:created_at).count.map { |x,y| { x => (start_free += y)} }.reduce({}, :merge)
+    for_paid = Product.where(:created_at => (Time.now - 6.month)..Time.now).where.not(:price => 0.0).group_by_day(:created_at).count.map { |x,y| { x => (start_paid += y)} }.reduce({}, :merge)
+
+    render json: [{name: I18n.translate('dialog.free'), data: for_free},{name: I18n.translate('dialog.not_free'), data: for_paid}]
+
+  end
+
+  def catalog_visits
+    #User.group_by_week(:created_at).order("week asc").count.map { |x,y| { x => (sum += y)} }.reduce({}, :merge)
+
+    free_products = Product.where(:price => 0.0)
+    paid_products = Product.where.not(:price => 0.0)
+
+    # this method don't take advantage of history
+    # we need to use the impression data as the counter_cache don't have history
+    #start_free = current_customer.products.where(:price => '0.0').where(:created_at => (Time.now-100.year)..(Time.now - 6.month)).sum(:counter_cache)
+    #for_free = current_customer.products.where(:price => '0.0').where(:created_at => (Time.now - 6.month)..Time.now).group_by_day(:created_at).sum(:counter_cache).map { |x,y| { x => (start_free += y)} }.reduce({}, :merge)
+
+
+    start_free = Impression.where(:impressionable_type => 'Product', :impressionable_id => free_products).where.not(:created_at => (Time.now - 6.month)..Time.now).count
+    # be carefull to have .sum(1) in order to be able to map results
+    for_free = Impression.where(:impressionable_type => 'Product', :impressionable_id => free_products).where(:created_at => (Time.now - 6.month)..Time.now).group_by_day("impressions.created_at").sum(1).map { |x,y| { x => (start_free += y)} }.reduce({}, :merge)
+
+
+
+    #start_paid = current_customer.products.where.not(:price => '0.0').where(:created_at => (Time.now-100.year)..(Time.now - 6.month)).sum(:counter_cache)
+    #for_paid = current_customer.products.where.not(:price => '0.0').where(:created_at => (Time.now - 6.month)..Time.now).group_by_day(:created_at).sum(:counter_cache).map { |x,y| { x => (start_paid += y)} }.reduce({}, :merge)
+    start_paid = Impression.where(:impressionable_type => 'Product', :impressionable_id => paid_products).where.not(:created_at => (Time.now - 6.month)..Time.now).count
+    for_paid = Impression.where(:impressionable_type => 'Product', :impressionable_id => paid_products).where(:created_at => (Time.now - 6.month)..Time.now).group_by_day("impressions.created_at").sum(1).map { |x,y| { x => (start_paid += y)} }.reduce({}, :merge)
+
+    render json: [{name: I18n.translate('dialog.free'), data: for_free},{name: I18n.translate('dialog.not_free'), data: for_paid}]
+    #render json: current_customer.products.where(:created_at => (Time.now - 6.month)..Time.now).group_by_day(:created_at).sum(:counter_cache).chart_json
+  end
 end
