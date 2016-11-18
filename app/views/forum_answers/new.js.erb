@@ -1,6 +1,6 @@
 
-$('#forum-answer-form').html("<%= j (render 'forum_answers/form_ajax') %>");
-var target = $('#forum-answer-form');
+$('#forum_answer-form').html("<%= j (render 'forum_answers/form_ajax') %>");
+var target = $('#forum_answer-form');
 $('html,body').animate({
     scrollTop: target.offset().top-90
 }, 1000);

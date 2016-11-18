@@ -27,6 +27,18 @@ class ForumAnswersControllerTest < ActionController::TestCase
     assert_redirected_to forum_subject_path(assigns(:forum_answer).forum_subject)
   end
 
+  test "should create forum_answer via ajax" do
+    get :new, xhr: true, forum_subject_id: @forum_answer.forum_subject_id
+    assert_response :success
+
+
+    assert_difference('ForumAnswer.count') do
+      post :create, xht: true, forum_answer: { customer_id: @forum_answer.customer_id, forum_subject_id: @forum_answer.forum_subject_id, text: @forum_answer.text }
+    end
+
+    assert_redirected_to forum_subject_path(assigns(:forum_answer).forum_subject)
+  end
+
   test "should show forum_answer" do
     get :show, id: @forum_answer
     assert_response :success

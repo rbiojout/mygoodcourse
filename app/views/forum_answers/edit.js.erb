@@ -1,6 +1,14 @@
 
 $('.forum_answer_<%= @forum_answer.id%>').html("<%= j (render 'forum_answers/form_ajax') %>");
-var target = $('.forum-answer_<%= @forum_answer.id%>');
+
+// activate the editor
+$('form[data-model="forum_answer"] .summernote').summernote({
+    lang: I18n_locale,
+    // adjust initial height for the Summernote Editor
+    height: '200px'
+})
+
+var target = $('.forum_answer_<%= @forum_answer.id%>');
 $('html,body').animate({
     scrollTop: target.offset().top-100
 }, 1000);

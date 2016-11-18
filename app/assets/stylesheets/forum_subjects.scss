@@ -2,8 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.panel-forum_subject {
+@import "application-variables";
+
+.forum_subject {
     background-color: #eeeeee;
     border-bottom: 4px darkgrey solid;
     padding-bottom: 0px;
+}
+
+.forum_subject .reply-panel {
+  background-color: white;
 }

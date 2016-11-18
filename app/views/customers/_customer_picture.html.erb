@@ -1,16 +1,15 @@
 <% withcols ||= 'true' %>
 <% customer ||= @customer %>
 
-
-
-<div class="container-customer">
-<!-- picture -->
-<div class="relative">
-  <img class="img-circle center-block customer-picture"
-       data-customer="<%=customer.id %>"
-       data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
-       data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>"
-       alt="" src="<%= customer.picture %>" >
+<div class="<%= 'col-xs-6 col-sm-3' if withcols == 'true' %> customer_presentation_<%=customer.id.to_s%>" id="customer_presentation_<%= customer.id%>">
+  <div class="container-customer-lg">
+    <!-- picture -->
+    <div class="relative">
+      <img class="img-circle center-block customer-picture-lg"
+           data-customer=" <%=customer.id %>"
+           data-locality="<%= t('activerecord.attributes.customer.located', :locality => customer.locality.presence||'???') %>"
+           data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>"
+           alt="" src="<%= customer.picture %>" >
         <span class="top-right">
         <!-- follow -->
           <% if customer_signed_in? %>
@@ -26,25 +25,28 @@
               <!-- if customer is signed, direct link to his profile -->
               <% else %>
                   <%= link_to(edit_customer_path(customer),
-                                class: 'btn-tool btn btn-default btn-sm',
-                                alt: t('page.my_profile'),
-                                title: t('page.my_profile'),
-                                data: {toggle: 'tooltip', placement: 'top'} ) do %>
+                              class: 'btn-tool btn btn-default btn-sm',
+                              alt: t('page.my_profile'),
+                              title: t('page.my_profile'),
+                              data: {toggle: 'tooltip', placement: 'top'} ) do %>
 
                   <i class="fa fa-pencil fa-lg"> </i><% end %>
               <% end %>
           <% end %>
         </span>
-</div>
-<!-- end picture -->
-      <!--- stars --->
-    <div>
-        <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => true} %>
+    </div>
+    <!-- end picture -->
+    <!--- name --->
+    <div class="text-center customer-name ellipsis">
+      <h5><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h5>
+    </div>
+    <!--- end  name --->
+    <!--- stars --->
+    <div class="text-center">
+      <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => false} %>
     </div>
     <!--- end stars --->
-<!--- name --->
-<div>
-  <p><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></p>
-</div>
-<!--- name --->
+
+
+  </div>
 </div>

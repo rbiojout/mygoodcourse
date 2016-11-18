@@ -26,6 +26,7 @@
     </div>
     <div class="form-group">
       <%= f.submit  @forum_answer.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
+      <%= link_to t('actions.undo'), '#', :class => "btn btn-default" %>
     </div>
 
 

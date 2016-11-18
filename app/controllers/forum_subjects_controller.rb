@@ -59,9 +59,13 @@ class ForumSubjectsController < ApplicationController
       if @forum_subject.update(forum_subject_params)
         format.html { redirect_to @forum_subject, notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @forum_subject }
+        # added
+        format.js   { @current_forum_subject = @forum_subject }
       else
         format.html { render :edit }
         format.json { render json: @forum_subject.errors, status: :unprocessable_entity }
+        # added
+        format.js   { render json: @forum_subject.errors, status: :unprocessable_entity }
       end
     end
   end

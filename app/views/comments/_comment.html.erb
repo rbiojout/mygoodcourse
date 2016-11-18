@@ -5,16 +5,16 @@
   <!-- Comment text -->
   <div class="comment-panel">
     <div class="arrow"></div>
-    <div class="comment-tools">
+    <div class="comment-tools bottom-right">
+      <div id="abus_comment_<%= comment.id%>" class="pull-right">
+        <%= render(partial: 'abuses/btn_create', locals: {context: comment}) %>
+      </div>
       <% if customer_signed_in?
            context = comment.commentable %>
           <% if comment.customer.id == current_customer.id %>
               <%= render(partial: 'comments/btn_edit', locals: {comment: comment}) %>
           <% end %>
       <% end %>
-      <div id="abus_comment_<%= comment.id%>">
-        <%= render(partial: 'abuses/btn_create', locals: {context: comment}) %>
-      </div>
     </div>
     <div class="comment-heading"><p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(comment.created_at) %></small></p></div>
     <div class="comment-body">

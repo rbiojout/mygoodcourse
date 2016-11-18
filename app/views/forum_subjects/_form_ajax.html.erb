@@ -1,0 +1,30 @@
+<%= form_for(@forum_subject, remote: true, :html => { :role => "form", 'data-model' => 'forum_subject', :class => 'ajax_form' }) do |f| %>
+
+    <div id="error_explanation" class="bg-danger text-danger">
+      <% if @forum_subject.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@forum_subject.errors.count, "error") %> prohibited this element from being saved:</h2>
+
+            <ul>
+              <% @forum_subject.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+    </div>
+    <div class="form-group">
+      <%= f.hidden_field :forum_category_id %>
+      <%= f.hidden_field :customer_id %>
+      <%= f.label :text, t('activerecord.attributes.forum_subject.text'), :class => "control-label" %>
+      <%= f.text_area :text, :rows => 5, :class => "form-control summernote" %>
+      <span class="help-block"></span>
+    </div>
+    <div class="form-group">
+      <%= f.submit  @forum_subject.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
+      <%= link_to t('actions.undo'), '#', :class => "btn btn-default" %>
+    </div>
+
+
+<% end %>

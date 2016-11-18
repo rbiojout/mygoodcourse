@@ -10,7 +10,7 @@
         <b><%= review.title %></b>
         <p><%= review.description %></p>
         <% customer = review.customer %>
-        <img class="img-circle align-left customer-picture-sm"
+        <img class="img-circle align-left customer-picture-xs"
              data-customer="<%=customer.id %>"
              data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
              data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">

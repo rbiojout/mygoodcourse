@@ -3,8 +3,8 @@
 
 <div class="row">
   <div class="col-md-3">
-    <%= render('customers/customer', :customer => @customer, :withcols => 'false' ) %>
-
+    <%= render('customers/customer_picture', :customer => @customer, :withcols => 'false' ) %>
+    <div class="clearfix"></div>
     <ul class="nav nav-pills nav-stacked">
       <li role="presentation"><%= link_to t('activerecord.attributes.customer.profile'), customer_path(@customer) %></li>
       <li role="presentation" class="active"><%= link_to t('activerecord.attributes.customer.wishes'), wish_list_customer_path %></li>
@@ -54,7 +54,7 @@
             <h4><%= link_to product.name, product_path(product) %></h4>
             <!-- author -->
             <% customer = product.customer %>
-            <img class="img-circle align-left customer-picture-sm"
+            <img class="img-circle align-left customer-picture-xs"
                  data-customer="<%=customer.id %>"
                  data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
                  data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
