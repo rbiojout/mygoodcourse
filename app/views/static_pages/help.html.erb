@@ -1,5 +1,26 @@
 <h1>StaticPages#help</h1>
 
+<% product = Product.last %>
+<div class="product-panel">
+  <div class="product-picture">
+    <%= link_to product_path(product), class: 'info'  do %>
+
+  <%= image_tag product.preview, class: 'img-thumbnail' %>
+    <div class="product-like top-right">
+      <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+    </div>
+    <div class="product-price"><%= nice_price(product.price) %></div>
+    <% end %>
+  </div>
+  <div class="product-name"><h4><%= product.name %></h4></div>
+  <div class="product-tools">
+    <%= link_to buy_product_path(product), :method => :post,
+                class:'btn btn-primary btn-block btn-sm' do %>
+        <i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%>
+    <% end %>
+  </div>
+</div>
+
 
 
 <button type="button" class="btn btn-warning pull-left" data-dismiss="modal" data-toggle="modal" data-target="#app_dialog">Sign Up?</button>

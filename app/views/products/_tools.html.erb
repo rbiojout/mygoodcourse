@@ -28,6 +28,16 @@
         </div>
         <!-- end abuse -->
 
+        <!-- edit -->
+        <%= render(partial: 'products/btn_edit', locals: {product: product}) %>
+
+        <!-- buy -->
+        <%= render(partial: 'products/btn_buy', locals: {product: product}) %>
+
+        <!-- buy -->
+        <%= render(partial: 'products/btn_download', locals: {product: product}) %>
+
+
         <% if customer_signed_in? %>
             <!-- add to wish list -->
             <div class="wish_form wish_form_<%= product.id%> pull-right" id="wish_form_<%= product.id%>">
@@ -40,6 +50,7 @@
             </div>
             <!-- end wish list -->
         <% end %>
+
 
       </div>
     </div>

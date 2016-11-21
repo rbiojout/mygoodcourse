@@ -1,0 +1,14 @@
+<% if customer_signed_in? %>
+    <% if product.candownload(current_customer) %>
+        <div class="pull-right">
+        <%= link_to download_attachment_path(product.attachment, format: :pdf),
+                    alt: 'Download',
+                    title: 'Download',
+                    data: {toggle: 'tooltip', placement: 'top'},
+                    class: 'btn-tool btn btn-success' do %>
+            <span class="fa fa-download"></span>
+        <% end %>
+        </div>
+    <% end %>
+<% end %>
+

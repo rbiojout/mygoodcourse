@@ -1,0 +1,11 @@
+<% if customer_signed_in? && current_customer.own_product(product) %>
+<div class="pull-right">
+    <%= link_to  edit_product_path(product),
+                 alt: t('helpers.action.edit'),
+                 title: t('helpers.action.edit'),
+                 data: {toggle: 'tooltip', placement: 'top'},
+                 class: 'btn-tool btn' do %>
+        <span class="fa fa-pencil"></span>
+    <% end %>
+</div>
+<% end %>

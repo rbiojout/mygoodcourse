@@ -1,0 +1,35 @@
+@import "bootstrap/variables";
+
+/** custom vaiables for bootstrap **/
+@import "bootstrap-variables";
+
+/*** application variables **/
+
+//--- Customer
+// fixed height for the name in order to control the size of the panel
+$customer_name: 30px;
+
+$customer_padding-top: 15px;
+
+// Xtra-Small screen / smartphone
+$customer_picture-xs: 50px;
+$customer_container-xs: 85px;
+
+// Small screen / tablet
+// $container-tablet:             (720px + $grid-gutter-width)
+//** For `$screen-sm-min` and up.
+$customer_picture-sm: 70px;
+$customer_container-sm: 85px;
+
+// Medium screen / desktop
+// $container-desktop:            (940px + $grid-gutter-width)
+//** For `$screen-md-min` and up.
+$customer_picture-md: 80px;
+$customer_container-md: 140px;
+
+// Large screen / wide desktop
+// $container-large-desktop:      (1140px + $grid-gutter-width)
+//** For `$screen-lg-min` and up.
+$customer_picture-lg: 100px;
+$customer_container-lg: 200px;
+

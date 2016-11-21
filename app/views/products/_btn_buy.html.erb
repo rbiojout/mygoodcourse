@@ -1,0 +1,16 @@
+<%
+# if the customer is not signed_in
+# if the customer is signed_in and (doesn't own the product and can buy the product )
+%>
+<% if (!customer_signed_in? || (customer_signed_in? && !current_customer.own_product(@product) && !product.is_bought_by_customer(current_customer.id))) %>
+    <div class="pull-right">
+        <%= link_to buy_product_path(product),
+                    :method => :post,
+                    alt: t('dialog.shop.add_cart'),
+                    title: t('dialog.shop.add_cart'),
+                    data: {toggle: 'tooltip', placement: 'top'},
+                    class: 'btn-tool btn btn-primary' do %>
+            <i class="fa fa-shopping-cart"></i>
+        <% end %>
+    </div>
+<% end %>

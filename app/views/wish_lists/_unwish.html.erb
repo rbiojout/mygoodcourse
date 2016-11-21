@@ -2,7 +2,7 @@
 <%= link_to(unwish_product_path(:product_id => product.id),
             class: 'btn-tool btn btn-sm',
             :title => t('dialog.product.unwish'),
-            data: {toggle: 'tooltip', placement: 'left'},
+            data: {toggle: 'tooltip', placement: 'top'},
             :method => :delete, remote: true ) do %>
 
     <i class="fa fa-heart fa-lg red"> </i>
