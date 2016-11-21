@@ -1,22 +1,27 @@
-<li class="forum_answer_<%= forum_answer.id%>">
-  <div class="reply-customer">
+<li class="forum_answer-panel forum_answer_<%= forum_answer.id%>">
+  <div class="forum_answer-customer">
     <%= render(partial: 'customers/customer', locals: {customer: forum_answer.customer, withcols: 'false'}) %>
   </div>
-  <div class="reply-panel">
+  <div class="quote-panel forum_answer-text">
     <div class="arrow"></div>
-    <div class="forum_answer-tools bottom-right">
-      <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_answer.forum_subject.id}) %>
-      <%= render(partial: 'comments/btn_comment', locals: {context: forum_answer}) %>
-      <%= render(partial: 'forum_answers/btn_edit', locals: {forum_answer: forum_answer}) %>
-    </div>
-    <div class="reply-heading">
+    <div class="quote-heading">
       <p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_answer.created_at) %></small></p>
     </div>
-    <div class="reply-body">
+    <div class="quote-body">
       <p><%= raw(forum_answer.text) %></p>
     </div>
+    <div class="quote-footer">
+      <div class="forum_answer-tools bottom-right">
+        <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_answer.forum_subject.id}) %>
+        <%= render(partial: 'comments/btn_comment', locals: {context: forum_answer}) %>
+        <%= render(partial: 'forum_answers/btn_edit', locals: {forum_answer: forum_answer}) %>
+      </div>
+    </div>
   </div>
-  <ul class="comments">
+
+  <div class="clearfix"></div>
+
+  <ul class="comments-list">
       <% forum_answer.comments.each do |comment| %>
           <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
       <% end %>

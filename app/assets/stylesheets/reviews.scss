@@ -1,4 +1,4 @@
-// Place all the styles related to the Comments controller here.
+// Place all the styles related to the reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
@@ -7,13 +7,13 @@
 @import "bootstrap/mixins/clearfix";
 
 
-.comments-list {
+.reviews-list {
   list-style: none;
   padding: 0;
   width: 100%;
 }
 @mixin styling($customer_picture, $customer_container) {
-  .comment-panel {
+  .review-panel {
     // reduced top for answer
     padding-top: 10px;
     padding-bottom: 5px;
@@ -21,25 +21,25 @@
     //padding-right: 10px;
     padding-left: ($customer_picture)/2;
 
-    .comment-customer {
+    .review-customer {
       display: inline;
       float: left;
       padding-top: $customer_padding-top;
       width: $customer_container;
     }
-    .comment-text {
+    .review-text {
       display: inline;
       float: right;
       width: calc(100% - #{$customer_container} - 10px);
       position: relative;
       background-color: white;
     }
-    .comment-tools {
+    .review-tools {
       display: block;
       width: 100%;
       height: 35px;
     }
-    // change shadow when dealing with the comments
+    // change shadow when dealing with the reviews
     .quote-panel {
       @include box-shadow(3px 3px 10px rgba(0, 0, 0, .2));
     }

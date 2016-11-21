@@ -329,6 +329,8 @@ en:
       create: 'Create'
       edit: 'Edit'
       delete: 'Delete'
+      comment:
+        create: 'Add a comment'
       customer:
         create: 'Create an account'
         edit: 'Edit my profile'
@@ -338,7 +340,7 @@ en:
         edit: 'Edit this forum subject'
         delete: 'Delete this forum subject'
       forum_answer:
-        create: 'Create an answer'
+        create: 'Create a new answer for this subject'
         edit: 'Edit this answer'
         delete: 'Delete this answer'
       post:

@@ -6,8 +6,8 @@
 %>
 <div class='<%="btn-comment_#{context_type}_#{context_value}"%> pull-right'>
   <%= link_to(new_comment_path(context_param => context_value),
-              alt: t('activerecord.models.comment.other'),
-              title: t('activerecord.models.comment.other'),
+              alt: t('helpers.action.comment.create'),
+              title: t('helpers.action.comment.create'),
               data: {toggle: 'tooltip', placement: 'top'},
               class: 'btn-tool btn',
               remote: true ) do %>

@@ -1,24 +1,27 @@
 <!-- COMMENT - START -->
-<li id='<%= "current_comment" if comment == @current_comment %>' class='comment_<%= comment.id%>'>
+<li id='<%= "current_comment" if comment == @current_comment %>' class='comment-panel comment_<%= comment.id%>'>
   <!-- Customer picture -->
   <div class="comment-customer"><%= render(partial: 'customers/customer', locals: {customer: comment.customer, withcols: 'false'}) %></div>
   <!-- Comment text -->
-  <div class="comment-panel">
+  <div class="quote-panel comment-text">
     <div class="arrow"></div>
-    <div class="comment-tools bottom-right">
-      <div id="abus_comment_<%= comment.id%>" class="pull-right">
-        <%= render(partial: 'abuses/btn_create', locals: {context: comment}) %>
-      </div>
-      <% if customer_signed_in?
-           context = comment.commentable %>
-          <% if comment.customer.id == current_customer.id %>
-              <%= render(partial: 'comments/btn_edit', locals: {comment: comment}) %>
-          <% end %>
-      <% end %>
-    </div>
-    <div class="comment-heading"><p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(comment.created_at) %></small></p></div>
-    <div class="comment-body">
+    <div class="quote-heading"><p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(comment.created_at) %></small></p></div>
+    <div class="quote-body">
       <p><%= comment.text %></p>
+    </div>
+    <div class="quote-footer">
+      <div class="comment-tools bottom-right">
+        <div id="abus_comment_<%= comment.id%>" class="pull-right">
+          <%= render(partial: 'abuses/btn_create', locals: {context: comment}) %>
+        </div>
+        <% if customer_signed_in?
+             context = comment.commentable %>
+            <% if comment.customer.id == current_customer.id %>
+                <%= render(partial: 'comments/btn_edit', locals: {comment: comment}) %>
+            <% end %>
+        <% end %>
+      </div>
+
     </div>
   </div>
 </li>

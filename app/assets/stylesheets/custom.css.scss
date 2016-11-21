@@ -209,7 +209,11 @@ $custom-orange: #F39C12;
   float: left;
 }
 
-
+.tools-box {
+  position: static;
+  display: inline-block;
+  float: right;
+}
 /* guiding users */
 .active-star, .guiding {
   color: $custom-yellow;

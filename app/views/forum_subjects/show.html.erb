@@ -24,21 +24,16 @@
 
 <div class="row">
   <div class="col-md-8">
-    <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
-
-
-    <ul class="replies">
+    <ul class="forum_subjects-list">
+        <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
+    </ul>
+    <ul class="forum_answers-list">
       <% @forum_answers.each do |forum_answer| %>
           <%= render(partial: 'forum_answers/forum_answer', locals: {forum_answer: forum_answer}) %>
       <% end %>
       <div id="forum_answer-form"></div>
     </ul>
 
-
-
-
-
-    <%= render "forum_subjects/tools" %>
 
     <div id="infinite-scrolling-answers" class="row">
       <%= will_paginate(@forum_answers, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>

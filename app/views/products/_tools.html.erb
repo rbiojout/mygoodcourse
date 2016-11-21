@@ -1,0 +1,47 @@
+<!-- tools -->
+
+<% product ||= @product %>
+
+    <div class="product-tools tools-box bottom-right">
+      <div class="pull-right">
+
+        <!-- like it! -->
+        <% if customer_signed_in? %>
+            <% if product.liked?(current_customer) %>
+                <%= render(partial: 'likes/unlike', locals: {context: product}, locale: locale) %>
+            <% else %>
+                <%= render(partial: 'likes/like', locals: {context: product}, locale: locale) %>
+            <% end %>
+        <% end %>
+        <!-- end like it! -->
+
+        <!-- report abuse problem -->
+        <div class="pull-right">
+          <%= link_to new_abuse_path(:product_id => product.id),
+                      class: 'btn-tool btn',
+                      title: I18n.translate('actions.abuses.new'),
+                      alt: I18n.translate('actions.abuses.new'),
+                      data: {toggle: 'tooltip', placement: 'top'},
+                      :remote => true do %>
+              <span class="fa fa-bolt fa-lg"> </span>
+          <% end %>
+        </div>
+        <!-- end abuse -->
+
+        <% if customer_signed_in? %>
+            <!-- add to wish list -->
+            <div class="wish_form wish_form_<%= product.id%> pull-right" id="wish_form_<%= product.id%>">
+
+              <% if current_customer.wishing?(product) %>
+                  <%= render(partial: 'wish_lists/unwish', locale: locale) %>
+              <% else %>
+                  <%= render(partial: 'wish_lists/wish', locale: locale) %>
+              <% end %>
+            </div>
+            <!-- end wish list -->
+        <% end %>
+
+      </div>
+    </div>
+
+<!-- end tools -->

@@ -49,53 +49,6 @@
       <!-- title -->
       <div class="panel-heading">
         <h3><%= @product.name %></h3>
-        <!-- tools -->
-        <div class="row">
-          <div class="col-xs-12">
-            <div class="row list-group-item-actions">
-              <div class="pull-right">
-
-                <!-- like it! -->
-                <% if customer_signed_in? %>
-                    <% if @product.liked?(current_customer) %>
-                        <%= render(partial: 'likes/unlike', locals: {context: @product}, locale: locale) %>
-                    <% else %>
-                        <%= render(partial: 'likes/like', locals: {context: @product}, locale: locale) %>
-                    <% end %>
-                <% end %>
-                <!-- end like it! -->
-
-                <!-- report abuse problem -->
-                <div class="pull-right">
-                  <%= link_to new_abuse_path(:product_id => @product.id),
-                              class: 'btn-tool btn',
-                              title: I18n.translate('actions.abuses.new'),
-                              alt: I18n.translate('actions.abuses.new'),
-                              data: {toggle: 'tooltip', placement: 'top'},
-                              :remote => true do %>
-                      <span class="fa fa-bolt fa-lg"> </span>
-                  <% end %>
-                </div>
-                <!-- end abuse -->
-
-                <% if customer_signed_in? %>
-                    <!-- add to wish list -->
-                    <div class="wish_form wish_form_<%= @product.id%> pull-right" id="wish_form_<%= @product.id%>">
-
-                      <% if current_customer.wishing?(@product) %>
-                          <%= render(partial: 'wish_lists/unwish', locale: locale) %>
-                      <% else %>
-                          <%= render(partial: 'wish_lists/wish', locale: locale) %>
-                      <% end %>
-                    </div>
-                    <!-- end wish list -->
-                <% end %>
-
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- end tools -->
         <div id="product_score">
           <%= link_to 'javascript:show_reviews();' do %>
             <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
@@ -133,11 +86,15 @@
           <!-- end short description -->
           <!-- author -->
           <div class="col-sm-4">
-            <%= render :partial => 'customers/customer', :locals => {customer: @product.customer, :withcols => 'false'} %>
+            <%= render :partial => 'customers/customer_picture', :locals => {customer: @product.customer, :withcols => 'false'} %>
           </div>
           <!-- end author -->
-        </div>
 
+        </div>
+      </div>
+      <div class="panel-footer">
+        <%= render(partial: 'products/tools', locals: {product: @product}) %>
+        <p>&nbsp;</p>
       </div>
 
 
@@ -170,10 +127,6 @@
     </div>
     <div role="tabpanel" class="tab-pane" id="reviews">
 
-    <!-- placeholder for the new reviews -->
-      <hr>
-    <div id="review-form"></div>
-      <hr>
 
       <!-- only signed users can add review -->
       <% if customer_signed_in? %>
@@ -211,14 +164,18 @@
           <% end %>
       <% end %>
 
-      <div id="review_table" class="reviews">
+
+
+      <ul id="review_table" class="reviews-list">
+        <!-- placeholder for the new reviews -->
+        <div id="review-form"></div>
 
         <% @reviews.each do |review| %>
             <%# Render table row partial for each person object %>
             <%= render partial: 'reviews/review', locals: {review: review} %>
         <% end %>
 
-      </div>
+      </ul>
 
       <div id="infinite-scrolling-reviews" class="row">
         <%= will_paginate(@reviews, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>

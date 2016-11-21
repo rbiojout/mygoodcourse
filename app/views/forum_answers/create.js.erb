@@ -4,12 +4,6 @@ $('#forum_answer-form').html("");
 $('#forum_answer-form').before("<%= j render partial: 'forum_answers/forum_answer', locals: {forum_answer: @forum_answer}  %>");
 
 
-// activate the editor
-$('form[data-model="forum_answer"] .summernote').summernote({
-    lang: I18n_locale,
-    // adjust initial height for the Summernote Editor
-    height: '200px'
-})
 
 // close the modal
 // REMOVED no more use of the modal
@@ -20,7 +14,6 @@ var target = $('#forum_answer-form');
 $('html,body').animate({
     scrollTop: target.offset().top + 100
 }, 1000);
-
 
 
 

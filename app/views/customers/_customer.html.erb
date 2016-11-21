@@ -31,12 +31,12 @@
       </div>
       <!-- end picture -->
     <!--- name --->
-    <div class="customer-name ellipsis">
+    <div class="customer-name ellipsis text-center">
         <h5><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h5>
     </div>
     <!--- end  name --->
     <!--- stars --->
-    <div>
+    <div class="text-center">
         <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => false} %>
     </div>
     <!--- end stars --->

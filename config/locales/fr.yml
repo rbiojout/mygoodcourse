@@ -380,6 +380,8 @@ fr:
       create: 'Ajouter'
       edit: 'Editer'
       delete: 'Supprimer'
+      comment:
+        create: 'Ajouter un commentaire'
       customer:
         create: 'Créer un compte'
         edit: 'Editer mon profil'
@@ -389,7 +391,7 @@ fr:
         edit: 'Editer ce sujet du forum'
         delete: 'Supprimer ce sujet du forum'
       forum_answer:
-        create: 'Créer une réponse'
+        create: 'Créer une nouvelle réponse pour ce sujet'
         edit: 'Editer cette réponse'
         delete: 'Supprimer cette réponse'
       post:
