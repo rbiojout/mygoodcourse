@@ -1,27 +1,44 @@
 <h1>StaticPages#help</h1>
+<div class="row">
+<% Product.all.limit(20).each do |product| %>
+<div class="col-xs-6 col-sm-4 col-lg-4 col-md-4 product-panel" id="panel_product_<%=product.id%>">
+  <%= link_to product_path(product), class: 'info'  do %>
+      <div class="product-picture">
+        <%= image_tag product.preview, class: 'img-thumbnail' %>
+        <div class="overlay"></div>
+        <div class="product-price"><%= nice_price(product.price) %></div>
+      </div>
+  <% end %>
+  <div class="product-like top-right">
+    <% if customer_signed_in? %>
+        <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
 
-<% product = Product.last %>
-<div class="product-panel">
-  <div class="product-picture">
-    <%= link_to product_path(product), class: 'info'  do %>
-
-  <%= image_tag product.preview, class: 'img-thumbnail' %>
-    <div class="product-like top-right">
-      <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
-    </div>
-    <div class="product-price"><%= nice_price(product.price) %></div>
+          <% if current_customer.wishing?(product) %>
+              <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+          <% else %>
+              <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
+          <% end %>
+        </div>
     <% end %>
   </div>
-  <div class="product-name"><h4><%= product.name %></h4></div>
-  <div class="product-tools">
-    <%= link_to buy_product_path(product), :method => :post,
-                class:'btn btn-primary btn-block btn-sm' do %>
-        <i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%>
-    <% end %>
+  <!--- stars --->
+  <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
+  <!--- end stars --->
+  <!--- name --->
+  <div class="product-name ellipsis">
+    <h4><%= link_to product.name, product_path(product) %></h4>
   </div>
+  <!--- end name --->
+
+</div>
+<% end %>
 </div>
 
-
+<div class="row">
+  <% Product.all.limit(20).each do |product| %>
+    <%= render(partial: 'products/product', locals: {product: product}) %>
+  <% end %>
+</div>
 
 <button type="button" class="btn btn-warning pull-left" data-dismiss="modal" data-toggle="modal" data-target="#app_dialog">Sign Up?</button>
 <%= link_to "Sign in", new_customer_session_path, remote: 'true', :class => 'btn btn-default' %>

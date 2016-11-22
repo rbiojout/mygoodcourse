@@ -1,8 +1,16 @@
 @import "application-variables";
 
-.panel-product {
+.panel-product, .product-panel {
   padding-bottom: 5px;
   padding-top: 5px;
+  position: relative;
+  .product-picture {
+    // overflow needed for tooltips
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
 }
 
 /* allow two lines for name */
@@ -15,26 +23,64 @@
 .product-panel {
   padding-bottom: 5px;
   padding-top: 5px;
-  max-width: 260px;
+  position: relative;
+  //max-width: 260px;
   .product-picture{
+    // overflow needed for tooltips
+    overflow: hidden;
     position: relative;
+    width: 100%;
+    height: 100%;
     img {
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      -webkit-transform:scale(1); /* Safari and Chrome */
+      -moz-transform:scale(1); /* Firefox */
+      -ms-transform:scale(1); /* IE 9 */
+      -o-transform:scale(1); /* Opera */
+      transform:scale(1);
+
       -webkit-transition: all 1s ease; /* Safari and Chrome */
       -moz-transition: all 1s ease; /* Firefox */
       -ms-transition: all 1s ease; /* IE 9 */
       -o-transition: all 1s ease; /* Opera */
       transition: all 1s ease;
     }
+
     :hover img {
+      overflow: hidden;
+
       -webkit-transform:scale(1.15); /* Safari and Chrome */
       -moz-transform:scale(1.15); /* Firefox */
       -ms-transform:scale(1.15); /* IE 9 */
       -o-transform:scale(1.15); /* Opera */
       transform:scale(1.15);
     }
-    .product-like {
-      background: rgba(255,255,255,0.7);
+    .overlay {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      -webkit-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+
+      -webkit-transform:scale(1.15); /* Safari and Chrome */
+      -moz-transform:scale(1.15); /* Firefox */
+      -ms-transform:scale(1.15); /* IE 9 */
+      -o-transform:scale(1.15); /* Opera */
+      transform:scale(1.15);
     }
+
+    :hover .overlay {
+      background-color: rgba(170,170,170,0.4);
+    }
+
     .product-price {
       position: absolute;
       bottom: 40px;
@@ -49,6 +95,10 @@
       background: rgba(45,45,45,0.7);
     }
   }
+  .product-like {
+    padding: 5px;
+    //background: rgba(255,255,255,0.7);
+  }
   .product-name {
     height:  55px;
     width:100%;
@@ -58,12 +108,6 @@
     width: 100%;
   }
   .product-footer {
-    background-color: red;
-  }
-}
-
-@media (max-width: $container-md) {
-  .product-panel {
-    max-width: 240px;
+    
   }
 }

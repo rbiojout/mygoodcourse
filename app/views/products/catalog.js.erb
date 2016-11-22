@@ -3,7 +3,7 @@
     $('#catalog-products').append('<%= j render(partial:'products/product', locals: {product: product}) %>');
     //console.log('panel_product_<%=product.id%>')
     //we use the ellipsis for the titles just added
-    $('#panel_product_<%=product.id%> .ellipsis').dotdotdot();
+    $('#product-panel_<%=product.id%> .ellipsis').dotdotdot();
 <% end %>
 <% end %>
 

@@ -4,21 +4,21 @@
   <%= link_to product_path(product), class: 'info'  do %>
       <div class="product-picture">
         <%= image_tag product.preview, class: 'img-thumbnail' %>
-        <div class="product-like top-right">
-          <% if customer_signed_in? %>
-              <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
-
-                <% if current_customer.wishing?(product) %>
-                    <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
-                <% else %>
-                    <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
-                <% end %>
-              </div>
-          <% end %>
-        </div>
         <div class="product-price"><%= nice_price(product.price) %></div>
       </div>
   <% end %>
+  <div class="product-like top-right">
+    <% if customer_signed_in? %>
+        <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+
+          <% if current_customer.wishing?(product) %>
+              <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+          <% else %>
+              <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
+          <% end %>
+        </div>
+    <% end %>
+  </div>
   <!--- stars --->
   <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
   <!--- end stars --->
