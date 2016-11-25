@@ -12,7 +12,7 @@
 <% if customer_signed_in? %>
     <div class="row">
       <div class="col-xs-12" style="padding-bottom: 10px;">
-        <%= link_to new_post_path, class: 'btn btn-primary pull-right' do %><span class="fa fa-pencil fa-lg"></span> <%= t('actions.posts.new') %><% end %>
+        <%= link_to new_post_path, class: 'btn btn-primary pull-right' do %><span class="fa fa-pencil fa-lg"></span> <%= t('helpers.action.post.create') %><% end %>
       </div>
     </div>
 <% end %>

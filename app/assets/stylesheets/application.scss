@@ -1,3 +1,49 @@
+
+// we need to import sprockets first
+@import "bootstrap-sprockets";
+
+// custom vaiables for bootstrap
+// that overwrite the basic configuration
+@import "bootstrap-variables";
+
+// application specific variables
+// that are used all over the application
+@import "application-variables";
+
+@import "bootstrap";
+
+// add Font Awesome
+@import 'font-awesome-sprockets';
+@import 'font-awesome';
+
+
+// sortable jquery
+@import "jquery-ui/sortable";
+
+// social share buttons
+@import "social-share-button";
+
+// style for the flags
+@import "famfamfam-flags";
+
+// import all scss files
+@import "*";
+
+/*
+ * we add manually additional css to be part of the asset pipeline
+ * we don't use a directive for this
+ *
+ */
+// add the css files needed
+@import "animate";
+// datetime picker
+@import "bootstrap-datetimepicker";
+@import "star-rating";
+@import "summernote";
+@import "theme-krajee-fa";
+@import "theme-krajee-svg";
+@import "theme-krajee-uni";
+
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
  * listed below.
@@ -10,19 +56,19 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- * we load the viabales first
- *= require _application-variables
- *= require_tree .
- *= require jquery-ui/sortable
+ * we load the variables first
+ **= require_tree .
+ **= require jquery-ui/sortable
  * require trix
  * use in custom.css not in plain css require bootstrap-datepicker
  * require bootstrap-wysihtml5
- *= require summernote
- *= require social-share-button
+ **= require summernote
+ **= require social-share-button
  * flags for countries
- *= require famfamfam-flags
- *= require_self
+ **= require famfamfam-flags
+ **= require_self
  */
+
 
 
 /* adjust size of social buttons */

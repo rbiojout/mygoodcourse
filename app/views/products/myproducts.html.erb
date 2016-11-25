@@ -26,10 +26,8 @@
 </table>
 <%= will_paginate(@products, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %><br/>
 
-<% if @products.size > 0 %>
-    <%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %>
-<% else %>
-    <%= link_to t('actions.products.new'), new_product_path, class: 'btn-tool btn btn-primary',
-                :data =>{toggle: "tooltip", placement: "bottom"}, :title =>t('dialog.product.explain_add') %>
-<% end %>
+
+<%= link_to t('helpers.action.product.create'), new_product_path, class: 'btn-tool btn btn-primary',
+            :data =>{toggle: "tooltip", placement: "top"}, :title =>t('dialog.product.explain_add') %>
+
 

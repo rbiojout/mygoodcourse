@@ -2,8 +2,7 @@
 
 <% product ||= @product %>
 
-    <div class="product-tools tools-box bottom-right">
-      <div class="pull-right">
+    <div class="tools-box">
 
         <!-- like it! -->
         <% if customer_signed_in? %>
@@ -16,16 +15,8 @@
         <!-- end like it! -->
 
         <!-- report abuse problem -->
-        <div class="pull-right">
-          <%= link_to new_abuse_path(:product_id => product.id),
-                      class: 'btn-tool btn',
-                      title: I18n.translate('actions.abuses.new'),
-                      alt: I18n.translate('actions.abuses.new'),
-                      data: {toggle: 'tooltip', placement: 'top'},
-                      :remote => true do %>
-              <span class="fa fa-bolt fa-lg"> </span>
-          <% end %>
-        </div>
+        <%= render(partial: 'abuses/btn_create', locals: {context: product}) %>
+
         <!-- end abuse -->
 
         <!-- edit -->
@@ -52,7 +43,6 @@
         <% end %>
 
 
-      </div>
     </div>
 
 <!-- end tools -->

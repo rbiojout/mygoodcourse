@@ -5,17 +5,17 @@
       <div class="forum_subject-customer">
         <%= render(partial: 'customers/customer', locals: {customer: forum_subject.customer, withcols: 'false'}) %>
       </div>
-      <div class="quote-panel forum_subject-text">
+      <div class="quote-panel panel-tools forum_subject-text">
         <div class="arrow"></div>
-        <div class="forum_subject-heading">
+        <div class="panel-heading">
           <h4><%= forum_subject.name %></h4>
           <p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.created_at) %></small></p>
         </div>
-        <div class="forum_subject-body">
+        <div class="panel-body">
           <p><%= raw(forum_subject.text) %></p>
         </div>
-        <div class="forum_subject-footer">
-          <div class="forum_subject-tools bottom-right">
+        <div class="panel-footer">
+          <div class="tools-box">
             <%= render(partial: 'forum_subjects/tools', locals: {forum_subject: forum_subject})%>
           </div>
         </div>

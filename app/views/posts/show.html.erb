@@ -54,15 +54,17 @@
 <h2><%= t('activerecord.models.comment', count: 2)%></h2>
 
     <!-- comments -->
-    <div id="comment-form_post_<%= @post.id %>"></div>
         <!-- alert if empty -->
         <% if @post.comments.count==0 %>
             <!-- add alert with call action to add comment -->
             <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add')}) %>
         <% else %>
+        <ul class="comments-list">
             <% @post.comments.each do |comment|%>
                 <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
             <% end %>
+          <div id="comment-form_post_<%= @post.id %>"></div>
+        </ul>
         <% end %>
 
       </div>

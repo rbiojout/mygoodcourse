@@ -51,8 +51,6 @@ fr:
     delete: 'Supprimer'
     undo: 'Annuler'
     pay: 'Payer'
-    abuses:
-      new: 'Signaler un abus'
     reviews:
       new: 'Ajouter une évaluation'
     likes:
@@ -380,6 +378,10 @@ fr:
       create: 'Ajouter'
       edit: 'Editer'
       delete: 'Supprimer'
+      undo: 'Annuler'
+      pay: 'Payer'
+      abuse:
+        create: 'Signaler un abus'
       comment:
         create: 'Ajouter un commentaire'
       customer:
@@ -395,13 +397,19 @@ fr:
         edit: 'Editer cette réponse'
         delete: 'Supprimer cette réponse'
       post:
-        create: 'Créer un article'
+        create: 'Rédiger un article'
         edit: 'Editer cet article'
         delete: 'Supprimer cet article'
       product:
         create: 'Créer un produit'
         edit: 'Editer ce produit'
         delete: 'Supprimer ce produit'
+      review:
+        create: 'Ajouter une évaluation'
+        edit: 'Editer cette évaluation'
+        delete: 'Supprimer cette évaluation'
+      stripe_account:
+        create: 'Créer un compte Stripe'
 
     submit:
       # helpers.submit.<model>.<action>

@@ -9,7 +9,7 @@
 
 // we had the new comment at the top, just after the form and hide the form
 $('#comment-form_<%="#{context_type}_#{context_value}"%>').html("");
-$('#comment-form_<%="#{context_type}_#{context_value}"%>').after("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
+$('#comment-form_<%="#{context_type}_#{context_value}"%>').before("<%= j render partial: 'comments/comment', locals: {comment: @comment}  %>");
 
 // update the number of comments
 $('.btn-comment_<%="#{context_type}_#{context_value}"%>').html("<%= j render(partial: 'comments/btn_comment', locals: {context: context}) %>")

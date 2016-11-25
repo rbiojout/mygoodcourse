@@ -1,28 +1,18 @@
 @import "application-variables";
 
-.panel-product, .product-panel {
-  padding-bottom: 5px;
-  padding-top: 5px;
-  position: relative;
-  .product-picture {
-    // overflow needed for tooltips
-    overflow: hidden;
-    position: relative;
-    width: 100%;
-    height: 100%;
-  }
-}
+
 
 /* allow two lines for name */
 .product-name {
   height:  55px;
   width:100%;
   float: left;
+  //border-bottom: 1px #dddddd solid;
 }
 
 .product-panel {
-  padding-bottom: 5px;
-  padding-top: 5px;
+  margin-bottom: 5px;
+  margin-top: 5px;
   position: relative;
   //max-width: 260px;
   .product-picture{
@@ -51,9 +41,7 @@
       transition: all 1s ease;
     }
 
-    :hover img {
-      overflow: hidden;
-
+     img:hover {
       -webkit-transform:scale(1.15); /* Safari and Chrome */
       -moz-transform:scale(1.15); /* Firefox */
       -ms-transform:scale(1.15); /* IE 9 */
@@ -64,17 +52,10 @@
       width: 100%;
       height: 100%;
       position: absolute;
-      overflow: hidden;
       top: 0;
       left: 0;
       -webkit-transition: all 0.4s ease-in-out;
       transition: all 0.4s ease-in-out;
-
-      -webkit-transform:scale(1.15); /* Safari and Chrome */
-      -moz-transform:scale(1.15); /* Firefox */
-      -ms-transform:scale(1.15); /* IE 9 */
-      -o-transform:scale(1.15); /* Opera */
-      transform:scale(1.15);
     }
 
     :hover .overlay {
@@ -104,10 +85,24 @@
     width:100%;
     //float: left;
   }
-  .product-tools {
-    width: 100%;
+
+  .product-panel-presentation {
+    .pannel-body {
+      display: inline-block;
+      padding-top: 0px;
+      padding-bottom: 40px;
+
+    }
+    .product-footer {
+      padding: $panel-body-padding 0 $panel-body-padding 0;
+      border-top: 1px $panel-default-border solid;
+      background-color: #EEEEEE;
+      position: absolute;
+      width: 100%;
+      height: 40px;
+      bottom: 0px;
+      right: 0px;
+    }
   }
-  .product-footer {
-    
-  }
+
 }

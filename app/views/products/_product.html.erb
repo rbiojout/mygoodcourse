@@ -36,7 +36,7 @@
   <!--- end name --->
 
   <!--- stars --->
-  <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
+  <%= render(:partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true}) %>
   <!--- end stars --->
 
 

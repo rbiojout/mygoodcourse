@@ -30,9 +30,9 @@
         </div>
         <!--- only when remove_ok flag is received we activate the link to remove --->
         <% unless is_first %>
-            <%= link_to_remove_association t('dialog.product.remove_version'), f, class: 'btn btn-danger btn-sm center-block' %>
+            <%= link_to_remove_association t('dialog.product.remove_version'), f, class: 'btn btn-danger btn-sm btn-block' %>
         <% else %>
-            <%= button_tag t('dialog.product.active_version'), class: 'btn btn-success btn-sm center-block' %>
+            <%= button_tag t('dialog.product.active_version'), class: 'btn btn-success btn-sm btn-block' %>
         <% end %>
       </div>
 <% end %>

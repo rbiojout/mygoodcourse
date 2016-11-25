@@ -1,9 +1,11 @@
-@import "bootstrap/variables";
-
-/** custom vaiables for bootstrap **/
-@import "bootstrap-variables";
 
 /*** application variables **/
+
+// custom colors
+$custom-aero: #9CC2CB;
+$custom-yellow: #FFDC1E;
+$custom-orange: #F39C12;
+
 
 //--- Customer
 // fixed height for the name in order to control the size of the panel
@@ -32,4 +34,12 @@ $customer_container-md: 140px;
 //** For `$screen-lg-min` and up.
 $customer_picture-lg: 100px;
 $customer_container-lg: 200px;
+
+
+/*
+ * panel tools fixed add bottom
+ * with background color
+ */
+$tools-padding-bottom: 40px;
+$tools-background-color: #EEEEEE;
 

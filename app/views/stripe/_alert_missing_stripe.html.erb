@@ -6,7 +6,7 @@
   <% if(current_customer.nil?) %>
       <%= link_to t('customers.registrations.new.sign_up'), new_customer_registration_path, class: 'btn btn-primary' %>
   <% else %>
-      <%= link_to t('actions.stripe_account.new'), stripe_oauth_path, class: 'btn btn-danger' %>
+      <%= link_to t('helpers.action.stripe_account.create'), stripe_oauth_path, class: 'btn btn-danger' %>
   <% end %>
 
 </div>

@@ -1,7 +1,7 @@
-<div class="btn-group">
-  <a class="btn btn-primary" href="#"><i class="famfamfam-flag-<%=@current_country.code2%>"></i> <%= @current_country.name %></a>
-  <a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-  <ul class="dropdown-menu">
+<div class="btn-group margined-vertical" style="width:100%">
+  <a class="btn btn-primary" style="width:85%" href="#"><i class="famfamfam-flag-<%=@current_country.code2%>"></i> <%= @current_country.name %></a>
+  <a class="btn btn-primary dropdown-toggle" style="width:15%" data-toggle="dropdown" href="#"><span class="caret"></span></a>
+  <ul class="dropdown-menu" style="width:100%">
     <% Country.all.each do |country|%>
         <% if country.id != @current_country.id %>
             <li><a href="?country_id=<%=country.id%>"><i class="famfamfam-flag-<%=country.code2%>"></i> <%=country.name %></a></li>

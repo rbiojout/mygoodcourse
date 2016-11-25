@@ -51,16 +51,12 @@ en:
     delete: 'Delete'
     undo: 'Undo'
     pay: 'Pay'
-    abuses:
-      new: 'Report abuse'
     reviews:
       new: 'Add review'
     likes:
       new: 'Like it!'
     posts:
       new: 'Write an article'
-    products:
-      new: 'Create product'
     stripe_account:
       new: 'Create a Stripe account'
 
@@ -329,6 +325,10 @@ en:
       create: 'Create'
       edit: 'Edit'
       delete: 'Delete'
+      undo: 'Undo'
+      pay: 'Pay'
+      abuse:
+        create: 'Report abuse'
       comment:
         create: 'Add a comment'
       customer:
@@ -351,6 +351,12 @@ en:
         create: 'Create a product'
         edit: 'Edit this product'
         delete: 'Delete this product'
+      review:
+        create: 'Add a review'
+        edit: 'Edit this review'
+        delete: 'Delete this review'
+      stripe_account:
+        create: 'Create a Stripe account'
 
     submit:
       # helpers.submit.<model>.<action>

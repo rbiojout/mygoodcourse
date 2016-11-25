@@ -1,6 +1,5 @@
-@import "application-variables";
-@import "bootstrap/mixins/vendor-prefixes";
-
+// we rely on the global variables and bootstrap mixin
+// as stated in the application scss order
 
 .container-customer-lg {
   float: none;
@@ -18,7 +17,10 @@
   width: $customer_picture-xs;
 }
 
-
+/* mixin
+ * for styling the panel with the picture
+ * of the customer
+ */
 @mixin styling($customer_picture, $customer_container) {
   .container-customer {
     float: none;
@@ -36,8 +38,109 @@
     height: $customer_name;
   }
 
+  /* add the quotes */
+  @include quote_customer($customer_picture, $customer_container)
 }
 
+/* mixin
+ * for the quotes in addition to the customer panel
+ */
+@mixin quote_customer($customer_picture, $customer_container) {
+  // quote panel with shadow
+  .quote-panel {
+    width: 100%;
+    min-height: $customer_picture + $customer_name + 80px;
+    float: right;
+    //padding: 10px 20px 10px 20px; //could be deleted if padding in heading, body and footer
+    // height 40px for footer to get the arrow
+    // toolbox inside footer to be positionned absolute bottom:2px, right:10px
+    position: relative;
+    border: 1px solid $popover-fallback-border-color;
+    border: 1px solid $popover-border-color;
+    border-radius: $border-radius-large;
+    @include box-shadow(0 5px 10px rgba(0, 0, 0, .2));
+
+    .panel-footer {
+      height: 40px;
+    }
+    // right 0 and make a border top insteab
+  }
+
+
+
+  // arrow associated
+  // arrow needs to be a div directly after the quote panel
+  .quote-panel > .arrow {
+    &,
+    &:after {
+      position: absolute;
+      display: block;
+      width: 0;
+      height: 0;
+      border-color: transparent;
+      border-style: solid;
+    }
+  }
+  .quote-panel > .arrow {
+    border-width: $popover-arrow-outer-width;
+  }
+  .quote-panel > .arrow:after {
+    border-width: $popover-arrow-width;
+    content: "";
+  }
+
+  .quote-panel > .arrow {
+    top: 1px+ $customer_picture/2+$customer_padding-top;
+    left: -$popover-arrow-outer-width;
+    margin-top: -$popover-arrow-outer-width;
+    border-left-width: 0;
+    border-right-color: $popover-arrow-outer-fallback-color; // IE8 fallback
+    border-right-color: $popover-arrow-outer-color;
+    &:after {
+      content: " ";
+      left: 1px;
+      bottom: -$popover-arrow-width;
+      border-left-width: 0;
+      border-right-color: $popover-arrow-color;
+    }
+  }
+
+  .quote-panel .panel-body {
+    display: inline-block;
+    padding-top: 0px;
+    padding-bottom: 40px;
+  }
+
+  .quote-panel .panel-footer {
+    padding: $panel-body-padding 0 $panel-body-padding 0;
+    border-top: 1px $panel-default-border solid;
+    background-color: #EEEEEE;
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    bottom: 0px;
+    right: 0px;
+  }
+}
+
+
+/* decorate the picture of the customer
+ * to be used as an overlay over an other panel
+ */
+.customer-profile{
+  width: $customer_picture-xs;
+  height: $customer_picture-xs;
+  padding: 1px;
+  background: $custom-aero;
+}
+
+
+
+
+
+/*
+ * make the panels of the presentation up to md
+ */
 // for xs screens
 @include styling($customer_picture-xs, $customer_container-xs);
 // for sm screens

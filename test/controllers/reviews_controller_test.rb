@@ -34,11 +34,6 @@ class ReviewsControllerTest < ActionController::TestCase
     end
 
     assert_response :success
-    assert_select_jquery :after, '#review-form' do
-      #assert_select '.media-object img', @review.customer.picture
-      assert_select '.hidden-xs p', @review.description
-    end
-
   end
 
   test "need login to create review" do

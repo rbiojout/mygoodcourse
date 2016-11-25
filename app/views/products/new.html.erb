@@ -1,13 +1,7 @@
-<% provide(:title, t('actions.products.new')) %>
+<% provide(:title, t('helpers.action.product.create')) %>
 
-<h1><%= t('actions.products.new')%></h1>
+<h1><%= t('helpers.action.product.create')%></h1>
 
-<!--- Country selector --->
-<div class="">
-  <%= render(partial: 'countries/btn_countries') %>
-</div>
-<br/><br/>
-<!--- end Country selector --->
 
 <%= render 'form' %>
 

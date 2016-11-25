@@ -25,10 +25,9 @@
         <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
         <!--- end stars --->
 
-        <% # @TODO add report %>
         <div id="abus_review_<%= review.id%>">
             <p><%= link_to new_abuse_path(:review_id => review.id), :remote => true do %>
-                  <span class="fa fa-bolt"></span> <%= t('actions.abuses.new') %>
+                  <span class="fa fa-bolt"></span> <%= t('helpers.submit.abuse.create') %>
               <% end %></p>
         </div>
       </div>

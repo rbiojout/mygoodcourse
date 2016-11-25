@@ -8,13 +8,6 @@
 
 ///////////////////////////////////////////////////
 
-@import "bootstrap-variables";
-
-@import "bootstrap-sprockets";
-@import "bootstrap";
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
-@import 'bootstrap-datetimepicker';
 
 
 
@@ -63,15 +56,12 @@ textarea {
 .green {
   color: #1ABB9C; }
 
-$custom-aero: #9CC2CB;
-
 .aero {
   color: $custom-aero }
 
 .red {
   color: #E74C3C; }
 
-$custom-yellow: #FFDC1E;
 
 .yellow {
   color: $custom-yellow;  }
@@ -119,8 +109,6 @@ $custom-yellow: #FFDC1E;
   background: #3498DB !important;
   border: 1px solid #3498DB !important;
   color: #fff; }
-
-$custom-orange: #F39C12;
 
 .bg-orange {
   background: $custom-orange !important;
@@ -209,11 +197,7 @@ $custom-orange: #F39C12;
   float: left;
 }
 
-.tools-box {
-  position: static;
-  display: inline-block;
-  float: right;
-}
+
 /* guiding users */
 .active-star, .guiding {
   color: $custom-yellow;
@@ -222,7 +206,7 @@ $custom-orange: #F39C12;
 }
 
 /* we want extra colors for the badges
-see _bootstrap-variables.scss for information
+see bootstrap-variables.scss for information
 // $brand-primary:         darken(#428bca, 6.5%) // #337ab7
 // $brand-success:         #5cb85c
 // $brand-info:            #5bc0de
@@ -458,13 +442,7 @@ ul.nav-tree  {
 .cart-summary a {
   color: #9d9d9d;
 }
-/* decorate the picture of the customer */
-.customer-profile{
-  width:50px;
-  height:50px;
-  padding: 1px;
-  background: $custom-aero;
-}
+
 
 /* adjust size of social buttons */
 $size-social: 24px;
@@ -488,6 +466,40 @@ $size-social: 24px;
 }
 
 
+
+.margined-vertical {
+  margin-bottom: 10px;
+}
+
+/*
+ * Panel with tools at the bottom
+ * and background color
+ */
+.panel-tools {
+  position: relative;
+  margin-bottom: 0px !important;
+
+  .panel-body {
+    padding-bottom: $tools-padding-bottom;
+  }
+
+  .panel-footer {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 100%;
+    height: $tools-padding-bottom;
+    padding: $panel-body-padding 0 $panel-body-padding 0;
+    background-color: $tools-background-color;
+    border-top: 1px $panel-default-border solid;
+  }
+}
+
+.tools-box {
+  position: absolute;
+  bottom: 2px;
+  right: $panel-body-padding;
+}
 
 
 

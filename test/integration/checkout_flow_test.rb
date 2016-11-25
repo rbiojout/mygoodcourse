@@ -39,7 +39,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     assert_equal 200, status
     assert_equal root_path, path
     assert_equal I18n.t('customers.sessions.signed_in'), flash[:notice]
-    assert_select 'p.alert-success', I18n.t('customers.sessions.signed_in')
+    assert_select '.alert-success p', I18n.t('customers.sessions.signed_in')
 
     get '/products', :id => products(:free_from_seller_one).id
     assert_response :success
@@ -178,7 +178,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
 
     assert_select "#stripe-form"
 
-    assert_select "#stripe-form input[value=?]", I18n.t('actions.pay')
+    assert_select "#stripe-form input[value=?]", I18n.t('helpers.action.pay')
 
     @current_order = assigns(:current_order)
 
@@ -205,7 +205,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     assert_equal 200, status
     assert_equal root_path, path
     assert_equal I18n.t('customers.sessions.signed_in'), flash[:notice]
-    assert_select 'p.alert-success', I18n.t('customers.sessions.signed_in')
+    assert_select '.alert-success p', I18n.t('customers.sessions.signed_in')
 
     @current_customer = assigns(:current_customer)
 

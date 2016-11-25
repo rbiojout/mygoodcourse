@@ -24,20 +24,14 @@
               <!-- end follow -->
               <!-- if customer is signed, direct link to his profile -->
               <% else %>
-                  <%= link_to(edit_customer_path(customer),
-                              class: 'btn-tool btn btn-default btn-sm',
-                              alt: t('page.my_profile'),
-                              title: t('page.my_profile'),
-                              data: {toggle: 'tooltip', placement: 'top'} ) do %>
-
-                  <i class="fa fa-pencil fa-lg"> </i><% end %>
+                  <%= render(partial: 'customers/btn_edit', locals: {customer: customer}) %>
               <% end %>
           <% end %>
         </span>
     </div>
     <!-- end picture -->
     <!--- name --->
-    <div class="text-center customer-name ellipsis">
+    <div class="text-center">
       <h4><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h4>
     </div>
     <!--- end  name --->

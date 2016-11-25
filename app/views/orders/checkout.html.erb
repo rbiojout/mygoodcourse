@@ -57,7 +57,7 @@
                       <li class="list-unstyled">
                         <h4>
                               <span class="fa fa-credit-card"></span> (<%= card.brand %>) **** <%= card.last4 %>
-                          <%= link_to t('actions.pay')+' '+ nice_price(current_order.total), checkout_confirmation_path(stripeToken: card.stripe_id), class: "btn btn-success" %>
+                          <%= link_to t('helpers.action.pay')+' '+ nice_price(current_order.total), checkout_confirmation_path(stripeToken: card.stripe_id), class: "btn btn-success" %>
 
                         </h4>
                       </li>

@@ -30,7 +30,7 @@
               <ul class="dropdown-menu">
                 <li><%= link_to t('page.my_account'), edit_customer_registration_path(:id => current_customer.id) %></li>
                 <li><%= link_to t('page.my_profile'), customer_path(current_customer) %></li>
-                <li><%= link_to t('actions.products.new'), new_product_path, class: 'btn btn-primary' %></li>
+                <li><%= link_to t('helpers.action.product.create'), new_product_path, class: 'btn btn-primary' %></li>
                 <li><%= link_to t('page.my_products'), myproducts_products_path %></li>
                 <li><%= link_to t('page.my_orders'), myorders_orders_path %></li>
                 <li><%= link_to t('page.my_dashboard.title'), dashboard_customer_path(current_customer) %></li>
