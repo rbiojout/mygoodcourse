@@ -1,6 +1,6 @@
 <% @products.each do |product| %>
 <% cache product do %>
-    $('#catalog-products').append('<%= j render(partial:'products/product', locals: {product: product}) %>');
+    $('#catalog-products').append('<%= j render(partial:'products/product_cart', locals: {product: product}) %>');
     //console.log('panel_product_<%=product.id%>')
     //we use the ellipsis for the titles just added
     $('#product-panel_<%=product.id%> .ellipsis').dotdotdot();
