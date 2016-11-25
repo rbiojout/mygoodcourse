@@ -31,7 +31,10 @@
         <% else %>
             <div id="catalog-products" class="row">
 
-              <%= render(partial:'products/product', collection: @products) %>
+              <% @products.each do |product| %>
+
+                <%= render(partial:'products/product_cart', locals: {product: product}) %>
+              <% end %>
 
 
             </div>

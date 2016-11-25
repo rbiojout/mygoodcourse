@@ -6,7 +6,7 @@
    context_param = context.class.name.underscore + "_id"
    context_value = context.id
 %>
-
+<% if customer_signed_in? %>
 <div class="pull-right">
     <%= link_to new_abuse_path(context_param => context_value),
                 alt: t('helpers.action.abuse.create'),
@@ -17,3 +17,4 @@
         <span class="fa fa-bolt fa-lg"></span>
     <% end %>
 </div>
+<% end %>

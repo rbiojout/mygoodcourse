@@ -7,29 +7,34 @@
         <% end %>
       </div>
       <div class="col-xs-8">
-        <b><%= review.title %></b>
-        <p><%= review.description %></p>
-        <% customer = review.customer %>
-        <img class="img-circle align-left customer-picture-xs"
-             data-customer="<%=customer.id %>"
-             data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
-             data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
+        <div class="quote-panel panel-tools">
+          <div class="arrow"></div>
+          <div class="panel-heading">
+            <% customer = review.customer %>
+            <img class="img-circle align-left customer-picture-xs"
+                 data-customer="<%=customer.id %>"
+                 data-locality=  "<%= t('activerecord.attributes.customer.located', :locality => customer.locality||'???') %>"
+                 data-created="<%=t('activerecord.attributes.customer.since', :created => l(customer.created_at, :format => :short) )%>" alt="" src="<%= customer.picture %>">
 
-        <h6><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h6>
+            <h6><%= link_to "#{customer.first_name} #{customer.name}", customer_path(customer) %></h6>
+            <p><span class="date text-muted"><%= nice_date(review.updated_at) %></span></p>
+          </div>
+          <div class="panel-body">
+            <!--- stars --->
+            <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
+            <!--- end stars --->
+            <b><%= review.title %></b>
+            <p><%= review.description %></p>
+          </div>
+          <div class="panel-footer">
+            <div class="tools-box">
+              <%= render(partial: 'abuses/btn_create', locals: {context: review}) %>
 
-        <p><span class="date text-muted"><%= nice_date(review.updated_at) %></span></p>
-
-      </div>
-      <div class="col-xs-8 col-xs-offset-4 col-sm-offset-0">
-        <!--- stars --->
-        <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
-        <!--- end stars --->
-
-        <div id="abus_review_<%= review.id%>">
-            <p><%= link_to new_abuse_path(:review_id => review.id), :remote => true do %>
-                  <span class="fa fa-bolt"></span> <%= t('helpers.submit.abuse.create') %>
-              <% end %></p>
+            </div>
+          </div>
         </div>
+
+
       </div>
     </div>
 <!-- REVIEW - END -->
