@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 
-ruby '2.3.1'
+ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 4.2.7'
@@ -40,10 +40,15 @@ gem 'touchpunch-rails'
 # to solve reloading of pages
 gem 'jquery-turbolinks'
 
+# handle file upload with javascript, in particular for progress bar
+gem 'jquery-fileupload-rails'
+
+
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
+
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
 
@@ -125,8 +130,6 @@ gem 'grim'
 # store in the cloud, in particular AWS
 gem 'fog'
 
-# handle file upload with javascript, in particular for progress bar
-gem 'jquery-fileupload-rails'
 
 # button for social networks
 gem 'social-share-button'
@@ -144,7 +147,7 @@ gem 'rails_admin'
 #gem "wysiwyg-rails", "~> 1.2.7"
 
 # New relic to monitor performances
-gem 'newrelic_rpm'
+# gem 'newrelic_rpm'
 
 
 # for Heroku
@@ -155,23 +158,36 @@ group :production do
 end
 
 group :test do
-  gem 'capybara'
-  gem 'selenium-webdriver'
+  # provide one-line matchers to RSpec
+  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'database_cleaner', '~> 1.5'
+
+  # generating random data for the tests
+  gem 'faker', '~> 1.6.1'
 end
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
-  gem 'sqlite3'
+  #gem 'sqlite3'
   #gem 'i18n-tasks', '~> 0.9.5'
 
   #gem 'jasmine'
   #gem "teaspoon-jasmine"
 
+  # spring command line for rspec
+  gem 'spring-commands-rspec'
   gem 'rspec-rails'
+  # create objects needed in your tests which can include default values
+  gem 'factory_girl_rails', '~> 4.5.0'
+  # automation framework used for creating functional tests that simulates how users will interact
+  gem 'capybara', '~> 2.5'
+  #gem 'spring-commands-rspec', git: 'https://github.com/thewoolleyman/spring-commands-rspec.git'
   # START_HIGHLIGHT
   gem 'poltergeist'
   # END_HIGHLIGHT
+
 
 end
 
@@ -199,7 +215,7 @@ group :development do
 
   # look at https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   # memory usage
-  gem 'derailed_benchmarks'
+  # gem 'derailed_benchmarks'
 
   # the profiler used
   gem 'rack-mini-profiler', require: false
