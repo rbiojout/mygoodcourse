@@ -121,10 +121,10 @@ GEM
     erubis (2.7.0)
     excon (0.54.0)
     execjs (2.7.0)
-    factory_girl (4.5.0)
+    factory_girl (4.7.0)
       activesupport (>= 3.0.0)
-    factory_girl_rails (4.5.0)
-      factory_girl (~> 4.5.0)
+    factory_girl_rails (4.7.0)
+      factory_girl (~> 4.7.0)
       railties (>= 3.0.0)
     faker (1.6.6)
       i18n (~> 0.5)
@@ -547,7 +547,7 @@ DEPENDENCIES
   binding_of_caller
   bootstrap-sass
   byebug
-  capybara (~> 2.5)
+  capybara
   carrierwave
   chartkick
   cocoon
@@ -557,8 +557,8 @@ DEPENDENCIES
   database_cleaner (~> 1.5)
   datetimepicker-rails!
   devise (~> 4.2)
-  factory_girl_rails (~> 4.5.0)
-  faker (~> 1.6.1)
+  factory_girl_rails
+  faker
   famfamfam_flags_rails
   fog
   font-awesome-sass
@@ -592,10 +592,10 @@ DEPENDENCIES
   rails_12factor
   rails_admin
   rmagick
-  rspec-rails
+  rspec-rails (~> 3.5.2)
   sass-rails (~> 5.0)
   sdoc
-  shoulda-matchers (~> 3.0)
+  shoulda-matchers
   simple_form
   social-share-button
   spring

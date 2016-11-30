@@ -159,11 +159,11 @@ end
 
 group :test do
   # provide one-line matchers to RSpec
-  gem 'shoulda-matchers', '~> 3.0', require: false
+  gem 'shoulda-matchers', require: false
   gem 'database_cleaner', '~> 1.5'
 
   # generating random data for the tests
-  gem 'faker', '~> 1.6.1'
+  gem 'faker'
 end
 
 
@@ -178,11 +178,11 @@ group :development, :test do
 
   # spring command line for rspec
   gem 'spring-commands-rspec'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.5.2'
   # create objects needed in your tests which can include default values
-  gem 'factory_girl_rails', '~> 4.5.0'
+  gem 'factory_girl_rails'
   # automation framework used for creating functional tests that simulates how users will interact
-  gem 'capybara', '~> 2.5'
+  gem 'capybara'
   #gem 'spring-commands-rspec', git: 'https://github.com/thewoolleyman/spring-commands-rspec.git'
   # START_HIGHLIGHT
   gem 'poltergeist'
