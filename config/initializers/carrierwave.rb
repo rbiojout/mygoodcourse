@@ -10,5 +10,6 @@ CarrierWave.configure do |config|
   config.fog_directory  = (Rails.env.production? ? 'formycourse' : 'fmcdevelopment')                                  # required
   config.fog_public     = true                                         # optional, defaults to true
   config.asset_host = 'https://dq1nmz5djttwu.cloudfront.net' if Rails.env.production?           # use of https for the CDN
+  config.asset_host = 'https://dq1nmz5djttwu.cloudfront.net' if Rails.env.staging?           # use of https for the CDN
   config.fog_attributes = { 'Cache-Control' => "max-age=#{120.minutes.to_i}" } # optional, defaults to {}
 end
