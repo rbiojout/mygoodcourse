@@ -86,3 +86,9 @@ production:
   database: formycourse_production
   #username: formycourse
   #password: <%= ENV['FORMYCOURSE_DATABASE_PASSWORD'] %>
+
+staging:
+  <<: *default
+  database: formycourse_production
+  #username: formycourse
+  #password: <%= ENV['FORMYCOURSE_DATABASE_PASSWORD'] %>
