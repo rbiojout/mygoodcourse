@@ -1,9 +1,11 @@
+<% if customer_signed_in? %>
 <%
    # context : parameter to refer to the polymorphic
    context_type = context.class.name.underscore
    context_param = context.class.name.underscore + "_id"
    context_value = context.id
 %>
+
 <div class='<%="btn-comment_#{context_type}_#{context_value}"%> pull-right'>
   <%= link_to(new_comment_path(context_param => context_value),
               alt: t('helpers.action.comment.create'),
@@ -15,3 +17,4 @@
       <span class="fa fa-comments fa-lg"></span> <span class="badge"><%= context.comments.count unless context.comments.count ==0 %></span>
   <% end %>
 </div>
+<% end %>

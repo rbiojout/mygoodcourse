@@ -41,12 +41,11 @@
             <%= link_to_add_association(t('dialog.product.add_version'),
                                         f,
                                         :attachments,
-                                        #:data => {'association-insertion-node'=> '#product_attachments', 'association-insertion-method' => 'children', 'association-insertion-traversal' => 'parent'},
-                                        'data-association-insertion-node' => '#product_attachments',
-                                        #'data-association-insertion-method' => 'append',
-                                        #'data-association-insertion-traversal' => 'children',
+                                        :data => {'association-insertion-node'=> '#product_attachments', 'association-insertion-method' => 'prepend'},
                                         class: 'btn btn-primary center-block margined-vertical') %>
         <% end %>
+
+
 
         <!--- Attachments --->
         <!--- only the first element can not be removed from the existing list -->

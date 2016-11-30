@@ -167,6 +167,12 @@ group :development, :test do
 
   #gem 'jasmine'
   #gem "teaspoon-jasmine"
+
+  gem 'rspec-rails'
+  # START_HIGHLIGHT
+  gem 'poltergeist'
+  # END_HIGHLIGHT
+
 end
 
 

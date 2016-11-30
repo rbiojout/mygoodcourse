@@ -1,4 +1,4 @@
-<div class="col-xs-6 col-sm-3 col-md-4 col-lg-4 product-panel" id="product-panel_<%=product.id%>">
+<div class="col-xs-6 col-sm-3 col-md-3 col-lg-3 product-panel" id="product-panel_<%=product.id%>">
 
   <%= link_to product_path(product), class: 'info'  do %>
       <div class="product-picture">
@@ -6,18 +6,22 @@
         <div class="product-price"><%= nice_price(product.price) %></div>
       </div>
   <% end %>
-  <div class="product-like top-right">
-    <% if customer_signed_in? %>
-        <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
+    <div class="product-like top-right">
+      <% if Rails.env.development? %>
+      <%= render(partial: 'products/btn_buy', locals: {product: product}) %>
+      <% end %>
+      <% if customer_signed_in? %>
+          <div class="wish_form wish_form_<%= product.id%>" id="wish_form_<%= product.id%>">
 
-          <% if current_customer.wishing?(product) %>
-              <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
-          <% else %>
-              <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
-          <% end %>
-        </div>
-    <% end %>
-  </div>
+            <% if current_customer.wishing?(product) %>
+                <%= render(partial: 'wish_lists/unwish', locals: {product: product}, locale: locale) %>
+            <% else %>
+                <%= render(partial: 'wish_lists/wish', locals: {product: product}, locale: locale) %>
+            <% end %>
+          </div>
+      <% end %>
+    </div>
+
   <!--- stars --->
   <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
   <!--- end stars --->
@@ -29,12 +33,9 @@
 
   <!--- actions --->
   <div>
-    <%= link_to buy_product_path(product), :method => :post, class:'float-left btn btn-block btn-primary btn-sm' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
+    <%= link_to buy_product_path(product), :method => :post, class:'btn btn-block btn-primary btn-sm' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
     <% if customer_signed_in? %>
     <% end %>
   </div>
   <!--- end actions --->
-
-
-
-</div>
+  </div>

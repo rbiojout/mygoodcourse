@@ -1,3 +1,4 @@
+<% if customer_signed_in? %>
 <div class='pull-right'>
   <%= link_to(new_forum_answer_path(forum_subject_id: forum_subject_id),
               alt: t('helpers.action.forum_answer.create'),
@@ -9,4 +10,4 @@
       <i class="fa fa-reply fa-lg"> </i>
   <% end %>
 </div>
-
+<% end %>

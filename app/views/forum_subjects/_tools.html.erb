@@ -3,12 +3,12 @@
 %>
 
 <% if Rails.env.development? %>
-<%= link_to new_forum_answer_path(forum_subject_id: forum_subject.id), class: 'btn btn-primary pull-right' do %>
+<%= link_to new_forum_answer_path(forum_subject_id: forum_subject.id), class: 'btn btn-warning pull-right' do %>
     <span class="fa fa-reply fa-lg"></span>
 <% end %>
 <% end %>
 
-<%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_subject.id}) %>
+    <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_subject.id}) %>
 
 <!-- like it! -->
 <% if customer_signed_in? %>

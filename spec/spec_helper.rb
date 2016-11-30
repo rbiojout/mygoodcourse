@@ -29,6 +29,7 @@ RSpec.configure do |config|
     # ...rather than:
     #     # => "be bigger than 2"
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true
+    expectations.syntax = [:expect]
   end
 
   # rspec-mocks config goes here. You can use an alternate test double
@@ -38,6 +39,7 @@ RSpec.configure do |config|
     # a real object. This is generally recommended, and will default to
     # `true` in RSpec 4.
     mocks.verify_partial_doubles = true
+    mocks.verify_doubled_constant_names = true
   end
 
   # This option will default to `:apply_to_host_groups` in RSpec 4 (and will
@@ -96,4 +98,15 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 =end
+
+  config.filter_run_when_matching :focus
+  config.run_all_when_everything_filtered = true
+  config.disable_monkey_patching!
+  config.expose_dsl_globally = true
+  if config.files_to_run.one?
+    config.default_formatter = 'doc'
+  end
+  config.profile_examples = 10
+  config.order = :random
+  Kernel.srand config.seed
 end

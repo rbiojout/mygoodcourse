@@ -1,3 +1,5 @@
+<% if customer_signed_in? %>
+    <% if (current_customer.id == forum_subject.customer.id )%>
 <div class="pull-right">
 <%= link_to( edit_forum_subject_path(forum_subject),
              alt: t('helpers.action.edit'),
@@ -8,3 +10,5 @@
     <span class="fa fa-pencil fa-lg"></span>
 <% end %>
 </div>
+    <% end %>
+<% end %>
