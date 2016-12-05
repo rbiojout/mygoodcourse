@@ -93,7 +93,7 @@ class Product < ActiveRecord::Base
 
 
   # validators
-  validates :customer_id, :name, :description, presence: true
+  validates :customer, :name, :description, presence: true
 
 
 
