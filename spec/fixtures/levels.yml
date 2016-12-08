@@ -1,0 +1,65 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Level1
+  description: MyString
+  position: 1
+  cycle: one
+  position: 1
+
+two:
+  name: MyString
+  description: MyString
+  position: 2
+  cycle: two
+  position: 2
+
+cp:
+  name: cp
+  description: cp
+  position: 1
+  cycle: primaire
+
+ce1:
+  name: ce1
+  description: ce1
+  position: 2
+  cycle: primaire
+
+ce2:
+  name: ce2
+  description: ce2
+  position: 3
+  cycle: primaire
+
+cm1:
+  name: cm1
+  description: cm1
+  position: 2
+  cycle: primaire
+
+cm2:
+  name: cm2
+  description: cm2
+  position: 3
+  cycle: primaire
+
+C1L1:
+  name: C1L1
+  cycle: C1
+  position: 1
+
+C1L2:
+  name: C1L2
+  cycle: C1
+  position: 2
+
+C2L1:
+  name: C2L1
+  cycle: C2
+  position: 1
+
+C2L2:
+  name: C2L2
+  cycle: C2
+  position: 2

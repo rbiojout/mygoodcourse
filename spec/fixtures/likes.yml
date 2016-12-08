@@ -1,0 +1,10 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+
+cust_one_prod_one:
+  customer: one
+  likeable: one(Product)
+
+cust_one_review_one:
+  customer: one
+  likeable: one(Review)

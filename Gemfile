@@ -211,6 +211,7 @@ group :development do
   gem 'kramdown', :require => false
 
   # get UML
+  # use bundle exec rake diagram:all_with_engines
   gem 'railroady'
 
   # look at https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup

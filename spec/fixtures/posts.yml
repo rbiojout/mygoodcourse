@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+<%
+str= "test "
+(1..100).each {|i| str += "test "}
+%>
+
+
+one:
+  name: One
+  description: <%= str %>
+  slug: one
+  customer: one
+  status: created
+  visual: "default_visual.png"
+
+
+two:
+  name: Two
+  description: <%= str %>
+  slug: two
+  customer: two
+  status: created
+  visual: "default_visual.png"

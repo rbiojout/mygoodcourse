@@ -1,0 +1,55 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Country1
+  code2: CO1
+  code3: CODE1
+  continent: EUROPE
+  tld: 
+  currency: EURO
+  eu_member: true
+
+two:
+  name: Country2
+  code2: CO2
+  code3: CODE2
+  continent: AMERICA
+  tld: 
+  currency: DOLLAR
+  eu_member: false
+
+not_linked:
+  name: NotLinked
+  code2: NL
+  code3: NOTLINKED
+  continent: AMERICA
+  tld:
+  currency: DOLLAR
+  eu_member: false
+
+uk:
+  name:        'United Kingdom'
+  code2:       'GB'
+  code3:       'GBR'
+  continent:   'EU'
+  tld:         'uk'
+  currency:    'GBP'
+  eu_member:   true
+
+us:
+  name:        'United States of America'
+  code2:       'US'
+  code3:       'USA'
+  continent:   'NA'
+  tld:         'us'
+  currency:    'USD'
+  eu_member:   false
+
+france:
+  name:        'France'
+  code2:       'FR'
+  code3:       'FRA'
+  continent:   'EU'
+  tld:         'fr'
+  currency:    'EUR'
+  eu_member:   true

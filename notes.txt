@@ -197,6 +197,9 @@ ATT! in this case for yard
 Use of i18n
 i18n-tasks health
 
+TEST
+http://chrisestanol.com/blog/2016/03/12/introduction-to-testing-with-rspec/
+
 
 
 

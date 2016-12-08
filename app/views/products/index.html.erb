@@ -3,6 +3,7 @@
 
 <h1><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h1>
 
+
 <% @products.each do |product|%>
     <%= render(partial: 'products/product', locals: {product: product}) %>
 <% end %>

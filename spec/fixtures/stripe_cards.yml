@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_id: card_18WQlx2eZvKYlo2CPKAth2Ua
+  brand: Visa
+  exp_month: 1
+  exp_year: 2018
+  last4: 1234
+  stripe_customer: one
+
+two:
+  stripe_id: card_18WQlx2eZvKYlo2CPKAth2Ub
+  brand: Visa
+  exp_month: 1
+  exp_year: 2019
+  last4: 1234
+  stripe_customer: two

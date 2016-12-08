@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: Family1
+  description: MyString
+  position: 1
+  country: france
+
+two:
+  name: Family2
+  description: MyString
+  position: 2
+  country: france
+
+maths:
+  name: maths
+  description: maths
+  position: 3
+  country: france
+
+francais:
+  name: francais
+  description: francais
+  position: 4
+  country: france
+
+F1:
+  name: F1
+  position: 3
+  country: france
+
+F2:
+  name: F2
+  position: 4
+  country: france

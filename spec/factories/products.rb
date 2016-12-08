@@ -9,17 +9,42 @@ FactoryGirl.define do
       product.attachments << FactoryGirl.build(:attachment, product: product)
     end
 
-    factory :free_product do
+    trait :free do
       price 0.0
     end
 
-    factory :paid_product do
+    trait :paid do
       price Product::PRICE_LIST.sample
     end
 
-    factory :ordered_product do
+    trait :ordered do
       order_items { create_list(:order_item, 1)}
     end
 
+    trait :active do
+      active true
+    end
+
+    trait :not_active do
+      active false
+    end
   end
+
+  factory :product_active do
+    association :product, :active
+  end
+
+  factory :product_not_active do
+    association :product, :not_active
+  end
+
+  factory :product_free do
+    association :product, :free
+  end
+
+  factory :product_paid do
+    association :product, :paid
+  end
+
+
 end

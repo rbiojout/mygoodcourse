@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  description: MyString
+  visual: MyText
+  country: one
+  position: 1
+
+two:
+  name: MyText
+  description: MyString
+  visual: MyText
+  country: two
+  position: 1

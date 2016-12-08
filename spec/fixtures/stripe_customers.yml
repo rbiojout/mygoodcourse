@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  stripe_id: cus_9MWjev5qYQOl8Z
+  account_balance: 0
+  currency: EUR
+  delinquent: false
+  customer: one
+
+two:
+  stripe_id: cus_9MWjev5qYQOl81
+  account_balance: 0
+  currency: EUR
+  delinquent: false
+  customer: two

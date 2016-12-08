@@ -32,6 +32,7 @@
 //= require summernote
 //= require summernote-fr.js
 
+
 // require bootstrap-treenav
 // require bootstrap-wysihtml5
 // require bootstrap-wysihtml5/locales
