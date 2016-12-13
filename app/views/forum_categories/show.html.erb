@@ -33,7 +33,7 @@
 
 <% @forum_subjects.each do |forum_subject| %>
 
-    <div class="row">
+    <div class="row" id="forum_subject_<%= forum_subject.id%>">
       <div class="col-xs-12">
           <h3><span class="fa fa-bullhorn fa-lg"></span> <%= link_to forum_subject.name, forum_subject_path(forum_subject) %></h3>
         <p>Created by <%= link_to forum_subject.customer.full_name, customer_path(forum_subject.customer) %>  - <%= nice_date(forum_subject.created_at) %></p>

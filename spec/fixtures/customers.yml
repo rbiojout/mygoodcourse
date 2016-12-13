@@ -4,8 +4,9 @@ one:
   name: Customer1
   first_name: FirstName1
   email: customer1@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture: MyString
+  picture: default_picture.jpg
   confirmation_token: 001if7ZPUBBxgdWuMwY_
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -13,8 +14,9 @@ two:
   name: Customer2
   first_name: FirstName2
   email: customer2@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture: MyString
+  picture: default_picture.jpg
   confirmation_token: 002if7ZPUBBxgdWuMwY_
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -22,8 +24,9 @@ seller_one:
   name: Seller1
   first_name: FirstName
   email: seller1@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: seller_one
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -31,8 +34,9 @@ seller_two:
   name: Seller2
   first_name: FirstName
   email: seller2@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: seller_two
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -40,8 +44,9 @@ seller_no_stripe:
   name: SellerNoStripe
   first_name: FirstName
   email: sellernostripe@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: seller_no_stripe
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -51,7 +56,7 @@ buyer_one:
   email: buyer1@test.com
   encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: buyer_one
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -61,7 +66,7 @@ buyer_two:
   email: buyer2@test.com
   encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: buyer_two
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -69,8 +74,9 @@ customer_without_orders:
   name: CustomerWithoutdOrders
   first_name: FirstName3
   email: CustomerWithoutdOrders@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: customer_without_orders
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -78,8 +84,9 @@ customer_with_rejected_orders:
   name: CustomerWithRejectedOrders
   first_name: FirstName
   email: CustomerWithRejectedOrders@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: customer_with_rejected_orders
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -87,8 +94,9 @@ stripe-managed:
   name: StripeManaged
   first_name: FirstName
   email: StripeManaged@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: stripe-managed
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -96,8 +104,9 @@ stripe_standalone:
   name: StripeStandalone
   first_name: FirstName
   email: StripeStandalone@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: stripe_standalone
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -105,8 +114,9 @@ stripe_oauth:
   name: StripeOauth
   first_name: FirstName
   email: StripeOauth@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: stripe_oauth
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -114,8 +124,9 @@ no_wish:
   name: NoWish
   first_name: NoWish
   email: NoWish@test.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: +33663220909
-  picture:
+  picture: default_picture.jpg
   confirmation_token: NoWish
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
 
@@ -124,7 +135,9 @@ JoeBloggs:
   first_name: Joe
   name: Bloggs
   email: joe@example.com
+  encrypted_password: <%=Devise::Encryptor.digest(Customer, "Helloworld1*")%>
   mobile: '01234 123123'
+  picture: default_picture.jpg
   formatted_address: 'Unit 9 Winchester Place, North Street, BH15 1NX'
   street_address:
   administrative_area_level_1:

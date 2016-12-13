@@ -1,18 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  description: MyText
+  name: Article 1
+  description: text of Article 1
   position: 1
-  slug: MyString
+  slug: one
   topic: one
   counter_cache: 1
 two:
-  name: MyString
-  description: MyText
+  name: Article 2
+  description: text of Article 2
   position: 2
-  slug: MyString
+  slug: two
   topic: two
+  counter_cache: 1
 
 order_one:
   name: OrderOne

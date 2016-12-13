@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -43,8 +42,8 @@ gem 'jquery-turbolinks'
 # handle file upload with javascript, in particular for progress bar
 gem 'jquery-fileupload-rails'
 
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
+# Turbolinks makes following links in your web application faster.
+# Read more: https://github.com/rails/turbolinks
 gem 'turbolinks', '~> 5.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
@@ -98,9 +97,8 @@ gem 'rack-cors'
 # summernote directly added with js file
 # gem 'summernote-rails'
 
-
 # add datetime picker with bootstrap
-#gem 'bootstrap-datepicker-rails'
+# gem 'bootstrap-datepicker-rails'
 gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 # gem 'bootstrap-daterangepicker-rails'
 
@@ -130,7 +128,6 @@ gem 'grim'
 # store in the cloud, in particular AWS
 gem 'fog'
 
-
 # button for social networks
 gem 'social-share-button'
 
@@ -149,7 +146,6 @@ gem 'rails_admin'
 # New relic to monitor performances
 gem 'newrelic_rpm'
 
-
 # for Heroku
 group :production do
   gem 'rails_12factor'
@@ -164,18 +160,6 @@ group :test do
 
   # generating random data for the tests
   gem 'faker'
-end
-
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
-  #gem 'sqlite3'
-  #gem 'i18n-tasks', '~> 0.9.5'
-
-  #gem 'jasmine'
-  #gem "teaspoon-jasmine"
-
   # spring command line for rspec
   gem 'spring-commands-rspec'
   gem 'rspec-rails', '~> 3.5.2'
@@ -183,11 +167,28 @@ group :development, :test do
   gem 'factory_girl_rails'
   # automation framework used for creating functional tests that simulates how users will interact
   gem 'capybara'
-  #gem 'spring-commands-rspec', git: 'https://github.com/thewoolleyman/spring-commands-rspec.git'
+
+  # gem 'spring-commands-rspec', git: 'https://github.com/thewoolleyman/spring-commands-rspec.git'
   # START_HIGHLIGHT
+  # this is a headless way to test instead of Selenium
   gem 'poltergeist'
   # END_HIGHLIGHT
 
+  #gem 'selenium-webdriver'
+end
+
+
+group :development, :test do
+  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'byebug'
+  # gem 'sqlite3'
+  # gem 'i18n-tasks', '~> 0.9.5'
+
+  # gem 'jasmine'
+  # gem "teaspoon-jasmine"
+
+  gem 'rubocop', require: false
+  gem 'brakeman', :require => false
 
 end
 
@@ -196,7 +197,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console'
 
-  # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  # Spring speeds up development by keeping your application running in the background.
+  # Read more: https://github.com/rails/spring
   gem 'spring'
 
   # help debugging
@@ -214,17 +216,17 @@ group :development do
   # use bundle exec rake diagram:all_with_engines
   gem 'railroady'
 
-  # look at https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
+  # look at
+  # https://infinum.co/the-capsized-eight/articles/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
   # memory usage
   # gem 'derailed_benchmarks'
 
   # the profiler used
   gem 'rack-mini-profiler', require: false
-  #gem 'brakeman', :require => false
+  # gem 'brakeman', :require => false
   # gem "rubycritic", :require => false
 
   gem 'i18n-tasks', '~> 0.9.5'
-
 
 end
 

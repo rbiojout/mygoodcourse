@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  name: MyString
-  text: MyText
+  name: Forum Subject 1
+  text: text for Forum Subject 1
   customer: one
   forum_category: one
 
 two:
-  name: MyString
-  text: MyText
+  name: Forum Subject 2
+  text: text for Forum Subject 2
   customer: one
   forum_category: one

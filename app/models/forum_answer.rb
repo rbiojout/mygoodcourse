@@ -28,4 +28,6 @@ class ForumAnswer < ActiveRecord::Base
   has_many :comments, class_name: "Comment", as: :commentable
 
   validates :text, :forum_subject, presence: true
+
+  default_scope -> { order(created_at: :desc) }
 end

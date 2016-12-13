@@ -25,22 +25,16 @@
 @import "famfamfam-flags";
 
 // import all scss files
+// IMPORTANT none scss files are not imported
 @import "*";
+@import "../../../vendor/assets/stylesheets/*";
 
 /*
  * we add manually additional css to be part of the asset pipeline
  * we don't use a directive for this
  *
  */
-// add the css files needed
-@import "animate";
-// datetime picker
-@import "bootstrap-datetimepicker";
-@import "star-rating";
-@import "summernote";
-@import "theme-krajee-fa";
-@import "theme-krajee-svg";
-@import "theme-krajee-uni";
+
 
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files

@@ -3,7 +3,8 @@ FactoryGirl.define do
     name          { Faker::Name.last_name }
     first_name    { Faker::Name.first_name}
     email         { Faker::Internet.email }
-    password      { Faker::Internet.password(8)}
+    password      "Helloworld1*"
+    password_confirmation      "Helloworld1*"
     mobile        { Faker::PhoneNumber.cell_phone }
     street_address       { Faker::Address.street_address }
     postal_code   { Faker::Address.postcode }

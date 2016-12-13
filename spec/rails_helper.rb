@@ -8,9 +8,30 @@ require 'rspec/rails'
 
 
 # Add additional requires below this line. Rails is not loaded until this point!
+# in order to test the integration with a headless browser
+require "capybara/rails"
+require 'capybara/poltergeist'
+Capybara.register_driver :poltergeist do |app|
+  Capybara::Poltergeist::Driver.new(app, {
+      debug: false,
+      default_wait_time: 30,
+      timeout: 60,
+      js_errors: true,
+      phantomjs_options: ['--load-images=yes']
+  })
+end
 
+
+Capybara.javascript_driver = :poltergeist
+Capybara.default_driver = :poltergeist
+Capybara.current_driver = :poltergeist
+Capybara.default_max_wait_time = 30
+
+
+
+
+# make simple matchers for ActiveRecord
 require 'shoulda/matchers'
-
 Shoulda::Matchers.configure do |config|
   config.integrate do |with|
     with.test_framework :rspec
@@ -21,13 +42,16 @@ end
 require 'devise'
 
 require 'support/factory_girl'
-#require 'support/database_cleaner'
-require 'support/controller_macros'
 
+require 'support/database_cleaner'
+
+require 'support/controller_macros'
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, :type => :controller
   config.extend ControllerMacros, :type => :controller
 end
+
+
 
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
@@ -50,8 +74,17 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
+
+  config.include Warden::Test::Helpers
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
+
+  # the fixtures for the default files must be already installed
+  # in the public folder
+  # run the bundle exec rake clean_tests:clean_files if needed
+  # it will reset the default file fixtures used by the factories
+  # and associated to CarrierWave
 
   # we load all fixture first thing
   config.global_fixtures = :all
@@ -59,7 +92,8 @@ RSpec.configure do |config|
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
-  config.use_transactional_fixtures = true
+  # use of DatabaseClearner to do the job
+  config.use_transactional_fixtures = false
 
   # RSpec Rails can automatically mix in different behaviours to your tests
   # based on their file location, for example enabling you to call `get` and
@@ -80,4 +114,28 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # we use the default pictures
+  # that are located in the public part to be served
+  # in /public/uploads/test
+  # make sure the fixtures are present
+  CarrierWave.root = Rails.root.join("public")
+
+  if defined?(CarrierWave)
+    CarrierWave::Uploader::Base.descendants.each do |klass|
+      next if klass.anonymous?
+      klass.class_eval do
+        def cache_dir
+          "#{Rails.root}/public/uploads/test/tmp"
+        end
+
+        def store_dir
+          "#{Rails.root}/public/uploads/test/#{model.class.to_s.underscore}/#{mounted_as}"
+        end
+      end
+    end
+  end
+
+
+
 end
