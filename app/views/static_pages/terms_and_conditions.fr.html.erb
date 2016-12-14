@@ -609,7 +609,7 @@
               <td><%= nice_price(oi.application_fee) %></td>
               <td>(incl. <%= nice_price(oi.tax_amount) %>)</td>
               <td><%= nice_price(oi.unit_cost_price) %></td>
-              <td><%= oi.share_seller.round(0) %> %</td>
+              <td><%= oi.share_seller.to_i %> %</td>
             </tr>
         <% end %>
       </table>

@@ -53,8 +53,5 @@ class Article < ActiveRecord::Base
   multisearchable :against => [:name, :description]
   pg_search_scope :search_by_text, :against => [:name, :description, ], :ignoring => :accents
 
-  private
-
-
 
 end

@@ -26,7 +26,7 @@
           <div class="row">
             <div class="col-xs-12">
               <div id="order_items_index">
-                <%= render(partial: "order_items/order_item", collection: current_order.order_items) %>
+                <%= render(partial: 'order_items/order_item', collection: current_order.order_items) %>
               </div>
             </div>
           </div>
@@ -39,7 +39,7 @@
 
   <div class="col-xs-12 col-md-4">
     <% if stripe_cards.count == 0 %>
-        <%= render "orders/new_card" %>
+        <%= render 'orders/new_card' %>
     <% else %>
         <div class="tabs mycards-tabs">
           <ul class="nav nav-tabs" role="tablist">
@@ -57,7 +57,7 @@
                       <li class="list-unstyled">
                         <h4>
                               <span class="fa fa-credit-card"></span> (<%= card.brand %>) **** <%= card.last4 %>
-                          <%= link_to t('helpers.action.pay')+' '+ nice_price(current_order.total), checkout_confirmation_path(stripeToken: card.stripe_id), class: "btn btn-success" %>
+                          <%= link_to t('helpers.action.pay')+' '+ nice_price(current_order.total), checkout_confirmation_path(stripeToken: card.stripe_id), class: 'btn btn-success' %>
 
                         </h4>
                       </li>
@@ -71,7 +71,7 @@
             <!--- end Existing Cards --->
             <!--- New Card --->
             <div role="tabpanel" class="tab-pane" id="new_card">
-              <%= render "orders/new_card" %>
+              <%= render 'orders/new_card' %>
             </div>
             <!--- end New Card --->
           </div>

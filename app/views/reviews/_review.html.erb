@@ -6,7 +6,7 @@
   <div class="quote-panel panel-tools review-text">
     <div class="arrow"></div>
     <div class="panel-heading">
-      <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
+      <%= render :partial => 'reviews/show_stars', :locals => {:score => review.score, :simple => true} %>
       <h4><%= review.title %></h4>
       <p><small class="text-muted"><i class="fa fa-clock-o"></i> <%= time_ago_in_words(review.created_at) %></small></p>
     </div>

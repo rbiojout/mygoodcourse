@@ -1,6 +1,6 @@
 ##
 # generated with rails g task carrierwave reprocess_attachments
-# use rake clean_tests:clean_files
+# use bundle exec rake clean_tests:clean_files
 ##
 namespace :clean_tests do
 

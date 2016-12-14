@@ -63,7 +63,7 @@ class Customers::RegistrationsController < Devise::RegistrationsController
     begin
       resource.destroy
     rescue
-      #@TODO check if customer if prevented from being deleted
+      # @TODO check if customer if prevented from being deleted
     end
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)
     set_flash_message! :notice, :destroyed

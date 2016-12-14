@@ -9,7 +9,8 @@ gem 'rails-i18n'
 
 # country informations and flags
 gem 'countries'
-gem 'famfamfam_flags_rails'
+# we put the files in vendor directly
+# gem 'famfamfam_flags_rails'
 
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.19'

@@ -145,9 +145,6 @@ class OrderItem < ActiveRecord::Base
     read_attribute(:unit_price) || (product.nil? ? BigDecimal(0):product.price) || BigDecimal(0)
   end
 
-
-
-
   # The unit price for the item without tax
   # VAT tax is only on the commission
   # unit_price_without_tax = unit_price*( 1 - COMMISSION_RATE/100*TAX_RATE/100)
@@ -156,8 +153,6 @@ class OrderItem < ActiveRecord::Base
   def unit_price_without_tax
     unit_price - tax_amount
   end
-
-
 
   # The cost price for the item meaning the part for the seller
   # based on the price without tax and the commission rate
@@ -168,8 +163,6 @@ class OrderItem < ActiveRecord::Base
   def unit_cost_price
     read_attribute(:cost_price) || unit_price - application_fee
   end
-
-
 
   # The share of the seller
   # compared to the unit_price
@@ -183,7 +176,6 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-
   # The application fee for the platfom
   # based on the unit cost price deducted from the unit price
   # application_fee = unit_price - unit_cost_price
@@ -194,8 +186,6 @@ class OrderItem < ActiveRecord::Base
     read_attribute(:application_fee) || (unit_price * (COMMISSION_RATE/100) + TRANSACTION_COST/100).round(2) || BigDecimal(0)
   end
 
-
-
   # The tax rate for the item
   # the VAT is only on the commission
   #
@@ -203,7 +193,6 @@ class OrderItem < ActiveRecord::Base
   def tax_rate
     read_attribute(:tax_rate) || TAX_RATE || product.try(:tax_rate).try(:rate_for, order) || BigDecimal(0)
   end
-
 
   # The total tax for the item
   # sub_total = amount with taxes
@@ -214,7 +203,6 @@ class OrderItem < ActiveRecord::Base
   def tax_amount
     read_attribute(:tax_amount) || (application_fee * tax_rate/100)
   end
-
 
   # The total cost for the product
   # excluding VAT
@@ -254,5 +242,4 @@ class OrderItem < ActiveRecord::Base
   def application_fee_without_tax
     application_fee * (1 -  tax_rate/100)
   end
-
 end

@@ -6,7 +6,7 @@
 <div class="<%= 'col-md-4' if with_cols %>">
   <div style="clear:both;">
       <%= link_to(post_path(post), class: 'pull-left relative') do %>
-          <%= image_tag post.preview, class: "img-responsive" %>
+          <%= image_tag post.preview, class: 'img-responsive' %>
           <span class="bottom-right white">
         <small><%= "#{post.customer.first_name} #{post.customer.name}"%></small>
             <%= image_tag post.customer.picture, class: 'img-circle customer-picture-xs bg-white' %>

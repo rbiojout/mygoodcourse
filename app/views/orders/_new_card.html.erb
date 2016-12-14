@@ -21,17 +21,17 @@
             <div class="form-group">
               <%= label_tag t('activerecord.attributes.payment.expiration_date'), nil, required: true %><br>
               <div class="col-xs-6 col-lg-6 pl-ziro">
-                <%= select_month(Date.today, {use_two_digit_numbers: true},  class: 'form-control', data: {stripe: "exp-month"}) %>
+                <%= select_month(Date.today, {use_two_digit_numbers: true},  class: 'form-control', data: {stripe: 'exp-month'}) %>
               </div>
               <div class="col-xs-6 col-lg-6 pl-ziro">
-                <%= select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 10}, class: 'form-control', data: {stripe: "exp-year"}) %>
+                <%= select_year(Date.today.year, {start_year: Date.today.year, end_year: Date.today.year + 10}, class: 'form-control', data: {stripe: 'exp-year'}) %>
               </div>
             </div>
           </div>
           <div class="col-xs-4 col-md-4 pull-right">
             <div class="form-group">
               <%= label_tag t('activerecord.attributes.payment.cv_code'), nil, required: true %>
-              <%= password_field_tag :cvCode, nil, :class=> "form-control", :placeholder=> "CV", "data-stripe" => "cvc"%>
+              <%= password_field_tag :cvCode, nil, :class=> 'form-control', :placeholder=> 'CV', 'data-stripe' => 'cvc'%>
             </div>
           </div>
         </div>
@@ -47,7 +47,7 @@
       -->
         <div class="row">
           <div class="col-xs-12">
-            <%= submit_tag t('helpers.action.pay'), class: "btn btn-success btn-lg btn-block" %>
+            <%= submit_tag t('helpers.action.pay'), class: 'btn btn-success btn-lg btn-block' %>
           </div>
         </div>
         <div class="row" style="display:none;">

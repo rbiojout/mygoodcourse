@@ -33,10 +33,5 @@ class CustomerAccountFlowTest < ActionDispatch::IntegrationTest
     # we recreate the account
     post customer_registration_path, customer: { email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name }, locale: I18n.default_locale
     assert_equal 200, status
-
-
   end
-
-
-
 end

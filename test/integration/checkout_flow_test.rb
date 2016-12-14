@@ -166,7 +166,7 @@ class CheckoutFlowTest < ActionDispatch::IntegrationTest
     get checkout_confirmation_path, :stripeToken => token[:id]
     assert_match I18n.t('dialog.shop.alert_rejected_order'), flash[:alert]
 
-    #@TODO look to uninitialized constant Order::Errors
+    # @TODO look to uninitialized constant Order::Errors
     @current_order = assigns(:current_order)
     assert @current_order.rejected?
     assert @current_order.may_reset?

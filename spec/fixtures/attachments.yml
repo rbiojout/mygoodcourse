@@ -1,7 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -10,7 +10,7 @@ one: # generated id:980190962
   product: one
 
 two: # generated id:298486374
-  file: 'Sommaire2.pdf'
+  file: 'default_document.pdf'
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -19,7 +19,7 @@ two: # generated id:298486374
   product: two
 
 free_from_seller_one: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -28,7 +28,7 @@ free_from_seller_one: # generated id:980190962
   product: free_from_seller_one
 
 one_from_seller_one: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -37,7 +37,7 @@ one_from_seller_one: # generated id:980190962
   product: one_from_seller_one
 
 two_from_seller_one: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -46,7 +46,7 @@ two_from_seller_one: # generated id:980190962
   product: two_from_seller_one
 
 free_from_seller_two: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -55,7 +55,7 @@ free_from_seller_two: # generated id:980190962
   product: free_from_seller_two
 
 one_from_seller_two: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -64,7 +64,7 @@ one_from_seller_two: # generated id:980190962
   product: one_from_seller_two
 
 two_from_seller_two: # generated id:980190962
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -73,7 +73,7 @@ two_from_seller_two: # generated id:980190962
   product: two_from_seller_two
 
 one_from_seller_no_stripe:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -82,7 +82,7 @@ one_from_seller_no_stripe:
   product: one_from_seller_no_stripe
 
 priced_one:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -91,7 +91,7 @@ priced_one:
   product: priced_one
 
 priced_two:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -100,7 +100,7 @@ priced_two:
   product: priced_two
 
 ProdF1C1_C1L1:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -109,7 +109,7 @@ ProdF1C1_C1L1:
   product: ProdF1C1_C1L1
 
 ProdF1C2_C1L2:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -118,7 +118,7 @@ ProdF1C2_C1L2:
   product: ProdF1C2_C1L2
 
 ProdF2C1_C2L1:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1
@@ -127,7 +127,7 @@ ProdF2C1_C2L1:
   product: ProdF2C1_C2L1
 
 ProdF2C2_C2L2:
-  file: "Sommaire.pdf"
+  file: "default_document.pdf"
   file_size: 1
   file_type: 'application/pdf'
   nbpages: 1

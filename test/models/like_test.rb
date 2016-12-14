@@ -5,7 +5,7 @@ class LikeTest < ActiveSupport::TestCase
   #   assert true
   # end
 
-  test "should validate like for Product" do
+  test 'should validate like for Product' do
     customer = customers(:one)
     product = products(:one)
     like_for_prod = likes(:cust_one_prod_one)
@@ -15,7 +15,7 @@ class LikeTest < ActiveSupport::TestCase
     assert product.liked?(customer)
   end
 
-  test "should validate like for Review" do
+  test 'should validate like for Review' do
     customer = customers(:one)
     review = reviews(:one)
     like_for_review = likes(:cust_one_review_one)
@@ -24,5 +24,4 @@ class LikeTest < ActiveSupport::TestCase
 
     assert review.liked?(customer)
   end
-
 end

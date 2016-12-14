@@ -49,7 +49,7 @@
         <h3><%= @product.name %></h3>
         <div id="product_score">
           <%= link_to 'javascript:show_reviews();' do %>
-            <%= render :partial => "reviews/show_stars", locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
+            <%= render :partial => 'reviews/show_stars', locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
           <% end %>
         </div>
 

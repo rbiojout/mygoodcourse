@@ -1,5 +1,5 @@
 <!-- COMMENT - START -->
-<li id='<%= "current_comment" if comment == @current_comment %>' class='comment-panel comment_<%= comment.id%>'>
+<li id='<%= 'current_comment' if comment == @current_comment %>' class='comment-panel comment_<%= comment.id%>'>
   <!-- Customer picture -->
   <div class="comment-customer"><%= render(partial: 'customers/customer', locals: {customer: comment.customer, withcols: 'false'}) %></div>
   <!-- Comment text -->

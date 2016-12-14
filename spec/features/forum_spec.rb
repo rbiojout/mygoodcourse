@@ -1,13 +1,13 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-RSpec.describe "Forum visit", feature: true, js: true do
+RSpec.describe "forum visit", feature: true, js: true do
 
   it 'visit forum open' do
 
     visit forum_subject_path(forum_subjects(:one))
 
-    country = countries(:one)
+    country = countries(:france)
 
     visit forum_families_path(:country_id => country.id)
     has_css?('.forum_family-panel')
@@ -26,7 +26,7 @@ RSpec.describe "Forum visit", feature: true, js: true do
       #expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
     end
 
-    save_screenshot("#{::Rails.root}/spec/forum_visit.jpg")
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_visit.jpg")
 
   end
 
@@ -36,7 +36,7 @@ end
 RSpec.feature "Forum answer management", :type => :feature, js: true do
 
   scenario 'visit forum', js: true do
-    country = countries(:one)
+    country = countries(:france)
     visit forum_families_path(:country_id => country.id)
     has_css?('.forum_family-panel')
 
@@ -52,7 +52,7 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
       click_on(forum_subject.name)
     #end
     expect(find("h1")).to have_content(forum_subject.name)
-    save_screenshot("#{::Rails.root}/spec/forum_answer.jpg")
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_answer.jpg", full: true)
 
   end
 
@@ -83,10 +83,8 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
       # this is a client side action
       # we use jquery to change the value
       page.execute_script("$('textarea#forum_subject_text').text('#{text}')")
-      #fill_in('forum_subject_text', :with => text)
-
+      sleep(1)
       find('input[name="commit"]').click
-      #click(I18n.translate('customers.sessions.new.sign_in'))
     end
 
     # check if the page is ready
@@ -95,7 +93,7 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     # retreive from DB
     forum_subject = ForumSubject.find(forum_subject.id)
     expect(forum_subject.text).to eq(text)
-    save_screenshot("#{::Rails.root}/spec/forum_subject.jpg")
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_subject.jpg", full: true)
   end
 
   scenario "add answer to subject", js: true do
@@ -146,7 +144,7 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     expect(page).to have_content(text)
 
     # check if the page is ready
-    save_screenshot("#{::Rails.root}/spec/forum_answer.jpg")
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_answer.jpg", full: true)
   end
 
   scenario "add comment to answer", js: true do
@@ -196,8 +194,10 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     expect(page).to have_css("li.comment_#{comment.id}")
     expect(page).to have_content(text)
 
+    # @TODO look for the number of comments displayed on page
+
     # check if the page is ready
-    save_screenshot("#{::Rails.root}/spec/forum_comment.jpg")
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_comment.jpg", full: true)
   end
 
 end

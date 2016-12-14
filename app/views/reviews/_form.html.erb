@@ -13,7 +13,7 @@
           <span class='badge'><%=@review.score%></span>
         </div>
         <% else %>
-    <%= f.input :score, type: 'number', input_html: { class: 'rating', 'data-max' => '5', 'data-step' => '1', 'data-show-clear' => 'false', 'data-size' => "xs"  } %>
+    <%= f.input :score, type: 'number', input_html: { class: 'rating', 'data-max' => '5', 'data-step' => '1', 'data-show-clear' => 'false', 'data-size' => 'xs'} %>
         <% end %>
     <%= f.input :title, placeholder: 'Title or Summary (needed)' %>
     <%= f.input :description, as: :text %>

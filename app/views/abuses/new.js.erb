@@ -1,7 +1,7 @@
 // TODO : need to handle the NOT AUTHORIZE
 $('#app_dialog h3').html('<%= j I18n.translate('helpers.action.abuse.create')+ ' ('+abusable_name(@abuse)+')'%>');
 
-$('#app_dialog .modal-body').html('<%= j render("form_ajax") %>');
+$('#app_dialog .modal-body').html('<%= j render('form_ajax') %>');
 
 $('#app_dialog').modal("show");
 

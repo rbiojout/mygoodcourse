@@ -1,12 +1,12 @@
 
 
 
-<%= form_for(@comment, remote: true, :html => { :role => "form", 'data-model' => 'comment', :class => 'ajax_form' }) do |f| %>
+<%= form_for(@comment, remote: true, :html => {:role => 'form', 'data-model' => 'comment', :class => 'ajax_form' }) do |f| %>
 
     <div id="error_explanation" class="bg-danger text-danger">
       <% if @comment.errors.any? %>
           <div id="error_explanation">
-            <h2><%= pluralize(@comment.errors.count, "error") %> prohibited this abuse from being saved:</h2>
+            <h2><%= pluralize(@comment.errors.count, 'error') %> prohibited this abuse from being saved:</h2>
 
             <ul>
               <% @comment.errors.full_messages.each do |msg| %>
@@ -19,13 +19,13 @@
     </div>
     <%= tag(:input, name: @context.class.to_s.underscore+'_id', type: 'hidden', value: @context.id)%>
         <div class="form-group">
-          <%= f.label :text, t('activerecord.attributes.comment.text'), :class => "control-label" %>
-          <%= f.text_area :text, :rows => 5, :class => "form-control" %>
+          <%= f.label :text, t('activerecord.attributes.comment.text'), :class => 'control-label' %>
+          <%= f.text_area :text, :rows => 5, :class => 'form-control' %>
           <span class="help-block"></span>
         </div>
         <div class="form-group">
-          <%= f.submit  @comment.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
-          <%= link_to t('actions.undo'), '#', :class => "btn btn-default" %>
+          <%= f.submit  @comment.new_record? ? t('actions.create') : t('actions.update'), :class => 'btn btn-primary' %>
+          <%= link_to t('actions.undo'), '#', :class => 'btn btn-default' %>
         </div>
 
 

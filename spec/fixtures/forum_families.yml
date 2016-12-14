@@ -4,12 +4,12 @@ one:
   name: Forum Family 1
   description: description of Forum Family One
   visual: default_visual.jpg
-  country: one
+  country: france
   position: 1
 
 two:
   name: Forum Family 2
   description: description of Forum Family Two
   visual: default_visual.jpg
-  country: two
+  country: uk
   position: 2

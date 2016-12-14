@@ -3,7 +3,7 @@
    # context : parameter to refer to the polymorphic
    context ||=@context
    context_type = context.class.name.underscore
-   context_param = context.class.name.underscore + "_id"
+   context_param = context.class.name.underscore + '_id'
    context_value = context.id
 %>
 <% if customer_signed_in? %>

@@ -1,6 +1,5 @@
 # Preview all emails at http://localhost:3000/rails/mailers/abuse_mailer
 class AbuseMailerPreview < ActionMailer::Preview
-
   def received_en
     abuse = Abuse.last
     I18n.locale = 'en'

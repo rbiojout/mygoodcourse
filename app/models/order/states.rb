@@ -130,7 +130,7 @@ class Order < ActiveRecord::Base
       share_seller += roi.unit_cost_price
     end
 
-    #@TODO if the total amount is 0.0 we don't charge with Stripe
+    # @TODO if the total amount is 0.0 we don't charge with Stripe
 
 
     # take the corresponding Stripe Account

@@ -1,6 +1,5 @@
 # Preview all emails at http://localhost:3000/rails/mailers/order_mailer
 class OrderMailerPreview < ActionMailer::Preview
-
   def received_en
     order = Order.first
     I18n.locale = 'en'
@@ -36,5 +35,4 @@ class OrderMailerPreview < ActionMailer::Preview
     I18n.locale = 'fr'
     OrderMailer.rejected(order)
   end
-
 end

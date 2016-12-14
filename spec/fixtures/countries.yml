@@ -29,7 +29,7 @@ not_linked:
 
 uk:
   name:        'United Kingdom'
-  code2:       'GB'
+  code2:       'gb'
   code3:       'GBR'
   continent:   'EU'
   tld:         'uk'
@@ -38,7 +38,7 @@ uk:
 
 us:
   name:        'United States of America'
-  code2:       'US'
+  code2:       'us'
   code3:       'USA'
   continent:   'NA'
   tld:         'us'
@@ -47,7 +47,7 @@ us:
 
 france:
   name:        'France'
-  code2:       'FR'
+  code2:       'fr'
   code3:       'FRA'
   continent:   'EU'
   tld:         'fr'

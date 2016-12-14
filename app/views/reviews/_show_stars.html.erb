@@ -14,19 +14,19 @@
 
 
   %>
-  <%= content_tag("div", class: 'product-rating') do
+  <%= content_tag('div', class: 'product-rating') do
 
   1.upto(nb_stars) do |i|
     if i<=score
-      concat content_tag("span", ' ', class: "fa fa-star active-star")+ ' '
+      concat content_tag('span', ' ', class: 'fa fa-star active-star')+ ' '
     else
-      concat content_tag("span", ' ', class: "fa fa-star-o aero")+ ' '
+      concat content_tag('span', ' ', class: 'fa fa-star-o aero')+ ' '
     end
     # make some space for the stars
     concat ' '
   end
   # add the score in a visual way
-  concat content_tag("span", score.round(2), class: 'badge') unless simple
+  concat content_tag('span', score.round(2), class: 'badge') unless simple
 
 end %>
 

@@ -81,7 +81,7 @@ class OrdersController < ApplicationController
     current_order.reset! if current_order.may_reset?
 
     # validate card infos
-    #@TODO use validation of card (done only at js level so far)
+    # @TODO use validation of card (done only at js level so far)
 
 
     #if request.patch?
