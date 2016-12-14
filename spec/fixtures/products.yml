@@ -224,3 +224,40 @@ ProdF2C2_C2L2:
   customer: one
   categories: F2C2
   levels: C2L2
+
+# we create 40 products with different prices
+# create 10 free products
+<% (0..9).each do |n| %>
+product_<%= n %>:
+  name: <%= "Product #{n}" %>
+  description: <%= "Product description for number  #{n}" %>
+  active: true
+  price: 0.0
+  customer: one
+  categories: one
+  levels: one
+<% end %>
+
+# create 10 paid products
+<% (10..19).each do |n| %>
+product_<%= n %>:
+  name: <%= "Product #{n}" %>
+  description: <%= "Product description for number  #{n}" %>
+  active: true
+  price: 1.99
+  customer: one
+  categories: one
+  levels: one
+<% end %>
+
+# create 20 expensive paid products
+<% (20..39).each do |n| %>
+product_<%= n %>:
+  name: <%= "Product #{n}" %>
+  description: <%= "Product description for number  #{n}" %>
+  active: true
+  price: 19.99
+  customer: one
+  categories: one
+  levels: one
+<% end %>

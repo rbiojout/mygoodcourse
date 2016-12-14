@@ -1,4 +1,4 @@
-<% if(current_customer.stripe_account.nil?) %>
+<% if current_customer.stripe_account.nil? %>
     <%= render(partial: 'stripe/alert_missing_stripe') %>
 <% end %>
 

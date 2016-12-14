@@ -4,6 +4,6 @@
     <del><%= order_item.product.name %> has been removed</del>
   </div>
   <div class="col-xs-3">
-    <%= link_to t('actions.undo'), undo_order_item_path(product_id: order_item.product.id), remote: true, method: :post, class: "btn btn-primary btn-xs" %>
+    <%= link_to t('actions.undo'), undo_order_item_path(product_id: order_item.product.id), remote: true, method: :post, class: 'btn btn-primary btn-xs' %>
   </div>
 </div>

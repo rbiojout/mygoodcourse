@@ -3,7 +3,7 @@
   <i class="fa fa-exclamation-triangle fa-3x text-danger"></i>
   <%= t('dialog.customer.alert_stripe_needed') %>
   <br/>
-  <% if(current_customer.nil?) %>
+  <% if current_customer.nil? %>
       <%= link_to t('customers.registrations.new.sign_up'), new_customer_registration_path, class: 'btn btn-primary' %>
   <% else %>
       <%= link_to t('helpers.action.stripe_account.create'), stripe_oauth_path, class: 'btn btn-danger' %>

@@ -9,9 +9,9 @@
         <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
             <div><%= t('.currently_waiting_confirmation_for_email', email: resource.unconfirmed_email) %></div>
         <% end %>
-        <%= f.input :password, autocomplete: "off", placeholder: t('.leave_blank_if_you_don_t_want_to_change_it') %>
-        <%= f.input :password_confirmation, autocomplete: "off" %>
-        <%= f.input :current_password, autocomplete: "off", hint: t('.we_need_your_current_password_to_confirm_your_changes') %>
+        <%= f.input :password, autocomplete: 'off', placeholder: t('.leave_blank_if_you_don_t_want_to_change_it') %>
+        <%= f.input :password_confirmation, autocomplete: 'off' %>
+        <%= f.input :current_password, autocomplete: 'off', hint: t('.we_need_your_current_password_to_confirm_your_changes') %>
     </div>
     <div class="form-actions">
       <%= f.button :submit, t('.update'), class: 'btn btn-primary input-block-level form-control' %>

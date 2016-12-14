@@ -6,7 +6,7 @@
   <% @forum_categories.each do |forum_category| %>
 
       <li class="list-group-item" id="forum_category_<%=forum_category.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
+        <%= link_to '#', class: 'btn btn-success' do %>
             <span class="fa fa-sort handle"> move</span>
         <% end %>
         <%= forum_category.name %>

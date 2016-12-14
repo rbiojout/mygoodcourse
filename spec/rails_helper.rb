@@ -14,8 +14,8 @@ require 'capybara/poltergeist'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
       debug: false,
-      default_wait_time: 30,
-      timeout: 60,
+      default_wait_time: 10,
+      timeout: 30,
       js_errors: true,
       phantomjs_options: ['--load-images=yes']
   })

@@ -84,6 +84,9 @@ fr:
       alert_empty_products: "Il n'y a pas encore de produits pour ce client.Vous pouvez suivre cet utilisateur et revenir plus tard..."
     forum_subject:
       populars: 'Sujets populaires'
+      alert_no_subject: "Il n'existe encore aucun sujet pour cette catégorie du forum. Soyez le premier à créer un sujet."
+    forum_answer:
+      alert_no_answer: "Il n'y a pas eu encore de réponse à ce sujet du forum. Soyer le premier à ajouter une réponse."
     order:
       alert_add: "Vous n'avez pas encore effectué une commande. Même pour les produits gratuits, vous devez passer commande pour les garder dans vos historiques. Alors allez-y!"
       alert_add_link: "Explorer le catalogue"

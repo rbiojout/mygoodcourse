@@ -6,7 +6,7 @@
   <% @articles.each do |article| %>
 
       <li class="list-group-item" id="article_<%=article.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
+        <%= link_to '#', class: 'btn btn-success' do %>
             <span class="fa fa-sort handle"> move</span>
         <% end %>
         <%= article.name %>

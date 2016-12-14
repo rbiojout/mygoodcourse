@@ -6,7 +6,7 @@
   <% @categories.each do |category| %>
 
       <li class="list-group-item" id="category_<%=category.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
+        <%= link_to '#', class: 'btn btn-success' do %>
             <span class="fa fa-move handle"> move</span>
         <% end %>
         <%= category.name %>

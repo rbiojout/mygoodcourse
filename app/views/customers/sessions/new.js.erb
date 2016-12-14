@@ -6,7 +6,7 @@ $(location).attr('href', "<%= new_customer_session_path %>");
 $('#app_dialog h3').html("<i class='glyphicon glyphicon-plus'></i> Sign In ");
 
 
-$('.modal-body').html('<%= j render("customers/sessions/form_login") %>');
+$('.modal-body').html('<%= j render('customers/sessions/form_login') %>');
 
 $('#app_dialog').modal("show");
 

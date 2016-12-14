@@ -8,8 +8,8 @@
   Are you sure you wish to delete <b><%= @order_item.product.name %></b>?
   </div>
   <div class="modal-footer">
-    <%= link_to "Yes, Delete This Product", order_item_path(@order_item), method: :delete, remote: true, class: "btn btn-danger" %>
-    <%= link_to "No, Please Don't", "#", class: "btn btn-default", data: { dismiss: "modal" } %>
+    <%= link_to 'Yes, Delete This Product', order_item_path(@order_item), method: :delete, remote: true, class: 'btn btn-danger' %>
+    <%= link_to "No, Please Don't", '#', class: 'btn btn-default', data: {dismiss: 'modal'} %>
   </div>
   </div>
 </div>

@@ -31,7 +31,7 @@
           <%= link_to  edit_product_path(@product), class:'btn btn-primary btn-block margined-vertical' do %>
           <span class="fa fa-pencil"></span> <%= t('helpers.action.edit') %>
           <% end %>
-      <% elsif (!customer_signed_in? || (customer_signed_in? && !@product.is_bought_by_customer(current_customer.id))) %>
+      <% elsif !customer_signed_in? || (customer_signed_in? && !@product.is_bought_by_customer(current_customer.id)) %>
           <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary btn-block' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <small><%= t('dialog.shop.explain_add') %></small>
       <% end %>
@@ -131,12 +131,14 @@
               <!-- alert if empty -->
               <% if @reviews.count==0 %>
                   <!-- add alert with call action to add review -->
-                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('actions.reviews.new'), alert_link_path: new_review_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
+                <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'),
+                                                                    alert_link_text: t('actions.reviews.new'),
+                                                                    alert_link_path: new_review_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
               <% else %>
                 <%= link_to t('helpers.action.review.create'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
               <% end %>
 
-          <% elsif (!current_customer.own_product(@product) && !@product.is_bought_by_customer(current_customer.id))  %>
+          <% elsif !current_customer.own_product(@product) && !@product.is_bought_by_customer(current_customer.id) %>
           <!-- product is not owned nor ordered by the customer -->
               <% if @reviews.count==0 %>
                   <!-- add alert with call action to add to basket -->

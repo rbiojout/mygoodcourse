@@ -3,7 +3,7 @@
 
 <% if f.object.new_record?  %>
       <div class="thumbnail" >
-        <%= image_tag "empty_file.png", class: 'img-responsive panel-image-product' %>
+        <%= image_tag 'empty_file.png', class: 'img-responsive panel-image-product' %>
         <div class="caption caption-file">
             <b>(Format: PDF)</b>
             <%= f.input :file, as: :attachment_preview %>

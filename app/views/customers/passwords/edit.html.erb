@@ -4,8 +4,8 @@
     <%= devise_error_messages! %>
     <%= f.input :reset_password_token, :as => :hidden %>
 
-    <%= f.input :password, :as => :password, :label => t('.new_password'), autofocus: true, autocomplete: "off", :hint =>  ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
-    <%= f.input :password_confirmation, :label => t('.confirm_new_password'), :as => :password, autocomplete: "off", :hint => "Confirm new password" %>
+    <%= f.input :password, :as => :password, :label => t('.new_password'), autofocus: true, autocomplete: 'off', :hint =>  ("#{@minimum_password_length} characters minimum" if @minimum_password_length) %>
+    <%= f.input :password_confirmation, :label => t('.confirm_new_password'), :as => :password, autocomplete: 'off', :hint => 'Confirm new password' %>
 
 
     <div class="actions">
@@ -13,4 +13,4 @@
     </div>
 <% end %>
 
-<%= render "customers/shared/links" %>
+<%= render 'customers/shared/links' %>

@@ -22,7 +22,7 @@
     <% end %>
   </div>
   <!--- stars --->
-  <%= render :partial =>"reviews/show_stars", :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews,:simple => true} %>
+  <%= render :partial => 'reviews/show_stars', :locals => {:score => product.score_reviews, :nb_reviews => product.nb_reviews, :simple => true} %>
   <!--- end stars --->
   <!--- name --->
   <div class="product-name ellipsis">
@@ -41,7 +41,7 @@
 </div>
 
 <button type="button" class="btn btn-warning pull-left" data-dismiss="modal" data-toggle="modal" data-target="#app_dialog">Sign Up?</button>
-<%= link_to "Sign in", new_customer_session_path, remote: 'true', :class => 'btn btn-default' %>
+<%= link_to 'Sign in', new_customer_session_path, remote: 'true', :class => 'btn btn-default' %>
 
 <ul class="nav nav-pills nav-stacked nav-list-main">
   <li><label class="nav-toggle nav-header"><span class="nav-toggle-icon glyphicon glyphicon-chevron-right"></span> <a href="http://www.google.com/">Header 1</a></label>

@@ -6,7 +6,7 @@
   <% @levels.each do |level| %>
 
       <li class="list-group-item" id="level_<%=level.id%>">
-        <%= link_to '#', class: "btn btn-success" do %>
+        <%= link_to '#', class: 'btn btn-success' do %>
             <span class="fa fa-move handle">move</span>
         <% end %>
         <%= level.name %>

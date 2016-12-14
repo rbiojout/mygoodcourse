@@ -18,7 +18,7 @@
     <span class="sr-only">Error:</span>
     <%= alert_message %>
   </p>
-  <% unless (alert_link_text.blank? || alert_link_path.blank?) %>
+  <% unless alert_link_text.blank? || alert_link_path.blank? %>
       <hr/>
       <div class="text-center center-block">
         <%= link_to( alert_link_text, alert_link_path, remote: alert_remote, :method => alert_link_method, locale: locale, class: 'btn btn-primary') %>

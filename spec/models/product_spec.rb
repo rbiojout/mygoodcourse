@@ -18,7 +18,7 @@ RSpec.describe Product, type: :model do
     it "has a correct attachment" do
       @product = create(:product)
       @attachment = @product.attachments.first
-      expect(@attachment.file_size).to eq(326314)
+      expect(@attachment.file_size).to eq(516653)
       expect(@attachment.file_type).to eq('application/pdf')
       expect(@attachment.version_number).to eq(1)
     end

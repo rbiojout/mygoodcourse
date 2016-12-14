@@ -37,7 +37,7 @@
     <!--- end  name --->
     <!--- stars --->
     <div class="text-center">
-        <%= render :partial =>"reviews/show_stars", :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews,:simple => false} %>
+        <%= render :partial => 'reviews/show_stars', :locals => {:score => customer.score_reviews, :nb_reviews => customer.nb_reviews, :simple => false} %>
     </div>
     <!--- end stars --->
 

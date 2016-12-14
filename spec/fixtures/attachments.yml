@@ -134,3 +134,14 @@ ProdF2C2_C2L2:
   version_number: 9.99
   active: true
   product: ProdF2C2_C2L2
+
+<% 40.times do |n| %>
+attachment_<%= n %>:
+  file: 'default_document.pdf'
+  file_size: 1
+  file_type: 'application/pdf'
+  nbpages: 1
+  version_number: 1.0
+  active: true
+  product: product_<%= "#{n}" %>
+<% end %>

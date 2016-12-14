@@ -21,7 +21,7 @@
           </div>
           <div class="panel-body">
             <!--- stars --->
-            <%= render :partial =>"reviews/show_stars", :locals => {:score => review.score,:simple => true} %>
+            <%= render :partial => 'reviews/show_stars', :locals => {:score => review.score, :simple => true} %>
             <!--- end stars --->
             <b><%= review.title %></b>
             <p><%= review.description %></p>

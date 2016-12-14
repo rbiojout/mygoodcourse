@@ -6,7 +6,7 @@
     <%=order.status %>
   </div>
   <div class="col-xs-2">
-    <%=order.created_at.strftime("%D") %>
+    <%=order.created_at.strftime('%D') %>
   </div>
   <div class="col-xs-2">
     <%= number_to_currency(order.amount_paid, precision: 2) %>

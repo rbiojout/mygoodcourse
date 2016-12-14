@@ -28,6 +28,20 @@
         <%= render(partial: 'forum_subjects/forum_subject', locals: {forum_subject: @forum_subject}) %>
     </ul>
     <ul class="forum_answers-list">
+      <!-- add alert with call action to add answer -->
+      <!-- if user is not logged-in we don't allow the creation -->
+      <% if @forum_answers.count==0 %>
+          <% if customer_signed_in? %>
+          <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.forum_answer.alert_no_answer'),
+                                                              alert_link_text: t('helpers.action.forum_answer.create'),
+                                                              alert_link_path: new_forum_answer_path(forum_subject_id: @forum_subject.id), alert_remote: true}) %>
+          <% else %>
+              <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.forum_answer.alert_no_answer'),
+                                                                  alert_link_text: t('helpers.action.forum_answer.create'),
+                                                                  alert_link_path: new_customer_session_path, alert_remote: false}) %>
+          <% end %>
+      <% end %>
+      <!-- end alert -->
       <% @forum_answers.each do |forum_answer| %>
           <%= render(partial: 'forum_answers/forum_answer', locals: {forum_answer: forum_answer}) %>
       <% end %>

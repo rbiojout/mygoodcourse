@@ -65,7 +65,7 @@
         <%= f.input :description, as: 'text', :input_html => {:class => 'summernote'}, placeholder: t('activerecord.attributes.product.place_description'), hint: t('activerecord.attributes.product.hint_description') %>
         <%= f.input :active, hint: t('activerecord.attributes.product.hint_active') %>
         <!-- price can be set only if Stripe is ok -->
-        <% if(current_customer.stripe_account.nil?) %>
+        <% if current_customer.stripe_account.nil? %>
             <%= render(partial: 'stripe/alert_missing_stripe') %>
             <%= f.input :price, :collection => [0.0].collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
         <% else %>

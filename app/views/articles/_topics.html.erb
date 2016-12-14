@@ -2,7 +2,7 @@
   <% @topics.each do |top|%>
     <li>
       <h4>
-        <% if (top.id != @topic.id) %>
+        <% if top.id != @topic.id %>
           <span class="fa-stack">
               <i class="fa fa-circle fa-stack-2x text-muted"></i>
               <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>

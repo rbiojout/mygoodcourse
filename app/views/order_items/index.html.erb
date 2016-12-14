@@ -1,7 +1,7 @@
 
   <div id="order_items_actions">
-    <%= link_to t('dialog.shop.continue_shoping'), catalog_products_path, class: "btn btn-primary btn-sm" %>
-    <%= link_to checkout_path, class: "btn btn-success pull-right" do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.checkout') %><% end %>
+    <%= link_to t('dialog.shop.continue_shoping'), catalog_products_path, class: 'btn btn-primary btn-sm' %>
+    <%= link_to checkout_path, class: 'btn btn-success pull-right' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.checkout') %><% end %>
     <br/>
   </div>
   <div class="new-orderitem"></div>
@@ -10,7 +10,7 @@
   </div>
 
   <div id="order_items_index">
-  <%= render(partial: "order_items/order_item", collection: @order_items) %>
+  <%= render(partial: 'order_items/order_item', collection: @order_items) %>
   </div>
 
 
