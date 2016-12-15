@@ -8,52 +8,49 @@ class CommentsControllerTest < ActionController::TestCase
     sign_in(customers(:one), scope: :customer)
   end
 
-  test "should get new for Post" do
+  test 'should get new for Post' do
     get :new, post_id: posts(:one).id
     assert_response :success
   end
 
-  test "should create comment for Post" do
+  test 'should create comment for Post' do
     assert_difference('Comment.count') do
-      post :create, post_id: posts(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+      post :create, post_id: posts(:one).id, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     end
 
     assert_redirected_to post_path(posts(:one))
   end
 
-  test "should show comment for Post" do
+  test 'should show comment for Post' do
     get :show, id: @comment
     assert_redirected_to post_path(posts(:one))
   end
 
-  test "should get edit for Post" do
+  test 'should get edit for Post' do
     get :edit, id: @comment, post_id: posts(:one).id
     assert_response :success
   end
 
-  test "should create comment for Post via ajax" do
+  test 'should create comment for Post via ajax' do
     sign_in(customers(:one), scope: :customer)
     assert_difference('Comment.count') do
-      xhr :post, :create, post_id: posts(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+      xhr :post, :create, post_id: posts(:one).id, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     end
 
     assert_response :success
-
   end
 
-  test "should update comment for Post" do
-    patch :update, post_id: posts(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+  test 'should update comment for Post' do
+    patch :update, post_id: posts(:one).id, id: @comment, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     assert_redirected_to post_path(posts(:one))
   end
 
-  test "should update comment for Post via ajax" do
+  test 'should update comment for Post via ajax' do
     sign_in(customers(:one), scope: :customer)
-    patch :update, xhr: true, post_id: posts(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
-
-
+    patch :update, xhr: true, post_id: posts(:one).id, id: @comment, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
   end
 
-  test "should destroy comment for Post" do
+  test 'should destroy comment for Post' do
     assert_difference('Comment.count', -1) do
       delete :destroy, id: @comment, post_id: posts(:one).id
     end
@@ -61,47 +58,44 @@ class CommentsControllerTest < ActionController::TestCase
     assert_redirected_to post_path(posts(:one))
   end
 
-  test "should get new for ForumAnswer" do
+  test 'should get new for ForumAnswer' do
     get :new, forum_answer_id: forum_answers(:one).id
     assert_response :success
   end
 
-  test "should create comment for ForumAnswer" do
+  test 'should create comment for ForumAnswer' do
     assert_difference('Comment.count') do
-      post :create, forum_answer_id: forum_answers(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+      post :create, forum_answer_id: forum_answers(:one).id, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     end
 
     assert_redirected_to forum_subject_path(forum_answers(:one).forum_subject)
   end
 
-  test "should get edit for ForumAnswer" do
+  test 'should get edit for ForumAnswer' do
     get :edit, id: @comment, forum_answer_id: forum_answers(:one).id
     assert_response :success
   end
 
-  test "should create comment for ForumAnswer via ajax" do
+  test 'should create comment for ForumAnswer via ajax' do
     sign_in(customers(:one), scope: :customer)
     assert_difference('Comment.count') do
-      xhr :post, :create, forum_answer_id: forum_answers(:one).id, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+      xhr :post, :create, forum_answer_id: forum_answers(:one).id, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     end
 
     assert_response :success
-
   end
 
-  test "should update comment for ForumAnswer" do
-    patch :update, forum_answer_id: forum_answers(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
+  test 'should update comment for ForumAnswer' do
+    patch :update, forum_answer_id: forum_answers(:one).id, id: @comment, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
     assert_redirected_to forum_subject_path(forum_answers(:one).forum_subject)
   end
 
-  test "should update comment for ForumAnswer via ajax" do
+  test 'should update comment for ForumAnswer via ajax' do
     sign_in(customers(:one), scope: :customer)
-    patch :update, xhr: true, forum_answer_id: forum_answers(:one).id, id: @comment, comment: { commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text }
-
-
+    patch :update, xhr: true, forum_answer_id: forum_answers(:one).id, id: @comment, comment: {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
   end
 
-  test "should destroy comment for ForumAnswer" do
+  test 'should destroy comment for ForumAnswer' do
     assert_difference('Comment.count', -1) do
       delete :destroy, id: @comment, forum_answer_id: forum_answers(:one).id
     end

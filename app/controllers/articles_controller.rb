@@ -4,7 +4,6 @@ class ArticlesController < ApplicationController
 
   before_action :authenticate_employee!, except: [:index, :show]
 
-
   # GET /articles
   # GET /articles.json
   def index
@@ -21,7 +20,6 @@ class ArticlesController < ApplicationController
     impressionist(@article)
     # need to reload object
     @article = @article.reload
-
   end
 
   # GET /articles/new
@@ -30,8 +28,7 @@ class ArticlesController < ApplicationController
   end
 
   # GET /articles/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /articles
   # POST /articles.json
@@ -40,7 +37,7 @@ class ArticlesController < ApplicationController
 
     respond_to do |format|
       if @article.save
-        format.html { redirect_to topic_article_path(@article, :topic_id => @article.topic_id), notice: t('views.flash_create_message') }
+        format.html { redirect_to topic_article_path(@article, topic_id: @article.topic_id), notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @article }
       else
         format.html { render :new }
@@ -54,7 +51,7 @@ class ArticlesController < ApplicationController
   def update
     respond_to do |format|
       if @article.update(article_params)
-        format.html { redirect_to topic_article_path(@article, :topic_id => @article.topic_id), notice: t('views.flash_update_message') }
+        format.html { redirect_to topic_article_path(@article, topic_id: @article.topic_id), notice: t('views.flash_update_message') }
         format.json { render :show, status: :ok, location: @article }
       else
         format.html { render :edit }
@@ -68,7 +65,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article.destroy
     respond_to do |format|
-      format.html { redirect_to topic_articles_url(:topic_id => @article.topic_id), notice: t('views.flash_delete_message') }
+      format.html { redirect_to topic_articles_url(topic_id: @article.topic_id), notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end
@@ -77,27 +74,26 @@ class ArticlesController < ApplicationController
   def sort
     unless params[:article].nil?
       params[:article].each .each_with_index do |id, index|
-        Article.update(id, position: index+1)
+        Article.update(id, position: index + 1)
       end
     end
-    render nothing:true
+    render nothing: true
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_article
-      @article = Article.friendly.find(params[:id])
-    end
+private
 
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.friendly.find(params[:topic_id]) unless params[:topic_id].nil?
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_article
+    @article = Article.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def article_params
-      params.require(:article).permit(:name, :description, :position, :topic_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = Topic.friendly.find(params[:topic_id]) unless params[:topic_id].nil?
+  end
 
-
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def article_params
+    params.require(:article).permit(:name, :description, :position, :topic_id)
+  end
 end

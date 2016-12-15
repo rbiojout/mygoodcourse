@@ -3,9 +3,9 @@ FactoryGirl.define do
     name        { Faker::Lorem.sentence }
     description { Faker::Lorem.sentence }
     customer
-    levels      { create_list(:level, 1) }
+    levels { create_list(:level, 1) }
     categories { create_list(:category, 1) }
-    after(:build) do |product, eval|
+    after(:build) do |product, _eval|
       product.attachments << FactoryGirl.build(:attachment, product: product)
     end
 
@@ -18,7 +18,7 @@ FactoryGirl.define do
     end
 
     trait :ordered do
-      order_items { create_list(:order_item, 1)}
+      order_items { create_list(:order_item, 1) }
     end
 
     trait :active do
@@ -45,6 +45,4 @@ FactoryGirl.define do
   factory :product_paid do
     association :product, :paid
   end
-
-
 end

@@ -105,7 +105,7 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
 
     # prepare the file
     # we need to prepare in order to have the file present during the validation of the model
-    post.visual =  fixture_file_upload(Rails.root.join('test/fixtures/files/default_visual.png'), 'image/png')
+    post.visual = fixture_file_upload(Rails.root.join('test/fixtures/files/default_visual.png'), 'image/png')
     post.save
 
     login_as_admin
@@ -152,7 +152,7 @@ class RailsAdminFlowTest < ActionDispatch::IntegrationTest
     assert_select '#CreatedReviewsChart'
   end
 
-  private
+private
 
   def login_as_admin
     Warden.test_mode!

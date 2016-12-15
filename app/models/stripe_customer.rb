@@ -20,8 +20,8 @@
 #  fk_rails_1d9a17c961  (customer_id => customers.id)
 #
 
-  class StripeCustomer < ActiveRecord::Base
-    belongs_to :customer, foreign_key: 'customer_id'
+class StripeCustomer < ActiveRecord::Base
+  belongs_to :customer, foreign_key: 'customer_id'
 
-    has_many :stripe_cards, :class_name => 'StripeCard', dependent: :destroy
+  has_many :stripe_cards, class_name: 'StripeCard', dependent: :destroy
   end

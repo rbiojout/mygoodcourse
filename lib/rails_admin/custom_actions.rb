@@ -4,20 +4,19 @@
 require 'rails_admin/config/actions'
 require 'rails_admin/config/actions/base'
 
-
 module RailsAdmin
   module Config
     module Actions
       # common config for custom actions
       class Customaction < RailsAdmin::Config::Actions::Base
-        register_instance_option :member do  #	this is for specific record
+        register_instance_option :member do #	this is for specific record
           true
         end
         register_instance_option :pjax? do
           false
         end
         register_instance_option :visible? do
-          authorized? 		# This ensures the action only shows up for the right class
+          authorized?	# This ensures the action only shows up for the right class
         end
       end
       class Foo < Customaction
@@ -32,7 +31,7 @@ module RailsAdmin
           [:get, :post]
         end
         register_instance_option :controller do
-          Proc.new do
+          proc do
             # call model.method here
             flash[:notice] = "Did custom action on #{@object.name}"
             redirect_to back_or_index
@@ -130,8 +129,6 @@ module RailsAdmin
           true	#	this is for all records in all models
         end
       end
-
-
     end
   end
 end

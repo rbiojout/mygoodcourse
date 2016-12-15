@@ -1,5 +1,4 @@
 module ProductsHelper
-
   # helper to look if the product belongs to current_customer
   # based on a previously made order
   # @param product[Product]
@@ -7,9 +6,9 @@ module ProductsHelper
   # @return [Boolean]
   def already_bought(product, current_customer)
     if current_customer.nil?
-      return false
+      false
     else
-      return product.in?Product.find_bought_by_customer(current_customer.id)
+      product.in?Product.find_bought_by_customer(current_customer.id)
     end
   end
 
@@ -18,7 +17,6 @@ module ProductsHelper
   # @param products[Product collaction]
   # @return [@Collection]
   def impressions_list(products)
-    Impression.where(:impressionable_type => 'Product', :impressionable_id => products)
+    Impression.where(impressionable_type: 'Product', impressionable_id: products)
   end
-
 end

@@ -174,7 +174,6 @@
 #
 
 Rails.application.routes.draw do
-
   resources :forum_answers
   resources :forum_subjects
   resources :forum_categories, only: [:index, :show] do
@@ -189,25 +188,24 @@ Rails.application.routes.draw do
   end
   resources :comments, except: [:index]
   resources :updates
-  #resources :likes
+  # resources :likes
   # Like and unlike other ressources (polymorphic)
   #
   #
   post 'likes/like' => 'likes#like', :as => 'like_like'
   delete 'likes/unlike' => 'likes#unlike', :as => 'unlike_like'
 
-
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   # protect from having all ressources exposed via CDN Cloudfront
   # Deny everything but /assets
   match '*path', via: :all, to: 'errors#not_found',
-        constraints: CloudfrontConstraint.new
+                 constraints: CloudfrontConstraint.new
 
   resources :reviews
   # abuses reported for Reviews and Products
   resources :abuses, only: [:new, :create]
-  #, only: [:new, :create]
+  # , only: [:new, :create]
   resources :payments, only: [:show] do
     member do
       post 'refund'
@@ -270,16 +268,16 @@ Rails.application.routes.draw do
   devise_for :employees
   resources :employees
   devise_for :customers, controllers: {
-             sessions: 'customers/sessions',
-             registrations: 'customers/registrations',
-             confirmations: 'customers/confirmations',
-             passwords: 'customers/passwords',
-             unlocks: 'customers/unlocks'
-                   }
-  #devise_scope :customers do
+    sessions: 'customers/sessions',
+    registrations: 'customers/registrations',
+    confirmations: 'customers/confirmations',
+    passwords: 'customers/passwords',
+    unlocks: 'customers/unlocks',
+  }
+  # devise_scope :customers do
   #  post "/sign_up", :to => "customers/registrations#create"
   #  post "/sign_in", :to => "customers/sessions#create"
-  #end
+  # end
 
   # Follow and unfollow other peer customers
   #
@@ -290,10 +288,10 @@ Rails.application.routes.draw do
   #
   # Product browsing
   #
-  #get 'products' => 'products#categories', :as => 'catalogue'
-  #get 'products/filter' => 'products#filter', :as => 'product_filter'
-  #get 'products/:category_id' => 'products#index', :as => 'products'
-  #get 'products/:category_id/:product_id' => 'products#show', :as => 'product'
+  # get 'products' => 'products#categories', :as => 'catalogue'
+  # get 'products/filter' => 'products#filter', :as => 'product_filter'
+  # get 'products/:category_id' => 'products#index', :as => 'products'
+  # get 'products/:category_id/:product_id' => 'products#show', :as => 'product'
 
   post 'products/:product_id/buy' => 'products#add_to_basket', :as => 'buy_product'
   delete 'products/:order_item_id/remove_from_basket' => 'products#remove_from_basket', :as => 'remove_basket_item'
@@ -304,7 +302,6 @@ Rails.application.routes.draw do
   post 'wish_lists/wish' => 'wish_lists#wish', :as => 'wish_product'
   delete 'wish_lists/unwish' => 'wish_lists#unwish', :as => 'unwish_product'
 
-
   #
   # Order status
   #
@@ -313,15 +310,15 @@ Rails.application.routes.draw do
   #
   # Basket
   #
-  #get 'basket/:id' => 'orders#basket', :as => 'basket'
-  #delete 'basket' => 'orders#destroy', :as => 'empty_basket'
-  #post 'basket/:order_item_id' => 'orders#change_item_quantity', :as => 'adjust_basket_item_quantity'
-  #delete 'basket/:order_item_id' => 'orders#change_item_quantity'
-  #delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
+  # get 'basket/:id' => 'orders#basket', :as => 'basket'
+  # delete 'basket' => 'orders#destroy', :as => 'empty_basket'
+  # post 'basket/:order_item_id' => 'orders#change_item_quantity', :as => 'adjust_basket_item_quantity'
+  # delete 'basket/:order_item_id' => 'orders#change_item_quantity'
+  # delete 'basket/delete/:order_item_id' => 'orders#remove_item', :as => 'remove_basket_item'
 
   # charts
   #
-  #for customers
+  # for customers
   get 'charts/accepted_orders' => 'charts#accepted_orders', :as => 'accepted_orders_chart'
   get 'charts/created_products' => 'charts#created_products', :as => 'created_products_chart'
   get 'charts/visited_products' => 'charts#visited_products', :as => 'visited_products_chart'
@@ -332,13 +329,11 @@ Rails.application.routes.draw do
   get 'charts/catalog_products' => 'charts#catalog_products', :as => 'catalog_products_chart'
   get 'charts/catalog_visits' => 'charts#catalog_visits', :as => 'catalog_visits_chart'
 
-
   #
   # position the locale in the URL in order to have a nicer URL
   #
   #
-  scope "/:locale" do
-
+  scope '/:locale' do
     # static pages
     get 'static_pages/home', as: 'home'
     get 'how_it_works' => 'static_pages#how_it_works', as: 'how_it_works'
@@ -351,7 +346,7 @@ Rails.application.routes.draw do
     # ressources
     resources :products do
       member do
-        #get 'detail'
+        # get 'detail'
       end
 
       collection do
@@ -384,7 +379,6 @@ Rails.application.routes.draw do
         get :reviews_list, as: 'reviews_list'
         # from the dashbord page add some links
         get :dashboard, :credit_cards, :cash_out
-
       end
     end
 
@@ -398,7 +392,6 @@ Rails.application.routes.draw do
       resources :articles
     end
     post 'articles/sort' => 'articles#sort', as: 'sort_articles'
-
   end
   # end of locale #
 
@@ -414,15 +407,12 @@ Rails.application.routes.draw do
   # StripeAccount webhooks
   post '/hooks/stripe' => 'stripe_hooks#stripe'
 
-
   # root page
   root to: 'static_pages#home'
   get '/:locale' => 'static_pages#home'
 
-  #root to: 'products#catalog'
-  #get '/:locale' => 'products#catalog'
-
-
+  # root to: 'products#catalog'
+  # get '/:locale' => 'products#catalog'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -1,84 +1,77 @@
 class Order < ActiveRecord::Base
-
   STATUSES = %w(created confirming received accepted rejected).freeze
 
   # State Machine
   include AASM
 
-  aasm :column => 'status' do
-    state :created, :initial => true
+  aasm column: 'status' do
+    state :created, initial: true
     state :confirmed, :received, :accepted, :rejected
 
     event :confirm do
       before do
         logger.debug('Preparing to confirm')
       end
-      transitions :from => :created, :to => :confirmed, :after => :runConfirm
+      transitions from: :created, to: :confirmed, after: :runConfirm
     end
 
     event :receive do
-      transitions :from => :confirmed, :to => :received, :after => :runReceive
+      transitions from: :confirmed, to: :received, after: :runReceive
     end
 
     event :accept do
-      transitions :from => :received, :to => :accepted, :guard => :confirmingOk?, :after => :runAccept
+      transitions from: :received, to: :accepted, guard: :confirmingOk?, after: :runAccept
     end
 
     event :reject do
-      transitions :from => :received, :to => :rejected, :after => :runReject
+      transitions from: :received, to: :rejected, after: :runReject
     end
 
     event :reset do
-      transitions :from => [:rejected, :confirmed, :received], :to => :received, :after => :runReset
+      transitions from: [:rejected, :confirmed, :received], to: :received, after: :runReset
     end
-
-
   end
 
   def confirmingOk?
     # don't consider confirmation if total amount is null
-    if (total == 0)
+    if total.zero?
       true
-    elsif self.stripe_customer_token && total > 0.0
-      not_charged_to_sellers = 0.0
-      ref_charges = ""
+    elsif stripe_customer_token && total > 0.0
+      # not_charged_to_sellers = 0.0
+      # ref_charges = ''
       # group by seller
-      group_by_seller = self.order_items.group_by{ |d| Product.find(d[:product_id])[:customer_id]}
+      group_by_seller = order_items.group_by { |d| Product.find(d[:product_id])[:customer_id] }
       begin
         # we collect for each seller
-        group_by_seller.each do |key, value|
+        group_by_seller.each do |_key, value|
           # take the corresponding Stripe Account
-          stripe_account_seller = value.first.product.customer.stripe_account
+          # stripe_account_seller = value.first.product.customer.stripe_account
 
           transfer_to_stripe(value)
           true
         end
 
-          #payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
-          #rescue ::Stripe::CardError
+      # payments.create(amount: total, method: 'Stripe', reference: charge.id, refundable: true, confirmed: false)
+      # rescue ::Stripe::CardError
       rescue => e
         logger.debug("----------- error #{e}")
 
         logger.error e.message
         e.backtrace.each { |line| logger.error line }
 
-        raise StandardError, "Payment was declined by the payment processor #{e.message}."
+        raise StandardError.new("Payment was declined by the payment processor #{e.message}.")
         false
       end
     end
   end
 
   def runConfirm
-    order_items.each do |oi|
-      oi.confirm!
-    end
+    order_items.each(&:confirm!)
   end
 
   def runReceive
     self.received_at = Time.now
-    order_items.each do |oi|
-      oi.receive!
-    end
+    order_items.each(&:receive!)
 
     # Send an email to the customer
     # deliver_received_order_email
@@ -99,9 +92,7 @@ class Order < ActiveRecord::Base
   end
 
   def runReset
-    order_items.each do |oi|
-      oi.reset!
-    end
+    order_items.each(&:reset!)
   end
 
   def deliver_accepted_order_email
@@ -116,10 +107,9 @@ class Order < ActiveRecord::Base
     OrderMailer.received(self).deliver_now
   end
 
-  private
+private
 
   def transfer_to_stripe(regrouped_orders_items)
-
     # we prepare the sum of all orders_item
     amout_total = 0.0
     application_fee_total = 0.0
@@ -132,57 +122,52 @@ class Order < ActiveRecord::Base
 
     # @TODO if the total amount is 0.0 we don't charge with Stripe
 
-
     # take the corresponding Stripe Account
     stripe_account_seller = regrouped_orders_items.first.product.customer.stripe_account
-    if (stripe_account_seller.nil? && amout_total > 0.0)
+    if stripe_account_seller.nil? && amout_total > 0.0
 
-      #notes += "StripeAccount null for some items."
-      #we charge all to the platform
+      # notes += "StripeAccount null for some items."
+      # we charge all to the platform
       # @TODO handle exception to continue treat other charges
 
-      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, capture: true }, Rails.application.secrets.stripe_secret_key)
+      charge = ::Stripe::Charge.create({amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: stripe_customer_token, capture: true}, Rails.application.secrets.stripe_secret_key)
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
-        roi.method = "Stripe"
+        roi.method = 'Stripe'
         # we keep track of the needed CashOut
         roi.processing_reference = charge.id
         # add the fact that we have confirmation from Stripe
         begin
-        roi.receive!
-        if charge.paid?
-          roi.accept!
-        else
-          roi.reject!
-        end
+          roi.receive!
+          if charge.paid?
+            roi.accept!
+          else
+            roi.reject!
+          end
         rescue => e
           logger.error e.message
           e.backtrace.each { |line| logger.error line }
 
-          raise StandardError, "Error during change state #{e.message}."
+          raise StandardError.new("Error during change state #{e.message}.")
         end
       end
       # we log at the order level
       if charge.paid
         self.amount_paid += amout_total
-        self.save
-# @TODO add method stripe in the list of methods for payment
-# @TODO add a split of payments to the owner and to the platform
-# if the user_mailer is managed, send money else keep and schedule when possible
-        payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
-
-      else
-        notes += "Some items where not accepted by the Bank."
+        save
+        # @TODO add method stripe in the list of methods for payment
+        # @TODO add a split of payments to the owner and to the platform
+        # if the user_mailer is managed, send money else keep and schedule when possible
+        payments.create(amount: amout_total, method: 'stripe', reference: charge.id, refundable: true, confirmed: true)
       end
-
 
     elsif amout_total > 0.0
       # we charge to the seller
       # @TODO if the OAuth is no more valid we must handle this and use the platform
-      charge = ::Stripe::Charge.create({ amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: self.stripe_customer_token, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round, capture: true }, Rails.application.secrets.stripe_secret_key)
+      charge = ::Stripe::Charge.create({amount: (amout_total * BigDecimal(100)).round, currency: 'EUR', customer: stripe_customer_token, destination: stripe_account_seller.stripe_user_id, application_fee: (application_fee_total * BigDecimal(100)).round, capture: true}, Rails.application.secrets.stripe_secret_key)
       # we log the reference in the lines or orders_items
       regrouped_orders_items.each do |roi|
-        roi.method = "Stripe"
+        roi.method = 'Stripe'
         roi.processing_reference = charge.id
         # add the fact that we have confirmation from Stripe
         roi.receive!
@@ -195,21 +180,17 @@ class Order < ActiveRecord::Base
       # we log at the order level
       if charge.paid
         self.amount_paid += amout_total
-        self.save
-# @TODO add method stripe in the list of methods for payment
-# @TODO add a split of payments to the owner and to the platform
-# if the user_mailer is managed, send money else keep and schedule when possible
+        save
+        # @TODO add method stripe in the list of methods for payment
+        # @TODO add a split of payments to the owner and to the platform
+        # if the user_mailer is managed, send money else keep and schedule when possible
         begin
-          payments.create(:amount => amout_total, :method => 'stripe', :reference => charge.id, :refundable => true, confirmed: true)
+          payments.create(amount: amout_total, method: 'stripe', reference: charge.id, refundable: true, confirmed: true)
         rescue => e
           logger.debug("Problem saving payment. #{e.message}")
-          raise StandardError, "Problem saving payment. #{e.message}"
+          raise StandardError.new("Problem saving payment. #{e.message}")
         end
-
-      else
-        notes += "Some items where not accepted by the Bank."
       end
     end
-
   end
 end

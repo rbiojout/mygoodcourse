@@ -25,8 +25,7 @@ class Comment < ActiveRecord::Base
   belongs_to :commentable, polymorphic: true
 
   # we have some abuses that can be reported by customers
-  has_many :abuses, class_name: "Abuse", as: :abusable
+  has_many :abuses, class_name: 'Abuse', as: :abusable
 
   validates :text, presence: true
-
 end

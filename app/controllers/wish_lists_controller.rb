@@ -6,8 +6,8 @@ class WishListsController < ApplicationController
   def wish
     current_customer.wish(@product)
     respond_to do |format|
-      format.html {redirect_to current_customer}
-      format.js { }
+      format.html { redirect_to current_customer }
+      format.js {}
     end
   end
 
@@ -15,15 +15,15 @@ class WishListsController < ApplicationController
   def unwish
     current_customer.unwish(@product)
     respond_to do |format|
-      format.html {redirect_to current_customer}
-      format.js { }
+      format.html { redirect_to current_customer }
+      format.js {}
     end
   end
 
-  private
+private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_product
     @product = Product.find(params[:product_id])
   end
-
 end

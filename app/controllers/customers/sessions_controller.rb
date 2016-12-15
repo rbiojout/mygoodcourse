@@ -1,5 +1,5 @@
 class Customers::SessionsController < Devise::SessionsController
-# before_filter :configure_sign_in_params, only: [:create]
+  # before_filter :configure_sign_in_params, only: [:create]
 
   # force the redirect to html form even with js by changing the view
   # add a way to specify the redirect with the parameter redirect_to
@@ -14,8 +14,6 @@ class Customers::SessionsController < Devise::SessionsController
   end
 
   # redirect to the
-
-
 
   # GET /resource/sign_in
   # def new
@@ -40,7 +38,7 @@ class Customers::SessionsController < Devise::SessionsController
     respond_with resource, location: after_sign_in_path_for(resource), locale: I18n.locale, country_id: resource.country_id
   end
 
-    # DELETE /resource/sign_out
+  # DELETE /resource/sign_out
   # def destroy
   #   super
   # end

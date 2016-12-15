@@ -30,7 +30,6 @@
 #
 
 class Order < ActiveRecord::Base
-
   EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
   PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 
@@ -43,7 +42,6 @@ class Order < ActiveRecord::Base
   require_dependency 'order/states'
   require_dependency 'order/billing'
   require_dependency 'order/stripe_order'
-
 
   # The Employee who accepted the order
   #
@@ -60,10 +58,8 @@ class Order < ActiveRecord::Base
   # @return [Employee]
   belongs_to :rejecter, class_name: 'Employee', foreign_key: 'rejected_by'
 
-
   # All items which make up this order
   has_many :order_items, dependent: :destroy
-
 
   accepts_nested_attributes_for :order_items, allow_destroy: true, reject_if: proc { |a| a['ordered_item_id'].blank? }
 
@@ -79,19 +75,17 @@ class Order < ActiveRecord::Base
 
   # This search the orders for a particular customer_id
   # the collection is ordered by creation date descending
-  scope :for_customer, -> (customer_id) {where(:customer_id => customer_id).order(:created_at => :desc)}
+  scope :for_customer, ->(customer_id) { where(customer_id: customer_id).order(created_at: :desc) }
 
   # This search the orders with a state 'accepted' for a particular customer_id
   # the collection is ordered by creation date descending
-  scope :accepted_for_customer, -> (customer_id) {where(:customer_id => customer_id, status: %w(accepted)).order(:created_at => :desc)}
+  scope :accepted_for_customer, ->(customer_id) { where(customer_id: customer_id, status: %w(accepted)).order(created_at: :desc) }
 
   # All orders which have been accepted
   scope :accepted, -> { where(status: 'accepted') }
 
   # All orders which have been rejected
   scope :rejected, -> { where(status: 'rejected') }
-
-
 
   # The order number
   #
@@ -120,15 +114,13 @@ class Order < ActiveRecord::Base
   #
   # @return [Boolean]
   def has_items?
-    total_items > 0
+    total_items.positive?
   end
 
   # Return the number of items in the order?
   #
   # @return [Integer]
   def total_items
-    order_items.inject(0) { |t, i| t + 1 }
+    order_items.inject(0) { |t, _i| t + 1 }
   end
-
-
 end

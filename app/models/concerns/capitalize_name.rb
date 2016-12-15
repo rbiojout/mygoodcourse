@@ -1,10 +1,10 @@
 module CapitalizeName
   extend ActiveSupport::Concern
 
-  private
+private
+
   # we want a name that start with capital
   def capitalize_name
-    self.name = self.name.sub(/\S/, &:upcase) unless self.name.nil?
+    self.name = name.sub(/\S/, &:upcase) unless name.nil?
   end
-
 end

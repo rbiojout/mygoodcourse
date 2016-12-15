@@ -1,7 +1,7 @@
 class AppError < StandardError
   def initialize(options = {})
     @options = if options.is_a?(String)
-                 { message: options }
+                 {message: options}
                else
                  options
                end

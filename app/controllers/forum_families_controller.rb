@@ -11,29 +11,27 @@ class ForumFamiliesController < ApplicationController
 
   # GET /forum_families/1
   # GET /forum_families/1.json
-  def show
-  end
-
+  def show; end
 
   # POST /forum_families/sort
   def sort
     unless params[:forum_family].nil?
       params[:forum_family].each .each_with_index do |id, index|
-        ForumFamily.update(id, position: index+1)
+        ForumFamily.update(id, position: index + 1)
       end
     end
-    render nothing:true
+    render nothing: true
   end
 
+private
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_forum_family
-      @forum_family = ForumFamily.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_forum_family
+    @forum_family = ForumFamily.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def forum_family_params
-      params.require(:forum_family).permit(:name, :description, :visual, :country_id, :position)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def forum_family_params
+    params.require(:forum_family).permit(:name, :description, :visual, :country_id, :position)
+  end
 end

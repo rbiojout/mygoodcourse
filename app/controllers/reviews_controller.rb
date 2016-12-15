@@ -2,24 +2,22 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update, :destroy]
   before_action :authenticate_customer!, only: [:new, :create, :update, :edit, :destroy]
 
-
   before_action :correct_user, excep: [:index, :show]
 
   # GET /reviews
   # GET /reviews.json
   def index
-    if (params[:product_id].nil?)
+    if params[:product_id].nil?
       @reviews = Review.all
     else
       @reviews.product = Product.find(params[:product_id])
     end
-    @reviews = @reviews.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @reviews = @reviews.paginate(page: params[:page], per_page: PAGINATE_PAGES)
   end
 
   # GET /reviews/1
   # GET /reviews/1.json
-  def show
-  end
+  def show; end
 
   # GET /reviews/new
   def new
@@ -28,10 +26,8 @@ class ReviewsController < ApplicationController
     @review.product = Product.find(params[:product_id]) unless params[:product_id].nil?
   end
 
-
   # GET /reviews/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /reviews
   # POST /reviews.json
@@ -83,19 +79,19 @@ class ReviewsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_review
-      @review = Review.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def review_params
-      params.require(:review).permit(:title, :description, :score, :product_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_review
+    @review = Review.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def review_params
+    params.require(:review).permit(:title, :description, :score, :product_id)
+  end
 
   def correct_user
     redirect_to catalog_products_path, alert: t('dialog.restricted') unless @review.nil? || @review.product.customer_id == current_customer.id
   end
-
 end

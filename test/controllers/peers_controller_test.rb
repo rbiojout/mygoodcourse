@@ -11,32 +11,29 @@ class PeersControllerTest < ActionController::TestCase
   #   assert true
   # end
 
-  test "should follow" do
+  test 'should follow' do
     assert_difference('Peer.count') do
       post :follow, followed_id: customers(:seller_one)
     end
   end
 
-  test "should follow via ajax" do
+  test 'should follow via ajax' do
     assert_difference('Peer.count') do
       xhr :post, :follow, followed_id: customers(:seller_one)
     end
     assert_response :success
-
   end
 
-  test "should unfollow" do
+  test 'should unfollow' do
     assert_difference('Peer.count', -1) do
       delete :unfollow, followed_id: customers(:two)
     end
   end
 
-  test "should unfollow via ajax" do
-    assert_difference('Peer.count',-1) do
+  test 'should unfollow via ajax' do
+    assert_difference('Peer.count', -1) do
       xhr :delete, :unfollow, followed_id: customers(:two)
     end
     assert_response :success
-
   end
-
 end

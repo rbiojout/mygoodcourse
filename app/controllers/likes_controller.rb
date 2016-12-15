@@ -5,7 +5,7 @@ class LikesController < ApplicationController
   # POST /like/like?context_id=
   def like
     @context = context
-    @like = @context.likes.new()
+    @like = @context.likes.new
     # we set the current customer
     @like.customer = current_customer
 
@@ -13,11 +13,11 @@ class LikesController < ApplicationController
       if @like.save
         format.html { redirect_to :back, notice: 'Like was successfully created.' }
         format.json { render :show, status: :created, location: @like }
-        format.js { }
+        format.js {}
       else
-        #format.html { render :new }
+        # format.html { render :new }
         format.json { render json: @like.errors, status: :unprocessable_entity }
-        format.js { }
+        format.js {}
       end
     end
   end
@@ -29,26 +29,22 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Like was successfully destroyed.' }
       format.json { head :no_content }
-      format.js { }
+      format.js {}
     end
   end
 
-  private
+private
 
   # as a polymorphic object, we need the context
   # param is constructed from the Class name to lower case
   def context
     if params[:product_id]
-      id = params[:product_id]
       Product.find(params[:product_id])
     elsif params[:post_id]
-      id = params[:post_id]
       Post.find(params[:post_id])
     elsif params[:review_id]
-      id = params[:review_id]
       Review.find(params[:review_id])
     elsif params[:forum_subject_id]
-      id = params[:forum_subject_id]
       ForumSubject.find(params[:forum_subject_id])
     end
   end

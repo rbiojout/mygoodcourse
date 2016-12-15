@@ -34,5 +34,4 @@ class Payment < ActiveRecord::Base
   def transaction_url
     "https://manage.stripe.com/#{Rails.env.production? ? '/' : 'test/'}payments/#{reference}"
   end
-
 end

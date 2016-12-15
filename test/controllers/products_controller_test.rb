@@ -9,112 +9,110 @@ class ProductsControllerTest < ActionController::TestCase
     sign_in(customers(:one), scope: :customer)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index, locale: I18n.default_locale
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-
-  test "should get catalog" do
+  test 'should get catalog' do
     get :catalog, locale: I18n.default_locale
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-  test "should filter catalog by families" do
+  test 'should filter catalog by families' do
     # set the country
-    get :catalog, :country_id => (countries(:france)).id, locale: I18n.default_locale
-    get :catalog, :family_id => [families(:one).id.to_s, families(:two).id.to_s], locale: I18n.default_locale
+    get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
+    get :catalog, family_id: [families(:one).id.to_s, families(:two).id.to_s], locale: I18n.default_locale
     assert_equal session[:family_for_products_id].sort, [families(:one).id.to_s, families(:two).id.to_s].sort
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-  test "should filter catalog by family" do
+  test 'should filter catalog by family' do
     # set the country
-    get :catalog, :country_id => (countries(:france)).id, locale: I18n.default_locale
-    get :catalog, :family_id => Array(families(:one)), locale: I18n.default_locale
+    get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
+    get :catalog, family_id: Array(families(:one)), locale: I18n.default_locale
     assert_equal session[:family_for_products_id], Array(families(:one).id.to_s)
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-  test "should filter catalog by categories" do
+  test 'should filter catalog by categories' do
     # set the country
-    get :catalog, :country_id => (countries(:france)).id, locale: I18n.default_locale
-    get :catalog, :category_id => [categories(:one).id.to_s, categories(:two).id.to_s], locale: I18n.default_locale
+    get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
+    get :catalog, category_id: [categories(:one).id.to_s, categories(:two).id.to_s], locale: I18n.default_locale
     assert_equal session[:category_for_products_id].sort, [categories(:one).id.to_s, categories(:two).id.to_s].sort
     assert_equal session[:family_for_products_id].sort, [categories(:one).family_id, categories(:two).family_id].sort
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-  test "should filter catalog by category" do
+  test 'should filter catalog by category' do
     # set the country
-    get :catalog, :country_id => (countries(:france)).id, locale: I18n.default_locale
-    get :catalog, :category_id => Array(categories(:one)), locale: I18n.default_locale
+    get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
+    get :catalog, category_id: Array(categories(:one)), locale: I18n.default_locale
     assert_equal session[:category_for_products_id], Array(categories(:one).id.to_s)
     assert_equal session[:family_for_products_id], [categories(:one).family_id]
     assert_response :success
     assert_not_nil assigns(:products)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new, locale: I18n.default_locale
     assert_response :success
   end
 
-  test "should not get new if not identified" do
+  test 'should not get new if not identified' do
     sign_out(customers(:one))
     get :new, locale: I18n.default_locale
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
 
-  test "should create product" do
+  test 'should create product' do
     assert_difference('Product.count') do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
+      post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')}}}, locale: I18n.default_locale
     end
 
     assert_redirected_to product_path(assigns(:product))
   end
 
-  test "should not get create if not identified" do
+  test 'should not get create if not identified' do
     sign_out(customers(:one))
-    post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
+    post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')}}}, locale: I18n.default_locale
 
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
 
-  test "should not create product without category" do
+  test 'should not create product without category' do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
+      post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')}}}, locale: I18n.default_locale
     end
   end
 
-  test "should not create product without level" do
+  test 'should not create product without level' do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [], attachments_attributes: {"0" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')  }} }, locale: I18n.default_locale
+      post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [], attachments_attributes: {'0' => {file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')}}}, locale: I18n.default_locale
     end
   end
 
-  test "should not create product without attachment" do
+  test 'should not create product without attachment' do
     assert_difference('Product.count', 0) do
-      post :create, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price,  sku: @product.sku, :category_ids => [categories(:one)], :level_ids => [levels(:one)], attachments_attributes: {"0" =>{ file: nil  }} }, locale: I18n.default_locale
+      post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: nil}}}, locale: I18n.default_locale
     end
   end
 
-
-  test "should show product" do
+  test 'should show product' do
     get :show, id: @product, locale: I18n.default_locale
     assert_response :success
   end
 
-  test "should impression show product" do
+  test 'should impression show product' do
     product = products(:one)
-    assert_difference ('product.counter_cache') do
+    assert_difference('product.counter_cache') do
       # @TODO why needed double?
       get :show, locale: I18n.default_locale, id: product
       get :show, locale: I18n.default_locale, id: product
@@ -122,23 +120,22 @@ class ProductsControllerTest < ActionController::TestCase
     end
   end
 
-
-  test "should show product with slug" do
+  test 'should show product with slug' do
     get :show, id: @product.slug, locale: I18n.default_locale
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @product, locale: I18n.default_locale
     assert_response :success
   end
 
-  test "should get edit with slug" do
+  test 'should get edit with slug' do
     get :edit, id: @product.slug, locale: I18n.default_locale
     assert_response :success
   end
 
-  test "should not get edit if not identified" do
+  test 'should not get edit if not identified' do
     sign_out(customers(:one))
     get :edit, id: @product.slug, locale: I18n.default_locale
 
@@ -146,7 +143,7 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to new_customer_session_path
   end
 
-  test "should not get edit if not product owner" do
+  test 'should not get edit if not product owner' do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
     get :edit, id: @product.slug, locale: I18n.default_locale
@@ -155,47 +152,46 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to products_path, locale: I18n.default_locale
   end
 
-  test "should update product" do
+  test 'should update product' do
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
-                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
+    patch :update, id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           attachments_attributes: {'0' => {id: attachments(:one).id}}}, locale: I18n.default_locale
 
     assert_redirected_to product_path(assigns(:product))
   end
 
-  test "should not get update if not identified" do
+  test 'should not get update if not identified' do
     sign_out(customers(:one))
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
-                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
+    patch :update, id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           attachments_attributes: {'0' => {id: attachments(:one).id}}}, locale: I18n.default_locale
 
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
 
-
-  test "should not get update if not product owner" do
+  test 'should not get update if not product owner' do
     sign_out(customers(:one))
     sign_in(customers(:two), scope: :customer)
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
-                                            attachments_attributes: { "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
-
+    patch :update, id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           attachments_attributes: {'0' => {id: attachments(:one).id}}}, locale: I18n.default_locale
 
     assert_response :found
     assert_redirected_to products_path, locale: I18n.default_locale
   end
 
-  test "should update product with ordered attachments" do
+  test 'should update product with ordered attachments' do
     @attachment = attachments(:one)
-    patch :update, id: @product, product: { active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
-                                            attachments_attributes: {
-                                                "1465974930533" =>{ file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')},
-                                                "0" =>{ id: attachments(:one).id } } }, locale: I18n.default_locale
+    patch :update, id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           attachments_attributes: {
+                                             '1465974930533' => {file: fixture_file_upload('files/Sommaire.pdf', 'application/pdf')},
+                                             '0' => {id: attachments(:one).id},
+                                           }}, locale: I18n.default_locale
     assert_equal 2, assigns(:product).attachments.count
   end
 
-  test "should destroy product not ordered" do
+  test 'should destroy product not ordered' do
     assert_difference('Product.count', -1) do
       delete :destroy, id: products(:product_without_orders), locale: I18n.default_locale
     end
@@ -203,43 +199,43 @@ class ProductsControllerTest < ActionController::TestCase
     assert_redirected_to products_url
   end
 
-  test "should not destroy product if not identified" do
+  test 'should not destroy product if not identified' do
     sign_out(customers(:one))
     delete :destroy, id: products(:product_without_orders), locale: I18n.default_locale
     assert_response :found
     assert_redirected_to new_customer_session_path
   end
 
-  test "should not destroy product ordered" do
-    assert_raises (ActiveRecord::DeleteRestrictionError) do
+  test 'should not destroy product ordered' do
+    assert_raises(ActiveRecord::DeleteRestrictionError) do
       delete :destroy, id: @product, locale: I18n.default_locale
     end
   end
 
-  test "should buy" do
-    assert_difference('OrderItem.count',1) do
+  test 'should buy' do
+    assert_difference('OrderItem.count', 1) do
       post :add_to_basket, product_id: products(:one), locale: I18n.default_locale
     end
     assert_redirected_to catalog_products_path
   end
 
-  test "should buy with slug" do
-    assert_difference('OrderItem.count',1) do
+  test 'should buy with slug' do
+    assert_difference('OrderItem.count', 1) do
       post :add_to_basket, product_id: products(:one).slug, locale: I18n.default_locale
     end
     assert_redirected_to catalog_products_path
   end
 
-  test "should see download is owner" do
+  test 'should see download is owner' do
     sign_in(customers(:seller_one), scope: :customer)
     product = products(:one_from_seller_one)
 
     get :show, id: product, locale: I18n.default_locale
 
-    assert_select "#product_download a"
+    assert_select '#product_download a'
   end
 
-  test "should see edit if owned" do
+  test 'should see edit if owned' do
     customer = customers(:seller_one)
     sign_in(customer, scope: :customer)
     product = products(:one_from_seller_one)
@@ -247,28 +243,26 @@ class ProductsControllerTest < ActionController::TestCase
     get :show, id: product, locale: I18n.default_locale
 
     assert customer.own_product(product)
-    assert_select "#product_actions a[href=?]", edit_product_path(product)
+    assert_select '#product_actions a[href=?]', edit_product_path(product)
 
     customer = customers(:buyer_one)
     sign_in(customer, scope: :customer)
-
   end
 
-  test "should see add to cart is not signed" do
+  test 'should see add to cart is not signed' do
     product = products(:one_from_seller_one)
 
     get :show, id: product, locale: I18n.default_locale
 
-    assert_select "#product_actions a[href=?]", buy_product_path(product)
-    assert_select "#product_actions a[data-method=?]", "post"
+    assert_select '#product_actions a[href=?]', buy_product_path(product)
+    assert_select '#product_actions a[data-method=?]', 'post'
   end
 
-  test "should see comments" do
+  test 'should see comments' do
     product = products(:one_from_seller_one)
 
     get :show, id: product, locale: I18n.default_locale
 
-    assert_select "#review_table"
+    assert_select '#review_table'
   end
-
 end

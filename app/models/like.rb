@@ -23,5 +23,5 @@ class Like < ActiveRecord::Base
   belongs_to :customer
   belongs_to :likeable, polymorphic: true
 
-  scope :for_customer_likeable, -> (customer, likeable) {where(customer: customer).where(likeable: likeable).distinct}
+  scope :for_customer_likeable, ->(customer, likeable) { where(customer: customer).where(likeable: likeable).distinct }
 end

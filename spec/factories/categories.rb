@@ -1,8 +1,7 @@
 FactoryGirl.define do
   factory :category, class: Category do
-    name          { Faker::Lorem.sentence }
+    name { Faker::Lorem.sentence }
     family
-
 
     trait :with_active_products do
       transient do
@@ -33,5 +32,4 @@ FactoryGirl.define do
       with_not_active_products
     end
   end
-
 end

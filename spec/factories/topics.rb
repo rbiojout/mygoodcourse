@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :topic do
-    name          { Faker::Lorem.sentence }
+    name { Faker::Lorem.sentence }
     country
 
     trait :with_articles do
@@ -12,6 +12,5 @@ FactoryGirl.define do
         create_list(:article, evaluator.number_of_articles, topic: topic)
       end
     end
-
   end
 end

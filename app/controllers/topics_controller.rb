@@ -11,8 +11,7 @@ class TopicsController < ApplicationController
 
   # GET /topics/1
   # GET /topics/1.json
-  def show
-  end
+  def show; end
 
   # GET /topics/new
   def new
@@ -20,8 +19,7 @@ class TopicsController < ApplicationController
   end
 
   # GET /topics/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /topics
   # POST /topics.json
@@ -67,22 +65,21 @@ class TopicsController < ApplicationController
   def sort
     unless params[:topic].nil?
       params[:topic].each .each_with_index do |id, index|
-        Topic.update(id, position: index+1)
+        Topic.update(id, position: index + 1)
       end
     end
-    render nothing:true
+    render nothing: true
   end
 
+private
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.friendly.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = Topic.friendly.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def topic_params
-      params.require(:topic).permit(:name, :description, :position, :country_id)
-    end
-
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def topic_params
+    params.require(:topic).permit(:name, :description, :position, :country_id)
+  end
 end

@@ -1,1 +1,1 @@
-json.partial! "updates/update", update: @update
+json.partial! 'updates/update', update: @update

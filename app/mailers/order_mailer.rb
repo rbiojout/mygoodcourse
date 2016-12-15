@@ -13,5 +13,4 @@ class OrderMailer < ApplicationMailer
     @order = order
     mail to: order.customer.email, subject: I18n.t('mailer.order_mailer.rejected.subject', default: 'Order Rejected')
   end
-
 end

@@ -27,18 +27,18 @@ class StripeTest < ActionDispatch::IntegrationTest
     Stripe.api_key = Rails.application.secrets.stripe_secret_key
     # create a token
     stripe_token = Stripe::Token.create(
-        card: {
-            number: '4242424242424242',
-            exp_month: 5,
-            exp_year: 2027,
-            cvc: '314'
-        }
+      card: {
+        number: '4242424242424242',
+        exp_month: 5,
+        exp_year: 2027,
+        cvc: '314',
+      }
     )
 
     # transform as customer
     number = current_order.id
-    stripe_customer = ::Stripe::Customer.create({ description: "Customer for order #{number}",
-                                                  card: stripe_token },
+    stripe_customer = ::Stripe::Customer.create({description: "Customer for order #{number}",
+                                                 card: stripe_token},
                                                 Rails.application.secrets.stripe_secret_key)
 
     # store stripe_customer

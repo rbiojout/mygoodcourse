@@ -21,20 +21,19 @@ class ForumSubjectsController < ApplicationController
     @current_user = current_customer
     impressionist(@forum_subject)
 
-    @forum_answers = @forum_subject.forum_answers.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @forum_answers = @forum_subject.forum_answers.paginate(page: params[:page], per_page: PAGINATE_PAGES)
 
     @top_forum_subjects = ForumSubject.where.not(id: @forum_subject.id).order(counter_cache: :desc).limit(10)
   end
 
   # GET /forum_subjects/new
   def new
-      @forum_subject = @forum_category.forum_subjects.new
-      @forum_subject.customer = current_customer
+    @forum_subject = @forum_category.forum_subjects.new
+    @forum_subject.customer = current_customer
   end
 
   # GET /forum_subjects/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /forum_subjects
   # POST /forum_subjects.json
@@ -80,11 +79,12 @@ class ForumSubjectsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_forum_subject
-      @forum_subject = ForumSubject.find(params[:id])
-    end
+private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_forum_subject
+    @forum_subject = ForumSubject.find(params[:id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_forum_category
@@ -96,9 +96,8 @@ class ForumSubjectsController < ApplicationController
     redirect_to forum_families_path, alert: t('dialog.restricted') unless @forum_subject.nil? || @forum_subject.customer_id == current_customer.id
   end
 
-
   # Never trust parameters from the scary internet, only allow the white list through.
-    def forum_subject_params
-      params.require(:forum_subject).permit(:name, :text, :customer_id, :forum_category_id)
-    end
+  def forum_subject_params
+    params.require(:forum_subject).permit(:name, :text, :customer_id, :forum_category_id)
+  end
 end

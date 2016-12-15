@@ -104,19 +104,19 @@ gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: '
 # gem 'bootstrap-daterangepicker-rails'
 
 # add full calendar to display and control events
-gem 'momentjs-rails'
 gem 'fullcalendar-rails'
+gem 'momentjs-rails'
 
 # use geocoder for addresse feed and other google maps tools with jquery.js
 gem 'geocoder'
 
 # render maps
-gem 'underscore-rails'
 gem 'gmaps4rails'
+gem 'underscore-rails'
 
 # use easy form templates with simple form
+gem 'country_select'
 gem 'simple_form'
-gem "country_select"
 
 # upload images
 gem 'carrierwave'
@@ -133,32 +133,32 @@ gem 'fog'
 gem 'social-share-button'
 
 # use of Stripe as payment solution
-gem 'stripe'
 gem 'oauth2'
+gem 'stripe'
 
 # add some graphing tools
-gem "chartkick"
+gem 'chartkick'
 gem 'groupdate'
 
 # add admin
-gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails_admin'
-#gem "wysiwyg-rails", "~> 1.2.7"
+gem 'rails_admin_rollincode', '~> 1.0'
+# gem "wysiwyg-rails", "~> 1.2.7"
 
 # New relic to monitor performances
 gem 'newrelic_rpm'
 
 # for Heroku
 group :production do
-  gem 'rails_12factor'
   gem 'puma'
+  gem 'rails_12factor'
   gem 'tunemygc'
 end
 
 group :test do
   # provide one-line matchers to RSpec
-  gem 'shoulda-matchers', require: false
   gem 'database_cleaner', '~> 1.5'
+  gem 'shoulda-matchers', require: false
 
   # generating random data for the tests
   gem 'faker'
@@ -176,9 +176,8 @@ group :test do
   gem 'poltergeist'
   # END_HIGHLIGHT
 
-  #gem 'selenium-webdriver'
+  # gem 'selenium-webdriver'
 end
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -189,11 +188,9 @@ group :development, :test do
   # gem 'jasmine'
   # gem "teaspoon-jasmine"
 
+  gem 'brakeman', require: false
   gem 'rubocop', require: false
-  gem 'brakeman', :require => false
-
 end
-
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
@@ -204,15 +201,15 @@ group :development do
   gem 'spring'
 
   # help debugging
-  gem "better_errors"
-  gem "binding_of_caller"
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'meta_request'
   gem 'quiet_assets'
 
   # annotate the informations
   gem 'annotate'
   # use special markdown needed, in particular when using doc generated YARD
-  gem 'kramdown', :require => false
+  gem 'kramdown', require: false
 
   # get UML
   # use bundle exec rake diagram:all_with_engines
@@ -229,10 +226,4 @@ group :development do
   # gem "rubycritic", :require => false
 
   gem 'i18n-tasks', '~> 0.9.5'
-
 end
-
-
-
-
-

@@ -8,41 +8,41 @@ class UpdatesControllerTest < ActionController::TestCase
     sign_in(customers(:one), scope: :customer)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:updates)
   end
 
-  test "should get new" do
+  test 'should get new' do
     get :new
     assert_response :success
   end
 
-  test "should create update" do
+  test 'should create update' do
     assert_difference('Update.count') do
-      post :create, update: { customer_id: @update.customer_id, description: @update.description, name: @update.name }
+      post :create, update: {customer_id: @update.customer_id, description: @update.description, name: @update.name}
     end
 
     assert_redirected_to update_path(assigns(:update))
   end
 
-  test "should show update" do
+  test 'should show update' do
     get :show, id: @update
     assert_response :success
   end
 
-  test "should get edit" do
+  test 'should get edit' do
     get :edit, id: @update
     assert_response :success
   end
 
-  test "should update update" do
-    patch :update, id: @update, update: { customer_id: @update.customer_id, description: @update.description, name: @update.name }
+  test 'should update update' do
+    patch :update, id: @update, update: {customer_id: @update.customer_id, description: @update.description, name: @update.name}
     assert_redirected_to update_path(assigns(:update))
   end
 
-  test "should destroy update" do
+  test 'should destroy update' do
     assert_difference('Update.count', -1) do
       delete :destroy, id: @update
     end

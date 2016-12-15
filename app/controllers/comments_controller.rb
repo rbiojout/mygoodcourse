@@ -9,7 +9,7 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all.paginate(page: params[:page], :per_page => PAGINATE_PAGES)
+    @comments = Comment.all.paginate(page: params[:page], per_page: PAGINATE_PAGES)
   end
 
   # GET /comments/1
@@ -83,16 +83,17 @@ class CommentsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.require(:comment).permit(:text, :customer_id, :commentable_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_comment
+    @comment = Comment.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def comment_params
+    params.require(:comment).permit(:text, :customer_id, :commentable_id)
+  end
 
   def correct_user
     redirect_to catalog_products_path, alert: t('dialog.restricted') unless @comment.nil? || @comment.customer_id == current_customer.id
@@ -101,10 +102,8 @@ class CommentsController < ApplicationController
   # as a polymorphic object, we need the context
   def context
     if params[:post_id]
-      id = params[:post_id]
       Post.find(params[:post_id])
     elsif params[:forum_answer_id]
-      id = params[:forum_answer_id]
       ForumAnswer.find(params[:forum_answer_id])
     end
   end
@@ -116,5 +115,4 @@ class CommentsController < ApplicationController
       forum_subject_path(context.forum_subject)
     end
   end
-
 end

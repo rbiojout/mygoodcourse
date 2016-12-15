@@ -34,34 +34,33 @@ class OrderItem < ActiveRecord::Base
   # State Machine
   include AASM
 
-  aasm :column => 'status' do
-    state :created, :initial => true
+  aasm column: 'status' do
+    state :created, initial: true
     state :confirmed, :received, :accepted, :cashed_out, :rejected
 
     event :confirm do
-      transitions :from => :created, :to => :confirmed
+      transitions from: :created, to: :confirmed
     end
 
     event :receive do
-      transitions :from => :confirmed, :to => :received
+      transitions from: :confirmed, to: :received
     end
 
     event :accept do
-      transitions :from => :received, :to => :accepted
+      transitions from: :received, to: :accepted
     end
 
     event :cash_out do
-      transitions :from => :received, :to => :cashed_out
+      transitions from: :received, to: :cashed_out
     end
 
     event :reject do
-      transitions :from => [:confirmed, :received], :to => :rejected
+      transitions from: [:confirmed, :received], to: :rejected
     end
 
     event :reset do
-      transitions :from => [:confirmed, :rejected, :received], :to => :confirmed
+      transitions from: [:confirmed, :rejected, :received], to: :confirmed
     end
-
   end
 
   def runInit
@@ -71,10 +70,8 @@ class OrderItem < ActiveRecord::Base
 
   def initPrice(value)
     self.price = value
-    fee = (value * (COMMISSION_RATE/100) + TRANSACTION_COST/100) || BigDecimal(0)
-    if value == 0.0 || fee < 0.0
-      fee = 0.0
-    end
+    fee = (value * (COMMISSION_RATE / 100) + TRANSACTION_COST / 100) || BigDecimal(0)
+    fee = 0.0 if value == 0.0 || fee < 0.0
     fee.round(2)
     self.application_fee = fee
     self.tax_rate = TAX_RATE
@@ -114,7 +111,7 @@ class OrderItem < ActiveRecord::Base
   # @param ordered_item [Object] an object which implements the Shoppe::OrderableItem protocol
   # @return [OrderItem]
   def self.add_item(product)
-    #fail AppErrors::UnorderableItem, product: product unless product.active?
+    # fail AppErrors::UnorderableItem, product: product unless product.active?
     if product.active
       transaction do
         if existing = where(product_id: product.id).first
@@ -123,13 +120,10 @@ class OrderItem < ActiveRecord::Base
           # we will set
           # cost_price and application_fee only after create
           # unit_price is set during creation
-          new_item = create(product: product, price: product.price  )
+          new_item = create(product: product, price: product.price)
           new_item
         end
       end
-    else
-      # @TODO treat it
-      #raise "inactive product"
     end
   end
 
@@ -142,7 +136,7 @@ class OrderItem < ActiveRecord::Base
   # the VAT is only paid by the marketplace on the commission
   # @return [BigDecimal]
   def unit_price
-    read_attribute(:unit_price) || (product.nil? ? BigDecimal(0):product.price) || BigDecimal(0)
+    self[:unit_price] || (product.nil? ? BigDecimal(0) : product.price) || BigDecimal(0)
   end
 
   # The unit price for the item without tax
@@ -161,7 +155,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def unit_cost_price
-    read_attribute(:cost_price) || unit_price - application_fee
+    self[:cost_price] || unit_price - application_fee
   end
 
   # The share of the seller
@@ -172,7 +166,7 @@ class OrderItem < ActiveRecord::Base
     if price == 0.0
       100.0
     else
-      cost_price/price*100
+      cost_price / price * 100
     end
   end
 
@@ -183,7 +177,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def application_fee
-    read_attribute(:application_fee) || (unit_price * (COMMISSION_RATE/100) + TRANSACTION_COST/100).round(2) || BigDecimal(0)
+    self[:application_fee] || (unit_price * (COMMISSION_RATE / 100) + TRANSACTION_COST / 100).round(2) || BigDecimal(0)
   end
 
   # The tax rate for the item
@@ -191,7 +185,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def tax_rate
-    read_attribute(:tax_rate) || TAX_RATE || product.try(:tax_rate).try(:rate_for, order) || BigDecimal(0)
+    self[:tax_rate] || TAX_RATE || product.try(:tax_rate).try(:rate_for, order) || BigDecimal(0)
   end
 
   # The total tax for the item
@@ -201,7 +195,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def tax_amount
-    read_attribute(:tax_amount) || (application_fee * tax_rate/100)
+    self[:tax_amount] || (application_fee * tax_rate / 100)
   end
 
   # The total cost for the product
@@ -209,7 +203,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def total_cost
-    #quantity * unit_cost_price
+    # quantity * unit_cost_price
     unit_cost_price
   end
 
@@ -218,7 +212,7 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def sub_total
-    #quantity * unit_price
+    # quantity * unit_price
     unit_price
   end
 
@@ -233,13 +227,13 @@ class OrderItem < ActiveRecord::Base
   #
   # @return [BigDecimal]
   def total_without_tax
-     sub_total - tax_amount
+    sub_total - tax_amount
   end
 
   # Application fee without tax
   #
   # @return [BigDecimal]
   def application_fee_without_tax
-    application_fee * (1 -  tax_rate/100)
+    application_fee * (1 -  tax_rate / 100)
   end
 end

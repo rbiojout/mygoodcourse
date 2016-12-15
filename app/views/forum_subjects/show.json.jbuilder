@@ -1,1 +1,1 @@
-json.partial! "forum_subjects/forum_subject", forum_subject: @forum_subject
+json.partial! 'forum_subjects/forum_subject', forum_subject: @forum_subject

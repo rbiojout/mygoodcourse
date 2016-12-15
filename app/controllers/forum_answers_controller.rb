@@ -15,8 +15,7 @@ class ForumAnswersController < ApplicationController
 
   # GET /forum_answers/1
   # GET /forum_answers/1.json
-  def show
-  end
+  def show; end
 
   # GET /forum_answers/new
   def new
@@ -25,8 +24,7 @@ class ForumAnswersController < ApplicationController
   end
 
   # GET /forum_answers/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /forum_answers
   # POST /forum_answers.json
@@ -78,11 +76,12 @@ class ForumAnswersController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_forum_answer
-      @forum_answer = ForumAnswer.find(params[:id])
-    end
+private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_forum_answer
+    @forum_answer = ForumAnswer.find(params[:id])
+  end
 
   # Use callbacks to share common setup or constraints between actions.
   def set_forum_subject
@@ -95,7 +94,7 @@ class ForumAnswersController < ApplicationController
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
-    def forum_answer_params
-      params.require(:forum_answer).permit(:text, :customer_id, :forum_subject_id)
-    end
+  def forum_answer_params
+    params.require(:forum_answer).permit(:text, :customer_id, :forum_subject_id)
+  end
 end

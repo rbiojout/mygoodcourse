@@ -1,5 +1,5 @@
 class TimePickerInput < DatePickerInput
-  private
+private
 
   def display_pattern
     I18n.t('timepicker.dformat', default: '%R')

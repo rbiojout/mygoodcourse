@@ -24,7 +24,6 @@
 #  fk_rails_2ae19963e4  (stripe_customer_id => stripe_customers.id)
 #
 
-  class StripeCard < ActiveRecord::Base
-    belongs_to :stripe_customer, :class_name => 'StripeCustomer', foreign_key: 'stripe_customer_id'
+class StripeCard < ActiveRecord::Base
+  belongs_to :stripe_customer, class_name: 'StripeCustomer', foreign_key: 'stripe_customer_id'
   end
-

@@ -1,16 +1,16 @@
-class StripeManaged < Struct.new( :customer )
-  ALLOWED = %w(US CA) # public beta
+class StripeManaged < Struct.new(:customer)
+  ALLOWED = %w(US CA).freeze # public beta
   COUNTRIES = [
-    { name: 'United States', code: 'US' },
-    { name: 'Canada', code: 'CA' },
-    { name: 'Australia', code: 'AU' },
-    { name: 'United Kingdom', code: 'GB' },
-    { name: 'Ireland', code: 'IE' }
-  ]
+    {name: 'United States', code: 'US'},
+    {name: 'Canada', code: 'CA'},
+    {name: 'Australia', code: 'AU'},
+    {name: 'United Kingdom', code: 'GB'},
+    {name: 'Ireland', code: 'IE'},
+  ].freeze
 
-  def create_account!( country, tos_accepted, ip )
+  def create_account!(country, tos_accepted, ip)
     return nil unless tos_accepted
-    return nil unless country.in?( COUNTRIES.map { |c| c[:code] } )
+    return nil unless country.in?(COUNTRIES.map { |c| c[:code] })
 
     begin
       @account = Stripe::Account.create(
@@ -19,7 +19,7 @@ class StripeManaged < Struct.new( :customer )
         email: customer.email,
         tos_acceptance: {
           ip: ip,
-          date: Time.now.to_i
+          date: Time.now.to_i,
         },
         legal_entity: {
           type: 'individual',
@@ -43,7 +43,7 @@ class StripeManaged < Struct.new( :customer )
     @account
   end
 
-  def update_account!( params: nil )
+  def update_account!(params: nil)
     if params
       if params[:bank_account_token]
         account.bank_account = params[:bank_account_token]
@@ -55,12 +55,12 @@ class StripeManaged < Struct.new( :customer )
         params[:legal_entity][:dob] = {
           year: params[:legal_entity].delete('dob(1i)'),
           month: params[:legal_entity].delete('dob(2i)'),
-          day: params[:legal_entity].delete('dob(3i)')
+          day: params[:legal_entity].delete('dob(3i)'),
         }
 
         # update legal_entity hash from the params
         params[:legal_entity].entries.each do |key, value|
-          if [ :address, :dob ].include? key.to_sym
+          if [:address, :dob].include? key.to_sym
             value.entries.each do |akey, avalue|
               next if avalue.blank?
               # Rails.logger.error "#{akey} - #{avalue.inspect}"
@@ -91,23 +91,23 @@ class StripeManaged < Struct.new( :customer )
     account.legal_entity
   end
 
-  def needs?( field )
-    user.stripe_account_status['fields_needed'].grep( Regexp.new( /#{field}/i ) ).any?
+  def needs?(field)
+    user.stripe_account_status['fields_needed'].grep(Regexp.new(/#{field}/i)).any?
   end
 
   def supported_bank_account_countries
     country_codes = case account.country
-                    when 'US' then %w{ US }
-                    when 'CA' then %w{ US CA }
-                    when 'IE', 'UK' then %w{ IE UK US }
-                    when 'AU' then %w{ AU }
+                    when 'US' then %w(US)
+                    when 'CA' then %w(US CA)
+                    when 'IE', 'UK' then %w(IE UK US)
+                    when 'AU' then %w(AU)
                     end
     COUNTRIES.select do |country|
       country[:code].in? country_codes
     end
   end
 
-  protected
+protected
 
   def account_status
     {
@@ -115,12 +115,11 @@ class StripeManaged < Struct.new( :customer )
       charges_enabled: account.charges_enabled,
       transfers_enabled: account.transfers_enabled,
       fields_needed: account.verification.fields_needed,
-      due_by: account.verification.due_by
+      due_by: account.verification.due_by,
     }
   end
 
   def account
-    @account ||= Stripe::Account.retrieve( user.stripe_user_id )
+    @account ||= Stripe::Account.retrieve(user.stripe_user_id)
   end
-
 end

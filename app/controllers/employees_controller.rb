@@ -3,7 +3,6 @@ class EmployeesController < ApplicationController
 
   before_action :authenticate_employee!
 
-
   # GET /employees
   # GET /employees.json
   def index
@@ -12,8 +11,7 @@ class EmployeesController < ApplicationController
 
   # GET /employees/1
   # GET /employees/1.json
-  def show
-  end
+  def show; end
 
   # GET /employees/new
   def new
@@ -21,8 +19,7 @@ class EmployeesController < ApplicationController
   end
 
   # GET /employees/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /employees
   # POST /employees.json
@@ -64,14 +61,15 @@ class EmployeesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_employee
-      @employee = Employee.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def employee_params
-      params.require(:employee).permit(:email, :password, :password_confirmation, :name, :first_name, :entry_date, :mobile, :picture, :role, :active)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_employee
+    @employee = Employee.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def employee_params
+    params.require(:employee).permit(:email, :password, :password_confirmation, :name, :first_name, :entry_date, :mobile, :picture, :role, :active)
+  end
 end

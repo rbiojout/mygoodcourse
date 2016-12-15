@@ -2,11 +2,9 @@ class AttachmentsController < ApplicationController
   require 'open-uri'
 
   before_action :set_attachment, only: [:download]
-  #before_action :authenticate_customer!, only: [:sort, :download]
+  # before_action :authenticate_customer!, only: [:sort, :download]
 
   before_action :correct_user, only: [:download]
-
-
 
   # GET /attachments/1/download
   # no format needed in parameters for the response
@@ -16,41 +14,36 @@ class AttachmentsController < ApplicationController
     cipher = OpenSSL::Cipher.new('aes-256-cbc')
     cipher.decrypt
 
-    buf = ""
+    buf = ''
     enc_file = @attachment.file.file
-    file_name =  "MyGoodCourse_"+@attachment.product.name + File.extname(enc_file.filename)
-    file_type = "application/pdf"
+    file_name = 'MyGoodCourse_' + @attachment.product.name + File.extname(enc_file.filename)
+    file_type = 'application/pdf'
 
-    outf = ""
-    if (enc_file.nil? == false)
+    outf = ''
+    if enc_file.nil? == false
       if enc_file.is_a?(CarrierWave::SanitizedFile)
         file_type = MIME::Types.type_for(enc_file.file).first.content_type
         # if no encryption take only the file
-        if (@attachment.key.nil? || @attachment.key.blank?)
+        if @attachment.key.nil? || @attachment.key.blank?
           outf = File.read(enc_file.file)
         else
           cipher.key = @attachment.key
           cipher.iv = @attachment.iv # key and iv are the ones from above
-          File.open(enc_file.file, "rb") do |inf|
-            while inf.read(4096, buf)
-              outf << cipher.update(buf)
-            end
+          File.open(enc_file.file, 'rb') do |inf|
+            outf << cipher.update(buf) while inf.read(4096, buf)
             outf << cipher.final
           end
         end
 
-
       elsif enc_file.is_a?(CarrierWave::Storage::Fog::File)
         file_type = enc_file.content_type
-        if (@attachment.key.nil? || @attachment.key.blank?)
-          outf  = open(enc_file.url).read
+        if @attachment.key.nil? || @attachment.key.blank?
+          outf = open(enc_file.url).read
         else
           cipher.key = @attachment.key
           cipher.iv = @attachment.iv # key and iv are the ones from above
-          web_contents  = open(enc_file.url) do |inf|
-            while inf.read(4096, buf)
-              outf << cipher.update(buf)
-            end
+          open(enc_file.url) do |inf|
+            outf << cipher.update(buf) while inf.read(4096, buf)
             outf << cipher.final
           end
         end
@@ -63,7 +56,7 @@ class AttachmentsController < ApplicationController
   # GET /attachments/1
   def download_old
     @pdf = @attachment.file.file
-    if @pdf.nil? == false && (@attachment.product.candownload(current_customer))
+    if @pdf.nil? == false && @attachment.product.candownload(current_customer)
       if @pdf.is_a?(CarrierWave::SanitizedFile)
         respond_to do |format|
           format.pdf do
@@ -86,20 +79,21 @@ class AttachmentsController < ApplicationController
   def sort
     unless params[:attachment].nil?
       params[:attachment].each .each_with_index do |id, index|
-        Attachment.update(id, position: index+1)
+        Attachment.update(id, position: index + 1)
       end
     end
-    render nothing:true
+    render nothing: true
   end
 
-  private
+private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_attachment
     @attachment = Attachment.find(params[:id])
   end
 
   def correct_user
-    redirect_to catalog_products_path(format: :html), alert: t('dialog.restricted') if(current_customer.nil? || @attachment.nil? || !@attachment.product.candownload(current_customer))
+    redirect_to catalog_products_path(format: :html), alert: t('dialog.restricted') if current_customer.nil? || @attachment.nil? || !@attachment.product.candownload(current_customer)
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

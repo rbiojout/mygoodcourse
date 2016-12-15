@@ -1,3 +1,5 @@
+# rubocop:disable Rails/DynamicFindBy
+
 require 'test_helper'
 
 class CategoryTest < ActiveSupport::TestCase

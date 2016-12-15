@@ -23,8 +23,8 @@ module RailsAdmin
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-                ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
-                bindings[:object].may_receive?
+            ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
+              bindings[:object].may_receive?
           rescue
             false
           end
@@ -33,7 +33,7 @@ module RailsAdmin
           'fa fa-flag'
         end
         register_instance_option :controller do
-          Proc.new do
+          proc do
             @object.receive
             @object.save!
             flash[:notice] = "Received #{@object.id}"
@@ -45,8 +45,8 @@ module RailsAdmin
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-                ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
-                bindings[:object].may_accept?
+            ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
+              bindings[:object].may_accept?
           rescue
             false
           end
@@ -55,7 +55,7 @@ module RailsAdmin
           'fa fa-thumbs-up'
         end
         register_instance_option :controller do
-          Proc.new do
+          proc do
             @object.accept
             @object.save
             flash[:notice] = "Accepted #{@object.id}"
@@ -67,8 +67,8 @@ module RailsAdmin
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-                ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
-                bindings[:object].may_reject?
+            ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
+              bindings[:object].may_reject?
           rescue
             false
           end
@@ -77,7 +77,7 @@ module RailsAdmin
           'fa fa-thumbs-down'
         end
         register_instance_option :controller do
-          Proc.new do
+          proc do
             @object.reject
             @object.save
             flash[:notice] = "Rejected #{@object.id}"
@@ -86,12 +86,11 @@ module RailsAdmin
         end
       end
       class CancelState < StateEngineActions
-
         RailsAdmin::Config::Actions.register(self)
         register_instance_option :visible? do
           begin
-                ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
-                bindings[:object].may_cancel?
+            ((bindings[:object].is_a? Post) || (bindings[:object].is_a? Abuse)) &&
+              bindings[:object].may_cancel?
           rescue
             false
           end
@@ -100,7 +99,7 @@ module RailsAdmin
           'fa fa-undo'
         end
         register_instance_option :controller do
-          Proc.new do
+          proc do
             @object.cancel
             @object.save
             flash[:notice] = "Canceled #{@object.id}"
@@ -108,8 +107,6 @@ module RailsAdmin
           end
         end
       end
-
-
     end
   end
 end

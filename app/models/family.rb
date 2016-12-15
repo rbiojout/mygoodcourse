@@ -21,7 +21,6 @@
 #
 
 class Family < ActiveRecord::Base
-
   has_many :categories, dependent: :destroy
   accepts_nested_attributes_for :categories, reject_if: :all_blank, allow_destroy: true
 
@@ -42,7 +41,7 @@ class Family < ActiveRecord::Base
   scope :with_active_products, -> { Family.joins(:products).where(products: {active: true}).distinct }
 
   # families with products
-  scope :with_products_for_cycle, -> (cycle_id) { Category.joins(:products).where(:cycle_id => cycle_id).distinct }
+  scope :with_products_for_cycle, ->(cycle_id) { Category.joins(:products).where(cycle_id: cycle_id).distinct }
 
   # we look for the objects associated in case of a query
   def self.associated_to_query(query)
@@ -58,12 +57,18 @@ class Family < ActiveRecord::Base
   # @level_id : list of levels, default to "0"
   # @active : flag for only active, default to false
   def self.associated_to_cycles_levels(cycle_id, level_id, active)
-    cycle_id ||= "0"
-    level_id ||= "0"
-    active ||=false
+    cycle_id ||= '0'
+    level_id ||= '0'
+    active ||= false
     # return all by default
-    if cycle_id =="0"
-      unless level_id == "0"
+    if cycle_id == '0'
+      if level_id == '0'
+        if active
+          Family.with_active_products
+        else
+          Family.all
+        end
+      else
         # we filter at the Levels level
         if active
           Family.joins(products: :levels).where(levels: {id: level_id}).where(products: {active: true}).distinct
@@ -71,21 +76,14 @@ class Family < ActiveRecord::Base
           Family.joins(products: :levels).where(levels: {id: level_id}).distinct
         end
         # special case no filter
-      else
-        if active
-          Family.with_active_products
-        else
-          Family.all
-        end
       end
     else
       # we filter at the Cycles level
       if active
-        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
+        joins(products: [{levels: :cycle}]).where(cycles: {id: cycle_id}).where(products: {active: true}).distinct
       else
-        joins(products: [{ levels: :cycle }]).where(cycles: {id: cycle_id}).distinct
+        joins(products: [{levels: :cycle}]).where(cycles: {id: cycle_id}).distinct
       end
     end
   end
-
 end

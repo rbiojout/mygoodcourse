@@ -8,7 +8,7 @@ class DateTimePickerInput < SimpleForm::Inputs::Base
   end
 
   def input_html_options
-    super.merge({class: 'form-control', readonly: true})
+    super.merge(class: 'form-control', readonly: true)
   end
 
   def span_remove
@@ -30,5 +30,4 @@ class DateTimePickerInput < SimpleForm::Inputs::Base
   def icon_table
     "<i class='glyphicon glyphicon-th'></i>".html_safe
   end
-
 end

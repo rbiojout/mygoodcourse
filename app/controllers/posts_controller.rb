@@ -7,8 +7,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    #@posts = Post.where(status: POST::STATE_ACCEPTED).unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
-    @posts = Post.all.unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
+    # @posts = Post.where(status: POST::STATE_ACCEPTED).unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], :per_page => 2)
+    @posts = Post.all.unscope(:order).order(created_at: :desc).all.paginate(page: params[:page], per_page: 2)
   end
 
   # GET /posts/1
@@ -27,8 +27,7 @@ class PostsController < ApplicationController
   end
 
   # GET /posts/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /posts
   # POST /posts.json
@@ -72,19 +71,19 @@ class PostsController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = Post.friendly.find(params[:id])
-    end
+private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_post
+    @post = Post.friendly.find(params[:id])
+  end
 
   def correct_user
     redirect_to posts_path, alert: t('dialog.restricted') unless @post.nil? || @post.customer_id == current_customer.id
   end
 
-
   # Never trust parameters from the scary internet, only allow the white list through.
-    def post_params
-      params.require(:post).permit(:name, :description, :visual, :visual_cache, :customer_id)
-    end
+  def post_params
+    params.require(:post).permit(:name, :description, :visual, :visual_cache, :customer_id)
+  end
 end

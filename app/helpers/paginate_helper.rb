@@ -6,29 +6,30 @@ module PaginateHelper
       super(collection, options, template)
     end
 
-    protected
+  protected
+
     def html_container(html)
-      tag(:nav, tag(:ul, html, class: "pagination"))
+      tag(:nav, tag(:ul, html, class: 'pagination'))
     end
 
     def previous_or_next_page(page, text, classname)
       if page
-        link(text, page, :class => classname)
+        link(text, page, class: classname)
       else
-        tag(:li, tag(:a, text, class: classname), class: "disabled")
+        tag(:li, tag(:a, text, class: classname), class: 'disabled')
       end
     end
 
     def page_number(page)
-      unless page == current_page
-        tag(:li, link(page, page, :rel => rel_value(page)))
+      if page == current_page
+        tag(:li, tag(:a, page), class: 'active')
       else
-        tag(:li, tag(:a, page), class: "active")
+        tag(:li, link(page, page, rel: rel_value(page)))
       end
     end
 
     def link(text, target, attributes = {})
-      if target.is_a? Fixnum
+      if target.is_a? Integer
         attributes[:rel] = rel_value(target)
         target = url(target)
       end
@@ -39,10 +40,9 @@ module PaginateHelper
     def gap
       tag(:li, tag(:a, '...'))
     end
-
-  end##end of class
+  end # #end of class
 
   def js_will_paginate(collection, options = {})
-    will_paginate(collection, options.merge(:renderer => PaginateHelper::PaginateJSLinkRenderer))
+    will_paginate(collection, options.merge(renderer: PaginateHelper::PaginateJSLinkRenderer))
   end
 end

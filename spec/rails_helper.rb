@@ -2,35 +2,28 @@
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
 
-
 # Add additional requires below this line. Rails is not loaded until this point!
-require "capybara/rails"
+require 'capybara/rails'
 # in order to test the integration with a headless browser
 # we use Phantomjs and poltergeist
 require 'capybara/poltergeist'
 Capybara.register_driver :poltergeist do |app|
-  Capybara::Poltergeist::Driver.new(app, {
-      debug: false,
-      default_wait_time: 10,
-      timeout: 60,
-      js_errors: true,
-      phantomjs_options: ['--load-images=yes']
-  })
+  Capybara::Poltergeist::Driver.new(app, debug: false,
+                                         default_wait_time: 10,
+                                         timeout: 60,
+                                         js_errors: true,
+                                         phantomjs_options: ['--load-images=yes'])
 end
-
 
 Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist
 Capybara.current_driver = :poltergeist
 # time out set in driver
 # Capybara.default_max_wait_time = 30
-
-
-
 
 # make simple matchers for ActiveRecord
 require 'shoulda/matchers'
@@ -49,12 +42,9 @@ require 'support/database_cleaner'
 
 require 'support/controller_macros'
 RSpec.configure do |config|
-  config.include Devise::Test::ControllerHelpers, :type => :controller
-  config.extend ControllerMacros, :type => :controller
+  config.include Devise::Test::ControllerHelpers, type: :controller
+  config.extend ControllerMacros, type: :controller
 end
-
-
-
 
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
@@ -76,7 +66,6 @@ end
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
   config.include Warden::Test::Helpers
 
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
@@ -121,7 +110,7 @@ RSpec.configure do |config|
   # that are located in the public part to be served
   # in /public/uploads/test
   # make sure the fixtures are present
-  CarrierWave.root = Rails.root.join("public")
+  CarrierWave.root = Rails.root.join('public')
 
   if defined?(CarrierWave)
     CarrierWave::Uploader::Base.descendants.each do |klass|
@@ -137,7 +126,4 @@ RSpec.configure do |config|
       end
     end
   end
-
-
-
 end

@@ -8,19 +8,19 @@ class StripeHooksController < ApplicationController
     # event sent regarding a connected user_mailer, and not to a webhook
     # handler setup on the application owner's account.
     # So, use the user_id to look up a connected user_mailer on our end.
-    user = params[:user_id] && User.find_by( stripe_user_id: params[:user_id] )
+    user = params[:user_id] && User.find_by(stripe_user_id: params[:user_id])
 
     # If we didn't find a user_mailer, we'll have nil instead
     # so build our arguments to the Event API taking that into account.
     # We'll end up with one of:
     #   args = [ 'EVENT_ID' ]
     #   args = [ 'EVENT_ID', 'ACCESS_TOKEN' ]
-    args = [ params[:id], user.try(:secret_key) ].compact
+    args = [params[:id], user.try(:secret_key)].compact
 
     # Retrieve the event from StripeAccount so that we can be
     # sure it wasn't spoofed/faked by someone being mean.
     begin
-      event = Stripe::Event.retrieve( *args )
+      event = Stripe::Event.retrieve(*args)
     rescue Stripe::InvalidRequestError
       # The event doesn't exist for some reason... this might
       # happen if you've got other apps maybe?
@@ -33,7 +33,7 @@ class StripeHooksController < ApplicationController
       # because the event belongs to the connected account, and we're
       # no longer authorized to access their account!
       if user && user.connected?
-        connector = StripeConnect.new( user )
+        connector = StripeConnect.new(user)
         connector.deauthorized
       end
 
@@ -51,9 +51,7 @@ class StripeHooksController < ApplicationController
       # handler will hopefully look like some day, where
       # the event is still accessible somehow and we verified
       # it came from StripeAccount.
-      if user && user.connected?
-        user.manager.deauthorized
-      end
+      user.manager.deauthorized if user && user.connected?
 
     when 'account.updated'
       # This webhook is used for standalone and managed
@@ -84,5 +82,4 @@ class StripeHooksController < ApplicationController
     # No body is necessary.
     render nothing: true, status: 200
   end
-
 end

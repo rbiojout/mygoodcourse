@@ -1,65 +1,54 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-RSpec.describe "forum visit", feature: true, js: true do
-
+RSpec.describe 'forum visit', feature: true, js: true do
   it 'visit forum open' do
-
     visit forum_subject_path(forum_subjects(:one))
 
     country = countries(:france)
 
-    visit forum_families_path(:country_id => country.id)
+    visit forum_families_path(country_id: country.id)
     has_css?('.forum_family-panel')
 
     category = country.forum_categories.first
-    within("li.forum_category-panel") do
+    within('li.forum_category-panel') do
       click_on(category.name)
     end
-
 
     subject = category.forum_subjects.first
 
     ## IMPORTANT WAIT TO HAVE THE PAGE LOADED
     expect(page).to have_content(subject.name)
-    within("main.container") do
-      #expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
+    within('main.container') do
+      # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
     end
-
-    save_screenshot("#{::Rails.root}/spec/screenshots/forum_visit.jpg")
-
   end
-
 end
 
-
-RSpec.feature "Forum answer management", :type => :feature, js: true do
-
+RSpec.feature 'Forum answer management', type: :feature, js: true do
   scenario 'visit forum', js: true do
     country = countries(:france)
-    visit forum_families_path(:country_id => country.id)
+    visit forum_families_path(country_id: country.id)
     has_css?('.forum_family-panel')
 
     forum_category = country.forum_categories.first
-    within("li.forum_category-panel") do
+    within('li.forum_category-panel') do
       click_on(forum_category.name)
     end
 
-    expect(find("h1")).to have_content(forum_category.name)
+    expect(find('h1')).to have_content(forum_category.name)
 
     forum_subject = forum_category.forum_subjects.first
-    #within("#forum_subject_#{forum_category.id}") do
-      click_on(forum_subject.name)
-    #end
-    expect(find("h1")).to have_content(forum_subject.name)
-    save_screenshot("#{::Rails.root}/spec/screenshots/forum_answer.jpg", full: true)
-
+    # within("#forum_subject_#{forum_category.id}") do
+    click_on(forum_subject.name)
+    # end
+    expect(find('h1')).to have_content(forum_subject.name)
   end
 
-  scenario "update forum subject text", js: true do
+  scenario 'update forum subject text', js: true do
     # Log In
     customer = customers(:one)
-    login_as customer, :scope => :customer
+    login_as customer, scope: :customer
     visit '/'
 
     # visit forum subject
@@ -93,14 +82,12 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     # retreive from DB
     forum_subject = ForumSubject.find(forum_subject.id)
     expect(forum_subject.text).to eq(text)
-    save_screenshot("#{::Rails.root}/spec/screenshots/forum_subject.jpg", full: true)
   end
 
-  scenario "add answer to subject", js: true do
-
+  scenario 'add answer to subject', js: true do
     # Log In
     customer = customers(:one)
-    login_as customer, :scope => :customer
+    login_as customer, scope: :customer
 
     # visit forum subject
     forum_subject = forum_subjects(:one)
@@ -114,10 +101,10 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     end
 
     # check if the form is ready
-    expect(page).to have_css("#new_forum_answer")
+    expect(page).to have_css('#new_forum_answer')
 
     text = 'This is the new answer text'
-    within("#new_forum_answer") do
+    within('#new_forum_answer') do
       # this is a client side action
       # we use jquery to change the value
       expect(page).to have_xpath('//input')
@@ -144,21 +131,19 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     expect(page).to have_content(text)
 
     # check if the page is ready
-    save_screenshot("#{::Rails.root}/spec/screenshots/forum_answer.jpg", full: true)
   end
 
-  scenario "add comment to answer", js: true do
-
+  scenario 'add comment to answer', js: true do
     # Log In
     customer = customers(:one)
-    login_as customer, :scope => :customer
+    login_as customer, scope: :customer
 
     # visit forum subject
     forum_subject = forum_subjects(:one)
     expect(forum_subject.customer.id).to eq(customer.id)
     visit forum_subject_path(forum_subject)
 
-    forum_answer= forum_subject.forum_answers.first
+    forum_answer = forum_subject.forum_answers.first
 
     # add an comment to answer
     within("li.forum_answer_#{forum_answer.id}") do
@@ -167,10 +152,10 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     end
 
     # check if the form is ready
-    expect(page).to have_css("#new_comment")
+    expect(page).to have_css('#new_comment')
 
     text = 'This is the new comment text for answer'
-    within("#new_comment") do
+    within('#new_comment') do
       # this is a client side action
       # we use jquery to change the value
       expect(page).to have_xpath('//input')
@@ -197,9 +182,5 @@ RSpec.feature "Forum answer management", :type => :feature, js: true do
     # @TODO look for the number of comments displayed on page
 
     # check if the page is ready
-    save_screenshot("#{::Rails.root}/spec/screenshots/forum_comment.jpg", full: true)
   end
-
 end
-
-

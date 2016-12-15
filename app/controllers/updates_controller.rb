@@ -11,8 +11,7 @@ class UpdatesController < ApplicationController
 
   # GET /updates/1
   # GET /updates/1.json
-  def show
-  end
+  def show; end
 
   # GET /updates/new
   def new
@@ -20,8 +19,7 @@ class UpdatesController < ApplicationController
   end
 
   # GET /updates/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /updates
   # POST /updates.json
@@ -63,14 +61,15 @@ class UpdatesController < ApplicationController
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_update
-      @update = Update.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def update_params
-      params.require(:update).permit(:name, :description, :customer_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_update
+    @update = Update.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def update_params
+    params.require(:update).permit(:name, :description, :customer_id)
+  end
 end

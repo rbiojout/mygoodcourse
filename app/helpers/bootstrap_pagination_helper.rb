@@ -1,12 +1,12 @@
 module BootstrapPaginationHelper
   class LinkRenderer < WillPaginate::ActionView::LinkRenderer
-    protected
+  protected
 
     def page_number(page)
-      unless page == current_page
-        link(page, page, :rel => rel_value(page))
+      if page == current_page
+        link(page, '#', class: 'active')
       else
-        link(page, "#", :class => 'active')
+        link(page, page, rel: rel_value(page))
       end
     end
 
@@ -22,31 +22,29 @@ module BootstrapPaginationHelper
 
     def previous_or_next_page(page, text, classname)
       if page
-        link(text, page, :class => classname)
+        link(text, page, class: classname)
       else
-        link(text, "#", :class => classname + ' disabled')
+        link(text, '#', class: classname + ' disabled')
       end
     end
 
     def html_container(html)
-      tag(:div, tag(:ul, html, class: 'pagination'),  container_attributes)
+      tag(:div, tag(:ul, html, class: 'pagination'), container_attributes)
     end
 
-    private
+  private
 
     def link(text, target, attributes = {})
-      if target.is_a? Fixnum
+      if target.is_a? Integer
         attributes[:rel] = rel_value(target)
         target = url(target)
       end
 
-      unless target == "#"
-        attributes[:href] = target
-      end
+      attributes[:href] = target unless target == '#'
 
       classname = attributes[:class]
       attributes.delete(:classname)
-      tag(:li, tag(:a, text, attributes), :class => classname)
+      tag(:li, tag(:a, text, attributes), class: classname)
     end
   end
 end

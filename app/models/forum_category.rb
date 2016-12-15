@@ -41,26 +41,22 @@ class ForumCategory < ActiveRecord::Base
   end
 
   def count_messages
-    forum_subjects.count+forum_answers.count
+    forum_subjects.count + forum_answers.count
   end
 
   def last_activity_date
-    if forum_answers.count >0
+    if forum_answers.count.positive?
       forum_answers.last.created_at
-    elsif forum_subjects.count>0
+    elsif forum_subjects.count.positive?
       forum_subjects.last.created_at
-    else
-      nil
     end
   end
 
   def last_activity_customer
-    if forum_answers.count >0
+    if forum_answers.count.positive?
       forum_answers.last.customer
-    elsif forum_subjects.count>0
+    elsif forum_subjects.count.positive?
       forum_subjects.last.customer
-    else
-      nil
     end
   end
 end

@@ -2,11 +2,9 @@ class AbusesController < ApplicationController
   before_action :context, only: [:new, :create]
   before_action :authenticate_customer!
 
-
   # GET /abuses/1
   # GET /abuses/1.json
-  def show
-  end
+  def show; end
 
   # GET /abuses/new
   def new
@@ -29,21 +27,18 @@ class AbusesController < ApplicationController
 
     respond_to do |format|
       if @abuse.save
-        # tell the state engine
-        # need the bang! to save in database
-        @abuse.receive!
+        @abuse.receive! # tell the state engine, need the bang! to save in database
         # display the new abuse
         format.html { redirect_to context_url(context), notice: t('views.flash_create_message') }
         format.json { render :show, status: :created, location: @abuse }
         # added
-        format.js   {
+        format.js   do
           @current_abuse = @abuse
-          render :create, :flash => { :notice => "Yeepee!" }
-        }
+          render :create, flash: {notice: 'Yeepee!'}
+        end
       else
         format.html { render :new }
         format.json { render json: @abuse.errors, status: :unprocessable_entity }
-        # added
         # needed for errors, cf form_error.coffee
         format.js   { render json: @abuse.errors, status: :unprocessable_entity }
       end
@@ -70,12 +65,13 @@ class AbusesController < ApplicationController
   def destroy
     @abuse.destroy
     respond_to do |format|
-      format.html { redirect_to abuses_url(), notice: t('views.flash_delete_message') }
+      format.html { redirect_to abuses_url, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   end
 
-  private
+private
+
   # Use callbacks to share common setup or constraints between actions.
   def set_abuse
     @abuse = Abuse.find(params[:id])
@@ -89,13 +85,10 @@ class AbusesController < ApplicationController
   # as a polymorphic object, we need the context
   def context
     if params[:product_id]
-      id = params[:product_id]
       Product.find(params[:product_id])
     elsif params[:review_id]
-      id = params[:review_id]
       Review.find(params[:review_id])
     elsif params[:comment_id]
-      id = params[:comment_id]
       Comment.find(params[:comment_id])
     end
   end
@@ -105,11 +98,9 @@ class AbusesController < ApplicationController
       product_path(context)
     elsif Review === context
       review_path(context)
-     # @TODO redirect to the commentable
+    # @TODO redirect to the commentable
     elsif Comment === context
       comment_path(context)
     end
   end
-
-
 end

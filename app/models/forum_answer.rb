@@ -25,7 +25,7 @@ class ForumAnswer < ActiveRecord::Base
   belongs_to :forum_subject
 
   # we have some comments that can be reported by customers
-  has_many :comments, class_name: "Comment", as: :commentable
+  has_many :comments, class_name: 'Comment', as: :commentable
 
   validates :text, :forum_subject, presence: true
 

@@ -13,7 +13,7 @@ class CustomersController < ApplicationController
   # GET /customers/1
   # GET /customers/1.json
   def show
-    @products = @customer.products.active.paginate(page: params[:page], :per_page => Product.per_page) unless @customer.nil?
+    @products = @customer.products.active.paginate(page: params[:page], per_page: Product.per_page) unless @customer.nil?
     # follow activity on pages
     # we keep track of the current customer in impressions
     @current_user = current_customer
@@ -32,17 +32,11 @@ class CustomersController < ApplicationController
     impressionist(@customer)
   end
 
-
   # GET /customers/1/edit
-  def edit
-  end
-
-
+  def edit; end
 
   # GET /customers/dashboard
-  def dashboard
-
-  end
+  def dashboard; end
 
   # GET /whislist
   def wishlist
@@ -53,7 +47,6 @@ class CustomersController < ApplicationController
   def reviews_list
     @reviews = Review.find_for_all_product_of_customer(@customer.id)
   end
-
 
   # PATCH/PUT /customers/1
   # PATCH/PUT /customers/1.json
@@ -72,35 +65,33 @@ class CustomersController < ApplicationController
   # DELETE /customers/1
   # DELETE /customers/1.json
   def destroy
-    begin
-      @customer.destroy
-      respond_to do |format|
-        format.html { redirect_to customers_url, notice: t('views.flash_delete_message') }
-        format.json { head :no_content }
-      end
-    rescue
-      flash[:msg] = "Can't delete"
-      respond_to do |format|
-        format.html { redirect_to(catalog_products_path, error: "Can't delete") }
-        format.xml  { head :ok }
-      end
+    @customer.destroy
+    respond_to do |format|
+      format.html { redirect_to customers_url, notice: t('views.flash_delete_message') }
+      format.json { head :no_content }
     end
-
+  rescue
+    flash[:msg] = "Can't delete"
+    respond_to do |format|
+      format.html { redirect_to(catalog_products_path, error: "Can't delete") }
+      format.xml  { head :ok }
+    end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_customer
-      @customer = Customer.friendly.find(params[:id])
-    end
+private
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def customer_params
-      params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :language, :country_id, :mobile, :birthdate, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1,  :administrative_area_level_2, :postal_code, :locality, :lat, :lng, :description, :terms_of_service)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_customer
+    @customer = Customer.friendly.find(params[:id])
+  end
 
-    def correct_user
-      @customer = Customer.friendly.find(params[:id])
-      redirect_to catalog_products_path, alert: t('dialog.restricted') unless @customer == current_customer
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def customer_params
+    params.require(:customer).permit(:name, :first_name, :email, :password, :password_confirmation, :language, :country_id, :mobile, :birthdate, :picture, :picture_cache, :formatted_address, :street_address, :administrative_area_level_1, :administrative_area_level_2, :postal_code, :locality, :lat, :lng, :description, :terms_of_service)
+  end
+
+  def correct_user
+    @customer = Customer.friendly.find(params[:id])
+    redirect_to catalog_products_path, alert: t('dialog.restricted') unless @customer == current_customer
+  end
 end

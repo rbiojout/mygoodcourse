@@ -12,6 +12,5 @@ FactoryGirl.define do
         create_list(:level, evaluator.number_of_levels, cycle: cycle)
       end
     end
-
   end
 end

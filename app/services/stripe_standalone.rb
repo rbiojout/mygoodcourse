@@ -1,15 +1,15 @@
-class StripeStandalone < Struct.new( :customer )
+class StripeStandalone < Struct.new(:customer)
   COUNTRIES = [
-    { name: 'United States', code: 'US' },
-    { name: 'Canada', code: 'CA' },
-    { name: 'Australia', code: 'AU' },
-    { name: 'United Kingdom', code: 'GB' },
-    { name: 'Ireland', code: 'IE' },
-    { name: 'France', code: 'FR' }
-  ]
+    {name: 'United States', code: 'US'},
+    {name: 'Canada', code: 'CA'},
+    {name: 'Australia', code: 'AU'},
+    {name: 'United Kingdom', code: 'GB'},
+    {name: 'Ireland', code: 'IE'},
+    {name: 'France', code: 'FR'},
+  ].freeze
 
-  def create_account!( country )
-    return nil unless country.in?( COUNTRIES.map { |c| c[:code] } )
+  def create_account!(country)
+    return nil unless country.in?(COUNTRIES.map { |c| c[:code] })
 
     begin
       @account = Stripe::Account.create(
@@ -18,12 +18,12 @@ class StripeStandalone < Struct.new( :customer )
         country: country
       )
     rescue Exception => exc
-      puts ("Message for the log file #{exc.message}")
+      puts "Message for the log file #{exc.message}"
       nil # TODO: improve
     end
 
     if @account
-      stripe_account = customer.stripe_account || StripeAccount.create(:customer => customer)
+      stripe_account = customer.stripe_account || StripeAccount.create(customer: customer)
       stripe_account.update_attributes(
         currency: @account.default_currency,
         stripe_account_type: 'standalone',
@@ -37,18 +37,17 @@ class StripeStandalone < Struct.new( :customer )
     @account
   end
 
-  protected
+protected
 
   def account_status
     {
       details_submitted: account.details_submitted,
       charges_enabled: account.charges_enabled,
-      transfers_enabled: account.transfers_enabled
+      transfers_enabled: account.transfers_enabled,
     }
   end
 
   def account
-    @account ||= Stripe::Account.retrieve( customer.stripe_account )
+    @account ||= Stripe::Account.retrieve(customer.stripe_account)
   end
-
 end

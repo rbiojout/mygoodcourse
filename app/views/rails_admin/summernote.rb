@@ -11,16 +11,16 @@ module RailsAdmin
           # Pass the theme and mode for Codemirror
           register_instance_option :config do
             {
-                mode: 'css',
-                theme: 'night',
+              mode: 'css',
+              theme: 'night',
             }
           end
 
           # Pass the location of the theme and mode for Codemirror
           register_instance_option :assets do
             {
-                mode: '/assets/codemirror/modes/css.js',
-                theme: '/assets/codemirror/themes/night.css',
+              mode: '/assets/codemirror/modes/css.js',
+              theme: '/assets/codemirror/themes/night.css',
             }
           end
 

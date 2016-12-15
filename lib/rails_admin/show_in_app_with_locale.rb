@@ -4,17 +4,20 @@ module RailsAdmin
       class ShowInAppWithLocale < RailsAdmin::Config::Actions::Base
         RailsAdmin::Config::Actions.register(self)
 
-
         register_instance_option :member do
           true
         end
 
         register_instance_option :visible? do
           calculated_path = "/#{bindings[:object].class.name.underscore}s"
-          authorized? && (bindings[:controller].main_app.url_for(controller: calculated_path,
-                                                                 action: 'show',
-                                                                 id: bindings[:object].id,
-                                                                 locale: I18n.locale) rescue false)
+          authorized? && (begin
+                            bindings[:controller].main_app.url_for(controller: calculated_path,
+                                                                   action: 'show',
+                                                                   id: bindings[:object].id,
+                                                                   locale: I18n.locale)
+                          rescue
+                            false
+                          end)
         end
 
         register_instance_option :controller do

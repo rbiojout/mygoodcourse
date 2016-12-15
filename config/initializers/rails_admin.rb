@@ -1,18 +1,17 @@
-require Rails.root.join('lib','rails_admin','custom_actions.rb')
-require Rails.root.join('lib','rails_admin','custom_dashboards.rb')
+# rubocop:disable Rails/OutputSafety
+
+require Rails.root.join('lib', 'rails_admin', 'custom_actions.rb')
+require Rails.root.join('lib', 'rails_admin', 'custom_dashboards.rb')
 
 # we need the locale to be passed
-require Rails.root.join('lib','rails_admin','show_in_app_with_locale.rb')
-
+require Rails.root.join('lib', 'rails_admin', 'show_in_app_with_locale.rb')
 
 # state engine
 # refer to http://dmitrypol.github.io/2016/01/01/rails-admin-state-machine.html
-require Rails.root.join('lib','rails_admin','state_engine_actions.rb')
-
+require Rails.root.join('lib', 'rails_admin', 'state_engine_actions.rb')
 
 RailsAdmin.config do |config|
-
-  config.main_app_name = ["MyGoodCourse", "BackOffice"]
+  config.main_app_name = %w(MyGoodCourse BackOffice)
 
   require 'i18n'
   I18n.default_locale = :fr
@@ -21,8 +20,8 @@ RailsAdmin.config do |config|
 
   ## == Devise ==
   config.authenticate_with do
-     warden.authenticate! scope: :employee
-   end
+    warden.authenticate! scope: :employee
+  end
   config.current_user_method(&:current_employee)
 
   ## == Cancan ==
@@ -33,7 +32,6 @@ RailsAdmin.config do |config|
 
   ## == PaperTrail ==
   # config.audit_with :paper_trail, 'User', 'PaperTrail::Version' # PaperTrail >= 3.0.0
-
 
   ### More at https://github.com/sferik/rails_admin/wiki/Base-configuration
 
@@ -53,7 +51,7 @@ RailsAdmin.config do |config|
       except [File, Like, OrderItem, StripeAccount, StripeCard, StripeCustomer, Peer]
     end
     delete do
-      only [Article, Category, Comment, Country, Cycle, Employee, Family,ForumAnswer, ForumCategory, ForumFamily, ForumSubject, Level, Post, Review, Topic, Update]
+      only [Article, Category, Comment, Country, Cycle, Employee, Family, ForumAnswer, ForumCategory, ForumFamily, ForumSubject, Level, Post, Review, Topic, Update]
     end
     # Set the custom action here
     sort_for_country
@@ -68,7 +66,6 @@ RailsAdmin.config do |config|
     reject_state
     cancel_state
 
-
     show_in_app do
       except [Attachment, OrderItem]
     end
@@ -76,13 +73,12 @@ RailsAdmin.config do |config|
       only [Product, Customer, Post, Topic]
     end
 
-
     ## With an audit adapter, you can add:
     # history_index
     # history_show
   end
 
-  config.model "Abuse" do
+  config.model 'Abuse' do
     configure :status do
       read_only true
     end
@@ -91,7 +87,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Article" do
+  config.model 'Article' do
     parent Topic
     list do
       sort_by :topic_id
@@ -119,10 +115,9 @@ RailsAdmin.config do |config|
       field :topic
       field :counter_cache
     end
-
   end
 
-  config.model "Country" do
+  config.model 'Country' do
     list do
       field :id
       field :name
@@ -140,15 +135,15 @@ RailsAdmin.config do |config|
       field :cycles
       field :families
       field :topics do
-        #orderable false
-        #removable false
-        #inline_add false
-        #help 'Topic association is disabled in this screen. Only the sort is possible'
+        # orderable false
+        # removable false
+        # inline_add false
+        # help 'Topic association is disabled in this screen. Only the sort is possible'
       end
     end
   end
 
-  config.model "Cycle" do
+  config.model 'Cycle' do
     parent Country
     list do
       sort_by :country_id
@@ -176,10 +171,9 @@ RailsAdmin.config do |config|
       field :country
       field :levels
     end
-
   end
 
-  config.model "Review" do
+  config.model 'Review' do
     parent Product
     list do
       sort_by :updated_at
@@ -207,7 +201,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Customer" do
+  config.model 'Customer' do
     list do
       field :id
       field :first_name
@@ -237,7 +231,7 @@ RailsAdmin.config do |config|
         date_format :default
       end
       field :confirmed_at do
-        strftime_format "%Y-%m-%d"
+        strftime_format '%Y-%m-%d'
       end
       field :language
       field :country
@@ -252,7 +246,7 @@ RailsAdmin.config do |config|
       field :picture
       field :mobile
       field :last_sign_in_at do
-        strftime_format "%Y-%m-%d"
+        strftime_format '%Y-%m-%d'
       end
       field :counter_cache
       field :email
@@ -268,7 +262,7 @@ RailsAdmin.config do |config|
       field :country
       field :description do
         formatted_value do
-          value.html_safe unless value.nil?
+          value&.html_safe
         end
       end
       field :orders
@@ -276,8 +270,7 @@ RailsAdmin.config do |config|
     end
   end
 
-
-  config.model "Employee" do
+  config.model 'Employee' do
     edit do
       field :name
       field :first_name
@@ -293,7 +286,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "ForumFamily" do
+  config.model 'ForumFamily' do
     edit do
       field :country
       field :name
@@ -308,16 +301,15 @@ RailsAdmin.config do |config|
       field :name
       field :description do
         formatted_value do
-          value.html_safe unless value.nil?
+          value&.html_safe
         end
       end
       field :visual
       field :forum_categories
     end
-
   end
 
-  config.model "ForumCategory" do
+  config.model 'ForumCategory' do
     parent ForumFamily
     edit do
       field :name
@@ -331,25 +323,23 @@ RailsAdmin.config do |config|
       field :name
       field :description do
         formatted_value do
-          value.html_safe unless value.nil?
+          value&.html_safe
         end
       end
       field :visual
       field :forum_family
     end
-
   end
 
-  config.model "ForumSubject" do
+  config.model 'ForumSubject' do
     parent ForumCategory
-
   end
 
-  config.model "ForumAnswer" do
+  config.model 'ForumAnswer' do
     parent ForumSubject
   end
 
-  config.model "Impression" do
+  config.model 'Impression' do
     list do
       field :id
       field :impressionable
@@ -365,7 +355,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Level" do
+  config.model 'Level' do
     parent Cycle
     list do
       sort_by :cycle_id
@@ -395,7 +385,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Family" do
+  config.model 'Family' do
     parent Country
     list do
       sort_by :country_id
@@ -425,7 +415,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Category" do
+  config.model 'Category' do
     parent Family
     list do
       sort_by :family_id
@@ -451,10 +441,9 @@ RailsAdmin.config do |config|
       end
       field :family
     end
-
   end
 
-  config.model "Order" do
+  config.model 'Order' do
     edit do
       field :customer do
         inline_add false
@@ -466,13 +455,13 @@ RailsAdmin.config do |config|
       end
       field :status
       field :received_at do
-        strftime_format "%Y-%m-%d"
+        strftime_format '%Y-%m-%d'
       end
       field :accepted_at do
-        strftime_format "%Y-%m-%d"
+        strftime_format '%Y-%m-%d'
       end
       field :rejected_at do
-        strftime_format "%Y-%m-%d"
+        strftime_format '%Y-%m-%d'
       end
       field :rejecter do
         read_only true
@@ -488,11 +477,11 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "OrderItem" do
+  config.model 'OrderItem' do
     parent Order
   end
 
-  config.model "Post" do
+  config.model 'Post' do
     parent Customer
     list do
       field :id
@@ -518,12 +507,11 @@ RailsAdmin.config do |config|
       field :customer
     end
     list do
-      scopes    [nil, Post::STATE_CREATED, Post::STATE_RECEIVED, Post::STATE_ACCEPTED, Post::STATE_REJECTED]
+      scopes [nil, Post::STATE_CREATED, Post::STATE_RECEIVED, Post::STATE_ACCEPTED, Post::STATE_REJECTED]
     end
-
   end
 
-  config.model "Product" do
+  config.model 'Product' do
     list do
       scopes [nil, :featured]
       sort_by :updated_at
@@ -550,7 +538,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Payment" do
+  config.model 'Payment' do
     parent Order
     edit do
       field :order do
@@ -568,19 +556,19 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "StripeAccount" do
+  config.model 'StripeAccount' do
     parent Customer
   end
 
-  config.model "StripeCard" do
+  config.model 'StripeCard' do
     parent StripeCustomer
   end
 
-  config.model "StripeCustomer" do
+  config.model 'StripeCustomer' do
     parent Order
   end
 
-  config.model "Topic" do
+  config.model 'Topic' do
     parent Country
     list do
       sort_by :country_id
@@ -600,8 +588,7 @@ RailsAdmin.config do |config|
     end
   end
 
-  config.model "Update" do
+  config.model 'Update' do
     parent Customer
   end
-
 end

@@ -26,7 +26,7 @@ class ForumSubject < ActiveRecord::Base
   # follow activities
   # we explicitely indicate the reference because of rails_admin issues
   include Impressionist::IsImpressionable
-  is_impressionable :counter_cache => true, :column_name => :counter_cache, :unique => :all
+  is_impressionable counter_cache: true, column_name: :counter_cache, unique: :all
 
   belongs_to :customer
   belongs_to :forum_category
@@ -34,12 +34,12 @@ class ForumSubject < ActiveRecord::Base
   has_many :forum_answers, dependent: :destroy
 
   # we have some likes that can be reported by customers
-  has_many :likes, class_name: "Like", as: :likeable
+  has_many :likes, class_name: 'Like', as: :likeable
 
   validates :name, :text, :forum_category, presence: true
 
   def last_activity_date
-    if forum_answers.count >0
+    if forum_answers.count.positive?
       forum_answers.last.created_at
     else
       created_at
@@ -47,7 +47,7 @@ class ForumSubject < ActiveRecord::Base
   end
 
   def last_activity_customer
-    if forum_answers.count >0
+    if forum_answers.count.positive?
       forum_answers.last.customer
     else
       customer
@@ -55,8 +55,6 @@ class ForumSubject < ActiveRecord::Base
   end
 
   def liked?(customer)
-    Like.where(:likeable_id => self.id).where(:likeable_type => 'ForumSubject').where(:customer => customer).count > 0
+    Like.where(likeable_id: id).where(likeable_type: 'ForumSubject').where(customer: customer).count.positive?
   end
-
-
 end

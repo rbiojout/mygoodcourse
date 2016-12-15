@@ -15,18 +15,17 @@ Rails.application.configure do
 
   # Don't care if the mailer can't send.
   ActionMailer::Base.smtp_settings = {
-      :address        => 'smtp-fr.securemail.pro',
-      :port           => '465',
-      :domain         => 'mygoodcourse.com',
-      :authentication => :login,
-      :user_name      => ENV['SMTP_USERNAME'],
-      :password       => ENV['SMTP_PASSWORD'],
-      :tls            => true
+    address: 'smtp-fr.securemail.pro',
+    port: '465',
+    domain: 'mygoodcourse.com',
+    authentication: :login,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    tls: true,
   }
 
-
   config.action_mailer.raise_delivery_errors = false
-  config.action_mailer.default_url_options = { :host => 'localhost:3000' }
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
   config.action_mailer.default_options = {from: 'contact@mygoodcourse.com'}
   config.action_mailer.asset_host = 'http://localhost:3000'
 

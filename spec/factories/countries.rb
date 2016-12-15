@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :country, class: Country do
-    name          { Faker::Address.country }
+    name { Faker::Address.country }
 
     trait :with_cycles do
       transient do
@@ -61,6 +61,5 @@ FactoryGirl.define do
         create_list(:topic, evaluator.number_of_topics, :with_articles, country: country)
       end
     end
-
   end
 end

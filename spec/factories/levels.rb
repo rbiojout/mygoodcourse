@@ -31,6 +31,5 @@ FactoryGirl.define do
       with_active_products
       with_not_active_products
     end
-
   end
 end

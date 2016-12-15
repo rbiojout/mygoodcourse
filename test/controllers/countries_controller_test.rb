@@ -7,15 +7,14 @@ class CountriesControllerTest < ActionController::TestCase
     @country = countries(:one)
   end
 
-  test "should get index" do
+  test 'should get index' do
     get :index
     assert_response :success
     assert_not_nil assigns(:countries)
   end
 
-  test "should show country" do
+  test 'should show country' do
     get :show, id: @country
     assert_response :success
   end
-
 end

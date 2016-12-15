@@ -5,16 +5,17 @@ AllCops:
     - 'tmp/**/*'
     - 'vendor/bundle/**/*'
     - 'db/migrate/**/*'
+  Severity: warning
 
 Metrics/AbcSize:
-  Max: 15
+  Max: 30
 
 Metrics/BlockNesting:
   Max: 3
 
 Metrics/ClassLength:
   CountComments: false
-  Max: 100
+  Max: 500
 
 Metrics/CyclomaticComplexity:
   Max: 6
@@ -25,7 +26,7 @@ Metrics/LineLength:
 
 Metrics/MethodLength:
   CountComments: false
-  Max: 15
+  Max: 40
 
 Metrics/ModuleLength:
   Max: 100
@@ -36,6 +37,13 @@ Metrics/ParameterLists:
 
 Metrics/PerceivedComplexity:
   Max: 7
+
+Rails:
+  Enabled: true
+
+# used in the test and for Rails 5
+Rails/HttpPositionalArguments:
+    Enabled: false
 
 Style/AccessModifierIndentation:
   EnforcedStyle: outdent
@@ -80,4 +88,5 @@ Style/SpaceInsideHashLiteralBraces:
 
 Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: 'comma'
+
 

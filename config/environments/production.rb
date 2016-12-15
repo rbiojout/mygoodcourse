@@ -62,26 +62,25 @@ Rails.application.configure do
   # Enable serving of images, stylesheets, and JavaScripts from an asset server.
   config.action_controller.asset_host = 'https://d1b6d82jm5evkl.cloudfront.net'
 
-
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   config.action_mailer.raise_delivery_errors = true
-  config.action_mailer.default_url_options = { :host => 'https://www.mygoodcourse.com' }
+  config.action_mailer.default_url_options = {host: 'https://www.mygoodcourse.com'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-      #:address        => 'smtp.gmail.com',
-      #:port           => '587',
-      #:authentication => :plain,
-      #:user_name      => ENV['GMAIL_USERNAME'],
-      #:password       => ENV['GMAIL_PASSWORD'],
-      #:enable_starttls_auto => true
-      :address        => 'smtp-fr.securemail.pro',
-      :port           => '465',
-      :domain         => 'mygoodcourse.com',
-      :authentication => :login,
-      :user_name      => ENV['SMTP_USERNAME'],
-      :password       => ENV['SMTP_PASSWORD'],
-      :tls            => true
+    #:address        => 'smtp.gmail.com',
+    #:port           => '587',
+    #:authentication => :plain,
+    #:user_name      => ENV['GMAIL_USERNAME'],
+    #:password       => ENV['GMAIL_PASSWORD'],
+    #:enable_starttls_auto => true
+    address: 'smtp-fr.securemail.pro',
+    port: '465',
+    domain: 'mygoodcourse.com',
+    authentication: :login,
+    user_name: ENV['SMTP_USERNAME'],
+    password: ENV['SMTP_PASSWORD'],
+    tls: true,
   }
 
   config.action_mailer.default_options = {from: 'contact@mygoodcourse.com'}

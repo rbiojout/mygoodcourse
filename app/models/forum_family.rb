@@ -37,5 +37,4 @@ class ForumFamily < ActiveRecord::Base
   validates :visual, presence: true
 
   default_scope -> { order(position: :asc) }
-
 end

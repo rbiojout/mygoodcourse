@@ -8,25 +8,25 @@ class AbusesControllerTest < ActionController::TestCase
     sign_in(customers(:one), scope: :customer)
   end
 
-  test "should get new" do
-    get :new, :review_id => reviews(:one).id
+  test 'should get new' do
+    get :new, review_id: reviews(:one).id
     assert_response :success
 
     assert_not_nil '#app_dialog #modal-dialog'
   end
 
-  test "should not create abuse if not signed-in" do
+  test 'should not create abuse if not signed-in' do
     sign_out(customers(:one))
     assert_no_difference('Abuse.count') do
-      post :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
+      post :create, abuse: {description: @abuse.description}, review_id: reviews(:one).id
     end
 
     assert_redirected_to new_customer_session_path
   end
 
-  test "should create abuse for review" do
+  test 'should create abuse for review' do
     assert_difference('Abuse.count') do
-      post :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
+      post :create, abuse: {description: @abuse.description}, review_id: reviews(:one).id
     end
 
     # check customer
@@ -35,11 +35,10 @@ class AbusesControllerTest < ActionController::TestCase
     assert_redirected_to review_path(id: reviews(:one).id)
   end
 
-
-  test "should create abuse for review via ajax" do
+  test 'should create abuse for review via ajax' do
     sign_in(customers(:one), scope: :customer)
     assert_difference('Abuse.count') do
-      xhr :post, :create, abuse: { description: @abuse.description }, review_id: reviews(:one).id
+      xhr :post, :create, abuse: {description: @abuse.description}, review_id: reviews(:one).id
     end
 
     assert_response :success
@@ -48,13 +47,11 @@ class AbusesControllerTest < ActionController::TestCase
       assert_select '.alert'
       assert_select '.alert p', I18n.translate('views.flash_create_message')
     end
-
   end
 
-
-  test "should create abuse for Product" do
+  test 'should create abuse for Product' do
     assert_difference('Abuse.count') do
-      post :create, abuse: { description: @abuse.description }, product_id: products(:one).id
+      post :create, abuse: {description: @abuse.description}, product_id: products(:one).id
     end
 
     # check customer
@@ -64,11 +61,10 @@ class AbusesControllerTest < ActionController::TestCase
     assert_redirected_to product_path(id: products(:one).friendly_id)
   end
 
-
-  test "should create abuse for Product via ajax" do
+  test 'should create abuse for Product via ajax' do
     sign_in(customers(:one), scope: :customer)
     assert_difference('Abuse.count') do
-      xhr :post, :create, abuse: { description: @abuse.description }, product_id: products(:one).id
+      xhr :post, :create, abuse: {description: @abuse.description}, product_id: products(:one).id
     end
 
     assert_response :success
@@ -76,8 +72,5 @@ class AbusesControllerTest < ActionController::TestCase
       assert_select '.alert'
       assert_select '.alert p', I18n.translate('views.flash_create_message')
     end
-
   end
-
-
 end
