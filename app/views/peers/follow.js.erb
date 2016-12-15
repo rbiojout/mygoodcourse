@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $(".follow_form_<%= @followed.id%>").html("<%= escape_javascript(render(partial: 'unfollow',  locals: {:followed => @followed, locale: locale})) %>")
+    $(".follow_form_<%= @followed.id%>").html("<%= escape_javascript(render(partial: 'unfollow',  locals: {:followed => @followed, locale: locale})) %>");
 
 // first we need to hide before to show
     $('.customer_presentation_<%= @followed.id %>').focus();

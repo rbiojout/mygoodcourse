@@ -423,6 +423,8 @@ GEM
       rails (>= 4.0, < 6)
       remotipart (~> 1.3)
       sass-rails (>= 4.0, < 6)
+    rails_admin_rollincode (1.1)
+      rails (>= 4.0, < 6)
     rails_serve_static_assets (0.0.5)
     rails_stdout_logging (0.0.5)
     railties (4.2.7.1)
@@ -601,6 +603,7 @@ DEPENDENCIES
   rails-i18n
   rails_12factor
   rails_admin
+  rails_admin_rollincode (~> 1.0)
   rmagick
   rspec-rails (~> 3.5.2)
   rubocop

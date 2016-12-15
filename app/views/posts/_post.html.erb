@@ -20,7 +20,7 @@
           <h3><%= post.name %></h3>
       <% end %>
       <% if with_body %>
-            <div classe="post-description"><%= raw(post.description) %></div>
+            <div class="post-description"><%= raw(post.description) %></div>
       <% end %>
     </div>
     <p class="pull-right"><%= link_to (post_path(post)) do %><small><%= t('dialog.read_next')%></small><% end %></p>

@@ -86,17 +86,14 @@
           <ul class="nav nav-pills nav-stacked category-menu">
             <li <%= "#{ 'class=active' if session[:family_for_products_id].nil? }"%> ><%= link_to t('activerecord.models.family.all'), catalog_products_path(:family_id => 0) %></li>
             <% @families.each do |fam| %>
-                <% family_active = (fam.id.to_s == session[:family_for_products_id].to_s)? true:false %>
+                <% family_active = false
+                   family_active = true if(!session[:family_for_products_id].nil? && session[:family_for_products_id].include?(fam.id)) %>
                 <li <%= "#{ 'class=active' if family_active }"%> > <%= link_to catalog_products_path(:family_id => fam.id) do %><%= fam.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_family(fam.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
                   <ul class="nav-tree">
                     <% fam.categories.each do |cat| %>
                         <% if @categories.include?(cat)%>
                             <li class="nav nav-stacked <% if cat.id.to_s == session[:category_for_products_id].to_s %>active<% end %>">
                               <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><span class="badge pull-right"><%= Product.count_active_filtered_for_category(cat.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
-
-
-
-
                             </li>
                         <% end %>
                     <%   end %>
@@ -112,7 +109,8 @@
 
             <span><%= link_to t('activerecord.models.family.all'), catalog_products_path(:family_id => 0), :class => (session[:family_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
             <% @families.each do |fam| %>
-                <% family_active = (fam.id.to_s == session[:family_for_products_id].to_s)? true:false %>
+                <% family_active = false
+                   family_active = true if(!session[:family_for_products_id].nil? && session[:family_for_products_id].include?(fam.id)) %>
                 <span><%= link_to catalog_products_path(:family_id => fam.id), :class => (family_active)?'btn btn-primary':'btn btn-info' do %><%= fam.name %> <% end %></span>
 
                     <% fam.categories.each do |cat| %>
@@ -138,7 +136,8 @@
           <ul class="nav nav-pills nav-stacked category-menu">
             <li <%= "#{ 'class=active' if session[:cycle_for_products_id].nil? }"%> ><%= link_to t('activerecord.models.cycle.all'), catalog_products_path(:cycle_id => 0) %></li>
             <% @cycles.each do |cyc| %>
-                <% cycle_active = (cyc.id.to_s == session[:cycle_for_products_id].to_s)? true:false %>
+                <% cycle_active = false
+                   cycle_active = true if(!session[:cycle_for_products_id].nil? && session[:cycle_for_products_id].include?(cyc.id)) %>
                 <li <%= "#{ 'class=active' if cycle_active }"%> > <%= link_to catalog_products_path(:cycle_id => cyc.id) do %><%= cyc.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_cycle(cyc.id, @families.map(&:id), @categories.map(&:id))%></span><% end %>
                   <ul class="nav-tree">
                     <% cyc.levels.each do |lev| %>
@@ -160,7 +159,8 @@
 
           <span><%= link_to t('activerecord.models.level.all'), catalog_products_path(:cycle_id => 0), :class => (session[:cycle_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
           <% @cycles.each do |cyc| %>
-              <% cycle_active = (cyc.id.to_s == session[:cycle_for_products_id].to_s)? true:false %>
+              <% cycle_active = false
+                 cycle_active = true if(!session[:cycle_for_products_id].nil? && session[:cycle_for_products_id].include?(cyc.id)) %>
               <span><%= link_to catalog_products_path(:cycle_id => cyc.id), :class => (cycle_active)?'btn btn-primary':'btn btn-info' do %><%= cyc.name %> <% end %></span>
 
               <% cyc.levels.each do |lev| %>

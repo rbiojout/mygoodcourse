@@ -141,6 +141,7 @@ gem "chartkick"
 gem 'groupdate'
 
 # add admin
+gem 'rails_admin_rollincode', '~> 1.0'
 gem 'rails_admin'
 #gem "wysiwyg-rails", "~> 1.2.7"
 

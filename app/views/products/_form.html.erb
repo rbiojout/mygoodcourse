@@ -50,7 +50,7 @@
         <!--- Attachments --->
         <!--- only the first element can not be removed from the existing list -->
         <% is_first= true %>
-        <div class="row sortgrid", id="product_attachments" data-update-url="<%= sort_attachments_path %>">
+        <div class="row sortgrid" id="product_attachments" data-update-url="<%= sort_attachments_path %>">
 
               <!--- list all already existing attachments --->
           <%= f.simple_fields_for :attachments do |att| %>

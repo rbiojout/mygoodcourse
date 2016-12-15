@@ -1,4 +1,4 @@
-    $(".wish_form_<%= @product.id%>").html("<%= escape_javascript(render(partial: 'wish', locale: locale)) %>")
+    $(".wish_form_<%= @product.id%>").html("<%= escape_javascript(render(partial: 'wish', locale: locale)) %>");
 
 // first we need to hide before to show
     $('.product_presentation_<%= @product.id %>').focus();

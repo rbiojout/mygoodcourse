@@ -8,14 +8,15 @@ require 'rspec/rails'
 
 
 # Add additional requires below this line. Rails is not loaded until this point!
-# in order to test the integration with a headless browser
 require "capybara/rails"
+# in order to test the integration with a headless browser
+# we use Phantomjs and poltergeist
 require 'capybara/poltergeist'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, {
       debug: false,
       default_wait_time: 10,
-      timeout: 30,
+      timeout: 60,
       js_errors: true,
       phantomjs_options: ['--load-images=yes']
   })
@@ -25,7 +26,8 @@ end
 Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist
 Capybara.current_driver = :poltergeist
-Capybara.default_max_wait_time = 30
+# time out set in driver
+# Capybara.default_max_wait_time = 30
 
 
 
