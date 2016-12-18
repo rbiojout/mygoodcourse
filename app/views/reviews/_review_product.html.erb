@@ -1,5 +1,5 @@
 <!-- REVIEW - START -->
-    <div class="row">
+    <div class="row" id='<%= "review_#{review.id}"%>'>
       <div class="col-xs-4">
         <%= link_to product_path(review.product) do %>
             <h5 class="ellipsis"><%= review.product.name %></h5>

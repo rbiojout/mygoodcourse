@@ -22,7 +22,7 @@ class CustomersController < ApplicationController
 
   # additionnal page for show
   # give all the followers and followeds
-  # GET /customers/circle
+  # GET /customers/:id/circle
   def circle
     @followers = @customer.followers
     @followeds = @customer.followeds
@@ -35,15 +35,15 @@ class CustomersController < ApplicationController
   # GET /customers/1/edit
   def edit; end
 
-  # GET /customers/dashboard
+  # GET /customers/:id/dashboard
   def dashboard; end
 
-  # GET /whislist
+  # GET /customers/:id//whislist
   def wishlist
     @products = @customer.wish_products
   end
 
-  # GET /reviewlist
+  # GET /customers/:id//reviewlist
   def reviews_list
     @reviews = Review.find_for_all_product_of_customer(@customer.id)
   end
@@ -67,7 +67,7 @@ class CustomersController < ApplicationController
   def destroy
     @customer.destroy
     respond_to do |format|
-      format.html { redirect_to customers_url, notice: t('views.flash_delete_message') }
+      format.html { redirect_to catalog_products_path, notice: t('views.flash_delete_message') }
       format.json { head :no_content }
     end
   rescue

@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-RSpec.describe 'forum visit', feature: true, js: true do
+RSpec.describe 'ForumFeatures', feature: true, js: true do
   it 'visit forum open' do
     visit forum_subject_path(forum_subjects(:one))
 
@@ -22,10 +22,36 @@ RSpec.describe 'forum visit', feature: true, js: true do
     within('main.container') do
       # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
     end
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_open.jpg", full: true)
   end
 end
 
-RSpec.feature 'Forum answer management', type: :feature, js: true do
+RSpec.feature 'Forum management', type: :feature, js: true do
+  scenario 'visit forum open', js: true do
+    visit forum_subject_path(forum_subjects(:one))
+
+    country = countries(:france)
+
+    visit forum_families_path(country_id: country.id)
+    has_css?('.forum_family-panel')
+
+    category = country.forum_categories.first
+    within('li.forum_category-panel') do
+      click_on(category.name)
+    end
+
+    subject = category.forum_subjects.first
+
+    ## IMPORTANT WAIT TO HAVE THE PAGE LOADED
+    expect(page).to have_content(subject.name)
+    within('main.container') do
+      # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
+    end
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_open.jpg", full: true)
+  end
+
   scenario 'visit forum', js: true do
     country = countries(:france)
     visit forum_families_path(country_id: country.id)
@@ -43,6 +69,8 @@ RSpec.feature 'Forum answer management', type: :feature, js: true do
     click_on(forum_subject.name)
     # end
     expect(find('h1')).to have_content(forum_subject.name)
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_visit.jpg", full: true)
   end
 
   scenario 'update forum subject text', js: true do
@@ -82,6 +110,8 @@ RSpec.feature 'Forum answer management', type: :feature, js: true do
     # retreive from DB
     forum_subject = ForumSubject.find(forum_subject.id)
     expect(forum_subject.text).to eq(text)
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_subject.jpg", full: true)
   end
 
   scenario 'add answer to subject', js: true do
@@ -131,6 +161,7 @@ RSpec.feature 'Forum answer management', type: :feature, js: true do
     expect(page).to have_content(text)
 
     # check if the page is ready
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_answer.jpg")
   end
 
   scenario 'add comment to answer', js: true do
@@ -182,5 +213,6 @@ RSpec.feature 'Forum answer management', type: :feature, js: true do
     # @TODO look for the number of comments displayed on page
 
     # check if the page is ready
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_comment.jpg", full: true)
   end
 end

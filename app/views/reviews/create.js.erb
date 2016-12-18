@@ -16,9 +16,9 @@ $('#customer_presentation_<%=@review.product.customer_id.to_s%>').html("<%= j re
 // $('#app_dialog').modal_success();
 
 // first we need to hide before to show
-$('#current_review').focus();
-$('#current_review').hide();
-$('#current_review').show(600);
+$('#<%="review_#{@review.id}"%>').focus();
+$('#<%="review_#{@review.id}"%>').hide();
+$('#<%="review_#{@review.id}"%>').show(600);
 
 
 

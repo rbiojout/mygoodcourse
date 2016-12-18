@@ -1,5 +1,5 @@
 <!-- REVIEW - START -->
-<li class="review-panel" id=<%= 'current_review' if review == @current_review %> >
+<li class="review-panel" id='<%= "review_#{review.id}"%>' >
   <div class="review-customer">
     <%= render(partial: 'customers/customer', locals: {customer: review.customer, withcols: 'false'}) %>
   </div>

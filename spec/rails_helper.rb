@@ -23,7 +23,7 @@ Capybara.javascript_driver = :poltergeist
 Capybara.default_driver = :poltergeist
 Capybara.current_driver = :poltergeist
 # time out set in driver
-# Capybara.default_max_wait_time = 30
+Capybara.default_max_wait_time = 10
 
 # make simple matchers for ActiveRecord
 require 'shoulda/matchers'
@@ -43,6 +43,7 @@ require 'support/database_cleaner'
 require 'support/controller_macros'
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :view
   config.extend ControllerMacros, type: :controller
 end
 

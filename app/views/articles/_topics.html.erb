@@ -14,7 +14,7 @@
           </span>
         <% end %>
 
-        <%= link_to top.name, topic_articles_path(:topic_id => top.id) %>
+        <%= link_to top.name, topic_articles_path(:topic_id => top.id, :locale => locale) %>
         </h4>
     </li>
   <% end %>

@@ -9,6 +9,7 @@ one:
   picture: default_picture.jpg
   confirmation_token: 001if7ZPUBBxgdWuMwY_
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: one
 
 two:
   name: Customer2
@@ -19,6 +20,7 @@ two:
   picture: default_picture.jpg
   confirmation_token: 002if7ZPUBBxgdWuMwY_
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: two
 
 seller_one:
   name: Seller1
@@ -29,6 +31,7 @@ seller_one:
   picture: default_picture.jpg
   confirmation_token: seller_one
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: seller_one
 
 seller_two:
   name: Seller2
@@ -39,6 +42,7 @@ seller_two:
   picture: default_picture.jpg
   confirmation_token: seller_two
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: seller_two
 
 seller_no_stripe:
   name: SellerNoStripe
@@ -49,6 +53,7 @@ seller_no_stripe:
   picture: default_picture.jpg
   confirmation_token: seller_no_stripe
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: seller_no_stripe
 
 buyer_one:
   name: Buyer1
@@ -59,6 +64,7 @@ buyer_one:
   picture: default_picture.jpg
   confirmation_token: buyer_one
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: buyer_one
 
 buyer_two:
   name: Buyer2
@@ -69,6 +75,7 @@ buyer_two:
   picture: default_picture.jpg
   confirmation_token: buyer_two
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: buyer_two
 
 customer_without_orders:
   name: CustomerWithoutdOrders
@@ -79,6 +86,7 @@ customer_without_orders:
   picture: default_picture.jpg
   confirmation_token: customer_without_orders
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: customer_without_orders
 
 customer_with_rejected_orders:
   name: CustomerWithRejectedOrders
@@ -89,6 +97,7 @@ customer_with_rejected_orders:
   picture: default_picture.jpg
   confirmation_token: customer_with_rejected_orders
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: customer_with_rejected_orders
 
 stripe-managed:
   name: StripeManaged
@@ -99,6 +108,7 @@ stripe-managed:
   picture: default_picture.jpg
   confirmation_token: stripe-managed
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: stripe-managed
 
 stripe_standalone:
   name: StripeStandalone
@@ -109,6 +119,7 @@ stripe_standalone:
   picture: default_picture.jpg
   confirmation_token: stripe_standalone
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: stripe_standalone
 
 stripe_oauth:
   name: StripeOauth
@@ -119,6 +130,7 @@ stripe_oauth:
   picture: default_picture.jpg
   confirmation_token: stripe_oauth
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: stripe_oauth
 
 no_wish:
   name: NoWish
@@ -129,6 +141,7 @@ no_wish:
   picture: default_picture.jpg
   confirmation_token: NoWish
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: no_wish
 
 
 JoeBloggs:
@@ -148,3 +161,4 @@ JoeBloggs:
   lng:
   confirmation_token: JoeBloggs
   confirmed_at: <%= 5.day.ago.to_s(:db) %>
+  slug: JoeBloggs

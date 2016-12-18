@@ -186,7 +186,7 @@ Rails.application.routes.draw do
       post :sort
     end
   end
-  resources :comments, except: [:index]
+  resources :comments
   resources :updates
   # resources :likes
   # Like and unlike other ressources (polymorphic)

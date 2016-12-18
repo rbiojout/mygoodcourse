@@ -4,9 +4,9 @@
     <div class="clearfix"></div>
     <ul class="nav nav-pills nav-stacked">
       <li role="presentation" class="active"><a href='#'><%= t('activerecord.attributes.customer.profile') %></a></li>
-      <li role="presentation"><%= link_to t('activerecord.attributes.customer.wishes'), wish_list_customer_path %></li>
-      <li role="presentation"><%= link_to t('activerecord.attributes.customer.followers'), circle_customer_path(@customer) %></li>
-      <li role="presentation"><%= link_to t('activerecord.attributes.customer.reviews'), reviews_list_customer_path(@customer) %></li>
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.wishes'), wish_list_customer_path(id: @customer.id, locale: locale) %></li>
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.followers'), circle_customer_path(id: @customer.id, locale: locale) %></li>
+      <li role="presentation"><%= link_to t('activerecord.attributes.customer.reviews'), reviews_list_customer_path(id: @customer.id, locale: locale) %></li>
     </ul>
 
 

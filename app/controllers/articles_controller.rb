@@ -4,15 +4,13 @@ class ArticlesController < ApplicationController
 
   before_action :authenticate_employee!, except: [:index, :show]
 
-  # GET /articles
-  # GET /articles.json
+  # GET /:locale/topics/:topic_id/articles(.:format)
   def index
     @topics = current_country.topics
     @articles = @topic.articles
   end
 
-  # GET /articles/1
-  # GET /articles/1.json
+  # GET /:locale/topics/:topic_id/articles/:id(.:format)
   def show
     # follow activity on pages
     # we keep track of the current customer in impressions
@@ -22,16 +20,15 @@ class ArticlesController < ApplicationController
     @article = @article.reload
   end
 
-  # GET /articles/new
+  # GET /:locale/topics/:topic_id/articles/new(.:format)
   def new
     @article = @topic.articles.build
   end
 
-  # GET /articles/1/edit
+  # GET /:locale/topics/:topic_id/articles/:id/edit(.:format)
   def edit; end
 
-  # POST /articles
-  # POST /articles.json
+  # POST /:locale/topics/:topic_id/articles(.:format)
   def create
     @article = Article.new(article_params)
 
@@ -46,8 +43,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /articles/1
-  # PATCH/PUT /articles/1.json
+  # PATCH/PUT /:locale/topics/:topic_id/articles/:id(.:format)
   def update
     respond_to do |format|
       if @article.update(article_params)
@@ -60,8 +56,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # DELETE /articles/1
-  # DELETE /articles/1.json
+  # DELETE /:locale/topics/:topic_id/articles/:id(.:format)
   def destroy
     @article.destroy
     respond_to do |format|
@@ -70,7 +65,7 @@ class ArticlesController < ApplicationController
     end
   end
 
-  # POST /articles/sort
+  # POST /:locale/articles/sort(.:format)
   def sort
     unless params[:article].nil?
       params[:article].each .each_with_index do |id, index|

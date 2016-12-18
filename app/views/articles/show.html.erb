@@ -3,7 +3,7 @@
 
 <h1><%= yield :title %></h1>
 
-<%= link_to @article.topic.name, topic_articles_path(topic_id: @article.topic_id), class: 'btn btn-primary' %>
+<%= link_to @article.topic.name, topic_articles_path(topic_id: @article.topic_id, locale: locale), class: 'btn btn-primary' %>
 
 <ul class="list-unstyled">
   <%= render(partial: 'articles/article', :locals => {article: @article}) %>

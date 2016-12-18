@@ -10,20 +10,20 @@ one:
 two:
   title: MyString
   description: MyString
-  score: 
+  score:  2.0
   product: one
   customer: two
 
 empty_product:
   title: MyString
   description: MyString
-  score:
+  score: 3.0
   product:
   customer: one
 
 empty_customer:
   title: MyString
   description: MyString
-  score:
+  score: 1.0
   product: two
   customer:

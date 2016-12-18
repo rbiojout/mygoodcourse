@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'registration', type: :feature, js: true do
+describe 'RegistrationFeatures', type: :feature, js: true do
   before :all do
     @current_user = create(:customer)
   end
@@ -28,6 +28,8 @@ describe 'registration', type: :feature, js: true do
 
     # Check that we go to the right page
     expect(find('#dialog-notice')).to have_content(I18n.translate('devise.sessions.signed_in'))
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/registration_sign_in.jpg")
   end
 
   scenario 'no sign in customer if wrong credential' do
@@ -48,6 +50,8 @@ describe 'registration', type: :feature, js: true do
 
     # Check that we go to the right page
     expect(find('#dialog-alert')).to have_content(I18n.translate('devise.failure.not_found_in_database'))
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/registration_wrong_credential.jpg", full: true)
   end
 
   scenario 'create user', js: true do
@@ -73,5 +77,7 @@ describe 'registration', type: :feature, js: true do
     end
 
     expect(page).to have_content(I18n.translate('devise.registrations.signed_up'))
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/registration_create.jpg", full: true)
   end
 end
