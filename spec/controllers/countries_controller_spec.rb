@@ -20,6 +20,9 @@ require 'rails_helper'
 
 RSpec.describe CountriesController, type: :controller do
 
+  # even if not recommended, we test the rendering in the controller
+  render_views
+
   # This should return the minimal set of attributes required to create a valid
   # Country. As you add validations to Country, be sure to
   # adjust the attributes here as well.

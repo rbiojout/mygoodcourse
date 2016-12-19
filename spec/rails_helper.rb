@@ -43,6 +43,7 @@ require 'support/database_cleaner'
 require 'support/controller_macros'
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
+  config.include Devise::Test::ControllerHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :view
   config.extend ControllerMacros, type: :controller
 end

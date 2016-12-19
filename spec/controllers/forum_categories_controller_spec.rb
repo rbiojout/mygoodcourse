@@ -18,17 +18,17 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe AttachmentsController, type: :controller do
+RSpec.describe ForumCategoriesController, type: :controller do
 
   # even if not recommended, we test the rendering in the controller
   render_views
 
-  before do
-    @attachment = attachments(:one)
+  setup do
+    @forum_category = forum_categories(:one)
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Attachment. As you add validations to Attachment, be sure to
+  # ForumCategory. As you add validations to ForumCategory, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
     skip("Add a hash of attributes valid for your model")
@@ -40,36 +40,21 @@ RSpec.describe AttachmentsController, type: :controller do
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # AttachmentsController. Be sure to keep this updated too.
+  # ForumCategoriesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
-  describe "GET #download" do
-    it "assigns the download attachment as pdf" do
-      # add a signed customer to perform the tests
-      sign_in(customers(:one), scope: :customer)
-
-      get :download, id: @attachment
-      expect(@attachment.product.candownload(customers(:one))).to be_truthy
-
-      expect(response).to be_success
-
+  describe "GET #index" do
+    it "assigns all forum_categories as @forum_categories" do
+      forum_category = ForumCategory.all
+      get :index, params: {}, session: valid_session
+      expect(assigns(:forum_categories)).to eq(forum_category)
     end
+  end
 
-    it 'need signed user' do
-      sign_out(customers(:one))
-
-      get :download, id: @attachment
-
-      expect(response).to redirect_to(catalog_products_path(format: :html))
-
-    end
-
-    it 'need correct user' do
-      sign_out(customers(:one))
-      sign_in(customers(:two), scope: :customer)
-
-      get :download, id: @attachment
-      expect(response).to redirect_to(catalog_products_path(format: :html))
+  describe "GET #show" do
+    it "assigns the requested forum_category as @forum_category" do
+      get :show, id: @forum_category.to_param, session: valid_session
+      expect(assigns(:forum_category)).to eq(@forum_category)
     end
   end
 

@@ -1,5 +1,5 @@
 class ArticlesController < ApplicationController
-  before_action :set_topic, only: [:index, :show, :new, :edit, :update]
+  before_action :set_topic, only: [:index, :show, :new, :create, :edit, :update]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
   before_action :authenticate_employee!, except: [:index, :show]
@@ -31,7 +31,6 @@ class ArticlesController < ApplicationController
   # POST /:locale/topics/:topic_id/articles(.:format)
   def create
     @article = Article.new(article_params)
-
     respond_to do |format|
       if @article.save
         format.html { redirect_to topic_article_path(@article, topic_id: @article.topic_id), notice: t('views.flash_create_message') }

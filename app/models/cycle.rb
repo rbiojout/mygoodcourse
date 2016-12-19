@@ -23,7 +23,7 @@ class Cycle < ActiveRecord::Base
   has_many :levels, dependent: :destroy
   accepts_nested_attributes_for :levels, reject_if: :all_blank, allow_destroy: true
 
-  has_many :products, through: :levels
+  has_many :products,  -> { distinct }, through: :levels
 
   belongs_to :country
   validates :country, presence: true

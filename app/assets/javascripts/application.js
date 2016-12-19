@@ -10,6 +10,9 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// exclude the js for Rails admin
+// stub 'rails_admin/custom/ui'
+//
 //= require jquery
 //= require jquery-ui/sortable
 //= require jquery-ui/widget
@@ -46,5 +49,7 @@
 //= require turbolinks
 //= require compatibility
 //= require_tree .
+
+
 
 

@@ -188,7 +188,8 @@ group :development, :test do
   # gem 'jasmine'
   # gem "teaspoon-jasmine"
 
-  gem 'brakeman', require: false
+  # BE CAREFULL there is a Article class that conflict with ArtiveRecord
+  # gem 'brakeman', require: false
   gem 'rubocop', require: false
 end
 

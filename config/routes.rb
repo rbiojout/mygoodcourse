@@ -218,7 +218,7 @@ Rails.application.routes.draw do
   end
   post 'undo' => 'order_items#undo', :as => 'undo_order_item'
 
-  resources :orders, only: [:show, :new, :create] do
+  resources :orders, only: [:show] do
     collection do
       get 'myorders'
     end

@@ -20,6 +20,9 @@ require 'rails_helper'
 
 RSpec.describe ArticlesController, type: :controller do
 
+  # even if not recommended, we test the rendering in the controller
+  render_views
+
   before do
     @article = articles(:one)
   end
@@ -31,7 +34,7 @@ RSpec.describe ArticlesController, type: :controller do
   }
 
   let(:invalid_attributes) {
-    {admin: true}
+    {topic_id: @article.topic_id}
   }
 
   # This should return the minimal set of values that should be in the session

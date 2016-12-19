@@ -18,75 +18,76 @@ require 'rails_helper'
 # Message expectations are only used when there is no simpler way to specify
 # that an instance is receiving a specific message.
 
-RSpec.describe CategoriesController, type: :controller do
+RSpec.describe FamiliesController, type: :controller do
 
   # even if not recommended, we test the rendering in the controller
   render_views
 
   before do
-    @category = categories(:one)
+    @family = families(:one)
     # add a signed employee to perform the tests
     sign_in(employees(:one), scope: :employee)
   end
 
   # This should return the minimal set of attributes required to create a valid
-  # Category. As you add validations to Category, be sure to
+  # Family. As you add validations to Family, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {:name => @category.name, :description => @category.description, :family_id => @category.family_id}
+    skip("Add a hash of attributes valid for your model")
   }
 
   let(:invalid_attributes) {
-     {admin: true}
+    skip("Add a hash of attributes invalid for your model")
   }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
-  # CategoriesController. Be sure to keep this updated too.
+  # FamiliesController. Be sure to keep this updated too.
   let(:valid_session) { {} }
 
   describe "GET #index" do
-    it "assigns all categories as @categories" do
+    it "assigns all families as @families" do
+      family = Family.all
       get :index, params: {}, session: valid_session
-      expect(assigns(:categories)).not_to be_nil
+      expect(assigns(:families)).to eq(family)
     end
   end
 
   describe "GET #show" do
-    it "assigns the requested category as @category" do
-      get :show, locale: I18n.default_locale, id: @category.id, session: valid_session
-      expect(response).to be_success
-      expect(assigns(:category)).to eq(@category)
+    it "assigns the requested family as @family" do
+      get :show, id: @family.to_param, session: valid_session
+      expect(assigns(:family)).to eq(@family)
     end
   end
 
-  describe "GET #sort" do
-    it 'sort categories if logged' do
-      assert(categories(:one).position == 1)
-      assert(categories(:two).position == 2)
+
+  describe "POST #sort" do
+    it "sort if logged in" do
+      assert(families(:one).position == 1)
+      assert(families(:two).position == 2)
       # add a signed employee to perform the tests
       sign_in(employees(:one), scope: :employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s] do
-        expect(categories(:one).position).to eq(2)
-        expect(categories(:two).position).to eq(1)
+      post :sort, locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s] do
+        assert(families(:one).position == 2)
+        assert(families(:two).position == 1)
       end
       # we Need assigns to recover the modifications from the Controller
       # end
 
-      expect(response).to have_http_status(:success)
+      expect(response).to be_success
     end
 
-    it 'not sort categories if not logged' do
-      expect(categories(:one).position).to eq(1)
-      expect(categories(:two).position).to eq(2)
+    it "no sort if not logged in" do
+      assert(families(:one).position == 1)
+      assert(families(:two).position == 2)
       # add a signed employee to perform the tests
       sign_in(employees(:one), scope: :employee)
       sign_out(:employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s]
+      post :sort, locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s]
       # we Need assigns to recover the modifications from the Controller
       # end
 

@@ -20,6 +20,9 @@ require 'rails_helper'
 
 RSpec.describe CommentsController, type: :controller do
 
+  # even if not recommended, we test the rendering in the controller
+  render_views
+
   before do
     @comment =comments(:one)
     # add a signed customer to perform the tests
@@ -35,6 +38,10 @@ RSpec.describe CommentsController, type: :controller do
 
   let(:invalid_attributes) {
     {admin: true}
+  }
+
+  let(:forum_answer) {
+    forum_answers(:one)
   }
 
   # This should return the minimal set of values that should be in the session
@@ -76,15 +83,21 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  describe "GET #edit" do
-    it "assigns the requested comment as @comment" do
-      comment = Comment.create! valid_attributes
-      get :edit, id: comment.to_param, session: valid_session
-      expect(assigns(:comment)).to eq(comment)
+  describe "GET #edit for Post" do
+    it "assigns the requested comment as @comment for Post" do
+      get :edit, post_id: posts(:one).id, id: @comment.to_param, session: valid_session
+      expect(assigns(:comment)).to eq(@comment)
     end
   end
 
-  describe "POST #create" do
+  describe "GET #edit for ForumAnswer" do
+    it "assigns the requested comment as @comment for ForumAnswer" do
+      get :edit, forum_answer_id: forum_answer.id, id: @comment.to_param, session: valid_session
+      expect(assigns(:comment)).to eq(@comment)
+    end
+  end
+
+  describe "POST #create for Post" do
     context "with valid params" do
       it "creates a new Comment for Post" do
         expect {
@@ -117,7 +130,40 @@ RSpec.describe CommentsController, type: :controller do
     end
   end
 
-  describe "PUT #update" do
+  describe "POST #create for ForumAnswer" do
+    context "with valid params" do
+      it "creates a new Comment for Post" do
+        expect {
+          post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+        }.to change(Comment, :count).by(1)
+      end
+
+      it "assigns a newly created comment for ForumAnswer as @comment" do
+        post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+        expect(assigns(:comment)).to be_a(Comment)
+        expect(assigns(:comment)).to be_persisted
+      end
+
+      it "redirects to the created comment for ForumAnswer" do
+        post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+        expect(response).to redirect_to(forum_subject_path(forum_answer.forum_subject))
+      end
+    end
+
+    context "with invalid params" do
+      it "assigns a newly created but unsaved comment as @comment" do
+        post :create, forum_answer_id: forum_answer.id, comment: invalid_attributes, session: valid_session
+        expect(assigns(:comment)).to be_a_new(Comment)
+      end
+
+      it "re-renders the 'new' template" do
+        post :create, forum_answer_id: forum_answer.id, comment: invalid_attributes, session: valid_session
+        expect(response).to render_template("new")
+      end
+    end
+  end
+
+  describe "PUT #update for Post" do
     context "with valid params" do
       let(:new_attributes) {
         {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
@@ -145,6 +191,39 @@ RSpec.describe CommentsController, type: :controller do
     context "with invalid params" do
       it "assigns the comment as @comment for Post" do
         put :update, post_id: posts(:one).id, id: @comment, comment: invalid_attributes, session: valid_session
+        expect(assigns(:comment)).to eq(@comment)
+      end
+    end
+  end
+
+  describe "PUT #update for ForumAnswer" do
+    context "with valid params" do
+      let(:new_attributes) {
+        {commentable_id: @comment.commentable_id, customer_id: @comment.customer_id, text: @comment.text}
+      }
+
+      it "updates the requested comment for Post" do
+        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: new_attributes, session: valid_session
+        @comment.reload
+        skip("Add assertions for updated state")
+      end
+
+      it "assigns the requested comment as @comment for Post" do
+        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        expect(assigns(:comment)).to eq(@comment)
+      end
+
+      it "redirects to the comment for Post" do
+        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        context = assigns(:context)
+        expect(context).not_to be_nil
+        expect(response).to redirect_to(forum_subject_path(forum_answer.forum_subject))
+      end
+    end
+
+    context "with invalid params" do
+      it "assigns the comment as @comment for Post" do
+        put :update, forum_answer_id: forum_answer.id, id: @comment, comment: invalid_attributes, session: valid_session
         expect(assigns(:comment)).to eq(@comment)
       end
     end

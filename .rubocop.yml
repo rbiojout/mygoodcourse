@@ -90,3 +90,96 @@ Style/TrailingCommaInLiteral:
   EnforcedStyleForMultiline: 'comma'
 
 
+
+
+# our style changes: disabling style rules we aren't interested in
+Style/AlignHash:
+  Enabled: false
+Style/AlignParameters:
+  Enabled: false
+Style/BlockDelimiters:
+  Enabled: false
+Style/BracesAroundHashParameters:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: false
+Style/Documentation:
+  Enabled: false
+Style/DotPosition:
+  Enabled: false
+Style/DoubleNegation:
+  Enabled: false
+Style/EmptyLines:
+  Enabled: false
+Style/EmptyLinesAroundMethodBody:
+  Enabled: false
+Style/EmptyLinesAroundClassBody:
+  Enabled: false
+Style/EmptyLinesAroundModuleBody:
+  Enabled: false
+Style/EmptyLinesAroundBlockBody:
+  Enabled: false
+Style/EmptyLinesAroundAccessModifier:
+  Enabled: false
+Style/GuardClause:
+  Enabled: false
+Style/HashSyntax:
+  Enabled: false
+Style/IfUnlessModifier:
+  Enabled: false
+Style/IndentationConsistency:
+  Enabled: false
+Style/IndentationWidth:
+  Enabled: false
+Style/Lambda:
+  Enabled: false
+Style/MethodCallParentheses:
+  Enabled: false
+Style/MultilineOperationIndentation:
+  Enabled: false
+Style/NumericLiterals:
+  Enabled: false
+Style/ParallelAssignment:
+  Enabled: false
+Style/PercentLiteralDelimiters:
+  Enabled: false
+Style/PercentQLiterals:
+  Enabled: false
+Style/RegexpLiteral:
+  Enabled: false
+Style/RedundantSelf:
+  Enabled: false
+Style/RescueModifier:
+  Severity: warning
+Style/SignalException:
+  Enabled: false
+Style/SpaceBeforeBlockBraces:
+  Enabled: false
+Style/SpaceInsideBlockBraces:
+  Enabled: false
+Style/StringLiterals:
+  Enabled: false
+Style/SpaceInsideBrackets:
+  Enabled: false
+Style/SpaceInsideHashLiteralBraces:
+  Enabled: false
+Style/SpaceAroundOperators:
+  Enabled: false
+Style/SpaceAfterColon:
+  Enabled: false
+Style/SpaceAfterComma:
+  Enabled: false
+Style/SpaceAroundEqualsInParameterDefault:
+  Enabled: false
+Style/SpaceBeforeFirstArg:
+  Enabled: false
+Style/WordArray:
+  Enabled: false
+Style/IndentHash:
+  Enabled: false
+Style/TrailingBlankLines:
+  Enabled: false
+Style/TrailingWhitespace:
+  Enabled: false
+Style/WhileUntilModifier:
+  Enabled: false

@@ -1,7 +1,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-RSpec.feature 'AbuseFeatures', js: true do
+RSpec.describe 'AbuseFeatures', type: :feature, js: true do
   context 'review' do
     scenario 'create abuse for review', js: true do
       customer = customers(:one)
@@ -14,22 +14,21 @@ RSpec.feature 'AbuseFeatures', js: true do
       # show the reviews
       page.execute_script('show_reviews();')
 
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_create-1.jpg", full: true)
-
       expect(page).to have_css("#review_#{review.id}")
 
       within("#review_#{review.id}") do
         action = I18n.translate('helpers.action.abuse.create')
         # some strange behavior for click
-        find("a[alt='#{action}']").click
+        save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-1.jpg", full: true)
+        expect(page).to have_css("a[alt='#{action}']")
         find("a[alt='#{action}']").click
       end
 
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_create-2.jpg", full: true)
-
       # waiting for modal
+      expect(page).to have_content(I18n.translate('helpers.action.abuse.create'))
       expect(page).to have_css('#app_dialog')
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_create-3.jpg", full: true)
+      expect(page).to have_xpath('//input')
+      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-2.jpg", full: true)
 
       text = 'This is the report for this abuse'
       # test the creation via Ajax call
@@ -50,13 +49,11 @@ RSpec.feature 'AbuseFeatures', js: true do
   end
 
   context 'product' do
-    scenario 'create abuse for review', js: true do
+    scenario 'create abuse for review' do
       customer = customers(:one)
       login_as customer, scope: :customer
       product = products(:one)
       visit product_path(product, locale: I18n.default_locale)
-
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_prod_create-1.jpg", full: true)
 
       expect(page).to have_css(".product_presentation_#{product.id}")
 
@@ -67,12 +64,8 @@ RSpec.feature 'AbuseFeatures', js: true do
         find("a[alt='#{action}']").click
       end
 
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_prod_create-2.jpg", full: true)
-
       # waiting for modal
       expect(page).to have_css('#app_dialog')
-      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_prod_create-3.jpg", full: true)
-
       text = 'This is the report for this abuse'
       # test the creation via Ajax call
       expect {

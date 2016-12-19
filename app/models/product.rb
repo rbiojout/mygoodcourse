@@ -106,12 +106,12 @@ class Product < ActiveRecord::Base
 
   # product is link to many categories
   has_and_belongs_to_many :categories, table_name: 'categories_products'
-  has_many :families, through: :categories
+  has_many :families,  -> { distinct }, through: :categories
   validates_presence_of :categories
 
   # product is linked to many levels
   has_and_belongs_to_many :levels, table_name: 'levels_products'
-  has_many :cycles, through: :levels
+  has_many :cycles,  -> { distinct }, through: :levels
   validates_presence_of :levels
 
   # many reviews linked, we consolidate the number and the average score

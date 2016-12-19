@@ -20,6 +20,9 @@ require 'rails_helper'
 
 RSpec.describe AbusesController, type: :controller do
 
+  # even if not recommended, we test the rendering in the controller
+  render_views
+
   before do
     @abuse = abuses(:review_one)
     # add a signed customer to perform the tests

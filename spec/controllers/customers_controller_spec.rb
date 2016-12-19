@@ -20,6 +20,9 @@ require 'rails_helper'
 
 RSpec.describe CustomersController, type: :controller do
 
+  # even if not recommended, we test the rendering in the controller
+  render_views
+
   before do
     @customer = customers(:one)
     @request.env['user_mailer.mapping'] = Devise.mappings[:customer]
