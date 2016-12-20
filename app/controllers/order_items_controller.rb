@@ -11,17 +11,14 @@ class OrderItemsController < ApplicationController
     @products = current_order.products
   end
 
-  def show; end
-
-  def new; end
-
   # POST /order_items
   # POST /order_items.json
   def create
     @order = current_order
     @order_item = @order.order_items.new(order_item_params)
-    @order.save
-    session[:order_id] = @order.id
+    if @order.save
+      session[:order_id] = @order.id
+    end
     render nothing: true
 
     # @order_item = OrderItems.new(order_item_params)
@@ -74,7 +71,6 @@ class OrderItemsController < ApplicationController
       respond_to do |format|
         format.html { redirect_to catalog_products_path, flash: {alert: t('dialog.shop.alert_empty_cart')} }
         format.js { render js: "window.location='#{catalog_products_path}'", flash: {alert: t('dialog.shop.alert_empty_cart')} }
-        logger.debug("===> #{catalog_products_path}")
       end
     else
       respond_to do |format|

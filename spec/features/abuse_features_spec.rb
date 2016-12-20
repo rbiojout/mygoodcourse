@@ -26,8 +26,8 @@ RSpec.describe 'AbuseFeatures', type: :feature, js: true do
 
       # waiting for modal
       expect(page).to have_content(I18n.translate('helpers.action.abuse.create'))
-      expect(page).to have_css('#app_dialog')
       expect(page).to have_xpath('//input')
+      expect(page).to have_css('#app_dialog')
       save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-2.jpg", full: true)
 
       text = 'This is the report for this abuse'

@@ -47,7 +47,7 @@ class CustomersControllerTest < ActionController::TestCase
       delete :destroy, id: customers(:customer_without_orders), locale: I18n.default_locale
     end
 
-    assert_redirected_to customers_path
+    assert_redirected_to catalog_products_path
   end
 
   test 'should not destroy customer with order' do

@@ -212,7 +212,7 @@ Rails.application.routes.draw do
     end
   end
   resources :countries, only: [:index, :show]
-  resources :order_items do
+  resources :order_items, except: [:show, :new, :edit ] do
     member do
     end
   end
