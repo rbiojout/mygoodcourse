@@ -1,3 +1,5 @@
 $(document).ready ->
-  $('.ellipsis').dotdotdot()
+  $('.ellipsis').dotdotdot({
+    watch: "window"
+  })
   return

@@ -63,9 +63,9 @@
             <% @post.comments.each do |comment|%>
                 <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
             <% end %>
-          <div id="comment-form_post_<%= @post.id %>"></div>
         </ul>
         <% end %>
+    <div id="comment-form_post_<%= @post.id %>"></div>
 
       </div>
     <!-- end comments -->

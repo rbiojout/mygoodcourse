@@ -3,7 +3,7 @@
    with_cols ||= false
 %>
 
-<div class="<%= 'col-md-4' if with_cols %>">
+<div class="post-panel <%= 'col-md-4' if with_cols %>">
   <div style="clear:both;">
       <%= link_to(post_path(post), class: 'pull-left relative') do %>
           <%= image_tag post.preview, class: 'img-responsive' %>
@@ -13,16 +13,27 @@
       </span>
       <% end %>
   </div>
-  <div style="clear: both;" id="panel_post_<%=post.id%>">
-    <p class="post-date"><small><%= nice_date(post.created_at)%></small></p>
-  <div class="ellipsis" style="width: 100%; height: <%= (with_body==true)? '300px':(with_cols==true)?'80px':'auto'%>">
-      <%= link_to (post_path(post)) do %>
-          <h3><%= post.name %></h3>
-      <% end %>
-      <% if with_body %>
-            <div class="post-description"><%= raw(post.description) %></div>
-      <% end %>
+  <% if with_body %>
+    <div class="post-content ellipsis" id="panel_post_<%=post.id%>">
+      <p class="post-date"><small><%= nice_date(post.created_at)%></small></p>
+      <div>
+        <%= link_to (post_path(post)) do %>
+            <h3><%= post.name %></h3>
+        <% end %>
+        <% if with_body %>
+              <div class="post-description"><%= raw(post.description) %></div>
+        <% end %>
+      </div>
     </div>
-    <p class="pull-right"><%= link_to (post_path(post)) do %><small><%= t('dialog.read_next')%></small><% end %></p>
-  </div>
+  <% else %>
+      <div class="post-content-short ellipsis" id="panel_post_<%=post.id%>">
+        <p class="post-date"><small><%= nice_date(post.created_at)%></small></p>
+        <div>
+          <%= link_to (post_path(post)) do %>
+              <h3><%= post.name %></h3>
+          <% end %>
+        </div>
+      </div>
+  <% end %>
+  <p class="post-read-next"><%= link_to (post_path(post)) do %><small><%= t('dialog.read_next')%></small><% end %></p>
 </div>

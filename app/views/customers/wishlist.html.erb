@@ -24,9 +24,9 @@
       <% @products.each do |product|%>
         <div class="row">
           <div class="col-xs-4 col-md-3">
-            <div class="relative">
+            <div class="product-panel">
             <!-- picture -->
-            <div class="hovereffect center-block panel-image-product">
+            <div class="product-picture">
               <% if product.preview.nil? %>
                   <%= image_tag 'product.preview', class: 'img-thumbnail center-block' %>
               <% else %>

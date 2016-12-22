@@ -3,7 +3,9 @@
 $('#index-posts').append('<%= j render(partial:'posts/post', locals: {post: post, with_body: true, with_cols: true}) %>');
 //console.log('panel_post_<%=post.id%>')
 //we use the ellipsis for the titles just added
-$('#panel_post_<%=post.id%> .ellipsis').dotdotdot();
+$('#panel_post_<%=post.id%>.ellipsis').dotdotdot({
+  watch: "window"
+});
 <%# end %>
 <% end %>
 
