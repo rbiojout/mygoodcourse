@@ -68,30 +68,5 @@ RSpec.describe Category, type: :model do
       expect(categories.count).not_to eq(0)
     end
   end
-
-  it 'is associated with query' do
-    # @category_with_active_products = create(:category, :with_active_products, number_of_products: 4)
-    category_with_active_products = create(:category, :with_products, number_of_products: 4)
-
-    puts category_with_active_products
-    puts category_with_active_products.products
-
-    category_with_active_products.products.each do |prod|
-      puts prod.id
-      puts prod.active
-      puts prod.categories.first.name
-      puts prod.name
-    end
-
-    @country = create(:country, :with_cycles_and_levels, :with_families_and_categories, :with_topics_and_articles)
-    puts @country.name
-    puts @country.levels.count
-    puts @country.categories.count
-    puts @country.articles.count
-  end
-
-  it 'should filter by nil' do
-    categories = Category.associated_to_cycles_levels(nil, nil, false)
-    assert_equal categories.count, Category.all.count
-  end
+  
 end

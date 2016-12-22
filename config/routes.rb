@@ -216,7 +216,7 @@ Rails.application.routes.draw do
     member do
     end
   end
-  post 'undo' => 'order_items#undo', :as => 'undo_order_item'
+  post 'order_items/undo' => 'order_items#undo', :as => 'undo_order_item'
 
   resources :orders, only: [:show] do
     collection do

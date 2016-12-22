@@ -135,7 +135,7 @@ class OrdersController < ApplicationController
         # make as the default card
 
         if db_stripe_customer.customer.id != current_customer.id
-          flash[:alert] = "#{I18n.translate('dialog.shop.alert_rejected_order')} #{e.message}"
+          flash[:alert] = "#{I18n.translate('dialog.shop.alert_rejected_order')}"
           logger.debug('Wrong customer without rights')
           current_order.reset! if current_order.may_reset?
           current_order.reject!
@@ -166,9 +166,10 @@ class OrdersController < ApplicationController
       # charge = ::Stripe::Charge.create({ customer: current_order.stripe_customer_token, amount: (current_order.total * BigDecimal(100)).round, currency: 'EUR', capture: false }, Rails.application.secrets.stripe_secret_key)
 
       # current_order.payments.create(:amount => current_order.total, :reference => rand(10000) + 10000, :refundable => true)
-      session[:order_id] = nil
       # save the state from the payment module as accepted
       current_order.accept!
+      # remove the order from session if payment accepted
+      session[:order_id] = nil
       redirect_to catalog_products_path, notice: t('dialog.shop.notice_pay_accepted')
 
     rescue => e

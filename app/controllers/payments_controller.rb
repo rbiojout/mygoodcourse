@@ -1,5 +1,5 @@
 class PaymentsController < ApplicationController
-  before_action :set_payment, only: [:show]
+  before_action :set_payment, only: [:show, :refund]
 
   before_action :correct_user, only: [:show]
 
@@ -9,16 +9,16 @@ class PaymentsController < ApplicationController
   # GET /payments/1.json
   def show; end
 
-  # POST
+  # POST /payments/:id/refund
   def refund
     if request.post?
       @payment.refund!(params[:amount])
-      redirect_to @order, flash: {notice: 'refunded'}
+      redirect_to @payment.order, flash: {notice: 'refunded'}
     else
       render layout: false
     end
   rescue StandardError => e
-    redirect_to @order, flash: {alert: e.message}
+    redirect_to @payment.order, flash: {alert: e.message}
   end
 
 private

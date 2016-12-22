@@ -1,2 +1,0 @@
-module ForumFamiliesHelper
-end

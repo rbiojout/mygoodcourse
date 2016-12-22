@@ -85,6 +85,9 @@ RailsAdmin.config do |config|
     list do
       scopes    [nil, Abuse::STATE_CREATED, Abuse::STATE_RECEIVED, Abuse::STATE_ACCEPTED, Abuse::STATE_REJECTED, Abuse::STATE_CORRECTED]
     end
+    edit do
+      field :description
+    end
   end
 
   config.model 'Article' do
@@ -333,10 +336,46 @@ RailsAdmin.config do |config|
 
   config.model 'ForumSubject' do
     parent ForumCategory
+    edit do
+      field :name
+      field :description do
+        partial 'form_summernote'
+      end
+      field :forum_category
+    end
+    show do
+      field :name
+      field :description do
+        formatted_value do
+          value&.html_safe
+        end
+      end
+      field :forum_category
+      field :forum_answers
+      field :customer
+      field :counter_cache
+      field :likes
+    end
   end
 
   config.model 'ForumAnswer' do
     parent ForumSubject
+    edit do
+      field :text do
+        partial 'form_summernote'
+      end
+      field :forum_subject
+    end
+    show do
+      field :text do
+        formatted_value do
+          value&.html_safe
+        end
+      end
+      field :forum_subject
+      field :customer
+      field :comments
+    end
   end
 
   config.model 'Impression' do

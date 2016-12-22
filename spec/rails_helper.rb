@@ -13,17 +13,15 @@ require 'capybara/rails'
 require 'capybara/poltergeist'
 Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, debug: false,
-                                         default_wait_time: 10,
+                                         default_wait_time: 20,
                                          timeout: 60,
                                          js_errors: true,
                                          phantomjs_options: ['--load-images=yes'])
 end
 
 Capybara.javascript_driver = :poltergeist
-Capybara.default_driver = :poltergeist
-Capybara.current_driver = :poltergeist
 # time out set in driver
-Capybara.default_max_wait_time = 10
+Capybara.default_max_wait_time = 20
 
 # make simple matchers for ActiveRecord
 require 'shoulda/matchers'
@@ -45,6 +43,7 @@ RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :request
   config.include Devise::Test::ControllerHelpers, type: :view
+  config.include Devise::Test::ControllerHelpers, type: :helper
   config.extend ControllerMacros, type: :controller
 end
 

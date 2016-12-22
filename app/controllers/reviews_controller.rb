@@ -34,7 +34,7 @@ class ReviewsController < ApplicationController
   def create
     @review = Review.new(review_params)
     @review.customer = current_customer
-    @nb_reviews = @review.product.nb_reviews
+    @nb_reviews = @review.product.nil? ? 0:@review.product.nb_reviews
 
     respond_to do |format|
       if @review.save

@@ -25,8 +25,9 @@ RSpec.describe 'AbuseFeatures', type: :feature, js: true do
       end
 
       # waiting for modal
+      find('#app_dialog')
+      find('#abuse_description')
       expect(page).to have_content(I18n.translate('helpers.action.abuse.create'))
-      expect(page).to have_xpath('//input')
       expect(page).to have_css('#app_dialog')
       save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-2.jpg", full: true)
 
@@ -61,10 +62,11 @@ RSpec.describe 'AbuseFeatures', type: :feature, js: true do
         action = I18n.translate('helpers.action.abuse.create')
         # some strange behavior for click
         find("a[alt='#{action}']").click
-        find("a[alt='#{action}']").click
       end
 
       # waiting for modal
+      find('#app_dialog')
+      find('#abuse_description')
       expect(page).to have_css('#app_dialog')
       text = 'This is the report for this abuse'
       # test the creation via Ajax call
