@@ -1,6 +1,4 @@
 
-
-
 <%= form_for(@forum_answer, remote: true, :html => { :role => "form", 'data-model' => 'forum_answer', :class => 'ajax_form' }) do |f| %>
 
     <div id="error_explanation" class="bg-danger text-danger">
@@ -32,11 +30,3 @@
 
 <% end %>
 
-<script language="JavaScript">
-    $('form[data-model="forum_answer"] .summernote').summernote({
-        lang: I18n_locale,
-        // adjust initial height for the Summernote Editor
-        height: '200px'
-    });
-
-</script>

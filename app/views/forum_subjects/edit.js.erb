@@ -8,7 +8,7 @@ $('form[data-model="forum_subject"] .summernote').summernote({
     height: '200px'
 })
 
-var target = $('.forum-forum_subject_<%= @forum_subject.id%>');
+var target = $('.forum_subject_<%= @forum_subject.id%>');
 $('html,body').animate({
     scrollTop: target.offset().top-100
 }, 1000);
