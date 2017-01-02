@@ -12,27 +12,27 @@ class Order < ActiveRecord::Base
       before do
         logger.debug('Preparing to confirm')
       end
-      transitions from: :created, to: :confirmed, after: :runConfirm
+      transitions from: :created, to: :confirmed, after: :run_confirm
     end
 
     event :receive do
-      transitions from: :confirmed, to: :received, after: :runReceive
+      transitions from: :confirmed, to: :received, after: :run_receive
     end
 
     event :accept do
-      transitions from: :received, to: :accepted, guard: :confirmingOk?, after: :runAccept
+      transitions from: :received, to: :accepted, guard: :confirming_ok?, after: :run_accept
     end
 
     event :reject do
-      transitions from: :received, to: :rejected, after: :runReject
+      transitions from: :received, to: :rejected, after: :run_reject
     end
 
     event :reset do
-      transitions from: [:rejected, :confirmed, :received], to: :received, after: :runReset
+      transitions from: [:rejected, :confirmed, :received], to: :received, after: :run_reset
     end
   end
 
-  def confirmingOk?
+  def confirming_ok?
     # don't consider confirmation if total amount is null
     if total.zero?
       true
@@ -65,11 +65,11 @@ class Order < ActiveRecord::Base
     end
   end
 
-  def runConfirm
+  def run_confirm
     order_items.each(&:confirm!)
   end
 
-  def runReceive
+  def run_receive
     self.received_at = Time.now
     order_items.each(&:receive!)
 
@@ -77,21 +77,21 @@ class Order < ActiveRecord::Base
     # deliver_received_order_email
   end
 
-  def runAccept
+  def run_accept
     self.accepted_at = Time.now
 
     # Send an email to the customer
     deliver_accepted_order_email
   end
 
-  def runReject
+  def run_reject
     self.rejected_at = Time.now
 
     # Send an email to the customer
     deliver_rejected_order_email
   end
 
-  def runReset
+  def run_reset
     order_items.each(&:reset!)
   end
 

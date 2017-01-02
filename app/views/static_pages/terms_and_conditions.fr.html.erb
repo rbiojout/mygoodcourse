@@ -603,7 +603,7 @@
         </tr>
         <% Product::PRICE_LIST.each do |pp| price=BigDecimal.new(pp) %>
             <% oi = OrderItem.new
-               oi.initPrice(price) %>
+               oi.init_price(price) %>
             <tr>
               <td><%=nice_price(price)%></td>
               <td><%= nice_price(oi.application_fee) %></td>

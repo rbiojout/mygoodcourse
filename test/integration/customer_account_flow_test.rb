@@ -28,7 +28,7 @@ class CustomerAccountFlowTest < ActionDispatch::IntegrationTest
     # we delete the account
     delete customer_path(id: new_customer.id, locale: I18n.default_locale)
     assert_equal 302, status
-    assert_nil Customer.find_by_email('tralala@test.com')
+    assert_nil Customer.find_by(email: 'tralala@test.com')
 
     # we recreate the account
     post customer_registration_path, customer: {email: @customer.email, password: 'tralala1*', password_confirmation: 'tralala1*', first_name: @customer.first_name, mobile: @customer.mobile, name: @customer.name}, locale: I18n.default_locale

@@ -63,12 +63,12 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  def runInit
-    initPrice(unit_price)
+  def run_init
+    init_price(unit_price)
     save!
   end
 
-  def initPrice(value)
+  def init_price(value)
     self.price = value
     fee = (value * (COMMISSION_RATE / 100) + TRANSACTION_COST / 100) || BigDecimal(0)
     fee = 0.0 if value == 0.0 || fee < 0.0
@@ -127,7 +127,7 @@ class OrderItem < ActiveRecord::Base
     end
   end
 
-  after_create :runInit
+  after_create :run_init
 
   attr_accessor :unit_price
 

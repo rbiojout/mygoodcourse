@@ -6,7 +6,7 @@ $('form[data-model="forum_subject"] .summernote').summernote({
     lang: I18n_locale,
     // adjust initial height for the Summernote Editor
     height: '200px'
-})
+});
 
 var target = $('.forum_subject_<%= @forum_subject.id%>');
 $('html,body').animate({

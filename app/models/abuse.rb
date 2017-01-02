@@ -45,15 +45,15 @@ class Abuse < ActiveRecord::Base
       before do
         logger.debug('Preparing to receive')
       end
-      transitions from: :created, to: :received, after: :sendReceivedEmail
+      transitions from: :created, to: :received, after: :send_received_email
     end
 
     event :accept do
-      transitions from: :received, to: :accepted, after: :sendAcceptedEmail
+      transitions from: :received, to: :accepted, after: :send_accepted_email
     end
 
     event :reject do
-      transitions from: :received, to: :rejected, after: :sendRejectedEmail
+      transitions from: :received, to: :rejected, after: :send_rejected_email
     end
 
     event :correct do
@@ -66,19 +66,19 @@ class Abuse < ActiveRecord::Base
   end
 
   # send email Received
-  def sendReceivedEmail
+  def send_received_email
     # Tell the AbuseMailer to send a confirmation after save
     AbuseMailer.received(self).deliver_later
   end
 
   # send email Accepted
-  def sendAcceptedEmail
+  def send_accepted_email
     # Tell the AbuseMailer to send a confirmation after save
     AbuseMailer.accepted(self).deliver_later
   end
 
   # send email Rejected
-  def sendRejectedEmail
+  def send_rejected_email
     # Tell the AbuseMailer to send a confirmation after save
     AbuseMailer.rejected(self).deliver_later
   end

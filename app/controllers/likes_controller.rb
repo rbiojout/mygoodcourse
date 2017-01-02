@@ -13,11 +13,11 @@ class LikesController < ApplicationController
       if @like.save
         format.html { redirect_to :back, notice: 'Like was successfully created.' }
         format.json { render :show, status: :created, location: @like }
-        format.js {}
+        format.js { render :like }
       else
         # format.html { render :new }
         format.json { render json: @like.errors, status: :unprocessable_entity }
-        format.js {}
+        format.js   { render json: @like.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -29,7 +29,7 @@ class LikesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to :back, notice: 'Like was successfully destroyed.' }
       format.json { head :no_content }
-      format.js {}
+      format.js { render :unlike}
     end
   end
 
@@ -50,13 +50,13 @@ private
   end
 
   def context_url(context)
-    if Product === context
+    if context.is_a?(Product)
       product_path(context)
-    elsif Post === context
+    elsif context.is_a?(post)
       post_path(context)
-    elsif Review === context
+    elsif context.is_a?(Review)
       review_path(context)
-    elsif ForumSubject === context
+    elsif context.is_a?(ForumSubject)
       review_path(context)
     end
   end

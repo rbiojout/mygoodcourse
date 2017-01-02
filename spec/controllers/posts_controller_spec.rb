@@ -128,7 +128,7 @@ RSpec.describe PostsController, type: :controller do
 
       it "redirects to the created post" do
         post :create, locale: I18n.default_locale, post: valid_attributes, session: valid_session
-        expect(response).to redirect_to(Post.last)
+        expect(response).to redirect_to(post_path(Post.last.slug))
       end
     end
 

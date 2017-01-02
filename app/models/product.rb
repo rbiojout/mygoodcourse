@@ -314,7 +314,7 @@ class Product < ActiveRecord::Base
   # @return [String]
   def attachment
     attachments.first
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file #{exc.message}")
     Attachment.new
   end
@@ -324,7 +324,7 @@ class Product < ActiveRecord::Base
   # @return [String]
   def preview
     attachments.first.file.url(:preview)
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file while retrieving preview #{exc.message}")
     'empty_file.png'
   end
@@ -334,7 +334,7 @@ class Product < ActiveRecord::Base
   # @return [String]
   def small
     attachments.first.file.url(:small)
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file while retrieving small preview #{exc.message}")
     'empty_file.png'
   end
@@ -344,16 +344,16 @@ class Product < ActiveRecord::Base
   # @return [String]
   def large
     attachments.first.file.url(:large)
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file while retrieving large preview #{exc.message}")
     'empty_file.png'
   end
 
   def file_url
-    attachments.first.file.url
-  rescue Exception => exc
-    logger.error("Message for the log file #{exc.message}")
-    'empty_file.pdf'
+      attachments.first.file.url
+    rescue StandardError => exc
+      logger.error("Message for the log file #{exc.message}")
+      'empty_file.pdf'
   end
 
   def candownload(customer)
@@ -365,7 +365,7 @@ class Product < ActiveRecord::Base
   def canreview(customer)
     return false if customer.nil?
     # owner can not put review
-    (self.customer.id != customer.id  && is_bought_by_customer(customer.id)  && Review.find_by_product_customer(id, self.customer.id).count.zero?)? true:false
+    (self.customer.id != customer.id  && is_bought_by_customer(customer.id)  && Review.find_by(product_id: id, customer_id: self.customer.id).count.zero?)? true:false
   end
 
   #####
@@ -377,7 +377,7 @@ class Product < ActiveRecord::Base
   # @return [int]
   def nbpages
     attachments.order(position: 'asc').first.nbpages
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file #{exc.message}")
     0
   end
@@ -388,7 +388,7 @@ class Product < ActiveRecord::Base
   def file_size
     # pretty value
     attachments.order(position: 'asc').first.file_size
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file #{exc.message}")
     0
   end
@@ -398,7 +398,7 @@ class Product < ActiveRecord::Base
   # @return [String]
   def file_type
     attachments.order(position: 'asc').first.file_type
-  rescue Exception => exc
+  rescue StandardError => exc
     logger.error("Message for the log file #{exc.message}")
     'application/pdf'
   end

@@ -1,6 +1,6 @@
 class StripeManaged < Struct.new(:customer)
   ALLOWED = %w(US CA).freeze # public beta
-  COUNTRIES = [
+  STRIPE_COUNTRIES = [
     {name: 'United States', code: 'US'},
     {name: 'Canada', code: 'CA'},
     {name: 'Australia', code: 'AU'},

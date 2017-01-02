@@ -94,12 +94,12 @@ private
   end
 
   def context_url(context)
-    if Product === context
+    if context.is_a?(Product)
       product_path(context)
-    elsif Review === context
+    elsif context.is_a?(Review)
       review_path(context)
     # @TODO redirect to the commentable
-    elsif Comment === context
+    elsif context.is_a?(Comment)
       comment_path(context)
     end
   end

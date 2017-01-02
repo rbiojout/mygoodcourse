@@ -43,12 +43,6 @@ class Review < ActiveRecord::Base
 
   default_scope -> { order(updated_at: :desc) }
 
-  # This search the reviews already done for a particular product_id and customer_id
-  # @param product_id [int] the id for the product
-  # @param customer_id [int] the id for the customer
-  # @return Review
-  scope :find_by_product_customer, ->(product_id, customer_id) { joins(:product).where(products: {id: product_id, customer_id: customer_id}).distinct }
-
   # This search all the reviews already relatted to the products for a particular customer_id
   # @param customer_id [int] the id for the customer
   # @return Review

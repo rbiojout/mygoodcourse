@@ -109,9 +109,9 @@ private
   end
 
   def context_url(context)
-    if Post === context
+    if context.is_a?(Post)
       post_path(context)
-    elsif ForumAnswer === context
+    elsif context.is_a?(ForumAnswer)
       forum_subject_path(context.forum_subject)
     end
   end

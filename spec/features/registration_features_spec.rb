@@ -1,3 +1,6 @@
+# save_screenshot is OK
+# rubocop:disable Lint/Debugger
+
 require 'rails_helper'
 
 describe 'RegistrationFeatures', type: :feature, js: true do

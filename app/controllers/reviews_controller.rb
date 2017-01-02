@@ -64,7 +64,7 @@ class ReviewsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @review.errors, status: :unprocessable_entity }
         # added
-        format.js   { @current_review = @review }
+        format.js   { render json: @review.errors, status: :unprocessable_entity }
       end
     end
   end

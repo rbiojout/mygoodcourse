@@ -1,28 +1,39 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This README is intended to help the projet.
 
-Things you may want to cover:
+# Development
+We use rails as the main back engine. Version is 4.2
 
-* Ruby version
+## Staging
+We have production and staging environment
 
-* System dependencies
+## Test
+We rely on Rspec to develop the test. FactoryGirl and ShouldaMatcher are used to help the tests.
 
-* Configuration
+To validate the behavior of the features, we rely on the headless browser Poltergiest. We should avoid the use of sleep and
+prefer the find method.
 
-* Database creation
+Fixtures for files are stored in the spec/fixtures/file directory with the proper subdirectories and names.
+There is a task to cleanup the public folder if needed before/after the test.
 
-* Database initialization
+## Quality
 
-* How to run the test suite
+### Rubocop
+This is a pass regarding the quality of Ruby code. Some adjustments have been made (see .rubocop.yml). The most impo
 
-* Services (job queues, cache servers, search engines, etc.)
+# Database
+We rely on Postgres, in particular in order to have the search option directly from the Database engine.
 
-* Deployment instructions
+# File uploads
+We rely on Amazon S3 to serve the assets and the files. In addition, for perfomance, we have cloudfront set-up.
 
-* ...
+# Front
+## assets
+In order to have the mixin of SaaS available, we use @import directives. Additional assets are located in public folder
 
+## favicon
+use of favicon has been made accordingly to https://rubyplus.com/articles/1751-How-to-Add-Favicon-to-Rails-4-2-App-in-5-minutes
 
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+## turbolinks
+We use the latest version of Turbolink. We then must be careful to use the proper watcher on change

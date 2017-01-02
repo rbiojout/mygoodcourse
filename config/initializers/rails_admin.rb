@@ -290,6 +290,11 @@ RailsAdmin.config do |config|
   end
 
   config.model 'ForumFamily' do
+    list do
+      field :country
+      field :name
+      field :visual
+    end
     edit do
       field :country
       field :name
@@ -314,6 +319,11 @@ RailsAdmin.config do |config|
 
   config.model 'ForumCategory' do
     parent ForumFamily
+    list do
+      field :forum_family
+      field :name
+      field :visual
+    end
     edit do
       field :name
       field :description do
@@ -336,30 +346,47 @@ RailsAdmin.config do |config|
 
   config.model 'ForumSubject' do
     parent ForumCategory
+    list do
+      field :name
+      field :customer
+      field :forum_category
+      field :counter_cache
+      field :created_at
+    end
     edit do
       field :name
-      field :description do
+      field :text do
         partial 'form_summernote'
       end
       field :forum_category
     end
     show do
       field :name
-      field :description do
+      field :text do
         formatted_value do
           value&.html_safe
         end
       end
+      field :created_at
       field :forum_category
       field :forum_answers
       field :customer
       field :counter_cache
-      field :likes
     end
   end
 
   config.model 'ForumAnswer' do
     parent ForumSubject
+    list do
+      field :text do
+        formatted_value do
+          value&.html_safe
+        end
+      end
+      field :customer
+      field :forum_subject
+      field :created_at
+    end
     edit do
       field :text do
         partial 'form_summernote'
@@ -372,6 +399,7 @@ RailsAdmin.config do |config|
           value&.html_safe
         end
       end
+      field :created_at
       field :forum_subject
       field :customer
       field :comments

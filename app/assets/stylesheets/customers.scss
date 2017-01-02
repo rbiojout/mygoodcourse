@@ -48,6 +48,7 @@
 @mixin quote_customer($customer_picture, $customer_container) {
   // quote panel with shadow
   .quote-panel {
+    overflow: hidden;
     width: 100%;
     min-height: $customer_picture + $customer_name + 80px;
     float: right;
