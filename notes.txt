@@ -1,13 +1,3 @@
-http://jetbrains.tencent.click
-
-
-chucky
-
-2147-D32242T
-00001"SYStKDlt1xzXMxPtm5n9IHlo
-lGeIrqgvDD3QxWk8gFKvB83XRF74z9
-8"dPuUhdODEIFTp0txKahF1jru0tf3
-
 ####install gems
 
 add some default pages
