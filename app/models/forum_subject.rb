@@ -23,6 +23,9 @@
 #
 
 class ForumSubject < ActiveRecord::Base
+
+  html_fragment :text, :scrub => :prune  # scrubs `text` using the :prune scrubber
+
   # follow activities
   # we explicitely indicate the reference because of rails_admin issues
   include Impressionist::IsImpressionable

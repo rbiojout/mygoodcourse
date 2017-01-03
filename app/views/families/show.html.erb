@@ -4,7 +4,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.family.description')%>:</strong>
-  <%= raw(@family.description) %>
+  <%= sanitize(@family.description, scrubber: :prune) %>
 </p>
 
 <h2><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h2>

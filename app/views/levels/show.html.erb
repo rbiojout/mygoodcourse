@@ -4,7 +4,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.level.description')%>:</strong>
-  <%= raw(@level.description) %>
+  <%= sanitize(@level.description, scrubber: :prune) %>
 </p>
 
 

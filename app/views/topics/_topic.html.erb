@@ -9,6 +9,6 @@
   </h2>
 
   <blockquote>
-    <%= raw(topic.description) %>
+    <%= sanitize(topic.description, scrubber: :prune) %>
   </blockquote>
 </li>

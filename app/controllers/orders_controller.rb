@@ -8,7 +8,8 @@ class OrdersController < ApplicationController
 
   # GET /myorders
   def myorders
-    @orders = Order.for_customer(current_customer.id).unscope(:order).order(sort_column + ' ' + sort_direction)
+    # @orders = Order.for_customer(current_customer.id).unscope(:order).order(sort_column + ' ' + sort_direction)
+    @orders = current_customer.orders.unscope(:order).order(sort_column + ' ' + sort_direction)
     @products = Product.find_bought_by_customer(current_customer.id)
   end
 

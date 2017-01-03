@@ -4,5 +4,5 @@
 
 <p>
   <strong><%= t('activerecord.attributes.category.description')%>:</strong>
-  <%= raw(@category.description) %>
+  <%= sanitize(@category.description, scrubber: :prune) %>
 </p>

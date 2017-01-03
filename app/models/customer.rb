@@ -95,6 +95,8 @@ class Customer < ActiveRecord::Base
   # add a file for image
   mount_uploader :picture, PictureUploader
 
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   # Validations
   # validate in addition to Devise
   validates :name, :first_name, presence: true

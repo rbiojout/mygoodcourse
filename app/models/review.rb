@@ -23,6 +23,9 @@
 #
 
 class Review < ActiveRecord::Base
+
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   belongs_to :product
   belongs_to :customer
 

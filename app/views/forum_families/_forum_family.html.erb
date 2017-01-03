@@ -8,7 +8,7 @@
   <div class="media-body">
     <div class="media-description">
     <h3 class="media-heading"><%= forum_family.name %></h3>
-    <p><%= raw(forum_family.description)%></p>
+    <p><%= sanitize(forum_family.description, scrubber: :prune)%></p>
     </div>
     <ul class="media-list">
       <% forum_family.forum_categories.each do |forum_category|%>

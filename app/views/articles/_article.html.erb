@@ -7,6 +7,6 @@
     <%= article.name %>
   </h4>
 
-  <%= raw(article.description) %>
+  <%= sanitize(article.description, scrubber: :prune) %>
   <hr/>
 </li>

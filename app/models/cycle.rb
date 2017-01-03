@@ -20,6 +20,9 @@
 #
 
 class Cycle < ActiveRecord::Base
+
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   has_many :levels, dependent: :destroy
   accepts_nested_attributes_for :levels, reject_if: :all_blank, allow_destroy: true
 

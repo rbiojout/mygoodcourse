@@ -26,6 +26,8 @@ class Topic < ActiveRecord::Base
   # we use slugs for finding the topics
   friendly_id :name, use: :slugged
 
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   # linked to country with a position in the list
   belongs_to :country
   validates :country, presence: true

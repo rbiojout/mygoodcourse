@@ -21,6 +21,9 @@
 #
 
 class ForumFamily < ActiveRecord::Base
+
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   belongs_to :country
 
   has_many :forum_categories, dependent: :destroy

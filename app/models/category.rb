@@ -26,6 +26,8 @@ class Category < ActiveRecord::Base
 
   has_and_belongs_to_many :products
 
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   validates :name, presence: true
 
   # categories associated to products

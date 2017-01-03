@@ -39,6 +39,8 @@ class Post < ActiveRecord::Base
   multisearchable against: [:name, :description]
   pg_search_scope :search_by_text, against: [:name, :description], ignoring: :accents
 
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   default_scope -> { order(created_at: :desc) }
 
   # we want a name with a Capital

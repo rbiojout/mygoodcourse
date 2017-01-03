@@ -44,7 +44,7 @@
     </div>
 
 <p>
-  <%= raw(@post.description) %>
+  <%= sanitize(@post.description, scrubber: :prune) %>
 </p>
 
 <!-- tools -->

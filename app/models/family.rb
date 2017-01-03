@@ -21,6 +21,9 @@
 #
 
 class Family < ActiveRecord::Base
+
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   has_many :categories, dependent: :destroy
   accepts_nested_attributes_for :categories, reject_if: :all_blank, allow_destroy: true
 

@@ -20,6 +20,9 @@
 #
 
 class Level < ActiveRecord::Base
+
+  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+
   belongs_to :cycle, inverse_of: :levels
   acts_as_list scope: :cycle, add_new_at: :bottom
 
