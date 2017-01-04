@@ -15,8 +15,28 @@ module Formycourse
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Bower asset paths
+    root.join('vendor', 'assets', 'bower_components').to_s.tap do |bower_path|
+      config.sass.load_paths << bower_path
+      config.assets.paths << bower_path
+    end
+    # Bootstrap asset paths
+    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'javascripts')
+    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'stylesheets')
+    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'fonts')
+    # Font-awesome asset paths
+    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'font-awesome')
+
+
     # add the fonts to assets
-    config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+    config.assets.precompile << /\.(?:svg|eot|woff2?|ttf)$/
+    # Precompile Bootstrap fonts
+    config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+    # Precompile Font-awesome fonts
+    config.assets.precompile << %r(font-awesome/fonts/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+
+    # Minimum Sass number precision required by bootstrap-sass
+    ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.

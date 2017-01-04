@@ -1,0 +1,63 @@
+{
+  "ignored_warnings": [
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "73245f5058f2379050eac0eae5c524d7561989406ef35a19fb7d4de14c167963",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 28,
+      "link": "http://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.read(Attachment.find(params[:id]).file.file.file)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "download"
+      },
+      "user_input": "Attachment.find(params[:id]).file.file.file",
+      "confidence": "Medium",
+      "note": "CarrierWave file"
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "7caf81b63481aeeff166e1f84f9b5c675b2898592f579d3eb583ebbc64db9656",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 32,
+      "link": "http://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "File.open(Attachment.find(params[:id]).file.file.file, \"rb\")",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "download"
+      },
+      "user_input": "Attachment.find(params[:id]).file.file.file",
+      "confidence": "Medium",
+      "note": "Carrierwave file"
+    },
+    {
+      "warning_type": "File Access",
+      "warning_code": 16,
+      "fingerprint": "7d044d8860a4b68ab66862698d1fbe66fd5a802dfa8349b6386ec76809d1927e",
+      "message": "Model attribute used in file name",
+      "file": "app/controllers/attachments_controller.rb",
+      "line": 45,
+      "link": "http://brakemanscanner.org/docs/warning_types/file_access/",
+      "code": "open(Attachment.find(params[:id]).file.file.url)",
+      "render_path": null,
+      "location": {
+        "type": "method",
+        "class": "AttachmentsController",
+        "method": "download"
+      },
+      "user_input": "Attachment.find(params[:id]).file.file.url",
+      "confidence": "Medium",
+      "note": "CarrierWave file"
+    }
+  ],
+  "updated": "2017-01-03 12:18:11 +0100",
+  "brakeman_version": "3.4.1"
+}

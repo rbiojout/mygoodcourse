@@ -31,20 +31,21 @@ gem 'coffee-rails', '~> 4.2'
 
 # gem 'haml'
 
+
 # Use jquery as the JavaScript library
-gem 'jquery-rails', '~> 4.2'
+## gem 'jquery-rails', '~> 4.2'
 
 # add some additional jquery
-gem 'jquery-ui-rails'
+## gem 'jquery-ui-rails'
 
 # to solve problems with tough on ios
-gem 'touchpunch-rails'
+## gem 'touchpunch-rails'
 
 # to solve reloading of pages
 gem 'jquery-turbolinks'
 
 # handle file upload with javascript, in particular for progress bar
-gem 'jquery-fileupload-rails'
+# gem 'jquery-fileupload-rails'
 
 # Turbolinks makes following links in your web application faster.
 # Read more: https://github.com/rails/turbolinks
@@ -85,12 +86,14 @@ gem 'cocoon'
 # see https://github.com/aasm/aasm
 gem 'aasm'
 
+gem 'bower-rails'
+
 # add some CSS
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
 gem 'autoprefixer-rails'
-gem 'bootstrap-sass'
+# gem 'bootstrap-sass'
 # add extra icon fonts
-gem 'font-awesome-sass'
+# gem 'font-awesome-sass'
 
 # new some Cross Domain Help for the fonts
 gem 'rack-cors'
@@ -108,7 +111,7 @@ gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: '
 
 # add full calendar to display and control events
 gem 'fullcalendar-rails'
-gem 'momentjs-rails'
+# gem 'momentjs-rails'
 
 # use geocoder for addresse feed and other google maps tools with jquery.js
 gem 'geocoder'

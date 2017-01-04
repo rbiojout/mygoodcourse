@@ -1,0 +1,31 @@
+# A sample Bowerfile
+# Check out https://github.com/42dev/bower-rails#ruby-dsl-configuration for more options
+
+asset 'jquery', '2.2.4'
+
+# bootstrap paths are defined in application.rb
+# fonts path must be defined in application.scss
+asset 'bootstrap-sass', '3.3.7'
+
+# font-awesome: path to fonts need to be set
+# fonts path must be defined in application.scss
+asset 'font-awesome', '4.7.0'
+
+asset 'jquery.ui.touch-punch'
+
+asset 'jquery-file-upload'
+
+# use for date manipulation
+asset 'moment'
+
+# parallax effects
+asset 'stellar'
+
+# ellipsis
+asset 'dotdotdot', '1.8.3'
+
+# WYSIWYG editor
+asset 'summernote'
+
+# star rating
+asset 'bootstrap-star-rating'

@@ -3,8 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 @import "application-variables";
-@import "bootstrap/mixins/vendor-prefixes";
-@import "bootstrap/mixins/clearfix";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/mixins/vendor-prefixes";
+@import "bootstrap-sass/assets/stylesheets/bootstrap/mixins/clearfix";
 
 .forum_subjects-list {
   list-style: none;

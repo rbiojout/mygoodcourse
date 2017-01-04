@@ -365,7 +365,7 @@ class Product < ActiveRecord::Base
   def canreview(customer)
     return false if customer.nil?
     # owner can not put review
-    (self.customer.id != customer.id  && is_bought_by_customer(customer.id)  && Review.find_by(product_id: id, customer_id: self.customer.id).count.zero?)? true:false
+    (self.customer.id != customer.id  && is_bought_by_customer(customer.id)  && Review.find_by(product_id: id, customer_id: self.customer.id)||[].count.zero?)? true:false
   end
 
   #####

@@ -17,23 +17,31 @@
 //= require jquery-ui/sortable
 //= require jquery-ui/widget
 //= require jquery-ui/mouse
-//= require jquery.ui.touch-punch
+//= require jquery.ui.touch-punch/dist/jquery.ui.touch-punch
 //= require jquery_ujs
-//= require jquery.turbolinks
-//= require jquery-fileupload/basic
-//= require jquery-fileupload/vendor/tmpl
+// removed 2017/01/04
+//  require jquery.turbolinks
+//= require jquery-file-upload
 // used for Parallax effect
-//= require jquery.stellar
+//= require stellar
+// ellipsis
+//= require dotdotdot
 // used for positioning pointer
 //= require jquery.waypoints
-//= require bootstrap-sprockets
+//= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
 //= require moment
-//= require moment/fr
+//= require moment/locale/fr
 //= require bootstrap-datetimepicker
 //= require pickers
 //= require cocoon
 //= require summernote
 //= require summernote-fr.js
+
+//= require bootstrap-star-rating
+//= require bootstrap-star-rating/js/star-rating_locale_de.js
+// added, not in Bower
+//= require star-rating_locale_fr.js
+//= require star-rating_locale_es.js
 
 
 // require bootstrap-treenav
@@ -49,6 +57,7 @@
 //= require turbolinks
 //= require compatibility
 //= require_tree .
+
 
 
 

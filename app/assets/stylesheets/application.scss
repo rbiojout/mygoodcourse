@@ -1,6 +1,8 @@
 
 // we need to import sprockets first
-@import "bootstrap-sprockets";
+// @import "bootstrap-sprockets";
+$icon-font-path: "bootstrap-sass/assets/fonts/bootstrap/";
+@import "bootstrap-sass/assets/stylesheets/bootstrap-sprockets";
 
 // custom vaiables for bootstrap
 // that overwrite the basic configuration
@@ -10,12 +12,12 @@
 // that are used all over the application
 @import "application-variables";
 
-@import "bootstrap";
+@import "bootstrap-sass/assets/stylesheets/bootstrap";
 
 // add Font Awesome
-@import 'font-awesome-sprockets';
-@import 'font-awesome';
-
+// @import 'font-awesome-sprockets';
+$fa-font-path: 'font-awesome/fonts';
+@import 'font-awesome/scss/font-awesome';
 
 // sortable jquery
 @import "jquery-ui/sortable";

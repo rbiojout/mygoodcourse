@@ -189,7 +189,17 @@ i18n-tasks health
 
 TEST
 http://chrisestanol.com/blog/2016/03/12/introduction-to-testing-with-rspec/
+https://about.futurelearn.com/blog/making-futurelearn/the-futurelearn-test-suite/
 
+Front-End
+AngularJs can be installed via Bower. In this case, we need to have the correct paths for the assets if we want to add
+other packages
+- see http://dotwell.io/taking-advantage-of-bower-in-your-rails-4-app/
+- see http://blog.jasonkim.ca/blog/2015/06/29/setting-up-bower-on-rails-4-for-heroku/
+- see http://angular-rails.com/bootstrap.html#front-end-dependency-management-with-bower
+- see http://iamfree.com/codings/rails-and-bower-for-assets-mangement
+- see http://kurtfunai.com/2014/08/angularjs-and-turbolinks.html
+- see http://stackoverflow.com/questions/14797935/using-angularjs-with-turbolinks
 
 
 

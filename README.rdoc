@@ -18,9 +18,16 @@ Fixtures for files are stored in the spec/fixtures/file directory with the prope
 There is a task to cleanup the public folder if needed before/after the test.
 
 ## Quality
+based on https://infinum.co/the-capsized-eight/top-8-tools-for-ruby-on-rails-code-optimization-and-cleanup
 
 ### Rubocop
 This is a pass regarding the quality of Ruby code. Some adjustments have been made (see .rubocop.yml). The most impo
+
+### Brakeman
+This is used to test the vulnerability. Run brakeman -I in order to keep track of False positive
+
+### Rubycritic
+
 
 # Database
 We rely on Postgres, in particular in order to have the search option directly from the Database engine.
@@ -37,3 +44,8 @@ use of favicon has been made accordingly to https://rubyplus.com/articles/1751-H
 
 ## turbolinks
 We use the latest version of Turbolink. We then must be careful to use the proper watcher on change
+
+# Production
+## Heroku
+We need to have bower installed, Configure Heroku to use ddollar’s multi-buildpack:
+heroku config:add BUILDPACK_URL=https://github.com/ddollar/heroku-buildpack-multi.git

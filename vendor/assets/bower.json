@@ -1,0 +1,15 @@
+{
+  "name": "dsl-generated-dependencies",
+  "dependencies": {
+    "jquery": "2.2.4",
+    "bootstrap-sass": "3.3.7",
+    "font-awesome": "4.7.0",
+    "jquery.ui.touch-punch": "latest",
+    "jquery-file-upload": "latest",
+    "moment": "latest",
+    "stellar": "latest",
+    "dotdotdot": "1.8.3",
+    "summernote": "latest",
+    "bootstrap-star-rating": "latest"
+  }
+}

@@ -1,10 +1,8 @@
-$(document).ready(function(){
-
-    $('.summernote').summernote({
-        lang: I18n_locale,
-        // adjust initial height for the Summernote Editor
-        height: '200px'
-    });
-
+document.addEventListener("turbolinks:load", function() {
+  $('.summernote').summernote({
+    lang: I18n_locale,
+    // adjust initial height for the Summernote Editor
+    height: '200px'
+  });
 
 });
