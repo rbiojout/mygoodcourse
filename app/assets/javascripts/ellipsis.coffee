@@ -1,4 +1,4 @@
-$(document).ready ->
+document.addEventListener 'turbolinks:load', ->
   $('.ellipsis').dotdotdot({
     watch: "window"
   })

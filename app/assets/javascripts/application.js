@@ -19,8 +19,8 @@
 //= require jquery-ui/mouse
 //= require jquery.ui.touch-punch/dist/jquery.ui.touch-punch
 //= require jquery_ujs
-// removed 2017/01/04
-//  require jquery.turbolinks
+// problem with reload
+//= require jquery.turbolinks
 //= require jquery-file-upload
 // used for Parallax effect
 //= require stellar

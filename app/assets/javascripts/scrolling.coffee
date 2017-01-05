@@ -26,7 +26,8 @@
 
 
 # display more reviews when displaying the reviews of a customer
-$ ->
+# $ ->
+document.addEventListener 'turbolinks:load', ->
   if $('#infinite-scrolling-reviews').length > 0
     $(window).on 'scroll', ->
       more_reviews_url = jQuery('#infinite-scrolling-reviews .pagination a.next').attr('href')
@@ -40,7 +41,8 @@ $ ->
     return
 
 # display more products when displaying the catalog of products
-$ ->
+# $ ->
+document.addEventListener 'turbolinks:load', ->
   if $('#infinite-scrolling-products').size() > 0
     $(window).on 'scroll', ->
       more_products_url = $('#infinite-scrolling-products .pagination a.next').attr('href')
@@ -54,7 +56,8 @@ $ ->
     return
 
 # display more posts when displaying the index of posts
-$ ->
+# $ ->
+document.addEventListener 'turbolinks:load', ->
   if $('#infinite-scrolling-posts').size() > 0
     $(window).on 'scroll', ->
       more_posts_url = $('#infinite-scrolling-posts .pagination a.next').attr('href')
