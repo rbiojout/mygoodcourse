@@ -10,6 +10,7 @@
     "stellar": "latest",
     "dotdotdot": "1.8.3",
     "summernote": "latest",
-    "bootstrap-star-rating": "latest"
+    "bootstrap-star-rating": "latest",
+    "animate.css": "latest"
   }
 }

@@ -201,6 +201,11 @@ other packages
 - see http://kurtfunai.com/2014/08/angularjs-and-turbolinks.html
 - see http://stackoverflow.com/questions/14797935/using-angularjs-with-turbolinks
 
+We use Bower in addition to regular vendor mecanism. It is in particular used to check dependencies and used mixin or functions.
+Some css and js can be put directly in vendor/assets and not through Bower
+
+can be usefull for regex http://rubular.com
+
 
 
 

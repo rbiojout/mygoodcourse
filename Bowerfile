@@ -29,3 +29,6 @@ asset 'summernote'
 
 # star rating
 asset 'bootstrap-star-rating'
+
+# animate css
+asset 'animate.css'

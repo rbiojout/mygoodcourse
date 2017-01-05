@@ -20,20 +20,14 @@ module Formycourse
       config.sass.load_paths << bower_path
       config.assets.paths << bower_path
     end
-    # Bootstrap asset paths
-    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'javascripts')
-    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'stylesheets')
-    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'bootstrap-sass', 'assets', 'fonts')
-    # Font-awesome asset paths
-    # config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components', 'font-awesome')
-
 
     # add the fonts to assets
     config.assets.precompile << /\.(?:svg|eot|woff2?|ttf)$/
-    # Precompile Bootstrap fonts
-    config.assets.precompile << %r(bootstrap-sass/assets/fonts/bootstrap/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
-    # Precompile Font-awesome fonts
-    config.assets.precompile << %r(font-awesome/fonts/[\w-]+\.(?:eot|svg|ttf|woff2?)$)
+
+    # Precompile Summernote WYSIWYG fonts
+    # THE REGEX NEED TO BE ADAPTED FOR SUMMERNOTE
+    config.assets.precompile << %r(summernote/dist/font/[\w-]+\.(?:eot|svg|ttf|woff2?).*$)
+
 
     # Minimum Sass number precision required by bootstrap-sass
     ::Sass::Script::Value::Number.precision = [8, ::Sass::Script::Value::Number.precision].max
