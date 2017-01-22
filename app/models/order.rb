@@ -29,7 +29,7 @@
 #  fk_rails_3dad120da9  (customer_id => customers.id)
 #
 
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
   EMAIL_REGEX = /\A\b[A-Z0-9\.\_\%\-\+]+@(?:[A-Z0-9\-]+\.)+[A-Z]{2,6}\b\z/i
   PHONE_REGEX = /\A[+?\d\ \-x\(\)]{7,}\z/
 

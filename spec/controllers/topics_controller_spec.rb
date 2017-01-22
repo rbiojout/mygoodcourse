@@ -43,14 +43,14 @@ RSpec.describe TopicsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all topics as @topics" do
-      get :index, locale: I18n.default_locale, session: valid_session
+      get :index, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:topics)).not_to be_nil
     end
   end
 
   describe "GET #show" do
     it "assigns the requested topic as @topic" do
-      get :show, locale: I18n.default_locale, id: topic.to_param, session: valid_session
+      get :show, params: {locale: I18n.default_locale, id: topic.to_param}, session: valid_session
       expect(assigns(:topic)).to eq(topic)
     end
   end
@@ -58,7 +58,7 @@ RSpec.describe TopicsController, type: :controller do
   describe "GET #new" do
     it "assigns a new topic as @topic" do
       sign_in(employees(:one), scope: :employee)
-      get :new, locale: I18n.default_locale, session: valid_session
+      get :new, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:topic)).to be_a_new(Topic)
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe TopicsController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested topic as @topic" do
       sign_in(employees(:one), scope: :employee)
-      get :edit, locale: I18n.default_locale, id: topic.to_param, session: valid_session
+      get :edit, params: {locale: I18n.default_locale, id: topic.to_param}, session: valid_session
       expect(assigns(:topic)).to eq(topic)
     end
   end
@@ -76,20 +76,20 @@ RSpec.describe TopicsController, type: :controller do
       it "creates a new Topic" do
         sign_in(employees(:one), scope: :employee)
         expect {
-          post :create, locale: I18n.default_locale, topic: valid_attributes, session: valid_session
+          post :create, params: {locale: I18n.default_locale, topic: valid_attributes}, session: valid_session
         }.to change(Topic, :count).by(1)
       end
 
       it "assigns a newly created topic as @topic" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic: valid_attributes}, session: valid_session
         expect(assigns(:topic)).to be_a(Topic)
         expect(assigns(:topic)).to be_persisted
       end
 
       it "redirects to the created topic" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic: valid_attributes}, session: valid_session
         expect(assigns(:topic)).not_to be_nil
         expect(response).to redirect_to(assigns(:topic))
       end
@@ -98,13 +98,13 @@ RSpec.describe TopicsController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved topic as @topic" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic: invalid_attributes}, session: valid_session
         expect(assigns(:topic)).to be_a_new(Topic)
       end
 
       it "re-renders the 'new' template" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -118,20 +118,20 @@ RSpec.describe TopicsController, type: :controller do
 
       it "updates the requested topic" do
         sign_in(employees(:one), scope: :employee)
-        put :update, locale: I18n.default_locale, id: topic.to_param, topic: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: topic.to_param, topic: new_attributes}, session: valid_session
         topic.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested topic as @topic" do
         sign_in(employees(:one), scope: :employee)
-        put :update, locale: I18n.default_locale, id: topic.to_param, topic: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: topic.to_param, topic: valid_attributes}, session: valid_session
         expect(assigns(:topic)).to eq(topic)
       end
 
       it "redirects to the topic" do
         sign_in(employees(:one), scope: :employee)
-        put :update, locale: I18n.default_locale, id: topic.to_param, topic: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: topic.to_param, topic: valid_attributes}, session: valid_session
         expect(response).to redirect_to(topic)
       end
     end
@@ -139,7 +139,7 @@ RSpec.describe TopicsController, type: :controller do
     context "with invalid params" do
       it "assigns the topic as @topic" do
         sign_in(employees(:one), scope: :employee)
-        put :update, locale: I18n.default_locale, id: topic.to_param, topic: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: topic.to_param, topic: invalid_attributes}, session: valid_session
         expect(assigns(:topic)).to eq(topic)
       end
 
@@ -150,13 +150,13 @@ RSpec.describe TopicsController, type: :controller do
     it "destroys the requested topic" do
       sign_in(employees(:one), scope: :employee)
       expect {
-        delete :destroy, locale: I18n.default_locale, id: topic.to_param, session: valid_session
+        delete :destroy, params: {locale: I18n.default_locale, id: topic.to_param}, session: valid_session
       }.to change(Topic, :count).by(-1)
     end
 
     it "redirects to the topics list" do
       sign_in(employees(:one), scope: :employee)
-      delete :destroy, locale: I18n.default_locale, id: topic.to_param, session: valid_session
+      delete :destroy, params: {locale: I18n.default_locale, id: topic.to_param}, session: valid_session
       expect(response).to redirect_to(topics_url)
     end
   end

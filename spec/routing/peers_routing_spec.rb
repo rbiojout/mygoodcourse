@@ -32,11 +32,11 @@ RSpec.describe PeersController, type: :routing do
     end
 
     it 'routes to #follow' do
-      expect(:post => '/peers/follow').to route_to('peers#follow')
+      expect(:post => '/peers/follow').to route_to('peers#follow', "path"=>"peers/follow")
     end
 
     it 'routes to #unfollow' do
-      expect(:delete => '/peers/unfollow').to route_to('peers#unfollow')
+      expect(:delete => '/peers/unfollow').to route_to('peers#unfollow', "path"=>"peers/unfollow")
     end
 
   end

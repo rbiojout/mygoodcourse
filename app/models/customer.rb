@@ -53,7 +53,7 @@
 #  fk_rails_595506fbcf  (country_id => countries.id)
 #
 
-class Customer < ActiveRecord::Base
+class Customer < ApplicationRecord
   extend FriendlyId
 
   # follow activities

@@ -22,7 +22,7 @@
 #  fk_rails_f76a01a4d1  (customer_id => customers.id)
 #
 
-class ForumSubject < ActiveRecord::Base
+class ForumSubject < ApplicationRecord
 
   html_fragment :text, :scrub => :prune  # scrubs `text` using the :prune scrubber
 

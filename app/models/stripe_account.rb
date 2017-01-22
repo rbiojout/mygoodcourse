@@ -20,7 +20,7 @@
 #  fk_rails_6090e626be  (customer_id => customers.id)
 #
 
-class StripeAccount < ActiveRecord::Base
+class StripeAccount < ApplicationRecord
   belongs_to :customer, foreign_key: 'customer_id'
 
   serialize :stripe_account_status, JSON

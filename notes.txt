@@ -168,6 +168,10 @@ MEMORY ISSUES
 cf https://devcenter.heroku.com/articles/tunemygc
 need to move to new region https://devcenter.heroku.com/articles/app-migration
 
+PRODUCTION / OPERATION
+in order to reduce slug size on Heroku
+see https://robots.thoughtbot.com/how-to-reduce-a-large-heroku-compiled-slug-size
+
 COOL STUFF
 https://github.com/ekremkaraca/awesome-rails
 

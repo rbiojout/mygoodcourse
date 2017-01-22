@@ -4,11 +4,11 @@ RSpec.describe AbusesController, type: :routing do
   describe "routing" do
 
     it "routes to #new" do
-      expect(:get => "/abuses/new").to route_to("abuses#new")
+      expect(:get => "/abuses/new").to route_to("abuses#new", "path"=>"abuses/new")
     end
 
     it "routes to #create" do
-      expect(:post => "/abuses").to route_to("abuses#create")
+      expect(:post => "/abuses").to route_to("abuses#create", "path"=>"abuses")
     end
 
   end

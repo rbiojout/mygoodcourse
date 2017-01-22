@@ -47,7 +47,7 @@ RSpec.describe AbusesController, type: :controller do
 
   describe "GET #new for a Review" do
     it "assigns a new abuse as @abuse for a Review" do
-      get :new, review_id: reviews(:one).id, params: {}, session: valid_session
+      get :new, params: {review_id: reviews(:one).id}, session: valid_session
       expect(assigns(:abuse)).to be_a_new(Abuse)
     end
   end
@@ -65,18 +65,18 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Abuse" do
         expect {
-          post :create, review_id: reviews(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, params: {review_id: reviews(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
       end
 
       it "assigns a newly created abuse as @abuse for a Review" do
-        post :create, review_id: reviews(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {review_id: reviews(:one).id, abuse: valid_attributes}, session: valid_session
         expect(assigns(:abuse)).to be_a(Abuse)
         expect(assigns(:abuse)).to be_persisted
       end
 
       it "redirects to the created abuse" do
-        post :create, review_id: reviews(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {review_id: reviews(:one).id, abuse: valid_attributes}, session: valid_session
         # check customer
         expect(assigns(:abuse).customer).to eq(customers(:one))
 
@@ -85,7 +85,7 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Abuse for a Review via ajax" do
         expect {
-          xhr :post, :create, review_id: reviews(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, xhr: true, params: {review_id: reviews(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
         assert_response :success
 
@@ -98,7 +98,7 @@ RSpec.describe AbusesController, type: :controller do
 
   describe "GET #new for a Product" do
     it "assigns a new abuse as @abuse for a Product" do
-      get :new, product_id: products(:one).id, params: {}, session: valid_session
+      get :new, params: {product_id: products(:one).id}, session: valid_session
       expect(assigns(:abuse)).to be_a_new(Abuse)
     end
   end
@@ -108,7 +108,7 @@ RSpec.describe AbusesController, type: :controller do
       it "not creates an abuse if not signed" do
         sign_out(customers(:one))
         expect {
-          post :create, product_id: products(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, params: {product_id: products(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(0)
 
         expect(response).to redirect_to(new_customer_session_path)
@@ -116,18 +116,18 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Abuse" do
         expect {
-          post :create, product_id: products(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, params: {product_id: products(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
       end
 
       it "assigns a newly created abuse as @abuse for a Product" do
-        post :create, product_id: products(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {product_id: products(:one).id, abuse: valid_attributes}, session: valid_session
         expect(assigns(:abuse)).to be_a(Abuse)
         expect(assigns(:abuse)).to be_persisted
       end
 
       it "redirects to the created abuse" do
-        post :create, product_id: products(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {product_id: products(:one).id, abuse: valid_attributes}, session: valid_session
         # check customer
         expect(assigns(:abuse).customer).to eq(customers(:one))
 
@@ -136,7 +136,7 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Abuse for a Product via ajax" do
         expect {
-          xhr :post, :create, product_id: products(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, xhr: true, params: {product_id: products(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
         assert_response :success
 
@@ -149,7 +149,7 @@ RSpec.describe AbusesController, type: :controller do
 
   describe "GET #new for a Comment" do
     it "assigns a new abuse as @abuse for a Product" do
-      get :new, comment_id: comments(:one).id, params: {}, session: valid_session
+      get :new, params: {comment_id: comments(:one).id}, session: valid_session
       expect(assigns(:abuse)).to be_a_new(Abuse)
     end
   end
@@ -159,7 +159,7 @@ RSpec.describe AbusesController, type: :controller do
       it "not creates an abuse if not signed" do
         sign_out(customers(:one))
         expect {
-          post :create, comment_id: comments(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, params: {comment_id: comments(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(0)
 
         expect(response).to redirect_to(new_customer_session_path)
@@ -167,18 +167,18 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Comment" do
         expect {
-          post :create, comment_id: comments(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, params: {comment_id: comments(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
       end
 
       it "assigns a newly created abuse as @abuse for a Comment" do
-        post :create, comment_id: comments(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {comment_id: comments(:one).id, abuse: valid_attributes}, session: valid_session
         expect(assigns(:abuse)).to be_a(Abuse)
         expect(assigns(:abuse)).to be_persisted
       end
 
       it "redirects to the created abuse" do
-        post :create, comment_id: comments(:one).id, abuse: valid_attributes, session: valid_session
+        post :create, params: {comment_id: comments(:one).id, abuse: valid_attributes}, session: valid_session
         # check customer
         expect(assigns(:abuse).customer).to eq(customers(:one))
 
@@ -187,7 +187,7 @@ RSpec.describe AbusesController, type: :controller do
 
       it "creates a new Abuse for a Comment via ajax" do
         expect {
-          xhr :post, :create, comment_id: comments(:one).id, abuse: valid_attributes, session: valid_session
+          post :create, xhr: true, params: {comment_id: comments(:one).id, abuse: valid_attributes}, session: valid_session
         }.to change(Abuse, :count).by(1)
         assert_response :success
 

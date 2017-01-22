@@ -24,7 +24,7 @@
 #  fk_rails_6af949464b  (order_id => orders.id)
 #
 
-class Payment < ActiveRecord::Base
+class Payment < ApplicationRecord
   # Additional callbacks
   extend ActiveModel::Callbacks
   define_model_callbacks :refund

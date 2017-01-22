@@ -58,7 +58,7 @@ RSpec.describe CommentsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested comment as @comment" do
-      get :show, id: @comment, session: valid_session
+      get :show, params: {id: @comment}, session: valid_session
       expect(assigns(:comment)).to eq(@comment)
     end
   end
@@ -67,7 +67,7 @@ RSpec.describe CommentsController, type: :controller do
     it "assigns a new comment as @comment" do
       sign_in(@customer, scope: :customer)
       existing_post = posts(:one)
-      get :new, post_id: existing_post.id, params: {}, session: valid_session
+      get :new, params: {post_id: existing_post.id}, session: valid_session
       expect(assigns(:context)).to eq(existing_post)
       expect(assigns(:comment)).to be_a_new(Comment)
     end
@@ -77,7 +77,7 @@ RSpec.describe CommentsController, type: :controller do
     it "assigns a new comment as @comment" do
       sign_in(@customer, scope: :customer)
       forum_answer = forum_answers(:one)
-      get :new, forum_answer_id: forum_answer.id, params: {}, session: valid_session
+      get :new, params: {forum_answer_id: forum_answer.id}, session: valid_session
       expect(assigns(:context)).to eq(forum_answer)
       expect(assigns(:comment)).to be_a_new(Comment)
     end
@@ -85,14 +85,14 @@ RSpec.describe CommentsController, type: :controller do
 
   describe "GET #edit for Post" do
     it "assigns the requested comment as @comment for Post" do
-      get :edit, post_id: posts(:one).id, id: @comment.to_param, session: valid_session
+      get :edit, params: {post_id: posts(:one).id, id: @comment.to_param}, session: valid_session
       expect(assigns(:comment)).to eq(@comment)
     end
   end
 
   describe "GET #edit for ForumAnswer" do
     it "assigns the requested comment as @comment for ForumAnswer" do
-      get :edit, forum_answer_id: forum_answer.id, id: @comment.to_param, session: valid_session
+      get :edit, params: {forum_answer_id: forum_answer.id, id: @comment.to_param}, session: valid_session
       expect(assigns(:comment)).to eq(@comment)
     end
   end
@@ -101,30 +101,30 @@ RSpec.describe CommentsController, type: :controller do
     context "with valid params" do
       it "creates a new Comment for Post" do
         expect {
-          post :create, post_id: posts(:one).id, comment: valid_attributes, session: valid_session
+          post :create, params: {post_id: posts(:one).id, comment: valid_attributes}, session: valid_session
         }.to change(Comment, :count).by(1)
       end
 
       it "assigns a newly created comment for Post as @comment" do
-        post :create, post_id: posts(:one).id, comment: valid_attributes, session: valid_session
+        post :create, params: {post_id: posts(:one).id, comment: valid_attributes}, session: valid_session
         expect(assigns(:comment)).to be_a(Comment)
         expect(assigns(:comment)).to be_persisted
       end
 
       it "redirects to the created comment for Post" do
-        post :create, post_id: posts(:one).id, comment: valid_attributes, session: valid_session
+        post :create, params: {post_id: posts(:one).id, comment: valid_attributes}, session: valid_session
         expect(response).to redirect_to(post_path(posts(:one)))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved comment as @comment" do
-        post :create, post_id: posts(:one).id, comment: invalid_attributes, session: valid_session
+        post :create, params: {post_id: posts(:one).id, comment: invalid_attributes}, session: valid_session
         expect(assigns(:comment)).to be_a_new(Comment)
       end
 
       it "re-renders the 'new' template" do
-        post :create, post_id: posts(:one).id, comment: invalid_attributes, session: valid_session
+        post :create, params: {post_id: posts(:one).id, comment: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -134,30 +134,30 @@ RSpec.describe CommentsController, type: :controller do
     context "with valid params" do
       it "creates a new Comment for Post" do
         expect {
-          post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+          post :create, params: {forum_answer_id: forum_answer.id, comment: valid_attributes}, session: valid_session
         }.to change(Comment, :count).by(1)
       end
 
       it "assigns a newly created comment for ForumAnswer as @comment" do
-        post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+        post :create, params: {forum_answer_id: forum_answer.id, comment: valid_attributes}, session: valid_session
         expect(assigns(:comment)).to be_a(Comment)
         expect(assigns(:comment)).to be_persisted
       end
 
       it "redirects to the created comment for ForumAnswer" do
-        post :create, forum_answer_id: forum_answer.id, comment: valid_attributes, session: valid_session
+        post :create, params: {forum_answer_id: forum_answer.id, comment: valid_attributes}, session: valid_session
         expect(response).to redirect_to(forum_subject_path(forum_answer.forum_subject))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved comment as @comment" do
-        post :create, forum_answer_id: forum_answer.id, comment: invalid_attributes, session: valid_session
+        post :create, params: {forum_answer_id: forum_answer.id, comment: invalid_attributes}, session: valid_session
         expect(assigns(:comment)).to be_a_new(Comment)
       end
 
       it "re-renders the 'new' template" do
-        post :create, forum_answer_id: forum_answer.id, comment: invalid_attributes, session: valid_session
+        post :create, params: {forum_answer_id: forum_answer.id, comment: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -170,18 +170,18 @@ RSpec.describe CommentsController, type: :controller do
       }
 
       it "updates the requested comment for Post" do
-        put :update, post_id: posts(:one).id, id: @comment.to_param, comment: new_attributes, session: valid_session
+        put :update, params: {post_id: posts(:one).id, id: @comment.to_param, comment: new_attributes}, session: valid_session
         @comment.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested comment as @comment for Post" do
-        put :update, post_id: posts(:one).id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        put :update, params: {post_id: posts(:one).id, id: @comment.to_param, comment: valid_attributes}, session: valid_session
         expect(assigns(:comment)).to eq(@comment)
       end
 
       it "redirects to the comment for Post" do
-        put :update, post_id: posts(:one).id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        put :update, params: {post_id: posts(:one).id, id: @comment.to_param, comment: valid_attributes}, session: valid_session
         context = assigns(:context)
         expect(context).not_to be_nil
         expect(response).to redirect_to(post_path(context))
@@ -190,7 +190,7 @@ RSpec.describe CommentsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the comment as @comment for Post" do
-        put :update, post_id: posts(:one).id, id: @comment, comment: invalid_attributes, session: valid_session
+        put :update, params: {post_id: posts(:one).id, id: @comment, comment: invalid_attributes}, session: valid_session
         expect(assigns(:comment)).to eq(@comment)
       end
     end
@@ -203,18 +203,18 @@ RSpec.describe CommentsController, type: :controller do
       }
 
       it "updates the requested comment for Post" do
-        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: new_attributes, session: valid_session
+        put :update, params: {forum_answer_id: forum_answer.id, id: @comment.to_param, comment: new_attributes}, session: valid_session
         @comment.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested comment as @comment for Post" do
-        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        put :update, params: {forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes}, session: valid_session
         expect(assigns(:comment)).to eq(@comment)
       end
 
       it "redirects to the comment for Post" do
-        put :update, forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes, session: valid_session
+        put :update, params: {forum_answer_id: forum_answer.id, id: @comment.to_param, comment: valid_attributes}, session: valid_session
         context = assigns(:context)
         expect(context).not_to be_nil
         expect(response).to redirect_to(forum_subject_path(forum_answer.forum_subject))
@@ -223,7 +223,7 @@ RSpec.describe CommentsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the comment as @comment for Post" do
-        put :update, forum_answer_id: forum_answer.id, id: @comment, comment: invalid_attributes, session: valid_session
+        put :update, params: {forum_answer_id: forum_answer.id, id: @comment, comment: invalid_attributes}, session: valid_session
         expect(assigns(:comment)).to eq(@comment)
       end
     end
@@ -232,12 +232,12 @@ RSpec.describe CommentsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested comment" do
       expect {
-        delete :destroy, post_id: posts(:one).id, id: @comment.to_param, session: valid_session
+        delete :destroy, params: {post_id: posts(:one).id, id: @comment.to_param}, session: valid_session
       }.to change(Comment, :count).by(-1)
     end
 
     it "redirects to the comments list" do
-      delete :destroy, post_id: posts(:one).id, id: @comment.to_param, session: valid_session
+      delete :destroy, params: {post_id: posts(:one).id, id: @comment.to_param}, session: valid_session
       context = assigns(:context)
       expect(context).not_to be_nil
       expect(response).to redirect_to(post_path(context))

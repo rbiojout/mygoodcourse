@@ -24,7 +24,7 @@ class StripeHooksController < ApplicationController
     rescue Stripe::InvalidRequestError
       # The event doesn't exist for some reason... this might
       # happen if you've got other apps maybe?
-      render nothing: true, status: 200
+      head :ok, status: 200
       return
     rescue Stripe::AuthenticationError
       # If we get an authentication error, and the event belongs to
@@ -37,7 +37,7 @@ class StripeHooksController < ApplicationController
         connector.deauthorized
       end
 
-      render nothing: true, status: 200
+      head :ok, status: 200
       return
     end
 
@@ -80,6 +80,6 @@ class StripeHooksController < ApplicationController
 
     # We just need to respond in the affirmative.
     # No body is necessary.
-    render nothing: true, status: 200
+    head :ok, status: 200
   end
 end

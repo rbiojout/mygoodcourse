@@ -20,7 +20,7 @@
 #  fk_rails_1eff374fe1  (customer_id => customers.id)
 #
 
-class Comment < ActiveRecord::Base
+class Comment < ApplicationRecord
   belongs_to :customer
   belongs_to :commentable, polymorphic: true
 

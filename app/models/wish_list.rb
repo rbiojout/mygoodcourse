@@ -19,7 +19,7 @@
 #  fk_rails_d23aa4df57  (customer_id => customers.id)
 #
 
-class WishList < ActiveRecord::Base
+class WishList < ApplicationRecord
   belongs_to :customer, class_name: 'Customer', foreign_key: 'customer_id'
   belongs_to :product, class_name: 'Product', foreign_key: 'product_id'
 end

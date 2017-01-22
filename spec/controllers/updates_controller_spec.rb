@@ -54,7 +54,7 @@ RSpec.describe UpdatesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested update as @update" do
-      get :show, id: @update.to_param, session: valid_session
+      get :show, params: {id: @update.to_param}, session: valid_session
       expect(assigns(:update)).to eq(@update)
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe UpdatesController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested update as @update" do
-      get :edit, id: @update.to_param, session: valid_session
+      get :edit, params: {id: @update.to_param}, session: valid_session
       expect(assigns(:update)).to eq(@update)
     end
   end
@@ -77,25 +77,25 @@ RSpec.describe UpdatesController, type: :controller do
     context "with valid params" do
       it "creates a new Update" do
         expect {
-          post :create, update: valid_attributes, session: valid_session
+          post :create, params: {update: valid_attributes}, session: valid_session
         }.to change(Update, :count).by(1)
       end
 
       it "assigns a newly created update as @update" do
-        post :create, update: valid_attributes, session: valid_session
+        post :create, params: {update: valid_attributes}, session: valid_session
         expect(assigns(:update)).to be_a(Update)
         expect(assigns(:update)).to be_persisted
       end
 
       it "redirects to the created update" do
-        post :create, update: valid_attributes, session: valid_session
+        post :create, params: {update: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Update.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved update as @update" do
-        post :create, update: invalid_attributes, session: valid_session
+        post :create, params: {update: invalid_attributes}, session: valid_session
         expect(assigns(:update)).not_to be_nil
       end
 
@@ -109,25 +109,25 @@ RSpec.describe UpdatesController, type: :controller do
       }
 
       it "updates the requested update" do
-        put :update, id: @update.to_param, update: new_attributes, session: valid_session
+        put :update, params: {id: @update.to_param, update: new_attributes}, session: valid_session
         @update.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested update as @update" do
-        put :update, id: @update.to_param, update: valid_attributes, session: valid_session
+        put :update, params: {id: @update.to_param, update: valid_attributes}, session: valid_session
         expect(assigns(:update)).to eq(@update)
       end
 
       it "redirects to the update" do
-        put :update, id: @update.to_param, update: valid_attributes, session: valid_session
+        put :update, params: {id: @update.to_param, update: valid_attributes}, session: valid_session
         expect(response).to redirect_to(@update)
       end
     end
 
     context "with invalid params" do
       it "assigns the update as @update" do
-        put :update, id: @update.to_param, update: invalid_attributes, session: valid_session
+        put :update, params: {id: @update.to_param, update: invalid_attributes}, session: valid_session
         expect(assigns(:update)).to eq(@update)
       end
 
@@ -137,12 +137,12 @@ RSpec.describe UpdatesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested update" do
       expect {
-        delete :destroy, id: @update.to_param, session: valid_session
+        delete :destroy, params: {id: @update.to_param}, session: valid_session
       }.to change(Update, :count).by(-1)
     end
 
     it "redirects to the updates list" do
-      delete :destroy, id: @update.to_param, session: valid_session
+      delete :destroy, params: {id: @update.to_param}, session: valid_session
       expect(response).to redirect_to(updates_url)
     end
   end

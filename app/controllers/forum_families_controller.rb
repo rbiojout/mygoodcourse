@@ -20,7 +20,7 @@ class ForumFamiliesController < ApplicationController
         ForumFamily.update(id, position: index + 1)
       end
     end
-    render nothing: true
+    head :ok
   end
 
 private

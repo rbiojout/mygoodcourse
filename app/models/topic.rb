@@ -20,7 +20,7 @@
 #  fk_rails_296866c32c  (country_id => countries.id)
 #
 
-class Topic < ActiveRecord::Base
+class Topic < ApplicationRecord
   extend FriendlyId
 
   # we use slugs for finding the topics

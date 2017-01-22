@@ -23,7 +23,7 @@
 #  fk_rails_294f894e6c  (customer_id => customers.id)
 #
 
-class Post < ActiveRecord::Base
+class Post < ApplicationRecord
   extend FriendlyId
   include PgSearch
 

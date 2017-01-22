@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
   STATUSES = %w(created confirming received accepted rejected).freeze
 
   # State Machine

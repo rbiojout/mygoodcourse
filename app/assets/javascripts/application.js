@@ -22,21 +22,36 @@
 // problem with reload
 //= require jquery.turbolinks
 //= require jquery-file-upload
+
 // used for Parallax effect
 //= require stellar
-// ellipsis
+
+// ellipsis helper for string too long
 //= require dotdotdot
+
 // used for positioning pointer
 //= require jquery.waypoints
+
+// bootstrap
 //= require bootstrap-sass/assets/javascripts/bootstrap-sprockets
+
+// usage of moment in i18n context
 //= require moment
 //= require moment/locale/fr
 //= require bootstrap-datetimepicker
 //= require pickers
+
+// javascript helper for nested forms
 //= require cocoon
+
+// WYSIWYG editor
 //= require summernote
 //= require summernote-fr.js
+// require bootstrap-wysihtml5
+// require bootstrap-wysihtml5/locales
+// require trix
 
+// star rating system
 //= require bootstrap-star-rating
 //= require bootstrap-star-rating/js/star-rating_locale_de.js
 // added, not in Bower
@@ -45,16 +60,20 @@
 
 
 // require bootstrap-treenav
-// require bootstrap-wysihtml5
-// require bootstrap-wysihtml5/locales
-// require trix
+
+// used to manipulate Google Map with jquery, in particular fill the address in details
 //= require jquery.geocomplete
-//= require underscore
+// require gmaps/google
+// require underscore
+
+// charting for rails
 //= require Chart.bundle
 //= require chartkick
-//= require gmaps/google
+
+// social sharing buttons
 //= require social-share-button
 //= require turbolinks
+// backward compatibility for turbolinks
 //= require compatibility
 //= require_tree .
 

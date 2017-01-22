@@ -22,7 +22,7 @@
 #  fk_rails_a0d280f6e4  (product_id => products.id)
 #
 
-class Review < ActiveRecord::Base
+class Review < ApplicationRecord
 
   html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
 

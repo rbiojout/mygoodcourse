@@ -1,4 +1,4 @@
-class Order < ActiveRecord::Base
+class Order < ApplicationRecord
   def accept_stripe_token(token)
     if token.start_with?('tok')
       stripe_customer = ::Stripe::Customer.create({description: "Customer for order #{number}", card: token}, Rails.application.secrets.stripe_secret_key)

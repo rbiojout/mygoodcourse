@@ -48,7 +48,7 @@ RSpec.describe AttachmentsController, type: :controller do
       # add a signed customer to perform the tests
       sign_in(customers(:one), scope: :customer)
 
-      get :download, id: @attachment
+      get :download, params: {id: @attachment}
       expect(@attachment.product.candownload(customers(:one))).to be_truthy
 
       expect(response).to be_success
@@ -58,7 +58,7 @@ RSpec.describe AttachmentsController, type: :controller do
     it 'need signed user' do
       sign_out(customers(:one))
 
-      get :download, id: @attachment
+      get :download, params: {id: @attachment}
 
       expect(response).to redirect_to(catalog_products_path(format: :html))
 
@@ -68,7 +68,7 @@ RSpec.describe AttachmentsController, type: :controller do
       sign_out(customers(:one))
       sign_in(customers(:two), scope: :customer)
 
-      get :download, id: @attachment
+      get :download, params: {id: @attachment}
       expect(response).to redirect_to(catalog_products_path(format: :html))
     end
   end

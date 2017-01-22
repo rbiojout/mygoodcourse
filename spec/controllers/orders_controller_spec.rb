@@ -51,21 +51,21 @@ RSpec.describe OrdersController, type: :controller do
     it "assigns the requested order as @order if logged in" do
       # add a signed customer to perform the tests
       sign_in(customers(:one), scope: :customer)
-      get :show, id: order.to_param, session: valid_session
+      get :show, params: {id: order.to_param}, session: valid_session
       expect(assigns(:order)).to eq(order)
       expect(assigns(:payments)).to eq(order.payments.to_a)
     end
 
     it "prevent assigns the requested order as @order if not logged in" do
       sign_out(customers(:one))
-      get :show, id: order.to_param, session: valid_session
+      get :show, params: {id: order.to_param}, session: valid_session
       expect(response).to redirect_to(new_customer_session_path)
     end
 
     it "prevent assigns the requested order as @order if not owner" do
       sign_out(customers(:one))
       sign_in(customers(:two), scope: :customer)
-      get :show, id: order.to_param, session: valid_session
+      get :show, params: {id: order.to_param}, session: valid_session
       expect(response).to redirect_to(catalog_products_path)
     end
   end

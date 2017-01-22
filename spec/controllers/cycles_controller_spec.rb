@@ -49,7 +49,7 @@ RSpec.describe CyclesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested cycle as @cycle" do
       cycle = cycles(:one)
-      get :show, id: cycle, session: valid_session
+      get :show, params: {id: cycle}, session: valid_session
       expect(assigns(:cycle)).to eq(cycle)
     end
   end

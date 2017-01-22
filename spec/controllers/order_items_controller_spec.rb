@@ -67,25 +67,25 @@ RSpec.describe OrderItemsController, type: :controller do
     context "with valid params" do
       it "creates a new OrderItem" do
         expect {
-          post :create, order_item: valid_attributes, session: valid_session
+          post :create, params: {order_item: valid_attributes}, session: valid_session
         }.to change(OrderItem, :count).by(1)
       end
 
       it "assigns a newly created order_item as @order_item" do
-        post :create, order_item: valid_attributes, session: valid_session
+        post :create, params: {order_item: valid_attributes}, session: valid_session
         expect(assigns(:order_item)).to be_a(OrderItem)
         expect(assigns(:order_item)).to be_persisted
       end
 
       it "redirects to the created order_item" do
-        post :create, order_item: valid_attributes, session: valid_session
+        post :create, params: {order_item: valid_attributes}, session: valid_session
         expect(response).to have_http_status(200)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved order_item as @order_item" do
-        post :create, order_item: invalid_attributes, session: valid_session
+        post :create, params: {order_item: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(200)
       end
 
@@ -99,25 +99,25 @@ RSpec.describe OrderItemsController, type: :controller do
       }
 
       it "updates the requested order_item" do
-        put :update, id: order_item.to_param, order_item: new_attributes, session: valid_session
+        put :update, params: {id: order_item.to_param, order_item: new_attributes}, session: valid_session
         order_item.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested order_item as @order_item" do
-        put :update, id: order_item.to_param, order_item: valid_attributes, session: valid_session
+        put :update, params: {id: order_item.to_param, order_item: valid_attributes}, session: valid_session
         expect(assigns(:order_item)).to eq(order_item)
       end
 
       it "redirects to the order_item" do
-        put :update, id: order_item.to_param, order_item: valid_attributes, session: valid_session
+        put :update, params: {id: order_item.to_param, order_item: valid_attributes}, session: valid_session
         expect(response).to have_http_status(200)
       end
     end
 
     context "with invalid params" do
       it "assigns the order_item as @order_item" do
-        put :update, id: order_item.to_param, order_item: invalid_attributes, session: valid_session
+        put :update, params: {id: order_item.to_param, order_item: invalid_attributes}, session: valid_session
         expect(assigns(:order_item)).to eq(order_item)
       end
 
@@ -127,12 +127,12 @@ RSpec.describe OrderItemsController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested order_item" do
       expect {
-        delete :destroy, id: order_item.to_param, session: valid_session
+        delete :destroy, params: {id: order_item.to_param}, session: valid_session
       }.to change(OrderItem, :count).by(-1)
     end
 
     it "redirects to the order_items list" do
-      delete :destroy, id: order_item.to_param, session: valid_session
+      delete :destroy, params: {id: order_item.to_param}, session: valid_session
       expect(response).to redirect_to(catalog_products_path)
     end
   end
@@ -140,13 +140,13 @@ RSpec.describe OrderItemsController, type: :controller do
   describe "POST #undo" do
     it "undo deletele for the requested order_item" do
       expect {
-        post :undo, product_id: products(:two).id, session: valid_session
+        post :undo, params: {product_id: products(:two).id}, session: valid_session
       }.to change(OrderItem, :count).by(1)
       expect(assigns(:order_item)).not_to be_nil
     end
 
     it "redirects to the order_items list" do
-      post :undo, product_id: products(:two).id, session: valid_session
+      post :undo, params: {product_id: products(:two).id}, session: valid_session
       expect(response).to redirect_to(catalog_products_path)
     end
   end

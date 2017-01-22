@@ -15,7 +15,7 @@
 #  index_peers_on_follower_id                  (follower_id)
 #
 
-class Peer < ActiveRecord::Base
+class Peer < ApplicationRecord
   belongs_to :follower, class_name: 'Customer', foreign_key: 'follower_id'
   belongs_to :followed, class_name: 'Customer', foreign_key: 'followed_id'
 

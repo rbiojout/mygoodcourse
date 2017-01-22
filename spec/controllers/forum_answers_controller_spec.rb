@@ -55,7 +55,7 @@ RSpec.describe ForumAnswersController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested forum_answer as @forum_answer" do
-      get :show, forum_subject_id: @forum_answer.forum_subject_id, id: @forum_answer.to_param, session: valid_session
+      get :show, params: {forum_subject_id: @forum_answer.forum_subject_id, id: @forum_answer.to_param}, session: valid_session
       expect(assigns(:forum_answer)).to eq(@forum_answer)
     end
   end
@@ -69,19 +69,19 @@ RSpec.describe ForumAnswersController, type: :controller do
     end
 
     it "assigns a new forum_answer as @forum_answer" do
-      get :new, forum_subject_id: @forum_answer.forum_subject_id, params: {}, session: valid_session
+      get :new, params: {forum_subject_id: @forum_answer.forum_subject_id}, session: valid_session
       expect(assigns(:forum_answer)).to be_a_new(ForumAnswer)
     end
 
     it "assigns a new forum_answer as @forum_answer via ajax" do
-      xhr :get, :new, forum_subject_id: @forum_answer.forum_subject_id, params: {}, session: valid_session
+      get :new, xhr: true, params: {forum_subject_id: @forum_answer.forum_subject_id}, session: valid_session
       expect(assigns(:forum_answer)).to be_a_new(ForumAnswer)
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested forum_answer as @forum_answer" do
-      get :edit, id: @forum_answer.to_param, session: valid_session
+      get :edit, params: {id: @forum_answer.to_param}, session: valid_session
       expect(assigns(:forum_answer)).to eq(@forum_answer)
     end
   end
@@ -90,30 +90,30 @@ RSpec.describe ForumAnswersController, type: :controller do
     context "with valid params" do
       it "creates a new ForumAnswer" do
         expect {
-          post :create, forum_answer: valid_attributes, session: valid_session
+          post :create, params: {forum_answer: valid_attributes}, session: valid_session
         }.to change(ForumAnswer, :count).by(1)
       end
 
       it "assigns a newly created forum_answer as @forum_answer" do
-        post :create, forum_answer: valid_attributes, session: valid_session
+        post :create, params: {forum_answer: valid_attributes}, session: valid_session
         expect(assigns(:forum_answer)).to be_a(ForumAnswer)
         expect(assigns(:forum_answer)).to be_persisted
       end
 
       it "redirects to the created forum_answer" do
-        post :create, forum_answer: valid_attributes, session: valid_session
+        post :create, params: {forum_answer: valid_attributes}, session: valid_session
         expect(response).to redirect_to(forum_subject_path(@forum_answer.forum_subject))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved forum_answer as @forum_answer" do
-        post :create, forum_answer: invalid_attributes, session: valid_session
+        post :create, params: {forum_answer: invalid_attributes}, session: valid_session
         expect(assigns(:forum_answer)).to be_a_new(ForumAnswer)
       end
 
       it "re-renders the 'new' template" do
-        post :create, forum_answer: invalid_attributes, session: valid_session
+        post :create, params: {forum_answer: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -126,25 +126,25 @@ RSpec.describe ForumAnswersController, type: :controller do
       }
 
       it "updates the requested forum_answer" do
-        put :update, id: @forum_answer.to_param, forum_answer: new_attributes, session: valid_session
+        put :update, params: {id: @forum_answer.to_param, forum_answer: new_attributes}, session: valid_session
         @forum_answer.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested forum_answer as @forum_answer" do
-        put :update, id: @forum_answer.to_param, forum_answer: valid_attributes, session: valid_session
+        put :update, params: {id: @forum_answer.to_param, forum_answer: valid_attributes}, session: valid_session
         expect(assigns(:forum_answer)).to eq(@forum_answer)
       end
 
       it "redirects to the forum_answer" do
-        put :update, id: @forum_answer.to_param, forum_answer: valid_attributes, session: valid_session
+        put :update, params: {id: @forum_answer.to_param, forum_answer: valid_attributes}, session: valid_session
         expect(response).to redirect_to(@forum_answer)
       end
     end
 
     context "with invalid params" do
       it "assigns the forum_answer as @forum_answer" do
-        put :update, id: @forum_answer.to_param, forum_answer: invalid_attributes, session: valid_session
+        put :update, params: {id: @forum_answer.to_param, forum_answer: invalid_attributes}, session: valid_session
         expect(assigns(:forum_answer)).to eq(@forum_answer)
       end
 
@@ -154,12 +154,12 @@ RSpec.describe ForumAnswersController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested forum_answer" do
       expect {
-        delete :destroy, id: @forum_answer.to_param, session: valid_session
+        delete :destroy, params: {id: @forum_answer.to_param}, session: valid_session
       }.to change(ForumAnswer, :count).by(-1)
     end
 
     it "redirects to the forum_answers list" do
-      delete :destroy, id: @forum_answer.to_param, session: valid_session
+      delete :destroy, params: {id: @forum_answer.to_param}, session: valid_session
       expect(response).to redirect_to(forum_subject_path(@forum_answer.forum_subject))
     end
   end

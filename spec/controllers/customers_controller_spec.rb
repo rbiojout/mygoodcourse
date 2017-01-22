@@ -46,21 +46,21 @@ RSpec.describe CustomersController, type: :controller do
 
   describe "GET #index" do
     it "assigns all customers as @customers" do
-      get :index, locale: I18n.default_locale, params: {}, session: valid_session
+      get :index, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:customers)).not_to be_nil
     end
   end
 
   describe "GET #show" do
     it "assigns the requested customer as @customer" do
-      get :show, locale: I18n.default_locale, id: @customer, session: valid_session
+      get :show, params: {locale: I18n.default_locale, id: @customer}, session: valid_session
       expect(assigns(:customer)).to eq(@customer)
     end
 
     it 'should impression show customer' do
       customer = customers(:one)
       expect {
-        get :show, locale: I18n.default_locale, id: customer
+        get :show, params: {locale: I18n.default_locale, id: customer}
         customer.reload
       }.to change(customer, :counter_cache).by(1)
     end
@@ -69,7 +69,7 @@ RSpec.describe CustomersController, type: :controller do
   describe "GET #edit" do
     it "assigns the requested customer as @customer" do
       sign_in(@customer, scope: :customer)
-      get :edit, locale: I18n.default_locale, id: @customer, session: valid_session
+      get :edit, params: {locale: I18n.default_locale, id: @customer}, session: valid_session
       expect(assigns(:customer)).to eq(@customer)
     end
   end
@@ -82,39 +82,39 @@ RSpec.describe CustomersController, type: :controller do
 
       it "assigns the requested customer as @customer if signed" do
         sign_in(@customer, scope: :customer)
-        put :update, locale: I18n.default_locale, id: @customer, customer: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: valid_attributes}, session: valid_session
         expect(assigns(:customer)).to eq(@customer)
       end
 
       it "redirects to the customer" do
         sign_in(@customer, scope: :customer)
-        put :update, locale: I18n.default_locale, id: @customer, customer: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: valid_attributes}, session: valid_session
         expect(response).to redirect_to(customer_path(id: @customer.slug))
       end
 
       it "prevent update customer if not signed" do
         sign_out(@customer)
-        put :update, locale: I18n.default_locale, id: @customer, customer: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: valid_attributes}, session: valid_session
         expect(response).to redirect_to(new_customer_session_path)
       end
 
       it "prevent update customer for wrong user" do
         sign_out(@customer)
         sign_in(customers(:two), scope: :customer)
-        put :update, locale: I18n.default_locale, id: @customer, customer: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: valid_attributes}, session: valid_session
         expect(response).to redirect_to(catalog_products_path)
       end
     end
 
     context "with invalid params" do
       it "assigns the customer as @customer" do
-        put :update, locale: I18n.default_locale, id: @customer, customer: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: invalid_attributes}, session: valid_session
         expect(assigns(:customer)).to eq(@customer)
       end
 
       it "re-renders the 'edit' template" do
         sign_in(customers(:one), scope: :customer)
-        put :update, locale: I18n.default_locale, id: @customer, customer: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @customer, customer: invalid_attributes}, session: valid_session
         expect(response).to redirect_to(customer_path(id: @customer.slug))
       end
     end
@@ -123,13 +123,13 @@ RSpec.describe CustomersController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested customer if no order" do
       expect {
-        delete :destroy, locale: I18n.default_locale, id: customers(:customer_without_orders), session: valid_session
+        delete :destroy, params: {locale: I18n.default_locale, id: customers(:customer_without_orders)}, session: valid_session
       }.to change(Customer, :count).by(-1)
     end
 
     it "not destroys the requested customer if orders" do
       expect {
-        delete :destroy, locale: I18n.default_locale, id: customers(:one), session: valid_session
+        delete :destroy, params: {locale: I18n.default_locale, id: customers(:one)}, session: valid_session
       }.to change(Customer, :count).by(0)
       expect(response).to redirect_to(catalog_products_path)
     end
@@ -140,7 +140,7 @@ RSpec.describe CustomersController, type: :controller do
   describe "GET #circle" do
     it 'should have circle' do
       # test the routing with customer one
-      get :circle, locale: I18n.default_locale, id: @customer.id
+      get :circle, params: {locale: I18n.default_locale, id: @customer.id}
       expect(response).to be_success
       expect(assigns(:followers)).not_to be_nil
       expect(assigns(:followeds)).not_to be_nil
@@ -151,7 +151,7 @@ RSpec.describe CustomersController, type: :controller do
       # we use after a signed user
       sign_in(@customer, scope: :customer)
 
-      get :circle, locale: I18n.default_locale, id: customers(:two).id
+      get :circle, params: {locale: I18n.default_locale, id: customers(:two).id}
       expect(response).to be_success
       expect(assigns(:followers)).not_to be_nil
       expect(assigns(:followeds)).not_to be_nil
@@ -163,14 +163,14 @@ RSpec.describe CustomersController, type: :controller do
 
   describe "GET #wishlist" do
     it 'should have wishlist' do
-      get :wishlist, locale: I18n.default_locale, id: @customer.id
+      get :wishlist, params: {locale: I18n.default_locale, id: @customer.id}
       expect(response).to be_success
       expect(assigns(:products)).not_to be_nil
 
       # we use after a signed user
       sign_in(@customer, scope: :customer)
 
-      get :wishlist, locale: I18n.default_locale, id: customers(:two).id
+      get :wishlist, params: {locale: I18n.default_locale, id: customers(:two).id}
 
       assert_response :success
       expect(assigns(:products)).not_to be_nil
@@ -180,7 +180,7 @@ RSpec.describe CustomersController, type: :controller do
 
   describe "GET #reviews_list" do
     it 'should have reviews_list' do
-      get :reviews_list, locale: I18n.default_locale, id: @customer.id
+      get :reviews_list, params: {locale: I18n.default_locale, id: @customer.id}
       expect(response).to be_success
       expect(assigns(:reviews)).not_to be_nil
     end
@@ -189,13 +189,13 @@ RSpec.describe CustomersController, type: :controller do
   describe "GET #dashboard" do
     it 'should have dashboard if signed in' do
       sign_in(@customer, scope: :customer)
-      get :dashboard, locale: I18n.default_locale, id: @customer.id
+      get :dashboard, params: {locale: I18n.default_locale, id: @customer.id}
       expect(response).to be_success
     end
 
     it 'should not have dashboard if not signed in' do
       sign_out(@customer)
-      get :dashboard, locale: I18n.default_locale, id: @customer.id
+      get :dashboard, params: {locale: I18n.default_locale, id: @customer.id}
       expect(response).not_to be_success
     end
   end

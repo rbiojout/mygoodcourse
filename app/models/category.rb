@@ -20,7 +20,7 @@
 #  fk_rails_22ababf336  (family_id => families.id)
 #
 
-class Category < ActiveRecord::Base
+class Category < ApplicationRecord
   belongs_to :family, inverse_of: :categories
   acts_as_list scope: :family, add_new_at: :bottom
 

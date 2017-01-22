@@ -53,7 +53,7 @@ RSpec.describe ForumFamiliesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested forum_family as @forum_family" do
-      get :show, id: @forum_family.to_param, session: valid_session
+      get :show, params: {id: @forum_family.to_param}, session: valid_session
       expect(assigns(:forum_family)).to eq(@forum_family)
     end
   end
@@ -66,7 +66,7 @@ RSpec.describe ForumFamiliesController, type: :controller do
       sign_in(employees(:one), scope: :employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s] do
+      post :sort, params: {locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s]} do
         assert(families(:one).position == 2)
         assert(families(:two).position == 1)
       end
@@ -84,7 +84,7 @@ RSpec.describe ForumFamiliesController, type: :controller do
       sign_out(:employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s]
+      post :sort, params: {locale: I18n.default_locale, 'family' => [families(:two).id.to_s, families(:one).id.to_s]}
       # we Need assigns to recover the modifications from the Controller
       # end
 

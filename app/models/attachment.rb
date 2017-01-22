@@ -25,7 +25,7 @@
 #  fk_rails_1e84c5b1fb  (product_id => products.id)
 #
 
-class Attachment < ActiveRecord::Base
+class Attachment < ApplicationRecord
   # attr_accessible :file, :file_size, :file_type, :nbpages, :version_number, :active
   belongs_to :product
   # we want the new ones at the begining of the list

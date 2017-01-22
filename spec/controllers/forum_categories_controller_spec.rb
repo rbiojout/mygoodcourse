@@ -53,7 +53,7 @@ RSpec.describe ForumCategoriesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested forum_category as @forum_category" do
-      get :show, id: @forum_category.to_param, session: valid_session
+      get :show, params: {id: @forum_category.to_param}, session: valid_session
       expect(assigns(:forum_category)).to eq(@forum_category)
     end
   end

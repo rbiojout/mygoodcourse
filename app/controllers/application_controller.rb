@@ -9,13 +9,13 @@ class ApplicationController < ActionController::Base
   # right page. If we're on a devise page, we don't want to store that as the
   # place to return to (for example, we don't want to return to the sign in page
   # after signing in), which is what the :unless prevents
-  before_filter :store_current_location, unless: :devise_controller?
+  before_action :store_current_location, unless: :devise_controller?
 
   before_action :set_i18n_locale_from_params
 
   before_action :current_country
 
-  before_filter :reload_rails_admin, if: :rails_admin_path?
+  before_action :reload_rails_admin, if: :rails_admin_path?
 
 # ...
 

@@ -4,7 +4,7 @@ RSpec.describe PaymentsController, type: :routing do
   describe "routing" do
 
     it "routes to #show" do
-      expect(:get => "/payments/1").to route_to("payments#show", :id => "1")
+      expect(:get => "/payments/1").to route_to("payments#show", :id => "1", "path"=>"payments/1")
     end
 
     it "routes to #edit" do
@@ -28,7 +28,7 @@ RSpec.describe PaymentsController, type: :routing do
     end
 
     it "routes to #refund" do
-      expect(:post => "/payments/1/refund").to route_to("payments#refund", :id => "1")
+      expect(:post => "/payments/1/refund").to route_to("payments#refund", :id => "1", "path"=>"payments/1/refund")
     end
 
   end

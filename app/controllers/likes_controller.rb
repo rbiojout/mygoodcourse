@@ -11,7 +11,7 @@ class LikesController < ApplicationController
 
     respond_to do |format|
       if @like.save
-        format.html { redirect_to :back, notice: 'Like was successfully created.' }
+        format.html { redirect_back(fallback_location: root_path, notice: 'Like was successfully created.')  }
         format.json { render :show, status: :created, location: @like }
         format.js { render :like }
       else
@@ -27,7 +27,7 @@ class LikesController < ApplicationController
     @context = context
     Like.for_customer_likeable(current_customer, @context).destroy_all
     respond_to do |format|
-      format.html { redirect_to :back, notice: 'Like was successfully destroyed.' }
+      format.html { redirect_back(fallback_location: root_path, notice: 'Like was successfully destroyed.') }
       format.json { head :no_content }
       format.js { render :unlike}
     end

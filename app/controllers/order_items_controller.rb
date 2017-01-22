@@ -19,7 +19,7 @@ class OrderItemsController < ApplicationController
     if @order.save
       session[:order_id] = @order.id
     end
-    render nothing: true
+    head :ok
 
     # @order_item = OrderItems.new(order_item_params)
     # respond_to do |format|
@@ -47,7 +47,7 @@ class OrderItemsController < ApplicationController
   # PATCH/PUT /order_items/1.json
   def update
     @order_item.update_attributes(order_item_params)
-    render nothing: true
+    head :ok
 
     # respond_to do |format|
     #  if @order_item.update(order_item_params)

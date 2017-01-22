@@ -19,7 +19,7 @@
 #  fk_rails_0e10a6e531  (customer_id => customers.id)
 #
 
-class Like < ActiveRecord::Base
+class Like < ApplicationRecord
   belongs_to :customer
   belongs_to :likeable, polymorphic: true
 

@@ -1,0 +1,30 @@
+<div class="row panel-forum_answer forum_answer_<%= forum_answer.id%>">
+  <div class="col-xs-4">
+    <%= render(partial: 'customers/customer', locals: {customer: forum_answer.customer}) %>
+
+  </div>
+  <div class="col-xs-8">
+    <p><%= raw(forum_answer.text) %></p>
+    <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_answer.created_at) %></small>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render(partial: 'forum_answers/btn_answer', locals: {forum_subject_id: forum_answer.forum_subject.id}) %>
+        <%= render(partial: 'comments/btn_comment', locals: {context: forum_answer}) %>
+        <%= render(partial: 'forum_answers/btn_edit', locals: {forum_answer: forum_answer}) %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-11 col-xs-offset-1 ">
+      <% forum_answer.comments.each do |comment| %>
+          <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
+      <% end %>
+      <div id=<%="comment-form_forum_answer_#{forum_answer.id}"%> ></div>
+    </div>
+  </div>
+
+
+</div>

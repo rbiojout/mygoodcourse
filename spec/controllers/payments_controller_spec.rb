@@ -45,12 +45,12 @@ RSpec.describe PaymentsController, type: :controller do
   describe "GET #show" do
     it "assigns the requested payment as @payment" do
       sign_in(customers(:one), scope: :customer)
-      get :show, id: payment.to_param, session: valid_session
+      get :show, params: {id: payment.to_param}, session: valid_session
       expect(assigns(:payment)).to eq(payment)
     end
 
     it "protects the requested payment as @payment if not signed" do
-      get :show, id: payment.to_param, session: valid_session
+      get :show, params: {id: payment.to_param}, session: valid_session
       expect(response).to redirect_to(catalog_products_path)
     end
   end
@@ -58,13 +58,13 @@ RSpec.describe PaymentsController, type: :controller do
   describe "POST #refund" do
     context "with valid params" do
       it "needs employee to refund" do
-        post :refund, id: payment.to_param, session: valid_session
+        post :refund, params: {id: payment.to_param}, session: valid_session
         expect(response).to redirect_to(new_employee_session_path)
       end
 
       it "updates the requested payment" do
         sign_in(employees(:one), scope: :employee)
-        post :refund, id: payment.to_param, amount: payment.amount, session: valid_session
+        post :refund, params: {id: payment.to_param, amount: payment.amount}, session: valid_session
         payment.reload
         skip("Add assertions for updated state")
       end
@@ -73,7 +73,7 @@ RSpec.describe PaymentsController, type: :controller do
 
     context "with invalid params" do
       it "assigns the payment as @payment" do
-        put :refund, id: payment.to_param, amount: 'text', session: valid_session
+        put :refund, params: {id: payment.to_param, amount: 'text'}, session: valid_session
         expect(assigns(:payment)).to eq(payment)
       end
 

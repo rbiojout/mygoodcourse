@@ -55,7 +55,7 @@ RSpec.describe EmployeesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested employee as @employee" do
-      get :show, id: @employee.to_param, session: valid_session
+      get :show, params: {id: @employee.to_param}, session: valid_session
       expect(assigns(:employee)).to eq(@employee)
     end
   end
@@ -69,7 +69,7 @@ RSpec.describe EmployeesController, type: :controller do
 
   describe "GET #edit" do
     it "assigns the requested employee as @employee" do
-      get :edit, id: @employee.to_param, session: valid_session
+      get :edit, params: {id: @employee.to_param}, session: valid_session
       expect(assigns(:employee)).to eq(@employee)
     end
   end
@@ -78,30 +78,30 @@ RSpec.describe EmployeesController, type: :controller do
     context "with valid params" do
       it "creates a new Employee" do
         expect {
-          post :create, employee: valid_attributes, session: valid_session
+          post :create, params: {employee: valid_attributes}, session: valid_session
         }.to change(Employee, :count).by(1)
       end
 
       it "assigns a newly created employee as @employee" do
-        post :create, employee: valid_attributes, session: valid_session
+        post :create, params: {employee: valid_attributes}, session: valid_session
         expect(assigns(:employee)).to be_a(Employee)
         expect(assigns(:employee)).to be_persisted
       end
 
       it "redirects to the created employee" do
-        post :create, employee: valid_attributes, session: valid_session
+        post :create, params: {employee: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Employee.last)
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved employee as @employee" do
-        post :create, employee: invalid_attributes, session: valid_session
+        post :create, params: {employee: invalid_attributes}, session: valid_session
         expect(assigns(:employee)).to be_a_new(Employee)
       end
 
       it "re-renders the 'new' template" do
-        post :create, employee: invalid_attributes, session: valid_session
+        post :create, params: {employee: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -114,30 +114,30 @@ RSpec.describe EmployeesController, type: :controller do
       }
 
       it "updates the requested employee" do
-        put :update, id: @employee.to_param, employee: new_attributes, session: valid_session
+        put :update, params: {id: @employee.to_param, employee: new_attributes}, session: valid_session
         @employee.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested employee as @employee" do
-        put :update, id: @employee.to_param, employee: valid_attributes, session: valid_session
+        put :update, params: {id: @employee.to_param, employee: valid_attributes}, session: valid_session
         expect(assigns(:employee)).to eq(employee)
       end
 
       it "redirects to the employee" do
-        put :update, id: @employee.to_param, employee: valid_attributes, session: valid_session
+        put :update, params: {id: @employee.to_param, employee: valid_attributes}, session: valid_session
         expect(response).to redirect_to(employee)
       end
     end
 
     context "with invalid params" do
       it "assigns the employee as @employee" do
-        put :update, id: @employee.to_param, employee: invalid_attributes, session: valid_session
+        put :update, params: {id: @employee.to_param, employee: invalid_attributes}, session: valid_session
         expect(assigns(:employee)).to eq(employee)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, id: @employee.to_param, employee: invalid_attributes, session: valid_session
+        put :update, params: {id: @employee.to_param, employee: invalid_attributes}, session: valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -146,12 +146,12 @@ RSpec.describe EmployeesController, type: :controller do
   describe "DELETE #destroy" do
     it "destroys the requested employee" do
       expect {
-        delete :destroy, id: @employee.to_param, session: valid_session
+        delete :destroy, params: {id: @employee.to_param}, session: valid_session
       }.to change(Employee, :count).by(-1)
     end
 
     it "redirects to the employees list" do
-      delete :destroy, id: @employee.to_param, session: valid_session
+      delete :destroy, params: {id: @employee.to_param}, session: valid_session
       expect(response).to redirect_to(employees_url)
     end
   end

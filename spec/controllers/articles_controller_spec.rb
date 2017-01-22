@@ -45,7 +45,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #index" do
     it "assigns all articles as @articles" do
       article = Article.create! valid_attributes
-      get :index, locale: I18n.default_locale, topic_id: @article.topic_id, article: {}, session: valid_session
+      get :index, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: {}}, session: valid_session
       expect(assigns(:articles)).not_to be_nil
     end
   end
@@ -53,7 +53,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested article as @article" do
       article = Article.create! valid_attributes
-      get :show, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, session: valid_session
+      get :show, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param}, session: valid_session
       expect(assigns(:article)).to eq(article)
     end
   end
@@ -61,7 +61,7 @@ RSpec.describe ArticlesController, type: :controller do
   describe "GET #new" do
     it "assigns a new article as @article" do
       sign_in(employees(:one), scope: :employee)
-      get :new, locale: I18n.default_locale, topic_id: @article.topic_id, params: {}, session: valid_session
+      get :new, params: {locale: I18n.default_locale, topic_id: @article.topic_id}, session: valid_session
       expect(assigns(:article)).to be_a_new(Article)
     end
   end
@@ -70,7 +70,7 @@ RSpec.describe ArticlesController, type: :controller do
     it "assigns the requested article as @article" do
       sign_in(employees(:one), scope: :employee)
       article = Article.create! valid_attributes
-      get :edit, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, session: valid_session
+      get :edit, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param}, session: valid_session
       expect(assigns(:article)).to eq(article)
     end
   end
@@ -80,20 +80,20 @@ RSpec.describe ArticlesController, type: :controller do
       it "creates a new Article" do
         sign_in(employees(:one), scope: :employee)
         expect {
-          post :create, locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes, session: valid_session
+          post :create, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes}, session: valid_session
         }.to change(Article, :count).by(1)
       end
 
       it "assigns a newly created article as @article" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes}, session: valid_session
         expect(assigns(:article)).to be_a(Article)
         expect(assigns(:article)).to be_persisted
       end
 
       it "redirects to the created article" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: valid_attributes}, session: valid_session
         expect(response).to redirect_to(topic_article_path(assigns(:article), topic_id: @article.topic_id))
       end
     end
@@ -101,13 +101,13 @@ RSpec.describe ArticlesController, type: :controller do
     context "with invalid params" do
       it "assigns a newly created but unsaved article as @article" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic_id: @article.topic_id, article: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: invalid_attributes}, session: valid_session
         expect(assigns(:article)).to be_a_new(Article)
       end
 
       it "re-renders the 'new' template" do
         sign_in(employees(:one), scope: :employee)
-        post :create, locale: I18n.default_locale, topic_id: @article.topic_id, article: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, topic_id: @article.topic_id, article: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -122,21 +122,21 @@ RSpec.describe ArticlesController, type: :controller do
       it "updates the requested article" do
         sign_in(employees(:one), scope: :employee)
         article = Article.create! valid_attributes
-        put :update, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: new_attributes}, session: valid_session
         article.reload
       end
 
       it "assigns the requested article as @article" do
         sign_in(employees(:one), scope: :employee)
         article = Article.create! valid_attributes
-        put :update, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: valid_attributes}, session: valid_session
         expect(assigns(:article)).to eq(article)
       end
 
       it "redirects to the article" do
         sign_in(employees(:one), scope: :employee)
         article = Article.create! valid_attributes
-        put :update, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: valid_attributes}, session: valid_session
         expect(response).to redirect_to(topic_article_path(assigns(:article), topic_id: @article.topic_id))
       end
     end
@@ -145,7 +145,7 @@ RSpec.describe ArticlesController, type: :controller do
       it "assigns the article as @article" do
         sign_in(employees(:one), scope: :employee)
         article = Article.create! valid_attributes
-        put :update, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, article: invalid_attributes}, session: valid_session
         expect(assigns(:article)).to eq(article)
       end
 
@@ -157,14 +157,14 @@ RSpec.describe ArticlesController, type: :controller do
       sign_in(employees(:one), scope: :employee)
       article = Article.create! valid_attributes
       expect {
-        delete :destroy, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, session: valid_session
+        delete :destroy, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param}, session: valid_session
       }.to change(Article, :count).by(-1)
     end
 
     it "redirects to the articles list" do
       sign_in(employees(:one), scope: :employee)
       article = Article.create! valid_attributes
-      delete :destroy, locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param, session: valid_session
+      delete :destroy, params: {locale: I18n.default_locale, topic_id: @article.topic_id, id: article.to_param}, session: valid_session
       expect(response).to redirect_to(topic_articles_url(topic_id: @article.topic_id))
     end
   end
@@ -179,7 +179,7 @@ RSpec.describe ArticlesController, type: :controller do
       @order_one = articles(:order_one)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'article' => [articles(:order_two).id.to_s, articles(:order_one).id.to_s]
+      post :sort, params: {locale: I18n.default_locale, 'article' => [articles(:order_two).id.to_s, articles(:order_one).id.to_s]}
       # we Need assigns to recover the modifications from the Controller
       # end
 

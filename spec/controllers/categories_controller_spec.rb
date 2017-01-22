@@ -54,7 +54,7 @@ RSpec.describe CategoriesController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested category as @category" do
-      get :show, locale: I18n.default_locale, id: @category.id, session: valid_session
+      get :show, params: {locale: I18n.default_locale, id: @category.id}, session: valid_session
       expect(response).to be_success
       expect(assigns(:category)).to eq(@category)
     end
@@ -68,7 +68,7 @@ RSpec.describe CategoriesController, type: :controller do
       sign_in(employees(:one), scope: :employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s] do
+      post :sort, params: {locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s]} do
         expect(categories(:one).position).to eq(2)
         expect(categories(:two).position).to eq(1)
       end
@@ -86,7 +86,7 @@ RSpec.describe CategoriesController, type: :controller do
       sign_out(:employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s]
+      post :sort, params: {locale: I18n.default_locale, 'category' => [categories(:two).id.to_s, categories(:one).id.to_s]}
       # we Need assigns to recover the modifications from the Controller
       # end
 

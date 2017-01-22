@@ -19,7 +19,7 @@
 #  fk_rails_3d7ea94142  (cycle_id => cycles.id)
 #
 
-class Level < ActiveRecord::Base
+class Level < ApplicationRecord
 
   html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
 

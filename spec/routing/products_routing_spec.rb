@@ -4,43 +4,43 @@ RSpec.describe ProductsController, type: :routing do
   describe "routing" do
 
     it "routes to #index" do
-      expect(:get => "/fr/products").to route_to("products#index", locale: 'fr')
+      expect(:get => "/fr/products").to route_to("products#index", locale: 'fr', "path"=>"fr/products")
     end
 
     it "routes to #new" do
-      expect(:get => "/fr/products/new").to route_to("products#new", locale: 'fr')
+      expect(:get => "/fr/products/new").to route_to("products#new", locale: 'fr', "path"=>"fr/products/new")
     end
 
     it "routes to #show" do
-      expect(:get => "/fr/products/1").to route_to("products#show", :id => "1", locale: 'fr')
+      expect(:get => "/fr/products/1").to route_to("products#show", :id => "1", locale: 'fr', "path"=>"fr/products/1")
     end
 
     it "routes to #edit" do
-      expect(:get => "/fr/products/1/edit").to route_to("products#edit", :id => "1", locale: 'fr')
+      expect(:get => "/fr/products/1/edit").to route_to("products#edit", :id => "1", locale: 'fr', "path"=>"fr/products/1/edit")
     end
 
     it "routes to #create" do
-      expect(:post => "/fr/products").to route_to("products#create", locale: 'fr')
+      expect(:post => "/fr/products").to route_to("products#create", locale: 'fr', "path"=>"fr/products")
     end
 
     it "routes to #update via PUT" do
-      expect(:put => "/fr/products/1").to route_to("products#update", :id => "1", locale: 'fr')
+      expect(:put => "/fr/products/1").to route_to("products#update", :id => "1", locale: 'fr', "path"=>"fr/products/1")
     end
 
     it "routes to #update via PATCH" do
-      expect(:patch => "/fr/products/1").to route_to("products#update", :id => "1", locale: 'fr')
+      expect(:patch => "/fr/products/1").to route_to("products#update", :id => "1", locale: 'fr', "path"=>"fr/products/1")
     end
 
     it "routes to #destroy" do
-      expect(:delete => "/fr/products/1").to route_to("products#destroy", :id => "1", locale: 'fr')
+      expect(:delete => "/fr/products/1").to route_to("products#destroy", :id => "1", locale: 'fr', "path"=>"fr/products/1")
     end
 
     it 'routes to #myproducts' do
-      expect(:get => '/fr/products/myproducts').to route_to('products#myproducts', locale: 'fr')
+      expect(:get => '/fr/products/myproducts').to route_to('products#myproducts', locale: 'fr', "path"=>"fr/products/myproducts")
     end
 
     it 'routes to #catalog' do
-      expect(:get => '/fr/products/catalog').to route_to('products#catalog', locale: 'fr')
+      expect(:get => '/fr/products/catalog').to route_to('products#catalog', locale: 'fr', "path"=>"fr/products/catalog")
     end
 
   end

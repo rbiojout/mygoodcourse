@@ -49,7 +49,7 @@ RSpec.describe CountriesController, type: :controller do
   describe "GET #show" do
     it "assigns the requested country as @country" do
       country = countries(:one)
-      get :show, id: country.to_param, session: valid_session
+      get :show, params: {id: country.to_param}, session: valid_session
       expect(assigns(:country)).to eq(country)
     end
   end

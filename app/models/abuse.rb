@@ -19,7 +19,7 @@
 #  fk_rails_0f23e3c2cf  (customer_id => customers.id)
 #
 
-class Abuse < ActiveRecord::Base
+class Abuse < ApplicationRecord
   # polymorphic association
   belongs_to :abusable, polymorphic: true
 

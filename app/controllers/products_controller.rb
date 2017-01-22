@@ -125,7 +125,7 @@ class ProductsController < ApplicationController
       else
         session[:family_for_products_id] = family_id
       end
-      category_id = Category.with_products_for_family(family_id).unscope(:order).uniq.pluck(:id)
+      category_id = Category.with_products_for_family(family_id).unscope(:order).distinct.pluck(:id)
       session[:category_for_products_id] = category_id
     end
     # unload if :category_id equal 0
@@ -136,7 +136,7 @@ class ProductsController < ApplicationController
         # if we have the category we need to have set the corresponding family
       else
         session[:category_for_products_id] = category_id
-        family_id = Category.where(id: category_id).unscope(:order).uniq.pluck(:family_id)
+        family_id = Category.where(id: category_id).unscope(:order).distinct.pluck(:family_id)
         session[:family_for_products_id] = family_id
       end
     end

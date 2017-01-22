@@ -18,6 +18,6 @@
 #  fk_rails_a19e00ae44  (customer_id => customers.id)
 #
 
-class Update < ActiveRecord::Base
+class Update < ApplicationRecord
   belongs_to :customer
 end

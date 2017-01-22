@@ -33,7 +33,10 @@ RSpec.describe ProductsController, type: :controller do
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
   let(:valid_attributes) {
-    {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}
+    {active: @product.active, description: @product.description, name: @product.name,
+     permalink: @product.permalink, price: @product.price, sku: @product.sku,
+     category_ids: [categories(:one).id], level_ids: [levels(:one).id],
+     attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}
   }
 
   let(:invalid_attributes) {
@@ -47,21 +50,21 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all products as @products" do
-      get :index, locale: I18n.default_locale, session: valid_session
+      get :index, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:products)).not_to be_nil
     end
   end
 
   describe "GET #catalog" do
     it "assigns catalog products as @products" do
-      get :catalog, locale: I18n.default_locale
+      get :catalog, params: {locale: I18n.default_locale}
       expect(assigns(:products)).not_to be_nil
     end
 
     it 'should filter catalog by families' do
       # set the country
-      get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
-      get :catalog, family_id: [families(:one).id.to_s, families(:two).id.to_s], locale: I18n.default_locale
+      get :catalog, params: {country_id: countries(:france).id, locale: I18n.default_locale}
+      get :catalog, params: {family_id: [families(:one).id.to_s, families(:two).id.to_s], locale: I18n.default_locale}
       expect(session[:family_for_products_id].sort).to eq([families(:one).id.to_s, families(:two).id.to_s].sort)
       expect(response).to be_success
       expect(assigns(:products)).not_to be_nil
@@ -69,8 +72,8 @@ RSpec.describe ProductsController, type: :controller do
 
     it 'should filter catalog by family' do
       # set the country
-      get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
-      get :catalog, family_id: Array(families(:one)), locale: I18n.default_locale
+      get :catalog, params: {country_id: countries(:france).id, locale: I18n.default_locale}
+      get :catalog, params: {family_id: Array(families(:one)), locale: I18n.default_locale}
       expect(session[:family_for_products_id]).to eq(Array(families(:one).id.to_s))
       expect(response).to be_success
       expect(assigns(:products)).not_to be_nil
@@ -78,8 +81,8 @@ RSpec.describe ProductsController, type: :controller do
 
     it 'should filter catalog by categories' do
       # set the country
-      get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
-      get :catalog, category_id: [categories(:one).id.to_s, categories(:two).id.to_s], locale: I18n.default_locale
+      get :catalog, params: {country_id: countries(:france).id, locale: I18n.default_locale}
+      get :catalog, params: {category_id: [categories(:one).id.to_s, categories(:two).id.to_s], locale: I18n.default_locale}
       expect(session[:category_for_products_id].sort).to eq([categories(:one).id.to_s, categories(:two).id.to_s].sort)
       expect(session[:family_for_products_id].sort).to eq([categories(:one).family_id, categories(:two).family_id].sort)
       expect(response).to be_success
@@ -88,8 +91,8 @@ RSpec.describe ProductsController, type: :controller do
 
     it 'should filter catalog by category' do
       # set the country
-      get :catalog, country_id: countries(:france).id, locale: I18n.default_locale
-      get :catalog, category_id: Array(categories(:one)), locale: I18n.default_locale
+      get :catalog, params: {country_id: countries(:france).id, locale: I18n.default_locale}
+      get :catalog, params: {category_id: Array(categories(:one)), locale: I18n.default_locale}
       expect(session[:category_for_products_id]).to eq(Array(categories(:one).id.to_s))
       expect(session[:family_for_products_id]).to eq([categories(:one).family_id])
       expect(response).to be_success
@@ -99,26 +102,26 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #show" do
     it "assigns the requested product as @product" do
-      get :show, locale: I18n.default_locale, id: @product.to_param, session: valid_session
+      get :show, params: {locale: I18n.default_locale, id: @product.to_param}, session: valid_session
       expect(assigns(:product)).to eq(@product)
     end
 
     it 'count impression show product' do
       expect {
-        get :show, locale: I18n.default_locale, id: @product.to_param
+        get :show, params: {locale: I18n.default_locale, id: @product.to_param}
         @product.reload
       }.to change(@product, :counter_cache).by(1)
     end
 
     it 'should show product with slug' do
-      get :show, id: @product.slug, locale: I18n.default_locale
+      get :show, params: {id: @product.slug, locale: I18n.default_locale}
       expect(response).to be_success
     end
 
     it 'should see download is owner' do
       sign_in(customers(:seller_one), scope: :customer)
       product = products(:one_from_seller_one)
-      get :show, id: product.id, locale: I18n.default_locale
+      get :show, params: {id: product.id, locale: I18n.default_locale}
       assert_select '#product_download a'
     end
 
@@ -126,14 +129,14 @@ RSpec.describe ProductsController, type: :controller do
       customer = customers(:seller_one)
       sign_in(customer, scope: :customer)
       product = products(:one_from_seller_one)
-      get :show, id: product, locale: I18n.default_locale
+      get :show, params: {id: product, locale: I18n.default_locale}
       assert customer.own_product(product)
       assert_select '#product_actions a[href=?]', edit_product_path(product)
     end
 
     it 'should see add to cart is not signed' do
       product = products(:one_from_seller_one)
-      get :show, id: product, locale: I18n.default_locale
+      get :show, params: {id: product, locale: I18n.default_locale}
       assert_select '#product_actions a[href=?]', buy_product_path(product)
       assert_select '#product_actions a[data-method=?]', 'post'
     end
@@ -141,7 +144,7 @@ RSpec.describe ProductsController, type: :controller do
     it 'should see comments' do
       product = products(:one_from_seller_one)
 
-      get :show, id: product, locale: I18n.default_locale
+      get :show, params: {id: product, locale: I18n.default_locale}
 
       assert_select '#review_table'
     end
@@ -149,38 +152,38 @@ RSpec.describe ProductsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new product as @product" do
-      get :new, locale: I18n.default_locale, session: valid_session
+      get :new, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:product)).to be_a_new(Product)
     end
 
     it 'should not get new if not identified' do
       sign_out(customers(:one))
-      get :new, locale: I18n.default_locale
+      get :new, params: {locale: I18n.default_locale}
       expect(response).to redirect_to(new_customer_session_path)
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested product as @product" do
-      get :edit, locale: I18n.default_locale, id: @product.to_param, session: valid_session
+      get :edit, params: {locale: I18n.default_locale, id: @product.to_param}, session: valid_session
       expect(assigns(:product)).to eq(@product)
     end
 
     it 'should get edit with slug' do
-      get :edit, id: @product.slug, locale: I18n.default_locale
+      get :edit, params: {id: @product.slug, locale: I18n.default_locale}
       expect(assigns(:product)).to eq(@product)
     end
 
     it 'should not get edit if not identified' do
       sign_out(customers(:one))
-      get :edit, id: @product.slug, locale: I18n.default_locale
+      get :edit, params: {id: @product.slug, locale: I18n.default_locale}
       expect(response).to redirect_to(new_customer_session_path)
     end
 
     it 'should not get edit if not product owner' do
       sign_out(customers(:one))
       sign_in(customers(:two), scope: :customer)
-      get :edit, id: @product.slug, locale: I18n.default_locale
+      get :edit, params: {id: @product.slug, locale: I18n.default_locale}
       expect(response).to redirect_to(products_path(locale: I18n.default_locale))
     end
   end
@@ -189,24 +192,24 @@ RSpec.describe ProductsController, type: :controller do
     context "with valid params" do
       it 'should not get create if not identified' do
         sign_out(customers(:one))
-        post :create, locale: I18n.default_locale, product: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(new_customer_session_path)
       end
 
       it "creates a new Product" do
         expect {
-          post :create, locale: I18n.default_locale, product: valid_attributes, session: valid_session
+          post :create, params: {locale: I18n.default_locale, product: valid_attributes}, session: valid_session
         }.to change(Product, :count).by(1)
       end
 
       it "assigns a newly created product as @product" do
-        post :create, locale: I18n.default_locale, product: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, product: valid_attributes}, session: valid_session
         expect(assigns(:product)).to be_a(Product)
         expect(assigns(:product)).to be_persisted
       end
 
       it "redirects to the created product" do
-        post :create, locale: I18n.default_locale, product: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(Product.last)
       end
     end
@@ -214,29 +217,35 @@ RSpec.describe ProductsController, type: :controller do
     context "with invalid params" do
       it 'should not create product without category' do
         expect {
-          post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}, locale: I18n.default_locale
+          post :create, params: {product: {active: @product.active, description: @product.description, name: @product.name,
+                                           permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           category_ids: [], level_ids: [levels(:one).id],
+                                           attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}, locale: I18n.default_locale}
         }.to change(Product, :count).by(0)
       end
 
       it 'should not create product without level' do
         expect {
-          post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [], attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}, locale: I18n.default_locale
+          post :create, params: {product: {active: @product.active, description: @product.description, name: @product.name,
+                                           permalink: @product.permalink, price: @product.price, sku: @product.sku,
+                                           category_ids: [categories(:one).id], level_ids: [],
+                                           attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}, locale: I18n.default_locale}
         }.to change(Product, :count).by(0)
       end
 
       it 'should not create product without attachment' do
         expect {
-          post :create, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: nil}}}, locale: I18n.default_locale
+          post :create, params: {product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: nil}}}, locale: I18n.default_locale}
         }.to change(Product, :count).by(0)
       end
 
       it "assigns a newly created but unsaved product as @product" do
-        post :create, locale: I18n.default_locale, product: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, product: invalid_attributes}, session: valid_session
         expect(assigns(:product)).to be_a_new(Product)
       end
 
       it "re-renders the 'new' template" do
-        post :create, locale: I18n.default_locale, product: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, product: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -245,32 +254,34 @@ RSpec.describe ProductsController, type: :controller do
   describe "PUT #update" do
     context "with valid params" do
       let(:new_attributes) {
-        {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku, category_ids: [categories(:one)], level_ids: [levels(:one)], attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}
+        {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink,
+         price: @product.price, sku: @product.sku, category_ids: [categories(:one).id], level_ids: [levels(:one).id],
+         attachments_attributes: {'0' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')}}}
       }
 
       it "updates the requested product" do
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: new_attributes}, session: valid_session
         @product.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested product as @product" do
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: valid_attributes}, session: valid_session
         expect(assigns(:product)).to eq(@product)
       end
 
       it "redirects to the product" do
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(@product)
       end
 
       it 'should update product with ordered attachments' do
         @attachment = attachments(:one)
-        patch :update, id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
+        patch :update, params: {id: @product, product: {active: @product.active, description: @product.description, name: @product.name, permalink: @product.permalink, price: @product.price, sku: @product.sku,
                                                attachments_attributes: {
                                                    '1465974930533' => {file: fixture_file_upload('files/uploads/attachment/file/default_document.pdf', 'application/pdf')},
                                                    '0' => {id: attachments(:one).id},
-                                               }}, locale: I18n.default_locale
+                                               }}, locale: I18n.default_locale}
         expect(assigns(:product).attachments.count).to eq(2)
       end
     end
@@ -278,19 +289,19 @@ RSpec.describe ProductsController, type: :controller do
     context "with invalid params" do
       it 'should not get update if not identified' do
         sign_out(customers(:one))
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(new_customer_session_path)
       end
 
       it 'should not get update if not product owner' do
         sign_out(customers(:one))
         sign_in(customers(:two), scope: :customer)
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: valid_attributes}, session: valid_session
         expect(response).to redirect_to(products_path(locale: I18n.default_locale))
       end
 
       it "assigns the product as @product" do
-        put :update, locale: I18n.default_locale, id: @product.to_param, product: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @product.to_param, product: invalid_attributes}, session: valid_session
         expect(assigns(:product)).to eq(@product)
       end
 
@@ -300,25 +311,25 @@ RSpec.describe ProductsController, type: :controller do
   describe "DELETE #destroy" do
     it 'should destroy product not ordered' do
       expect{
-        delete :destroy, id: products(:product_without_orders), locale: I18n.default_locale
+        delete :destroy, params: {id: products(:product_without_orders), locale: I18n.default_locale}
       }.to change(Product, :count).by(-1)
     end
 
     it 'should not destroy product if not identified' do
       sign_out(customers(:one))
-      delete :destroy, id: products(:product_without_orders), locale: I18n.default_locale
+      delete :destroy, params: {id: products(:product_without_orders), locale: I18n.default_locale}
       expect(response).to redirect_to(new_customer_session_path)
     end
 
     it 'should not destroy product ordered' do
       expect {
-        delete :destroy, id: @product, locale: I18n.default_locale
+        delete :destroy, params: {id: @product, locale: I18n.default_locale}
       }.to raise_error(ActiveRecord::DeleteRestrictionError)
     end
 
 
     it "redirects to the products list" do
-      delete :destroy, locale: I18n.default_locale, id: products(:product_without_orders).to_param, session: valid_session
+      delete :destroy, params: {locale: I18n.default_locale, id: products(:product_without_orders).to_param}, session: valid_session
       expect(response).to redirect_to(products_url)
     end
   end
@@ -326,18 +337,18 @@ RSpec.describe ProductsController, type: :controller do
   describe 'POST #add_to_basket' do
     it 'create an order_item' do
       expect {
-        post :add_to_basket, product_id: products(:one).id, locale: I18n.default_locale
+        post :add_to_basket, params: {product_id: products(:one).id, locale: I18n.default_locale}
       }.to change(OrderItem, :count).by(1)
     end
 
     it 'redirect to catalog' do
-      post :add_to_basket, product_id: products(:one).id, locale: I18n.default_locale
+      post :add_to_basket, params: {product_id: products(:one).id, locale: I18n.default_locale}
       expect(response).to redirect_to(catalog_products_path)
     end
 
     it 'should buy with slug' do
       expect {
-        post :add_to_basket, product_id: products(:one).slug, locale: I18n.default_locale
+        post :add_to_basket, params: {product_id: products(:one).slug, locale: I18n.default_locale}
       }.to change(OrderItem, :count).by(1)
       expect(response).to redirect_to(catalog_products_path)
     end

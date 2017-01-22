@@ -21,7 +21,7 @@
 #  fk_rails_ce7582c81f  (topic_id => topics.id)
 #
 
-class Article < ActiveRecord::Base
+class Article < ApplicationRecord
   extend FriendlyId
 
   # follow activities

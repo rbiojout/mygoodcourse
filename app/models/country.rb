@@ -14,7 +14,7 @@
 #  updated_at :datetime         not null
 #
 
-class Country < ActiveRecord::Base
+class Country < ApplicationRecord
   # we organize the products into cycles and levels for a country
   has_many :cycles
   has_many :levels, through: :cycles

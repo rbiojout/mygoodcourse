@@ -69,7 +69,7 @@ RSpec.describe LevelsController, type: :controller do
       sign_in(employees(:one), scope: :employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'level' => [levels(:two).id.to_s, levels(:one).id.to_s] do
+      post :sort, params: {locale: I18n.default_locale, 'level' => [levels(:two).id.to_s, levels(:one).id.to_s]} do
         assert(levels(:one).position == 2)
         assert(levels(:two).position == 1)
       end
@@ -87,7 +87,7 @@ RSpec.describe LevelsController, type: :controller do
       sign_out(:employee)
 
       # assert_equal(@order_one.position, 2) do
-      post :sort, locale: I18n.default_locale, 'level' => [levels(:two).id.to_s, levels(:one).id.to_s]
+      post :sort, params: {locale: I18n.default_locale, 'level' => [levels(:two).id.to_s, levels(:one).id.to_s]}
       # we Need assigns to recover the modifications from the Controller
       # end
 

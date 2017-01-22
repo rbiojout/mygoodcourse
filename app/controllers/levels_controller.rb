@@ -19,7 +19,7 @@ class LevelsController < ApplicationController
         Level.update(id, position: index + 1)
       end
     end
-    render nothing: true
+    head :ok
   end
 
 private

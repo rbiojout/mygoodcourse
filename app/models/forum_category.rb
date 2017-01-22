@@ -20,7 +20,7 @@
 #  fk_rails_2c945ba926  (forum_family_id => forum_families.id)
 #
 
-class ForumCategory < ActiveRecord::Base
+class ForumCategory < ApplicationRecord
   belongs_to :forum_family
 
   has_many :forum_subjects, dependent: :destroy

@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 ruby '2.3.3'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.2.7'
+gem 'rails', '~> 5.0.1'
 
 # sanitizer for html in activerecords
 gem 'loofah-activerecord'
@@ -21,11 +21,11 @@ gem 'pg', '~> 0.19'
 gem 'pg_search'
 
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 5.0'
+gem 'sass-rails'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.2'
+gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -49,7 +49,7 @@ gem 'jquery-turbolinks'
 
 # Turbolinks makes following links in your web application faster.
 # Read more: https://github.com/rails/turbolinks
-gem 'turbolinks', '~> 5.0'
+gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
 
@@ -66,7 +66,7 @@ gem 'sdoc', group: :doc
 # gem 'capistrano-rails', group: :development
 
 # add devise for the users
-gem 'devise', '~> 4.2'
+gem 'devise'
 
 # add pagination helper for listing the data
 gem 'will_paginate'
@@ -117,8 +117,8 @@ gem 'fullcalendar-rails'
 gem 'geocoder'
 
 # render maps
-gem 'gmaps4rails'
-gem 'underscore-rails'
+# gem 'gmaps4rails'
+# gem 'underscore-rails'
 
 # use easy form templates with simple form
 gem 'country_select'
@@ -170,7 +170,9 @@ group :test do
   gem 'faker'
   # spring command line for rspec
   gem 'spring-commands-rspec'
-  gem 'rspec-rails', '~> 3.5.2'
+  gem 'rspec-rails'
+  gem 'rails-controller-testing'
+
   # create objects needed in your tests which can include default values
   gem 'factory_girl_rails'
   # automation framework used for creating functional tests that simulates how users will interact
@@ -211,7 +213,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 
   # annotate the informations
   gem 'annotate'

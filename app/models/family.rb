@@ -20,7 +20,7 @@
 #  fk_rails_67b345b356  (country_id => countries.id)
 #
 
-class Family < ActiveRecord::Base
+class Family < ApplicationRecord
 
   html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
 

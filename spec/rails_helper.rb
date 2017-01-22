@@ -39,6 +39,15 @@ require 'support/factory_girl'
 require 'support/database_cleaner'
 
 require 'support/controller_macros'
+
+RSpec.configure do |config|
+  config.before(:each) do
+    FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads/test/*"])
+    FileUtils.cp_r(Dir["#{Rails.root}/spec/fixtures/files/uploads/*"], Dir["#{Rails.root}/public/uploads/test"])
+  end
+end
+
+
 RSpec.configure do |config|
   config.include Devise::Test::ControllerHelpers, type: :controller
   config.include Devise::Test::ControllerHelpers, type: :request

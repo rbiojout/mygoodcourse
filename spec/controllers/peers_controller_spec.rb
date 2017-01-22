@@ -49,22 +49,22 @@ RSpec.describe PeersController, type: :controller do
   describe "POST #follow" do
     it "creates a new Peer" do
       expect {
-        post :follow, followed_id: customers(:seller_one).id
+        post :follow, params: {followed_id: customers(:seller_one).id}
       }.to change(Peer, :count).by(1)
     end
 
     it 'assigns a followed @followed' do
-      post :follow, followed_id: customers(:seller_one).id
+      post :follow, params: {followed_id: customers(:seller_one).id}
       expect(assigns(:followed)).to eq(customers(:seller_one))
     end
 
     it 'follow the customer' do
-      post :follow, followed_id: customers(:seller_one).id
+      post :follow, params: {followed_id: customers(:seller_one).id}
       expect(follower.following?(customers(:seller_one))).to be_truthy
     end
 
     it "return to customer" do
-      post :follow, followed_id: customers(:seller_one).id
+      post :follow, params: {followed_id: customers(:seller_one).id}
       expect(response).to redirect_to(customer_path(follower))
     end
   end
@@ -72,22 +72,22 @@ RSpec.describe PeersController, type: :controller do
   describe "DELETE #unfollow" do
     it "delete a Peer" do
       expect {
-        delete :unfollow, followed_id: customers(:two).id
+        delete :unfollow, params: {followed_id: customers(:two).id}
       }.to change(Peer, :count).by(-1)
     end
 
     it 'assigns a customer @followed' do
-      delete :unfollow, followed_id: customers(:two).id
+      delete :unfollow, params: {followed_id: customers(:two).id}
       expect(assigns(:followed)).to eq(customers(:two))
     end
 
     it 'unfollow the customer' do
-      delete :unfollow, followed_id: customers(:two).id
+      delete :unfollow, params: {followed_id: customers(:two).id}
       expect(follower.following?(customers(:two))).not_to be_truthy
     end
 
     it "return to customer" do
-      delete :unfollow, followed_id: customers(:two).id
+      delete :unfollow, params: {followed_id: customers(:two).id}
       expect(response).to redirect_to(customer_path(follower))
     end
   end

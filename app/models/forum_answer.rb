@@ -20,7 +20,7 @@
 #  fk_rails_d6bfb1ed1a  (customer_id => customers.id)
 #
 
-class ForumAnswer < ActiveRecord::Base
+class ForumAnswer < ApplicationRecord
   belongs_to :customer
   belongs_to :forum_subject
 

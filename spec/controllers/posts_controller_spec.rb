@@ -48,19 +48,19 @@ RSpec.describe PostsController, type: :controller do
 
   describe "GET #index" do
     it "assigns all posts as @posts" do
-      get :index, locale: I18n.default_locale,  session: valid_session
+      get :index, params: {locale: I18n.default_locale},  session: valid_session
       expect(assigns(:posts)).not_to be_nil
     end
   end
 
   describe "GET #show" do
     it "assigns the requested post as @post" do
-      get :show, locale: I18n.default_locale, id: @post.to_param, session: valid_session
+      get :show, params: {locale: I18n.default_locale, id: @post.to_param}, session: valid_session
       expect(assigns(:post)).to eq(@post)
     end
 
     it 'should show post with slug' do
-      get :show, locale: I18n.default_locale, id: @post.slug
+      get :show, params: {locale: I18n.default_locale, id: @post.slug}
       expect(response).to be_success
       expect(assigns(:post)).to eq(@post)
     end
@@ -68,39 +68,39 @@ RSpec.describe PostsController, type: :controller do
 
   describe "GET #new" do
     it "assigns a new post as @post" do
-      get :new, locale: I18n.default_locale, session: valid_session
+      get :new, params: {locale: I18n.default_locale}, session: valid_session
       expect(assigns(:post)).to be_a_new(Post)
     end
 
     it 'not get new if not identified' do
       sign_out(customers(:one))
-      get :new, locale: I18n.default_locale
+      get :new, params: {locale: I18n.default_locale}
       expect(response).to redirect_to(new_customer_session_path)
     end
   end
 
   describe "GET #edit" do
     it "assigns the requested post as @post" do
-      get :edit, locale: I18n.default_locale, id: @post.to_param, session: valid_session
+      get :edit, params: {locale: I18n.default_locale, id: @post.to_param}, session: valid_session
       expect(assigns(:post)).to eq(@post)
     end
 
     it 'should get edit with slug' do
-      get :edit, locale: I18n.default_locale, id: @post.slug
+      get :edit, params: {locale: I18n.default_locale, id: @post.slug}
       expect(response).to be_success
       expect(assigns(:post)).to eq(@post)
     end
 
     it 'should get edit if not identified' do
       sign_out(customers(:one))
-      get :edit, locale: I18n.default_locale, id: @post
+      get :edit, params: {locale: I18n.default_locale, id: @post}
       expect(response).to redirect_to(new_customer_session_path)
     end
 
     it 'should not get edit if not post owner' do
       sign_out(customers(:one))
       sign_in(customers(:two), scope: :customer)
-      get :edit, locale: I18n.default_locale, id: @post.slug
+      get :edit, params: {locale: I18n.default_locale, id: @post.slug}
 
       expect(response).to redirect_to(posts_path(locale: I18n.default_locale))
     end
@@ -110,36 +110,36 @@ RSpec.describe PostsController, type: :controller do
     context "with valid params" do
       it 'not create if not identified' do
         sign_out(customers(:one))
-        post :create, locale: I18n.default_locale, post: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, post: valid_attributes}, session: valid_session
         expect(response).to redirect_to(new_customer_session_path)
       end
 
       it "creates a new Post" do
         expect {
-          post :create, locale: I18n.default_locale, post: valid_attributes, session: valid_session
+          post :create, params: {locale: I18n.default_locale, post: valid_attributes}, session: valid_session
         }.to change(Post, :count).by(1)
       end
 
       it "assigns a newly created post as @post" do
-        post :create, locale: I18n.default_locale, post: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, post: valid_attributes}, session: valid_session
         expect(assigns(:post)).to be_a(Post)
         expect(assigns(:post)).to be_persisted
       end
 
       it "redirects to the created post" do
-        post :create, locale: I18n.default_locale, post: valid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, post: valid_attributes}, session: valid_session
         expect(response).to redirect_to(assigns(:post))
       end
     end
 
     context "with invalid params" do
       it "assigns a newly created but unsaved post as @post" do
-        post :create, locale: I18n.default_locale, post: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, post: invalid_attributes}, session: valid_session
         expect(assigns(:post)).to be_a_new(Post)
       end
 
       it "re-renders the 'new' template" do
-        post :create, locale: I18n.default_locale, post: invalid_attributes, session: valid_session
+        post :create, params: {locale: I18n.default_locale, post: invalid_attributes}, session: valid_session
         expect(response).to render_template("new")
       end
     end
@@ -153,42 +153,42 @@ RSpec.describe PostsController, type: :controller do
 
       it 'should not update post if not identified' do
         sign_out(customers(:one))
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: new_attributes}, session: valid_session
         expect(response).to redirect_to(new_customer_session_path)
       end
 
       it 'should not get update if not post owner' do
         sign_out(customers(:one))
         sign_in(customers(:two), scope: :customer)
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: new_attributes}, session: valid_session
         expect(response).to redirect_to(posts_path(locale: I18n.default_locale))
       end
 
       it "updates the requested post" do
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: new_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: new_attributes}, session: valid_session
         @post.reload
         skip("Add assertions for updated state")
       end
 
       it "assigns the requested post as @post" do
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: valid_attributes}, session: valid_session
         expect(assigns(:post)).to eq(@post)
       end
 
       it "redirects to the post" do
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: valid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: valid_attributes}, session: valid_session
         expect(response).to redirect_to(@post)
       end
     end
 
     context "with invalid params" do
       it "assigns the post as @post" do
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: invalid_attributes}, session: valid_session
         expect(assigns(:post)).to eq(@post)
       end
 
       it "re-renders the 'edit' template" do
-        put :update, locale: I18n.default_locale, id: @post.to_param, post: invalid_attributes, session: valid_session
+        put :update, params: {locale: I18n.default_locale, id: @post.to_param, post: invalid_attributes}, session: valid_session
         expect(response).to render_template("edit")
       end
     end
@@ -197,25 +197,25 @@ RSpec.describe PostsController, type: :controller do
   describe "DELETE #destroy" do
     it 'should not destroy post if not identified' do
       sign_out(customers(:one))
-      delete :destroy, locale: I18n.default_locale, id: @post
+      delete :destroy, params: {locale: I18n.default_locale, id: @post}
       expect(response).to redirect_to(new_customer_session_path)
     end
 
     it 'should not destroy post if not post owner' do
       sign_out(customers(:one))
       sign_in(customers(:two), scope: :customer)
-      delete :destroy, locale: I18n.default_locale, id: @post
+      delete :destroy, params: {locale: I18n.default_locale, id: @post}
       expect(response).to redirect_to(posts_path(locale: I18n.default_locale))
     end
 
     it "destroys the requested post" do
       expect {
-        delete :destroy, locale: I18n.default_locale, id: @post.to_param, session: valid_session
+        delete :destroy, params: {locale: I18n.default_locale, id: @post.to_param}, session: valid_session
       }.to change(Post, :count).by(-1)
     end
 
     it "redirects to the posts list" do
-      delete :destroy, locale: I18n.default_locale, id: @post.to_param, session: valid_session
+      delete :destroy, params: {locale: I18n.default_locale, id: @post.to_param}, session: valid_session
       expect(response).to redirect_to(posts_url)
     end
   end

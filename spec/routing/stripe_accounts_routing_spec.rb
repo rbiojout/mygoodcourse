@@ -32,23 +32,23 @@ RSpec.describe StripeAccountsController, type: :routing do
     end
 
     it 'routes to #oauth' do
-      expect(:get => '/connect/oauth').to route_to('stripe_accounts#oauth')
+      expect(:get => '/connect/oauth').to route_to('stripe_accounts#oauth', "path"=>"connect/oauth")
     end
 
     it 'routes to #confirm' do
-      expect(:get => '/connect/confirm').to route_to('stripe_accounts#confirm')
+      expect(:get => '/connect/confirm').to route_to('stripe_accounts#confirm', "path"=>"connect/confirm")
     end
 
     it 'routes to #deauthorize' do
-      expect(:get => '/connect/deauthorize').to route_to('stripe_accounts#deauthorize')
+      expect(:get => '/connect/deauthorize').to route_to('stripe_accounts#deauthorize', "path"=>"connect/deauthorize")
     end
 
     it 'routes to #managed' do
-      expect(:post => '/connect/managed').to route_to('stripe_accounts#managed')
+      expect(:post => '/connect/managed').to route_to('stripe_accounts#managed', "path"=>"connect/managed")
     end
 
     it 'routes to #standalone' do
-      expect(:post => '/connect/standalone').to route_to('stripe_accounts#standalone')
+      expect(:post => '/connect/standalone').to route_to('stripe_accounts#standalone', "path"=>"connect/standalone")
     end
   end
 end

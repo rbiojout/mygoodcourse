@@ -49,7 +49,7 @@ RSpec.describe LikesController, type: :controller do
     it "no creation if not logged in" do
       sign_out(customers(:one))
       expect {
-        post :like, like: {}, review_id: reviews(:one).id
+        post :like, params: {like: {}, review_id: reviews(:one).id}
       }.to change(Like, :count).by(0)
 
       expect(response).to redirect_to(new_customer_session_path)
@@ -58,7 +58,7 @@ RSpec.describe LikesController, type: :controller do
     it "create like for review" do
       request.env['HTTP_REFERER'] = product_path(products(:one))
       expect {
-        post :like, like: {customer_id: customers(:one).id}, review_id: reviews(:one).id
+        post :like, params: {like: {customer_id: customers(:one).id}, review_id: reviews(:one).id}
       }.to change(Like, :count).by(1)
 
       expect(response).to redirect_to(product_path(products(:one)))
@@ -67,7 +67,7 @@ RSpec.describe LikesController, type: :controller do
     it 'create like for review via ajax' do
       sign_in(customers(:one), scope: :customer)
       expect {
-        xhr :post, :like, like: {customer_id: customers(:one).id}, review_id: reviews(:one).id
+        post :like, xhr: true,  params: {like: {customer_id: customers(:one).id}, review_id: reviews(:one).id}
       }.to change(Like, :count).by(1)
 
       expect(response).to be_success
@@ -76,7 +76,7 @@ RSpec.describe LikesController, type: :controller do
     it "create like for product" do
       request.env['HTTP_REFERER'] = product_path(products(:one))
       expect {
-        post :like, like: {customer_id: customers(:one).id}, product_id: products(:one).id
+        post :like, params: {like: {customer_id: customers(:one).id}, product_id: products(:one).id}
       }.to change(Like, :count).by(1)
 
       expect(response).to redirect_to(product_path(products(:one)))
@@ -87,28 +87,28 @@ RSpec.describe LikesController, type: :controller do
     it "destroys the requested like" do
       product = products(:two)
       request.env['HTTP_REFERER'] = product_path(product)
-      post :like, product_id: products(:two).id
+      post :like, params: {product_id: products(:two).id}
 
       expect(product.liked?(customers(:one))).to be_truthy
 
       request.env['HTTP_REFERER'] = product_path(product)
       expect {
-        delete :unlike, product_id: products(:two).id
+        delete :unlike, params: {product_id: products(:two).id}
       }.to change(Like, :count).by(-1)
 
       expect(product.liked?(customers(:one))).not_to be_truthy
     end
 
-    it "destroy the requested like ia ajax" do
+    it "destroy the requested like via ajax" do
       product = products(:two)
       request.env['HTTP_REFERER'] = product_path(product)
-      post :like, product_id: product.id
+      post :like, params: {product_id: product.id}
 
       expect(product.liked?(customers(:one))).to be_truthy
 
       request.env['HTTP_REFERER'] = product_path(product)
       expect {
-        xhr :delete, :unlike, like: {customer_id: customers(:one).id}, product_id: product.id
+        delete :unlike, xhr: true,  params: {like: {customer_id: customers(:one).id}, product_id: product.id}
       }.to change(Like, :count).by(-1)
 
       expect(product.liked?(customers(:one))).not_to be_truthy
