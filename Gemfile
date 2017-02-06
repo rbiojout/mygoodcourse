@@ -158,7 +158,7 @@ gem 'newrelic_rpm'
 # for Heroku
 group :production do
   gem 'puma'
-  gem 'rails_12factor'
+  # gem 'rails_12factor'
   gem 'tunemygc'
 end
 
