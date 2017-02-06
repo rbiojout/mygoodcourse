@@ -1,0 +1,5 @@
+heroku
+
+When pushing a branch (development)
+push git push staging development:master
+
