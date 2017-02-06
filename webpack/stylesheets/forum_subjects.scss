@@ -1,0 +1,55 @@
+// Place all the styles related to the ForumSubjects controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+@import "application-variables";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/vendor-prefixes";
+@import "~bootstrap-sass/assets/stylesheets/bootstrap/mixins/clearfix";
+
+.forum_subjects-list {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+@mixin styling($customer_picture, $customer_container) {
+  .forum_subject-panel {
+    background-color: #eeeeee;
+    padding: 10px;
+    border-bottom: 4px darkgrey solid;
+
+    .forum_subject-customer {
+      display: inline;
+      float: left;
+      padding-top: $customer_padding-top;
+      width: $customer_container;
+    }
+
+    .forum_subject-text {
+      display: inline;
+      float: right;
+      width: calc(100% - #{$customer_container} - 10px);
+      position: relative;
+      background-color: white;
+    }
+
+    .forum_subject-tools {
+      display: block;
+      width: 100%;
+      height: 35px;
+    }
+    @include clearfix();
+  }
+}
+
+// for xs screens
+@include styling($customer_picture-xs, $customer_container-xs);
+// for sm screens
+@media (min-width: $container-sm) {
+  @include styling($customer_picture-sm, $customer_container-sm);
+}
+// for md screens
+@media (min-width: $container-md) {
+  @include styling($customer_picture-md, $customer_container-md);
+}
+

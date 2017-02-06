@@ -29,8 +29,8 @@ gem 'coffee-rails'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
-# gem 'haml'
-
+# use webpack to handle the assets
+gem 'webpack-rails'
 
 # Use jquery as the JavaScript library
 ## gem 'jquery-rails', '~> 4.2'
@@ -85,8 +85,6 @@ gem 'cocoon'
 # state engine for the models
 # see https://github.com/aasm/aasm
 gem 'aasm'
-
-gem 'bower-rails'
 
 # add some CSS
 # recommended to use Autoprefixer with Bootstrap to add browser vendor prefixes automatically.
@@ -148,6 +146,9 @@ gem 'groupdate'
 
 # add admin
 gem 'rails_admin'
+# add support to summernote
+gem 'summernote-rails'
+# custom presentation
 gem 'rails_admin_rollincode', '~> 1.0'
 # gem "wysiwyg-rails", "~> 1.2.7"
 
@@ -236,3 +237,5 @@ group :development do
 
   gem 'i18n-tasks', '~> 0.9.5'
 end
+
+gem 'foreman'

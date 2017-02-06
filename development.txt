@@ -1,2 +1,14 @@
 http://rogerdudler.github.io/git-guide/index.fr.html
 
+Our stack
+We use Rails as the primary engine
+Postgres has the primary DB
+
+for the front, we rely on js, react, css and saas.
+The building process for the front is made by webpack, and we rely on the gem webpack-rails to help.
+bundle exec rails generate webpack_rails:install
+
+node_modules are references with yarn
+
+<%= javascript_include_tag *webpack_asset_paths('application', extension: 'js') %>
+<%= stylesheet_link_tag *webpack_asset_paths('application', extension: 'css') %>

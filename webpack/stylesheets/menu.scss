@@ -1,0 +1,17 @@
+#accordion_family, #accordion_cycle{
+  .glyphicon-triangle-bottom {
+    display: block;
+    float: right;
+  }
+  .panel-body{
+    padding-top: 5px;
+    padding-bottom: 0px;
+    .list-unstyled {
+      margin-bottom: 0px;
+    }
+
+  }
+
+}
+
+

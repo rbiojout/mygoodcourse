@@ -1,0 +1,129 @@
+// parallax is based on stellar.js and jquery.waypoints
+// there is a limitation on ios devices.... use only one parallax element per page at the top
+.parallaxed {
+    background-attachment: fixed;
+    background-position: 50% 0;
+    background-color: black;
+    background-repeat: no-repeat;
+    height: 200px;
+    width: auto;
+    position: relative;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.parallaxed span {
+    bottom: 0;
+    color: white;
+    display: block;
+    //left: 50%;
+    //margin-left: -600px;
+    //font-size: 38px;
+    padding: 10px;
+    position: absolute;
+    //text-shadow: 0 2px 0 black, 0 0 10px black;
+    //width: 1200px;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+  .parallaxed {
+    height: 300px;
+  }
+
+}
+
+// space pictures
+.banner {
+  background-image: url('../images/banner.jpg');
+}
+.banner_1 {
+    background-image: url('../images/banner_1.jpg');
+}
+.banner_2 {
+    background-image: url('../images/banner_2.jpg');
+}
+.banner_3 {
+    background-image: url('../images/banner_3.jpg');
+}
+.banner_4 {
+    background-image: url('../images/banner_4.jpg');
+}
+.banner_5 {
+  background-image: url('../images/banner_5.jpg');
+}
+.banner_6 {
+  background-image: url('../images/banner_6.jpg');
+}
+.banner_7 {
+  background-image: url('../images/banner_7.jpg');
+}
+.banner_8 {
+  background-image: url('../images/banner_8.jpg');
+}
+.banner_9 {
+  background-image: url('../images/banner_9.jpg');
+}
+
+// abstract pictures
+.banner_100 {
+  background-image: url('../images/banner_100.jpg');
+}
+.banner_101 {
+  background-image: url('../images/banner_101.jpg');
+}
+.banner_102 {
+  background-image: url('../images/banner_102.jpg');
+}
+.banner_103 {
+  background-image: url('../images/banner_103.jpg');
+}
+.banner_104 {
+  background-image: url('../images/banner_104.jpg');
+}
+.banner_105 {
+  background-image: url('../images/banner_105.jpg');
+}
+.banner_106 {
+  background-image: url('../images/banner_106.jpg');
+}
+.banner_107 {
+  background-image: url('../images/banner_107.jpg');
+}
+.banner_108 {
+  background-image: url('../images/banner_108.jpg');
+}
+.banner_109 {
+  background-image: url('../images/banner_109.jpg');
+}
+
+// school equipments pictures
+.banner_200 {
+  background-image: url('../images/banner_200.jpg');
+}
+.banner_201 {
+  background-image: url('../images/banner_201.jpg');
+}
+.banner_202 {
+  background-image: url('../images/banner_202.jpg');
+}
+.banner_203 {
+  background-image: url('../images/banner_203.jpg');
+}
+.banner_204 {
+  background-image: url('../images/banner_204.jpg');
+}
+.banner_205 {
+  background-image: url('../images/banner_205.jpg');
+}
+.banner_206 {
+  background-image: url('../images/banner_206.jpg');
+}
+.banner_207 {
+  background-image: url('../images/banner_207.jpg');
+}
+.banner_208 {
+  background-image: url('../images/banner_208.jpg');
+}
+.banner_209 {
+  background-image: url('../images/banner_209.jpg');
+}

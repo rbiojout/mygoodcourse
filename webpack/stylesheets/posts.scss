@@ -1,0 +1,38 @@
+// Place all the styles related to the Posts controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.post-panel {
+  margin-bottom: 25px;
+  .pull-left {
+    width: 100%;
+  }
+  .img-responsive {
+    width: 100%;
+  }
+}
+
+.post-date {
+  clear: both;
+  height: 18px;
+}
+.post-content {
+  clear: both;
+  height: 315px;
+  overflow: hidden;
+}
+
+.post-content-short {
+  clear: both;
+  height: 100px;
+  overflow: hidden;
+}
+/* allow three lines for description */
+.post-description {
+  //max-height: 150px;
+}
+
+.post-read-next {
+  position: absolute;
+  bottom: -25px;
+  right: 0px;
+}

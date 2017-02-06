@@ -16,9 +16,9 @@ module Formycourse
     # -- all .rb files in that directory are automatically loaded.
 
     # Bower asset paths
-    root.join('vendor', 'assets', 'bower_components').to_s.tap do |bower_path|
-      config.sass.load_paths << bower_path
-      config.assets.paths << bower_path
+    root.join('node_modules').to_s.tap do |node_path|
+      config.sass.load_paths << node_path
+      config.assets.paths << node_path
     end
 
     # add the fonts to assets

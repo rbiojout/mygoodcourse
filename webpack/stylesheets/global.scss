@@ -1,0 +1,62 @@
+$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
+
+// custom vaiables for bootstrap
+// that overwrite the basic configuration
+@import "bootstrap-variables";
+
+// application specific variables
+// that are used all over the application
+@import "application-variables";
+
+@import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+
+
+// in vendor
+// @import "~material-kit-free/assets/sass/material-kit.scss";
+
+@import "~summernote/dist/summernote";
+
+// bootstrap
+// $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
+// @import '~bootstrap-sass/assets/shared/_bootstrap.scss';
+
+@import '~jquery-ui/themes/base/core';
+@import '~jquery-ui/themes/base/theme';
+@import '~jquery-ui/themes/base/sortable';
+
+
+@import '~font-awesome/scss/font-awesome';
+
+// IMPORTANT make sure to resolve the path for font asset
+// run rake bower:resolve summernote
+@import "~summernote/src/less/summernote.scss";
+@import "~summernote/dist/summernote";
+
+// star rating
+@import "~bootstrap-star-rating/css/star-rating.css";
+
+// animate CSS
+@import '~animate.css/animate.css';
+
+
+
+// global CSS
+@import "custom";
+@import "famfamfam-flags.css";
+@import "parallax";
+@import "print";
+
+// CSS for models
+@import "attachments";
+@import "comments";
+@import "customers";
+@import "forum_answers";
+@import "forum_categories";
+@import "forum_families";
+@import "forum_subjects";
+@import "posts";
+@import "products";
+@import "reviews";
+@import "stripe";
+

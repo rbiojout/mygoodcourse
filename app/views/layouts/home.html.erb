@@ -7,10 +7,14 @@
   <title><%= full_title(yield(:title)) %></title>
   <meta name="keywords" content="<%= t('keywords') %>">
   <meta name="description" content="<%= t('description') %>">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+  <%# stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <script src="https://js.stripe.com/v2/"></script>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%# javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag *webpack_asset_paths('global', extension: 'js') %>
+  <%= stylesheet_link_tag *webpack_asset_paths('global', extension: 'css') %>
+
+
   <%= javascript_tag do %>
       I18n_defaultLocale = "<%= I18n.default_locale %>";
       I18n_locale = "<%= I18n.locale %>";

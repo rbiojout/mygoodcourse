@@ -1,0 +1,15 @@
+.os-animation{
+  opacity: 0.1;
+}
+
+.os-animation.animated{
+  opacity: 1;
+}
+
+#services-panel {
+  .noborder {
+    border: none;
+    box-shadow: none;
+  }
+}
+
