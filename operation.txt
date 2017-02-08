@@ -3,3 +3,42 @@ heroku
 When pushing a branch (development)
 push git push staging development:master
 
+CORS (CROSS ORIGIN)
+cf http://stackoverflow.com/questions/32592571/cloudfront-cors-issue-serving-fonts-on-rails-application
+IMPORTANT :
+BOTH SITE AND CDN
+if defined? Rack::Cors
+    Rails.configuration.middleware.insert_before 0, Rack::Cors do
+        allow do
+            origins %w[
+                https://example.com
+                 http://example.com
+                https://www.example.com
+                 http://www.example.com
+                https://example-staging.herokuapp.com
+                 http://example-staging.herokuapp.com
+            ]
+            resource '/assets/*'
+        end
+    end
+end
+
+AWS special conf (Whitelist + Origin)
+Click Create Distribution
+
+(For the sake of completeness and reproducibility, I'm listing all the settings I changed from the defaults, however the Whitelist settings are the only ones that are relevant to this discussion)
+
+Delivery Method: Web (not RTMP)
+
+Origin Settings
+
+    Origin Domain Name: example.com
+    Origin SSL Protocols: TLSv1.2 ONLY
+    Origin Protocol Policy: HTTPS only
+
+Default Cache Behavior Settings
+
+    Viewer Protocol Policy: Redirect HTTP to HTTPS
+    Forward Headers: Whitelist
+    Whitelist Headers: Select Origin and click Add >>
+    Compress Objects Automatically: Yes

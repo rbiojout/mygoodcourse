@@ -34,7 +34,12 @@
   <%= render 'layouts/navigation' %>
 </header>
 
-<div class="container">
+<div class="wrapper">
+  <div class="main main-raised">
+    <div class="section">
+
+
+    <div class="container">
   <div id="alert_notice_holder">
 
   </div>
@@ -46,12 +51,14 @@
   <% end %>
 
   <%= yield %>
-  <hr>
 
   <%= debug(params) if Rails.env.development? %>
 
 </div>
 
+    </div>
+  </div>
+</div>
 
 
 <!-- FOOTER -->
