@@ -56,6 +56,9 @@ require('bootstrap-star-rating/js/locales/fr.js');
 // geocomplete with jquery for GoogleMap
 require('geocomplete/jquery.geocomplete.js');
 
+// cocoon to add/remove via javascript associated childs
+require('./lib/cocoon.js');
+
 // turbolinks
 require('jquery-turbolinks');
 var Turbolinks = require("turbolinks");
