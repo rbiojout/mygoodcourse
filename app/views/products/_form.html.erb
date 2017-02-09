@@ -71,7 +71,7 @@
         <% else %>
             <%= f.input :price, :collection => Product::PRICE_LIST.collect {|p| [ nice_price(p), p ] },hint: t('activerecord.attributes.product.hint_price'), include_blank: false %>
         <% end %>
-        <%= f.button :submit, class: 'btn btn-primary input-block-level form-control loading' %>
+        <%= f.button :submit, class: 'btn btn-primary input-block-level form-control loading margined-vertical' %>
       </div>
 
     </div>

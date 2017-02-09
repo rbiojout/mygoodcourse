@@ -4,7 +4,6 @@
 
 
 <div class="row" id="order_item_<%=order_item.id%>">
-  <br/>
   <div class="hidden-xs col-sm-3 picture_part">
     <%= link_to product_path(order_item.product) do %>
         <%= image_tag order_item.product.small, class: 'img-thumbnail center-block' %>

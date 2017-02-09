@@ -24,7 +24,7 @@
   </div>
 </div>
 <div class="row">
-  <div class="col-md-8">
+  <div class="col-md-8 panel">
 
 
 <!-- tools -->
@@ -43,9 +43,9 @@
       <!-- end counter views -->
     </div>
 
-<p>
+<div class="white-content">
   <%= sanitize(@post.description, scrubber: :prune) %>
-</p>
+</div>
 
 <!-- tools -->
 <%= render(partial: 'posts/tools', locals: {post: @post}) %>

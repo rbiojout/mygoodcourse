@@ -4,6 +4,7 @@
 %>
 
 <div class="post-panel <%= 'col-md-4' if with_cols %>">
+  <div class="panel">
   <div style="clear:both;">
       <%= link_to(post_path(post), class: 'pull-left relative') do %>
           <%= image_tag post.preview, class: 'img-responsive' %>
@@ -14,7 +15,7 @@
       <% end %>
   </div>
   <% if with_body %>
-    <div class="post-content ellipsis" id="panel_post_<%=post.id%>">
+    <div class="post-content padded-content ellipsis" id="panel_post_<%=post.id%>">
       <p class="post-date"><small><%= nice_date(post.created_at)%></small></p>
       <div>
         <%= link_to (post_path(post)) do %>
@@ -26,7 +27,7 @@
       </div>
     </div>
   <% else %>
-      <div class="post-content-short ellipsis" id="panel_post_<%=post.id%>">
+      <div class="post-content-short padded-content ellipsis" id="panel_post_<%=post.id%>">
         <p class="post-date"><small><%= nice_date(post.created_at)%></small></p>
         <div>
           <%= link_to (post_path(post)) do %>
@@ -36,4 +37,5 @@
       </div>
   <% end %>
   <p class="post-read-next"><%= link_to (post_path(post)) do %><small><%= t('dialog.read_next')%></small><% end %></p>
+  </div>
 </div>

@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col-sm-4">
-    <div class="relative margined-vertical">
+    <div class="relative">
       <%= image_tag @product.large, class: 'img-thumbnail center-block' %>
       <!-- counter views -->
       <span class="bottom-right">
@@ -43,16 +43,17 @@
 
   </div>
   <div class="col-sm-8">
-    <div class="panel panel-default panel-tools product_presentation_<%= @product.id %>">
+    <div class="panel panel-primary panel-tools product_presentation_<%= @product.id %>">
       <!-- heading -->
       <div class="panel-heading">
+        <div class="panel-title">
         <h3><%= @product.name %></h3>
+        <%= link_to 'javascript:show_reviews();' do %>
         <div id="product_score">
-          <%= link_to 'javascript:show_reviews();' do %>
             <%= render :partial => 'reviews/show_stars', locals: {:score => @product.score_reviews, :nb_reviews => @product.nb_reviews} %>
-          <% end %>
         </div>
-
+        <% end %>
+        </div>
       </div>
       <!-- panel body -->
       <div class="panel-body">
@@ -135,7 +136,7 @@
                                                                     alert_link_text: t('actions.reviews.new'),
                                                                     alert_link_path: new_review_path(product_id: @product.id, locale: locale), alert_remote: true}) %>
               <% else %>
-                <%= link_to t('helpers.action.review.create'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+                <%= link_to t('helpers.action.review.create'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary margined-vertical' %>
               <% end %>
 
           <% elsif !current_customer.own_product(@product) && !@product.is_bought_by_customer(current_customer.id) %>
@@ -144,12 +145,12 @@
                   <!-- add alert with call action to add to basket -->
                   <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('dialog.shop.add_cart'), alert_link_path: buy_product_path(@product, locale: locale),:alert_link_method => :post}) %>
               <% else %>
-                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary',:method => :post %><br/>
+                  <%= link_to t('dialog.shop.add_cart'), buy_product_path(@product, locale: locale), class: 'btn btn-primary margined-vertical',:method => :post %><br/>
               <% end %>
           <% end %>
           <% if Rails.env.development? %>
-              <%= link_to 'REVIEW REMOTE', new_review_path(product_id: @product.id), remote: true, class: 'btn btn-warning' %>
-              <%= link_to 'REVIEW', new_review_path(product_id: @product.id), class: 'btn btn-warning' %>
+              <%= link_to 'REVIEW REMOTE', new_review_path(product_id: @product.id), remote: true, class: 'btn btn-warning margined-vertical' %>
+              <%= link_to 'REVIEW', new_review_path(product_id: @product.id), class: 'btn btn-warning margined-vertical' %>
           <% end %>
       <!-- customer not signed -->
       <% else %>
@@ -158,7 +159,7 @@
               <!-- add alert with call action to login -->
               <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.review.alert_add'), alert_link_text: t('actions.reviews.new'), alert_link_path: new_customer_session_path(:redirect_to => product_path(id: @product.id, locale: locale))}) %>
           <% else %>
-              <%= link_to t('helpers.action.review.create'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary' %>
+              <%= link_to t('helpers.action.review.create'), new_review_path(product_id: @product.id), remote: true, class: 'btn btn-primary margined-vertical' %>
           <% end %>
       <% end %>
 
