@@ -1,7 +1,16 @@
 .wrapper > .header{
-    min-height: 300px;
     background-position: center center;
     background-size: cover;
+    height: auto;
+    min-height: 100vh;
+}
+.wrapper > .page-header{
+    height: auto;
+    min-height: 60vh;
+    background-position: center center;
+    margin: 0;
+    padding: 0;
+    border: 0;
 }
 .main{
     background: #FFFFFF;
@@ -27,10 +36,10 @@ h2.title{
 }
 
 // general style for example pages
-.header-filter{
+@mixin header_gradient($base-color) {
     position: relative;
 
-    &:after{
+    &:after {
         position: absolute;
         z-index: 1;
         width: 100%;
@@ -39,7 +48,10 @@ h2.title{
         left: 0;
         top: 0;
         content: "";
-        background-color: rgba(0,0,0,.4);
+        background: lighten($base-color, 36%);
+        background: linear-gradient(45deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
+        background: -moz-linear-gradient(135deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
+        background: -webkit-linear-gradient(135deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
     }
 
     .container{
@@ -47,6 +59,31 @@ h2.title{
         position: relative;
     }
 }
+
+.header-filter{
+    @include header_gradient($mdb-brand-inverse);
+}
+
+.header-filter-primary{
+    @include header_gradient($brand-primary);
+}
+
+.header-filter-success{
+    @include header_gradient($brand-success);
+}
+
+.header-filter-info{
+    @include header_gradient($brand-info);
+}
+
+.header-filter-warning{
+    @include header_gradient($brand-warning);
+}
+
+.header-filter-danger{
+    @include header_gradient($brand-danger);
+}
+
 .gallery{
     .image{
         img{
@@ -84,6 +121,7 @@ h2.title{
     z-index: 1031;
 }
 
+
 .index-page{
     .wrapper > .header{
         height: 90vh;
@@ -107,14 +145,10 @@ h2.title{
     .section-basic{
         padding-top: 15px;
     }
-    .header-filter:after{
-        background: rgba(101, 47, 142, 0.64);
-        background: linear-gradient(45deg,  rgba(101, 47, 142, 0.88) 0%, rgba(125, 46, 185, 0.45) 100%);
-        background: -moz-linear-gradient(135deg,  rgba(101, 47, 142, 0.88) 0%, rgba(125, 46, 185, 0.45) 100%);
-        background: -webkit-linear-gradient(135deg,  rgba(101, 47, 142, 0.88) 0%, rgba(125, 46, 185, 0.45) 100%);
-
-    }
 }
+
+
+
 
 // style for the landing page
 .landing-page{

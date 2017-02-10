@@ -1,0 +1,71 @@
+.wrapper > .header{
+  background-position: center center;
+  background-size: cover;
+  height: auto;
+  min-height: 100vh;
+}
+.wrapper > .page-header{
+  height: auto;
+  min-height: 60vh;
+  background-position: center center;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+// general style for example pages
+.header-filter{
+  position: relative;
+
+  &:after{
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background-color: rgba(0,0,0,.4);
+  }
+
+  .container{
+    z-index: 2;
+    position: relative;
+  }
+}
+
+@mixin header_gradient($base-color) {
+  background: lighten($base-color, 36%);
+  background: linear-gradient(45deg, lighten($base-color, 36%) 0%, lighten($base-color, 36%) 100%);
+  background: -moz-linear-gradient(135deg, lighten($base-color, 36%) 0%, lighten($base-color, 36%) 100%);
+  background: -webkit-linear-gradient(135deg, lighten($base-color, 36%) 0%, lighten($base-color, 36%) 100%);
+}
+
+.header-filter:after{
+  @include header_gradient($brand-primary);
+}
+
+.header-filter-success:after{
+  @include header_gradient($brand-success);
+}
+
+.header-filter-info:after{
+  @include header_gradient($brand-success);
+}
+
+.header-filter-warning:after{
+  @include header_gradient($brand-success);
+}
+
+.header-filter-danger:after{
+  @include header_gradient($brand-success);
+}
+
+.header-filter:after{
+  background: rgba(38, 82, 188, 0.64);
+  background: linear-gradient(45deg,  rgba(38, 82, 188, 0.88) 0%, rgba(2, 17, 216, 0.45) 100%);
+  background: -moz-linear-gradient(135deg,  rgba(38, 82, 188, 0.88) 0%, rgba(2, 17, 216, 0.45) 100%);
+  background: -webkit-linear-gradient(135deg,  rgba(38, 82, 188, 0.88) 0%, rgba(2, 17, 216, 0.45) 100%);
+
+}

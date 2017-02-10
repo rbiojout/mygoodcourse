@@ -59,12 +59,6 @@ require('geocomplete/jquery.geocomplete.js');
 // cocoon to add/remove via javascript associated childs
 require('./lib/cocoon.js');
 
-// turbolinks
-require('jquery-turbolinks');
-var Turbolinks = require("turbolinks");
-Turbolinks.start();
-require('./compatibility.js');
-
 require('./button.js');
 require('./customers.js');
 require('./geocoding.js');
@@ -78,12 +72,35 @@ require('./sortable.js');
 require('./stripe-payment.js');
 
 // require('material-kit-free/assets/js/material-kit');
+require('./material-kit/material.js');
+require('./material-kit/material-kit.js');
+//import {materialKit, materialKitDemo} from './material-kit/material-kit.js';
+//window.materialKit = require('./material-kit/material-kit.js').materialKit;
+//window.materialKitDemo = require('./material-kit/material-kit.js').materialKitDemo;
+
+//require('./material-kit/material-kit.js');
+//require('./material-kit/material-kit.js');
+// require('./material-kit/material-kit.js');
+// var materialKit = require('./material-kit/material-kit.js').materialKit;
+// var materialKitDemo = require('./material-kit/material-kit.js').materialKitDemo;
+//var materialKitDemo = require('./material-kit/material-kit.js');
+
+
+console.log(window.materialKit);
+
+// turbolinks
+// require('jquery-turbolinks');
+// var Turbolinks = require("turbolinks");
+// Turbolinks.start();
+// require('./compatibility.js');
 
 // import './global.scss';
 
+
+
 console.log("Hello the world!");
 
-$(document).on('turbolinks:load', function() {
+$(document).ready(function() {
     window.setTimeout((function() {
         $('.alert-flash').fadeTo(500, 0).slideUp(500, function() {
             $(this).remove();
@@ -91,7 +108,7 @@ $(document).on('turbolinks:load', function() {
     }), 4000);
 });
 
-document.addEventListener('turbolinks:load', function() {
+$(document).ready(function() {
     // attach event for ellipsis
     $('.ellipsis').dotdotdot({
         watch: "window"

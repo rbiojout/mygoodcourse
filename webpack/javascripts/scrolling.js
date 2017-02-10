@@ -20,7 +20,7 @@
 //<# end %>
 // display more reviews when displaying the reviews of a customer
 
-document.addEventListener('turbolinks:load', function() {
+$(document).ready(function() {
     if ($('#infinite-scrolling-reviews').length > 0) {
         $(window).on('scroll', function() {
             var more_reviews_url;
@@ -33,7 +33,7 @@ document.addEventListener('turbolinks:load', function() {
     }
 });
 
-document.addEventListener('turbolinks:load', function() {
+$(document).ready(function() {
     if ($('#infinite-scrolling-products').size() > 0) {
         $(window).on('scroll', function() {
             var more_products_url;
@@ -46,7 +46,7 @@ document.addEventListener('turbolinks:load', function() {
     }
 });
 
-document.addEventListener('turbolinks:load', function() {
+$(document).ready(function() {
     if ($('#infinite-scrolling-posts').size() > 0) {
         $(window).on('scroll', function() {
             var more_posts_url;
