@@ -13,6 +13,27 @@
 
   <%= javascript_include_tag *webpack_asset_paths('global', extension: 'js') %>
   <%= stylesheet_link_tag *webpack_asset_paths('global', extension: 'css') %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<style>
+
+
+  .affix {
+    top: 90px;
+    width: 213px;
+  }
+
+  .affix-bottom {
+    bottom: 200px;
+    width: 213px;
+    position: fixed;
+  }
+  @media (min-width: 1200px) {
+    .affix {
+      width: 263px;
+    }
+  }
+</style>
 
 
   <%= javascript_tag do %>
@@ -28,7 +49,7 @@
   <%= tag :meta, :name => 'stripe-key', :content => Rails.application.secrets.stripe_publishable_key %>
 
 </head>
-<body class="index-page" data-spy="scroll" data-target="#navScrollspy" data-offset="70">
+<body data-spy="scroll" data-target="#navScrollspy" data-offset="70">
 
 <header>
   <%= render 'layouts/navigation' %>
@@ -36,19 +57,7 @@
 
 
 <div class="wrapper">
-  <div class="page-header header-filter" data-parallax="active" style="background-image: url('/images/background.jpeg');">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-          <div class="brand">
-            <h1>Material Kit.</h1>
-            <h3>A Badass Bootstrap UI Kit based on Material Design.</h3>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
+  <%= yield :page_header %>
 
   <div class="main main-raised">
     <div class="section">

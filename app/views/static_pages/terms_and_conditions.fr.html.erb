@@ -2,12 +2,27 @@
 <% provide(:title, t('activerecord.attributes.customer.terms_of_service')) %>
 
 
+<% content_for :page_header do %>
+    <div class="img-header header-filter-warning" data-parallax="active" style="background-image: url('/images/banner_1.jpg');">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="brand">
+              <h1><%= t('activerecord.attributes.customer.terms_of_service')%></h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<% end %>
+
 
 <div class="container">
 <div class="row">
 
 <div class="col-md-3" id="navScrollspy" role="navigation">
-  <ul class="affix_nav nav nav-pills nav-stacked hidden-xs hidden-sm affix">
+  <ul class="affix_nav nav nav-pills nav-stacked hidden-xs hidden-sm affix-top" data-spy="affix" data-offset-top="400" data-offset-bottom="200">
     <li><a href="#forewords" data-turbolinks="false">Préambule - Définitions</a></li>
     <li><a href="#obligation_platform" data-turbolinks="false">Obligations de MyGoodCourse</a></li>
     <li><a href="#obligation_member" data-turbolinks="false">Obligations du Membre</a></li>

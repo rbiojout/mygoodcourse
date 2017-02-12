@@ -1,5 +1,22 @@
 <% provide(:title, t('page.who_we_are')) %>
 
+
+<% content_for :page_header do %>
+<div class="img-header-full header-filter img-parallax" data-parallax="active" style="background-image: url('/images/banner_2.jpg');">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2">
+        <div class="brand">
+          <h1>MyGoodCourse</h1>
+          <h3>La place de marché des bons cours d'enseignants.</h3>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+<% end %>
+
 <!-- Image Header -->
 <div class="parallaxed banner_1" data-stellar-background-ratio="0.5"><span>
       <h2>Notre mission: vous aider dans votre travail d'enseignant</h2>
@@ -344,7 +361,7 @@
     window_width = $(window).width();
 
     if (window_width >= 992){
-      big_image = $('.wrapper > .header');
+      big_image = $('.img-parallax');
 
       $(window).on('scroll', materialKitDemo.checkScrollForParallax);
     }

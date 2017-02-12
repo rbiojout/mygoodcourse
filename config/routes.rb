@@ -341,6 +341,7 @@ Rails.application.routes.draw do
     get 'contact' => 'static_pages#contact', as: 'contact'
     get 'about' => 'static_pages#about', as: 'about'
     get 'cheating' => 'static_pages#cheating', as: 'cheating'
+    get 'components' => 'static_pages#components', as: 'components'
     get 'terms_and_conditions' => 'static_pages#terms_and_conditions', as: 'terms_and_conditions'
 
     # ressources
