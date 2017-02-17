@@ -1,15 +1,28 @@
 <% provide(:title, I18n.translate('page.catalog')) %>
 
+
+
 <!-- Image Header -->
-<div class="parallaxed banner_<%= rand(200..209)%>" data-stellar-background-ratio="0.5"><span>
-<h1><%= t('page.catalog') %></h1>
-</span>
-</div>
+<% content_for :page_header do %>
+    <div class="img-header header-filter parallaxed banner_<%= rand(200..209)%>" data-stellar-background-ratio="0.5">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-8 col-md-offset-2">
+            <div class="brand">
+              <h1><%= t('page.catalog') %></h1>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+<% end %>
 <!-- /.row -->
 
 <!-- Page Content -->
 
 <!-- search -->
+<div class="margined-vertical">
 <%= form_tag(catalog_products_path, method: :get) do  %>
     <%= text_field_tag 'query' %>
     <%= button_tag t('page.search'), class: 'btn btn-primary btn-sm' %>
@@ -20,7 +33,8 @@
         <% end %>
     <% end %>
 <% end %>
-<hr>
+</div>
+
 <!-- end search -->
 
 

@@ -9,13 +9,36 @@
 ///////////////////////////////////////////////////
 
 
+@import "./custom/_variables";
+@import "./custom/_mixins";
+
+@import './custom/shadows';
+
+/*           Animations              */
+
+.animation-transition-general{
+  @include transition($general-transition-time, $transition-linear);
+}
+
+.animation-transition-slow{
+  @include transition($slow-transition-time, $transition-linear);
+}
+
+.animation-transition-fast{
+  @include transition($fast-transition-time, $transition-ease);
+}
+
+@import "./custom/_headers";
+// SASS conversion note: please mirror any content change in _mixins-shared.scss navbar-variations-content
+//@include navbar-variations(unquote(".navbar"), unquote(""), $brand-primary);
+@import "./custom/_navbar";
+@import "./custom/_pagination";
+
 
 
 
 /* universal */
-body {
-  padding-top: 65px;
-}
+
 section {
   overflow: auto;
 }

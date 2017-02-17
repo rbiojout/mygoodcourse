@@ -1,0 +1,109 @@
+// add a image at the top of the page
+.wrapper > .img-header-full, .img-header{
+  background-position: center center;
+  background-size: cover;
+  height: auto;
+  min-height: 60vh;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  .brand{
+    margin-top: 20vh;
+    color: #FFFFFF;
+    text-align: center;
+
+    h1{
+      font-size: 4.8em;
+      font-weight: 600;
+      max-width: 400px;
+    }
+    h3{
+      font-size: 1.5em;
+      text-transform: uppercase;
+      max-width: 400px;
+      margin: 10px auto 0;
+    }
+  }
+}
+// page-header covers all the page
+.wrapper > .img-header-full{
+  min-height: 100vh;
+  .brand{
+    margin-top: 30vh;
+  }
+}
+.main{
+  background: #FFFFFF;
+  position: relative;
+  z-index: 3;
+
+}
+.main-raised{
+  margin: 75px 30px 0px;
+  border-radius: $border-radius-base * 2;
+}
+
+// special case with headers
+.img-header-full + .main-raised, .img-header + .main-raised {
+  margin: -60px 30px 0px;
+}
+
+.title{
+  font-weight: bold;
+  color: $black-color;
+}
+h2.title{
+  margin-bottom: $margin-base * 2;
+}
+.description{
+  color: $gray-light;
+}
+
+// general style for example pages
+@mixin header_gradient($base-color) {
+  position: relative;
+
+  &:after {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: block;
+    left: 0;
+    top: 0;
+    content: "";
+    background: lighten($base-color, 36%);
+    background: linear-gradient(45deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
+    background: -moz-linear-gradient(135deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
+    background: -webkit-linear-gradient(135deg, transparentize(darken($base-color, 0%),0.12) 0%, transparentize(saturate($base-color, 20%),0.55) 100%);
+  }
+
+  .container{
+    z-index: 2;
+    position: relative;
+  }
+}
+
+.header-filter{
+  @include header_gradient($gray-light);
+}
+
+.header-filter-primary{
+  @include header_gradient($brand-primary);
+}
+
+.header-filter-success{
+  @include header_gradient($brand-success);
+}
+
+.header-filter-info{
+  @include header_gradient($brand-info);
+}
+
+.header-filter-warning{
+  @include header_gradient($brand-warning);
+}
+
+.header-filter-danger{
+  @include header_gradient($brand-danger);
+}
