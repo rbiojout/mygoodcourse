@@ -1,7 +1,7 @@
 // add a image at the top of the page
 .wrapper > .img-header-full, .img-header{
   background-position: center center;
-  background-size: cover;
+  background-size: auto 100%;
   height: auto;
   min-height: 60vh;
   margin: 0;
@@ -32,6 +32,13 @@
     margin-top: 30vh;
   }
 }
+
+@media screen and (min-width: $screen-sm-min) {
+  .wrapper > .img-header-full, .img-header {
+    background-size: cover;
+  }
+}
+
 .main{
   background: #FFFFFF;
   position: relative;

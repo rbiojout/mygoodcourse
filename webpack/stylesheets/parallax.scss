@@ -14,20 +14,19 @@ html {
   overflow: hidden;
 }
 .parallaxed {
-    // background-attachment: fixed;
-    background-position: 50% 0;
-    background-color: transparent;
-    background-repeat: no-repeat;
-    background-size: cover;
-    -webkit-background-size: cover; /* safari may need this */
-    width: auto;
-    position: relative;
+  background-color: transparent;
+  // background-attachment: fixed;
+  background-size: auto 100%;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 // fix for mobile devices
 @media screen and (min-width: $screen-sm-min) {
   .parallaxed {
     background-attachment: fixed;
+    background-size: cover;
   }
 }
 
