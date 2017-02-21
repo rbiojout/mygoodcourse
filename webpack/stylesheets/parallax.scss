@@ -14,7 +14,7 @@ html {
   overflow: hidden;
 }
 .parallaxed {
-    background-attachment: fixed;
+    // background-attachment: fixed;
     background-position: 50% 0;
     background-color: transparent;
     background-repeat: no-repeat;
@@ -23,6 +23,15 @@ html {
     width: auto;
     position: relative;
 }
+
+// fix for mobile devices
+@media screen and (min-width: $screen-sm-min) {
+  .parallaxed {
+    background-attachment: fixed;
+  }
+}
+
+
 
 // world pictures
 // space pictures
