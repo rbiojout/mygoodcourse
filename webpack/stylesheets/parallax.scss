@@ -1,5 +1,11 @@
 // parallax is based on stellar.js and jquery.waypoints
 // there is a limitation on ios devices.... use only one parallax element per page at the top
+
+html {
+  height: 100vh; /* set viewport constraint */
+  min-height: 100%; /* enforce height */
+}
+
 .parallax {
   background-color: transparent;
   background-attachment: fixed;
@@ -13,6 +19,7 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: cover;
+    -webkit-background-size: cover; /* safari may need this */
     width: auto;
     position: relative;
 }
