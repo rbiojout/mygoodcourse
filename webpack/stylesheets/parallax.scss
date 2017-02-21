@@ -1,36 +1,43 @@
 // parallax is based on stellar.js and jquery.waypoints
 // there is a limitation on ios devices.... use only one parallax element per page at the top
+.parallax {
+  background-color: transparent;
+  background-attachment: fixed;
+  background-position: 50% 0;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
 .parallaxed {
     background-attachment: fixed;
     background-position: 50% 0;
-    background-color: black;
+    background-color: transparent;
     background-repeat: no-repeat;
-    height: 200px;
+    background-size: cover;
     width: auto;
     position: relative;
-    margin-top: 10px;
-    margin-bottom: 10px;
-}
-.parallaxed span {
-    bottom: 0;
-    color: white;
-    display: block;
-    //left: 50%;
-    //margin-left: -600px;
-    //font-size: 38px;
-    padding: 10px;
-    position: absolute;
-    //text-shadow: 0 2px 0 black, 0 0 10px black;
-    //width: 1200px;
 }
 
-/* Small devices (tablets, 768px and up) */
-@media (min-width: 768px) {
-  .parallaxed {
-    height: 300px;
-  }
-
+// world pictures
+// space pictures
+.home_1 {
+  background-image: url('../images/home_1.jpg');
 }
+.home_2 {
+  background-image: url('../images/home_2.jpg');
+}
+.home_3 {
+  background-image: url('../images/home_3.jpg');
+}
+.home_4 {
+  background-image: url('../images/home_4.jpg');
+}
+.home_5 {
+  background-image: url('../images/home_5.jpg');
+}
+.home_6 {
+  background-image: url('../images/home_6.jpg');
+}
+
 
 // space pictures
 .banner {

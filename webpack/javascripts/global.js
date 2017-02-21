@@ -25,7 +25,9 @@ require('jquery-ui-touch-punch');
 require('jquery-dotdotdot/src/jquery.dotdotdot');
 
 // parallax effect
-require('stellar');
+import Stellar from './lib/jquery-stellar.js';
+
+
 
 // position of the mouse on the screen
 require('jquery-waypoints/waypoints');
@@ -99,6 +101,15 @@ console.log(window.materialKit);
 
 
 console.log("Hello the world!");
+
+
+$(function(){
+    $.stellar({
+        horizontalScrolling: false,
+        verticalOffset: 40
+    });
+});
+
 
 $(document).ready(function() {
     window.setTimeout((function() {

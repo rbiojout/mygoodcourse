@@ -1,0 +1,19 @@
+.divider {
+  position: relative;
+  overflow: hidden;
+  margin: 35px 0;
+  color: #E5E5E5;
+  width: 100%;
+}
+
+.divider.divider-short {
+  margin: 10px 0;
+}
+
+.divider.divider-right {
+  text-align: right;
+}
+
+.divider.divider-center, .divider.divider-center.divider-short {
+  text-align: center;
+}

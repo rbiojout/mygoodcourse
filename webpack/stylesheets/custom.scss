@@ -28,6 +28,10 @@
   @include transition($fast-transition-time, $transition-ease);
 }
 
+@import "./custom/_boxes";
+@import "./custom/_sections";
+@import "./custom/_buttons";
+@import "./custom/_dividers";
 @import "./custom/_headers";
 // SASS conversion note: please mirror any content change in _mixins-shared.scss navbar-variations-content
 //@include navbar-variations(unquote(".navbar"), unquote(""), $brand-primary);

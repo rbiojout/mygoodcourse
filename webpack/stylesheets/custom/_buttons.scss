@@ -1,0 +1,53 @@
+body:not(.device-touch) .btn {
+  -webkit-transition: all .2s ease-in-out;
+  -o-transition: all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+
+
+.btn-round {
+  border-radius: 30px;
+}
+
+.btn-border:not(.btn-fill, .btn-default, .btn-primary, .btn-info, .btn-success, .btn-warning, .btn-danger):hover {
+  background-color: #444;
+  color: #FFF;
+  border-color: transparent!important;
+  text-shadow: 1px 1px 1px rgba(0,0,0,.2);
+}
+
+.btn-border:not(.btn-default, .btn-primary, .btn-info, .btn-success, .btn-warning, .btn-danger) {
+  border-color: #333;
+}
+
+.btn-border {
+  display: inline-block;
+  cursor: pointer;
+  outline: 0;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-width: 2px;
+  background-color: transparent;
+  color: #333;
+  font-weight: 600;
+  text-shadow: none;
+}
+
+
+.btn.btn-desc span {
+  display: block;
+  margin-top: 10px;
+  font-weight: 400;
+  letter-spacing: 1px;
+  font-style: italic;
+  text-transform: none;
+}
+
+.btn.btn-desc {
+    padding: 24px 34px;
+    height: auto;
+    div {
+      display: inline-block;
+    }
+}
