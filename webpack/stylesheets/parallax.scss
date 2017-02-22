@@ -13,22 +13,20 @@ html {
   background-repeat: no-repeat;
   overflow: hidden;
 }
+// it is important not to use background-attachment: fixed;
+// if so, with touch devices, the size is considered as the full page
+// the result is then not consistant
 .parallaxed {
   background-color: transparent;
+  // background-size: 100% 100%;
+  background-size: cover!important;
   // background-attachment: fixed;
-  background-size: auto 100%;
-  background-position: 50% 0;
+  background-attachment: scroll!important;
+  background-position: center center;
   background-repeat: no-repeat;
   overflow: hidden;
 }
 
-// fix for mobile devices
-@media screen and (min-width: $screen-sm-min) {
-  .parallaxed {
-    background-attachment: fixed;
-    background-size: cover;
-  }
-}
 
 
 
