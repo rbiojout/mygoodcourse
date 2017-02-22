@@ -25,85 +25,66 @@
     <p class="lead">MyGoodCourse a pour mission d'offrir une plateforme pour aider les enseignants à construire et à promouvoir leurs cours. Nous visons de devenir la place de marché pour tous les "Bons Cours" des enseignants. </p>
   </div>
 </div>
-<div class="row ">
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
-    <div class="panel panel-default text-center noborder">
-      <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-diamond fa-stack-1x fa-inverse"></i>
-                        </span>
-      </div>
-      <div class="panel-body">
-        <h4>Trouvez des cours</h4>
-        <p>Vous cherchez des ressources fabuleuses pour votre cours? Parcourez donc les bonnes ressources déjà réalisées par des enseignants!</p>
+
+
+  <div class="row">
+    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+      <div class="feature-box fbox-center fbox-effect">
+        <div class="fbox-icon">
+          <a href="#"><i class="fa fa-diamond i-alt"></i></a>
+        </div>
+          <h4>Trouvez des cours</h4>
+          <p>Vous cherchez des ressources fabuleuses pour votre cours? Parcourez donc les bonnes ressources déjà réalisées par des enseignants!</p>
       </div>
     </div>
-  </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="1.5s">
-    <div class="panel panel-default text-center noborder">
-      <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-thumbs-o-up fa-stack-1x fa-inverse"></i>
-                        </span>
-      </div>
-      <div class="panel-body">
-        <h4>Rejoignez une communauté</h4>
-        <p>Avec l'aide des autres utilisateurs, améliorez votre productivité, construisez votre réseau, gagnez en réputation et en reconnaissance.</p>
+    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="1.5s">
+      <div class="feature-box fbox-center fbox-effect">
+        <div class="fbox-icon">
+          <a href="#"><i class="fa fa-thumbs-o-up i-alt"></i></a>
+        </div>
+          <h4>Rejoignez une communauté</h4>
+          <p>Avec l'aide des autres utilisateurs, améliorez votre productivité, construisez votre réseau, gagnez en réputation et en reconnaissance.</p>
       </div>
     </div>
-  </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="2.5s">
-    <div class="panel panel-default text-center noborder">
-      <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-                        </span>
-      </div>
-      <div class="panel-body">
-        <h4>Sauvegardez votre travail</h4>
-        <p>Mettez en place facilement une sauvegarde pour vos cours, stockez les dans le cloud, partagez vos cours si vous le souhaitez avec d'autres utilisateurs.</p>
-      </div>
+    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="2.5s">
+      <div class="feature-box fbox-center fbox-effect">
+        <div class="fbox-icon">
+          <a href="#"><i class="fa fa-database i-alt"></i></a>
+        </div>
+          <h4>Sauvegardez votre travail</h4>
+          <p>Mettez en place facilement une sauvegarde pour vos cours, stockez les dans le cloud, partagez vos cours si vous le souhaitez avec d'autres utilisateurs.</p>
+        </div>
     </div>
-  </div>
-  <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="3.5s">
-    <div class="panel panel-default text-center noborder">
-      <div class="panel-heading">
-                        <span class="fa-stack fa-5x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-money fa-stack-1x fa-inverse"></i>
-                        </span>
-      </div>
-      <div class="panel-body">
+    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="3.5s">
+      <div class="feature-box fbox-center fbox-effect">
+        <div class="fbox-icon">
+          <a href="#"><i class="fa fa-money i-alt"></i></a>
+        </div>
         <h4>Gagnez de l'argent</h4>
         <p>Vous pouvez décider de vendre ou non vos cours, en fonction de vos choix certaines ressources peuvent être payantes et vous serez payé sur votre compte en banque par les autres utilisateurs.</p>
       </div>
     </div>
   </div>
-</div>
-  <div class="row">
-    <%= link_to 'Inscrivez vous à MyGoodCourse et commencez votre aventure', new_customer_registration_path, class: 'btn btn-success input-block-level form-control margined-vertical' %>
+  <div class="row center">
+    <%= link_to new_customer_registration_path, class: 'btn btn-success btn-border btn-desc margined-vertical' do %>
+        Inscrivez vous <span>et commencez votre aventure</span>
+    <% end %>
   </div>
   </div>
 
 <!-- Image Header -->
-<div class="row white-content">
-  <br/>
-  <br/>
-  <div class="col-lg-12">
+<div class="margined-vertical">
     <img class="img-responsive" src="/images/banner_2.jpg" alt="">
-  </div>
 </div>
 <!-- /.row -->
 
 
 <!-- Service Tabs -->
-<div class="row white-content">
-  <div class="col-lg-12">
-    <h2 class="page-header">Nos valeurs</h2>
-  </div>
+<div class="heading-block center">
+  <h2>Nos valeurs</h2>
+</div>
+
+<div class="row">
   <div class="col-lg-12 staggered-animation-container">
 
     <ul id="myTab" class="nav nav-tabs nav-justified">
@@ -161,133 +142,85 @@
 </div>
 
 <!-- Image Header -->
-<div class="row white-content">
-  <br/>
-  <br/>
-  <div class="col-lg-12">
+<div class="margined-vertical">
     <img class="img-responsive" src="/images/banner_3.jpg" alt="">
-  </div>
 </div>
 <!-- /.row -->
 
 <!-- Service List -->
+<div class="heading-block center">
+  <h2>Nos services</h2>
+</div>
+
 <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-<div class="row white-content">
-  <div class="col-lg-12">
-    <h2 class="page-header">Notre plateforme</h2>
-  </div>
+<div class="row">
   <div class="col-md-4">
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-lock fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-lock"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Securité</h4>
-        <p>Nous connaissons la valeur de cotre travail et nous mettons en place un environnement très sûr pour vos ressouces pédagogiques.</p>
-      </div>
+      <h4>Securité</h4>
+      <p>Nous connaissons la valeur de cotre travail et nous mettons en place un environnement très sûr pour vos ressouces pédagogiques.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-file-pdf-o fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-file-pdf-o"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Format universel</h4>
-        <p>Nous travaillons avec des formats universels qui pourrons s'adapter facilement avec toutes les plateformes. Fournissez un fichier PDF et nous prenons en charge tout le processus de gestion associé.</p>
-      </div>
+      <h4>Format universel</h4>
+      <p>Nous travaillons avec des formats universels qui pourrons s'adapter facilement avec toutes les plateformes. Fournissez un fichier PDF et nous prenons en charge tout le processus de gestion associé.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-support fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-support"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Simplicité</h4>
-        <p>Nous cherchons à rendre le processus aussi simple que possible. Nous travaillons continuellement dans ce but.</p>
-      </div>
+      <h4>Simplicité</h4>
+      <p>Nous cherchons à rendre le processus aussi simple que possible. Nous travaillons continuellement dans ce but.</p>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-database fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-database"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Stockage</h4>
-        <p>Ne vous souciez plus du stockage de vos cours. Nous pouvons tous les stocker dans le "cloud" si vous le souhaitez.</p>
-      </div>
+      <h4>Stockage</h4>
+      <p>Ne vous souciez plus du stockage de vos cours. Nous pouvons tous les stocker dans le "cloud" si vous le souhaitez.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-mobile fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-mobile"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Mobile</h4>
-        <p>MyGoodCourse est également disponible sur mobile. Vous pouvez surveillez les évolution même en déplacement, en particulier vos ventes.</p>
-      </div>
+      <h4>Mobile</h4>
+      <p>MyGoodCourse est également disponible sur mobile. Vous pouvez surveillez les évolution même en déplacement, en particulier vos ventes.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-bank fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-bank"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Paiement sécurisé</h4>
-        <p>Nous nous appuyons sur des partenaires pour les transactions ficnancières. Les informations sensible seront chez ces partenaires qui ont le plus haut niveau de sécurité.</p>
-      </div>
+      <h4>Paiement sécurisé</h4>
+      <p>Nous nous appuyons sur des partenaires pour les transactions ficnancières. Les informations sensible seront chez ces partenaires qui ont le plus haut niveau de sécurité.</p>
     </div>
   </div>
   <div class="col-md-4">
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-paper-plane fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-paper-plane"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Information</h4>
-        <p>Nous vous tiendrons au courant des évolutions de vos ventes, de votre communauté.</p>
-      </div>
+      <h4>Information</h4>
+      <p>Nous vous tiendrons au courant des évolutions de vos ventes, de votre communauté.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-space-shuttle fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-space-shuttle"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Mise en place</h4>
-        <p>Vous pouvez très facilement démarrer dès  <b>aujourd'hui</b> et commencer à déposer vos cours, pas besoin d'attendre.</p>
-      </div>
+      <h4>Mise en place</h4>
+      <p>Vous pouvez très facilement démarrer dès  <b>aujourd'hui</b> et commencer à déposer vos cours, pas besoin d'attendre.</p>
     </div>
-    <div class="media">
-      <div class="pull-left">
-                        <span class="fa-stack fa-2x">
-                              <i class="fa fa-circle fa-stack-2x text-primary"></i>
-                              <i class="fa fa-recycle fa-stack-1x fa-inverse"></i>
-                        </span>
+    <div class="feature-box fbox-effect">
+      <div class="fbox-icon">
+        <a href="#"><i class="fa fa-recycle"></i></a>
       </div>
-      <div class="media-body">
-        <h4 class="media-heading">Productivité</h4>
-        <p>Vous n'avez pas besoin de partir de zéro, il vous suffit de télécharger vos fichiers actuels au format PDF pour commencer à pouvoir vendre vos cours.</p>
-      </div>
+      <h4>Productivité</h4>
+      <p>Vous n'avez pas besoin de partir de zéro, il vous suffit de télécharger vos fichiers actuels au format PDF pour commencer à pouvoir vendre vos cours.</p>
     </div>
   </div>
 </div>
@@ -304,12 +237,8 @@
 
 
 <!-- Image Header -->
-<div class="row">
-  <br/>
-  <br/>
-  <div class="col-lg-12">
+<div class="margined-vertical">
     <img class="img-responsive" src="/images/banner_4.jpg" alt="">
-  </div>
 </div>
 <!-- /.row -->
 
