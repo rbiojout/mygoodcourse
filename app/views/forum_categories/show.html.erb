@@ -1,10 +1,14 @@
 <% provide(:title, @forum_category.name) %>
 
 <!-- Image Header -->
-<div class="parallaxed banner" data-stellar-background-ratio="0.5"><span>
-    <h1><%= yield :title %></h1>
-</span>
-</div>
+
+<% content_for :slider do %>
+    <div class="img-header parallaxed banner bg-inverse" data-stellar-background-ratio="1.5">
+      <div class="slider-caption">
+        <h1><%= yield :title %></h1>
+      </div>
+    </div>
+<% end %>
 <!-- /.row -->
 
 <script language="JavaScript">

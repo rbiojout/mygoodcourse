@@ -1,6 +1,9 @@
 .wrapper > .header{
   background-position: center center;
-  background-size: cover;
+  background-size: cover!important;
+  // prevent size problem with mobile devices
+  // background-attachment: fixed; is taking the full size
+  background-attachment: scroll!important;
   height: auto;
   min-height: 100vh;
 }

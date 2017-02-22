@@ -51,40 +51,40 @@
 </head>
 <body>
 
-<header>
+<header id="header">
   <%= render 'layouts/navigation' %>
 </header>
 
-<div class="wrapper">
-  <%= yield :page_header %>
-
- <div class="main main-raised">
-   <div class="section">
+<section id="slider">
+  <%= yield :slider %>
+</section>
 
 
-<main class="container">
-
-  <div id="alert_notice_holder">
-
-  </div>
+<section id="page_title">
+  <!-- alerts -->
+  <div id="alert_notice_holder"></div>
   <% if notice %>
       <%= render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: notice}) %>
   <% end %>
   <% if alert %>
       <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
   <% end %>
+  <!-- end alerts -->
 
-  <%= yield %>
-  <!-- FOOTER -->
+  <%= yield :page_title %>
+</section>
 
-  <%= debug(params) if Rails.env.development? %>
+<section id="content" <% if content_for?(:slider) %>class="with-slider"<% end %> >
+  <div class="container">
+    <%= yield %>
+    <%= debug(params) if Rails.env.development? %>
+  </div>
+</section>
 
-</main>
 
-
-   </div>
- </div>
-</div>
+<footer class="bs-docs-footer" role="contentinfo">
+  <%= render 'layouts/footer' %>
+</footer>
 
 <div class="modal fade" id="app_dialog" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"  data-backdrop="static" data-keyboard="true">
   <div class="modal-dialog">
@@ -99,11 +99,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
-
-<footer class="bs-docs-footer" role="contentinfo">
-  <%= render 'layouts/footer' %>
-</footer>
 
 </body>
 </html>

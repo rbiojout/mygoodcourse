@@ -1,9 +1,9 @@
 // add a image at the top of the page
-.wrapper > .img-header-full, .img-header{
+.img-header-full, .img-header{
   background-position: center center;
-  background-size: auto 100%;
+  background-size: cover;
   height: auto;
-  min-height: 60vh;
+  min-height: 30vh;
   margin: 0;
   padding: 0;
   border: 0;
@@ -26,7 +26,7 @@
   }
 }
 // page-header covers all the page
-.wrapper > .img-header-full{
+.img-header-full{
   min-height: 100vh;
   .brand{
     margin-top: 30vh;

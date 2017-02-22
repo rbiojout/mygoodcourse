@@ -39,7 +39,47 @@
 @import "./custom/_pagination";
 
 
+$offset-nav: 80px;
 
+#header, #header-wrap, #logo img {
+  height: $offset-nav;
+  -webkit-transition: height .4s ease,opacity .3s ease;
+  -o-transition: height .4s ease,opacity .3s ease;
+  transition: height .4s ease,opacity .3s ease;
+}
+
+#slider {
+  position: relative;
+}
+
+#header+#slider {
+  top: -$offset-nav;
+  margin-bottom: -$offset-nav;
+}
+
+.slider-caption {
+  padding-top: $offset-nav;
+  text-align: center;
+  font-size: $font-size-h3;
+  font-weight: 300;
+  h1 {
+    font-size: floor($font-size-h1 * 1.25);
+    font-weight: 600;
+  }
+  h2 {
+    font-size: floor($font-size-h2 * 1.25);
+    font-weight: 400;
+  }
+}
+
+
+#content {
+  padding-top: 70px;
+}
+
+#content.with-slider {
+  padding-top: 10px;
+}
 
 /* universal */
 
@@ -490,6 +530,10 @@ $size-social: 24px;
 .affix_nav li>a {
   padding-top: 5px;
   padding-bottom: 5px;
+}
+
+.padded-vertical {
+  padding: 0px 10px 0px 10px;
 }
 
 .padded-content {
