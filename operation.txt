@@ -1,4 +1,15 @@
+
+
 heroku
+
+## BUILDPACKS
+We need differents buildpacks to hadle NodeJS and Rails
+heroku buildpacks:set heroku/ruby --remote production
+heroku buildpacks:add --index 1 heroku/nodejs --remote production
+
+IMPORTANT: we need to build with dev dependencies for NodeJS
+heroku config:set NPM_CONFIG_PRODUCTION=false
+
 
 When pushing a branch (development)
 push git push staging development:master

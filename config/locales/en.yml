@@ -160,12 +160,14 @@ en:
       cycle:
         one: 'cycle'
         other: 'cycles'
+        all: 'All cycles'
       employee:
         one: 'employee'
         other: 'employees'
       family:
         one: 'family'
         other: 'families'
+        all: 'All families'
       forum_family:
         one: 'forum family'
         other: 'forum families'

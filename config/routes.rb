@@ -333,7 +333,7 @@ Rails.application.routes.draw do
   # position the locale in the URL in order to have a nicer URL
   #
   #
-  scope '/:locale', :locale => /fr|en/, :defaults => {:locale => 'fr'} do
+  scope '/:locale', :locale => /fr|en/, :defaults => {} do
     # static pages
     get 'static_pages/home', as: 'home'
     get 'how_it_works' => 'static_pages#how_it_works', as: 'how_it_works'

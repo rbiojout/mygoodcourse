@@ -22,6 +22,7 @@ class ApplicationController < ActionController::Base
 protected
 
   def set_i18n_locale_from_params
+    logger.debug("---- entering i18 #{I18n.locale}")
     if params[:locale]
       if I18n.available_locales.map(&:to_s).include?(params[:locale])
         I18n.locale = params[:locale]
@@ -33,6 +34,7 @@ protected
     else
       I18n.locale = I18n.default_locale
     end
+    logger.debug("---- end entering i18 #{I18n.locale}")
   end
 
   # We need to have a filter when listing.
