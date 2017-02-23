@@ -5,8 +5,10 @@
 <!-- Image Header -->
 <% content_for :slider do %>
     <div class="img-header parallaxed home_6 bg-inverse" data-stellar-background-ratio="1.5">
-      <div class="slider-caption">
-        <h1><%= t('activerecord.models.post', count: 2).capitalize %></h1>
+      <div class="bottom-caption">
+        <div class="container">
+          <h1><%= t('activerecord.models.post', count: 2).capitalize %></h1>
+        </div>
       </div>
     </div>
 <% end %>

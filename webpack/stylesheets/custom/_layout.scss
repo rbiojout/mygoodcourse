@@ -1,0 +1,80 @@
+$offset-nav: 80px;
+
+#header, #header-wrap, #logo img {
+  height: $offset-nav;
+  -webkit-transition: height .4s ease,opacity .3s ease;
+  -o-transition: height .4s ease,opacity .3s ease;
+  transition: height .4s ease,opacity .3s ease;
+}
+
+#slider {
+  position: relative;
+}
+
+#header+#slider {
+  top: -$offset-nav;
+  margin-bottom: -$offset-nav;
+}
+
+// caption at the center of the slider
+.slider-caption {
+  padding-top: $offset-nav;
+  text-align: center;
+  font-size: $font-size-h3;
+  font-weight: 300;
+  h1 {
+    font-size: floor($font-size-h1 * 1.25);
+    font-weight: 600;
+  }
+  h2 {
+    font-size: floor($font-size-h2 * 1.25);
+    font-weight: 400;
+  }
+}
+
+// caption at the bottom
+.bottom-caption {
+  text-align: left;
+  color: white;
+  font-weight: 300;
+  width: 100%;
+  position: absolute;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.50);
+  h1, h2, h3, h4, h5 {
+    margin: 5px 0;
+  }
+}
+
+#content {
+  padding-top: 70px;
+}
+
+#content.with-slider {
+  padding-top: 10px;
+}
+
+#footer{
+  width: 100%;
+  padding-top: 10px;
+  color: #99979c;
+  text-align: center;
+  background-color: #2a2730;
+  a {
+    color: white;
+  }
+}
+/* Override Rail's default error calls with Bootstrap 3 */
+#error_explanation {
+  color: #E74C3C;
+  ul {
+    color: #E74C3C;
+    margin: 0 0 30px 0;
+  }
+}
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}

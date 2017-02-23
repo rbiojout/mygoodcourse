@@ -28,6 +28,7 @@
   @include transition($fast-transition-time, $transition-ease);
 }
 
+@import "./custom/_layout";
 @import "./custom/_boxes";
 @import "./custom/_sections";
 @import "./custom/_buttons";
@@ -39,47 +40,7 @@
 @import "./custom/_pagination";
 
 
-$offset-nav: 80px;
 
-#header, #header-wrap, #logo img {
-  height: $offset-nav;
-  -webkit-transition: height .4s ease,opacity .3s ease;
-  -o-transition: height .4s ease,opacity .3s ease;
-  transition: height .4s ease,opacity .3s ease;
-}
-
-#slider {
-  position: relative;
-}
-
-#header+#slider {
-  top: -$offset-nav;
-  margin-bottom: -$offset-nav;
-}
-
-.slider-caption {
-  padding-top: $offset-nav;
-  text-align: center;
-  font-size: $font-size-h3;
-  font-weight: 300;
-  h1 {
-    font-size: floor($font-size-h1 * 1.25);
-    font-weight: 600;
-  }
-  h2 {
-    font-size: floor($font-size-h2 * 1.25);
-    font-weight: 400;
-  }
-}
-
-
-#content {
-  padding-top: 70px;
-}
-
-#content.with-slider {
-  padding-top: 10px;
-}
 
 /* universal */
 
@@ -97,19 +58,6 @@ textarea {
 }
 
 
-/* footer */
-.bs-docs-footer {
-  width: 100%;
-  padding-top: 10px;
-  color: #99979c;
-  text-align: center;
-  background-color: #2a2730
-}
-
-.bs-docs-footer-links {
-  padding-left: 0;
-  margin-bottom: 20px;
-}
 /**  Additional colors ------------------------------------------  **/
 .white {
   color: #FFFFFF; }
@@ -345,20 +293,6 @@ see bootstrap-variables.scss for information
 
 
 
-/* Override Rail's default error calls with Bootstrap 3 */
-#error_explanation {
-  color: #E74C3C;
-  ul {
-    color: #E74C3C;
-    margin: 0 0 30px 0;
-  }
-}
-.field_with_errors {
-  @extend .has-error;
-  .form-control {
-    color: $state-danger-text;
-  }
-}
 
 
 /* need for geocoder to disable "powered by Google Maps" */
@@ -475,7 +409,7 @@ see bootstrap-variables.scss for information
 
 /* navigation on the left */
 ul.nav-tree  {
-  margin-left: 15px;
+  margin-left: 10px;
   padding-left: 0px;
   display: block;
   background-color: $gray-lighter;
@@ -491,7 +425,7 @@ ul.nav-tree  {
   li{
     a{
       display: block;
-      padding: 5px 15px;
+      padding: 2px 10px;
 
     }
   }

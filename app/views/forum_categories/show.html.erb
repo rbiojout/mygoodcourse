@@ -4,8 +4,10 @@
 
 <% content_for :slider do %>
     <div class="img-header parallaxed banner bg-inverse" data-stellar-background-ratio="1.5">
-      <div class="slider-caption">
-        <h1><%= yield :title %></h1>
+      <div class="bottom-caption">
+        <div class="container">
+          <h1><%= yield :title %></h1>
+        </div>
       </div>
     </div>
 <% end %>

@@ -53,6 +53,11 @@
 
 <header id="header">
   <%= render 'layouts/navigation' %>
+  <div class='alert alert-success alert-block alert-flashe' id="dialog-notice">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    <h4></h4>
+    <p>THIS IS AN ALERT</p>
+  </div>
 </header>
 
 <section id="slider">
@@ -61,28 +66,28 @@
 
 
 <section id="page_title">
-  <!-- alerts -->
-  <div id="alert_notice_holder"></div>
-  <% if notice %>
-      <%= render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: notice}) %>
-  <% end %>
-  <% if alert %>
-      <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
-  <% end %>
-  <!-- end alerts -->
-
   <%= yield :page_title %>
 </section>
 
 <section id="content" <% if content_for?(:slider) %>class="with-slider"<% end %> >
   <div class="container">
+    <!-- alerts -->
+    <div id="alert_notice_holder">
+      <% if notice %>
+          <%= render(partial: 'shared/dialog_notice_flash', locals: {alert_notice: notice}) %>
+      <% end %>
+      <% if alert %>
+          <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
+      <% end %>
+    </div>
+    <!-- end alerts -->
     <%= yield %>
     <%= debug(params) if Rails.env.development? %>
   </div>
 </section>
 
 
-<footer class="bs-docs-footer" role="contentinfo">
+<footer id="footer" role="contentinfo">
   <%= render 'layouts/footer' %>
 </footer>
 

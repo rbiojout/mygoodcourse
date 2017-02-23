@@ -53,14 +53,6 @@
 
 <header id="header">
   <%= render 'layouts/navigation' %>
-</header>
-
-<section id="slider">
-  <%= yield :slider %>
-</section>
-
-
-<section id="page_title">
   <!-- alerts -->
   <div id="alert_notice_holder"></div>
   <% if notice %>
@@ -70,7 +62,14 @@
       <%= render(partial: 'shared/dialog_alert_flash', locals: {alert: alert}) %>
   <% end %>
   <!-- end alerts -->
+</header>
 
+<section id="slider">
+  <%= yield :slider %>
+</section>
+
+
+<section id="page_title">
   <%= yield :page_title %>
 </section>
 
@@ -83,7 +82,7 @@
 
 
 <!-- FOOTER -->
-<footer class="footer" role="contentinfo">
+<footer id="footer" role="contentinfo">
   <%= render 'layouts/footer' %>
 </footer>
 

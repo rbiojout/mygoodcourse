@@ -1,0 +1,43 @@
+<div id="selector_family_category" class="sidebar-menu hidden-xs">
+    <h3><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h3>
+    <ul class="nav nav-pills nav-stacked category-menu">
+      <li <%= "#{ 'class=active' if session[:family_for_products_id].nil? }"%> ><%= link_to t('activerecord.models.family.all'), catalog_products_path(:family_id => 0) %></li>
+      <% @families.each do |fam| %>
+          <% family_active = false
+             family_active = true if(!session[:family_for_products_id].nil? && session[:family_for_products_id].include?(fam.id)) %>
+          <li <%= "#{ 'class=active' if family_active }"%> > <%= link_to catalog_products_path(:family_id => fam.id) do %><%= fam.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_family(fam.id, @cycles.map(&:id), @levels.map(&:id))%></span><% end %>
+            <ul class="nav-tree">
+              <% fam.categories.each do |cat| %>
+                  <% if @categories.include?(cat)%>
+                      <li class="nav nav-stacked <% if cat.id.to_s == session[:category_for_products_id].to_s %>active<% end %>">
+                        <%= link_to catalog_products_path(:category_id => cat.id) do %><%=cat.name %><% end %>
+                      </li>
+                  <% end %>
+              <%   end %>
+            </ul>
+          </li>
+      <% end %>
+    </ul>
+</div>
+<!-- for smal device -->
+<div class="visible-xs">
+  <div class="panel panel-default">
+
+    <span><%= link_to t('activerecord.models.family.all'), catalog_products_path(:family_id => 0), :class => (session[:family_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
+    <% @families.each do |fam| %>
+        <% family_active = false
+           family_active = true if(!session[:family_for_products_id].nil? && session[:family_for_products_id].include?(fam.id)) %>
+        <span><%= link_to catalog_products_path(:family_id => fam.id), :class => (family_active)?'btn btn-primary':'btn btn-info' do %><%= fam.name %> <% end %></span>
+
+        <% fam.categories.each do |cat| %>
+            <% if @categories.include?(cat)%>
+                            <span>
+                              <%= link_to catalog_products_path(:category_id => cat.id), :class => (cat.id.to_s == session[:category_for_products_id].to_s)?'btn btn-primary btn-xs':'btn btn-default btn-xs' do %><%=cat.name %><% end %>
+                            </span>
+            <% end %>
+        <%   end %>
+        <br/>
+    <% end %>
+
+  </div>
+</div>

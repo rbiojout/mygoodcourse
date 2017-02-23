@@ -1,0 +1,43 @@
+<div id="selector_cycle_level" class="sidebar-menu hidden-xs">
+    <h3><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h3>
+    <ul class="nav nav-pills nav-stacked category-menu">
+      <li <%= "#{ 'class=active' if session[:cycle_for_products_id].nil? }"%> ><%= link_to t('activerecord.models.cycle.all'), catalog_products_path(:cycle_id => 0) %></li>
+      <% @cycles.each do |cyc| %>
+          <% cycle_active = false
+             cycle_active = true if(!session[:cycle_for_products_id].nil? && session[:cycle_for_products_id].include?(cyc.id)) %>
+          <li <%= "#{ 'class=active' if cycle_active }"%> > <%= link_to catalog_products_path(:cycle_id => cyc.id) do %><%= cyc.name %> <span class="badge pull-right"><%= Product.count_active_filtered_for_cycle(cyc.id, @families.map(&:id), @categories.map(&:id))%></span><% end %>
+            <ul class="nav-tree">
+              <% cyc.levels.each do |lev| %>
+                  <% if @levels.include?(lev) %>
+                      <li class="nav nav-stacked <% if lev.id.to_s == session[:level_for_products_id].to_s %>active<% end %>">
+                        <%= link_to catalog_products_path(:level_id => lev.id) do %><%=lev.name %><% end %>
+                      </li>
+                  <% end %>
+              <% end %>
+            </ul>
+          </li>
+      <% end %>
+    </ul>
+</div>
+<!-- for smal device -->
+<div class="visible-xs">
+  <div class="panel panel-default">
+
+    <span><%= link_to t('activerecord.models.level.all'), catalog_products_path(:cycle_id => 0), :class => (session[:cycle_for_products_id].nil?)?'btn btn-primary':'btn btn-info' %></span><br/>
+    <% @cycles.each do |cyc| %>
+        <% cycle_active = false
+           cycle_active = true if(!session[:cycle_for_products_id].nil? && session[:cycle_for_products_id].include?(cyc.id)) %>
+        <span><%= link_to catalog_products_path(:cycle_id => cyc.id), :class => (cycle_active)?'btn btn-primary':'btn btn-info' do %><%= cyc.name %> <% end %></span>
+
+        <% cyc.levels.each do |lev| %>
+            <% if @levels.include?(lev)%>
+                            <span>
+                              <%= link_to catalog_products_path(:level_id => lev.id), :class => (lev.id.to_s == session[:level_for_products_id].to_s)?'btn btn-primary btn-xs':'btn btn-default btn-xs' do %><%=lev.name %><% end %>
+                            </span>
+            <% end %>
+        <%   end %>
+        <br/>
+    <% end %>
+
+  </div>
+</div>
