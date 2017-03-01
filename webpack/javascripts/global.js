@@ -74,8 +74,8 @@ require('./sortable.js');
 require('./stripe-payment.js');
 
 // require('material-kit-free/assets/js/material-kit');
-require('./material-kit/material.js');
-require('./material-kit/material-kit.js');
+// require('./material-kit/material.js');
+// require('./material-kit/material-kit.js');
 //import {materialKit, materialKitDemo} from './material-kit/material-kit.js';
 //window.materialKit = require('./material-kit/material-kit.js').materialKit;
 //window.materialKitDemo = require('./material-kit/material-kit.js').materialKitDemo;
@@ -88,7 +88,7 @@ require('./material-kit/material-kit.js');
 //var materialKitDemo = require('./material-kit/material-kit.js');
 
 
-console.log(window.materialKit);
+// console.log(window.materialKit);
 
 // turbolinks
 // require('jquery-turbolinks');

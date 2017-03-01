@@ -7,6 +7,12 @@ $custom-yellow: #FFDC1E;
 $custom-orange: #F39C12;
 
 
+/** variables for pictures ---------------------------------- **/
+$picture-xs: 50px;
+$picture-sm: 70px;
+$picture-md: 80px;
+$picture-lg: 100px;
+
 //--- Customer
 // fixed height for the name in order to control the size of the panel
 $customer_name: 30px;
@@ -14,26 +20,27 @@ $customer_name: 30px;
 $customer_padding-top: 15px;
 
 // Xtra-Small screen / smartphone
-$customer_picture-xs: 50px;
+$customer_picture-xs: $picture-xs;
 $customer_container-xs: 85px;
 
 // Small screen / tablet
 // $container-tablet:             (720px + $grid-gutter-width)
 //** For `$screen-sm-min` and up.
-$customer_picture-sm: 70px;
+$customer_picture-sm: $picture-sm;
 $customer_container-sm: 85px;
 
 // Medium screen / desktop
 // $container-desktop:            (940px + $grid-gutter-width)
 //** For `$screen-md-min` and up.
-$customer_picture-md: 80px;
+$customer_picture-md: $picture-md;
 $customer_container-md: 140px;
 
 // Large screen / wide desktop
 // $container-large-desktop:      (1140px + $grid-gutter-width)
 //** For `$screen-lg-min` and up.
-$customer_picture-lg: 100px;
+$customer_picture-lg: $picture-lg;
 $customer_container-lg: 200px;
+
 
 
 /*

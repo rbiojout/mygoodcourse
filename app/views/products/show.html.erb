@@ -32,7 +32,7 @@
           <span class="fa fa-pencil"></span> <%= t('helpers.action.edit') %>
           <% end %>
       <% elsif !customer_signed_in? || (customer_signed_in? && !@product.is_bought_by_customer(current_customer.id)) %>
-          <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary btn-block' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
+          <%= link_to buy_product_path(@product), :method => :post, class:'btn btn-primary btn-block margined-vertical' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.add_cart')%><% end %>
           <small><%= t('dialog.shop.explain_add') %></small>
       <% end %>
       <% if Rails.env.development? %>

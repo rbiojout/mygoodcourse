@@ -17,19 +17,12 @@ $offset-nav: 80px;
 }
 
 // caption at the center of the slider
-.slider-caption {
+#slider .jumbotron {
   padding-top: $offset-nav;
-  text-align: center;
-  font-size: $font-size-h3;
-  font-weight: 300;
-  h1 {
-    font-size: floor($font-size-h1 * 1.25);
-    font-weight: 600;
-  }
-  h2 {
-    font-size: floor($font-size-h2 * 1.25);
-    font-weight: 400;
-  }
+}
+
+.img-header-full .jumbotron, .img-header .jumbotron {
+  background-color: transparent;
 }
 
 // caption at the bottom

@@ -22,7 +22,7 @@ RSpec.describe 'ForumFeatures', feature: true, js: true do
 
     ## IMPORTANT WAIT TO HAVE THE PAGE LOADED
     expect(page).to have_content(subject.name)
-    within('main.container') do
+    within('#content') do
       # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
     end
 
@@ -48,7 +48,7 @@ RSpec.feature 'Forum management', type: :feature, js: true do
 
     ## IMPORTANT WAIT TO HAVE THE PAGE LOADED
     expect(page).to have_content(subject.name)
-    within('main.container') do
+    within('#content') do
       # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
     end
 

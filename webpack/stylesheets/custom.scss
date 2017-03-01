@@ -36,7 +36,9 @@
 @import "./custom/_headers";
 // SASS conversion note: please mirror any content change in _mixins-shared.scss navbar-variations-content
 //@include navbar-variations(unquote(".navbar"), unquote(""), $brand-primary);
+@import "./custom/_lists";
 @import "./custom/_navbar";
+@import "./custom/_pictures";
 @import "./custom/_pagination";
 
 
@@ -56,6 +58,7 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
 
 
 /**  Additional colors ------------------------------------------  **/
@@ -140,16 +143,7 @@ textarea {
   border: 1px solid #50C1CF !important;
   color: #fff; }
 
-/* img utilities */
-.img-50 {
-  height:50px;
-  width: 50px;
-}
 
-.img-80 {
-  height:80px;
-  width: 80px;
-}
 
 /* positioning layers
  example
@@ -203,6 +197,7 @@ textarea {
   height:  60px;
   width:100%;
   float: left;
+
 }
 
 // for posts
@@ -407,30 +402,6 @@ see bootstrap-variables.scss for information
 }
 
 
-/* navigation on the left */
-ul.nav-tree  {
-  margin-left: 10px;
-  padding-left: 0px;
-  display: block;
-  background-color: $gray-lighter;
-  border-radius: 4px;
-  .active {
-    color: white;
-    background-color: darkgrey;
-    border-radius: 4px;
-    a {
-      color: white;
-    }
-  }
-  li{
-    a{
-      display: block;
-      padding: 2px 10px;
-
-    }
-  }
-}
-
 .nav > li > a {
   padding-right: 10px;
   padding-left: 10px;
@@ -516,7 +487,7 @@ $size-social: 24px;
 .shadow:hover {
   background-color: #ffffff;
   box-shadow:
-          2px 2px rgba(0, 0, 0, 0.12);
+          0 2px 5px 3px rgba(0, 0, 0, 0.12);
 }
 
 

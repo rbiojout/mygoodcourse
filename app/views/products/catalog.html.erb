@@ -18,20 +18,58 @@
 
 <!-- search -->
 <div class="margined-vertical">
-<%= form_tag(catalog_products_path, method: :get) do  %>
-    <%= text_field_tag 'query' %>
-    <%= button_tag t('page.search'), class: 'btn btn-primary btn-sm' %>
-    <% unless (session[:query_store]).nil? %>
-        <%= button_tag :class => 'btn btn-success' do %>
+  <%= form_tag(catalog_products_path, method: :get) do  %>
+    <div class="input-group">
+    <%= text_field_tag('query', nil, class: 'form-control', placeholder: I18n.t('page.search')) %>
+    <div class="input-group-btn">
+      <% unless (session[:query_store]).nil? %>
+          <%= button_tag :class => 'btn btn-success' do %>
               <%= session[:query_store] %>
               <i class="fa fa-times"></i>
-        <% end %>
-    <% end %>
-<% end %>
+          <% end %>
+      <% end %>
+      <%= button_tag t('page.search'), class: 'btn btn-primary' %>
+    </div>
+  </div>
+  <% end %>
 </div>
-
 <!-- end search -->
-
+<div class="input-group">
+  <input type="text" class="form-control" placeholder="<%= t('dialog.method.order_by')%>...">
+  <span class="input-group-btn">
+    <% link_to catalog_products_path(:sort =>'score_reviews', :direction => 'asc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.score_reviews') %>
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i>
+    <% end%>
+    <%= link_to catalog_products_path(:sort =>'score_reviews', :direction => 'desc' ), class: 'btn btn-default' do %>
+                <%= t('activerecord.attributes.product.score_reviews') %>
+        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
+    <% link_to catalog_products_path(:sort =>'counter_cache', :direction => 'asc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.counter_cache') %>
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> <% end%>
+    <%= link_to catalog_products_path(:sort =>'counter_cache', :direction => 'desc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.counter_cache') %>
+        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
+    <% link_to catalog_products_path(:sort =>'created_at', :direction => 'asc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.creation_date') %>
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> <% end%>
+    <%= link_to catalog_products_path(:sort =>'created_at', :direction => 'desc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.creation_date') %>
+        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
+    <% link_to catalog_products_path(:sort =>'name', :direction => 'asc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.name') %>
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> <% end%>
+    <% link_to catalog_products_path(:sort =>'name', :direction => 'desc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.name') %>
+        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
+    <%= link_to catalog_products_path(:sort =>'price', :direction => 'asc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.price') %>
+        <i class="fa fa-sort-amount-asc" aria-hidden="true"></i> <% end%>
+    <%= link_to catalog_products_path(:sort =>'price', :direction => 'desc' ), class: 'btn btn-default' do %>
+        <%= t('activerecord.attributes.product.price') %>
+        <i class="fa fa-sort-amount-desc" aria-hidden="true"></i> <% end%>
+  </span>
+</div>
 
 <!-- display catalog --->
   <div class="row">

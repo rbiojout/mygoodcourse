@@ -54,42 +54,83 @@
 <h2><%= t('activerecord.models.comment', count: 2)%></h2>
 
     <!-- comments -->
+    <ul class="comments-list">
         <!-- alert if empty -->
         <% if @post.comments.count==0 %>
             <!-- add alert with call action to add comment -->
             <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.comment.alert_add')}) %>
         <% else %>
-        <ul class="comments-list">
             <% @post.comments.each do |comment|%>
                 <%= render(partial: 'comments/comment', locals: {comment: comment}) %>
             <% end %>
-        </ul>
         <% end %>
-    <div id="comment-form_post_<%= @post.id %>"></div>
+      <div id="comment-form_post_<%= @post.id %>"></div>
+    </ul>
 
       </div>
     <!-- end comments -->
   <div class="col-md-4">
-    <%= link_to posts_path do %>
-        <h2><%= t('activerecord.models.post.all') %></h2>
-    <% end %>
     <!-- top posts -->
-    <h2><%= t('dialog.post.populars')%></h2>
-    <div class="most-viewed-posts">
-    <ol class="list-unstyled">
-      <% @top_posts.each do |post| %>
-          <li class>
+    <ul class="nav nav-tabs nav-justified">
+      <li role="presentation" class="active"><a href="#posts-popular" data-toggle="tab">Popular</a></li>
+      <li role="presentation"><a href="#posts-latest" data-toggle="tab">Latest</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="posts-popular">
+        <ol class="list-unstyled">
+        <% @top_posts.each do |post| %>
+            <li class="with-dash">
+                  <div class="media">
+                    <div class="media-left">
+                      <%= link_to (post_path(post)) do %>
+                         <%= image_tag post.preview, class: 'media-object pull-left img-circle picture-adjusted' %>
+                      <% end %>
+                    </div>
+                    <div class="media-body">
+                      <%= link_to (post_path(post)) do %>
+                        <h5 class="media-heading"><%= post.name %></h5>
+                      <% end %>
+                      <ul class="list-meta">
+                        <li><span class="fa fa-eye"></span> <%= post.counter_cache %></li>
+                        <li><span class="fa fa-comments"></span> <%= post.comments.size %></li>
+                        <li><%= nice_date(post.created_at) %></li>
+                      </ul>
+                    </div>
+                  </div>
+              <% end %>
 
-            <%= link_to (post_path(post)) do %>
-                <h3><i class="fa fa-star-o fa-1x active-star"></i>
 
-            </span><%= post.name %></h3>
-            <% end %>
+            </li>
+        </ol>
 
-            <%# render(:partial => 'posts/post', locals: {post: post, with_body: false, with_cols: false}) %>
-          </li>
-      <% end %>
-    </ol>
+      </div>
+
+      <div class="tab-pane fade" id="posts-latest">
+        <ol class="list-unstyled">
+          <% last_posts = Post.all.limit(10) %>
+          <% last_posts.each do |post| %>
+              <li class="with-dash">
+
+                <%= link_to (post_path(post)) do %>
+                    <div class="media">
+                      <div class="media-left">
+                          <%= image_tag post.preview, class: 'media-object pull-left img-circle picture-adjusted' %>
+                      </div>
+                      <div class="media-body">
+                        <h5 class="media-heading"><%= post.name %></h5>
+                        <ul class="list-meta">
+                          <li><span class="fa fa-comments"></span> <%= post.comments.size %> </li>
+                          <li><%= nice_date(post.created_at) %></li>
+                        </ul>
+                      </div>
+                    </div>
+                <% end %>
+
+
+              </li>
+          <% end %>
+        </ol>
+      </div>
     </div>
     <!-- end top posts -->
   </div>
