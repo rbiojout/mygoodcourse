@@ -1,3 +1,41 @@
+// used by animate.css
+function onScrollInit(items, trigger) {
+    items.each(function () {
+        var osElement = $(this),
+            osAnimationClass = osElement.attr('data-os-animation'),
+            osAnimationDelay = osElement.attr('data-os-animation-delay');
+
+        osElement.css({
+            '-webkit-animation-delay': osAnimationDelay,
+            '-moz-animation-delay': osAnimationDelay,
+            'animation-delay': osAnimationDelay
+        });
+
+
+        var trigger = $(this).parents('.os-animation-container');
+
+        var osTrigger = ( trigger.length > 0 ) ? trigger : osElement;
+
+
+        osTrigger.waypoint(function () {
+            osElement.addClass('animated').addClass(osAnimationClass);
+        }, {
+            triggerOnce: true,
+            offset: '50%'
+        });
+    });
+};
+
+// class for animation: .os-animation
+// class for parent if stagged animations: .os-animation-container
+
+$(document).ready(function() {
+
+    if ($('.os-animation').length > 0) {
+        onScrollInit($('.os-animation', null));
+    }
+
+});
 // example of usage
 //
 //<div id="catalog-products" class="row">

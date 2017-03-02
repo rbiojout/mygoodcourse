@@ -22,7 +22,8 @@ require('jquery-ui-touch-punch');
 // ellipsis for the text to long
 // use the src as the file name is not correct
 // and there is a potential issue with 'jQuery' name against 'jquery'
-require('jquery-dotdotdot/src/jquery.dotdotdot');
+// require('jquery-dotdotdot/src/jquery.dotdotdot');
+require('./lib/jquery-dotdotdot.js')
 
 // parallax effect
 import Stellar from './lib/jquery-stellar.js';
@@ -40,7 +41,15 @@ require('moment');
 require('moment/locale/fr');
 
 // calendars for bootstrap
-require('bootstrap-datetime-picker');
+// see options at http://eonasdan.github.io/bootstrap-datetimepicker/Options/
+require('eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js');
+$(function () {
+    $('.datetimepicker').datetimepicker();
+});
+
+
+// require('./datetimepicker.js');
+// require('bootstrap-datetime-picker');
 
 // WYSIWYG Summernote
 // some links to bootstrap js needed
@@ -99,8 +108,6 @@ require('./stripe-payment.js');
 // import './global.scss';
 
 
-
-console.log("Hello the world!");
 
 
 $(function(){

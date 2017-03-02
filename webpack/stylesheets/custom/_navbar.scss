@@ -286,3 +286,10 @@
         transition: all 0.3s;
     }
 }
+
+
+.tab-content > .tab-pane.tab-bordered {
+  border: 1px solid #DDD;
+  border-top: 27px;
+  padding: 20px;
+}

@@ -12,3 +12,10 @@ node_modules are references with yarn
 
 <%= javascript_include_tag *webpack_asset_paths('application', extension: 'js') %>
 <%= stylesheet_link_tag *webpack_asset_paths('application', extension: 'css') %>
+
+
+EMAIL TEMPLATE
+https://colorlib.com/wp/responsive-html-email-templates/
+http://tedgoas.github.io/Cerberus/
+
+

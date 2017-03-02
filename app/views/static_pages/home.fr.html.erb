@@ -1,5 +1,6 @@
 <% provide(:title, t('page.who_we_are')) %>
 
+<!-- Image Header -->
 <% content_for :slider do %>
 <div class="img-header-full parallaxed home_1 bg-inverse" data-stellar-background-ratio="0.5">
   <div class="container">
@@ -10,8 +11,9 @@
   </div>
 </div>
 <% end %>
+<!-- /.row -->
 
-<!-- Image Header -->
+<!-- Mission Header -->
 <div class="heading-block center">
       <h2>Notre mission: vous aider dans votre travail d'enseignant</h2>
 </div>
@@ -29,38 +31,38 @@
 </div>
 
 
-  <div class="row">
-    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
+  <div class="row os-animation-containers">
+    <div class="col-md-3 col-sm-6 os-animation" data-os-animation="flipInX" data-os-animation-delay="0.5s">
       <div class="feature-box fbox-center fbox-effect">
         <div class="fbox-icon">
-          <i class="fa fa-diamond i-alt"></i>
+          <i class="fa fa-diamond"></i>
         </div>
           <h4>Trouvez des cours</h4>
           <p>Vous cherchez des ressources fabuleuses pour votre cours? Parcourez donc les bonnes ressources déjà réalisées par des enseignants!</p>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="1.5s">
+    <div class="col-md-3 col-sm-6 os-animation" data-os-animation="flipInX" data-os-animation-delay="1.5s">
       <div class="feature-box fbox-center fbox-effect">
         <div class="fbox-icon">
-          <i class="fa fa-thumbs-o-up i-alt"></i>
+          <i class="fa fa-thumbs-o-up"></i>
         </div>
           <h4>Rejoignez une communauté</h4>
           <p>Avec l'aide des autres utilisateurs, améliorez votre productivité, construisez votre réseau, gagnez en réputation et en reconnaissance.</p>
       </div>
     </div>
-    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="2.5s">
+    <div class="col-md-3 col-sm-6 os-animation" data-os-animation="flipInX" data-os-animation-delay="2.5s">
       <div class="feature-box fbox-center fbox-effect">
         <div class="fbox-icon">
-          <i class="fa fa-database i-alt"></i>
+          <i class="fa fa-database"></i>
         </div>
           <h4>Sauvegardez votre travail</h4>
           <p>Mettez en place facilement une sauvegarde pour vos cours, stockez les dans le cloud, partagez vos cours si vous le souhaitez avec d'autres utilisateurs.</p>
         </div>
     </div>
-    <div class="col-md-3 col-sm-6 service-animation" data-os-animation="flipInX" data-os-animation-delay="3.5s">
+    <div class="col-md-3 col-sm-6 os-animation" data-os-animation="flipInX" data-os-animation-delay="3.5s">
       <div class="feature-box fbox-center fbox-effect">
         <div class="fbox-icon">
-          <i class="fa fa-money i-alt"></i>
+          <i class="fa fa-money"></i>
         </div>
         <h4>Gagnez de l'argent</h4>
         <p>Vous pouvez décider de vendre ou non vos cours, en fonction de vos choix certaines ressources peuvent être payantes et vous serez payé sur votre compte en banque par les autres utilisateurs.</p>
@@ -87,7 +89,7 @@
 </div>
 
 <div class="row">
-  <div class="col-lg-12 staggered-animation-container">
+  <div class="col-lg-12">
 
     <ul id="myTab" class="nav nav-tabs nav-justified">
       <li class="active"><a href="#service-one" data-toggle="tab"><i class="fa fa-heart"></i> Education</a>
@@ -101,42 +103,46 @@
     </ul>
 
     <div id="myTabContent" class="tab-content">
-      <div class="tab-pane fade active in" id="service-one">
-                        <span class="fa-stack fa-3x pull-left">
-                              <i class="fa fa-circle fa-stack-2x aero"></i>
-                              <i class="fa fa-heart fa-stack-1x fa-inverse"></i>
-                        </span>
-        <h4>Nous adorons l'Education</h4>
-        <p>Nous sommes persuadés que l'Education est un des sujets les plus important au monde. Nous travaillons depuis des années au contact des enseignants, des élèves, des chefs d'établissements et même des autorités adminisratives de l'Education. L'Education est clairement une passion pour nous et le point de départ de tout ce que nous cherchons à accomplir quotidiennement.</p>
-        <p>Nous souhaitons devenir un partenaire de tous les paticipants de l'Education. En premier lieu, un partenaire des enseignants qui sont bien évidemment clef pour l'Education. Mais nous souhaitons également répondre aux besoins des élèves, de leurs parents et de toute la communauté éducative au sein large.</p>
-        <p>Notre vision est que grâce aux technologies numériques, nous pouvons désormais améliorer la réussite et la performance de tous. Nous sommes persuadés que nous pouvons faire grandir le succès de chacun.</p>
+      <div class="tab-pane tab-bordered fade active in" id="service-one">
+        <div class="feature-box fbox-large fbox-effect">
+          <div class="fbox-icon">
+            <i class="fa fa-heart"></i>
+          </div>
+          <h3>Nous adorons l'Education</h3>
+          <p>Nous sommes persuadés que l'Education est un des sujets les plus important au monde. Nous travaillons depuis des années au contact des enseignants, des élèves, des chefs d'établissements et même des autorités adminisratives de l'Education. L'Education est clairement une passion pour nous et le point de départ de tout ce que nous cherchons à accomplir quotidiennement.</p>
+          <p>Nous souhaitons devenir un partenaire de tous les paticipants de l'Education. En premier lieu, un partenaire des enseignants qui sont bien évidemment clef pour l'Education. Mais nous souhaitons également répondre aux besoins des élèves, de leurs parents et de toute la communauté éducative au sein large.</p>
+          <p>Notre vision est que grâce aux technologies numériques, nous pouvons désormais améliorer la réussite et la performance de tous. Nous sommes persuadés que nous pouvons faire grandir le succès de chacun.</p>
+        </div>
       </div>
-      <div class="tab-pane fade" id="service-two">
-                        <span class="fa-stack fa-3x pull-left">
-                              <i class="fa fa-circle fa-stack-2x aero"></i>
-                              <i class="fa fa-graduation-cap fa-stack-1x fa-inverse"></i>
-                        </span>
-        <h4>Nous croyons en l'Education</h4>
-        <p>Nous travaillons dans les technologies numériques pour l'Education depuis maintenant deux décénies. Nous savons que ces nouvelles technologies peuvent aider les enseignants dans leur travail quotidien, que désormais en permanence le numérique est un atout disponible pour l'enseignement.</p>
-        <p>Impliqués depuis de nombreuses années dans les technologies pour l'éducation, nous souhaitons utiliser le maximum de possibilités de ces technologies pour la réussite de tous.</p>
+      <div class="tab-pane tab-bordered fade" id="service-two">
+        <div class="feature-box fbox-large fbox-effect">
+          <div class="fbox-icon">
+            <i class="fa fa-graduation-cap"></i>
+          </div>
+          <h3>Nous croyons en l'Education</h3>
+          <p>Nous travaillons dans les technologies numériques pour l'Education depuis maintenant deux décénies. Nous savons que ces nouvelles technologies peuvent aider les enseignants dans leur travail quotidien, que désormais en permanence le numérique est un atout disponible pour l'enseignement.</p>
+          <p>Impliqués depuis de nombreuses années dans les technologies pour l'éducation, nous souhaitons utiliser le maximum de possibilités de ces technologies pour la réussite de tous.</p>
+        </div>
       </div>
-      <div class="tab-pane fade" id="service-three">
-                         <span class="fa-stack fa-3x pull-left">
-                              <i class="fa fa-circle fa-stack-2x aero"></i>
-                              <i class="fa fa-star fa-stack-1x fa-inverse"></i>
-                        </span>
-        <h4>Nous comprenons votre travail</h4>
-        <p>Nous sommes conscients de l'énergie et du travail que vous fournissez tous les jours pour réaliser vos cours, nous savons que vous êtes ceux qui sont les meilleurs auteurs. Si nous nous appelons "MyGoodCourse", c'est que nous savons combien de cours fabuleux sont produit par les enseignants et que nous souhaitons vous aider à en faire profiter le plus grand nombre.</p>
-        <p>En tant qu'enseignant, vous êtes un grand auteur, vous avez besoin du meilleur éditeur qui vous permettra de diffuser largement votre travail et nous souhaitons être votre partenaire dans cette démarche.</p>
+      <div class="tab-pane tab-bordered fade" id="service-three">
+        <div class="feature-box fbox-large fbox-effect">
+          <div class="fbox-icon">
+            <i class="fa fa-star"></i>
+          </div>
+          <h3>Nous comprenons votre travail</h3>
+          <p>Nous sommes conscients de l'énergie et du travail que vous fournissez tous les jours pour réaliser vos cours, nous savons que vous êtes ceux qui sont les meilleurs auteurs. Si nous nous appelons "MyGoodCourse", c'est que nous savons combien de cours fabuleux sont produit par les enseignants et que nous souhaitons vous aider à en faire profiter le plus grand nombre.</p>
+          <p>En tant qu'enseignant, vous êtes un grand auteur, vous avez besoin du meilleur éditeur qui vous permettra de diffuser largement votre travail et nous souhaitons être votre partenaire dans cette démarche.</p>
+        </div>
       </div>
-      <div class="tab-pane fade" id="service-four">
-                         <span class="fa-stack fa-3x pull-left">
-                              <i class="fa fa-circle fa-stack-2x aero"></i>
-                              <i class="fa fa-user fa-stack-1x fa-inverse"></i>
-                        </span>
-        <h4>Nous voulons que les enseignants soient récompensés</h4>
-        <p>Nous sommes plus que conscients du temps et des efforts que les enseignants consacrent à la réalisation de leurs cours. Nous savons le soin qu'ils apportent à réaliser les meilleures ressources pédagogiques et nous voulons qu'ils soient récompensés pour ces efforts.</p>
-        <p>Vous deveez être reconnus pour tous vos Bons Cours, vous devez même avoir la possibilité de gagner de l'argent pour ce travail et ces efforts. MyGoodCourse veut que votre travail soit reconnu et que vous ayez la possibilité de gagner de l'argent pour ce travail.</p>
+      <div class="tab-pane tab-bordered fade" id="service-four">
+        <div class="feature-box fbox-large fbox-effect">
+          <div class="fbox-icon">
+            <i class="fa fa-user"></i>
+          </div>
+          <h3>Nous voulons que les enseignants soient récompensés</h3>
+          <p>Nous sommes plus que conscients du temps et des efforts que les enseignants consacrent à la réalisation de leurs cours. Nous savons le soin qu'ils apportent à réaliser les meilleures ressources pédagogiques et nous voulons qu'ils soient récompensés pour ces efforts.</p>
+          <p>Vous devez être reconnus pour tous vos Bons Cours, vous devez même avoir la possibilité de gagner de l'argent pour ce travail et ces efforts. MyGoodCourse veut que votre travail soit reconnu et que vous ayez la possibilité de gagner de l'argent pour ce travail.</p>
+        </div>
       </div>
     </div>
 
@@ -245,32 +251,3 @@
 <!-- /.row -->
 
 
-<script language="JavaScript">
-  function onScrollInit( items , trigger ) {
-    items.each( function() {
-      var osElement = $(this),
-          osAnimationClass = osElement.attr('data-os-animation'),
-          osAnimationDelay = osElement.attr('data-os-animation-delay');
-
-      osElement.css({
-        '-webkit-animation-delay':  osAnimationDelay,
-        '-moz-animation-delay':     osAnimationDelay,
-        'animation-delay':          osAnimationDelay
-      });
-
-      var osTrigger = ( trigger ) ? trigger : osElement;
-
-      osTrigger.waypoint(function() {
-        osElement.addClass('animated').addClass(osAnimationClass);
-      },{
-        triggerOnce: true,
-        offset: '50%'
-      });
-    });
-  };
-
-  onScrollInit( $('.os-animation', null) );
-  onScrollInit( $('.staggered-animation'), $('.staggered-animation-container') );
-  onScrollInit( $('.service-animation'), $('#services-panel') );
-
-</script>
