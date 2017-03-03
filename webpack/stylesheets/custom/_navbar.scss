@@ -287,6 +287,111 @@
     }
 }
 
+/*
+ * Side navigation
+ *
+ * Scrollspy and affixed enhanced navigation to highlight sections and secondary
+ * sections of docs content.
+ */
+
+/* By default it's not affixed in mobile views, so undo that */
+$padding-docs-sidenav: 20px;
+
+.docs-sidebar.affix {
+  position: static;
+}
+@media (min-width: $screen-sm) {
+  .docs-sidebar {
+    padding-left: $padding-docs-sidenav;
+  }
+}
+
+/* First level of nav */
+.docs-sidenav {
+  margin-top: $padding-docs-sidenav;
+  margin-bottom: $padding-docs-sidenav;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+
+/* All levels of nav */
+.docs-sidebar .nav > li > a {
+  display: block;
+  padding: 4px $padding-docs-sidenav;
+  font-size: 13px;
+  font-weight: 500;
+  color: $gray-light;
+}
+.docs-sidebar .nav > li > a:hover,
+.docs-sidebar .nav > li > a:focus {
+  padding-left: $padding-docs-sidenav -1px;
+  color: $gray;
+  text-decoration: none;
+  background-color: transparent;
+  border-left: 1px solid $gray;
+}
+.docs-sidebar .nav > .active > a,
+.docs-sidebar .nav > .active:hover > a,
+.docs-sidebar .nav > .active:focus > a {
+  padding-left: $padding-docs-sidenav -2px;
+  font-weight: bold;
+  color: $gray;
+  background-color: transparent;
+  border-left: 2px solid $gray;
+}
+
+/* Nav: second level (shown on .active) */
+.docs-sidebar .nav .nav {
+  display: none; /* Hide by default, but at >768px, show it */
+  padding-bottom: $padding-docs-sidenav / 2;
+}
+.docs-sidebar .nav .nav > li > a {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  padding-left: $padding-docs-sidenav * 1.5;
+  font-size: 12px;
+  font-weight: normal;
+}
+.docs-sidebar .nav .nav > li > a:hover,
+.docs-sidebar .nav .nav > li > a:focus {
+  padding-left: $padding-docs-sidenav * 1.5 -1px;
+}
+.docs-sidebar .nav .nav > .active > a,
+.docs-sidebar .nav .nav > .active:hover > a,
+.docs-sidebar .nav .nav > .active:focus > a {
+  padding-left: $padding-docs-sidenav * 1.5 -2px;
+  font-weight: 500;
+}
+
+/* Show and affix the side nav when space allows it */
+@media (min-width: $screen-md) {
+  .docs-sidebar .nav > .active > ul {
+    display: block;
+  }
+  /* Widen the fixed sidebar */
+  .docs-sidebar.affix,
+  .docs-sidebar.affix-bottom {
+    width: 213px;
+  }
+  .docs-sidebar.affix {
+    position: fixed; /* Undo the static from mobile first approach */
+    top: $padding-docs-sidenav;
+  }
+  .docs-sidebar.affix-bottom {
+    position: absolute; /* Undo the static from mobile first approach */
+  }
+  .docs-sidebar.affix-bottom .docs-sidenav,
+  .docs-sidebar.affix .docs-sidenav {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+}
+@media (min-width: $screen-lg) {
+  /* Widen the fixed sidebar again */
+  .docs-sidebar.affix-bottom,
+  .docs-sidebar.affix {
+    width: 263px;
+  }
+}
 
 .tab-content > .tab-pane.tab-bordered {
   border: 1px solid #DDD;
