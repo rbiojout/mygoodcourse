@@ -13,7 +13,7 @@
   line-height: 11px;
   /* vertical-align: text-top; */
   /*background-image: url("<%#= asset_path 'famfamfam-flags.png' %>"); */
-  background-image: url('../images/famfamfam-flags.png');
+  background-image: url('../../images/famfamfam-flags.png');
   background-position: 0 0;
   background-repeat: no-repeat;
 }

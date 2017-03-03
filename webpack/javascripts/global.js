@@ -70,8 +70,10 @@ require('geocomplete/jquery.geocomplete.js');
 // cocoon to add/remove via javascript associated childs
 require('./lib/cocoon.js');
 
-require('./button.js');
-require('./customers.js');
+// social buttons
+require('./lib/social-share-button.js');
+
+require('./observer.js');
 require('./geocoding.js');
 require('./google_analytics.js');
 require('./form_error.js');

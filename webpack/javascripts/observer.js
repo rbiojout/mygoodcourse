@@ -1,4 +1,4 @@
-var display_info, inspector, observer;
+var display_tooltip, display_popover, display_info, inspector, observer;
 
 inspector = {
     selectors: [],
@@ -29,6 +29,19 @@ inspector = {
     }
 };
 
+// Tooltip for buttons in particular
+display_tooltip = function(node) {
+    return $('[data-toggle="tooltip"]').tooltip();
+};
+
+
+// Popover
+display_popover = function(node) {
+    return $('[data-toggle="popover"]').popover();
+};
+
+
+// info for customer
 display_info = function(node) {
     return $('.customer-picture').mouseenter(function() {
         var created, id, locality;
@@ -46,28 +59,27 @@ display_info = function(node) {
     });
 };
 
+// Tooltip for buttons in particular
+inspector.watch('[data-toggle="tooltip"]', display_tooltip);
+
+inspector.watch('[data-toggle="popover"]', display_popover);
+
 inspector.watch('.customer-picture', display_info);
 
+
+// observer for mutations
 observer = new MutationObserver(function(mutations) {
-    var i, len, mutation, node, results;
+    var i, len, mutation, results;
     results = [];
     for (i = 0, len = mutations.length; i < len; i++) {
         mutation = mutations[i];
-        results.push((function() {
-            var j, len1, ref, results1;
-            ref = mutation.addedNodes;
-            results1 = [];
-            for (j = 0, len1 = ref.length; j < len1; j++) {
-                node = ref[j];
-                results1.push(inspector.process(node));
-            }
-            return results1;
-        })());
+        results.push(inspector.process(mutation.target));
     }
     return results;
 });
 
 observer.observe(document, {
     childList: true,
-    subtree: true
+    subtree: true,
+    characterData: true
 });

@@ -43,10 +43,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 @import '~animate.css/animate.css';
 
 
-
 // global CSS
+@import "lib/social-share-button";
+@import "./lib/famfamfam-flags.css";
 @import "custom";
-@import "famfamfam-flags.css";
 @import "home";
 @import "parallax";
 @import "print";

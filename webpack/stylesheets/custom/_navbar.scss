@@ -327,7 +327,7 @@ $padding-docs-sidenav: 20px;
   color: $gray;
   text-decoration: none;
   background-color: transparent;
-  border-left: 1px solid $gray;
+  border-left: 1px solid $brand-primary;
 }
 .docs-sidebar .nav > .active > a,
 .docs-sidebar .nav > .active:hover > a,
@@ -336,7 +336,7 @@ $padding-docs-sidenav: 20px;
   font-weight: bold;
   color: $gray;
   background-color: transparent;
-  border-left: 2px solid $gray;
+  border-left: 2px solid $brand-primary;
 }
 
 /* Nav: second level (shown on .active) */

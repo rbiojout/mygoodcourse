@@ -416,17 +416,6 @@ see bootstrap-variables.scss for information
 }
 
 
-/* adjust size of social buttons */
-$size-social: 24px;
-
-.social-share-button {
-  .ssb-icon {
-    background-size: $size-social $size-social;
-    height: $size-social;
-    width: $size-social;
-  }
-}
-
 /* need to float */
 .float-left {
   float: left;

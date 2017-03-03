@@ -71,8 +71,12 @@ var config = {
             },
             // Embed images
             {
-                test: /\.(jpe?g|png|gif|svg)$/i,
+                test: /\.(jpe?g|png|gif)$/i,
                 loader: 'file?name=images/[name].[ext]'
+            },
+            {
+                test: /\.svg/,
+                loader: 'svg-url-loader?name=images/[name].[ext]'
             },
             // Embed cursor pointers in Css
             {
@@ -99,7 +103,7 @@ var config = {
               loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
             },
             {
-              test: /\.(ttf|eot|svg)([\?].*)?$/,
+              test: /\.(ttf|eot)([\?].*)?$/,
               loader: 'file-loader?name=fonts/[name].[ext]'
             },
             // expose jQuery
