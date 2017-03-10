@@ -37,7 +37,7 @@ var config = {
         // name of the global var: "Foo"
         library: "Turbolinks",
 
-        filename: production ? '[name]-[chunkhash].js' : '[name].js'
+        filename: production ? '[name]-[hash].js' : '[name].js'
     },
 
     resolve: {
@@ -96,27 +96,34 @@ var config = {
             // Process SASS files
             {
                 test: /\.s?css$/,
-                use: [{
-                    loader: "style-loader"
-                    },
-                    {
-                    loader: "css-loader",
-                    query: {
-                        modules: false,
-                        sourceMap: true,
-                        importLoaders: 2
-                        }
-                    },
-                    {
-                        loader: 'resolve-url-loader'
-                    },
-                    {
-                    loader: "sass-loader",
-                        query: {
-                            sourceMap: true,
-                            sourceMapContents: true
-                        }
-                }],
+
+                //loader: ExtractTextPlugin.extract('css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'),
+                //loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap', 'postcss-loader']
+                //loader: 'style!css!sass!postcss'
+
+
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: [
+                        {
+                            loader: "css-loader",
+                            query: {
+                                // modules: false,
+                                sourceMap: true,
+                                importLoaders: 1
+                            }
+                        },
+                        {
+                            loader: 'resolve-url-loader'
+                        },
+                        {
+                            loader: "sass-loader",
+                            query: {
+                                sourceMap: true,
+                                //sourceMapContents: true
+                            }
+                        }]
+                })
                 //loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap', 'postcss-loader']
                 //loader: 'style!css!sass!postcss'
             },
@@ -141,7 +148,7 @@ var config = {
         new webpack.LoaderOptionsPlugin({
             debug: true
         }),
-        new ExtractTextPlugin(production ? '[name]-[chunkhash].css' : '[name].css'),
+        new ExtractTextPlugin(production ? '[name]-[hash].css' : '[name].css'),
         // if you want a module available as variable in every module,
         // such as making $ and jQuery available in every module without writing require("jquery").
         // You should use ProvidePlugin.
@@ -166,7 +173,7 @@ var config = {
 
 if (production) {
     config.plugins.push(
-    new webpack.NoErrorsPlugin(),
+    new webpack.NoEmitOnErrorsPlugin(),
     new webpack.optimize.UglifyJsPlugin({
         debug: true,
         compressor: { warnings: false },
@@ -175,8 +182,7 @@ if (production) {
     }),
     new webpack.DefinePlugin({
         'process.env': { NODE_ENV: JSON.stringify('production') }
-    }),
-    new webpack.optimize.DedupePlugin()
+    })
     );
 } else {
     config.devServer = {
