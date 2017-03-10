@@ -75,7 +75,7 @@ var config = {
                 loader: 'file?name=images/[name].[ext]'
             },
             {
-                test: /\.svg/,
+                test: /\.(svg)$/i,
                 loader: 'file?mimetype=image/svg+xml&name=images/[name].[ext]'
                 //loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=images/[name].[ext]'
                 //loader: 'svg-url-loader?name=images/[name].[ext]'

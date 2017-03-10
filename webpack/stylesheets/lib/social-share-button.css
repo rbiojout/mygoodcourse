@@ -1,12 +1,11 @@
-$size-social: 35px;
 
 .social-share-button .ssb-icon {
     background-position: center center;
     background-repeat: no-repeat;
-    background-size: $size-social $size-social;
+    background-size: 35px 35px;
     display: inline-block;
-    height: $size-social;
-    width: $size-social;
+    height: 35px;
+    width: 35px;
 }
 
 .social-share-button .ssb-twitter {
