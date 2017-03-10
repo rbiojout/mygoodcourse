@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -15,20 +14,19 @@ ActiveRecord::Schema.define(version: 20161104150227) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
-  enable_extension "fuzzystrmatch"
   enable_extension "pg_trgm"
+  enable_extension "fuzzystrmatch"
   enable_extension "unaccent"
 
   create_table "abuses", force: :cascade do |t|
-    t.integer "abusable_id"
     t.string  "abusable_type"
+    t.integer "abusable_id"
     t.integer "customer_id"
     t.text    "description"
     t.string  "status"
+    t.index ["abusable_type", "abusable_id"], name: "index_abuses_on_abusable_type_and_abusable_id", using: :btree
+    t.index ["customer_id"], name: "index_abuses_on_customer_id", using: :btree
   end
-
-  add_index "abuses", ["abusable_type", "abusable_id"], name: "index_abuses_on_abusable_type_and_abusable_id", using: :btree
-  add_index "abuses", ["customer_id"], name: "index_abuses_on_customer_id", using: :btree
 
   create_table "articles", force: :cascade do |t|
     t.string   "name"
@@ -39,9 +37,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",                null: false
     t.datetime "updated_at",                null: false
     t.integer  "counter_cache", default: 0
+    t.index ["topic_id"], name: "index_articles_on_topic_id", using: :btree
   end
-
-  add_index "articles", ["topic_id"], name: "index_articles_on_topic_id", using: :btree
 
   create_table "attachments", force: :cascade do |t|
     t.string   "file"
@@ -56,9 +53,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "position"
     t.binary   "iv"
     t.binary   "key"
+    t.index ["product_id"], name: "index_attachments_on_product_id", using: :btree
   end
-
-  add_index "attachments", ["product_id"], name: "index_attachments_on_product_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "name",        null: false
@@ -67,30 +63,27 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "position"
+    t.index ["family_id"], name: "index_categories_on_family_id", using: :btree
+    t.index ["name"], name: "index_categories_on_name", using: :btree
   end
-
-  add_index "categories", ["family_id"], name: "index_categories_on_family_id", using: :btree
-  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
 
   create_table "categories_products", id: false, force: :cascade do |t|
     t.integer "category_id"
     t.integer "product_id"
+    t.index ["category_id"], name: "index_categories_products_on_category_id", using: :btree
+    t.index ["product_id"], name: "index_categories_products_on_product_id", using: :btree
   end
-
-  add_index "categories_products", ["category_id"], name: "index_categories_products_on_category_id", using: :btree
-  add_index "categories_products", ["product_id"], name: "index_categories_products_on_product_id", using: :btree
 
   create_table "comments", force: :cascade do |t|
     t.text     "text"
     t.integer  "customer_id"
-    t.integer  "commentable_id"
     t.string   "commentable_type"
+    t.integer  "commentable_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["customer_id"], name: "index_comments_on_customer_id", using: :btree
   end
-
-  add_index "comments", ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
-  add_index "comments", ["customer_id"], name: "index_comments_on_customer_id", using: :btree
 
   create_table "countries", force: :cascade do |t|
     t.string   "name"
@@ -141,13 +134,12 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.string   "description"
     t.string   "slug"
     t.integer  "counter_cache",               default: 0
+    t.index ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true, using: :btree
+    t.index ["country_id"], name: "index_customers_on_country_id", using: :btree
+    t.index ["email"], name: "index_customers_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
+    t.index ["slug"], name: "index_customers_on_slug", unique: true, using: :btree
   end
-
-  add_index "customers", ["confirmation_token"], name: "index_customers_on_confirmation_token", unique: true, using: :btree
-  add_index "customers", ["country_id"], name: "index_customers_on_country_id", using: :btree
-  add_index "customers", ["email"], name: "index_customers_on_email", unique: true, using: :btree
-  add_index "customers", ["reset_password_token"], name: "index_customers_on_reset_password_token", unique: true, using: :btree
-  add_index "customers", ["slug"], name: "index_customers_on_slug", unique: true, using: :btree
 
   create_table "cycles", force: :cascade do |t|
     t.string   "name"
@@ -156,9 +148,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "country_id"
+    t.index ["country_id"], name: "index_cycles_on_country_id", using: :btree
   end
-
-  add_index "cycles", ["country_id"], name: "index_cycles_on_country_id", using: :btree
 
   create_table "employees", force: :cascade do |t|
     t.string   "name"
@@ -180,10 +171,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
+    t.index ["email"], name: "index_employees_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "employees", ["email"], name: "index_employees_on_email", unique: true, using: :btree
-  add_index "employees", ["reset_password_token"], name: "index_employees_on_reset_password_token", unique: true, using: :btree
 
   create_table "families", force: :cascade do |t|
     t.string   "name",        null: false
@@ -192,22 +182,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "updated_at",  null: false
     t.integer  "position"
     t.integer  "country_id"
+    t.index ["country_id"], name: "index_families_on_country_id", using: :btree
+    t.index ["name"], name: "index_families_on_name", using: :btree
   end
-
-  add_index "families", ["country_id"], name: "index_families_on_country_id", using: :btree
-  add_index "families", ["name"], name: "index_families_on_name", using: :btree
-
-  create_table "followings", force: :cascade do |t|
-    t.integer  "customer_id"
-    t.integer  "followingable_id"
-    t.string   "followingable_type"
-    t.text     "status",             default: "created"
-    t.datetime "created_at",                             null: false
-    t.datetime "updated_at",                             null: false
-  end
-
-  add_index "followings", ["customer_id"], name: "index_followings_on_customer_id", using: :btree
-  add_index "followings", ["followingable_type", "followingable_id"], name: "index_followings_on_followingable_type_and_followingable_id", using: :btree
 
   create_table "forum_answers", force: :cascade do |t|
     t.text     "text"
@@ -215,10 +192,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "forum_subject_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["customer_id"], name: "index_forum_answers_on_customer_id", using: :btree
+    t.index ["forum_subject_id"], name: "index_forum_answers_on_forum_subject_id", using: :btree
   end
-
-  add_index "forum_answers", ["customer_id"], name: "index_forum_answers_on_customer_id", using: :btree
-  add_index "forum_answers", ["forum_subject_id"], name: "index_forum_answers_on_forum_subject_id", using: :btree
 
   create_table "forum_categories", force: :cascade do |t|
     t.string   "name"
@@ -228,9 +204,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "position"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["forum_family_id"], name: "index_forum_categories_on_forum_family_id", using: :btree
   end
-
-  add_index "forum_categories", ["forum_family_id"], name: "index_forum_categories_on_forum_family_id", using: :btree
 
   create_table "forum_families", force: :cascade do |t|
     t.string   "name"
@@ -240,9 +215,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "position"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["country_id"], name: "index_forum_families_on_country_id", using: :btree
   end
-
-  add_index "forum_families", ["country_id"], name: "index_forum_families_on_country_id", using: :btree
 
   create_table "forum_subjects", force: :cascade do |t|
     t.string   "name"
@@ -252,10 +226,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",                    null: false
     t.datetime "updated_at",                    null: false
     t.integer  "counter_cache",     default: 0
+    t.index ["customer_id"], name: "index_forum_subjects_on_customer_id", using: :btree
+    t.index ["forum_category_id"], name: "index_forum_subjects_on_forum_category_id", using: :btree
   end
-
-  add_index "forum_subjects", ["customer_id"], name: "index_forum_subjects_on_customer_id", using: :btree
-  add_index "forum_subjects", ["forum_category_id"], name: "index_forum_subjects_on_forum_category_id", using: :btree
 
   create_table "friendly_id_slugs", force: :cascade do |t|
     t.string   "slug",                      null: false
@@ -263,12 +236,11 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.string   "sluggable_type", limit: 50
     t.string   "scope"
     t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
   end
-
-  add_index "friendly_id_slugs", ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true, using: :btree
-  add_index "friendly_id_slugs", ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id", using: :btree
-  add_index "friendly_id_slugs", ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type", using: :btree
 
   create_table "impressions", force: :cascade do |t|
     t.string   "impressionable_type"
@@ -284,16 +256,15 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.text     "referrer"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
+    t.index ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
+    t.index ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
+    t.index ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
+    t.index ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
+    t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
+    t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
+    t.index ["user_id"], name: "index_impressions_on_user_id", using: :btree
   end
-
-  add_index "impressions", ["controller_name", "action_name", "ip_address"], name: "controlleraction_ip_index", using: :btree
-  add_index "impressions", ["controller_name", "action_name", "request_hash"], name: "controlleraction_request_index", using: :btree
-  add_index "impressions", ["controller_name", "action_name", "session_hash"], name: "controlleraction_session_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "ip_address"], name: "poly_ip_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "request_hash"], name: "poly_request_index", using: :btree
-  add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
-  add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", using: :btree
-  add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
 
   create_table "levels", force: :cascade do |t|
     t.string   "name"
@@ -302,51 +273,47 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "cycle_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["cycle_id"], name: "index_levels_on_cycle_id", using: :btree
   end
-
-  add_index "levels", ["cycle_id"], name: "index_levels_on_cycle_id", using: :btree
 
   create_table "levels_products", id: false, force: :cascade do |t|
     t.integer "level_id"
     t.integer "product_id"
+    t.index ["level_id"], name: "index_levels_products_on_level_id", using: :btree
+    t.index ["product_id"], name: "index_levels_products_on_product_id", using: :btree
   end
-
-  add_index "levels_products", ["level_id"], name: "index_levels_products_on_level_id", using: :btree
-  add_index "levels_products", ["product_id"], name: "index_levels_products_on_product_id", using: :btree
 
   create_table "likes", force: :cascade do |t|
     t.integer  "customer_id"
-    t.integer  "likeable_id"
     t.string   "likeable_type"
+    t.integer  "likeable_id"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["customer_id"], name: "index_likes_on_customer_id", using: :btree
+    t.index ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
   end
-
-  add_index "likes", ["customer_id"], name: "index_likes_on_customer_id", using: :btree
-  add_index "likes", ["likeable_type", "likeable_id"], name: "index_likes_on_likeable_type_and_likeable_id", using: :btree
 
   create_table "order_items", force: :cascade do |t|
     t.integer  "product_id"
-    t.decimal  "price",                precision: 8, scale: 2, default: 0.0
+    t.decimal  "price",                precision: 8, scale: 2, default: "0.0"
     t.decimal  "tax_rate",             precision: 8, scale: 2
-    t.decimal  "tax_amount",           precision: 8, scale: 2, default: 0.0
+    t.decimal  "tax_amount",           precision: 8, scale: 2, default: "0.0"
     t.integer  "order_id"
-    t.datetime "created_at",                                                 null: false
-    t.datetime "updated_at",                                                 null: false
+    t.datetime "created_at",                                                   null: false
+    t.datetime "updated_at",                                                   null: false
     t.string   "processing_reference"
     t.string   "method"
     t.string   "status"
-    t.decimal  "cost_price",           precision: 8, scale: 2, default: 0.0
-    t.decimal  "application_fee",      precision: 8, scale: 2, default: 0.0
+    t.decimal  "cost_price",           precision: 8, scale: 2, default: "0.0"
+    t.decimal  "application_fee",      precision: 8, scale: 2, default: "0.0"
+    t.index ["order_id"], name: "index_order_items_on_order_id", using: :btree
+    t.index ["product_id"], name: "index_order_items_on_product_id", using: :btree
   end
-
-  add_index "order_items", ["order_id"], name: "index_order_items_on_order_id", using: :btree
-  add_index "order_items", ["product_id"], name: "index_order_items_on_product_id", using: :btree
 
   create_table "orders", force: :cascade do |t|
     t.integer  "customer_id"
-    t.datetime "created_at",                                               null: false
-    t.datetime "updated_at",                                               null: false
+    t.datetime "created_at",                                                 null: false
+    t.datetime "updated_at",                                                 null: false
     t.string   "token"
     t.string   "status"
     t.datetime "received_at"
@@ -357,12 +324,11 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "rejected_by"
     t.string   "ip_address"
     t.text     "notes"
-    t.decimal  "amount_paid",        precision: 8, scale: 2, default: 0.0
+    t.decimal  "amount_paid",        precision: 8, scale: 2, default: "0.0"
     t.boolean  "exported"
     t.string   "invoice_number"
+    t.index ["customer_id"], name: "index_orders_on_customer_id", using: :btree
   end
-
-  add_index "orders", ["customer_id"], name: "index_orders_on_customer_id", using: :btree
 
   create_table "payments", force: :cascade do |t|
     t.integer  "order_id"
@@ -376,30 +342,27 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "method"
+    t.index ["order_id"], name: "index_payments_on_order_id", using: :btree
   end
-
-  add_index "payments", ["order_id"], name: "index_payments_on_order_id", using: :btree
 
   create_table "peers", force: :cascade do |t|
     t.integer  "follower_id"
     t.integer  "followed_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["followed_id", "follower_id"], name: "index_peers_on_followed_id_and_follower_id", unique: true, using: :btree
+    t.index ["followed_id"], name: "index_peers_on_followed_id", using: :btree
+    t.index ["follower_id"], name: "index_peers_on_follower_id", using: :btree
   end
-
-  add_index "peers", ["followed_id", "follower_id"], name: "index_peers_on_followed_id_and_follower_id", unique: true, using: :btree
-  add_index "peers", ["followed_id"], name: "index_peers_on_followed_id", using: :btree
-  add_index "peers", ["follower_id"], name: "index_peers_on_follower_id", using: :btree
 
   create_table "pg_search_documents", force: :cascade do |t|
     t.text     "content"
-    t.integer  "searchable_id"
     t.string   "searchable_type"
+    t.integer  "searchable_id"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
   end
-
-  add_index "pg_search_documents", ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable_type_and_searchable_id", using: :btree
 
   create_table "posts", force: :cascade do |t|
     t.string   "name"
@@ -411,10 +374,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.string   "slug"
     t.string   "visual"
     t.string   "status"
+    t.index ["customer_id"], name: "index_posts_on_customer_id", using: :btree
+    t.index ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
   end
-
-  add_index "posts", ["customer_id"], name: "index_posts_on_customer_id", using: :btree
-  add_index "posts", ["slug"], name: "index_posts_on_slug", unique: true, using: :btree
 
   create_table "products", force: :cascade do |t|
     t.string   "name"
@@ -422,19 +384,18 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.string   "permalink"
     t.string   "description"
     t.boolean  "active",                                default: true
-    t.decimal  "price",         precision: 8, scale: 2, default: 0.0
+    t.decimal  "price",         precision: 8, scale: 2, default: "0.0"
     t.boolean  "featured",                              default: false
     t.datetime "created_at",                                            null: false
     t.datetime "updated_at",                                            null: false
     t.integer  "customer_id"
     t.integer  "nb_reviews",                            default: 0
-    t.decimal  "score_reviews",                         default: 0.0
+    t.decimal  "score_reviews",                         default: "0.0"
     t.string   "slug"
     t.integer  "counter_cache",                         default: 0
+    t.index ["customer_id"], name: "index_products_on_customer_id", using: :btree
+    t.index ["slug"], name: "index_products_on_slug", unique: true, using: :btree
   end
-
-  add_index "products", ["customer_id"], name: "index_products_on_customer_id", using: :btree
-  add_index "products", ["slug"], name: "index_products_on_slug", unique: true, using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.string   "title"
@@ -444,10 +405,9 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "customer_id"
+    t.index ["customer_id"], name: "index_reviews_on_customer_id", using: :btree
+    t.index ["product_id"], name: "index_reviews_on_product_id", using: :btree
   end
-
-  add_index "reviews", ["customer_id"], name: "index_reviews_on_customer_id", using: :btree
-  add_index "reviews", ["product_id"], name: "index_reviews_on_product_id", using: :btree
 
   create_table "stripe_accounts", force: :cascade do |t|
     t.integer "customer_id"
@@ -457,9 +417,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.string  "currency",              limit: 255
     t.string  "stripe_account_type",   limit: 255
     t.text    "stripe_account_status",             default: "{}"
+    t.index ["customer_id"], name: "index_stripe_accounts_on_customer_id", using: :btree
   end
-
-  add_index "stripe_accounts", ["customer_id"], name: "index_stripe_accounts_on_customer_id", using: :btree
 
   create_table "stripe_cards", force: :cascade do |t|
     t.string   "stripe_id"
@@ -473,9 +432,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "stripe_customer_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
+    t.index ["stripe_customer_id"], name: "index_stripe_cards_on_stripe_customer_id", using: :btree
   end
-
-  add_index "stripe_cards", ["stripe_customer_id"], name: "index_stripe_cards_on_stripe_customer_id", using: :btree
 
   create_table "stripe_customers", force: :cascade do |t|
     t.string   "stripe_id"
@@ -485,9 +443,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "customer_id"
     t.datetime "created_at",                      null: false
     t.datetime "updated_at",                      null: false
+    t.index ["customer_id"], name: "index_stripe_customers_on_customer_id", using: :btree
   end
-
-  add_index "stripe_customers", ["customer_id"], name: "index_stripe_customers_on_customer_id", using: :btree
 
   create_table "topics", force: :cascade do |t|
     t.string   "name"
@@ -497,9 +454,8 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "country_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["country_id"], name: "index_topics_on_country_id", using: :btree
   end
-
-  add_index "topics", ["country_id"], name: "index_topics_on_country_id", using: :btree
 
   create_table "updates", force: :cascade do |t|
     t.string   "name"
@@ -507,19 +463,17 @@ ActiveRecord::Schema.define(version: 20161104150227) do
     t.integer  "customer_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["customer_id"], name: "index_updates_on_customer_id", using: :btree
   end
-
-  add_index "updates", ["customer_id"], name: "index_updates_on_customer_id", using: :btree
 
   create_table "wish_lists", force: :cascade do |t|
     t.integer  "customer_id"
     t.integer  "product_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["customer_id"], name: "index_wish_lists_on_customer_id", using: :btree
+    t.index ["product_id"], name: "index_wish_lists_on_product_id", using: :btree
   end
-
-  add_index "wish_lists", ["customer_id"], name: "index_wish_lists_on_customer_id", using: :btree
-  add_index "wish_lists", ["product_id"], name: "index_wish_lists_on_product_id", using: :btree
 
   add_foreign_key "abuses", "customers"
   add_foreign_key "articles", "topics"
@@ -529,7 +483,6 @@ ActiveRecord::Schema.define(version: 20161104150227) do
   add_foreign_key "customers", "countries"
   add_foreign_key "cycles", "countries"
   add_foreign_key "families", "countries"
-  add_foreign_key "followings", "customers"
   add_foreign_key "forum_answers", "customers"
   add_foreign_key "forum_answers", "forum_subjects"
   add_foreign_key "forum_categories", "forum_families"

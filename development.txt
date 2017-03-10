@@ -14,6 +14,15 @@ node_modules are references with yarn
 <%= stylesheet_link_tag *webpack_asset_paths('application', extension: 'css') %>
 
 
+CUSTOM ADDITIONAL ELEMENTS
+Rspec need to be installed globally:  gem install rspec
+XCode for MAc to have imageMagic/Rmagic
+Imagemagick to process images
+BE CAREFULL WE NEED TO HAVE IMAGEMAGICK 6 AND NOT 7
+brew install imagemagick@6 && brew link imagemagick@6 --force
+check with $convert --version
+
+
 EMAIL TEMPLATE
 https://colorlib.com/wp/responsive-html-email-templates/
 http://tedgoas.github.io/Cerberus/
