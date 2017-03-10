@@ -130,7 +130,7 @@ var config = {
             // Embed fonts
             {
               test: /\.woff(2)?([\?].*)?$/,
-              use: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+              use: 'file-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
             },
             {
               test: /\.(ttf|eot)([\?].*)?$/,
