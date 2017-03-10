@@ -76,7 +76,8 @@ var config = {
             },
             {
                 test: /\.svg/,
-                loader: 'svg-url-loader?name=images/[name].[ext]'
+                loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=images/[name].[ext]'
+                //loader: 'svg-url-loader?name=images/[name].[ext]'
             },
             // Embed cursor pointers in Css
             {
