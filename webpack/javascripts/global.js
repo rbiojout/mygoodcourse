@@ -1,5 +1,5 @@
 // jQuery is imported as a Global
-require('expose?$!expose?jQuery!expose?jquery!jquery');
+require('expose-loader?$!expose-loader?jQuery!expose-loader?jquery!jquery');
 
 // unobstructive javascript
 require('jquery-ujs');

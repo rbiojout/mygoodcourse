@@ -12,13 +12,13 @@ var devServerPort = 3808;
 
 // set NODE_ENV=production on the environment to add asset fingerprints
 var production = process.env.NODE_ENV === 'production';
-// var production = false;
+// var production = true;
 
 var config = {
     context: __dirname + "/../",
     entry: {
       global: ["./webpack/javascripts/global.js", "./webpack/stylesheets/global.scss"],
-      //global: "./webpack/global.js",
+      // global: "./webpack/javascripts/global.js",
 
         // Sources are expected to live in $app_root/webpack
         // 'application': './webpack/application.js'
@@ -41,10 +41,9 @@ var config = {
     },
 
     resolve: {
-        modulesDirectories: ["webpack", "node_modules", "vendor/assets/javascripts", "vendor/assets/stylesheets"],
         modules: [
             path.resolve(__dirname, "webpack"),
-            path.resolve(__dirname, "node_modules"),
+            "node_modules",
             path.resolve(__dirname, "lib/assets"),
             path.resolve(__dirname, "vendor/assets/javascripts"),
             path.resolve(__dirname, "vendor/assets/stylesheets")],
@@ -62,63 +61,86 @@ var config = {
     },
 
     module: {
-        loaders: [
+        rules: [
             // Process .js and .jsx files for ES6 and React
             {
-                test: /\.js$/,
-                exclude: /(node_modules)/,
-                loader: "babel?presets[]=react,presets[]=es2015"
+                test: /\.(js|jsx)$/,
+                exclude: /node_modules/,
+                use: [
+                    'babel-loader',
+                ],
             },
             // Embed images
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                loader: 'file?name=images/[name].[ext]'
+                use: 'file-loader?name=images/[name].[ext]'
             },
             {
                 test: /\.(svg)$/i,
-                loader: 'file?mimetype=image/svg+xml&name=images/[name].[ext]'
+                use: 'file-loader?mimetype=image/svg+xml&name=images/[name].[ext]'
                 //loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=images/[name].[ext]'
                 //loader: 'svg-url-loader?name=images/[name].[ext]'
             },
             // Embed cursor pointers in Css
             {
                 test: /\.(cur)$/i,
-                loader: 'file?name=images/[name].[ext]'
+                use: 'file-loader?name=images/[name].[ext]'
             },
             // Process normal CSS files
             {
                 test: /\.acss$/, // Only .css files
-                loader: ExtractTextPlugin.extract("css-loader?sourceMap!resolve-url-loader"),
+                use: ExtractTextPlugin.extract("css-loader?sourceMap!resolve-url-loader"),
                 //, loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'postcss-loader']
                 //loader: 'style!css!postcss'
             },
             // Process SASS files
             {
                 test: /\.s?css$/,
-                loader: ExtractTextPlugin.extract('css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'),
+                use: [{
+                    loader: "style-loader"
+                    },
+                    {
+                    loader: "css-loader",
+                    query: {
+                        modules: false,
+                        sourceMap: true,
+                        importLoaders: 2
+                        }
+                    },
+                    {
+                        loader: 'resolve-url-loader'
+                    },
+                    {
+                    loader: "sass-loader",
+                        query: {
+                            sourceMap: true,
+                            sourceMapContents: true
+                        }
+                }],
                 //loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap', 'postcss-loader']
                 //loader: 'style!css!sass!postcss'
             },
             // Embed fonts
             {
               test: /\.woff(2)?([\?].*)?$/,
-              loader: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+              use: 'url-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
             },
             {
               test: /\.(ttf|eot)([\?].*)?$/,
-              loader: 'file-loader?name=fonts/[name].[ext]'
+              use: 'file-loader?name=fonts/[name].[ext]'
             },
             // expose jQuery
-            { test: require.resolve('jquery'), loader: 'expose?jQuery' },
-            { test: require.resolve('jquery'), loader: 'expose?jquery' },
-            { test: require.resolve('jquery'), loader: 'expose?$' },
+            { test: require.resolve('jquery'), loader: 'expose-loader?jQuery' },
+            { test: require.resolve('jquery'), loader: 'expose-loader?jquery' },
+            { test: require.resolve('jquery'), loader: 'expose-loader?$' },
 
         ]
     },
 
-    debug: true,
-
     plugins: [
+        new webpack.LoaderOptionsPlugin({
+            debug: true
+        }),
         new ExtractTextPlugin(production ? '[name]-[chunkhash].css' : '[name].css'),
         // if you want a module available as variable in every module,
         // such as making $ and jQuery available in every module without writing require("jquery").
@@ -154,8 +176,7 @@ if (production) {
     new webpack.DefinePlugin({
         'process.env': { NODE_ENV: JSON.stringify('production') }
     }),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin()
+    new webpack.optimize.DedupePlugin()
     );
 } else {
     config.devServer = {
