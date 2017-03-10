@@ -104,7 +104,7 @@ gem 'rack-cors'
 
 # add datetime picker with bootstrap
 # gem 'bootstrap-datepicker-rails'
-gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
+# gem 'datetimepicker-rails', github: 'zpaulovics/datetimepicker-rails', branch: 'master', submodules: true
 # gem 'bootstrap-daterangepicker-rails'
 
 # add full calendar to display and control events
