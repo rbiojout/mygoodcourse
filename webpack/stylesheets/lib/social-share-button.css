@@ -9,71 +9,71 @@
 }
 
 .social-share-button .ssb-twitter {
-    background-image: url('../../images/social/twitter.svg');
+    background-image: url('~images/social/twitter.svg');
 }
 
 .social-share-button .ssb-facebook {
-    background-image: url('../../images/social/facebook.svg');
+    background-image: url('~images/social/facebook.svg');
 }
 
 .social-share-button .ssb-google_bookmark {
-    background-image: url('../../images/social/google_bookmark.svg');
+    background-image: url('~images/social/google_bookmark.svg');
 }
 
 .social-share-button .ssb-google_plus {
-    background-image: url('../../images/social/google_plus.svg');
+    background-image: url('~images/social/google_plus.svg');
 }
 
 .social-share-button .ssb-weibo {
-    background-image: url('../../images/social/weibo.svg');
+    background-image: url('~images/social/weibo.svg');
 }
 
 .social-share-button .ssb-qq {
-    background-image: url('../../images/social/qq.svg');
+    background-image: url('~images/social/qq.svg');
 }
 
 .social-share-button .ssb-delicious {
-    background-image: url('../../images/social/delicious.svg');
+    background-image: url('~images/social/delicious.svg');
 }
 
 .social-share-button .ssb-linkedin {
-    background-image: url('../../images/social/linkedin.svg');
+    background-image: url('~images/social/linkedin.svg');
 }
 
 .social-share-button .ssb-tumblr {
-    background-image: url('../../images/social/tumblr.svg');
+    background-image: url('~images/social/tumblr.svg');
 }
 
 .social-share-button .ssb-pinterest {
-    background-image: url('../../images/social/pinterest.svg');
+    background-image: url('~images/social/pinterest.svg');
 }
 
 .social-share-button .ssb-douban {
-    background-image: url('../../images/social/douban.svg');
+    background-image: url('~images/social/douban.svg');
 }
 
 .social-share-button .ssb-wechat {
-    background-image: url('../../images/social/wechat.svg');
+    background-image: url('~images/social/wechat.svg');
 }
 
 .social-share-button .ssb-vkontakte {
-    background-image: url('../../images/social/vkontakte.svg');
+    background-image: url('~images/social/vkontakte.svg');
 }
 
 .social-share-button .ssb-xing {
-    background-image: url('../../images/social/xing.svg');
+    background-image: url('~images/social/xing.svg');
 }
 
 .social-share-button .ssb-email {
-    background-image: url('../../images/social/email.svg');
+    background-image: url('~images/social/email.svg');
 }
 
 .social-share-button .ssb-reddit {
-    background-image: url('../../images/social/reddit.svg');
+    background-image: url('~images/social/reddit.svg');
 }
 
 .social-share-button .ssb-hacker_news {
-    background-image: url('../../images/social/hacker_news.svg');
+    background-image: url('~images/social/hacker_news.svg');
 }
 
 .ss-wechat-dialog {
