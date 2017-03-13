@@ -5,6 +5,7 @@ require File.expand_path('../../config/environment', __FILE__)
 abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'spec_helper'
 require 'rspec/rails'
+require 'selenium-webdriver'
 
 # Add additional requires below this line. Rails is not loaded until this point!
 require 'capybara/rails'
@@ -15,11 +16,26 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, debug: false,
                                          default_wait_time: 20,
                                          timeout: 60,
-                                         js_errors: true,
+                                         js_errors: false,
                                          phantomjs_options: ['--load-images=yes'])
 end
 
-Capybara.javascript_driver = :poltergeist
+
+capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
+    "chromeOptions" => {"args" => [ "--no-startup-window --disable-web-security" ]})
+
+Capybara.register_driver :chrome do |app|
+  Capybara::Selenium::Driver.new(app, :browser => :chrome,
+                                 :desired_capabilities => capabilities)
+end
+
+Capybara.current_driver = :chrome
+
+
+# Capybara.javascript_driver = :poltergeist
+Capybara.javascript_driver = :chrome
+
+
 # time out set in driver
 Capybara.default_max_wait_time = 20
 

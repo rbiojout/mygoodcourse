@@ -73,6 +73,8 @@ GEM
       activesupport (>= 4.0.0)
       mime-types (>= 1.16)
     chartkick (2.2.2)
+    childprocess (0.6.2)
+      ffi (~> 1.0, >= 1.0.11)
     cliver (0.3.2)
     cocoon (1.2.9)
     coderay (1.1.1)
@@ -119,6 +121,7 @@ GEM
       i18n (~> 0.5)
     faraday (0.10.1)
       multipart-post (>= 1.2, < 3)
+    ffi (1.9.18)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.38.0)
@@ -452,6 +455,7 @@ GEM
       ruby-progressbar (~> 1.7)
       unicode-display_width (~> 1.0, >= 1.0.1)
     ruby-progressbar (1.8.1)
+    rubyzip (1.2.1)
     sass (3.4.23)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
@@ -462,6 +466,10 @@ GEM
     sdoc (0.4.2)
       json (~> 1.7, >= 1.7.7)
       rdoc (~> 4.0)
+    selenium-webdriver (3.3.0)
+      childprocess (~> 0.5)
+      rubyzip (~> 1.0)
+      websocket (~> 1.0)
     shoulda-matchers (3.1.1)
       activesupport (>= 4.0.0)
     simple_form (3.4.0)
@@ -519,6 +527,7 @@ GEM
       railties (>= 5.0)
     webpack-rails (0.9.10)
       railties (>= 3.2.0)
+    websocket (1.2.4)
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
@@ -582,6 +591,7 @@ DEPENDENCIES
   rubocop
   sass-rails
   sdoc
+  selenium-webdriver
   shoulda-matchers
   simple_form
   social-share-button

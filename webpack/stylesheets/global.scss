@@ -1,4 +1,3 @@
-$icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 // custom vaiables for bootstrap
 // that overwrite the basic configuration
@@ -8,7 +7,22 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 // that are used all over the application
 @import "application-variables";
 
+$icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import "~bootstrap-sass/assets/stylesheets/bootstrap";
+
+// issue with Glyphicons
+@at-root {
+  // Import the fonts
+  @font-face {
+    font-family: 'Glyphicons Halflings';
+    src: url('#{$icon-font-path}#{$icon-font-name}.eot');
+    src: url('#{$icon-font-path}#{$icon-font-name}.eot?#iefix') format('embedded-opentype'),
+    url('#{$icon-font-path}#{$icon-font-name}.woff2') format('woff2'),
+    url('#{$icon-font-path}#{$icon-font-name}.woff') format('woff'),
+    url('#{$icon-font-path}#{$icon-font-name}.ttf') format('truetype'),
+    url('#{$icon-font-path}#{$icon-font-name}.svg') format('svg');
+  }
+}
 
 // @import "material-kit.scss";
 
@@ -30,8 +44,10 @@ $icon-font-path: "~bootstrap-sass/assets/fonts/bootstrap/";
 
 // IMPORTANT make sure to resolve the path for font asset
 // run rake bower:resolve summernote
+@import "~codemirror/lib/codemirror.css";
+@import "~codemirror/theme/monokai.css";
 @import "~summernote/src/less/summernote.scss";
-@import "~summernote/dist/summernote";
+@import "~summernote/dist/summernote.css";
 
 // datetimepicker
 @import "~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";

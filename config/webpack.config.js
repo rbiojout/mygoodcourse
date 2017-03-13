@@ -12,13 +12,13 @@ var devServerPort = 3808;
 
 // set NODE_ENV=production on the environment to add asset fingerprints
 var production = process.env.NODE_ENV === 'production';
-// var production = true;
+// var production = false;
 
 var config = {
     context: __dirname + "/../",
     entry: {
-      global: ["./webpack/javascripts/global.js", "./webpack/stylesheets/global.scss"],
-      // global: "./webpack/javascripts/global.js",
+        global: ["./webpack/javascripts/global.js", "./webpack/stylesheets/global.scss"],
+        //global: "./webpack/global.js",
 
         // Sources are expected to live in $app_root/webpack
         // 'application': './webpack/application.js'
@@ -35,22 +35,24 @@ var config = {
         // export itself to a global var
         libraryTarget: "var",
         // name of the global var: "Foo"
-        library: "Turbolinks",
+        // library: "Turbolinks",
 
-        filename: production ? '[name]-[hash].js' : '[name].js'
+        filename: production ? '[name]-[chunkhash].js' : '[name].js'
     },
 
     resolve: {
+        modulesDirectories: ["webpack", "node_modules", "vendor/assets/javascripts", "vendor/assets/stylesheets"],
         modules: [
             path.resolve(__dirname, "webpack"),
-            "node_modules",
+            path.resolve(__dirname, "node_modules"),
             path.resolve(__dirname, "lib/assets"),
             path.resolve(__dirname, "vendor/assets/javascripts"),
             path.resolve(__dirname, "vendor/assets/stylesheets")],
         alias: {
             jquery: 'jquery/dist/jquery',
-            stellar: "jquery.stellar/jquery.stellar",
-            'jquery-turbolinks': 'jquery.turbolinks/vendor/assets/javascripts/jquery.turbolinks.js'
+            stellar: "jquery.stellar/jquery.stellar"
+            //,
+            //'jquery-turbolinks': 'jquery.turbolinks/vendor/assets/javascripts/jquery.turbolinks.js'
         }
     },
 
@@ -61,94 +63,63 @@ var config = {
     },
 
     module: {
-        rules: [
+        loaders: [
             // Process .js and .jsx files for ES6 and React
             {
-                test: /\.(js|jsx)$/,
-                exclude: /node_modules/,
-                use: [
-                    'babel-loader',
-                ],
+                test: /\.js$/,
+                exclude: /(node_modules)/,
+                loader: "babel?presets[]=react,presets[]=es2015"
             },
             // Embed images
             {
                 test: /\.(jpe?g|png|gif)$/i,
-                use: 'file-loader?name=images/[name].[ext]'
+                loader: 'file?name=images/[name].[ext]'
             },
             {
-                test: /\.(svg)$/i,
-                use: 'file-loader?mimetype=image/svg+xml&name=images/[name].[ext]'
-                //loader: 'url-loader?limit=10000&mimetype=image/svg+xml&name=images/[name].[ext]'
-                //loader: 'svg-url-loader?name=images/[name].[ext]'
+                test: /\.svg/,
+                loader: 'svg-url-loader?name=images/[name].[ext]'
             },
             // Embed cursor pointers in Css
             {
                 test: /\.(cur)$/i,
-                use: 'file-loader?name=images/[name].[ext]'
+                loader: 'file?name=images/[name].[ext]'
             },
             // Process normal CSS files
             {
                 test: /\.acss$/, // Only .css files
-                use: ExtractTextPlugin.extract("css-loader?sourceMap!resolve-url-loader"),
+                loader: ExtractTextPlugin.extract("css-loader?sourceMap!resolve-url-loader"),
                 //, loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'postcss-loader']
                 //loader: 'style!css!postcss'
             },
             // Process SASS files
             {
                 test: /\.s?css$/,
-
+                loader: ExtractTextPlugin.extract('css-loader?sourceMap!resolve-url-loader?sourceMap!sass-loader?sourceMap'),
                 //loader: ExtractTextPlugin.extract('css-loader?sourceMap!resolve-url-loader!sass-loader?sourceMap'),
-                //loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap', 'postcss-loader']
-                //loader: 'style!css!sass!postcss'
-
-
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: [
-                        {
-                            loader: "css-loader",
-                            query: {
-                                // modules: false,
-                                sourceMap: true,
-                                importLoaders: 1
-                            }
-                        },
-                        {
-                            loader: 'resolve-url-loader'
-                        },
-                        {
-                            loader: "sass-loader",
-                            query: {
-                                sourceMap: true,
-                                //sourceMapContents: true
-                            }
-                        }]
-                })
                 //loaders: ['style-loader', 'css-loader', 'resolve-url-loader', 'sass-loader?sourceMap', 'postcss-loader']
                 //loader: 'style!css!sass!postcss'
             },
             // Embed fonts
             {
-              test: /\.woff(2)?([\?].*)?$/,
-              use: 'file-loader?name=fonts/[name].[ext]&limit=10000&mimetype=application/font-woff'
+                test: /\.woff(2)?([\?].*)?$/,
+                loader: 'url-loader?name=fonts/[name].[ext]&limit=100000&mimetype=application/font-woff'
             },
             {
-              test: /\.(ttf|eot)([\?].*)?$/,
-              use: 'file-loader?name=fonts/[name].[ext]'
+                test: /\.(ttf|eot)([\?].*)?$/,
+                loader: 'url-loader?&limit=100000&name=fonts/[name].[ext]'
             },
             // expose jQuery
-            { test: require.resolve('jquery'), loader: 'expose-loader?jQuery' },
-            { test: require.resolve('jquery'), loader: 'expose-loader?jquery' },
-            { test: require.resolve('jquery'), loader: 'expose-loader?$' },
+            { test: require.resolve('jquery'), loader: 'expose?jQuery' },
+            { test: require.resolve('jquery'), loader: 'expose?jquery' },
+            { test: require.resolve('jquery'), loader: 'expose?$' },
 
         ]
     },
 
+    debug: true,
+
     plugins: [
-        new webpack.LoaderOptionsPlugin({
-            debug: true
-        }),
-        new ExtractTextPlugin(production ? '[name]-[hash].css' : '[name].css'),
+        new ExtractTextPlugin(production ? '[name]-[chunkhash].css' : '[name].css'),
         // if you want a module available as variable in every module,
         // such as making $ and jQuery available in every module without writing require("jquery").
         // You should use ProvidePlugin.
@@ -173,16 +144,18 @@ var config = {
 
 if (production) {
     config.plugins.push(
-    new webpack.NoEmitOnErrorsPlugin(),
-    new webpack.optimize.UglifyJsPlugin({
-        debug: true,
-        compressor: { warnings: false },
-        test: /\.js($|\?)/i,
-        sourceMap: true
-    }),
-    new webpack.DefinePlugin({
-        'process.env': { NODE_ENV: JSON.stringify('production') }
-    })
+        new webpack.NoErrorsPlugin(),
+        new webpack.optimize.UglifyJsPlugin({
+            debug: true,
+            compressor: { warnings: false },
+            test: /\.js($|\?)/i,
+            sourceMap: true
+        }),
+        new webpack.DefinePlugin({
+            'process.env': { NODE_ENV: JSON.stringify('production') }
+        }),
+        new webpack.optimize.DedupePlugin(),
+        new webpack.optimize.OccurenceOrderPlugin()
     );
 } else {
     config.devServer = {

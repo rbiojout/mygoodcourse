@@ -64,6 +64,10 @@ RSpec.describe 'CheckoutFeatures', type: :feature, js: true do
 
       click_on(I18n.translate('helpers.action.pay'))
 
+      sleep(1)
+
+      save_screenshot("#{::Rails.root}/spec/screenshots/checkout-prepare-2.jpg", full: true)
+
       find('#dialog-notice')
       expect(page).to have_content(I18n.t('dialog.shop.notice_pay_accepted'))
 

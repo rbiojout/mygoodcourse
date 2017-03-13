@@ -53,6 +53,9 @@ $(function () {
 
 // WYSIWYG Summernote
 // some links to bootstrap js needed
+window.CodeMirror = require('codemirror/lib/codemirror.js');
+// require('codemirror/lib/codemirror.js');
+require('codemirror/lib/codemirror.css');
 require('summernote/dist/summernote');
 // locale for summernote
 require('./summernote-fr.js');

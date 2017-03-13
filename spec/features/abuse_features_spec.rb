@@ -23,10 +23,14 @@ RSpec.describe 'AbuseFeatures', type: :feature, js: true do
         action = I18n.translate('helpers.action.abuse.create')
         # some strange behavior for click
         save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-1.jpg", full: true)
-        expect(page).to have_css("a[alt='#{action}']")
+        # We need to scroll because the link is outside the window!!
+        page.execute_script(%Q{$("a[alt='#{action}']").prop("scrollTop", 1000000).trigger('scroll')})
+        find("a[alt='#{action}']").click
+        # double click because of touch behaviour
         find("a[alt='#{action}']").click
       end
 
+      save_screenshot("#{::Rails.root}/spec/screenshots/abuse_review_create-2.jpg", full: true)
       # waiting for modal
       find('#app_dialog')
       find('#abuse_description')
@@ -43,8 +47,8 @@ RSpec.describe 'AbuseFeatures', type: :feature, js: true do
           # we use jquery to change the value
           page.execute_script("$('textarea#abuse_description').text('#{text}')")
           find('input[name="commit"]').click
-          expect(page).to have_no_xpath('//input')
         end
+        expect(page).to have_no_xpath('//input')
       # we wait to have the request sent to the server
       }.to change(Abuse, :count).by(1)
 

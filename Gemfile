@@ -185,7 +185,7 @@ group :test do
   gem 'poltergeist'
   # END_HIGHLIGHT
 
-  # gem 'selenium-webdriver'
+  gem 'selenium-webdriver'
 end
 
 group :development, :test do
