@@ -22,7 +22,8 @@
 
 class Family < ApplicationRecord
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   has_many :categories, dependent: :destroy
   accepts_nested_attributes_for :categories, reject_if: :all_blank, allow_destroy: true

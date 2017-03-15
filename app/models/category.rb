@@ -26,7 +26,8 @@ class Category < ApplicationRecord
 
   has_and_belongs_to_many :products
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   validates :name, presence: true
 

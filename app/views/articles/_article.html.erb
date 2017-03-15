@@ -7,6 +7,6 @@
     <%= article.name %>
   </h4>
 
-  <%= sanitize(article.description, scrubber: :prune) %>
+  <%= sanitize(article.description, scrubber: VideoScrubber.new) %>
   <hr/>
 </li>

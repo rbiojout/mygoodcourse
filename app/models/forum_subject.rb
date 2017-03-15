@@ -24,7 +24,8 @@
 
 class ForumSubject < ApplicationRecord
 
-  html_fragment :text, :scrub => :prune  # scrubs `text` using the :prune scrubber
+  # html_fragment :text, :scrub => :prune  # scrubs `text` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   # follow activities
   # we explicitely indicate the reference because of rails_admin issues

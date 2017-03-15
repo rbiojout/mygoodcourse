@@ -5,7 +5,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.cycle.description')%>:</strong>
-  <%= sanitize(@cycle.description, scrubber: :prune) %>
+  <%= sanitize(@cycle.description, scrubber: VideoScrubber.new) %>
 </p>
 
 <h2><%= (I18n.translate 'activerecord.models.level', count: 2).capitalize %></h2>

@@ -4,7 +4,7 @@
 require 'rails_helper'
 include Warden::Test::Helpers
 
-RSpec.feature 'CatalogFeatures' do
+RSpec.feature 'AdminFeatures' do
 
   before(:each) do
     login_as employees(:one), scope: :employee

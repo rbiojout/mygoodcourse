@@ -20,7 +20,7 @@
       <!--- end list of actions --->
     </h1>
     <blockquote>
-      <%= sanitize(@customer.description, scrubber: :prune) %>
+      <%= sanitize(@customer.description, scrubber: VideoScrubber.new) %>
     </blockquote>
     <h3><%= (I18n.translate 'activerecord.models.product', count: 2).capitalize %></h3>
       <!-- products of the customer -->

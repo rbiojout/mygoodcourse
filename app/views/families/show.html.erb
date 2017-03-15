@@ -4,7 +4,7 @@
 
 <p>
   <strong><%= t('activerecord.attributes.family.description')%>:</strong>
-  <%= sanitize(@family.description, scrubber: :prune) %>
+  <%= sanitize(@family.description, scrubber: VideoScrubber.new) %>
 </p>
 
 <h2><%= (I18n.translate 'activerecord.models.category', count: 2).capitalize %></h2>

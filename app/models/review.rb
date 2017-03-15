@@ -24,7 +24,8 @@
 
 class Review < ApplicationRecord
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   belongs_to :product
   belongs_to :customer

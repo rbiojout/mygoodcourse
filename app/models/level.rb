@@ -21,7 +21,8 @@
 
 class Level < ApplicationRecord
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   belongs_to :cycle, inverse_of: :levels
   acts_as_list scope: :cycle, add_new_at: :bottom

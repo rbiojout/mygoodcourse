@@ -4,16 +4,218 @@
   margin: 35px 0;
   color: #E5E5E5;
   width: 100%;
+  i {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    line-height: 1;
+    font-size: 18px!important;
+    text-align: center;
+  }
+  a {
+    position: relative;
+    display: inline-block;
+    color: inherit;
+    -webkit-transition: all .3s ease;
+    -o-transition: all .3s ease;
+    transition: all .3s ease;
+  }
+  a:hover {
+    color: #888;
+  }
 }
 
 .divider.divider-short {
   margin: 10px 0;
+  &:after {
+    width: 30%;
+  }
 }
 
+// divider right
 .divider.divider-right {
   text-align: right;
+  &:after {
+    left: auto;
+    right: 30px;
+  }
 }
 
+// divider center
 .divider.divider-center, .divider.divider-center.divider-short {
   text-align: center;
+}
+
+.divider.divider-center{
+  &:before {
+    left: -50%!important;
+    right: 0;
+    margin-left: -20px;
+  }
+  &:after {
+    left: 50%!important;
+    right: 0;
+    margin-left: 20px;
+  }
+}
+
+.divider.divider-center.divider-short {
+  &:before {
+    left: auto!important;
+    right: 50%;
+    margin-right: 20px;
+    width: 15%
+  }
+  &:after {
+    left: 50%!important;
+    right: auto!important;
+    margin-left: 20px;
+    width: 15%;
+  }
+}
+
+.divider.divider-center.divider-short:before,.divider.divider-center:before,.divider:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  top: 8px;
+  left: 30px;
+  height: 0;
+  border-top: 1px solid #EEE;
+}
+
+// divider thick
+.divider.divider-center.divider-short.divider-thick:before,.divider.divider-center.divider-thick:before,.divider.divider-thick:after {
+  border-top-width: 3px;
+}
+
+// divider vshort
+.divider.divider-vshort:after {
+  width: 12%;
+}
+
+
+.divider.divider-center.divider-vshort:after,.divider.divider-center.divider-vshort:before {
+  width: 6%;
+}
+
+
+// divider margin
+.divider.divider-margin {
+  margin: 70px 0;
+}
+
+// divider rounded
+.divider.divider-rounded {
+  color: #BBB;
+}
+
+// divider border
+.divider.divider-border.divider-center:before,.divider.divider-border.divider-short:before,.divider.divider-border:after,.divider.divider-rounded.divider-center:before,.divider.divider-rounded.divider-short:before,.divider.divider-rounded:after {
+  top: 19px;
+  left: 40px;
+}
+
+.divider.divider-border i,.divider.divider-rounded i {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  background-color: #F5F5F5;
+  border-radius: 50%;
+}
+
+.divider.divider-border.divider-right:after,.divider.divider-rounded.divider-right:after {
+  left: auto;
+  right: 40px;
+}
+
+.divider.divider-border {
+  color: #E5E5E5;
+}
+
+.divider.divider-border i {
+  line-height: 38px;
+  background-color: transparent;
+  border: 1px solid #EEE;
+}
+
+// divider line
+.divider.divider-line:after,.divider.divider-line:before {
+  margin-left: 0!important;
+  margin-right: 0!important;
+}
+
+
+
+// fancy title
+.fancy-title {
+  position: relative;
+  margin-bottom: 30px;
+  h1, h2, h3, h4, h5, h6 {
+    position: relative;
+    display: inline-block;
+    background-color: #FFF;
+    padding-right: 15px;
+    margin-top: 0px;
+    margin-bottom: 0;
+  }
+  h4, h5, h6 {
+    padding-right: 10px;
+  }
+
+  &.title-border-color:before, &.title-border:before, &.title-double-border:before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 0;
+    border-top: 3px double #E5E5E5;
+    left: auto;
+    top: 46%;
+    right: 0;
+  }
+  &.title-border:before {
+    top: 60%;
+    border-top: 1px solid #EEE;
+  }
+  &.title-border-color:before {
+    top: 60%;
+    border-top: 1px solid $brand-primary;
+    opacity: .6;
+  }
+}
+
+// title center
+.title-center {
+  text-align: center;
+  h1, h2, h3 {
+    padding: 0 15px;
+  }
+  h4, h5, h6 {
+    padding: 0 10px;
+  }
+}
+
+// title right
+.title-right {
+  text-align: right;
+  h1, h2, h3 {
+    padding: 0 0 0 15px;
+  }
+  h4, h5, h6 {
+    padding: 0 0 0 10px;
+  }
+}
+
+// title bottom border
+.fancy-title.title-bottom-border {
+  h1, h2, h3, h4, h5, h6 {
+    display: block;
+    background: 0 0;
+    padding: 0 0 10px;
+    border-bottom: 2px solid $brand-primary;
+  }
+}
+
+.fancy-title.title-dotted-border {
+  background: url('../../images/dotted.png') center repeat-x;
 }

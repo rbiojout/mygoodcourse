@@ -16,7 +16,7 @@ Capybara.register_driver :poltergeist do |app|
   Capybara::Poltergeist::Driver.new(app, debug: false,
                                          default_wait_time: 20,
                                          timeout: 60,
-                                         js_errors: false,
+                                         js_errors: true,
                                          phantomjs_options: ['--load-images=yes'])
 end
 
@@ -32,8 +32,8 @@ end
 Capybara.current_driver = :chrome
 
 
-# Capybara.javascript_driver = :poltergeist
-Capybara.javascript_driver = :chrome
+Capybara.javascript_driver = :poltergeist
+# Capybara.javascript_driver = :chrome
 
 
 # time out set in driver

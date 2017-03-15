@@ -9,6 +9,6 @@
   </h2>
 
   <blockquote>
-    <%= sanitize(topic.description, scrubber: :prune) %>
+    <%= sanitize(topic.description, scrubber: VideoScrubber.new) %>
   </blockquote>
 </li>

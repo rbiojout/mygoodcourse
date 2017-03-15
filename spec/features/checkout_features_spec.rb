@@ -57,7 +57,8 @@ RSpec.describe 'CheckoutFeatures', type: :feature, js: true do
 
       save_screenshot("#{::Rails.root}/spec/screenshots/checkout-prepare.jpg", full: true)
 
-      find('input[data-stripe="number"]').set('4242424242424242')
+      page.execute_script("$('input[data-stripe=\"number\"]').val('4242424242424242')")
+      # find('input[data-stripe="number"]').set('4242424242424242')
       find('select[data-stripe="exp-month"]').set('11')
       find('select[data-stripe="exp-month"]').set('2027')
       find('input[data-stripe="cvc"]').set('321')
@@ -81,7 +82,8 @@ RSpec.describe 'CheckoutFeatures', type: :feature, js: true do
 
       # we have an order
 
-      find('input[data-stripe="number"]').set('4000000000000077')
+      page.execute_script("$('input[data-stripe=\"number\"]').val('4000000000000077')")
+      # find('input[data-stripe="number"]').set('4000000000000077')
       find('select[data-stripe="exp-month"]').set('11')
       find('select[data-stripe="exp-month"]').set('2027')
       find('input[data-stripe="cvc"]').set('321')
@@ -101,7 +103,8 @@ RSpec.describe 'CheckoutFeatures', type: :feature, js: true do
 
       # we have an order
 
-      find('input[data-stripe="number"]').set('4000000000000341')
+      page.execute_script("$('input[data-stripe=\"number\"]').val('4000000000000341')")
+      # find('input[data-stripe="number"]').set('4000000000000341')
       find('select[data-stripe="exp-month"]').set('11')
       find('select[data-stripe="exp-month"]').set('2027')
       find('input[data-stripe="cvc"]').set('321')

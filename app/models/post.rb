@@ -39,7 +39,8 @@ class Post < ApplicationRecord
   multisearchable against: [:name, :description]
   pg_search_scope :search_by_text, against: [:name, :description], ignoring: :accents
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   default_scope -> { order(created_at: :desc) }
 

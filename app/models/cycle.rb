@@ -21,7 +21,8 @@
 
 class Cycle < ApplicationRecord
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   has_many :levels, dependent: :destroy
   accepts_nested_attributes_for :levels, reject_if: :all_blank, allow_destroy: true

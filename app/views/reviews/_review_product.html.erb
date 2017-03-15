@@ -24,7 +24,7 @@
             <%= render :partial => 'reviews/show_stars', :locals => {:score => review.score, :simple => true} %>
             <!--- end stars --->
             <b><%= review.title %></b>
-            <p><%= sanitize(review.description, scrubber: :prune) %></p>
+            <p><%= sanitize(review.description, scrubber: VideoScrubber.new) %></p>
           </div>
           <div class="panel-footer">
             <div class="tools-box">

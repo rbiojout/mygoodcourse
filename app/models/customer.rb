@@ -95,7 +95,8 @@ class Customer < ApplicationRecord
   # add a file for image
   mount_uploader :picture, PictureUploader
 
-  html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  # html_fragment :description, :scrub => :prune  # scrubs `description` using the :prune scrubber
+  html_fragment :description, :scrub => VideoScrubber.new  # scrubs `description` using our Video scrubber
 
   # Validations
   # validate in addition to Devise

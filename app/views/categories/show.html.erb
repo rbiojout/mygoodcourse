@@ -4,5 +4,5 @@
 
 <p>
   <strong><%= t('activerecord.attributes.category.description')%>:</strong>
-  <%= sanitize(@category.description, scrubber: :prune) %>
+  <%= sanitize(@category.description, scrubber: VideoScrubber.new) %>
 </p>
