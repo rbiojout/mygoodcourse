@@ -11,9 +11,11 @@
 
 <h1><%= yield :title %></h1>
 
+<ul class="media-list">
 <% @forum_categories.each do |forum_category| %>
     <%= render(partial:'forum_categories/forum_category', locals: {forum_category: forum_category}) %>
 <% end %>
+</ul>
 
 
 

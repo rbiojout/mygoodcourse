@@ -51,17 +51,18 @@
       <div class="col-xs-12">
           <h3><span class="fa fa-bullhorn fa-lg"></span> <%= link_to forum_subject.name, forum_subject_path(forum_subject) %></h3>
         <p>Created by <%= link_to forum_subject.customer.full_name, customer_path(forum_subject.customer) %>  - <%= nice_date(forum_subject.created_at) %></p>
-        <% unless forum_subject.forum_answers.count == 0 %>
-            <small><i class="fa fa-comments"></i> <%= forum_subject.forum_answers.count %> <%= t('activerecord.models.forum_answer', count: forum_subject.forum_answers.count) %></small>
-      <% end %>
-        <small><i class="fa fa-eye"></i> <%= forum_subject.counter_cache %> vues</small>
-
-        <% unless forum_subject.last_activity_date.nil? %>
-            <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.last_activity_date) %></small>
-        <% end %>
-        <% unless forum_subject.last_activity_customer.nil? %>
-            <%= link_to forum_subject.last_activity_customer.full_name, customer_path(forum_subject.last_activity_customer) %>
-        <% end %>
+        <ul class="list-meta">
+          <% unless forum_subject.forum_answers.count == 0 %>
+              <li><i class="fa fa-comments"></i> <%= forum_subject.forum_answers.count %> <%= t('activerecord.models.forum_answer', count: forum_subject.forum_answers.count) %></li>
+          <% end %>
+          <li><i class="fa fa-eye"></i> <%= forum_subject.counter_cache %> vues</li>
+          <% unless forum_subject.last_activity_date.nil? %>
+              <li><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.last_activity_date) %></li>
+          <% end %>
+          <% unless forum_subject.last_activity_customer.nil? %>
+              <%= link_to forum_subject.last_activity_customer.full_name, customer_path(forum_subject.last_activity_customer) %>
+          <% end %>
+        </ul>
       </div>
 
     </div>

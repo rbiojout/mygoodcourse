@@ -69,6 +69,8 @@ fr:
     need_login: "Vous devez vous connecter pour continuer"
     operation_in_progress: 'Operation en cours'
     read_next: 'lire la suite'
+    popular: 'Populaires'
+    latest: 'Derniers'
     method:
       order_by: 'Trier par'
       searching_for: 'Recherche pour'

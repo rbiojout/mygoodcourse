@@ -2,23 +2,24 @@
 <% #https://addstar34.github.io/2016/01/13/the-secret-to-easy-nested-content-tags.html %>
 
 
-
-<div class="row" id="order_item_<%=order_item.id%>">
-  <div class="hidden-xs col-sm-3 picture_part">
-    <%= link_to product_path(order_item.product) do %>
-        <%= image_tag order_item.product.small, class: 'img-thumbnail center-block' %>
-    <% end %>
-  </div>
-  <div class="col-xs-7 col-sm-5 description_part">
-    <h4><%= order_item.product.name %></h4>
-    <div class="pull-right">
-      <%= render :partial => 'reviews/show_stars', :locals => {:score => order_item.product.score_reviews, :nb_reviews => order_item.product.nb_reviews, :simple => true} %>
+<li class="with-dash">
+  <div class="row" id="order_item_<%=order_item.id%>">
+    <div class="hidden-xs col-sm-3 picture_part">
+      <%= link_to product_path(order_item.product) do %>
+          <%= image_tag order_item.product.small, class: 'img-thumbnail center-block' %>
+      <% end %>
     </div>
-    <small><%= order_item.product.customer.first_name %> <%= order_item.product.customer.name %></small>
+    <div class="col-xs-7 col-sm-5 description_part">
+      <h4><%= order_item.product.name %></h4>
+      <div class="pull-right">
+        <%= render :partial => 'reviews/show_stars', :locals => {:score => order_item.product.score_reviews, :nb_reviews => order_item.product.nb_reviews, :simple => true} %>
+      </div>
+      <small><%= order_item.product.customer.first_name %> <%= order_item.product.customer.name %></small>
 
+    </div>
+    <div class="col-xs-5 col-sm-4 price_part">
+      <h4><%= nice_price(order_item.product.price) %></h4>
+      <%= link_to t('dialog.shop.remove_cart'), order_item, remote: true, method: :delete, dataconfirm: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: 'btn btn-danger btn-xs' %>
+    </div>
   </div>
-  <div class="col-xs-5 col-sm-4 price_part">
-    <h4><%= nice_price(order_item.product.price) %></h4>
-    <%= link_to t('dialog.shop.remove_cart'), order_item, remote: true, method: :delete, dataconfirm: {confirm: "Remove from Cart: #{order_item.product.name}"}, class: 'btn btn-danger btn-xs' %>
-  </div>
-</div>
+</li>

@@ -43,7 +43,7 @@ display_popover = function(node) {
 
 // info for customer
 display_info = function(node) {
-    return $('.customer-picture').mouseenter(function() {
+    return $('img.customer-picture').mouseenter(function() {
         var created, id, locality;
         id = $(this).data('customer');
         created = $(this).data('created');
@@ -64,7 +64,7 @@ inspector.watch('[data-toggle="tooltip"]', display_tooltip);
 
 inspector.watch('[data-toggle="popover"]', display_popover);
 
-inspector.watch('.customer-picture', display_info);
+inspector.watch('img.customer-picture', display_info);
 
 
 // observer for mutations

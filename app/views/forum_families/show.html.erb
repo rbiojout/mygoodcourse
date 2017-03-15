@@ -2,10 +2,15 @@
 
 
 <!-- Image Header -->
-<div class="parallaxed banner" data-stellar-background-ratio="0.5"><span>
-    <h1><%= yield :title %></h1>
-</span>
-</div>
+<% content_for :slider do %>
+    <div class="img-header parallaxed banner bg-inverse" data-stellar-background-ratio="0.5">
+      <div class="bottom-caption">
+        <div class="container">
+          <h1><%= yield :title %></h1>
+        </div>
+      </div>
+    </div>
+<% end %>
 <!-- /.row -->
 
 <script language="JavaScript">
@@ -20,6 +25,6 @@
   </li>
 </ol>
 
-
+<ul class="media-list">
 <%= render(partial: 'forum_families/forum_family', locals: {forum_family: @forum_family}) %>
-
+</ul>

@@ -6,13 +6,15 @@
   </div>
   <div class="media-body">
     <h3 class="media-heading"><%= link_to forum_category.name, forum_category_path(forum_category) %></h3>
-    <small><%= forum_category.count_subjects %> <%= t('activerecord.models.forum_subject', count: forum_category.count_subjects) %></small>
-    <small><i class="fa fa-comments"></i> <%= forum_category.count_messages %> <%= t('activerecord.models.forum_answer', count: forum_category.count_messages) %></small>
-    <% unless forum_category.last_activity_date.nil? %>
-        <small><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_category.last_activity_date) %></small>
-    <% end %>
-    <% unless forum_category.last_activity_customer.nil? %>
-        <%= link_to forum_category.last_activity_customer.full_name, customer_path(forum_category.last_activity_customer) %>
-    <% end %>
+    <ul class="list-meta">
+      <li><%= forum_category.count_subjects %> <%= t('activerecord.models.forum_subject', count: forum_category.count_subjects) %></li>
+      <li><i class="fa fa-comments"></i> <%= forum_category.count_messages %> <%= t('activerecord.models.forum_answer', count: forum_category.count_messages) %></li>
+      <% unless forum_category.last_activity_date.nil? %>
+          <li><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_category.last_activity_date) %></li>
+      <% end %>
+      <% unless forum_category.last_activity_customer.nil? %>
+          <li><%= link_to forum_category.last_activity_customer.full_name, customer_path(forum_category.last_activity_customer) %></li>
+      <% end %>
+    </ul>
   </div>
 </li>

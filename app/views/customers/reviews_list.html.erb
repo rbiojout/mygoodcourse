@@ -12,7 +12,7 @@
 
   </div>
   <div class="col-sm-9">
-    <h1><%= t('activerecord.attributes.customer.reviews') %></h1>
+    <h2><%= t('activerecord.attributes.customer.reviews') %></h2>
     <% if @reviews.count ==0 %>
         <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.customer.alert_no_reviews')}) %>
     <% else %>

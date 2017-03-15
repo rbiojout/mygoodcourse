@@ -12,13 +12,13 @@
 
   </div>
   <div class="col-md-9">
-    <h1><%= t('activerecord.attributes.customer.profile') %>
+    <h2><%= t('activerecord.attributes.customer.profile') %>
       <!--- list of actions --->
       <% if customer_signed_in? && current_customer.id == @customer.id %>
             <%= link_to(edit_customer_path(current_customer), class: 'btn btn-default btn-sm' ) do %><i class="fa fa-pencil" aria-hidden="true"></i> <%=t('actions.update')%><%end%>
     <% end %>
       <!--- end list of actions --->
-    </h1>
+    </h2>
     <blockquote>
       <%= sanitize(@customer.description, scrubber: VideoScrubber.new) %>
     </blockquote>

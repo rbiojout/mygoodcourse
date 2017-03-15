@@ -72,6 +72,8 @@ en:
     need_login: "You need to login to proceed"
     operation_in_progress: 'Operation in progress'
     read_next: 'read next'
+    popular: 'Popular'
+    latest: 'Latest'
     method:
       order_by: 'Order by'
       searching_for: 'Searching for'

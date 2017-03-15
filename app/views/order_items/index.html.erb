@@ -3,14 +3,17 @@
     <%= link_to t('dialog.shop.continue_shoping'), catalog_products_path, class: 'btn btn-primary btn-sm margined-vertical' %>
     <%= link_to checkout_path, class: 'btn btn-success pull-right margined-vertical' do %><i class="fa fa-shopping-cart"></i> <%= t('dialog.shop.checkout') %><% end %>
   </div>
+
+  <div class="divider divider-short divider-border divider-center"><i class="fa fa-shopping-basket"></i></div>
+
   <div class="new-orderitem"></div>
 
   <div id="orderitem-dropped">
   </div>
 
-  <div id="order_items_index">
-  <%= render(partial: 'order_items/order_item', collection: @order_items) %>
-  </div>
+  <ol id="order_items_index" class="list-unstyled">
+      <%= render(partial: 'order_items/order_item', collection: @order_items) %>
+  </ol>
 
 
   <!--- list of associated products --->

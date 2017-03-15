@@ -21,7 +21,9 @@
         <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.product.alert_wishes'), alert_link_text: t('dialog.order.alert_add_link'), alert_link_path: catalog_products_path}) %>
     <% else %>
 
+      <ul class="list-unstyled">
       <% @products.each do |product|%>
+            <li class="with-dash">
         <div class="row">
           <div class="col-xs-4 col-md-3">
             <div class="product-panel">
@@ -77,8 +79,9 @@
 
           </div>
         </div>
-        <br/>
+              </li>
       <% end %>
+      </ul>
     <% end %>
   </div>
 </div>

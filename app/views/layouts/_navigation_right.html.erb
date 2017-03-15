@@ -14,10 +14,11 @@
     <!--                      pull-right keeps the drop-down in line -->
     <ul class="nav navbar-nav pull-right">
       <li><%= link_to t('page.catalog'), catalog_products_path(locale: locale) %></li>
-      <% if Post.all.count > 5 %>
+      <% if Post.all.count > 0 %>
         <li><%= link_to t('page.posts'), posts_path(locale: locale) %></li>
       <% end %>
       <li><%= link_to t('page.who_we_are'), home_path(locale: locale) %></li>
+      <li><%= link_to t('page.forum'), forum_families_path(locale: locale) %></li>
       <li><%= link_to t('page.help'), topics_path(locale: locale) %></li>
     </ul>
   </div>

@@ -5,6 +5,34 @@ require 'rails_helper'
 include Warden::Test::Helpers
 
 RSpec.describe 'ForumFeatures', feature: true, js: true do
+  it 'visit forum families' do
+
+    visit forum_families_path
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_families.jpg", full: true)
+
+    visit forum_subject_path(forum_subjects(:one))
+
+    country = countries(:france)
+
+    visit forum_families_path(country_id: country.id)
+    has_css?('.forum_family-panel')
+
+    category = country.forum_categories.first
+    within('li.forum_category-panel') do
+      click_on(category.name)
+    end
+
+    subject = category.forum_subjects.first
+
+    ## IMPORTANT WAIT TO HAVE THE PAGE LOADED
+    expect(page).to have_content(subject.name)
+    within('#content') do
+      # expect(page).to have_content(I18n.translate('activerecord.models.forum_category', count:2).capitalize)
+    end
+
+    save_screenshot("#{::Rails.root}/spec/screenshots/forum_open.jpg", full: true)
+  end
+
   it 'visit forum open' do
     visit forum_subject_path(forum_subjects(:one))
 
