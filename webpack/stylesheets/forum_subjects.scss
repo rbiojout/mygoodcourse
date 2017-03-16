@@ -14,9 +14,10 @@
 
 @mixin styling($customer_picture, $customer_container) {
   .forum_subject-panel {
-    background-color: #eeeeee;
+    // background-color: #eeeeee;
     padding: 10px;
-    border-bottom: 4px darkgrey solid;
+    border: 1px darkgrey solid;
+    border-radius: 10px;
 
     .forum_subject-customer {
       display: inline;
