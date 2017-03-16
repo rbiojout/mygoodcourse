@@ -64,7 +64,7 @@ $(document).ready(function() {
             var more_reviews_url;
             more_reviews_url = jQuery('#infinite-scrolling-reviews .pagination a.next').attr('href');
             if (more_reviews_url && $(window).scrollTop() > ( $("#infinite-scrolling-reviews").offset().top - $(window).height() - 60 )) {
-                $('#infinite-scrolling-reviews .pagination').text("Please Wait...");
+                $('#infinite-scrolling-reviews .pagination').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
                 $.getScript(more_reviews_url);
             }
         });
@@ -77,7 +77,7 @@ $(document).ready(function() {
             var more_products_url;
             more_products_url = $('#infinite-scrolling-products .pagination a.next').attr('href');
             if (more_products_url && $(window).scrollTop() > ( $('#infinite-scrolling-products').offset().top - $(window).height()- 60)) {
-                $('#infinite-scrolling-products .pagination').text("Please Wait...");
+                $('#infinite-scrolling-products .pagination').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
                 $.getScript(more_products_url);
             }
         });
@@ -90,7 +90,7 @@ $(document).ready(function() {
             var more_posts_url;
             more_posts_url = $('#infinite-scrolling-posts .pagination a.next').attr('href');
             if (more_posts_url && $(window).scrollTop() > ( $('#infinite-scrolling-posts').offset().top - $(window).height() - 60)) {
-                $('#infinite-scrolling-posts .pagination').text("Please Wait...");
+                $('#infinite-scrolling-posts .pagination').html('<i class="fa fa-spinner fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>');
                 $.getScript(more_posts_url);
             }
         });

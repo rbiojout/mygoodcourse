@@ -3,7 +3,7 @@
 <!-- Image Header -->
 
 <% content_for :slider do %>
-    <div class="img-header parallaxed banner bg-inverse" data-stellar-background-ratio="1.5">
+    <div class="img-header parallaxed banner bg-inverse" data-stellar-background-ratio="0.5">
       <div class="bottom-caption">
         <div class="container">
           <h1><%= yield :title %></h1>
@@ -37,37 +37,46 @@
 <h2><%= t('activerecord.models.forum_subject', count:2).capitalize %></h2>
 
 
-<!-- add alert with call action to add subject -->
-<% if @forum_subjects.count==0 %>
+<div class="row">
+  <div class="col-md-8">
+    <!-- add alert with call action to add subject -->
+    <% if @forum_subjects.count==0 %>
         <%= render(partial: 'shared/dialog_alert', locals: {alert_message: t('dialog.forum_subject.alert_no_subject'),
                                                             alert_link_text: t('helpers.action.forum_subject.create'),
                                                             alert_link_path: new_forum_subject_path(forum_category_id: @forum_category.id), alert_remote: false}) %>
-<% end %>
-<!-- end alert -->
+    <% end %>
+    <!-- end alert -->
 
-<% @forum_subjects.each do |forum_subject| %>
+    <% @forum_subjects.each do |forum_subject| %>
 
-    <div class="row" id="forum_subject_<%= forum_subject.id%>">
-      <div class="col-xs-12">
-          <h3><span class="fa fa-bullhorn fa-lg"></span> <%= link_to forum_subject.name, forum_subject_path(forum_subject) %></h3>
-        <p>Created by <%= link_to forum_subject.customer.full_name, customer_path(forum_subject.customer) %>  - <%= nice_date(forum_subject.created_at) %></p>
-        <ul class="list-meta">
-          <% unless forum_subject.forum_answers.count == 0 %>
-              <li><i class="fa fa-comments"></i> <%= forum_subject.forum_answers.count %> <%= t('activerecord.models.forum_answer', count: forum_subject.forum_answers.count) %></li>
-          <% end %>
-          <li><i class="fa fa-eye"></i> <%= forum_subject.counter_cache %> vues</li>
-          <% unless forum_subject.last_activity_date.nil? %>
-              <li><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.last_activity_date) %></li>
-          <% end %>
-          <% unless forum_subject.last_activity_customer.nil? %>
-              <%= link_to forum_subject.last_activity_customer.full_name, customer_path(forum_subject.last_activity_customer) %>
-          <% end %>
-        </ul>
-      </div>
+        <div class="row" id="forum_subject_<%= forum_subject.id%>">
+          <div class="col-xs-12">
+            <h3><span class="fa fa-bullhorn fa-lg"></span> <%= link_to forum_subject.name, forum_subject_path(forum_subject) %></h3>
+            <p>Created by <%= link_to forum_subject.customer.full_name, customer_path(forum_subject.customer) %>  - <%= nice_date(forum_subject.created_at) %></p>
+            <ul class="list-meta">
+              <% unless forum_subject.forum_answers.count == 0 %>
+                  <li><i class="fa fa-comments"></i> <%= forum_subject.forum_answers.count %> <%= t('activerecord.models.forum_answer', count: forum_subject.forum_answers.count) %></li>
+              <% end %>
+              <li><i class="fa fa-eye"></i> <%= forum_subject.counter_cache %> vues</li>
+              <% unless forum_subject.last_activity_date.nil? %>
+                  <li><i class="fa fa-clock-o"></i> <%= time_ago_in_words(forum_subject.last_activity_date) %></li>
+              <% end %>
+              <% unless forum_subject.last_activity_customer.nil? %>
+                  <%= link_to forum_subject.last_activity_customer.full_name, customer_path(forum_subject.last_activity_customer) %>
+              <% end %>
+            </ul>
+          </div>
 
+        </div>
+    <% end %>
+
+    <div id="infinite-scrolling-subjects" class="row">
+      <%= will_paginate(@forum_subjects, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
     </div>
-<% end %>
-
-<div id="infinite-scrolling-subjects" class="row">
-  <%= will_paginate(@forum_subjects, :renderer => 'BootstrapPaginationHelper::LinkRenderer') %>
+  </div>
+  <div class="col-md-4">
+      <!-- top forum_subjects -->
+      <%= render ('forum_subjects/top_latest_forum_subjects') %>
+      <!-- end top forum_subjects -->
+  </div>
 </div>

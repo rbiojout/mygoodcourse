@@ -76,7 +76,7 @@ require('./lib/cocoon.js');
 // social buttons
 require('./lib/social-share-button.js');
 
-require('./observer.js');
+// require('./observer.js');
 require('./geocoding.js');
 require('./google_analytics.js');
 require('./form_error.js');
@@ -123,15 +123,35 @@ $(function(){
 });
 
 
+// we have all actions in this function regarding
+// the initial state : $(document).ready
+// the refresh after an Ajax call : $( document ).ajaxComplete
+const prepare_pop = function(){
+    // prepare tooltips and popovers
+    $('[data-toggle="tooltip"]').tooltip();
+    $('[data-toggle="popover"]').popover();
+    $('img.customer-picture').mouseenter(function() {
+        var created, id, locality;
+        id = $(this).data('customer');
+        created = $(this).data('created');
+        locality = $(this).data('locality');
+        $(this).popover({
+            content: "<span class='fa fa-map-marker'></span> " + locality + "<br/><span class='fa fa-calendar'></span> " + created,
+            html: true,
+            placement: "bottom"
+        });
+        return $(this).popover('show');
+    }).mouseleave(function() {
+        return $(this).popover('hide');
+    });
+};
+
 $(document).ready(function() {
     window.setTimeout((function() {
         $('.alert-flash').fadeTo(500, 0).slideUp(500, function() {
             $(this).remove();
         });
     }), 4000);
-});
-
-$(document).ready(function() {
     // attach event for ellipsis
     $('.ellipsis').dotdotdot({
         watch: "window"
@@ -143,5 +163,16 @@ $(document).ready(function() {
         // adjust initial height for the Summernote Editor
         height: '200px'
     });
+    // prepare tooltips and popovers
+    prepare_pop();
+    // prepare tooltips and popovers
+
 });
+
+$( document ).ajaxComplete(function() {
+    //$( ".log" ).text( "Triggered ajaxComplete handler." );
+    // prepare tooltips and popovers
+    prepare_pop();
+});
+
 

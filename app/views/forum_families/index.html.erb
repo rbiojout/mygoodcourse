@@ -2,17 +2,25 @@
 
 <h1><%= yield :title %></h1>
 
-<!-- country selector -->
 <div class="row">
-  <div class="col-xs-12" style="padding-bottom: 10px;">
-    <%= render(partial: 'countries/btn_countries') %>
+  <div class="col-md-8">
+    <!-- country selector -->
+    <div class="row">
+      <div class="col-xs-12" style="padding-bottom: 10px;">
+        <%= render(partial: 'countries/btn_countries') %>
+      </div>
+    </div>
+    <!-- end country selector -->
+
+    <ul class="media-list">
+      <% @forum_families.each do |forum_family| %>
+          <%= render(partial: 'forum_families/forum_family', locals: {forum_family: forum_family}) %>
+      <% end %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <!-- top forum_subjects -->
+    <%= render ('forum_subjects/top_latest_forum_subjects') %>
+    <!-- end top forum_subjects -->
   </div>
 </div>
-<!-- end country selector -->
-
-<ul class="media-list">
-  <% @forum_families.each do |forum_family| %>
-      <%= render(partial: 'forum_families/forum_family', locals: {forum_family: forum_family}) %>
-  <% end %>
-</ul>
-

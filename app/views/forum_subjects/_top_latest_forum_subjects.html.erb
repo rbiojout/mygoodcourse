@@ -1,0 +1,64 @@
+<!-- top forum_subjects -->
+<ul class="nav nav-tabs nav-justified">
+  <li role="presentation" class="active"><a href="#forum_subjects-popular" data-toggle="tab"><%= t('dialog.popular')%></a></li>
+  <li role="presentation"><a href="#forum_subjects-latest" data-toggle="tab"><%= t('dialog.latest')%></a></li>
+</ul>
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane tab-bordered fade active in" id="forum_subjects-popular">
+    <ul class="list-unstyled">
+      <% top_forum_subjects = ForumSubject.order(counter_cache: :desc).limit(10) %>
+      <% top_forum_subjects.each do |forum_subject| %>
+          <li class="with-dash">
+            <div class="media">
+              <div class="media-left">
+                <%= link_to (forum_subject_path(forum_subject)) do %>
+                    <%= image_tag forum_subject.forum_category.visual.square, class: 'media-object pull-left img-circle picture-adjusted' %>
+                <% end %>
+              </div>
+              <div class="media-body">
+                <%= link_to (forum_subject_path(forum_subject)) do %>
+                    <h5 class="media-heading"><%= forum_subject.name %></h5>
+                <% end %>
+                <ul class="list-meta">
+                  <li><span class="fa fa-eye"></span> <%= forum_subject.counter_cache %></li>
+                  <li><span class="fa fa-reply-all"></span> <%= forum_subject.forum_answers.size %></li>
+                  <li><%= nice_date(forum_subject.created_at) %></li>
+                </ul>
+              </div>
+            </div>
+      <% end %>
+
+
+      </li>
+    </ul>
+
+  </div>
+
+  <div class="tab-pane tab-bordered fade" id="forum_subjects-latest">
+    <ul class="list-unstyled">
+      <% last_forum_subjects = ForumSubject.all.limit(10) %>
+      <% last_forum_subjects.each do |forum_subject| %>
+          <li class="with-dash">
+
+            <%= link_to (forum_subject_path(forum_subject)) do %>
+                <div class="media">
+                  <div class="media-left">
+                    <%= image_tag forum_subject.forum_category.visual.square, class: 'media-object pull-left img-circle picture-adjusted' %>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading"><%= forum_subject.name %></h5>
+                    <ul class="list-meta">
+                      <li><span class="fa fa-reply-all"></span> <%= forum_subject.forum_answers.size %> </li>
+                      <li><%= nice_date(forum_subject.created_at) %></li>
+                    </ul>
+                  </div>
+                </div>
+            <% end %>
+
+
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+<!-- end top forum_subjects -->

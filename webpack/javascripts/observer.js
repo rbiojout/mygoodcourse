@@ -81,5 +81,6 @@ observer = new MutationObserver(function(mutations) {
 observer.observe(document, {
     childList: true,
     subtree: true,
-    characterData: true
+    characterData: true,
+    attributeFilter: ["data-toggle", 'data-customer']
 });
