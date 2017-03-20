@@ -1,5 +1,6 @@
-
 $('.comment_<%= @comment.id%>').html("<%= j (render 'comments/form_ajax') %>");
+
+
 var target = $('#comment-form');
 $('html,body').animate({
     scrollTop: target.offset().top-90

@@ -23,7 +23,11 @@
     </div>
     <div class="form-group">
       <%= f.submit  @forum_subject.new_record? ? t('actions.create') : t('actions.update'), :class => "btn btn-primary" %>
-      <%= link_to t('actions.undo'), '#', :class => "btn btn-default" %>
+      <% unless @forum_subject.new_record? %>
+          <%= link_to t('actions.undo'), undo_forum_subject_path(id: @forum_subject.id), :remote => true, :class => "btn btn-default" %>
+      <% else %>
+          <%= link_to t('actions.undo'), undo_forum_subject_path(id: 0), :remote => true, :class => "btn btn-default" %>
+      <% end %>
     </div>
 
 

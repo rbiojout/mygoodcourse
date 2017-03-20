@@ -1,0 +1,5 @@
+<% if @forum_answer.nil? %>
+$('#forum_answer-form').html("");
+<% else %>
+$('.forum_answer_<%= @forum_answer.id%>').html("<%= j (render 'forum_answers/forum_answer') %>");
+<% end %>

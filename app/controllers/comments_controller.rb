@@ -53,6 +53,16 @@ class CommentsController < ApplicationController
     end
   end
 
+  # close the form
+  # GET /comments/1/undo
+  def undo
+    @context = context
+    @comment = Comment.find(params[:id])
+
+  rescue ActiveRecord::RecordNotFound => error
+    @comment = nil
+  end
+
   # PATCH/PUT /comments/1
   # PATCH/PUT /comments/1.json
   def update

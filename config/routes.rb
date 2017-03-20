@@ -174,8 +174,16 @@
 #
 
 Rails.application.routes.draw do
-  resources :forum_answers
-  resources :forum_subjects
+  resources :forum_answers do
+    member do
+      get :undo
+    end
+  end
+  resources :forum_subjects do
+    member do
+      get :undo
+    end
+  end
   resources :forum_categories, only: [:index, :show] do
     collection do
       post :sort
@@ -186,7 +194,11 @@ Rails.application.routes.draw do
       post :sort
     end
   end
-  resources :comments
+  resources :comments do
+    member do
+      get :undo
+    end
+  end
   resources :updates
   # resources :likes
   # Like and unlike other ressources (polymorphic)

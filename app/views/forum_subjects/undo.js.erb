@@ -1,0 +1,5 @@
+<% if @forum_subject.nil? %>
+$('form[data-model="forum_subject"]').html("");
+<% else %>
+$('.forum_subject_<%= @forum_subject.id%>').replaceWith("<%= j (render 'forum_subjects/forum_subject') %>");
+<% end %>

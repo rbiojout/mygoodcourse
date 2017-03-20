@@ -17,6 +17,7 @@
       <% end %>
 
     </div>
+    <% param_name= @context.class.to_s.underscore+'_id' %>
     <%= tag(:input, name: @context.class.to_s.underscore+'_id', type: 'hidden', value: @context.id)%>
         <div class="form-group">
           <%= f.label :text, t('activerecord.attributes.comment.text'), :class => 'control-label' %>
@@ -25,7 +26,11 @@
         </div>
         <div class="form-group">
           <%= f.submit  @comment.new_record? ? t('actions.create') : t('actions.update'), :class => 'btn btn-primary' %>
-          <%= link_to t('actions.undo'), '#', :class => 'btn btn-default' %>
+          <% unless @comment.new_record? %>
+              <%= link_to t('actions.undo'), undo_comment_path(id: @comment.id), :remote => true, :class => "btn btn-default" %>
+          <% else %>
+              <%= link_to t('actions.undo'), undo_comment_path(id: 0, "#{@context.class.to_s.underscore}_id" => @context.id), :remote => true, :class => "btn btn-default" %>
+          <% end %>
         </div>
 
 

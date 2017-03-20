@@ -1,0 +1,17 @@
+
+<% if @comment.nil? %>
+
+<%
+
+   # context : parameter to refer to the polymorphic
+   context ||=@context
+   context_type = context.class.name.underscore
+   context_param = context.class.name.underscore + '_id'
+   context_value = context.id
+%>
+
+
+$('#comment-form_<%="#{context_type}_#{context_value}"%>').html("");
+<% else %>
+$('.comment_<%= @comment.id%>').replaceWith("<%= j (render 'comments/comment') %>");
+<% end %>

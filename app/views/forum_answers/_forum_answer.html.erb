@@ -1,3 +1,5 @@
+<% forum_answer ||= @forum_answer %>
+
 <li class="forum_answer-panel forum_answer_<%= forum_answer.id%>">
   <div class="forum_answer-customer">
     <%= render(partial: 'customers/customer', locals: {customer: forum_answer.customer, withcols: 'false'}) %>

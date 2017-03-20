@@ -51,6 +51,14 @@ class ForumSubjectsController < ApplicationController
     end
   end
 
+  # close the form
+  # GET /forum_subjects/1/undo
+  def undo
+    @forum_subject = ForumSubject.find(params[:id])
+  rescue ActiveRecord::RecordNotFound => error
+    @forum_subject = nil
+  end
+
   # PATCH/PUT /forum_subjects/1
   # PATCH/PUT /forum_subjects/1.json
   def update
