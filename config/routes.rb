@@ -404,6 +404,7 @@ Rails.application.routes.draw do
       end
       resources :articles
     end
+    post 'articles/search' => 'articles#search', as: 'search_articles'
     post 'articles/sort' => 'articles#sort', as: 'sort_articles'
   end
   # end of locale #

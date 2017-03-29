@@ -1,0 +1,21 @@
+<div id="myTabContent" class="tab-content">
+  <div class="tab-pane fade active in" id="forum_subjects-popular">
+    <ul class="list-unstyled">
+      <% top_articles = Article.top_for_country(@current_country.id) %>
+      <% top_articles.each do |article| %>
+          <li class="with-dash">
+            <%= link_to (topic_article_path(:topic_id => article.topic.id, :id => article.id)) do %>
+                <h4><%= article.name %></h4>
+            <% end %>
+            <ul class="list-meta">
+              <li><span class="fa fa-eye"></span> <%= article.counter_cache %></li>
+              <li><span class="fa fa-book"></span>
+                <%= link_to (topic_articles_path(:topic_id => article.topic.id)) do %>
+                    <%= article.topic.name %>
+                <% end %></li>
+            </ul>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>

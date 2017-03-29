@@ -1,0 +1,70 @@
+<% provide(:title, (I18n.translate 'activerecord.models.article', count: 2).capitalize) %>
+
+
+<h1><%= (I18n.translate 'activerecord.models.article', count: 2).capitalize %></h1>
+
+<div class="row">
+  <div class="col-md-4">
+    <!-- country selector -->
+    <div class="row">
+      <div class="col-xs-12" style="padding-bottom: 10px;">
+        <%= render(partial: 'countries/btn_countries') %>
+      </div>
+    </div>
+    <!-- end country selector -->
+
+    <!-- list of topics -->
+    <%= render(partial: 'articles/topics', :current_topic => @topic) %>
+    <!-- end list of topics -->
+    <hr/>
+  </div>
+  <div class="col-md-8">
+    <!-- search -->
+    <div class="margined-vertical">
+      <%= form_tag(search_articles_path, method: :post) do  %>
+          <div class="input-group">
+            <%= text_field_tag('query', nil, class: 'form-control', placeholder: I18n.t('page.search')) %>
+            <div class="input-group-btn">
+              <% unless (session[:query_articles_store]).nil? %>
+                  <%= button_tag :class => 'btn btn-success' do %>
+                      <%= session[:query_articles_store] %>
+                      <i class="fa fa-times"></i>
+                  <% end %>
+              <% end %>
+              <%= button_tag t('page.search'), class: 'btn btn-primary' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <!-- end search -->
+
+    <h3>
+      <span class="fa-stack">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-file-text fa-stack-1x fa-inverse"></i>
+      </span>
+      <%= @topic.name %>
+    </h3>
+    <% query= session[:query_articles_store] %>
+    <ul class="list-unstyled">
+      <% @articles.each do |article|%>
+
+          <li>
+            <h4>
+              <span class="fa-stack">
+                <i class="fa fa-circle fa-stack-2x text-primary"></i>
+                <i class="fa fa-flag fa-stack-1x fa-inverse"></i>
+              </span>
+              <%= highlight(article.name, query) %>
+            </h4>
+
+            <%= highlight(excerpt(sanitize(article.description, scrubber: VideoScrubber.new), session[:query_articles_store]), query) %>
+            <%= link_to '... '+t('dialog.read_next'), topic_article_path(topic_id: article.topic.id, id: article.id) %>
+            <hr/>
+          </li>
+      <% end %>
+    </ul>
+  </div>
+</div>
+
+

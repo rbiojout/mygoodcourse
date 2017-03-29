@@ -12,15 +12,41 @@
 <% end %>
 <!-- /.row -->
 
-<!-- country selector -->
+
+<%= javascript_include_tag *webpack_asset_paths('faqApp', extension: 'js') %>
+<div id="FaqApp" country_id="<%=@current_country.id ||= Country.first.id %>" ></div>
+
 <div class="row">
-  <div class="col-xs-12" style="padding-bottom: 10px;">
+  <div class="col-md-8">
+    <!-- country selector -->
     <%= render(partial: 'countries/btn_countries') %>
+    <!-- end country selector -->
+    <ul class="list-unstyled">
+      <%= render(:partial => 'topics/topic', collection: @topics) %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <!-- search -->
+    <div class="margined-vertical">
+      <%= form_tag(search_articles_path, method: :post) do  %>
+          <div class="input-group">
+            <%= text_field_tag('query', nil, class: 'form-control', placeholder: I18n.t('page.search')) %>
+            <div class="input-group-btn">
+              <% unless (session[:query_store]).nil? %>
+                  <%= button_tag :class => 'btn btn-success' do %>
+                      <%= session[:query_store] %>
+                      <i class="fa fa-times"></i>
+                  <% end %>
+              <% end %>
+              <%= button_tag t('page.search'), class: 'btn btn-primary' %>
+            </div>
+          </div>
+      <% end %>
+    </div>
+    <!-- end search -->
+
+    <!-- top articles -->
+      <%= render ('articles/top_articles') %>
+    <!-- end top articles -->
   </div>
 </div>
-<!-- end country selector -->
-
-
-<ul class="list-unstyled">
-  <%= render(:partial => 'topics/topic', collection: @topics) %>
-</ul>

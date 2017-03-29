@@ -1,11 +1,31 @@
 <% provide(:title, @article.name) %>
 
 
-<h1><%= yield :title %></h1>
+<div class="row">
+  <div class="col-md-8">
+    <div class="feature-box fbox-outline fbox-dark fbox-effect">
+      <div class="fbox-icon">
+        <i class="fa fa-book"></i>
+      </div>
+      <%= link_to(topic_articles_path(:topic_id => @article.topic.id)) do %>
+          <div class="heading-block center">
+            <h2><%= @article.topic.name %></h2>
+          </div>
+      <% end %>
+    </div>
 
-<%= link_to @article.topic.name, topic_articles_path(topic_id: @article.topic_id, locale: locale), class: 'btn btn-primary' %>
+    <h1><%= yield :title %></h1>
 
-<ul class="list-unstyled">
-  <%= render(partial: 'articles/article', :locals => {article: @article}) %>
-</ul>
+    <ul class="list-unstyled">
+      <%= render(partial: 'articles/article', :locals => {article: @article}) %>
+    </ul>
+  </div>
+  <div class="col-md-4">
+    <!-- top articles -->
+    <%= render ('articles/top_articles') %>
+    <!-- end top articles -->
+  </div>
+</div>
+
+
 

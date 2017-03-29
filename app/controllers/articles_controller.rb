@@ -2,12 +2,37 @@ class ArticlesController < ApplicationController
   before_action :set_topic, only: [:index, :show, :new, :create, :edit, :update]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_employee!, except: [:index, :show]
+  before_action :authenticate_employee!, except: [:index, :show, :search]
 
   # GET /:locale/topics/:topic_id/articles(.:format)
   def index
     @topics = current_country.topics
     @articles = @topic.articles
+  end
+
+
+  # POST /:locale/articles/search(.:format)
+  def search
+    @topics = current_country.topics
+    @topic = @topics.first
+    # retrieve the search query
+    # filter only on active products when searching
+    query = params[:query]
+
+    query_articles_store = session[:query_articles_store]
+
+    unless query.nil?
+      # we add or remove if the parameter is sent
+      query_articles_store = if query.empty?
+                               nil
+                             else
+                               query
+                             end
+    end
+
+    session[:query_articles_store] = query_articles_store
+    @articles = Article.search_by_text(query_articles_store).joins(:topic).where(topics: {country_id: current_country})
+
   end
 
   # GET /:locale/topics/:topic_id/articles/:id(.:format)

@@ -1,3 +1,4 @@
+require('es6-promise').polyfill();
 // jQuery is imported as a Global
 require('expose-loader?$!expose-loader?jQuery!expose-loader?jquery!jquery');
 
@@ -54,8 +55,8 @@ $(function () {
 // WYSIWYG Summernote
 // some links to bootstrap js needed
 window.CodeMirror = require('codemirror/lib/codemirror.js');
-// require('codemirror/lib/codemirror.js');
-require('codemirror/lib/codemirror.css');
+require('codemirror/lib/codemirror.js');
+// require('codemirror/lib/codemirror.css');
 require('summernote/dist/summernote');
 // locale for summernote
 require('./summernote-fr.js');
@@ -163,6 +164,20 @@ $(document).ready(function() {
         // adjust initial height for the Summernote Editor
         height: '200px'
     });
+
+    // attach small WYSIWYG
+    $('.wysiwyg-small').summernote({
+        lang: I18n_locale,
+        toolbar: [
+            // [groupName, [list of button]]
+            ['style', ['bold', 'italic', 'underline', 'clear']],
+            ['font', ['strikethrough', 'superscript', 'subscript']],
+            ['color', ['color']],
+            ['para', ['ul', 'ol', 'paragraph']],
+        ],
+        height: '200px'
+    });
+
     // prepare tooltips and popovers
     prepare_pop();
     // prepare tooltips and popovers

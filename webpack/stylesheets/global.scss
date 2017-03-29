@@ -44,10 +44,10 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 // IMPORTANT make sure to resolve the path for font asset
 // run rake bower:resolve summernote
-@import "~codemirror/lib/codemirror.css";
-@import "~codemirror/theme/monokai.css";
-@import "~summernote/src/less/summernote.scss";
-@import "~summernote/dist/summernote.css";
+// @import "~codemirror/lib/codemirror.css";
+// @import "~codemirror/theme/monokai.css";
+// @import "~summernote/src/less/summernote.scss";
+// @import "~summernote/dist/summernote.css";
 
 // datetimepicker
 @import "~eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.css";

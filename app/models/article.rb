@@ -48,6 +48,8 @@ class Article < ApplicationRecord
   # ordered by position by default
   default_scope -> { order(position: :asc) }
 
+  scope :top_for_country, ->(country_id) { joins(:topic).where(topics: {country_id: country_id}).unscope(:order).order(counter_cache: :desc).distinct.limit(10) }
+
   # search options
   multisearchable against: [:name, :description]
   pg_search_scope :search_by_text, against: [:name, :description], ignoring: :accents
