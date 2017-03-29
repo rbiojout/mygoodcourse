@@ -13,8 +13,8 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var devServerPort = 3808;
 
 // set NODE_ENV=production on the environment to add asset fingerprints
-var production = process.env.NODE_ENV === 'production';
-// var production = false;
+// var production = process.env.NODE_ENV === 'production';
+var production = true;
 
 var config = {
     context: __dirname + "/../",
@@ -40,7 +40,7 @@ var config = {
         // name of the global var: "Foo"
         // library: "Turbolinks",
 
-        filename: production ? '[name]-[chunkhash].js' : '[name].js'
+        filename: production ? '[name]-[hash].js' : '[name].js'
     },
 
     resolve: {
@@ -171,7 +171,7 @@ var config = {
             }
         }),
         new ExtractTextPlugin({
-            filename: production ? '[name]-[chunkhash].css' : '[name].css',
+            filename: production ? '[name]-[hash].css' : '[name].css',
             allChunks: true,
             ignoreOrder: true
         }),
@@ -199,19 +199,16 @@ var config = {
 
 if (production) {
     config.plugins.push(
-        new webpack.NoErrorsPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
         new webpack.optimize.UglifyJsPlugin({
-            debug: true,
+            screw_ie8: true,
             compressor: { warnings: false },
-            test: /\.js($|\?)/i,
             sourceMap: true
         }),
         new webpack.DefinePlugin({
             'process.env': { NODE_ENV: JSON.stringify('production') }
-        }),
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurenceOrderPlugin()
-    );
+        })
+    )
 } else {
     config.devServer = {
         port: devServerPort,
