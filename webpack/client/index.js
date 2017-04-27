@@ -15,7 +15,7 @@ import App from './App'
 import {FETCH_TOPICS, FETCH_TOPIC, FETCH_TOPARTICLES} from './constants/actions'
 
 const client = axios.create({ //all axios can be used, shown in axios documentation
-    baseURL:'http://localhost:3000',
+    baseURL:'/',
     responseType: 'json'
 });
 
