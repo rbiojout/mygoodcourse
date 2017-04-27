@@ -6,7 +6,8 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = current_country.topics
+    # @topics = current_country.topics
+    @topics = Topic.all
   end
 
   # GET /topics/1

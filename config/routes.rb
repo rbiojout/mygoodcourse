@@ -406,6 +406,7 @@ Rails.application.routes.draw do
     end
     post 'articles/search' => 'articles#search', as: 'search_articles'
     post 'articles/sort' => 'articles#sort', as: 'sort_articles'
+    get 'articles/top' => 'articles#top', as: 'top_articles'
   end
   # end of locale #
 

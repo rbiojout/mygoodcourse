@@ -2,12 +2,21 @@ class ArticlesController < ApplicationController
   before_action :set_topic, only: [:index, :show, :new, :create, :edit, :update]
   before_action :set_article, only: [:show, :edit, :update, :destroy]
 
-  before_action :authenticate_employee!, except: [:index, :show, :search]
+  before_action :authenticate_employee!, except: [:index, :show, :search, :top]
 
   # GET /:locale/topics/:topic_id/articles(.:format)
   def index
     @topics = current_country.topics
     @articles = @topic.articles
+  end
+
+
+  # GET /:locale/topics/top(.:format)
+  def top
+    @articles = Article.top_for_country(current_country.id)
+    respond_to do |format|
+      format.json { render json: @articles }
+    end
   end
 
 

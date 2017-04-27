@@ -12,8 +12,10 @@
 <% end %>
 <!-- /.row -->
 
+<%= javascript_include_tag *webpack_asset_paths('client', extension: 'js') %>
+<div id="Client" country_id="<%=@current_country.id ||= Country.first.id %>" ></div>
 
-<%= javascript_include_tag *webpack_asset_paths('faqApp', extension: 'js') %>
+<%# javascript_include_tag *webpack_asset_paths('faqApp', extension: 'js') %>
 <div id="FaqApp" country_id="<%=@current_country.id ||= Country.first.id %>" ></div>
 
 <div class="row">

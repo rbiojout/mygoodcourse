@@ -1,10 +1,10 @@
-var React = require('react');
+import React, { PropTypes } from 'react';
 
 class Topic extends React.Component {
     rawMarkup(){
         var rawMarkup = this.props.description
         return { __html: rawMarkup };
-    };
+    };//rawMarkup
 
     render() {
         return(

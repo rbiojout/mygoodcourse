@@ -445,7 +445,7 @@
         viewport = geometry.viewport,
         bounds = geometry.bounds;
 
-      // Create a simplified version of the address components.
+      // Create a simplified version of the address faqApp.
       $.each(result.address_components, function(index, object){
         var name = object.types[0];
 

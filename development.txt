@@ -1,5 +1,16 @@
 http://rogerdudler.github.io/git-guide/index.fr.html
 
+TOOLING
+some nice tooling can be found on: http://icalialabs.github.io/kaishi/, in particular
+- oh-my-zsh
+- Homebrew
+- launchrocket
+- Pow
+
+GIT
+look at http://gitref.org for quick reference
+
+
 Our stack
 We use Rails as the primary engine
 Postgres has the primary DB

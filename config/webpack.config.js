@@ -13,11 +13,14 @@ var ExtractTextPlugin = require("extract-text-webpack-plugin");
 var devServerPort = 3808;
 
 // set NODE_ENV=production on the environment to add asset fingerprints
-// var production = process.env.NODE_ENV === 'production';
-var production = true;
+var production = process.env.NODE_ENV === 'production';
+// var production = true;
+
+var webpackFolder = path.join(__dirname, '..', 'public', 'webpack');
+var rootPath = path.join(__dirname, '..');
 
 var config = {
-    context: __dirname + "/../",
+    context: rootPath,
     entry: {
         global: ["./webpack/javascripts/global.js", "./webpack/stylesheets/global.scss"],
         // global: "./webpack/javascripts/global.js",
@@ -25,7 +28,8 @@ var config = {
 
         // Sources are expected to live in $app_root/webpack
         // 'application': './webpack/application.js'
-        faqApp: './webpack/components/faqApp.js',
+        faqApp: './webpack/faqApp/index.js',
+        client: './webpack/client/index.js',
     },
 
     output: {
@@ -44,11 +48,13 @@ var config = {
     },
 
     resolve: {
-        modules: ["webpack", "node_modules", "lib/assets", "vendor/assets/javascripts", "vendor/assets/stylesheets"],
+        modules: ["webpack", path.resolve(rootPath, "webpack"), "node_modules", "lib/assets", "vendor/assets/javascripts", "vendor/assets/stylesheets"],
         extensions: ['.js', '.jsx', '.css', '.scss'],
         alias: {
             jquery: 'jquery/dist/jquery',
-            stellar: "jquery.stellar/jquery.stellar"
+            stellar: "jquery.stellar/jquery.stellar",
+            shared: path.join(rootPath, 'webpack', 'shared'),
+            faqApp: path.join(rootPath, 'webpack', 'faqApp'),
             //,
             //'jquery-turbolinks': 'jquery.turbolinks/vendor/assets/javascripts/jquery.turbolinks.js'
         }
@@ -66,7 +72,10 @@ var config = {
             {
                 test: /\.js$/,
                 exclude: /(node_modules)/,
-                loader: "babel-loader?presets[]=react,presets[]=es2015"
+                loader: "babel-loader",
+                query: {
+                    presets: ['es2015', 'react', 'stage-0']
+                }
             },
             // Embed images
             {
@@ -210,6 +219,12 @@ if (production) {
         })
     )
 } else {
+    // redux dev tools needed
+    config.plugins.push(
+        new webpack.DefinePlugin({
+            'process.env.NODE_ENV': JSON.stringify('development')
+        })
+    );
     config.devServer = {
         port: devServerPort,
         headers: { 'Access-Control-Allow-Origin': '*' }
