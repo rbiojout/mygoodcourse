@@ -9,6 +9,7 @@ some nice tooling can be found on: http://icalialabs.github.io/kaishi/, in parti
 
 GIT
 look at http://gitref.org for quick reference
+to put a specific branch to Heroku, we need to map always to master, git push stagin api:master
 
 
 Our stack
