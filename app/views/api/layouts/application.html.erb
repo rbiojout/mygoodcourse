@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang='<%= I18n.locale %>'>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Facebook and Twitter integration -->
+  <meta property="og:title" content="<%= full_title(yield(:title)) %>"/>
+  <meta property="og:image" content=""/>
+  <meta property="og:url" content=""/>
+  <meta property="og:site_name" content=""/>
+  <meta property="og:description" content=""/>
+  <meta name="twitter:title" content="<%= full_title(yield(:title)) %>" />
+  <meta name="twitter:image" content="" />
+  <meta name="twitter:url" content="" />
+  <meta name="twitter:card" content="" />
+
+  <!-- favicon -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32">
+  <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="theme-color" content="#ffffff">
+
+
+  <title><%= full_title(yield(:title)) %></title>
+  <meta name="keywords" content="<%= t('keywords') %>">
+  <meta name="description" content="<%= t('description') %>">
+  <%# stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBv19W4JC3nVPZv-jKyhurM5hR8MgHPw9A&amp;libraries=places"></script>
+  <script src="https://js.stripe.com/v2/"></script>
+  <%# javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+
+  <%= javascript_include_tag *webpack_asset_paths('global', extension: 'js') %>
+  <%= stylesheet_link_tag *webpack_asset_paths('global', extension: 'css') %>
+
+  <%= javascript_tag do %>
+      I18n_defaultLocale = "<%= I18n.default_locale %>";
+      I18n_locale = "<%= I18n.locale %>";
+  <% end %>
+
+  <%= csrf_meta_tags %>
+  <!--[if lt IE 9]>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/r29/html5.min.js"></script>
+  <![endif]-->
+
+  <%= tag :meta, :name => 'stripe-key', :content => Rails.application.secrets.stripe_publishable_key %>
+
+</head>
+<body>
+
+
+
+</body>
+</html>
+
+

@@ -6,7 +6,7 @@ function getCSRFToken() {
 }
 const axios = client.create({
 
-  baseURL: '/',
+  baseURL: '/api/v1',
   headers: {
     'Content-Type': 'application/json',
     'X-CSRF-Token': getCSRFToken(),

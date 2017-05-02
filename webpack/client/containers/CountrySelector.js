@@ -12,7 +12,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
-        onCountryClick: (country_id) => {
+        onCountryClick: (event, country_id) => {
+            event.preventDefault();
             dispatch(setCountry(country_id));
             dispatch(fetchTopics());
             dispatch(fetchTopArticles(country_id));

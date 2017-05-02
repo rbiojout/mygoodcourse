@@ -52,6 +52,8 @@ gem 'jquery-turbolinks'
 gem 'turbolinks'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder'
+#Api gems
+gem 'active_model_serializers'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', group: :doc
@@ -70,6 +72,7 @@ gem 'devise'
 
 # add pagination helper for listing the data
 gem 'will_paginate'
+
 # add some order in the models for lists
 gem 'acts_as_list'
 # gem 'nested_form_fields'

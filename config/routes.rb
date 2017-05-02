@@ -174,6 +174,26 @@
 #
 
 Rails.application.routes.draw do
+
+  # API
+    namespace :api, default: { format: :json } do
+      namespace :v1 do
+        resources :topics do
+          collection do
+            post :sort
+          end
+          resources :articles
+        end
+        post 'articles/search' => 'articles#search', as: 'search_articles'
+        post 'articles/sort' => 'articles#sort', as: 'sort_articles'
+        get 'articles/top' => 'articles#top', as: 'top_articles'
+
+
+        resources :countries
+
+      end
+    end
+
   resources :forum_answers do
     member do
       get :undo

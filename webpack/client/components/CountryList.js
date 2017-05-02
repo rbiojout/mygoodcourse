@@ -18,7 +18,7 @@ class CountryList extends React.Component {
         var country_list = this.props.countries.map(function(country, index) {
             if(this.props.current_country.id != country.id) {
                 return(
-                    <li key={country.id} value={country} onClick={() => this.onCountryClick(country.id)}>
+                    <li key={country.id} value={country} onClick={(event) => this.onCountryClick(event, country.id)}>
                         <a href="#" value={country}  ref={country.id}><i className={"famfamfam-flag-"+country.code2} ></i> {country.name}</a>
                     </li>
             ); //return

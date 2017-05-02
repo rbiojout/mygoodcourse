@@ -1,5 +1,5 @@
-import React, { PropTypes } from 'react';
-
+import React from 'react';
+import PropTypes from 'prop-types';
 
 class TopArticle extends React.Component {
     render() {
@@ -23,10 +23,10 @@ class TopArticle extends React.Component {
 
 
 TopArticle.propTypes = {
-    id: React.PropTypes.number,
-    topic_id: React.PropTypes.number,
+    id: PropTypes.number.isRequired,
+    topic_id: PropTypes.number.isRequired,
     name: PropTypes.string.isRequired,
-    counter_cache: React.PropTypes.number,
+    counter_cache: PropTypes.number.isRequired,
 }
 
 module.exports = TopArticle;

@@ -15,7 +15,7 @@ import App from './App'
 import {FETCH_TOPICS, FETCH_TOPIC, FETCH_TOPARTICLES} from './constants/actions'
 
 const client = axios.create({ //all axios can be used, shown in axios documentation
-    baseURL:'/',
+    baseURL:'/api/v1',
     responseType: 'json'
 });
 
@@ -76,15 +76,7 @@ store.dispatch(fetchCountries());
 store.dispatch(setCountry(1));
 store.dispatch(fetchTopics());
 store.dispatch(fetchTopic());
-
-function nextOp() {
-    return {
-        type: FETCH_TOPICS.REQUEST,
-    }
-}
-
-store.dispatch(nextOp());
-//store.dispatch(fetchTopArticles());
+store.dispatch(fetchTopArticles());
 
 window.Redux = require("redux");
 window.ReactRedux = require("react-redux");

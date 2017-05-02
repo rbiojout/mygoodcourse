@@ -1,11 +1,11 @@
 import { FETCH_TOPICS, FETCH_TOPIC, FETCH_TOPARTICLES } from '../constants/actions'
-import { Topics, Topic, TopArticles} from '../actions/topics'
+import { Topic} from '../actions/topics'
 
 const initialState = {
-    topics: Topics,
+    topics: [],
     loadingTopics: false,
-    topic: Topic,
-    topArticles: TopArticles,
+    topic: {},
+    topArticles: [],
     loadingTopArticles: false,
 }
 
